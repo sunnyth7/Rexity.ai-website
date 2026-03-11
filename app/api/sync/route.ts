@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server"
 import { neon } from "@neondatabase/serverless"
 
-const sql = neon(process.env.NEON_DATABASE_URL || process.env.DATABASE_URL || "")
+function getSQL() {
+  const url = process.env.NEON_DATABASE_URL || process.env.DATABASE_URL
+  if (!url) throw new Error("No database connection string configured")
+  return neon(url)
+}
 
 function toStr(v: unknown) {
   if (v === null || v === undefined) return undefined
@@ -24,6 +28,7 @@ function toIso(v: any) {
 
 export async function GET(req: Request) {
   try {
+    const sql = getSQL()
     const url = new URL(req.url)
     const plant = url.searchParams.get("plant") ?? undefined
     const days = Number(url.searchParams.get("days") ?? "7")
