@@ -16,6 +16,11 @@ export default function PrivacyPolicyPage() {
       description: "Privacy policy for the LevelKraft TELC language exam preparation app",
       href: "/LevelKraft-TELC%20Prep%20AI/Privacypolicy",
     },
+    {
+      name: "Save&Fresh",
+      description: "Privacy policy for the Save&Fresh smart food & grocery management app",
+      href: "/save-and-fresh/privacy",
+    },
   ]
 
   return (
