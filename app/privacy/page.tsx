@@ -21,6 +21,11 @@ export default function PrivacyPolicyPage() {
       description: "Privacy policy for the Save&Fresh smart food & grocery management app",
       href: "/save-and-fresh/privacy",
     },
+    {
+      name: "CLEVR",
+      description: "Privacy policy for the CLEVR social event planning app",
+      href: "/clevr/privacy",
+    },
   ]
 
   return (
