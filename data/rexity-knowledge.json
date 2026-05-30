@@ -1,0 +1,140 @@
+{
+  "version": "2026-05-30",
+  "brand": {
+    "name": "Rexity",
+    "positioning": "Rexity builds AI automation systems, growth workflows, design systems, and digital products for modern teams.",
+    "contact": {
+      "demo": "sunny@rexity.ai",
+      "admin": "admin@rexity.ai"
+    }
+  },
+  "rules": {
+    "supportedLanguages": ["en", "de"],
+    "allowedTopics": [
+      "Rexity services",
+      "Rexity products",
+      "website and app design",
+      "software development",
+      "business automation",
+      "AI systems",
+      "growth and scaling",
+      "consulting",
+      "demo booking",
+      "meeting setup"
+    ],
+    "adminTopics": [
+      "refund",
+      "refunds",
+      "billing dispute",
+      "policy exception",
+      "legal decision",
+      "contract decision",
+      "guarantee",
+      "cancellation decision",
+      "chargeback"
+    ],
+    "demoTopics": [
+      "demo",
+      "meeting",
+      "termin",
+      "beratung",
+      "projektgespräch",
+      "anforderung",
+      "anforderungen",
+      "consultation",
+      "requirement",
+      "requirements",
+      "project brief",
+      "quote",
+      "proposal",
+      "call",
+      "book"
+    ]
+  },
+  "entries": [
+    {
+      "id": "rexity-overview",
+      "title": "What Rexity Does",
+      "keywords": ["rexity", "company", "agency", "studio", "what do you do", "was macht rexity"],
+      "en": "Rexity helps teams design, develop, automate, and scale digital systems. We work across websites, apps, SaaS interfaces, business automation, AI workflows, and growth infrastructure.",
+      "de": "Rexity hilft Teams dabei, digitale Systeme zu designen, zu entwickeln, zu automatisieren und zu skalieren. Wir arbeiten an Websites, Apps, SaaS-Oberflächen, Geschäftsautomatisierung, AI-Workflows und Wachstumsinfrastruktur."
+    },
+    {
+      "id": "design-studio",
+      "title": "Design Studio",
+      "keywords": ["design", "website design", "app design", "saas design", "ui", "ux", "brand", "figma"],
+      "en": "Design Studio covers high-end website design, app design, SaaS UI, visual systems, landing pages, product interfaces, and brand-aligned digital experiences.",
+      "de": "Design Studio umfasst hochwertiges Website-Design, App-Design, SaaS-UI, visuelle Systeme, Landingpages, Produktoberflächen und markenkonforme digitale Erlebnisse."
+    },
+    {
+      "id": "development-studio",
+      "title": "Development Studio",
+      "keywords": ["development", "coding", "web development", "app development", "saas", "backend", "frontend", "api"],
+      "en": "Development Studio turns ideas and designs into working software: websites, apps, SaaS platforms, frontends, backends, APIs, integrations, and production-ready digital products.",
+      "de": "Development Studio verwandelt Ideen und Designs in funktionierende Software: Websites, Apps, SaaS-Plattformen, Frontends, Backends, APIs, Integrationen und produktionsreife digitale Produkte."
+    },
+    {
+      "id": "business-automation",
+      "title": "Business Automation",
+      "keywords": ["automation", "rpa", "workflow", "crm", "whatsapp", "operations", "process"],
+      "en": "Business Automation connects tools, data, messages, and decisions into reliable workflows. Rexity can help automate lead handling, internal operations, CRM flows, reporting, and repeatable business processes.",
+      "de": "Business Automation verbindet Tools, Daten, Nachrichten und Entscheidungen zu verlässlichen Workflows. Rexity kann Lead-Prozesse, interne Abläufe, CRM-Flows, Reporting und wiederholbare Geschäftsprozesse automatisieren."
+    },
+    {
+      "id": "scale",
+      "title": "Scale",
+      "keywords": ["scale", "growth", "marketing", "infrastructure", "analytics", "conversion", "seo"],
+      "en": "Scale focuses on growth systems: performance, analytics, conversion paths, content infrastructure, deployment systems, and the operating layer needed to grow digital products.",
+      "de": "Scale konzentriert sich auf Wachstumssysteme: Performance, Analytics, Conversion-Pfade, Content-Infrastruktur, Deployment-Systeme und die operative Ebene für skalierende digitale Produkte."
+    },
+    {
+      "id": "forge",
+      "title": "Forge",
+      "keywords": ["forge", "venture", "product", "mvp", "prototype", "launch"],
+      "en": "Forge is Rexity's product-building lane for prototypes, MVPs, experiments, internal tools, and new digital ventures.",
+      "de": "Forge ist Rexitys Produktbau-Bereich für Prototypen, MVPs, Experimente, interne Tools und neue digitale Ventures."
+    },
+    {
+      "id": "levelkraft",
+      "title": "LevelKraft",
+      "keywords": ["levelkraft", "telc", "language", "exam", "german"],
+      "en": "LevelKraft is a Rexity product focused on TELC language exam preparation and structured learning support.",
+      "de": "LevelKraft ist ein Rexity-Produkt für TELC-Sprachprüfungsvorbereitung und strukturierte Lernunterstützung."
+    },
+    {
+      "id": "clevr",
+      "title": "CLEVR",
+      "keywords": ["clevr", "event", "social", "planning"],
+      "en": "CLEVR is a Rexity product for social event planning and coordination.",
+      "de": "CLEVR ist ein Rexity-Produkt für soziale Eventplanung und Koordination."
+    },
+    {
+      "id": "asogrove",
+      "title": "ASOGrove",
+      "keywords": ["asogrove", "aso", "app store", "growth"],
+      "en": "ASOGrove is a Rexity product direction around app growth, app store optimization, and discoverability systems.",
+      "de": "ASOGrove ist eine Rexity-Produktrichtung für App-Wachstum, App-Store-Optimierung und Auffindbarkeit."
+    },
+    {
+      "id": "vibedflow",
+      "title": "VibedFlow",
+      "keywords": ["vibedflow", "workflow", "creative", "automation"],
+      "en": "VibedFlow is a Rexity product direction for creative workflow systems and AI-assisted production flows.",
+      "de": "VibedFlow ist eine Rexity-Produktrichtung für kreative Workflow-Systeme und AI-gestützte Produktionsabläufe."
+    },
+    {
+      "id": "demo",
+      "title": "Requirements And Demo",
+      "keywords": ["demo", "meeting", "requirement", "requirements", "call", "consult", "beratung", "termin"],
+      "en": "For requirements, demos, project discussions, or consulting calls, please email sunny@rexity.ai.",
+      "de": "Für Anforderungen, Demos, Projektgespräche oder Beratungstermine schreiben Sie bitte an sunny@rexity.ai."
+    },
+    {
+      "id": "admin",
+      "title": "Admin, Refunds, And Policies",
+      "keywords": ["refund", "policy", "admin", "billing", "legal", "vertrag", "erstattung", "rechnung"],
+      "en": "For refunds, policy questions, billing disputes, or admin matters, please email admin@rexity.ai. The chatbot cannot make refund, legal, billing, or policy decisions.",
+      "de": "Für Erstattungen, Richtlinienfragen, Rechnungsstreitigkeiten oder Admin-Themen schreiben Sie bitte an admin@rexity.ai. Der Chatbot trifft keine Erstattungs-, Rechts-, Rechnungs- oder Richtlinienentscheidungen."
+    }
+  ]
+}
