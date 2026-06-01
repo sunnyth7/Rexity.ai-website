@@ -190,9 +190,38 @@
     });
   }
 
+  function loaderIsComplete() {
+    var intro = document.querySelector(".intro");
+    return !intro || intro.classList.contains("rexity-loader-complete") || getComputedStyle(intro).display === "none";
+  }
+
+  function waitForMainPage() {
+    if (loaderIsComplete()) {
+      init();
+      return;
+    }
+
+    var intro = document.querySelector(".intro");
+    var observer = intro && new MutationObserver(function () {
+      if (loaderIsComplete()) {
+        observer.disconnect();
+        init();
+      }
+    });
+
+    if (observer && intro) {
+      observer.observe(intro, { attributes: true, attributeFilter: ["class", "style"] });
+    }
+
+    window.setTimeout(function () {
+      if (observer) observer.disconnect();
+      init();
+    }, 3600);
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", waitForMainPage);
   } else {
-    init();
+    waitForMainPage();
   }
 })();
