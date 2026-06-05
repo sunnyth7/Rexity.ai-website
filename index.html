@@ -8781,4 +8781,292 @@ body.rexity-main-ready .rexity-scroll-cue {
     window.setTimeout(applyTextFixes, delay);
   });
 })();
+</script><script id="rexity-i18n">
+(function () {
+  var STORAGE_KEY = "rexity_lang";
+  var SUPPORTED = ["en", "de"];
+  var meta = {
+    en: {
+      title: "Rexity - Automation Website",
+      description: "Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams."
+    },
+    de: {
+      title: "Rexity - Website für Automatisierung",
+      description: "Rexity entwickelt Automatisierungssysteme, Wachstums-Workflows und hochwertige digitale Erlebnisse für moderne Teams."
+    }
+  };
+  var deText = {
+    "Home": "Start",
+    "About": "Über uns",
+    "Work": "Arbeit",
+    "Services": "Services",
+    "Contact": "Kontakt",
+    "Menu": "Menü",
+    "Close": "Schließen",
+    "News": "Neuigkeiten",
+    "All Templates": "Alle Vorlagen",
+    "More than a studio,": "Mehr als ein Studio,",
+    "we are a creative engine.": "wir sind ein kreativer Motor.",
+    "we are a design authority.": "wir sind eine Design-Autorität.",
+    "we are a digital benchmark.": "wir sind ein digitaler Benchmark.",
+    "we build digital ecosystems.": "wir bauen digitale Ökosysteme.",
+    "Scroll to explore": "Zum Entdecken scrollen",
+    "©Automation Architecture": "©Automatisierungsarchitektur",
+    "©Growth Experience Design": "©Growth Experience Design",
+    "©Systems Engineering": "©Systementwicklung",
+    "Rexity Systems Lead": "Rexity Systems Lead",
+    "Selected Capabilities": "Ausgewählte Fähigkeiten",
+    "Systems We Build": "Systeme, die wir bauen",
+    "View all systems": "Alle Systeme ansehen",
+    "Design Studio": "Design Studio",
+    "Development Studio": "Development Studio",
+    "Business Automation": "Business Automation",
+    "Scale": "Skalierung",
+    "Marketing": "Marketing",
+    "Capabilities": "Fähigkeiten",
+    "©Services(06)": "©Services(06)",
+    "Strategic, conversion-focused websites crafted with clarity, performance, and refined visual identity.": "Strategische, conversion-orientierte Websites mit Klarheit, Performance und einer hochwertigen visuellen Identität.",
+    "Scalable automation and web solutions engineered for speed, security, and growth.": "Skalierbare Automatisierungs- und Weblösungen, entwickelt für Geschwindigkeit, Sicherheit und Wachstum.",
+    "Smart automation workflows that streamline operations, reduce costs, and boost efficiency.": "Intelligente Automatisierungs-Workflows, die Abläufe vereinfachen, Kosten senken und Effizienz steigern.",
+    "Data-driven content and positioning strategies that grow your audience and elevate brand presence.": "Datenbasierte Content- und Positionierungsstrategien, die Reichweite aufbauen und Markenpräsenz stärken.",
+    "Technical and content-driven SEO strategies designed to increase visibility and sustainable traffic.": "Technische und contentbasierte SEO-Strategien für mehr Sichtbarkeit und nachhaltigen Traffic.",
+    "Strategic AI integration tailored to your business model, unlocking smarter processes and innovation.": "Strategische KI-Integration, abgestimmt auf Ihr Geschäftsmodell, für intelligentere Prozesse und Innovation.",
+    "AI ML Research": "KI- und ML-Forschung",
+    "Our Products": "Unsere Produkte",
+    "©Rexity Products": "©Rexity Produkte",
+    "Learning": "Lernen",
+    "AI Ops": "KI Ops",
+    "Growth": "Wachstum",
+    "Creative": "Kreativ",
+    "Language prep and progress systems for focused learners.": "Sprachvorbereitung und Fortschrittssysteme für fokussierte Lernende.",
+    "Operational intelligence for smarter workflows and teams.": "Operative Intelligenz für smartere Workflows und Teams.",
+    "App growth research, visibility, and launch infrastructure.": "App-Growth-Research, Sichtbarkeit und Launch-Infrastruktur.",
+    "Content systems for fast creative production and testing.": "Content-Systeme für schnelle kreative Produktion und Tests.",
+    "Showreel ©26": "Showreel ©26",
+    "Play Reel": "Reel abspielen",
+    "Play": "Abspielen",
+    "Our AI Infrastructure Stack": "Unser KI-Infrastruktur-Stack",
+    "Cloud": "Cloud",
+    "GPU": "GPU",
+    "Deploy": "Deployment",
+    "Data": "Daten",
+    "Compute": "Compute",
+    "Models": "Modelle",
+    "AI Platform": "KI-Plattform",
+    "We build with these cloud, AI, GPU, database, deployment, and infrastructure products. Product names and logos are trademarks of their respective owners. Rexity is not endorsed by or formally affiliated with these companies unless stated otherwise.": "Wir arbeiten mit diesen Cloud-, KI-, GPU-, Datenbank-, Deployment- und Infrastrukturprodukten. Produktnamen und Logos sind Marken der jeweiligen Eigentümer. Rexity wird von diesen Unternehmen nicht unterstützt und ist nicht offiziell mit ihnen verbunden, sofern nicht anders angegeben.",
+    "©Better design, simplified.": "©Besseres Design, vereinfacht.",
+    "Our design subscription gives you flexible access to high-quality creative work — delivered quickly, refined continuously, and tailored to your brand.": "Unser Design-Abo gibt Ihnen flexiblen Zugang zu hochwertiger Kreativarbeit — schnell geliefert, kontinuierlich verfeinert und auf Ihre Marke abgestimmt.",
+    "Limitless Requests": "Unbegrenzte Anfragen",
+    "Submit as many design requests as you need. We keep refining and improving until everything aligns perfectly with your vision.": "Reichen Sie so viele Designanfragen ein, wie Sie benötigen. Wir verfeinern und verbessern, bis alles exakt zu Ihrer Vision passt.",
+    "Fast Delivery": "Schnelle Lieferung",
+    "Speed meets quality. Our streamlined workflow ensures your projects move forward quickly without sacrificing attention to detail.": "Geschwindigkeit trifft Qualität. Unser klarer Workflow bringt Ihre Projekte schnell voran, ohne Details zu vernachlässigen.",
+    "Predictable Pricing": "Planbare Preise",
+    "Access dedicated design support through a simple monthly model. No hidden fees, no surprises — just consistent creative work tailored to your needs.": "Erhalten Sie dedizierte Designunterstützung über ein einfaches Monatsmodell. Keine versteckten Gebühren, keine Überraschungen — nur verlässliche Kreativarbeit nach Bedarf.",
+    "Senior Design Team": "Senior Design Team",
+    "Work with experienced designers who understand strategy, aesthetics, and performance — delivering work that strengthens your brand.": "Arbeiten Sie mit erfahrenen Designern, die Strategie, Ästhetik und Performance verstehen — für Arbeit, die Ihre Marke stärkt.",
+    "Clear Collaboration": "Klare Zusammenarbeit",
+    "Stay connected with our team through simple, transparent communication that keeps feedback flowing and projects moving.": "Bleiben Sie mit unserem Team über einfache, transparente Kommunikation verbunden, damit Feedback fließt und Projekte vorankommen.",
+    "Studio Notes": "Studio Notizen",
+    "©Journal": "©Journal",
+    "Designing digital systems that scale your business": "Digitale Systeme gestalten, die Ihr Business skalieren",
+    "From idea to execution: building products that last": "Von der Idee zur Umsetzung: Produkte bauen, die bleiben",
+    "The power of simplicity in modern real brand design": "Die Kraft der Einfachheit im modernen Markendesign",
+    "October 4, 2025": "4. Oktober 2025",
+    "October 1, 2025": "1. Oktober 2025",
+    "November 11, 2025": "11. November 2025",
+    "Footer": "Footer",
+    "©Let's Talk": "©Kontakt",
+    "Let's Talk": "Sprechen wir",
+    "3 Slots Open — Mar.": "3 Slots offen — März",
+    "Contact us": "Kontakt aufnehmen",
+    "Trusted by directors of influence companies": "Vertraut von Entscheidern einflussreicher Unternehmen",
+    "Rexity Team": "Rexity Team",
+    "Design, AI, demos": "Design, KI, Demos",
+    "Ask Rexity": "Rexity fragen",
+    "Rexity Systems": "Rexity Systems",
+    "Contact Rexity": "Rexity kontaktieren",
+    "Products": "Produkte",
+    "©AI systems for ambitious teams.": "©KI-Systeme für ambitionierte Teams.",
+    "Automation": "Automatisierung"
+  };
+  var reverseText = {};
+  Object.keys(deText).forEach(function (key) { reverseText[deText[key]] = key; });
+
+  function queryLang() {
+    try {
+      var value = new URLSearchParams(window.location.search).get("lang");
+      return SUPPORTED.indexOf(value) > -1 ? value : null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function preferredLang() {
+    var fromQuery = queryLang();
+    if (fromQuery) return fromQuery;
+    try {
+      var saved = window.localStorage.getItem(STORAGE_KEY);
+      if (SUPPORTED.indexOf(saved) > -1) return saved;
+    } catch (_error) {}
+    var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
+    return browserLang.indexOf("de") === 0 ? "de" : "en";
+  }
+
+  function translateValue(value, lang) {
+    var clean = String(value || "").replace(/\s+/g, " ").trim();
+    if (!clean) return value;
+    if (lang === "de" && deText[clean]) return deText[clean];
+    if (lang === "en" && reverseText[clean]) return reverseText[clean];
+    return value;
+  }
+
+  function setText(el, text) {
+    if (!el || !text) return;
+    el.textContent = text;
+    if (el.hasAttribute("aria-label")) el.setAttribute("aria-label", text);
+  }
+
+  function translateTextNodes(lang) {
+    var skip = { SCRIPT: true, STYLE: true, NOSCRIPT: true, SVG: true, PATH: true };
+    function visible(el) {
+      return el && !skip[el.tagName];
+    }
+    function walk(node) {
+      if (node.nodeType === 3) {
+        if (!visible(node.parentElement)) return;
+        var original = node.nodeValue;
+        var leading = original.match(/^\s*/)[0];
+        var trailing = original.match(/\s*$/)[0];
+        var translated = translateValue(original, lang);
+        if (translated !== original) node.nodeValue = leading + translated + trailing;
+        return;
+      }
+      if (node.nodeType !== 1 || !visible(node)) return;
+      Array.prototype.slice.call(node.childNodes).forEach(walk);
+    }
+    walk(document.body);
+  }
+
+  function translateLabels(lang) {
+    document.querySelectorAll("[aria-label], [placeholder], [title]").forEach(function (el) {
+      ["aria-label", "placeholder", "title"].forEach(function (attr) {
+        if (!el.hasAttribute(attr)) return;
+        var translated = translateValue(el.getAttribute(attr), lang);
+        if (translated !== el.getAttribute(attr)) el.setAttribute(attr, translated);
+      });
+    });
+  }
+
+  function translateSplitLabelElements(lang) {
+    document.querySelectorAll(".button-small-name[aria-label], .button-big-menu[aria-label], .navigation-text-main[aria-label], .text-small-menu[aria-label], .h1[aria-label]").forEach(function (el) {
+      var label = (el.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim();
+      var text = (el.textContent || "").replace(/\s+/g, " ").trim();
+      var translated = translateValue(label, lang);
+      if (translated === label) translated = translateValue(text, lang);
+      if (!translated || translated === text) return;
+      el.setAttribute("aria-label", translated);
+      el.textContent = translated;
+    });
+  }
+
+  function translateLeafElements(lang) {
+    document.querySelectorAll(".button-small-name, .button-big-menu, .badge-paragraph, .top-text, .card-text, .work-title, .thumb-title, .rexity-product-status, .rexity-product-desc, .rexity-product-name, .navigation-text-main").forEach(function (el) {
+      if (el.children.length > 0) return;
+      var translated = translateValue(el.textContent, lang);
+      if (translated !== el.textContent) el.textContent = translated;
+    });
+  }
+
+  function normalizeAnimatedNav(lang) {
+    var labels = {
+      en: { Home: "Home", About: "About", Work: "Work", Services: "Services", Contact: "Contact", Menu: "Menu", Close: "Close" },
+      de: { Home: "Start", About: "Über uns", Work: "Arbeit", Services: "Services", Contact: "Kontakt", Menu: "Menü", Close: "Schließen" }
+    };
+    Object.keys(labels.en).forEach(function (key) {
+      document.querySelectorAll('[aria-label="' + labels.en[key] + '"], [aria-label="' + labels.de[key] + '"]').forEach(function (el) {
+        setText(el, labels[lang][key]);
+      });
+    });
+  }
+
+  function applyMeta(lang) {
+    var data = meta[lang] || meta.en;
+    document.documentElement.setAttribute("lang", lang);
+    document.title = data.title;
+    [
+      ['meta[name="description"]', "content", data.description],
+      ['meta[property="og:title"]', "content", data.title],
+      ['meta[property="og:description"]', "content", data.description],
+      ['meta[name="twitter:title"]', "content", data.title],
+      ['meta[name="twitter:description"]', "content", data.description]
+    ].forEach(function (item) {
+      var el = document.querySelector(item[0]);
+      if (el) el.setAttribute(item[1], item[2]);
+    });
+  }
+
+  function ensureSwitcher(lang) {
+    var existing = document.querySelector(".rexity-lang-switch");
+    if (!existing) {
+      var style = document.createElement("style");
+      style.id = "rexity-lang-switch-style";
+      style.textContent = ".rexity-lang-switch{display:inline-flex;align-items:center;gap:2px;padding:4px;border:1px solid rgba(9,9,9,.16);border-radius:999px;background:rgba(255,255,255,.72);backdrop-filter:blur(12px);box-shadow:0 10px 32px rgba(9,9,9,.08);font:600 12px/1 Inter,Arial,sans-serif;color:#090909}.rexity-lang-switch button{border:0;border-radius:999px;background:transparent;color:inherit;cursor:pointer;padding:7px 9px;line-height:1}.rexity-lang-switch button.is-active{background:#090909;color:#fff}.navigation-top .rexity-lang-switch{margin-right:14px}.fixed-menu .rexity-lang-switch{margin-top:18px}@media(max-width:767px){.navigation-top .rexity-lang-switch{position:fixed;right:78px;top:28px;z-index:9999;background:rgba(255,255,255,.9)}}";
+      document.head.appendChild(style);
+      existing = document.createElement("div");
+      existing.className = "rexity-lang-switch";
+      existing.setAttribute("role", "group");
+      existing.setAttribute("aria-label", "Language");
+      existing.innerHTML = '<button type="button" data-lang="en">EN</button><button type="button" data-lang="de">DE</button>';
+      existing.addEventListener("click", function (event) {
+        var button = event.target.closest("button[data-lang]");
+        if (!button) return;
+        setLang(button.getAttribute("data-lang"), true);
+      });
+      var lastPart = document.querySelector(".navigation-top .last-part");
+      if (lastPart) lastPart.insertBefore(existing, lastPart.firstChild);
+      else document.body.appendChild(existing);
+    }
+    existing.querySelectorAll("button[data-lang]").forEach(function (button) {
+      button.classList.toggle("is-active", button.getAttribute("data-lang") === lang);
+      button.setAttribute("aria-pressed", String(button.getAttribute("data-lang") === lang));
+    });
+  }
+
+  function setLang(lang, persist) {
+    lang = SUPPORTED.indexOf(lang) > -1 ? lang : "en";
+    if (persist) {
+      try { window.localStorage.setItem(STORAGE_KEY, lang); } catch (_error) {}
+    }
+    window.RexityLang = lang;
+    applyMeta(lang);
+    normalizeAnimatedNav(lang);
+    translateTextNodes(lang);
+    translateLeafElements(lang);
+    translateLabels(lang);
+    translateSplitLabelElements(lang);
+    ensureSwitcher(lang);
+    try {
+      window.dispatchEvent(new CustomEvent("rexity:languagechange", { detail: { lang: lang } }));
+    } catch (_error) {
+      var event = document.createEvent("CustomEvent");
+      event.initCustomEvent("rexity:languagechange", false, false, { lang: lang });
+      window.dispatchEvent(event);
+    }
+  }
+
+  function boot() {
+    var lang = preferredLang();
+    setLang(lang, Boolean(queryLang()));
+    [300, 900, 1800, 3200, 5200].forEach(function (delay) {
+      window.setTimeout(function () { setLang(window.RexityLang || lang, false); }, delay);
+    });
+  }
+
+  window.RexitySetLanguage = setLang;
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
 </script><script src="assets/chatbot/rexity-chatbot.js" defer></script></body>

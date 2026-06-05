@@ -1,12 +1,57 @@
 (function () {
-  var quickQuestions = [
-    "What does Rexity do?",
-    "Book a demo",
-    "I need a website",
-    "Automate my business",
-    "Tell me about LevelKraft",
-    "Preise auf Deutsch?"
-  ];
+  var STORAGE_KEY = "rexity_lang";
+  var copy = {
+    en: {
+      quickQuestions: [
+        "What does Rexity do?",
+        "Book a demo",
+        "I need a website",
+        "Automate my business",
+        "Tell me about LevelKraft",
+        "Pricing in English?"
+      ],
+      rootLabel: "Rexity chat assistant",
+      openLabel: "Open Rexity chat",
+      closeLabel: "Close chat",
+      panelLabel: "Rexity chat",
+      quickLabel: "Suggested questions",
+      messageLabel: "Message Rexity",
+      sendLabel: "Send message",
+      pillTitle: "Ask Rexity",
+      pillSubtitle: "Design, AI, demos",
+      introTitle: "How can we help?",
+      introCopy: "Ask about Rexity services, products, automation, AI systems, or booking a demo.",
+      placeholder: "Ask about Rexity...",
+      footnote: "The assistant answers from approved Rexity information only. Admin, refund, billing, and policy topics go to admin@rexity.ai.",
+      greeting: "Hi. I can help with Rexity services, products, automation, design, development, scaling, and demos.",
+      loading: "Checking Rexity knowledge..."
+    },
+    de: {
+      quickQuestions: [
+        "Was macht Rexity?",
+        "Demo buchen",
+        "Ich brauche eine Website",
+        "Mein Business automatisieren",
+        "Erzähl mir von LevelKraft",
+        "Preise auf Deutsch?"
+      ],
+      rootLabel: "Rexity Chat-Assistent",
+      openLabel: "Rexity Chat öffnen",
+      closeLabel: "Chat schließen",
+      panelLabel: "Rexity Chat",
+      quickLabel: "Vorgeschlagene Fragen",
+      messageLabel: "Nachricht an Rexity",
+      sendLabel: "Nachricht senden",
+      pillTitle: "Rexity fragen",
+      pillSubtitle: "Design, KI, Demos",
+      introTitle: "Wie können wir helfen?",
+      introCopy: "Fragen Sie zu Rexity Services, Produkten, Automatisierung, KI-Systemen oder einer Demo.",
+      placeholder: "Fragen Sie Rexity...",
+      footnote: "Der Assistent antwortet nur auf Basis freigegebener Rexity Informationen. Admin-, Erstattungs-, Rechnungs- und Richtlinienthemen gehen an admin@rexity.ai.",
+      greeting: "Hallo. Ich helfe bei Rexity Services, Produkten, Automatisierung, Design, Entwicklung, Skalierung und Demos.",
+      loading: "Rexity Wissen wird geprüft..."
+    }
+  };
 
   var fallbackKnowledge = [
     {
@@ -46,8 +91,15 @@
   }
 
   function detectLang(text) {
+    if (window.RexityLang === "de" || window.RexityLang === "en") return window.RexityLang;
+    try {
+      var saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved === "de" || saved === "en") return saved;
+    } catch (_error) {}
     var t = String(text || "").toLowerCase();
-    return /(was|wie|bitte|danke|kann|können|termin|beratung|erstattung|rechnung|deutsch|preise)/i.test(t) ? "de" : "en";
+    var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
+    if (/(was|wie|bitte|danke|kann|können|termin|beratung|erstattung|rechnung|deutsch|preise)/i.test(t)) return "de";
+    return browserLang.indexOf("de") === 0 ? "de" : "en";
   }
 
   function localReply(message) {
@@ -97,36 +149,38 @@
 
   function init() {
     if (document.querySelector(".rexity-chatbot")) return;
+    var lang = detectLang("");
+    var activeCopy = copy[lang] || copy.en;
 
     var root = document.createElement("section");
     root.className = "rexity-chatbot";
-    root.setAttribute("aria-label", "Rexity chat assistant");
+    root.setAttribute("aria-label", activeCopy.rootLabel);
     root.innerHTML = [
-      '<button class="rexity-chatbot__pill" type="button" aria-label="Open Rexity chat">',
+      '<button class="rexity-chatbot__pill" type="button" aria-label="' + activeCopy.openLabel + '">',
         '<span class="rexity-chatbot__mark">' + svgIcon("mark") + '</span>',
         '<span class="rexity-chatbot__pill-text">',
-          '<span class="rexity-chatbot__pill-title">Ask Rexity</span>',
-          '<span class="rexity-chatbot__pill-subtitle">Design, AI, demos</span>',
+          '<span class="rexity-chatbot__pill-title">' + activeCopy.pillTitle + '</span>',
+          '<span class="rexity-chatbot__pill-subtitle">' + activeCopy.pillSubtitle + '</span>',
         '</span>',
       '</button>',
-      '<div class="rexity-chatbot__panel" role="dialog" aria-modal="false" aria-label="Rexity chat">',
+      '<div class="rexity-chatbot__panel" role="dialog" aria-modal="false" aria-label="' + activeCopy.panelLabel + '">',
         '<div class="rexity-chatbot__hero">',
           '<div class="rexity-chatbot__top">',
             '<div class="rexity-chatbot__brand">' + svgIcon("mark") + '<span>Rexity</span></div>',
-            '<button class="rexity-chatbot__close" type="button" aria-label="Close chat">' + svgIcon("close") + '</button>',
+            '<button class="rexity-chatbot__close" type="button" aria-label="' + activeCopy.closeLabel + '">' + svgIcon("close") + '</button>',
           '</div>',
           '<div class="rexity-chatbot__intro">',
-            '<h2 class="rexity-chatbot__intro-title">How can we help?</h2>',
-            '<p class="rexity-chatbot__intro-copy">Ask about Rexity services, products, automation, AI systems, or booking a demo.</p>',
+            '<h2 class="rexity-chatbot__intro-title">' + activeCopy.introTitle + '</h2>',
+            '<p class="rexity-chatbot__intro-copy">' + activeCopy.introCopy + '</p>',
           '</div>',
         '</div>',
-        '<div class="rexity-chatbot__quick" aria-label="Suggested questions"></div>',
+        '<div class="rexity-chatbot__quick" aria-label="' + activeCopy.quickLabel + '"></div>',
         '<div class="rexity-chatbot__messages" aria-live="polite"></div>',
         '<form class="rexity-chatbot__form">',
-          '<input class="rexity-chatbot__input" type="text" maxlength="1000" autocomplete="off" placeholder="Ask about Rexity..." aria-label="Message Rexity">',
-          '<button class="rexity-chatbot__send" type="submit" aria-label="Send message">' + svgIcon("send") + '</button>',
+          '<input class="rexity-chatbot__input" type="text" maxlength="1000" autocomplete="off" placeholder="' + activeCopy.placeholder + '" aria-label="' + activeCopy.messageLabel + '">',
+          '<button class="rexity-chatbot__send" type="submit" aria-label="' + activeCopy.sendLabel + '">' + svgIcon("send") + '</button>',
         '</form>',
-        '<div class="rexity-chatbot__footnote">The assistant answers from approved Rexity information only. Admin, refund, billing, and policy topics go to admin@rexity.ai.</div>',
+        '<div class="rexity-chatbot__footnote">' + activeCopy.footnote + '</div>',
       '</div>'
     ].join("");
 
@@ -140,7 +194,37 @@
     var input = root.querySelector(".rexity-chatbot__input");
     var send = root.querySelector(".rexity-chatbot__send");
 
-    quickQuestions.forEach(function (question) {
+    function renderChatLanguage(nextLang) {
+      lang = nextLang === "de" ? "de" : "en";
+      activeCopy = copy[lang] || copy.en;
+      root.setAttribute("aria-label", activeCopy.rootLabel);
+      pill.setAttribute("aria-label", activeCopy.openLabel);
+      close.setAttribute("aria-label", activeCopy.closeLabel);
+      root.querySelector(".rexity-chatbot__panel").setAttribute("aria-label", activeCopy.panelLabel);
+      quick.setAttribute("aria-label", activeCopy.quickLabel);
+      input.setAttribute("placeholder", activeCopy.placeholder);
+      input.setAttribute("aria-label", activeCopy.messageLabel);
+      send.setAttribute("aria-label", activeCopy.sendLabel);
+      root.querySelector(".rexity-chatbot__pill-title").textContent = activeCopy.pillTitle;
+      root.querySelector(".rexity-chatbot__pill-subtitle").textContent = activeCopy.pillSubtitle;
+      root.querySelector(".rexity-chatbot__intro-title").textContent = activeCopy.introTitle;
+      root.querySelector(".rexity-chatbot__intro-copy").textContent = activeCopy.introCopy;
+      root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
+      quick.innerHTML = "";
+      activeCopy.quickQuestions.forEach(function (question) {
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "rexity-chatbot__chip";
+        chip.textContent = question;
+        chip.addEventListener("click", function () {
+          input.value = question;
+          form.dispatchEvent(new Event("submit", { cancelable: true }));
+        });
+        quick.appendChild(chip);
+      });
+    }
+
+    activeCopy.quickQuestions.forEach(function (question) {
       var chip = document.createElement("button");
       chip.type = "button";
       chip.className = "rexity-chatbot__chip";
@@ -152,7 +236,11 @@
       quick.appendChild(chip);
     });
 
-    addMessage(messages, "Hi. I can help with Rexity services, products, AI automation, design, development, scaling, and demos.", "bot");
+    renderChatLanguage(lang);
+    addMessage(messages, activeCopy.greeting, "bot");
+    window.addEventListener("rexity:languagechange", function (event) {
+      renderChatLanguage(event.detail && event.detail.lang);
+    });
 
     pill.addEventListener("click", function () {
       root.classList.add("is-open");
@@ -178,7 +266,7 @@
       input.value = "";
       send.disabled = true;
       addMessage(messages, message, "user");
-      var loading = addMessage(messages, "Checking Rexity knowledge...", "bot rexity-chatbot__message--loading");
+      var loading = addMessage(messages, activeCopy.loading, "bot rexity-chatbot__message--loading");
       try {
         loading.textContent = await askApi(message);
       } catch (_error) {
