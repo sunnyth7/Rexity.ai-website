@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style><title>Rexity - Automation Website</title><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." name="description"><meta content="Rexity - Automation Website" property="og:title"><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." property="og:description"><meta content="assets/hero/rexity-hero-poster.jpg" property="og:image"><meta content="Rexity - Automation Website" name="twitter:title"><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." name="twitter:description"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><style>html {
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>.wf-force-outline-none[tabindex="-1"]:focus{outline:none;}</style><title>Rexity - Automation Website</title><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." name="description"><meta content="Rexity - Automation Website" property="og:title"><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." property="og:description"><meta content="assets/hero/rexity-hero-poster.jpg" property="og:image"><meta content="Rexity - Automation Website" name="twitter:title"><meta content="Rexity builds automation systems, growth workflows, and polished digital experiences for modern teams." name="twitter:description"><meta property="og:type" content="website"><meta content="summary_large_image" name="twitter:card"><meta content="width=device-width, initial-scale=1" name="viewport"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="googlebot" content="noindex,nofollow"><style>html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   font-family: sans-serif;
@@ -9069,4 +9069,65 @@ body.rexity-main-ready .rexity-scroll-cue {
     boot();
   }
 })();
-</script><script src="assets/chatbot/rexity-chatbot.js" defer></script></body>
+</script><script src="assets/chatbot/rexity-chatbot.js" defer></script><!-- Cookie / localStorage notice — minimal, dismissible. No tracking cookies on this site today.
+     Only localStorage usage: language preference (DE/EN switcher). -->
+<style id="rexity-cookie-style">
+  #rexity-cookie-notice{position:fixed;bottom:16px;left:16px;right:16px;max-width:520px;margin:0 auto;
+    background:#111;color:#fff;padding:14px 18px;border-radius:12px;font:14px/1.5 -apple-system,Inter,sans-serif;
+    box-shadow:0 12px 40px rgba(0,0,0,.25);z-index:9999;border:1px solid rgba(255,255,255,.08);display:none}
+  #rexity-cookie-notice.visible{display:block}
+  #rexity-cookie-notice p{margin:0 0 10px;color:rgba(255,255,255,.85)}
+  #rexity-cookie-notice a{color:#22d3ee;text-decoration:underline}
+  #rexity-cookie-notice .actions{display:flex;gap:8px;justify-content:flex-end}
+  #rexity-cookie-notice button{background:#fff;color:#111;border:0;border-radius:999px;padding:8px 16px;
+    font-weight:600;font-size:13px;cursor:pointer}
+  #rexity-cookie-notice button.secondary{background:transparent;color:rgba(255,255,255,.7);font-weight:500}
+  @media (max-width:480px){#rexity-cookie-notice{font-size:13px;padding:12px 14px}}
+</style>
+<div id="rexity-cookie-notice" role="dialog" aria-label="Cookie-Hinweis" lang="de">
+  <p data-lang="de" style="display:block">
+    Diese Website verwendet keine Werbe-Cookies. Wir speichern lediglich Ihre Sprachpräferenz im
+    lokalen Speicher Ihres Browsers, um die Sprache zu erinnern.
+    Mehr in unserer <a href="/datenschutz">Datenschutzerklärung</a>.
+  </p>
+  <p data-lang="en" style="display:none">
+    This site uses no advertising cookies. We only store your language preference in your browser's
+    local storage to remember the chosen language.
+    See our <a href="/datenschutz">Privacy notice</a>.
+  </p>
+  <div class="actions">
+    <button class="secondary" id="rexity-cookie-lang">EN</button>
+    <button id="rexity-cookie-ok" type="button">OK</button>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    if (localStorage.getItem('rexity.cookieNoticeDismissed') === '1') return;
+  } catch(e) {}
+  var el = document.getElementById('rexity-cookie-notice');
+  if (!el) return;
+  el.classList.add('visible');
+  var de = el.querySelector('[data-lang="de"]');
+  var en = el.querySelector('[data-lang="en"]');
+  var langBtn = document.getElementById('rexity-cookie-lang');
+  var ok = document.getElementById('rexity-cookie-ok');
+  var browserLang = (navigator.language||'').toLowerCase();
+  if (browserLang.indexOf('de') !== 0) {
+    de.style.display = 'none'; en.style.display = 'block';
+    langBtn.textContent = 'DE'; el.setAttribute('lang','en');
+  }
+  langBtn.addEventListener('click', function(){
+    var deOn = de.style.display !== 'none';
+    de.style.display = deOn ? 'none' : 'block';
+    en.style.display = deOn ? 'block' : 'none';
+    langBtn.textContent = deOn ? 'DE' : 'EN';
+    el.setAttribute('lang', deOn ? 'en' : 'de');
+  });
+  ok.addEventListener('click', function(){
+    try { localStorage.setItem('rexity.cookieNoticeDismissed','1'); } catch(e) {}
+    el.classList.remove('visible');
+  });
+})();
+</script>
+</body>
