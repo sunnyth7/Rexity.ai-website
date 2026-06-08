@@ -90,13 +90,89 @@
     Einwilligung. Andernfalls wird das Gespräch ohne Audioaufzeichnung geführt.
   </p>
 
-  <h2 class="mt-10 text-xl font-bold text-slate-900">5. Auftragsverarbeiter</h2>
+  <h2 class="mt-10 text-xl font-bold text-slate-900">5. Auftragsverarbeiter und Drittanbieter</h2>
   <p class="mt-3 text-slate-700">
-    Eine vollständige und stets aktuelle Liste unserer Auftragsverarbeiter (Hosting, Datenbank,
-    Kommunikation, Sprachprovider) finden Sie im Repository unter
-    <code class="text-sm bg-slate-100 px-1 py-0.5 rounded">docs/PROCESSORS.md</code> bzw. nach
-    Veröffentlichung unter <code class="text-sm bg-slate-100 px-1 py-0.5 rounded">/processors</code>.
+    Mit den nachstehenden Auftragsverarbeitern haben wir, soweit erforderlich, Verträge zur
+    Auftragsverarbeitung nach <strong>Art. 28 DSGVO</strong> abgeschlossen oder werden diese vor
+    produktivem Einsatz abschließen. Eine maschinenlesbare und stets aktuelle Liste finden Sie im
+    Repository unter <code class="text-sm bg-slate-100 px-1 py-0.5 rounded">docs/PROCESSORS.md</code>.
   </p>
+  <h3 class="text-lg font-semibold text-slate-800 mt-6 mb-3">5.1 Aktive Anbieter (heute eingesetzt)</h3>
+  <ul class="mt-2 list-disc pl-6 text-slate-700 space-y-2">
+    <li>
+      <strong>Vercel Inc.</strong> (San Francisco, USA; EU-Edge in Frankfurt) — Hosting der Website
+      und der Webhook-Endpunkte. Datenfluss: Anfrage-Metadaten (IP, Browser-UA, URL) werden zur
+      Auslieferung verarbeitet. Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO. EU-Standardvertragsklauseln
+      auf Basis Vercel-DPA.
+    </li>
+    <li>
+      <strong>Vercel Analytics</strong> — anonymisierte Web-Analyse <em>ohne Cookies</em>; keine
+      personenbezogenen Daten, keine geräteübergreifende Verfolgung.
+    </li>
+    <li>
+      <strong>Neon (Databricks Inc.)</strong> (EU-Region Frankfurt) — Postgres-Datenbank für Leads,
+      Termine, Audit-Logs. Daten verlassen die EU nicht. AVV nach Art. 28 DSGVO in Vorbereitung.
+    </li>
+    <li>
+      <strong>Google Fonts (Google Ireland Ltd.)</strong> — Schriftarten („Inter") werden von
+      <code>fonts.googleapis.com</code> nachgeladen, dabei wird Ihre IP-Adresse an Google übermittelt.
+      Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO (einheitliche Darstellung). Wir prüfen die Umstellung
+      auf selbst gehostete Schriften.
+    </li>
+    <li>
+      <strong>Tailwind CSS CDN</strong> (<code>cdn.tailwindcss.com</code>, betrieben über
+      jsDelivr/Cloudflare) — Styling-Bibliothek; lädt JavaScript zur Aufbereitung der Seite.
+      Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO.
+    </li>
+    <li>
+      <strong>GitHub Inc.</strong> — Quellcode-Verwaltung; keine Endnutzer-Daten.
+    </li>
+  </ul>
+  <h3 class="text-lg font-semibold text-slate-800 mt-6 mb-3">5.2 Geplante Anbieter (vor produktivem Einsatz mit AVV)</h3>
+  <ul class="mt-2 list-disc pl-6 text-slate-700 space-y-2">
+    <li><strong>Meta Platforms Ireland Ltd.</strong> — WhatsApp Business API (eingehende Nachrichten, ausgehende
+      Vorlagen). Nicht aktiv. Aktivierung erst nach abgeschlossener WhatsApp-Business-Verifikation.</li>
+    <li><strong>Vapi / Retell / Twilio</strong> (Auswahl ausstehend) — Sprachprovider für die KI-Sprachassistenz
+      „Rexona". Nicht aktiv. Standardmäßig ohne Aufzeichnung; Aufzeichnung nur nach ausdrücklicher Einwilligung.</li>
+    <li><strong>OpenAI / Anthropic / Mistral</strong> (Auswahl ausstehend) — LLM-Anbieter für die geschlossene
+      Wissensdatenbank (RAG). Eingaben werden vor Übermittlung pseudonymisiert.</li>
+    <li><strong>Sentry oder Datadog</strong> (optional) — Fehlerprotokollierung. Nicht aktiv.</li>
+  </ul>
+
+  <h3 class="text-lg font-semibold text-slate-800 mt-6 mb-3">5.3 Was wir NICHT einsetzen</h3>
+  <p class="mt-2 text-slate-700">
+    Aus Transparenzgründen führen wir auf, was auf dieser Website ausdrücklich <strong>nicht</strong>
+    zum Einsatz kommt:
+  </p>
+  <ul class="mt-2 list-disc pl-6 text-slate-700 space-y-1">
+    <li>Google Analytics, Google Tag Manager, Google Ads-Conversion-Pixel</li>
+    <li>Meta-Pixel / Facebook-Pixel</li>
+    <li>LinkedIn Insight Tag</li>
+    <li>Hotjar, Microsoft Clarity, Mixpanel, Segment, Posthog</li>
+    <li>Mailchimp, HubSpot, Pipedrive (kein Newsletter, kein CRM mit Endkunden-Daten)</li>
+    <li>Zoom, Google Meet, Microsoft Teams (Kommunikation läuft per E-Mail oder nach individueller Verabredung)</li>
+    <li>Cookies zu Werbe- oder Marketing-Zwecken</li>
+  </ul>
+  <p class="mt-3 text-slate-700">
+    Sollte sich an dieser Aufstellung etwas ändern, aktualisieren wir diese Seite und die Datei
+    <code class="text-sm bg-slate-100 px-1 py-0.5 rounded">docs/PROCESSORS.md</code> innerhalb von
+    30 Tagen.
+  </p>
+
+  <h2 class="mt-10 text-xl font-bold text-slate-900">5a. Cookies und lokaler Speicher</h2>
+  <p class="mt-3 text-slate-700">
+    Diese Website setzt <strong>keine Werbe-, Marketing- oder Profiling-Cookies</strong>. Es findet
+    keine geräteübergreifende Wiedererkennung statt.
+  </p>
+  <ul class="mt-2 list-disc pl-6 text-slate-700 space-y-2">
+    <li>Technisch notwendige Session-Cookies werden ggf. durch unseren Hosting-Anbieter Vercel gesetzt
+      (Lastverteilung). Diese sind nach TTDSG § 25 Abs. 2 einwilligungsfrei.</li>
+    <li>Im <code>localStorage</code> Ihres Browsers speichern wir ausschließlich Ihre Sprachpräferenz
+      (DE/EN), damit der Sprachschalter beim erneuten Besuch funktioniert. Auch dies ist technisch
+      notwendig im Sinne des § 25 Abs. 2 TTDSG.</li>
+    <li>Sollten wir künftig Tracking-Cookies oder ähnliche Technologien einsetzen, implementieren wir
+      vorher einen Consent-Banner mit Opt-in nach § 25 Abs. 1 TTDSG.</li>
+  </ul>
 
   <h2 class="mt-10 text-xl font-bold text-slate-900">6. Pseudonymisierung und Audit-Logs</h2>
   <p class="mt-3 text-slate-700">

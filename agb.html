@@ -64,6 +64,24 @@
       Auftraggebers berechtigen zur entsprechenden Verlängerung der vereinbarten Termine.
     </p>
 
+    <h2 id="mitwirkung-ki" class="text-2xl font-bold text-slate-900 mt-10 mb-3 pb-2 border-b border-slate-200">§ 3a Mitwirkungspflichten bei KI-Leistungen</h2>
+    <p class="text-slate-700">
+      (1) Soweit der Vertragsgegenstand KI-Modelle, KI-Agenten, RAG-Systeme oder Sprachassistenten umfasst,
+      stellt der Auftraggeber inhaltlich geprüfte Trainings- bzw. Referenzdaten zur Verfügung. Der Auftraggeber
+      stellt sicher, dass er zur Bereitstellung dieser Inhalte berechtigt ist (insbesondere im Hinblick auf
+      Urheber-, Datenschutz- und Wettbewerbsrechte Dritter).
+    </p>
+    <p class="text-slate-700">
+      (2) Personenbezogene Daten dürfen ohne vorherigen Abschluss eines Auftragsverarbeitungsvertrages nach
+      Art. 28 DSGVO nicht an die Auftragnehmerin übermittelt werden. Vertraulich klassifizierte Inhalte
+      werden vor Übermittlung als solche gekennzeichnet.
+    </p>
+    <p class="text-slate-700">
+      (3) Der Auftraggeber benennt eine fachkundige Person, die Modellausgaben vor produktiver Verwendung
+      prüft und freigibt. Eine ungeprüfte Übernahme von Modellausgaben in betriebskritische Prozesse erfolgt
+      auf eigenes Risiko.
+    </p>
+
     <h2 id="verguetung" class="text-2xl font-bold text-slate-900 mt-10 mb-3 pb-2 border-b border-slate-200">§ 4 Vergütung und Zahlung</h2>
     <p class="text-slate-700">
       (1) Die Vergütung ergibt sich aus dem jeweiligen Angebot. Sofern nicht anders vereinbart, sind
@@ -91,6 +109,66 @@
       (2) An vorbestehenden Werken (Bibliotheken, Frameworks, Templates, internen Tools) der
       Auftragnehmerin verbleiben sämtliche Rechte bei der Auftragnehmerin. Der Auftraggeber erhält
       hieran ein einfaches, nicht übertragbares Nutzungsrecht im Rahmen des Vertragszwecks.
+    </p>
+
+    <h2 id="ki-spezifisch" class="text-2xl font-bold text-slate-900 mt-10 mb-3 pb-2 border-b border-slate-200">§ 6a Spezielle Regelungen für KI-gestützte Leistungen</h2>
+    <p class="text-slate-700">
+      (1) <strong>Ergebnisse von KI-Modellen.</strong> Outputs, die im Rahmen der Leistung von
+      KI-Modellen, KI-Agenten oder Sprachassistenten erzeugt werden, stehen dem Auftraggeber zur
+      unbeschränkten Verwendung zur Verfügung — eingeschränkt nur durch zwingende Rechte Dritter
+      sowie Lizenzbedingungen der jeweils eingesetzten Modellanbieter.
+    </p>
+    <p class="text-slate-700">
+      (2) <strong>Keine Gewähr für inhaltliche Richtigkeit.</strong> Die Auftragnehmerin gibt keine
+      Gewähr für die inhaltliche Richtigkeit, Vollständigkeit oder Aktualität von Modellausgaben.
+      KI-Modelle können fehlerhafte, unvollständige oder erfundene Inhalte erzeugen („Halluzinationen").
+      Modellausgaben sind vor produktiver Verwendung durch den Auftraggeber zu prüfen. Diese Regelung
+      gilt nur für die KI-Modellausgaben selbst und lässt die Gewährleistung für die Erbringung der
+      Dienstleistung im Übrigen unberührt.
+    </p>
+    <p class="text-slate-700">
+      (3) <strong>Telemetrie und Plattform-Verbesserung.</strong> Zur Qualitätssicherung, Fehleranalyse
+      und Weiterentwicklung der Plattform ist die Auftragnehmerin berechtigt, <em>pseudonymisierte</em>
+      Nutzungs- und Telemetriedaten zu verarbeiten. Personenbezogene Daten werden nach den im
+      <a href="/datenschutz" class="text-blue-600 hover:underline">/datenschutz</a> beschriebenen
+      Redaktionsregeln entfernt, bevor Daten in Audit- oder Trainings-Pipelines fließen.
+    </p>
+    <p class="text-slate-700">
+      (4) <strong>Verwendung von Eingaben.</strong> Inhaltliche Eingaben des Auftraggebers in das System
+      werden ausschließlich zur Erbringung der vereinbarten Leistung verwendet. Eine Verwendung für das
+      Training von Drittanbieter-Modellen (z. B. OpenAI, Anthropic) findet ausgeschlossen statt, soweit
+      die jeweilige Anbieter-Konfiguration dies zulässt und der Auftraggeber dies nicht ausdrücklich
+      genehmigt.
+    </p>
+    <p class="text-slate-700">
+      (5) <strong>Fair-Use und Missbrauchsschutz.</strong> Die Nutzung unterliegt branchenüblichen
+      Fair-Use-Grenzen. Bei missbräuchlicher Nutzung — etwa Umgehung der Rate-Limits, Versuche der
+      Modell-Manipulation („Prompt Injection"), automatisierte Generierung in einem Maße, das die
+      Verfügbarkeit für andere Auftraggeber beeinträchtigt — ist die Auftragnehmerin zur sofortigen
+      Drosselung oder Sperrung berechtigt.
+    </p>
+
+    <h2 id="ki-hochrisiko" class="text-2xl font-bold text-slate-900 mt-10 mb-3 pb-2 border-b border-slate-200">§ 6b Hoch-Risiko-Themen und menschliche Verifikation</h2>
+    <p class="text-slate-700">
+      (1) Outputs der KI-Systeme zu folgenden Themenbereichen verbleiben in jedem Fall menschlich
+      verifiziert; eine automatische KI-Antwort hat insoweit nur unverbindlichen Charakter:
+    </p>
+    <ul class="list-disc pl-6 text-slate-700 space-y-1">
+      <li>verbindliche Preisangaben oder Angebote</li>
+      <li>rechtliche Bewertungen, Rechtsberatung oder Vertragsauskünfte</li>
+      <li>medizinische, gesundheitliche oder pflegerische Auskünfte</li>
+      <li>verbindliche Liefer-, Termin- oder Erfüllungszusagen</li>
+      <li>Erstattungs-, Rückzahlungs- oder Kulanzentscheidungen</li>
+      <li>Vertragsabschlüsse oder verbindliche Erklärungen gegenüber Dritten</li>
+    </ul>
+    <p class="text-slate-700">
+      (2) In diesen Themen leitet das System die Anfrage an einen menschlichen Bearbeiter weiter
+      („Handoff"). Eine vorläufige, klar als KI-generiert gekennzeichnete Hinweisantwort bleibt zulässig.
+    </p>
+    <p class="text-slate-700">
+      (3) Der Auftraggeber stellt sicher, dass aus solchen Outputs keine ungeprüften Entscheidungen
+      gegenüber Dritten abgeleitet werden. Die Auftragnehmerin haftet nicht für Schäden aus einer
+      ungeprüften Übernahme von KI-Outputs in den vorgenannten Themenbereichen.
     </p>
 
     <h2 id="maengel" class="text-2xl font-bold text-slate-900 mt-10 mb-3 pb-2 border-b border-slate-200">§ 7 Mängel und Gewährleistung</h2>
@@ -156,6 +234,31 @@
       Bestimmungen unberührt. An die Stelle der unwirksamen Bestimmung tritt die gesetzlich zulässige
       Regelung, die dem mit der unwirksamen Bestimmung verfolgten Zweck am nächsten kommt.
     </p>
+  </section>
+
+  <!-- ============================================================
+       Teil II — SaaS-Plattform-Nutzungsbedingungen
+       Aktiviert sich, sobald wir eine Plattform mit Selbstbedienungs-
+       Zugang anbieten (etwa Rexona-Dashboard, KI-Workflow-Editor).
+       Bis dahin platzhalterweise gerahmt.
+       ============================================================ -->
+  <section class="prose prose-slate max-w-none mt-16 border-t-2 border-slate-200 pt-10">
+    <p class="text-xs uppercase tracking-wider text-slate-500 mb-3">Teil II (vorbehalten)</p>
+    <h2 class="text-3xl font-bold text-slate-900 mb-2">Nutzungsbedingungen der SaaS-Plattform</h2>
+    <div class="rounded-lg border-l-4 border-slate-300 bg-slate-50 p-4 text-sm text-slate-700 mt-4">
+      <p>
+        <strong>Status:</strong> Dieser Teil wird wirksam, sobald die Auftragnehmerin eine SaaS-
+        Plattform mit Selbstbedienungs-Zugang anbietet (z. B. ein Dashboard, einen Workflow-Editor
+        oder eine direkt nutzbare KI-Schnittstelle für den Auftraggeber).
+      </p>
+      <p class="mt-2">
+        Solange ein solches Angebot nicht besteht, gelten ausschließlich die in Teil I geregelten
+        Bedingungen für Dienstleistungen. Geplant sind Regelungen zu: Registrierung und Test-Zugang,
+        Vertragsschluss bei Plattform-Nutzung, Verfügbarkeit und Wartungsfenster, Nutzungsrechte
+        an der Plattform, Sperrung und Löschung von Accounts, Fair-Usage-Policy, Support-Stufen,
+        Regulatorische Pflichten (DSA, AI Act) sowie Vertraulichkeit.
+      </p>
+    </div>
   </section>
 
   <div class="mt-12 text-center text-sm text-slate-500 border-t border-slate-200 pt-8">
