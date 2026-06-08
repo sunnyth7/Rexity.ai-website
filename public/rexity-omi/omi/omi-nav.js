@@ -41,20 +41,28 @@
     var linksHtml = links.map(function (l) { return '<a href="' + l.href + '">' + l.t + '</a>'; }).join('');
     sh.innerHTML =
       '<style>' +
-      '.ov{position:fixed;inset:0;z-index:2147483646;background:#f7f7f4;transition:opacity .35s ease,visibility .35s ease;' +
-      '  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:Inter,system-ui,sans-serif}' +
-      '.ov a{font-size:clamp(2rem,6vw,3.4rem);font-weight:600;color:#070707;text-decoration:none;letter-spacing:-.02em;' +
-      '  line-height:1.18;opacity:.55;transition:opacity .2s}' +
-      '.ov a:hover{opacity:1}' +
-      '.x{position:fixed;top:28px;right:32px;width:50px;height:50px;border:0;border-radius:999px;background:#070707;color:#fff;' +
-      '  font-size:22px;line-height:50px;text-align:center;cursor:pointer;padding:0}' +
+      // dim backdrop (click to close)
+      '.bd{position:fixed;inset:0;z-index:2147483645;background:rgba(9,9,9,.45);transition:opacity .35s ease,visibility .35s ease}' +
+      // right-side sidebar panel
+      '.panel{position:fixed;top:0;height:100vh;width:min(420px,86vw);z-index:2147483646;background:#f7f7f4;' +
+      '  box-shadow:-24px 0 70px rgba(0,0,0,.22);' +
+      '  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:64px 52px;box-sizing:border-box;' +
+      '  font-family:Inter,system-ui,sans-serif}' +
+      '.panel a{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:600;color:#070707;text-decoration:none;letter-spacing:-.01em;' +
+      '  line-height:1.5;opacity:.85;transition:opacity .2s}' +
+      '.panel a:hover{opacity:1}' +
+      '.x{position:absolute;top:26px;right:30px;width:46px;height:46px;border:0;border-radius:999px;background:#070707;color:#fff;' +
+      '  font-size:21px;line-height:46px;text-align:center;cursor:pointer;padding:0}' +
       '</style>' +
-      '<div class="ov" style="opacity:0;visibility:hidden"><button class="x" aria-label="Close menu">&#10005;</button>' + linksHtml + '</div>';
+      '<div class="bd" style="opacity:0;visibility:hidden"></div>' +
+      '<div class="panel" style="right:-460px"><button class="x" aria-label="Close menu">&#10005;</button>' + linksHtml + '</div>';
 
-    var ov = sh.querySelector('.ov');
+    var bd = sh.querySelector('.bd');
+    var panel = sh.querySelector('.panel');
+    var xBtn = sh.querySelector('.x');
     var isOpen = false, lastT = 0;
-    function open() { isOpen = true; ov.style.opacity = '1'; ov.style.visibility = 'visible'; document.documentElement.style.overflow = 'hidden'; }
-    function close() { isOpen = false; ov.style.opacity = '0'; ov.style.visibility = 'hidden'; document.documentElement.style.overflow = ''; }
+    function open() { isOpen = true; bd.style.opacity = '1'; bd.style.visibility = 'visible'; panel.style.right = '0px'; document.documentElement.style.overflow = 'hidden'; }
+    function close() { isOpen = false; bd.style.opacity = '0'; bd.style.visibility = 'hidden'; panel.style.right = '-460px'; document.documentElement.style.overflow = ''; }
     function toggle(e) {
       if (e) { e.preventDefault(); e.stopPropagation(); }
       var now = (e && e.timeStamp) || (window.performance ? performance.now() : 0);
@@ -69,9 +77,9 @@
       if (bound.some(function (b) { return b.contains(h) || h.contains(b); })) return;
       bound.push(h); h.style.cursor = 'pointer'; h.addEventListener('click', toggle);
     });
-    sh.querySelector('.x').addEventListener('click', close);
-    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
-    sh.querySelectorAll('.ov a').forEach(function (a) { a.addEventListener('click', close); });
+    xBtn.addEventListener('click', close);
+    bd.addEventListener('click', close);
+    sh.querySelectorAll('.panel a').forEach(function (a) { a.addEventListener('click', close); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
