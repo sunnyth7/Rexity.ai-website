@@ -8,6 +8,7 @@
 (function () {
   function clean(t) {
     t = (t || '').replace(/\s+/g, ' ').trim();
+    t = t.replace(/\s*\(\s*\d+\s*\)\s*$/, '').trim();   // drop trailing count badge e.g. "Work (14)" -> "Work"
     var c = t.replace(/\s+/g, '');
     for (var k = Math.floor(c.length / 2); k >= 1; k--) {
       if (c.slice(0, k) === c.slice(k, 2 * k)) return (c.slice(0, k) + c.slice(2 * k)).trim();
