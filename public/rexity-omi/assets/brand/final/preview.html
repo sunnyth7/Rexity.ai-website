@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rexity Brand Asset Preview</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, Arial, sans-serif; }
+    body { margin: 0; background: #f7f7f4; color: #080808; }
+    main { max-width: 1080px; margin: 0 auto; padding: 48px 20px; }
+    h1 { margin: 0 0 28px; font-size: 32px; }
+    section { margin-top: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .tile { border: 1px solid #deded8; border-radius: 8px; padding: 20px; background: #fff; }
+    .tile.dark { background: #070707; color: #fff; border-color: #070707; }
+    .tile img { display: block; max-width: 100%; height: auto; }
+    .mark { width: 128px; }
+    .icon-row { display: flex; align-items: center; gap: 16px; }
+    p { margin: 14px 0 0; color: #666; font-size: 13px; }
+    .dark p { color: #b7b7b7; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Rexity Brand Asset Preview</h1>
+    <div class="grid">
+      <section class="tile">
+        <img src="rexity-logo-horizontal.svg" alt="Rexity horizontal logo">
+        <p>Horizontal logo for light backgrounds</p>
+      </section>
+      <section class="tile dark">
+        <img src="rexity-logo-horizontal-white.svg" alt="Rexity horizontal logo white">
+        <p>Horizontal logo for dark backgrounds</p>
+      </section>
+      <section class="tile">
+        <img class="mark" src="rexity-mark.svg" alt="Rexity mark">
+        <p>Standalone mark</p>
+      </section>
+      <section class="tile dark">
+        <img class="mark" src="rexity-mark-white.svg" alt="Rexity mark white">
+        <p>Standalone mark reversed</p>
+      </section>
+      <section class="tile">
+        <div class="icon-row">
+          <img src="favicon-16.png" width="16" height="16" alt="">
+          <img src="favicon-32.png" width="32" height="32" alt="">
+          <img src="favicon-48.png" width="48" height="48" alt="">
+          <img src="apple-touch-icon.png" width="64" height="64" alt="">
+        </div>
+        <p>Tab and app icons</p>
+      </section>
+      <section class="tile">
+        <img src="rexity-logo-master.png" alt="Rexity logo master">
+        <p>Generated HD master render</p>
+      </section>
+    </div>
+  </main>
+</body>
+</html>
