@@ -13,7 +13,7 @@ Legal entity: **Rexity Labs UG (haftungsbeschränkt)** _(formation in progress �
 | App hosting | Vercel Inc. | US (Frankfurt edge) | ✅ DPA via Vercel terms | Logs may transit US; SCCs apply |
 | Database | Neon (Databricks) | EU (Frankfurt region) | ⚠️ pending | Postgres for Lead/Appointment/Audit |
 | Analytics | Vercel Analytics | US | ✅ DPA via Vercel | Cookieless, no PII, no cross-site tracking |
-| Web fonts | Google Fonts (Google Ireland) | IE / global CDN | ⚠️ no separate DPA | Loaded from fonts.googleapis.com; IP transmitted to Google. Mitigation in progress — self-host evaluation |
+| ~~Web fonts~~ | ~~Google Fonts~~ | — | ✅ removed 2026-06 | Self-hosted Inter; no external font fetch |
 | CSS framework CDN | Tailwind CSS via cdn.tailwindcss.com | jsDelivr/Cloudflare | ⚠️ CDN-level only | Script-based styling utility |
 | Source control | GitHub Inc. (Microsoft) | US (multi-region) | ✅ Microsoft EU DPA | Code only; no end-user data |
 

@@ -1,0 +1,11 @@
+Contact: mailto:security@rexity.ai
+Contact: mailto:hello@rexity.ai
+Expires: 2027-06-09T09:41:26Z
+Preferred-Languages: en, de
+Canonical: https://www.rexity.ai/.well-known/security.txt
+Policy: https://www.rexity.ai/datenschutz
+
+# We respond to good-faith vulnerability reports within 5 business days.
+# Please include: affected URL, reproduction steps, observed vs. expected
+# behavior, and your contact details. PII / secrets you discover should
+# not be exfiltrated — please summarize the type and we'll investigate.

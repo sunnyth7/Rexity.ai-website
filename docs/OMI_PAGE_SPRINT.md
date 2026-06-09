@@ -145,23 +145,41 @@ The Omi page **does not yet have** any of the work we just shipped on `rexity.ai
 
 **Acceptance: 13/13 leak-term checks at zero. 57 headlines and all body copy now Rexity.**
 
-### Phase O2 — Compliance footer + legal (this week)
+### Phase O2 — Compliance footer + legal ✅ **DONE**
 
-Mirror the rexity.ai compliance posture onto the Omi page.
+| # | ID | Task | Status |
+|---|---|---|---|
+| 1 | O2-T1 | 5-link footer strip in banner (Impressum · Datenschutz · AGB · AEB · Barrierefreiheit) | ✅ done in O0-T8 |
+| 2 | O2-T2 | Footer link routing verified (links go to /impressum etc on the static-site main branch via Next.js static fallthrough) | ✅ |
+| 3 | O2-T3 | Cookie / localStorage notice (DE/EN, dismissible) | ✅ done in O0-T13 |
+| 4 | O2-T4 | Parent meta description + og:* already Rexity-specific (audited in O1) | ✅ |
+| 5 | O2-T5 | "Rexity Labs UG (haftungsbeschränkt) i. Gr." in banner | ✅ done in O0-T8 |
+| 6 | O2-T6 | theme-color #f7f7f4 added | ✅ done in O0 |
+| 7 | O2-T7 | `/.well-known/security.txt` created (security@/hello@rexity.ai contacts, 1-year expiry, EN+DE, link to /datenschutz) | ✅ |
+| 8 | O2-T8 | PROCESSORS.md: Google Fonts row marked removed | ✅ |
+| 9 | O2-T9 | Datenschutz §5.1: Google Fonts entry rewritten as "self-hosted, no external fetch" | ✅ (commit 9f8a054 on main) |
 
-| # | ID | Task | File(s) | Effort |
-|---|---|---|---|---|
-| 1 | O2-T1 | Add 5-link footer strip (Impressum · Datenschutz · AGB · AEB · Barrierefreiheit) **inside the parent `.footer-grid`** so it's part of the Rexity-owned chrome | `index.html` | S |
-| 2 | O2-T2 | Verify footer links work after prod-flip — confirm `/impressum`, `/datenschutz`, etc. still resolve when `app/page.tsx` redirects to `/rexity-omi/index.html` | n/a | XS |
-| 3 | O2-T3 | Add cookie / localStorage notice (DE/EN toggle, dismissible) — replicate the working component from prod `index.html` | `index.html` | S |
-| 4 | O2-T4 | Add `<meta name="description">` + `<meta property="og:*">` to parent — describe Rexity, NOT Webflow template | `index.html` | XS |
-| 5 | O2-T5 | Add `Rexity Labs UG (haftungsbeschränkt) i. Gr.` copyright line in footer | `index.html` | XS |
-| 6 | O2-T6 | Add `<meta name="theme-color" content="#f7f7f4">` for mobile browser chrome | `index.html` | XS |
-| 7 | O2-T7 | Add a `/security.txt` at `/.well-known/security.txt` — disclose responsible disclosure email | `public/.well-known/security.txt` | XS |
-| 8 | O2-T8 | Document the new page in `docs/PROCESSORS.md` — call out Adobe Typekit (or remove), GSAP CDN, any new external script | `docs/PROCESSORS.md` | S |
-| 9 | O2-T9 | Update `/datenschutz` §5.1 with: GSAP CDN (gsap.com), Adobe Typekit if used, font CDN choices made on the Omi page | `datenschutz.html` (static site) | S |
+**Acceptance: all 9 items done. Compliance parity reached.**
 
-**O2 acceptance:** Omi page has full footer parity with rexity.ai; cookies notice shows; legal links resolve; PROCESSORS.md reflects reality.
+### Phase O3 — Architecture & performance hardening (in progress)
+
+| # | ID | Task | Status |
+|---|---|---|---|
+| 1 | O3-T1 | **Self-host Google Fonts** — removed external `<link>`s; CSS routed to Inter (already self-hosted) + system fallbacks | ✅ |
+| 2 | O3-T2 | **Adobe Typekit** — audit confirmed it appears only inside the Webflow `WebFontLoader` library as a default-fallback string; no runtime fetch. No action needed. | ✅ verified safe |
+| 3 | O3-T3 | **GSAP CDN** — audit confirmed gsap.com appears only inside an inlined error-message string; GSAP itself is bundled into the page. No runtime CDN fetch. No action needed. | ✅ verified safe |
+| 4 | O3-T4 | Visible fallback when iframe doesn't paint within 8 s — rendered inside `#omi-it-scroll` with link to /contact | ✅ |
+| 5 | O3-T5 | Scroll-proxy uses `ResizeObserver(iframe.body)` instead of setInterval — settles on actual layout changes, keeps working past 10 s | ✅ |
+| 6 | O3-T6 | File-size optimization of the 9.9 MB `index.html` | ⏳ deferred (biggest engineering risk; separate sprint) |
+| 7 | O3-T7 | CSP via `next.config.mjs` — split `/rexity-omi/:path*` (tight: only self + Vercel Analytics) from rest of site | ✅ |
+| 8 | O3-T8 | HSTS `max-age=63072000; includeSubDomains; preload` | ✅ |
+| 9 | O3-T9 | `Referrer-Policy: strict-origin-when-cross-origin` | ✅ |
+| 10 | O3-T10 | `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()` | ✅ |
+| 11 | O3-T11 | `X-Content-Type-Options: nosniff` + `X-Frame-Options: SAMEORIGIN` | ✅ |
+| 12 | O3-T12 | Lighthouse audit | ⏳ pending preview deploy |
+| 13 | O3-T13 | axe-core audit | ⏳ pending preview deploy |
+
+**Acceptance so far: 11/13 done. T6/T12/T13 explicitly deferred and tracked.**
 
 ### Phase O3 — Architecture & performance hardening
 
