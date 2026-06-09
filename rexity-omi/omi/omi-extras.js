@@ -186,5 +186,42 @@
     if (++aTries > 40) clearInterval(aInt);
   }, 250);
 
+  // ============================================================
+  // 4. Footer placeholder cleanup (per request):
+  //    remove the "©AI systems for ambitious teams." tagline,
+  //    the placeholder email + phone, and the "© 2026 Rexity" line.
+  //    Our own legal strip already carries the real copyright.
+  // ============================================================
+  function cleanFooter() {
+    var hits = 0;
+    // 4a. "© 2026 Rexity" template copyright
+    document.querySelectorAll('.copywrith-dark').forEach(function (n) {
+      if (n.style.display !== 'none') { n.style.display = 'none'; hits++; }
+    });
+    // 4b. "©AI systems for ambitious teams." H2 tagline
+    document.querySelectorAll('h2.for-h2, .footer-grid h2, .footer-grid .h1').forEach(function (n) {
+      var t = (n.textContent || '').replace(/\s+/g, ' ').trim();
+      if (/systems for ambitious teams/i.test(t) && n.style.display !== 'none') {
+        n.style.display = 'none'; hits++;
+      }
+    });
+    // 4c. placeholder email + phone contact buttons (match by aria-label)
+    document.querySelectorAll('[aria-label]').forEach(function (n) {
+      var al = n.getAttribute('aria-label') || '';
+      if ((/@rexity\.ai/i.test(al) || /\+?1\s*100\s*300\s*404/.test(al)) && n.style.display !== 'none') {
+        // hide the whole clickable button wrapper, not just the label
+        var wrap = n.closest('a, .button-small, .small-vt-flex > *') || n;
+        wrap.style.display = 'none'; hits++;
+      }
+    });
+    if (hits) LOG('footer placeholders hidden: ' + hits);
+    return hits;
+  }
+  var fcTries = 0;
+  var fcInt = setInterval(function () {
+    cleanFooter();
+    if (++fcTries > 40) clearInterval(fcInt);
+  }, 250);
+
   LOG('omi-extras.js loaded');
 })();
