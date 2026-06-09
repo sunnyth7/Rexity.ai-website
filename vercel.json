@@ -6,10 +6,16 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/altrum",
+      "destination": "/index.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/",
-      "destination": "/rexity-omi/index.html",
+      "destination": "/rexity-omi",
       "permanent": false
     },
     {
