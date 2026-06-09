@@ -107,23 +107,25 @@ The Omi page **does not yet have** any of the work we just shipped on `rexity.ai
 
 5 phases. Phase O0 happens **today** because the leaks are discoverable as soon as anyone shares the local URL or any preview deploy lands.
 
-### Phase O0 — Emergency leak closure (TODAY)
+### Phase O0 — Emergency leak closure ✅ **DONE (commit 381f78d)**
 
-| # | ID | Task | File(s) | Effort |
-|---|---|---|---|---|
-| 1 | O0-T1 | Add `<meta name="robots" content="noindex,nofollow,noarchive">` to BOTH `index.html` head AND `it-page-anim.html` head | both | XS |
-| 2 | O0-T2 | Replace `<title>Workspace IT - Managed IT Services</title>` → `<title>Rexity Labs — AI Workspaces & Automation</title>` in `it-page-anim.html` | `it-page-anim.html` | XS |
-| 3 | O0-T3 | Replace meta description + og:title in `it-page-anim.html` with Rexity copy | `it-page-anim.html` | XS |
-| 4 | O0-T4 | Strip all `workspace-it.com` URLs from `it-page-anim.html` → neutralize to `#` or `/contact` | `it-page-anim.html` | S |
-| 5 | O0-T5 | Strip all `workspace-it.com/wp-content/...` CSS/font imports from `it-page-anim.html` head | `it-page-anim.html` | S |
-| 6 | O0-T6 | Strip `https://theluxuryfirepitco.uk` reference | `it-page-anim.html` | XS |
-| 7 | O0-T7 | Strip `https://yoast.com/product/...` Yoast comment / link | `it-page-anim.html` | XS |
-| 8 | O0-T8 | Add "Review underway / Entwurf" banner (same DE/EN toggle pattern as prod) | `index.html` | S |
-| 9 | O0-T9 | Replace `aria-label="Rexity trademark"` → `aria-label="Rexity"` (drop the trademark word) | `index.html` | XS |
-| 10 | O0-T10 | Replace `aria-label="Studio"` (footer animated letters) → either empty or "Labs" | `index.html` | XS |
-| 11 | O0-T11 | Replace template `aria-label`s ("creative engine", "design authority", "digital benchmark", "build digital ecosystems", "All Templates") with Rexity copy or remove | `index.html` | S |
+| # | ID | Task | Status |
+|---|---|---|---|
+| 1 | O0-T1 | `noindex,nofollow,noarchive` on BOTH parent + iframe | ✅ |
+| 2 | O0-T2 | Iframe `<title>` → "Rexity Labs — AI Workspaces & Automation" | ✅ |
+| 3 | O0-T3 | meta description + og:* + canonical → www.rexity.ai | ✅ |
+| 4 | O0-T4 | Stripped all `workspace-it.com` URLs (8 CSS imports, 4 oxygen-cache, font URLs, oembed/feed/xmlrpc/api.w.org links, JSON-LD schema-graph) | ✅ |
+| 5 | O0-T5 | Stripped WP-content CSS/font imports | ✅ |
+| 6 | O0-T6 | `theluxuryfirepitco.uk` background-image URLs → `about:blank` | ✅ |
+| 7 | O0-T7 | Yoast SEO comment + schema-graph removed | ✅ |
+| 8 | O0-T8 | Amber "Review underway" banner with DE/EN toggle + 5-link legal footer | ✅ |
+| 9 | O0-T9 | `aria-label="Rexity trademark"` → `"Rexity Labs"` (also fixed JS replacement target) | ✅ |
+| 10 | O0-T10 | `aria-label="Studio"` → `"Labs"` | ✅ |
+| 11 | O0-T11 | Replaced 4 template hero taglines + "All Templates" aria-label in both aria + visible body | ✅ |
+| +  | O0-T12 | **Bonus**: also stripped customer names (Zertus/Premier/Zellis) and team names (Andy Codling/Mark Collis) — placeholder replacements pending real content in O1 | ✅ |
+| +  | O0-T13 | **Bonus**: cookie/localStorage notice + theme-color added | ✅ |
 
-**O0 acceptance:** zero requests to `workspace-it.com`, `theluxuryfirepitco.uk`, `yoast.com`; tab title says Rexity; no "Studio" / "All Templates" / template-taglines in source.
+**Acceptance: 15/15 leak-checks at zero, 4/4 compliance checks present** (verified in commit message).
 
 ### Phase O1 — Content rewrite (this week)
 
