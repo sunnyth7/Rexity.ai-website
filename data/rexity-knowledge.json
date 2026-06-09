@@ -1,8 +1,11 @@
 {
-  "version": "2026-05-30",
+  "version": "2026-06-09",
   "brand": {
-    "name": "Rexity",
-    "positioning": "Rexity builds AI automation systems, growth workflows, design systems, and digital products for modern teams.",
+    "name": "Rexity Labs",
+    "legalName": "Rexity Labs UG (haftungsbeschränkt) i. Gr.",
+    "location": "Niedersachsen, Germany",
+    "founder": "Sunny Thakur, Founder & CEO",
+    "positioning": "Rexity Labs builds AI workspaces and automation for ambitious teams — production-grade software that is DSGVO-compliant, EU-hosted, audit-logged, and opt-out by design.",
     "contact": {
       "demo": "sunny@rexity.ai",
       "admin": "admin@rexity.ai"
@@ -10,131 +13,161 @@
   },
   "rules": {
     "supportedLanguages": ["en", "de"],
+    "pricingPolicy": "Never quote prices, ranges, or ballparks. Pricing depends on scope — always route the visitor to sunny@rexity.ai for a quote or call.",
+    "promoteProducts": false,
+    "neverSay": [
+      "Never quote prices, price ranges, or hourly rates.",
+      "Never promise delivery dates, timelines, or guarantees of results (rankings, revenue, downloads).",
+      "Never name clients or invent case studies, references, or testimonials.",
+      "Never give legal, tax, or medical advice — including definitive DSGVO/GDPR legal assessments; describe Rexity's compliance approach only.",
+      "Never make refund, billing, contract, or policy decisions.",
+      "Never discuss internal tooling, infrastructure credentials, or security details.",
+      "Never disparage competitors."
+    ],
     "allowedTopics": [
-      "Rexity services",
-      "Rexity products",
-      "website and app design",
-      "software development",
-      "business automation",
-      "AI systems",
-      "growth and scaling",
-      "consulting",
+      "Rexity Labs services",
+      "website and SaaS development",
+      "mobile app development",
+      "business process automation",
+      "AI voice and WhatsApp automation",
+      "testing, QA and support",
+      "SEO and AI video",
+      "compliance and data protection (DSGVO/GDPR)",
+      "how Rexity works",
+      "technology stack",
+      "industries served",
       "demo booking",
-      "meeting setup"
+      "getting started"
     ],
     "adminTopics": [
-      "refund",
-      "refunds",
-      "billing dispute",
-      "policy exception",
-      "legal decision",
-      "contract decision",
-      "guarantee",
-      "cancellation decision",
-      "chargeback"
+      "refund", "refunds", "billing dispute", "policy exception", "legal decision",
+      "contract decision", "guarantee", "cancellation decision", "chargeback", "invoice dispute"
     ],
     "demoTopics": [
-      "demo",
-      "meeting",
-      "termin",
-      "beratung",
-      "projektgespräch",
-      "anforderung",
-      "anforderungen",
-      "consultation",
-      "requirement",
-      "requirements",
-      "project brief",
-      "quote",
-      "proposal",
-      "call",
-      "book"
+      "demo", "meeting", "termin", "beratung", "projektgespräch", "anforderung", "anforderungen",
+      "consultation", "requirement", "requirements", "project brief", "quote", "angebot",
+      "proposal", "call", "book", "start", "starten"
     ]
   },
   "entries": [
     {
       "id": "rexity-overview",
-      "title": "What Rexity Does",
-      "keywords": ["rexity", "company", "agency", "studio", "what do you do", "was macht rexity"],
-      "en": "Rexity helps teams design, develop, automate, and scale digital systems. We work across websites, apps, SaaS interfaces, business automation, AI workflows, and growth infrastructure.",
-      "de": "Rexity hilft Teams dabei, digitale Systeme zu designen, zu entwickeln, zu automatisieren und zu skalieren. Wir arbeiten an Websites, Apps, SaaS-Oberflächen, Geschäftsautomatisierung, AI-Workflows und Wachstumsinfrastruktur."
+      "title": "What Rexity Labs Does",
+      "keywords": ["rexity", "company", "what do you do", "was macht rexity", "services", "leistungen", "about", "über", "overview"],
+      "en": "Rexity Labs builds AI workspaces and automation for ambitious teams. We work end to end across six areas: website & SaaS development, mobile apps, business-process automation, AI voice & WhatsApp assistants, testing & support, and SEO & AI video. Everything we ship is production-grade, DSGVO-compliant and EU-hosted — built by a senior, embedded team led by founder Sunny Thakur.",
+      "de": "Rexity Labs entwickelt KI-Workspaces und Automatisierung für ambitionierte Teams. Wir arbeiten durchgängig in sechs Bereichen: Website- & SaaS-Entwicklung, Mobile Apps, Geschäftsprozess-Automatisierung, KI-Voice- & WhatsApp-Assistenten, Testing & Support sowie SEO & KI-Video. Alles, was wir ausliefern, ist produktionsreif, DSGVO-konform und EU-gehostet — gebaut von einem senioren, eng eingebundenen Team unter der Leitung von Gründer Sunny Thakur."
     },
     {
-      "id": "design-studio",
-      "title": "Design Studio",
-      "keywords": ["design", "website design", "app design", "saas design", "ui", "ux", "brand", "figma"],
-      "en": "Design Studio covers high-end website design, app design, SaaS UI, visual systems, landing pages, product interfaces, and brand-aligned digital experiences.",
-      "de": "Design Studio umfasst hochwertiges Website-Design, App-Design, SaaS-UI, visuelle Systeme, Landingpages, Produktoberflächen und markenkonforme digitale Erlebnisse."
+      "id": "website-development",
+      "title": "Website & SaaS Development",
+      "keywords": ["website", "webseite", "saas", "web app", "frontend", "backend", "chatbot", "landing page", "platform", "plattform", "homepage", "online shop", "webdesign"],
+      "en": "We design and build business websites and SaaS platforms — frontend and backend — with AI chatbots included. Typical deliverables: marketing sites and landing pages, full SaaS product interfaces, dashboards and admin panels, APIs and third-party integrations, payment and booking flows, multilingual (DE/EN) content, and an integrated AI assistant trained on your business. Built to be fast, secure, SEO-ready and EU-compliant, with hosting and analytics set up properly from day one.",
+      "de": "Wir gestalten und entwickeln Business-Websites und SaaS-Plattformen — Frontend und Backend — inklusive KI-Chatbots. Typische Leistungen: Marketing-Seiten und Landingpages, vollständige SaaS-Produktoberflächen, Dashboards und Admin-Bereiche, APIs und Drittanbieter-Integrationen, Zahlungs- und Buchungsstrecken, mehrsprachige Inhalte (DE/EN) sowie ein integrierter KI-Assistent, der Ihr Geschäft kennt. Gebaut für Tempo, Sicherheit, SEO und EU-Konformität — mit sauber aufgesetztem Hosting und Analytics ab Tag eins."
     },
     {
-      "id": "development-studio",
-      "title": "Development Studio",
-      "keywords": ["development", "coding", "web development", "app development", "saas", "backend", "frontend", "api"],
-      "en": "Development Studio turns ideas and designs into working software: websites, apps, SaaS platforms, frontends, backends, APIs, integrations, and production-ready digital products.",
-      "de": "Development Studio verwandelt Ideen und Designs in funktionierende Software: Websites, Apps, SaaS-Plattformen, Frontends, Backends, APIs, Integrationen und produktionsreife digitale Produkte."
+      "id": "mobile-apps",
+      "title": "Mobile Apps",
+      "keywords": ["mobile", "app", "ios", "android", "kotlin", "swift", "react native", "figma", "app store", "play store", "native app"],
+      "en": "We build iOS and Android apps — designed in Figma and engineered to last with Kotlin, Swift or React Native. Typical deliverables: UX/UI design and clickable prototypes, native or cross-platform development, backend and API integration, push notifications, in-app purchases and subscriptions, App Store / Play Store submission, and post-launch updates. Rexity has production apps live in the app stores today, so we know the full path from idea to approved release.",
+      "de": "Wir entwickeln iOS- und Android-Apps — in Figma gestaltet und mit Kotlin, Swift oder React Native langlebig umgesetzt. Typische Leistungen: UX/UI-Design und klickbare Prototypen, native oder plattformübergreifende Entwicklung, Backend- und API-Integration, Push-Benachrichtigungen, In-App-Käufe und Abos, App-Store-/Play-Store-Einreichung sowie Updates nach dem Launch. Rexity hat heute produktive Apps live in den App-Stores — wir kennen den kompletten Weg von der Idee bis zum freigegebenen Release."
     },
     {
-      "id": "business-automation",
-      "title": "Business Automation",
-      "keywords": ["automation", "rpa", "workflow", "crm", "whatsapp", "operations", "process"],
-      "en": "Business Automation connects tools, data, messages, and decisions into reliable workflows. Rexity can help automate lead handling, internal operations, CRM flows, reporting, and repeatable business processes.",
-      "de": "Business Automation verbindet Tools, Daten, Nachrichten und Entscheidungen zu verlässlichen Workflows. Rexity kann Lead-Prozesse, interne Abläufe, CRM-Flows, Reporting und wiederholbare Geschäftsprozesse automatisieren."
+      "id": "business-process-automation",
+      "title": "Business Process Automation",
+      "keywords": ["automation", "automatisierung", "workflow", "voip", "receptionist", "rezeption", "whatsapp for business", "crm", "process", "prozess", "rpa", "telefonassistent"],
+      "en": "We automate the repetitive parts of your operations: a VoIP cloud receptionist that answers and routes calls, WhatsApp for Business for enquiries and updates, and internal workflow automations that connect your tools, data and messages into reliable, repeatable processes. Typical outcomes: enquiries answered around the clock, leads captured and followed up automatically, appointments handled without phone tag, and your team freed from manual routing and copy-paste work — with every automated action logged for auditability.",
+      "de": "Wir automatisieren die wiederkehrenden Teile Ihres Betriebs: eine VoIP-Cloud-Rezeption, die Anrufe entgegennimmt und weiterleitet, WhatsApp for Business für Anfragen und Updates sowie interne Workflow-Automatisierungen, die Ihre Tools, Daten und Nachrichten zu verlässlichen, wiederholbaren Prozessen verbinden. Typische Ergebnisse: Anfragen werden rund um die Uhr beantwortet, Leads automatisch erfasst und nachverfolgt, Termine ohne Telefon-Pingpong organisiert — und Ihr Team wird von manueller Weiterleitung und Copy-Paste-Arbeit entlastet, wobei jede automatisierte Aktion nachvollziehbar protokolliert wird."
     },
     {
-      "id": "scale",
-      "title": "Scale",
-      "keywords": ["scale", "growth", "marketing", "infrastructure", "analytics", "conversion", "seo"],
-      "en": "Scale focuses on growth systems: performance, analytics, conversion paths, content infrastructure, deployment systems, and the operating layer needed to grow digital products.",
-      "de": "Scale konzentriert sich auf Wachstumssysteme: Performance, Analytics, Conversion-Pfade, Content-Infrastruktur, Deployment-Systeme und die operative Ebene für skalierende digitale Produkte."
+      "id": "ai-voice-whatsapp",
+      "title": "AI Voice & WhatsApp",
+      "keywords": ["ai voice", "voice", "sprachassistent", "rexona", "whatsapp", "bot", "assistant", "assistent", "telefon", "anruf", "termin buchen", "booking bot"],
+      "en": "Our AI voice assistant and WhatsApp bot handle enquiries, bookings and FAQs around the clock — DSGVO-konform, EU-hosted, and opt-out by design. They book, reschedule and cancel appointments with double-booking protection, answer common questions from an approved knowledge base, always disclose that they are AI, collect consent before processing data, and hand off to a human whenever the caller asks or the situation needs it. Every conversation step is audit-logged.",
+      "de": "Unser KI-Voice-Assistent und WhatsApp-Bot bearbeiten Anfragen, Buchungen und FAQs rund um die Uhr — DSGVO-konform, EU-gehostet und mit Opt-out ab Werk. Sie buchen, verschieben und stornieren Termine mit Schutz vor Doppelbuchungen, beantworten häufige Fragen aus einer freigegebenen Wissensbasis, geben sich stets als KI zu erkennen, holen vor der Datenverarbeitung die Einwilligung ein und übergeben an einen Menschen, sobald der Anrufer es wünscht oder die Situation es erfordert. Jeder Gesprächsschritt wird revisionssicher protokolliert."
     },
     {
-      "id": "forge",
-      "title": "Forge",
-      "keywords": ["forge", "venture", "product", "mvp", "prototype", "launch"],
-      "en": "Forge is Rexity's product-building lane for prototypes, MVPs, experiments, internal tools, and new digital ventures.",
-      "de": "Forge ist Rexitys Produktbau-Bereich für Prototypen, MVPs, Experimente, interne Tools und neue digitale Ventures."
+      "id": "testing-support",
+      "title": "Testing & Support",
+      "keywords": ["testing", "qa", "quality", "support", "monitoring", "maintenance", "wartung", "test", "post-launch", "bug", "fehler"],
+      "en": "We provide end-to-end QA across devices and platforms, plus post-launch monitoring and support. Typical deliverables: functional and regression testing, device and browser coverage, performance and accessibility checks, uptime and error monitoring, security patching, and ongoing maintenance — so what we ship keeps working reliably in the real world long after launch.",
+      "de": "Wir bieten durchgängige QA über Geräte und Plattformen hinweg sowie Monitoring und Support nach dem Launch. Typische Leistungen: Funktions- und Regressionstests, Geräte- und Browser-Abdeckung, Performance- und Barrierefreiheits-Checks, Uptime- und Fehler-Monitoring, Sicherheits-Patches und laufende Wartung — damit das, was wir ausliefern, auch lange nach dem Launch zuverlässig funktioniert."
     },
     {
-      "id": "levelkraft",
-      "title": "LevelKraft",
-      "keywords": ["levelkraft", "telc", "language", "exam", "german"],
-      "en": "LevelKraft is a Rexity product focused on TELC language exam preparation and structured learning support.",
-      "de": "LevelKraft ist ein Rexity-Produkt für TELC-Sprachprüfungsvorbereitung und strukturierte Lernunterstützung."
+      "id": "seo-ai-video",
+      "title": "SEO & AI Video",
+      "keywords": ["seo", "search", "ranking", "ai video", "video", "marketing", "content", "avatar", "shorts", "suchmaschine", "sichtbarkeit", "google"],
+      "en": "We combine technical SEO that compounds over time with AI video marketing at scale. SEO covers site architecture, page speed, structured data, content strategy and multilingual optimization. AI video covers avatar presenters, realistic product shots and short-form video produced at a pace traditional shoots can't match — so your organic and paid channels keep working long after a single campaign. We won't promise specific rankings; we build the foundations that earn them.",
+      "de": "Wir verbinden technisches SEO mit Zinseszinseffekt und KI-Videomarketing in großem Stil. SEO umfasst Seitenarchitektur, Ladezeiten, strukturierte Daten, Content-Strategie und mehrsprachige Optimierung. KI-Video umfasst Avatar-Presenter, realistische Produktaufnahmen und Kurzvideos in einem Tempo, das klassische Drehs nicht erreichen — damit Ihre organischen und bezahlten Kanäle weit über eine einzelne Kampagne hinaus wirken. Konkrete Rankings versprechen wir nicht; wir bauen die Grundlagen, die sie verdienen."
     },
     {
-      "id": "clevr",
-      "title": "CLEVR",
-      "keywords": ["clevr", "event", "social", "planning"],
-      "en": "CLEVR is a Rexity product for social event planning and coordination.",
-      "de": "CLEVR ist ein Rexity-Produkt für soziale Eventplanung und Koordination."
+      "id": "industries",
+      "title": "Industries & Who We Work With",
+      "keywords": ["industry", "industries", "branche", "branchen", "who do you work with", "clients", "kunden", "sme", "mittelstand", "startup", "praxis", "kanzlei", "restaurant", "clinic", "handwerk"],
+      "en": "Rexity Labs works across all industries — from medical practices, law firms, restaurants and trades to e-commerce, agencies, startups and established SMEs. The common thread is not the industry but the need: a team that wants modern, compliant digital systems without hiring an in-house department. We adapt to your domain quickly because every engagement starts with understanding your business first.",
+      "de": "Rexity Labs arbeitet branchenübergreifend — von Arztpraxen, Kanzleien, Restaurants und Handwerksbetrieben bis zu E-Commerce, Agenturen, Startups und etabliertem Mittelstand. Der gemeinsame Nenner ist nicht die Branche, sondern der Bedarf: ein Team, das moderne, konforme digitale Systeme will, ohne eine eigene Abteilung aufzubauen. Wir arbeiten uns schnell in Ihre Domäne ein, denn jedes Projekt beginnt damit, zuerst Ihr Geschäft zu verstehen."
     },
     {
-      "id": "asogrove",
-      "title": "ASOGrove",
-      "keywords": ["asogrove", "aso", "app store", "growth"],
-      "en": "ASOGrove is a Rexity product direction around app growth, app store optimization, and discoverability systems.",
-      "de": "ASOGrove ist eine Rexity-Produktrichtung für App-Wachstum, App-Store-Optimierung und Auffindbarkeit."
+      "id": "why-rexity",
+      "title": "Why Rexity — Differentiators",
+      "keywords": ["why rexity", "warum rexity", "different", "unterschied", "besser", "advantage", "vorteil", "usp", "agency", "agentur", "compare"],
+      "en": "Four things set Rexity Labs apart. First: AI-native, not AI-themed — we build with AI at the core, not as a sticker. Second: compliance built in — DSGVO/GDPR, EU hosting, audit logs and opt-out by design are part of the architecture, not an afterthought. Third: senior, small, embedded — you work directly with the people who build, not through account managers. Fourth: outcomes over output — we measure success by what actually ships and works in the real world, and we stay until it does.",
+      "de": "Vier Dinge unterscheiden Rexity Labs. Erstens: KI-nativ statt KI-bemalt — KI ist der Kern unserer Arbeit, kein Aufkleber. Zweitens: Compliance eingebaut — DSGVO, EU-Hosting, Audit-Logs und Opt-out ab Werk sind Teil der Architektur, kein Nachtrag. Drittens: senior, kompakt, eingebunden — Sie arbeiten direkt mit den Menschen, die bauen, nicht über Account-Manager. Viertens: Ergebnisse statt Output — wir messen Erfolg daran, was tatsächlich live geht und in der Praxis funktioniert, und bleiben dran, bis es so ist."
     },
     {
-      "id": "vibedflow",
-      "title": "VibedFlow",
-      "keywords": ["vibedflow", "workflow", "creative", "automation"],
-      "en": "VibedFlow is a Rexity product direction for creative workflow systems and AI-assisted production flows.",
-      "de": "VibedFlow ist eine Rexity-Produktrichtung für kreative Workflow-Systeme und AI-gestützte Produktionsabläufe."
+      "id": "founder",
+      "title": "Founder & Team",
+      "keywords": ["founder", "gründer", "sunny", "thakur", "team", "ceo", "who is behind", "wer steckt hinter"],
+      "en": "Rexity Labs was founded by Sunny Thakur, who leads the company's AI-first approach. With a background spanning product, engineering and go-to-market, Sunny focuses on shipping production-grade software that is DSGVO-compliant, EU-hosted and built to last. The team is deliberately senior and small: experts from multiple disciplines working as an embedded extension of your team rather than a distant vendor.",
+      "de": "Rexity Labs wurde von Sunny Thakur gegründet, der den AI-first-Ansatz des Unternehmens verantwortet. Mit einem Hintergrund über Produkt, Engineering und Go-to-Market hinweg konzentriert sich Sunny darauf, produktionsreife Software auszuliefern, die DSGVO-konform, EU-gehostet und auf Langlebigkeit gebaut ist. Das Team ist bewusst senior und kompakt: Expert:innen aus mehreren Disziplinen, die als eingebundene Erweiterung Ihres Teams arbeiten — nicht als entfernter Dienstleister."
+    },
+    {
+      "id": "compliance-dsgvo",
+      "title": "Compliance & Data Protection",
+      "keywords": ["dsgvo", "gdpr", "datenschutz", "compliance", "eu-hosted", "privacy", "data protection", "audit", "opt-out", "security", "sicherheit", "einwilligung", "consent"],
+      "en": "Compliance is built in, not bolted on. Rexity software is DSGVO/GDPR-compliant, EU-hosted, audit-logged, and opt-out by design: AI assistants disclose themselves, consent is collected before data processing, personal data is minimised and access-controlled, and automated actions leave an audit trail. For a formal legal assessment of your specific case, please consult your legal counsel — we describe our engineering approach, not legal advice.",
+      "de": "Compliance ist eingebaut, nicht nachträglich aufgesetzt. Rexity-Software ist DSGVO-konform, EU-gehostet, audit-protokolliert und mit Opt-out ab Werk: KI-Assistenten geben sich zu erkennen, Einwilligungen werden vor der Datenverarbeitung eingeholt, personenbezogene Daten werden minimiert und zugriffsgeschützt, und automatisierte Aktionen hinterlassen eine Prüfspur. Für eine formale rechtliche Bewertung Ihres konkreten Falls wenden Sie sich bitte an Ihre Rechtsberatung — wir beschreiben unseren Engineering-Ansatz, keine Rechtsberatung."
+    },
+    {
+      "id": "how-we-work",
+      "title": "How Rexity Works",
+      "keywords": ["how", "process", "ablauf", "wie arbeitet", "approach", "engagement", "zusammenarbeit", "projektablauf", "phasen"],
+      "en": "Every engagement starts with understanding your business, goals and constraints — then we scope the smallest version that delivers real value, ship it production-grade, and iterate from live feedback. You work directly with the builders, get honest progress updates, and keep ownership of your code and data. After launch we stay available for monitoring, support and the next iteration. Outcomes over output.",
+      "de": "Jedes Projekt beginnt damit, Ihr Unternehmen, Ihre Ziele und Rahmenbedingungen zu verstehen — dann definieren wir die kleinste Version, die echten Mehrwert liefert, setzen sie produktionsreif um und iterieren auf Basis von Live-Feedback. Sie arbeiten direkt mit den Entwickelnden, erhalten ehrliche Status-Updates und behalten die Hoheit über Ihren Code und Ihre Daten. Nach dem Launch bleiben wir für Monitoring, Support und die nächste Iteration an Bord. Ergebnisse statt Output."
+    },
+    {
+      "id": "tech-stack",
+      "title": "Technology Stack",
+      "keywords": ["stack", "technology", "technologie", "cloud", "ai", "gpu", "database", "deployment", "tools", "infrastructure", "infrastruktur", "welche technologien"],
+      "en": "We build on best-in-class cloud, AI, GPU, database and deployment platforms — the proven infrastructure behind everything we deliver, including OpenAI, Anthropic, Google and other leading AI providers, modern cloud hosting, and managed databases. We pick the right tool for each job rather than locking you into one vendor, and EU data residency is a standing requirement, not an option.",
+      "de": "Wir bauen auf erstklassige Cloud-, KI-, GPU-, Datenbank- und Deployment-Plattformen — die erprobte Infrastruktur hinter allem, was wir liefern, darunter OpenAI, Anthropic, Google und weitere führende KI-Anbieter, modernes Cloud-Hosting und Managed Databases. Wir wählen das passende Werkzeug für die jeweilige Aufgabe, statt Sie an einen Anbieter zu binden — und EU-Datenhaltung ist bei uns Standard, keine Option."
+    },
+    {
+      "id": "capability-proof",
+      "title": "Track Record",
+      "keywords": ["built", "portfolio", "experience", "erfahrung", "examples", "beispiele", "case study", "referenz", "have you built", "live apps"],
+      "en": "Rexity Labs has shipped production software across web, mobile, automation and AI — including live apps in the app stores and automation systems with audit-logged, EU-hosted operation. For specific references or a tailored example for your industry, email sunny@rexity.ai.",
+      "de": "Rexity Labs hat produktionsreife Software in Web, Mobile, Automatisierung und KI ausgeliefert — darunter Live-Apps in den App-Stores und Automatisierungssysteme mit audit-protokolliertem, EU-gehostetem Betrieb. Für konkrete Referenzen oder ein passendes Beispiel für Ihre Branche schreiben Sie an sunny@rexity.ai."
+    },
+    {
+      "id": "pricing",
+      "title": "Pricing",
+      "keywords": ["price", "pricing", "cost", "preis", "kosten", "budget", "quote", "angebot", "how much", "wie viel", "rate", "stundensatz", "teuer"],
+      "en": "Pricing depends on scope, so we don't quote fixed numbers up front. Tell us what you want to build and we'll put together a clear, itemised proposal — email sunny@rexity.ai to get a quote or book a call.",
+      "de": "Die Kosten hängen vom Umfang ab, daher nennen wir vorab keine festen Zahlen. Sagen Sie uns, was Sie bauen möchten, und wir erstellen ein klares, aufgeschlüsseltes Angebot — schreiben Sie an sunny@rexity.ai für ein Angebot oder einen Termin."
     },
     {
       "id": "demo",
-      "title": "Requirements And Demo",
-      "keywords": ["demo", "meeting", "requirement", "requirements", "call", "consult", "beratung", "termin"],
-      "en": "For requirements, demos, project discussions, or consulting calls, please email sunny@rexity.ai.",
-      "de": "Für Anforderungen, Demos, Projektgespräche oder Beratungstermine schreiben Sie bitte an sunny@rexity.ai."
+      "title": "Getting Started, Requirements & Demo",
+      "keywords": ["demo", "start", "starten", "requirements", "anforderungen", "consultation", "beratung", "termin", "call", "meeting", "kontakt", "contact", "loslegen"],
+      "en": "For requirements, a demo, a project discussion, or to get started, email sunny@rexity.ai — or use the contact form on this page. We'll review what you want to build and map out the next steps, usually within one business day.",
+      "de": "Für Anforderungen, eine Demo, ein Projektgespräch oder den Start schreiben Sie an sunny@rexity.ai — oder nutzen Sie das Kontaktformular auf dieser Seite. Wir prüfen, was Sie bauen möchten, und skizzieren die nächsten Schritte, in der Regel innerhalb eines Werktags."
     },
     {
       "id": "admin",
-      "title": "Admin, Refunds, And Policies",
-      "keywords": ["refund", "policy", "admin", "billing", "legal", "vertrag", "erstattung", "rechnung"],
-      "en": "For refunds, policy questions, billing disputes, or admin matters, please email admin@rexity.ai. The chatbot cannot make refund, legal, billing, or policy decisions.",
-      "de": "Für Erstattungen, Richtlinienfragen, Rechnungsstreitigkeiten oder Admin-Themen schreiben Sie bitte an admin@rexity.ai. Der Chatbot trifft keine Erstattungs-, Rechts-, Rechnungs- oder Richtlinienentscheidungen."
+      "title": "Admin, Refunds & Policies",
+      "keywords": ["refund", "erstattung", "billing", "rechnung", "policy", "richtlinie", "legal", "contract", "vertrag", "invoice", "admin"],
+      "en": "For refunds, billing disputes, contracts, legal or policy matters, please email admin@rexity.ai. The assistant can't make refund, billing, legal or policy decisions.",
+      "de": "Für Erstattungen, Rechnungsstreitigkeiten, Verträge, rechtliche oder Richtlinien-Themen schreiben Sie bitte an admin@rexity.ai. Der Assistent kann keine Erstattungs-, Rechnungs-, Rechts- oder Richtlinienentscheidungen treffen."
     }
   ]
 }

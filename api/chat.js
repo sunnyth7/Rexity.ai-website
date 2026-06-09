@@ -125,10 +125,10 @@ function composeAnswer(message, forcedLang) {
 
 // ---- DeepSeek layer ---------------------------------------------------------
 
-function buildSystemPrompt(lang, matches) {
+function buildSystemPrompt(lang, contextLines) {
   const langName = lang === "de" ? "German (Sie-Form, professional)" : "English";
-  const contextBlock = (matches.length ? matches : knowledge.entries.slice(0, 4))
-    .map((e) => `- ${e.title}: ${e.en}`)
+  const neverSay = (knowledge.rules.neverSay || [])
+    .map((r, i) => `${i + 6}. ${r}`)
     .join("\n");
 
   return [
@@ -141,10 +141,84 @@ function buildSystemPrompt(lang, matches) {
     `3. For refunds, billing disputes, contracts, legal or policy decisions, do not decide anything — direct them to ${ADMIN_EMAIL}.`,
     `4. Stay strictly on Rexity topics. Politely decline unrelated requests.`,
     `5. Reply in ${langName}. Keep it to 2–4 short sentences. No markdown headings, no bullet dumps unless asked.`,
+    neverSay,
     ``,
     `CONTEXT (approved Rexity information):`,
-    contextBlock
+    contextLines.join("\n")
   ].join("\n");
+}
+
+// ---- Retrieval: semantic (KbChunk/pgvector via Gemini embeddings) with
+// keyword fallback. Both produce plain "- Title: text" context lines. --------
+
+const SUPABASE_URL = process.env.SUPABASE_URL || "";
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+const GEMINI_KEY = process.env.GEMINI_API_KEY || "";
+
+async function embedQuery(text) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 6000);
+  try {
+    const resp = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=" + GEMINI_KEY,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content: { parts: [{ text: text.slice(0, 1500) }] },
+          taskType: "RETRIEVAL_QUERY",
+          outputDimensionality: 1536
+        }),
+        signal: controller.signal
+      }
+    );
+    if (!resp.ok) throw new Error("gemini embed " + resp.status);
+    const data = await resp.json();
+    const vec = data && data.embedding && data.embedding.values;
+    if (!Array.isArray(vec) || vec.length !== 1536) throw new Error("bad embedding");
+    return vec;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function retrieveSemantic(message, lang, limit) {
+  const vec = await embedQuery(message);
+  const resp = await fetch(SUPABASE_URL + "/rest/v1/rpc/match_kb_chunks", {
+    method: "POST",
+    headers: {
+      apikey: SUPABASE_KEY,
+      Authorization: "Bearer " + SUPABASE_KEY,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      query_embedding: JSON.stringify(vec),
+      match_count: limit || 4,
+      locale_filter: lang
+    })
+  });
+  if (!resp.ok) throw new Error("kb rpc " + resp.status);
+  const rows = await resp.json();
+  if (!Array.isArray(rows) || !rows.length) throw new Error("kb empty");
+  return rows.map((r) => `- ${r.title}: ${r.text}`);
+}
+
+function retrieveKeywordLines(message, lang, limit) {
+  const matches = retrieve(message, limit || 4);
+  const list = matches.length ? matches : knowledge.entries.slice(0, 4);
+  return list.map((e) => `- ${e.title}: ${e[lang] || e.en}`);
+}
+
+async function buildContext(message, lang) {
+  if (SUPABASE_URL && SUPABASE_KEY && GEMINI_KEY) {
+    try {
+      const lines = await retrieveSemantic(message, lang, 4);
+      return { lines: lines, retrieval: "vector" };
+    } catch (error) {
+      console.error("[chat] semantic retrieval failed:", error && error.message);
+    }
+  }
+  return { lines: retrieveKeywordLines(message, lang, 4), retrieval: "keyword" };
 }
 
 function sanitizeHistory(history) {
@@ -247,13 +321,13 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  const matches = retrieve(message, 4);
-
-  // Primary path: grounded DeepSeek answer.
+  // Primary path: grounded DeepSeek answer (semantic retrieval when the
+  // KbChunk store + Gemini key are available, keyword retrieval otherwise).
   if (DEEPSEEK_KEY) {
     try {
+      const ctx = await buildContext(message, lang);
       const messages = [
-        { role: "system", content: buildSystemPrompt(lang, matches) },
+        { role: "system", content: buildSystemPrompt(lang, ctx.lines) },
         ...history,
         { role: "user", content: message }
       ];
@@ -261,7 +335,7 @@ module.exports = async function handler(req, res) {
       res.statusCode = 200;
       res.end(JSON.stringify({
         answer: answer,
-        sources: matches.map((e) => e.id),
+        retrieval: ctx.retrieval,
         engine: "deepseek"
       }));
       return;
