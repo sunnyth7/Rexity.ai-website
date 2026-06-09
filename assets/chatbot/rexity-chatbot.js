@@ -136,11 +136,11 @@
     return item;
   }
 
-  async function askApi(message) {
+  async function askApi(message, lang, history) {
     var response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message })
+      body: JSON.stringify({ message: message, lang: lang, history: history || [] })
     });
     if (!response.ok) throw new Error("Chat request failed");
     var data = await response.json();
@@ -265,10 +265,21 @@
       if (!message) return;
       input.value = "";
       send.disabled = true;
+      // Capture the prior conversation BEFORE adding the new turn, so the
+      // model gets context. (greeting + alternating user/bot bubbles)
+      var history = [];
+      messages.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
+        if (el.classList.contains("rexity-chatbot__message--loading")) return;
+        history.push({
+          role: el.classList.contains("rexity-chatbot__message--user") ? "user" : "assistant",
+          content: (el.textContent || "").slice(0, 800)
+        });
+      });
+      var curLang = (window.rexityGetLang && window.rexityGetLang()) || lang;
       addMessage(messages, message, "user");
       var loading = addMessage(messages, activeCopy.loading, "bot rexity-chatbot__message--loading");
       try {
-        loading.textContent = await askApi(message);
+        loading.textContent = await askApi(message, curLang, history.slice(-6));
       } catch (_error) {
         loading.textContent = localReply(message);
       } finally {
