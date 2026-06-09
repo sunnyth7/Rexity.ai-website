@@ -111,7 +111,7 @@
 
 .rexity-chatbot__hero {
   position: relative;
-  min-height: 178px;
+  min-height: 190px;
   overflow: hidden;
   background:
     radial-gradient(circle at 78% 30%, rgba(255, 45, 45, 0.55), transparent 18%),
@@ -186,8 +186,8 @@
 .rexity-chatbot__intro {
   position: relative;
   z-index: 2;
-  max-width: 250px;
-  padding: 34px 24px 0;
+  max-width: 330px;
+  padding: 26px 24px 18px;
   color: rgba(255, 255, 255, 0.92);
 }
 
@@ -202,7 +202,7 @@
   margin: 7px 0 0;
   color: rgba(255, 255, 255, 0.62);
   font-size: 13px;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 .rexity-chatbot__quick {
