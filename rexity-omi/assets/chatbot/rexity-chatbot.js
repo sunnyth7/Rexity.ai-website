@@ -287,10 +287,16 @@
     // PRD launch behavior: expand once, 8-10 s after load, with the greeting
     // already in place. Once per browser session; never again after the
     // visitor closes or opens it themselves. Desktop only — auto-opening a
-    // near-fullscreen panel on mobile is intrusive.
-    if (!introSeen() && window.innerWidth >= 640) {
+    // near-fullscreen panel on mobile is intrusive. Viewport is checked when
+    // the timer FIRES (prerendered/background tabs report width 0 at init;
+    // unknown width counts as desktop).
+    function isMobileViewport() {
+      var w = window.innerWidth || (window.screen && window.screen.width) || 0;
+      return w > 0 && w < 640;
+    }
+    if (!introSeen()) {
       window.setTimeout(function () {
-        if (introSeen() || root.classList.contains("is-open")) return;
+        if (introSeen() || root.classList.contains("is-open") || isMobileViewport()) return;
         markIntroSeen();
         root.classList.add("is-open");
       }, 9000);
