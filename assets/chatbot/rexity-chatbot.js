@@ -47,8 +47,9 @@
       introTitle: "How can we help?",
       introCopy: "Ask about web & app development, digital marketing, AI agents, automations, or dashboards.",
       placeholder: "Ask about Rexity...",
-      footnote: "Rexity is a virtual assistant and answers from approved Rexity information only. Business, billing, and policy topics go to hello@rexity.ai.",
-      loading: "Checking Rexity knowledge..."
+      footnote: "Our Rexity chatbot is powered by a modern AI agent and can make mistakes. Please contact us before drawing any conclusions — we can help you better: hello@rexity.ai.",
+      loadingThink: "Rexity is thinking …",
+      loadingWrite: "Rexity is writing …"
     },
     de: {
       quickQuestions: [
@@ -71,8 +72,9 @@
       introTitle: "Wie können wir helfen?",
       introCopy: "Fragen Sie zu Web- & App-Entwicklung, Digital Marketing, AI Agents, Automatisierungen oder Dashboards.",
       placeholder: "Fragen Sie Rexity...",
-      footnote: "Rexity ist ein virtueller Assistent und antwortet nur auf Basis freigegebener Rexity-Informationen. Business-, Rechnungs- und Richtlinienthemen gehen an hello@rexity.ai.",
-      loading: "Rexity Wissen wird geprüft..."
+      footnote: "Unser Rexity-Chatbot basiert auf einem modernen KI-Agenten und kann Fehler machen. Bitte kontaktieren Sie uns, bevor Sie Entscheidungen daraus ableiten — wir helfen Ihnen gerne besser weiter: hello@rexity.ai.",
+      loadingThink: "Rexity denkt …",
+      loadingWrite: "Rexity schreibt …"
     }
   };
 
@@ -327,12 +329,21 @@
       });
       var curLang = (window.rexityGetLang && window.rexityGetLang()) || lang;
       addMessage(messages, message, "user");
-      var loading = addMessage(messages, activeCopy.loading, "bot rexity-chatbot__message--loading");
+      // Two-stage status like a human typing: "denkt …" first, then
+      // "schreibt …" while the answer is being generated.
+      var loading = addMessage(messages, activeCopy.loadingThink, "bot rexity-chatbot__message--loading");
+      var writeTimer = window.setTimeout(function () {
+        if (loading.classList.contains("rexity-chatbot__message--loading")) {
+          loading.textContent = activeCopy.loadingWrite;
+        }
+      }, 1500);
       try {
         loading.textContent = await askApi(message, curLang, history.slice(-12));
       } catch (_error) {
         loading.textContent = localReply(message);
       } finally {
+        window.clearTimeout(writeTimer);
+        loading.classList.remove("rexity-chatbot__message--loading");
         send.disabled = false;
         input.focus();
       }
