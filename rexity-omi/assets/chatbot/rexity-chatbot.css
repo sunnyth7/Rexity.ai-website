@@ -276,6 +276,47 @@
   50% { opacity: 1; }
 }
 
+.rexity-chatbot__maillink {
+  color: inherit;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rexity-chatbot__maillink:hover {
+  color: var(--rx-red);
+}
+
+.rexity-chatbot__mailmenu {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 2px 0 0 8px;
+  vertical-align: middle;
+  animation: rexityChatOpen 160ms ease both;
+}
+
+.rexity-chatbot__mailmenu-btn {
+  display: inline-block;
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: #0b0b0c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 140ms ease, transform 140ms ease;
+}
+
+.rexity-chatbot__mailmenu-btn:hover {
+  background: var(--rx-red);
+  transform: translateY(-1px);
+}
+
 .rexity-chatbot__form {
   display: flex;
   align-items: center;

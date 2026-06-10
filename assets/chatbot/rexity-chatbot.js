@@ -152,10 +152,110 @@
       : "I can help with Rexity services, products, design, development, automation, AI systems, scaling, and demo requests.";
   }
 
+  // ---- hello@rexity.ai → clickable, pre-filled email -----------------------
+  // Every appearance of the contact address in bot messages and the footnote
+  // becomes a link. Clicking opens a tiny chooser (Gmail / Outlook / mail
+  // app) — each target gets To, Subject and Body pre-filled in the chat
+  // language. Built with DOM nodes only (never innerHTML on model output).
+  var CONTACT_EMAIL = "hello@rexity.ai";
+
+  function mailPrefill(lang) {
+    if (lang === "de") {
+      return {
+        subject: "Ich benötige mehr Informationen",
+        body: "Hallo Rexity-Team,\n\nich interessiere mich für mehr Informationen zu Ihren Tools, zum Zeitrahmen, zu Kosten und Paketen — und gerne eine Demo.\n\nViele Grüße"
+      };
+    }
+    return {
+      subject: "I need more info on this topic",
+      body: "Hey Rexity,\n\nI am interested in getting more info about your tools, timeline, costs etc and a demo?\n\nBest regards"
+    };
+  }
+
+  function composeUrls(lang) {
+    var p = mailPrefill(lang);
+    var s = encodeURIComponent(p.subject);
+    var b = encodeURIComponent(p.body);
+    return {
+      gmail: "https://mail.google.com/mail/?view=cm&fs=1&to=" + CONTACT_EMAIL + "&su=" + s + "&body=" + b,
+      outlook: "https://outlook.live.com/mail/0/deeplink/compose?to=" + CONTACT_EMAIL + "&subject=" + s + "&body=" + b,
+      mailto: "mailto:" + CONTACT_EMAIL + "?subject=" + s + "&body=" + b
+    };
+  }
+
+  function closeMailMenus() {
+    document.querySelectorAll(".rexity-chatbot__mailmenu").forEach(function (m) { m.remove(); });
+  }
+
+  function openMailMenu(anchor) {
+    var existing = anchor.nextElementSibling;
+    if (existing && existing.classList && existing.classList.contains("rexity-chatbot__mailmenu")) {
+      existing.remove();
+      return;
+    }
+    closeMailMenus();
+    var lang = detectLang("");
+    var urls = composeUrls(lang);
+    var menu = document.createElement("span");
+    menu.className = "rexity-chatbot__mailmenu";
+    [
+      ["Gmail", urls.gmail, true],
+      ["Outlook", urls.outlook, true],
+      [lang === "de" ? "E-Mail-App" : "Mail app", urls.mailto, false]
+    ].forEach(function (item) {
+      var btn = document.createElement("a");
+      btn.className = "rexity-chatbot__mailmenu-btn";
+      btn.textContent = item[0];
+      btn.href = item[1];
+      if (item[2]) { btn.target = "_blank"; btn.rel = "noopener noreferrer"; }
+      btn.addEventListener("click", function () {
+        window.setTimeout(closeMailMenus, 150);
+      });
+      menu.appendChild(btn);
+    });
+    anchor.insertAdjacentElement("afterend", menu);
+  }
+
+  function linkifyEmail(el) {
+    if (!el) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var hits = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (node.nodeValue && node.nodeValue.indexOf(CONTACT_EMAIL) > -1) hits.push(node);
+    }
+    hits.forEach(function (textNode) {
+      var parts = textNode.nodeValue.split(CONTACT_EMAIL);
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (part, i) {
+        if (part) frag.appendChild(document.createTextNode(part));
+        if (i < parts.length - 1) {
+          var a = document.createElement("a");
+          a.className = "rexity-chatbot__maillink";
+          a.textContent = CONTACT_EMAIL;
+          a.href = "mailto:" + CONTACT_EMAIL;
+          a.addEventListener("click", function (e) {
+            e.preventDefault();
+            openMailMenu(a);
+          });
+          frag.appendChild(a);
+        }
+      });
+      textNode.parentNode.replaceChild(frag, textNode);
+    });
+  }
+
+  // Close any open chooser when clicking elsewhere.
+  document.addEventListener("click", function (e) {
+    if (e.target.closest && (e.target.closest(".rexity-chatbot__maillink") || e.target.closest(".rexity-chatbot__mailmenu"))) return;
+    closeMailMenus();
+  }, true);
+
   function addMessage(container, text, type) {
     var item = document.createElement("div");
     item.className = "rexity-chatbot__message rexity-chatbot__message--" + type;
     item.textContent = text;
+    if (type.indexOf("bot") > -1) linkifyEmail(item);
     container.appendChild(item);
     container.scrollTop = container.scrollHeight;
     return item;
@@ -235,6 +335,7 @@
       root.querySelector(".rexity-chatbot__intro-title").textContent = activeCopy.introTitle;
       root.querySelector(".rexity-chatbot__intro-copy").textContent = activeCopy.introCopy;
       root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
+      linkifyEmail(root.querySelector(".rexity-chatbot__footnote"));
       quick.innerHTML = "";
       activeCopy.quickQuestions.forEach(function (question) {
         var chip = document.createElement("button");
@@ -344,6 +445,7 @@
       } finally {
         window.clearTimeout(writeTimer);
         loading.classList.remove("rexity-chatbot__message--loading");
+        linkifyEmail(loading);
         send.disabled = false;
         input.focus();
       }

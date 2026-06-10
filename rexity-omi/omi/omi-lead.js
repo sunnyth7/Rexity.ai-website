@@ -27,6 +27,30 @@
   }
   function t(k) { return (T[lang()] || T.en)[k]; }
 
+  // hello@rexity.ai in status messages becomes a pre-filled mailto link.
+  var EMAIL = "hello@rexity.ai";
+  function mailtoHref() {
+    var de = lang() === "de";
+    var subject = de ? "Ich benötige mehr Informationen" : "I need more info on this topic";
+    var body = de
+      ? "Hallo Rexity-Team,\n\nich interessiere mich für mehr Informationen zu Ihren Tools, zum Zeitrahmen, zu Kosten und Paketen — und gerne eine Demo.\n\nViele Grüße"
+      : "Hey Rexity,\n\nI am interested in getting more info about your tools, timeline, costs etc and a demo?\n\nBest regards";
+    return "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+  function setStatus(el, text) {
+    el.textContent = "";
+    String(text).split(EMAIL).forEach(function (part, i, arr) {
+      if (part) el.appendChild(document.createTextNode(part));
+      if (i < arr.length - 1) {
+        var a = document.createElement("a");
+        a.textContent = EMAIL;
+        a.href = mailtoHref();
+        a.style.cssText = "color:inherit;font-weight:600;text-decoration:underline";
+        el.appendChild(a);
+      }
+    });
+  }
+
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function findForm() {
@@ -86,13 +110,13 @@
       status.style.color = "";
       if (!payload["your-name"] || !EMAIL_RE.test(payload["your-email"])) {
         status.style.color = "#b91c1c";
-        status.textContent = t("invalid");
+        setStatus(status, t("invalid"));
         return;
       }
 
       if (submitBtn) { submitBtn.disabled = true; }
       status.style.color = "";
-      status.textContent = t("sending");
+      setStatus(status, t("sending"));
 
       try {
         var r = await fetch("/api/lead", {
@@ -104,14 +128,14 @@
         if (r.ok && data.ok) {
           form.reset();
           status.style.color = "#15803d";
-          status.textContent = t("ok");
+          setStatus(status, t("ok"));
         } else {
           status.style.color = "#b91c1c";
-          status.textContent = (data && data.error) || t("err");
+          setStatus(status, (data && data.error) || t("err"));
         }
       } catch (_err) {
         status.style.color = "#b91c1c";
-        status.textContent = t("err");
+        setStatus(status, t("err"));
       } finally {
         if (submitBtn) { submitBtn.disabled = false; }
       }
