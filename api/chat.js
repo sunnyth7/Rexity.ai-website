@@ -194,6 +194,25 @@ function classifyIntent(message) {
   return "service_info";
 }
 
+// ---- Deterministic FAQ layer: approved, crisp, layman answers returned
+// verbatim when the question matches a trigger phrase. Runs before the LLM
+// so common questions can never come back vague or textbook-y. Longest
+// matching trigger wins (most specific FAQ).
+function matchFaq(message) {
+  const text = normalize(message);
+  if (!text) return null;
+  let best = null;
+  for (const f of knowledge.faqs || []) {
+    for (const trig of f.triggers || []) {
+      const t = normalize(trig);
+      if (t && text.includes(t) && (!best || t.length > best.len)) {
+        best = { faq: f, len: t.length };
+      }
+    }
+  }
+  return best && best.faq;
+}
+
 // Deterministic, retrieval-only answer. Used when the LLM is unavailable or
 // errors — the assistant must never go silent.
 function composeAnswer(message, forcedLang) {
@@ -244,6 +263,8 @@ function buildSystemPrompt(lang, contextLines) {
     ``,
     `STYLE — strict:`,
     `Plain text only. Never use markdown: no asterisks, no bold, no headings, no backticks, no bullet lists, no numbered lists, no emojis. If you need to enumerate, do it in a flowing sentence ("erstens …, zweitens …" / "first …, second …"). 2–4 short sentences per reply. Crisp, helpful, human.`,
+    `Use simple, everyday words a non-technical person — even a farmer — instantly understands. No jargon (no "frontend", "backend", "API", "SaaS", "UX") unless the visitor used the term first; say what it means for them instead.`,
+    `Never give generic textbook definitions. If the visitor asks what something is, explain it in ONE plain sentence, then immediately say what Rexity does for them on it. Answer the question that was actually asked — do not explain neighbouring topics first.`,
     ``,
     `RULES:`,
     `1. Answer ONLY using the Rexity CONTEXT below and the general positioning above. If the answer is not covered, say you don't have confirmed information on that and offer to connect them — do NOT invent facts, pricing, timelines, client names, or guarantees.`,
@@ -464,6 +485,14 @@ module.exports = async function handler(req, res) {
   if (deterministic[intent]) {
     res.statusCode = 200;
     res.end(JSON.stringify({ answer: deterministic[intent], lang: lang, intent: intent, engine: "policy" }));
+    return;
+  }
+
+  // Approved FAQ answers beat the LLM: crisp, layman, on-message every time.
+  const faq = matchFaq(message);
+  if (faq) {
+    res.statusCode = 200;
+    res.end(JSON.stringify({ answer: faq[lang] || faq.en, lang: lang, intent: "faq", faqId: faq.id, engine: "faq" }));
     return;
   }
 

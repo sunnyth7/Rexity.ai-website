@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0",
+  "version": "3.1.0",
   "meta": {
     "lastReviewed": "2026-06-10",
     "approvedBy": "Sunny Thakur",
@@ -8,7 +8,7 @@
       "lib/services.ts",
       "https://www.rexity.ai/"
     ],
-    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to hello@rexity.ai. Phone references removed until a business number is procured."
+    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to hello@rexity.ai. Phone references removed until a business number is procured. v3.1: deterministic FAQ layer added — crisp layman answers, matched before the LLM."
   },
   "brand": {
     "name": "Rexity Labs",
@@ -23,7 +23,10 @@
     }
   },
   "rules": {
-    "supportedLanguages": ["en", "de"],
+    "supportedLanguages": [
+      "en",
+      "de"
+    ],
     "pricingPolicy": "Never quote prices, ranges, or ballparks. Always route to hello@rexity.ai.",
     "timelinePolicy": "Only when the user asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope, never binding, never for SAP/enterprise as a committed window. Route to hello@rexity.ai for a confirmed estimate.",
     "promoteProducts": false,
@@ -39,12 +42,28 @@
       "Never pretend to be a human — you are Rexity, a virtual assistant."
     ],
     "adminTopics": [
-      "refund", "refunds", "billing dispute", "policy exception", "legal decision",
-      "contract decision", "guarantee", "cancellation decision", "chargeback", "invoice dispute"
+      "refund",
+      "refunds",
+      "billing dispute",
+      "policy exception",
+      "legal decision",
+      "contract decision",
+      "guarantee",
+      "cancellation decision",
+      "chargeback",
+      "invoice dispute"
     ],
     "demoTopics": [
-      "demo", "beratung", "projektgespräch", "consultation", "project brief",
-      "quote", "angebot", "proposal", "book a call", "termin vereinbaren"
+      "demo",
+      "beratung",
+      "projektgespräch",
+      "consultation",
+      "project brief",
+      "quote",
+      "angebot",
+      "proposal",
+      "book a call",
+      "termin vereinbaren"
     ]
   },
   "copy": {
@@ -82,7 +101,31 @@
       "id": "svc-web-app",
       "code": "SVC.01",
       "title": "Web & App Design and Development",
-      "keywords": ["website", "webseite", "webdesign", "web app", "app", "mobile", "ios", "android", "saas", "plattform", "frontend", "backend", "ux", "ui", "figma", "landing page", "homepage", "online shop", "kotlin", "swift", "react native", "website-entwicklung", "app-entwicklung"],
+      "keywords": [
+        "website",
+        "webseite",
+        "webdesign",
+        "web app",
+        "app",
+        "mobile",
+        "ios",
+        "android",
+        "saas",
+        "plattform",
+        "frontend",
+        "backend",
+        "ux",
+        "ui",
+        "figma",
+        "landing page",
+        "homepage",
+        "online shop",
+        "kotlin",
+        "swift",
+        "react native",
+        "website-entwicklung",
+        "app-entwicklung"
+      ],
       "en": "Rexity builds modern websites, web apps, SaaS platforms, and mobile apps with clean design, stable backend systems, and optional AI integration. This covers business websites, landing pages, SaaS product interfaces, frontend and backend implementation, CMS or database-backed pages, mobile app design and development, Figma prototypes and design systems, app-store preparation, and AI chatbot or automation integration where relevant. Typical deliverables: requirements summary, UX flow, wireframes or Figma design, responsive frontend, backend and API integration, database integration where needed, deployment setup, and basic analytics recommendations. An optimal scoped implementation usually fits a 14-21 day window; larger SaaS or mobile builds require scoping by Rexity.",
       "de": "Rexity entwickelt moderne Websites, Web-Apps, SaaS-Plattformen und mobile Apps mit sauberem Design, stabilem Backend und optionaler KI-Integration. Dazu gehören Business-Websites, Landingpages, SaaS-Produktoberflächen, Frontend- und Backend-Umsetzung, CMS- oder datenbankgestützte Seiten, App-Design und -Entwicklung, Figma-Prototypen und Design-Systeme, App-Store-Vorbereitung sowie die Integration von KI-Chatbots oder Automatisierungen, wo es sinnvoll ist. Typische Leistungen: Anforderungszusammenfassung, UX-Flow, Wireframes oder Figma-Design, responsives Frontend, Backend- und API-Integration, Datenbankanbindung bei Bedarf, Deployment-Setup und grundlegende Analytics-Empfehlungen. Eine optimal zugeschnittene Umsetzung liegt meist in einem Zeitfenster von 14 bis 21 Tagen; größere SaaS- oder App-Projekte erfordern ein Scoping durch Rexity."
     },
@@ -90,7 +133,24 @@
       "id": "svc-digital-marketing",
       "code": "SVC.02",
       "title": "Digital Marketing",
-      "keywords": ["marketing", "seo", "content", "performance marketing", "ai video", "ki-video", "kampagne", "campaign", "marketing automation", "suchmaschine", "google", "ranking", "sichtbarkeit", "avatar", "shorts", "video"],
+      "keywords": [
+        "marketing",
+        "seo",
+        "content",
+        "performance marketing",
+        "ai video",
+        "ki-video",
+        "kampagne",
+        "campaign",
+        "marketing automation",
+        "suchmaschine",
+        "google",
+        "ranking",
+        "sichtbarkeit",
+        "avatar",
+        "shorts",
+        "video"
+      ],
       "en": "Rexity supports digital marketing through SEO, content structure, campaign ideas, AI-supported videos, and measurable digital growth workflows. This includes technical SEO audits, content and keyword strategy, website acquisition improvements, AI video marketing, avatar and short-form video concepts, campaign-grade creative workflows, reporting recommendations, and growth experiments. Typical deliverables: an SEO or marketing audit, a keyword and content map, a campaign concept, a creative brief, AI video and script direction, and publishing plus measurement recommendations. An optimal initial setup or campaign foundation usually fits a 14-21 day window; long-term SEO growth continues beyond the initial setup. Rexity does not promise specific rankings.",
       "de": "Rexity unterstützt Digital Marketing mit SEO, Content-Struktur, Kampagnenideen, KI-gestützten Videos und messbaren digitalen Wachstumsprozessen. Dazu gehören technische SEO-Audits, Content- und Keyword-Strategie, Verbesserungen der Website-Akquise, KI-Videomarketing, Avatar- und Kurzvideo-Konzepte, kampagnenreife Kreativ-Workflows, Reporting-Empfehlungen und Growth-Experimente. Typische Leistungen: SEO- oder Marketing-Audit, Keyword- und Content-Map, Kampagnenkonzept, Creative Brief, KI-Video- und Skript-Richtung sowie Empfehlungen für Veröffentlichung und Messung. Ein optimales Erst-Setup oder Kampagnenfundament liegt meist in einem Zeitfenster von 14 bis 21 Tagen; langfristiges SEO-Wachstum läuft darüber hinaus. Konkrete Rankings verspricht Rexity nicht."
     },
@@ -98,7 +158,26 @@
       "id": "svc-ai-agents",
       "code": "SVC.03",
       "title": "AI Agents",
-      "keywords": ["ai agent", "ki-agent", "ki-agenten", "agents", "chatbot", "voice agent", "sprachassistent", "whatsapp", "bot", "assistant", "assistent", "sap joule", "agentic", "rag", "wissensdatenbank", "human handoff", "telefon", "anruf"],
+      "keywords": [
+        "ai agent",
+        "ki-agent",
+        "ki-agenten",
+        "agents",
+        "chatbot",
+        "voice agent",
+        "sprachassistent",
+        "whatsapp",
+        "bot",
+        "assistant",
+        "assistent",
+        "sap joule",
+        "agentic",
+        "rag",
+        "wissensdatenbank",
+        "human handoff",
+        "telefon",
+        "anruf"
+      ],
       "en": "Rexity builds AI agents that guide users, answer approved questions, prepare workflows, and hand complex cases to humans. This covers website chatbots, WhatsApp assistants, voice and RPA assistants, SAP Joule AI agent concepts, SAP Agentic AI workflow support, retrieval-based answering from approved databanks, human handoff, structured output validation, prompt-injection protection, and safe audit summaries. Typical deliverables: assistant persona and disclosure, a knowledge databank, an intent list, guardrails, a RAG adapter, a channel adapter plan, handoff rules, and testing scenarios. Agents always disclose that they are AI, collect consent before processing data, and every conversation step can be audit-logged. An optimal scoped assistant and databank implementation usually fits a 14-21 day window; enterprise or SAP agent workflows require a scoped technical review.",
       "de": "Rexity entwickelt KI-Agenten, die Nutzer führen, freigegebene Fragen beantworten, Prozesse vorbereiten und komplexe Anliegen an Menschen übergeben. Dazu gehören Website-Chatbots, WhatsApp-Assistenten, Voice- und RPA-Assistenten, SAP-Joule-Agentenkonzepte, Unterstützung für SAP Agentic AI Workflows, retrieval-basierte Antworten aus freigegebenen Datenbanken, Human Handoff, strukturierte Ausgabevalidierung, Schutz vor Prompt-Injection und sichere Audit-Zusammenfassungen. Typische Leistungen: Assistenten-Persona und Offenlegung, Wissensdatenbank, Intent-Liste, Guardrails, RAG-Adapter, Kanal-Adapter-Plan, Übergaberegeln und Testszenarien. Die Agenten geben sich stets als KI zu erkennen, holen vor der Datenverarbeitung die Einwilligung ein, und jeder Gesprächsschritt kann revisionssicher protokolliert werden. Eine optimal zugeschnittene Assistenten- und Datenbank-Implementierung liegt meist in einem Zeitfenster von 14 bis 21 Tagen; Enterprise- oder SAP-Agenten-Workflows erfordern ein technisches Scoping."
     },
@@ -106,7 +185,26 @@
       "id": "svc-digital-automations",
       "code": "SVC.04",
       "title": "Digital Automations",
-      "keywords": ["automation", "automatisierung", "automatisierungen", "rpa", "workflow", "business process", "prozess", "whatsapp automation", "voip", "rezeption", "receptionist", "cloud-empfang", "n8n", "zapier", "crm", "lead intake", "terminvorbereitung", "geschäftsprozess"],
+      "keywords": [
+        "automation",
+        "automatisierung",
+        "automatisierungen",
+        "rpa",
+        "workflow",
+        "business process",
+        "prozess",
+        "whatsapp automation",
+        "voip",
+        "rezeption",
+        "receptionist",
+        "cloud-empfang",
+        "n8n",
+        "zapier",
+        "crm",
+        "lead intake",
+        "terminvorbereitung",
+        "geschäftsprozess"
+      ],
       "en": "Rexity automates recurring digital processes such as WhatsApp replies, CRM workflows, internal operations, appointment preparation, and cloud reception. This covers WhatsApp Business automation, cloud receptionist and voice intake, lead intake automation, CRM handoff, internal workflow automation, appointment preparation, data routing between tools, audit-safe process logging, and opt-out handling for messaging channels. Typical deliverables: a process audit, a workflow map, the automation design, an integration plan, trigger and action definitions, failure and handoff handling, and monitoring recommendations. An optimal scoped automation workflow usually fits a 14-21 day window; complex multi-system automations need scoping.",
       "de": "Rexity automatisiert wiederkehrende digitale Prozesse, zum Beispiel WhatsApp-Antworten, CRM-Abläufe, interne Workflows, Terminvorbereitung und Cloud-Empfang. Dazu gehören WhatsApp-Business-Automatisierung, Cloud-Rezeption und Voice-Intake, automatisierte Lead-Erfassung, CRM-Übergabe, interne Workflow-Automatisierung, Terminvorbereitung, Daten-Routing zwischen Tools, revisionssichere Prozessprotokollierung und Opt-out-Handling für Messaging-Kanäle. Typische Leistungen: Prozess-Audit, Workflow-Map, Automatisierungsdesign, Integrationsplan, Trigger- und Aktionsdefinitionen, Fehler- und Übergabe-Handling sowie Monitoring-Empfehlungen. Ein optimal zugeschnittener Automatisierungs-Workflow liegt meist in einem Zeitfenster von 14 bis 21 Tagen; komplexe Automatisierungen über mehrere Systeme erfordern ein Scoping."
     },
@@ -114,7 +212,21 @@
       "id": "svc-dashboards",
       "code": "SVC.05",
       "title": "Dashboards",
-      "keywords": ["dashboard", "dashboards", "analytics", "reporting", "bi", "kpi", "kennzahlen", "looker studio", "data", "daten", "auswertung", "monitoring", "berichte"],
+      "keywords": [
+        "dashboard",
+        "dashboards",
+        "analytics",
+        "reporting",
+        "bi",
+        "kpi",
+        "kennzahlen",
+        "looker studio",
+        "data",
+        "daten",
+        "auswertung",
+        "monitoring",
+        "berichte"
+      ],
       "en": "Rexity designs dashboards that present key metrics, processes, and outcomes clearly so teams can make better decisions. This covers KPI dashboards, marketing dashboards, operations dashboards, automation monitoring dashboards, lead and conversion reporting, data source mapping, decision-support views, and admin or operations views for automations. Typical deliverables: KPI definition, a data source map, a dashboard wireframe, a dashboard implementation plan, access and role recommendations, and monitoring and reporting notes. An optimal scoped dashboard implementation usually fits a 14-21 day window; complex data pipelines require scoping.",
       "de": "Rexity konzipiert Dashboards, die wichtige Kennzahlen, Prozesse und Ergebnisse übersichtlich darstellen und Teams bei Entscheidungen unterstützen. Dazu gehören KPI-Dashboards, Marketing-Dashboards, Operations-Dashboards, Monitoring-Dashboards für Automatisierungen, Lead- und Conversion-Reporting, Datenquellen-Mapping, Entscheidungs-Views sowie Admin- und Ops-Ansichten für Automatisierungen. Typische Leistungen: KPI-Definition, Datenquellen-Map, Dashboard-Wireframe, Implementierungsplan, Zugriffs- und Rollenempfehlung sowie Monitoring- und Reporting-Hinweise. Eine optimal zugeschnittene Dashboard-Implementierung liegt meist in einem Zeitfenster von 14 bis 21 Tagen; komplexe Datenpipelines erfordern ein Scoping."
     },
@@ -122,7 +234,24 @@
       "id": "svc-sap-agentic",
       "code": "SVC.06",
       "title": "SAP Agentic AI Workflows",
-      "keywords": ["sap", "sap agentic", "sap automation", "sap ai", "joule", "sales order", "auftragsabwicklung", "purchase order", "einkauf", "bestellung", "plant maintenance", "wartung", "asset maintenance", "instandhaltung", "enterprise", "erp"],
+      "keywords": [
+        "sap",
+        "sap agentic",
+        "sap automation",
+        "sap ai",
+        "joule",
+        "sales order",
+        "auftragsabwicklung",
+        "purchase order",
+        "einkauf",
+        "bestellung",
+        "plant maintenance",
+        "wartung",
+        "asset maintenance",
+        "instandhaltung",
+        "enterprise",
+        "erp"
+      ],
       "en": "Rexity positions SAP Agentic AI Workflows as intelligent automation for SAP processes, where agents can prepare and optimize work such as order handling, maintenance, procurement, and project coordination. Approved focus areas: sales order agents, asset maintenance agents, project management agents, purchase order agents, plant maintenance agents, real-time optimization, autonomous workflow support, and SAP process transformation. For SAP and enterprise workflows, Rexity does not promise a 14-21 day implementation: initial scoping or prototype planning may fit such a window, but implementation depends on the SAP landscape, access, integrations, and compliance review.",
       "de": "Rexity positioniert SAP Agentic AI Workflows als intelligente Automatisierungen für SAP-Prozesse, bei denen Agenten Aufgaben wie Auftragsprozesse, Wartung, Einkauf oder Projektkoordination vorbereiten und optimieren können. Freigegebene Schwerpunkte: Sales-Order-Agenten, Asset-Maintenance-Agenten, Projektmanagement-Agenten, Purchase-Order-Agenten, Plant-Maintenance-Agenten, Echtzeit-Optimierung, Unterstützung autonomer Workflows und SAP-Prozesstransformation. Für SAP- und Enterprise-Workflows verspricht Rexity keine Umsetzung in 14 bis 21 Tagen: Ein erstes Scoping oder eine Prototyp-Planung kann in dieses Zeitfenster passen, die Implementierung hängt jedoch von SAP-Landschaft, Zugängen, Integrationen und Compliance-Prüfung ab."
     },
@@ -130,7 +259,18 @@
       "id": "rexity-overview",
       "code": "CMP.01",
       "title": "What Rexity Does",
-      "keywords": ["rexity", "company", "what do you do", "was macht rexity", "services", "leistungen", "about", "über", "overview", "wer seid ihr"],
+      "keywords": [
+        "rexity",
+        "company",
+        "what do you do",
+        "was macht rexity",
+        "services",
+        "leistungen",
+        "about",
+        "über",
+        "overview",
+        "wer seid ihr"
+      ],
       "en": "Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. Rexity also positions enterprise AI topics such as SAP Agentic AI Workflows, SAP Joule AI agents, and autonomous workflows. Everything Rexity ships is production-grade, DSGVO-compliant and EU-hosted, built by a senior, embedded team led by founder Sunny Thakur. For a concrete project discussion, write to hello@rexity.ai.",
       "de": "Rexity unterstützt Unternehmen bei Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitalen Automatisierungen und Dashboards. Außerdem positioniert sich Rexity mit Enterprise-AI-Themen wie SAP Agentic AI Workflows, SAP Joule AI Agents und autonomen Workflows. Alles, was Rexity ausliefert, ist produktionsreif, DSGVO-konform und EU-gehostet — gebaut von einem senioren, eng eingebundenen Team unter der Leitung von Gründer Sunny Thakur. Für ein konkretes Projektgespräch schreiben Sie an hello@rexity.ai."
     },
@@ -138,7 +278,23 @@
       "id": "industries",
       "code": "CMP.02",
       "title": "Industries & Who We Work With",
-      "keywords": ["industry", "industries", "branche", "branchen", "who do you work with", "clients", "kunden", "sme", "mittelstand", "startup", "praxis", "kanzlei", "restaurant", "clinic", "handwerk"],
+      "keywords": [
+        "industry",
+        "industries",
+        "branche",
+        "branchen",
+        "who do you work with",
+        "clients",
+        "kunden",
+        "sme",
+        "mittelstand",
+        "startup",
+        "praxis",
+        "kanzlei",
+        "restaurant",
+        "clinic",
+        "handwerk"
+      ],
       "en": "Rexity works across all industries — from medical practices, law firms, restaurants and trades to e-commerce, agencies, startups and established SMEs. The common thread is not the industry but the need: a team that wants modern, compliant digital systems without hiring an in-house department. Rexity adapts to each domain quickly because every engagement starts with understanding the business first.",
       "de": "Rexity arbeitet branchenübergreifend — von Arztpraxen, Kanzleien, Restaurants und Handwerksbetrieben bis zu E-Commerce, Agenturen, Startups und etabliertem Mittelstand. Der gemeinsame Nenner ist nicht die Branche, sondern der Bedarf: ein Team, das moderne, konforme digitale Systeme will, ohne eine eigene Abteilung aufzubauen. Rexity arbeitet sich schnell in jede Domäne ein, denn jedes Projekt beginnt damit, zuerst das Geschäft zu verstehen."
     },
@@ -146,7 +302,19 @@
       "id": "why-rexity",
       "code": "CMP.03",
       "title": "Why Rexity — Differentiators",
-      "keywords": ["why rexity", "warum rexity", "different", "unterschied", "besser", "advantage", "vorteil", "usp", "agency", "agentur", "compare"],
+      "keywords": [
+        "why rexity",
+        "warum rexity",
+        "different",
+        "unterschied",
+        "besser",
+        "advantage",
+        "vorteil",
+        "usp",
+        "agency",
+        "agentur",
+        "compare"
+      ],
       "en": "Four things set Rexity apart. First: AI-native, not AI-themed — AI is the core of the work, not a sticker. Second: compliance built in — DSGVO/GDPR, EU hosting, audit logs and opt-out by design are part of the architecture, not an afterthought. Third: senior, small, embedded — clients work directly with the people who build, not through account managers. Fourth: outcomes over output — success is measured by what actually ships and works in the real world.",
       "de": "Vier Dinge unterscheiden Rexity. Erstens: KI-nativ statt KI-bemalt — KI ist der Kern der Arbeit, kein Aufkleber. Zweitens: Compliance eingebaut — DSGVO, EU-Hosting, Audit-Logs und Opt-out ab Werk sind Teil der Architektur, kein Nachtrag. Drittens: senior, kompakt, eingebunden — Kund:innen arbeiten direkt mit den Menschen, die bauen, nicht über Account-Manager. Viertens: Ergebnisse statt Output — Erfolg wird daran gemessen, was tatsächlich live geht und in der Praxis funktioniert."
     },
@@ -154,7 +322,16 @@
       "id": "founder",
       "code": "CMP.04",
       "title": "Founder & Team",
-      "keywords": ["founder", "gründer", "sunny", "thakur", "team", "ceo", "who is behind", "wer steckt hinter"],
+      "keywords": [
+        "founder",
+        "gründer",
+        "sunny",
+        "thakur",
+        "team",
+        "ceo",
+        "who is behind",
+        "wer steckt hinter"
+      ],
       "en": "Rexity was founded by Sunny Thakur, who leads the company's AI-first approach. With a background spanning product, engineering and go-to-market, Sunny focuses on shipping production-grade software that is DSGVO-compliant, EU-hosted and built to last. The team is deliberately senior and small: experts from multiple disciplines working as an embedded extension of the client's team.",
       "de": "Rexity wurde von Sunny Thakur gegründet, der den AI-first-Ansatz des Unternehmens verantwortet. Mit einem Hintergrund über Produkt, Engineering und Go-to-Market hinweg konzentriert sich Sunny darauf, produktionsreife Software auszuliefern, die DSGVO-konform, EU-gehostet und auf Langlebigkeit gebaut ist. Das Team ist bewusst senior und kompakt: Expert:innen aus mehreren Disziplinen, die als eingebundene Erweiterung des Kundenteams arbeiten."
     },
@@ -162,7 +339,21 @@
       "id": "compliance-dsgvo",
       "code": "CMP.05",
       "title": "Compliance & Data Protection",
-      "keywords": ["dsgvo", "gdpr", "datenschutz", "compliance", "eu-hosted", "privacy", "data protection", "audit", "opt-out", "security", "sicherheit", "einwilligung", "consent"],
+      "keywords": [
+        "dsgvo",
+        "gdpr",
+        "datenschutz",
+        "compliance",
+        "eu-hosted",
+        "privacy",
+        "data protection",
+        "audit",
+        "opt-out",
+        "security",
+        "sicherheit",
+        "einwilligung",
+        "consent"
+      ],
       "en": "Compliance is built in, not bolted on. Rexity software is DSGVO/GDPR-compliant, EU-hosted, audit-logged, and opt-out by design: AI assistants disclose themselves, consent is collected before data processing, personal data is minimised and access-controlled, and automated actions leave an audit trail. For a formal legal assessment of a specific case, clients should consult their legal counsel — Rexity describes its engineering approach, not legal advice.",
       "de": "Compliance ist eingebaut, nicht nachträglich aufgesetzt. Rexity-Software ist DSGVO-konform, EU-gehostet, audit-protokolliert und mit Opt-out ab Werk: KI-Assistenten geben sich zu erkennen, Einwilligungen werden vor der Datenverarbeitung eingeholt, personenbezogene Daten werden minimiert und zugriffsgeschützt, und automatisierte Aktionen hinterlassen eine Prüfspur. Für eine formale rechtliche Bewertung eines konkreten Falls wenden Sie sich bitte an Ihre Rechtsberatung — Rexity beschreibt den Engineering-Ansatz, keine Rechtsberatung."
     },
@@ -170,7 +361,17 @@
       "id": "how-we-work",
       "code": "CMP.06",
       "title": "How Rexity Works",
-      "keywords": ["how", "process", "ablauf", "wie arbeitet", "approach", "engagement", "zusammenarbeit", "projektablauf", "phasen"],
+      "keywords": [
+        "how",
+        "process",
+        "ablauf",
+        "wie arbeitet",
+        "approach",
+        "engagement",
+        "zusammenarbeit",
+        "projektablauf",
+        "phasen"
+      ],
       "en": "Every engagement starts with understanding the business, goals and constraints — then Rexity scopes the smallest version that delivers real value, ships it production-grade, and iterates from live feedback. Clients work directly with the builders, get honest progress updates, and keep ownership of their code and data. After launch Rexity stays available for monitoring, support and the next iteration.",
       "de": "Jedes Projekt beginnt damit, das Unternehmen, die Ziele und Rahmenbedingungen zu verstehen — dann definiert Rexity die kleinste Version, die echten Mehrwert liefert, setzt sie produktionsreif um und iteriert auf Basis von Live-Feedback. Kund:innen arbeiten direkt mit den Entwickelnden, erhalten ehrliche Status-Updates und behalten die Hoheit über Code und Daten. Nach dem Launch bleibt Rexity für Monitoring, Support und die nächste Iteration an Bord."
     },
@@ -178,7 +379,20 @@
       "id": "tech-stack",
       "code": "CMP.07",
       "title": "Technology Stack",
-      "keywords": ["stack", "technology", "technologie", "cloud", "ai", "gpu", "database", "deployment", "tools", "infrastructure", "infrastruktur", "welche technologien"],
+      "keywords": [
+        "stack",
+        "technology",
+        "technologie",
+        "cloud",
+        "ai",
+        "gpu",
+        "database",
+        "deployment",
+        "tools",
+        "infrastructure",
+        "infrastruktur",
+        "welche technologien"
+      ],
       "en": "Rexity builds on best-in-class cloud, AI, GPU, database and deployment platforms — the proven infrastructure behind everything it delivers, including OpenAI, Anthropic, Google and other leading AI providers, modern cloud hosting, and managed databases. Rexity picks the right tool for each job rather than locking clients into one vendor, and EU data residency is a standing requirement.",
       "de": "Rexity baut auf erstklassige Cloud-, KI-, GPU-, Datenbank- und Deployment-Plattformen — die erprobte Infrastruktur hinter allem, was geliefert wird, darunter OpenAI, Anthropic, Google und weitere führende KI-Anbieter, modernes Cloud-Hosting und Managed Databases. Rexity wählt das passende Werkzeug für die jeweilige Aufgabe, statt Kund:innen an einen Anbieter zu binden — und EU-Datenhaltung ist Standard."
     },
@@ -186,7 +400,18 @@
       "id": "capability-proof",
       "code": "CMP.08",
       "title": "Track Record",
-      "keywords": ["built", "portfolio", "experience", "erfahrung", "examples", "beispiele", "case study", "referenz", "have you built", "live apps"],
+      "keywords": [
+        "built",
+        "portfolio",
+        "experience",
+        "erfahrung",
+        "examples",
+        "beispiele",
+        "case study",
+        "referenz",
+        "have you built",
+        "live apps"
+      ],
       "en": "Rexity has shipped production software across web, mobile, automation and AI — including live apps in the app stores and automation systems with audit-logged, EU-hosted operation. For specific references or a tailored example for your industry, email hello@rexity.ai.",
       "de": "Rexity hat produktionsreife Software in Web, Mobile, Automatisierung und KI ausgeliefert — darunter Live-Apps in den App-Stores und Automatisierungssysteme mit audit-protokolliertem, EU-gehostetem Betrieb. Für konkrete Referenzen oder ein passendes Beispiel für Ihre Branche schreiben Sie an hello@rexity.ai."
     },
@@ -194,7 +419,21 @@
       "id": "demo",
       "code": "RTE.01",
       "title": "Getting Started, Requirements & Demo",
-      "keywords": ["demo", "start", "starten", "requirements", "anforderungen", "consultation", "beratung", "termin", "call", "meeting", "kontakt", "contact", "loslegen"],
+      "keywords": [
+        "demo",
+        "start",
+        "starten",
+        "requirements",
+        "anforderungen",
+        "consultation",
+        "beratung",
+        "termin",
+        "call",
+        "meeting",
+        "kontakt",
+        "contact",
+        "loslegen"
+      ],
       "en": "For business enquiries or demo booking, please write directly to hello@rexity.ai — or use the contact form on this page. The Rexity team will follow up with next steps, usually within one business day.",
       "de": "Für Business-Anfragen oder eine Demo schreiben Sie bitte direkt an hello@rexity.ai — oder nutzen Sie das Kontaktformular auf dieser Seite. Das Rexity-Team meldet sich mit den nächsten Schritten, in der Regel innerhalb eines Werktags."
     },
@@ -202,9 +441,215 @@
       "id": "admin",
       "code": "RTE.02",
       "title": "Admin, Refunds & Policies",
-      "keywords": ["refund", "erstattung", "billing", "rechnung", "policy", "richtlinie", "legal", "contract", "vertrag", "invoice", "admin"],
+      "keywords": [
+        "refund",
+        "erstattung",
+        "billing",
+        "rechnung",
+        "policy",
+        "richtlinie",
+        "legal",
+        "contract",
+        "vertrag",
+        "invoice",
+        "admin"
+      ],
       "en": "For refunds, billing disputes, contracts, legal or policy matters, please email hello@rexity.ai. The assistant cannot make refund, billing, legal or policy decisions.",
       "de": "Für Erstattungen, Rechnungsstreitigkeiten, Verträge, rechtliche oder Richtlinien-Themen schreiben Sie bitte an hello@rexity.ai. Der Assistent kann keine Erstattungs-, Rechnungs-, Rechts- oder Richtlinienentscheidungen treffen."
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-assistant-identity",
+      "triggers": [
+        "who are you",
+        "what are you",
+        "wer bist du",
+        "was bist du",
+        "bist du ein mensch",
+        "are you human",
+        "are you a bot",
+        "bist du ein bot",
+        "bist du eine ki"
+      ],
+      "en": "I am Rexity, the virtual assistant of Rexity Labs. I can explain our services and point you to the right one. For everything deeper, the team is at hello@rexity.ai.",
+      "de": "Ich bin Rexity, der virtuelle Assistent von Rexity Labs. Ich erkläre Ihnen unsere Services und zeige Ihnen den passenden. Für alles Weitere erreichen Sie das Team unter hello@rexity.ai."
+    },
+    {
+      "id": "faq-what-is-rexity",
+      "triggers": [
+        "what is rexity",
+        "whats rexity",
+        "what's rexity",
+        "was ist rexity",
+        "wer ist rexity",
+        "who is rexity",
+        "tell me about rexity",
+        "erzähl mir von rexity"
+      ],
+      "en": "Rexity is a German software team that builds digital tools for businesses: websites, mobile apps, AI assistants, automations, and dashboards. You tell us what your business needs — we build it and keep it running. Everything follows EU data-protection rules.",
+      "de": "Rexity ist ein deutsches Software-Team, das digitale Werkzeuge für Unternehmen baut: Websites, Apps, KI-Assistenten, Automatisierungen und Dashboards. Sie sagen uns, was Ihr Geschäft braucht — wir bauen es und halten es am Laufen. Alles nach EU-Datenschutzregeln."
+    },
+    {
+      "id": "faq-what-do-you-do",
+      "triggers": [
+        "what do you do",
+        "what does rexity do",
+        "was macht rexity",
+        "was macht ihr",
+        "what services",
+        "welche services",
+        "welche leistungen",
+        "was bietet ihr",
+        "what do you offer",
+        "your services",
+        "eure services",
+        "list your services",
+        "all services",
+        "alle services",
+        "alle leistungen"
+      ],
+      "en": "We do six things: we build websites and apps, we help people find you online (digital marketing), we build AI helpers that answer your customers (AI agents), we automate repetitive work (digital automations), we build dashboards that show your numbers at a glance, and we bring AI into SAP systems for larger companies. Ask me about any of them — or email hello@rexity.ai.",
+      "de": "Wir machen sechs Dinge: Wir bauen Websites und Apps, wir sorgen dafür, dass Kunden Sie online finden (Digital Marketing), wir bauen KI-Helfer, die Ihren Kunden antworten (AI Agents), wir automatisieren wiederkehrende Arbeit (digitale Automatisierungen), wir bauen Dashboards, die Ihre Zahlen auf einen Blick zeigen, und wir bringen KI in SAP-Systeme größerer Unternehmen. Fragen Sie mich zu jedem davon — oder schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-web-design",
+      "triggers": [
+        "what is web design",
+        "what is webdesign",
+        "was ist webdesign",
+        "what is website development",
+        "was ist website-entwicklung",
+        "was ist website entwicklung",
+        "what is a website",
+        "what is web development",
+        "was ist webentwicklung"
+      ],
+      "en": "Web design is how your website looks; web development is building it so it works. Rexity does both: we design and build your site — your digital storefront that is open day and night, looks professional, and brings you customers. Want one for your business? Email hello@rexity.ai.",
+      "de": "Webdesign ist, wie Ihre Website aussieht; Webentwicklung ist, sie so zu bauen, dass sie funktioniert. Rexity macht beides: Wir gestalten und bauen Ihre Website — Ihr digitales Schaufenster, das Tag und Nacht geöffnet ist, professionell aussieht und Ihnen Kunden bringt. Sie möchten eine? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-app-development",
+      "triggers": [
+        "what is app development",
+        "whats app development",
+        "what's app development",
+        "was ist app-entwicklung",
+        "was ist app entwicklung",
+        "what is an app",
+        "was ist eine app",
+        "what is mobile development",
+        "app development?"
+      ],
+      "en": "App development means building a mobile app — the kind people install from the App Store or Google Play. Rexity designs and builds apps for iPhone and Android: you describe what the app should do, we handle everything from the design to the launch in the stores. Want an app for your business? Email hello@rexity.ai.",
+      "de": "App-Entwicklung heißt: eine Handy-App bauen — also das, was man aus dem App Store oder von Google Play installiert. Rexity gestaltet und baut Apps für iPhone und Android: Sie beschreiben, was die App können soll, wir kümmern uns um alles vom Design bis zum Start in den Stores. Sie möchten eine App? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-digital-marketing",
+      "triggers": [
+        "what is digital marketing",
+        "was ist digital marketing",
+        "was ist digitales marketing",
+        "what is seo",
+        "was ist seo",
+        "what is online marketing",
+        "was ist online marketing"
+      ],
+      "en": "Digital marketing means getting your business found online. Rexity helps with three things: showing up on Google (SEO), content that attracts customers, and AI-made marketing videos. More customers find you — without you chasing them. Interested? Email hello@rexity.ai.",
+      "de": "Digital Marketing heißt: Ihr Unternehmen wird online gefunden. Rexity hilft bei drei Dingen: bei Google sichtbar werden (SEO), Inhalte, die Kunden anziehen, und KI-erstellte Marketing-Videos. Mehr Kunden finden Sie — ohne dass Sie ihnen hinterherlaufen. Interesse? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-ai-agents",
+      "triggers": [
+        "what is an ai agent",
+        "what are ai agents",
+        "was ist ein ki-agent",
+        "was ist ein ai agent",
+        "was sind ai agents",
+        "was sind ki-agenten",
+        "what is a chatbot",
+        "was ist ein chatbot",
+        "what is a voice agent",
+        "was ist ein sprachassistent"
+      ],
+      "en": "An AI agent is a digital helper that talks to your customers for you — on your website, on WhatsApp, or on the phone. It answers questions and books appointments day and night, and hands tricky cases to a human. Rexity builds these for your business, fully compliant with EU data rules. Curious? Email hello@rexity.ai.",
+      "de": "Ein KI-Agent ist ein digitaler Helfer, der für Sie mit Ihren Kunden spricht — auf Ihrer Website, über WhatsApp oder am Telefon. Er beantwortet Fragen und bucht Termine, Tag und Nacht, und übergibt knifflige Fälle an einen Menschen. Rexity baut solche Helfer für Ihr Unternehmen, vollständig DSGVO-konform. Neugierig? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-automations",
+      "triggers": [
+        "what is automation",
+        "what are automations",
+        "what are digital automations",
+        "was ist automatisierung",
+        "was sind automatisierungen",
+        "was sind digitale automatisierungen",
+        "what is rpa",
+        "was ist rpa",
+        "what is workflow automation"
+      ],
+      "en": "Automation means letting software do your repetitive work. Think of WhatsApp replies sent automatically, appointments prepared without phone tag, or customer data moved between tools without anyone typing. Rexity sets this up so your team saves hours every week. Want to know what we could automate for you? Email hello@rexity.ai.",
+      "de": "Automatisierung heißt: Software erledigt Ihre wiederkehrende Arbeit. Zum Beispiel WhatsApp-Antworten, die automatisch rausgehen, Termine, die ohne Telefon-Pingpong vorbereitet werden, oder Kundendaten, die ohne Abtippen zwischen Programmen wandern. Rexity richtet das ein — Ihr Team spart jede Woche Stunden. Was wir bei Ihnen automatisieren könnten? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-dashboards",
+      "triggers": [
+        "what is a dashboard",
+        "what are dashboards",
+        "was ist ein dashboard",
+        "was sind dashboards",
+        "what is a kpi dashboard",
+        "was ist reporting"
+      ],
+      "en": "A dashboard is one screen that shows how your business is doing — sales, customers, marketing — in simple charts. Instead of digging through spreadsheets, you see your numbers at a glance. Rexity builds dashboards tailored to what matters in your business. Interested? Email hello@rexity.ai.",
+      "de": "Ein Dashboard ist ein Bildschirm, der zeigt, wie Ihr Geschäft läuft — Umsatz, Kunden, Marketing — in einfachen Diagrammen. Statt in Tabellen zu wühlen, sehen Sie Ihre Zahlen auf einen Blick. Rexity baut Dashboards, zugeschnitten auf das, was in Ihrem Geschäft zählt. Interesse? Schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-sap",
+      "triggers": [
+        "what is sap agentic",
+        "was ist sap agentic",
+        "what are sap workflows",
+        "was sind sap workflows",
+        "what is sap automation",
+        "was ist sap automatisierung"
+      ],
+      "en": "SAP is the software many large companies use to run orders, purchasing, and maintenance. Rexity adds AI agents to SAP that prepare and speed up this work — for example order handling or maintenance planning. Enterprise topics like this need a proper conversation: email hello@rexity.ai.",
+      "de": "SAP ist die Software, mit der viele große Unternehmen Aufträge, Einkauf und Wartung steuern. Rexity ergänzt SAP um KI-Agenten, die diese Arbeit vorbereiten und beschleunigen — zum Beispiel Auftragsabwicklung oder Wartungsplanung. Solche Enterprise-Themen besprechen wir am besten direkt: hello@rexity.ai."
+    },
+    {
+      "id": "faq-how-help",
+      "triggers": [
+        "how can you help",
+        "how could you help",
+        "wie könnt ihr helfen",
+        "wie können sie helfen",
+        "wie kann rexity helfen",
+        "wie könnt ihr mir helfen",
+        "how do you help",
+        "can you help me",
+        "könnt ihr mir helfen"
+      ],
+      "en": "Tell me what eats your time or where you lose customers — missed calls, an outdated website, no app, manual paperwork, numbers you can't see. I will point you to the right Rexity solution. For a concrete plan, email hello@rexity.ai.",
+      "de": "Sagen Sie mir, was Ihre Zeit frisst oder wo Sie Kunden verlieren — verpasste Anrufe, eine veraltete Website, keine App, Papierkram von Hand, Zahlen ohne Überblick. Ich zeige Ihnen die passende Rexity-Lösung. Für einen konkreten Plan schreiben Sie an hello@rexity.ai."
+    },
+    {
+      "id": "faq-know-more",
+      "triggers": [
+        "know more",
+        "more details",
+        "mehr details",
+        "in depth",
+        "tell me more",
+        "mehr erfahren",
+        "mehr infos",
+        "more information",
+        "next steps",
+        "nächste schritte",
+        "wie geht es weiter"
+      ],
+      "en": "Happy to go deeper on any service — just name it. For duration, plans, a demo, or anything binding, the Rexity team handles that personally: email hello@rexity.ai.",
+      "de": "Gerne gehe ich bei jedem Service tiefer — nennen Sie ihn einfach. Für Dauer, Pläne, eine Demo oder alles Verbindliche ist das Rexity-Team persönlich da: Schreiben Sie an hello@rexity.ai."
     }
   ]
 }
