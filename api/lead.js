@@ -14,6 +14,22 @@ function clip(v, n) {
   return typeof v === "string" ? v.slice(0, n) : "";
 }
 
+// Best-effort per-IP spam protection (in-memory; resets on cold start).
+const rateBuckets = new Map();
+function rateLimited(ip, limit, windowMs) {
+  const now = Date.now();
+  const hits = (rateBuckets.get(ip) || []).filter((t) => now - t < windowMs);
+  if (hits.length >= limit) { rateBuckets.set(ip, hits); return true; }
+  hits.push(now);
+  rateBuckets.set(ip, hits);
+  if (rateBuckets.size > 5000) rateBuckets.clear();
+  return false;
+}
+function clientIp(req) {
+  const fwd = req.headers["x-forwarded-for"];
+  return (typeof fwd === "string" ? fwd.split(",")[0].trim() : "") || req.socket.remoteAddress || "unknown";
+}
+
 async function insertLead(lead) {
   const resp = await fetch(SUPABASE_URL + "/rest/v1/Lead", {
     method: "POST",
@@ -38,6 +54,13 @@ module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
     res.statusCode = 405;
     res.end(JSON.stringify({ ok: false, error: "Method not allowed" }));
+    return;
+  }
+
+  if (rateLimited(clientIp(req), 8, 10 * 60 * 1000)) {
+    res.statusCode = 429;
+    res.setHeader("Retry-After", "300");
+    res.end(JSON.stringify({ ok: false, error: "Too many requests. Please try again later." }));
     return;
   }
 

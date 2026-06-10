@@ -96,10 +96,10 @@
       var saved = window.localStorage.getItem(STORAGE_KEY);
       if (saved === "de" || saved === "en") return saved;
     } catch (_error) {}
-    var t = String(text || "").toLowerCase();
-    var browserLang = (navigator.language || (navigator.languages && navigator.languages[0]) || "en").toLowerCase();
-    if (/(was|wie|bitte|danke|kann|können|termin|beratung|erstattung|rechnung|deutsch|preise)/i.test(t)) return "de";
-    return browserLang.indexOf("de") === 0 ? "de" : "en";
+    // German-first: unless the visitor explicitly switched the page to EN
+    // (stored above), the chat greets and starts in German. The server then
+    // follows the language the visitor actually writes in.
+    return "de";
   }
 
   function localReply(message) {
@@ -279,7 +279,7 @@
       addMessage(messages, message, "user");
       var loading = addMessage(messages, activeCopy.loading, "bot rexity-chatbot__message--loading");
       try {
-        loading.textContent = await askApi(message, curLang, history.slice(-6));
+        loading.textContent = await askApi(message, curLang, history.slice(-12));
       } catch (_error) {
         loading.textContent = localReply(message);
       } finally {
