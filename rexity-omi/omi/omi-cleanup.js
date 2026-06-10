@@ -38,10 +38,46 @@
     });
   }
 
+  // The contact form is hidden (Sprint 1). Drop a clear email CTA into the
+  // contact section so it still gives visitors a way to reach us. Bilingual
+  // via the same lang signal the rest of the page uses, with a pre-filled
+  // mailto so one click opens a ready email.
+  function mailtoHref(de) {
+    var subject = de ? "Anfrage über rexity.ai" : "Enquiry from rexity.ai";
+    var body = de
+      ? "Hallo Rexity-Team,\n\nich interessiere mich für Ihre Services und würde gerne mehr erfahren.\n\nViele Grüße"
+      : "Hi Rexity team,\n\nI'm interested in your services and would like to know more.\n\nBest regards";
+    return "mailto:hello@rexity.ai?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  }
+  function injectContactCta() {
+    var sec = document.getElementById("contact-us");
+    if (!sec || sec.querySelector("#omi-contact-cta")) return;
+    var de = false;
+    try { de = (window.rexityGetLang && window.rexityGetLang()) === "de"; } catch (e) {}
+    var wrap = document.createElement("div");
+    wrap.id = "omi-contact-cta";
+    wrap.style.cssText = "margin-top:18px;font:16px/1.6 Inter,system-ui,sans-serif;";
+    var a = document.createElement("a");
+    a.href = mailtoHref(de);
+    a.textContent = "hello@rexity.ai";
+    a.style.cssText = "color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;";
+    wrap.appendChild(document.createTextNode(de
+      ? "Schreiben Sie uns direkt an "
+      : "Write to us directly at "));
+    wrap.appendChild(a);
+    wrap.appendChild(document.createTextNode(de
+      ? " — oder nutzen Sie den Rexity-Chat unten rechts."
+      : " — or use the Rexity chat at the bottom right."));
+    // place it where the form was (after the subtext heading block)
+    var anchor = sec.querySelector(".oxy-ou-cf7-styler") || sec.querySelector("form") || sec;
+    (anchor.parentNode || sec).appendChild(wrap);
+  }
+
   function boot() {
     var tries = 0;
     var iv = setInterval(function () {
       wire();
+      injectContactCta();
       if (++tries > 40) clearInterval(iv);
     }, 300);
   }
