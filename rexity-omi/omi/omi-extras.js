@@ -223,5 +223,77 @@
     if (++fcTries > 40) clearInterval(fcInt);
   }, 250);
 
+  // ============================================================
+  // 5. DE | EN language pill in the top navigation.
+  //    Injected as an absolutely-positioned child of the navbar
+  //    (left of the hamburger) so the Webflow grid is never touched.
+  //    Drives the site-wide capsule (omi-i18n.js): page content,
+  //    banner, cookie notice, iframe body and chatbot all switch.
+  // ============================================================
+  function currentLang() {
+    try {
+      var v = localStorage.getItem('rexity_lang');
+      if (v === 'de' || v === 'en') return v;
+    } catch (e) {}
+    return (typeof window.rexityGetLang === 'function' && window.rexityGetLang()) || 'de';
+  }
+
+  function injectLangPill() {
+    if (document.getElementById('rexity-lang-pill')) return true;
+    var navbar = document.querySelector('.navigation-top .navbar') || document.querySelector('.navigation-top');
+    if (!navbar) return false;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'rexity-lang-pill';
+    wrap.setAttribute('role', 'group');
+    wrap.setAttribute('aria-label', 'Sprache / Language');
+    wrap.style.cssText =
+      'position:absolute;right:clamp(84px,9vw,150px);top:50%;transform:translateY(-50%);' +
+      'z-index:1000;display:inline-flex;align-items:center;padding:3px;' +
+      'border:1px solid rgba(17,18,22,.16);border-radius:999px;' +
+      'background:rgba(255,255,255,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);';
+
+    function update() {
+      var lang = currentLang();
+      wrap.querySelectorAll('button').forEach(function (b) {
+        var active = b.getAttribute('data-rxlang') === lang;
+        b.style.background = active ? '#111214' : 'transparent';
+        b.style.color = active ? '#fff' : '#3a3d44';
+      });
+    }
+
+    ['de', 'en'].forEach(function (l) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = l.toUpperCase();
+      b.setAttribute('data-rxlang', l);
+      b.setAttribute('aria-label', l === 'de' ? 'Deutsch' : 'English');
+      b.style.cssText =
+        'border:0;border-radius:999px;padding:6px 12px;background:transparent;color:#3a3d44;' +
+        'font:700 11px/1 Inter,system-ui,-apple-system,sans-serif;letter-spacing:.03em;' +
+        'cursor:pointer;transition:background .14s ease,color .14s ease;';
+      b.addEventListener('click', function () {
+        if (typeof window.rexitySetLang === 'function') window.rexitySetLang(l);
+        else { try { localStorage.setItem('rexity_lang', l); } catch (e) {} }
+        update();
+      });
+      wrap.appendChild(b);
+    });
+
+    window.addEventListener('rexity:languagechange', update);
+    window.addEventListener('storage', function (e) { if (e.key === 'rexity_lang') update(); });
+
+    if (getComputedStyle(navbar).position === 'static') navbar.style.position = 'relative';
+    navbar.appendChild(wrap);
+    update();
+    LOG('lang pill injected into top nav');
+    return true;
+  }
+
+  var lpTries = 0;
+  var lpInt = setInterval(function () {
+    if (injectLangPill() || ++lpTries > 60) clearInterval(lpInt);
+  }, 200);
+
   LOG('omi-extras.js loaded');
 })();

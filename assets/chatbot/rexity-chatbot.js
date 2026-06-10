@@ -292,13 +292,7 @@
         '<div class="rexity-chatbot__hero">',
           '<div class="rexity-chatbot__top">',
             '<div class="rexity-chatbot__brand"><img src="/rexity-omi/assets/brand/rexity-labs-logo-white-160.png" alt="Rexity Labs UG"></div>',
-            '<div class="rexity-chatbot__topright">',
-              '<div class="rexity-chatbot__lang" role="group" aria-label="Language">',
-                '<button class="rexity-chatbot__lang-btn" type="button" data-rxlang="de">DE</button>',
-                '<button class="rexity-chatbot__lang-btn" type="button" data-rxlang="en">EN</button>',
-              '</div>',
-              '<button class="rexity-chatbot__close" type="button" aria-label="' + activeCopy.closeLabel + '">' + svgIcon("close") + '</button>',
-            '</div>',
+            '<button class="rexity-chatbot__close" type="button" aria-label="' + activeCopy.closeLabel + '">' + svgIcon("close") + '</button>',
           '</div>',
           '<div class="rexity-chatbot__intro">',
             '<h2 class="rexity-chatbot__intro-title">' + activeCopy.introTitle + '</h2>',
@@ -342,9 +336,6 @@
       root.querySelector(".rexity-chatbot__intro-copy").textContent = activeCopy.introCopy;
       root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
       linkifyEmail(root.querySelector(".rexity-chatbot__footnote"));
-      root.querySelectorAll(".rexity-chatbot__lang-btn").forEach(function (btn) {
-        btn.classList.toggle("is-active", btn.getAttribute("data-rxlang") === lang);
-      });
       quick.innerHTML = "";
       activeCopy.quickQuestions.forEach(function (question) {
         var chip = document.createElement("button");
@@ -369,21 +360,6 @@
         form.dispatchEvent(new Event("submit", { cancelable: true }));
       });
       quick.appendChild(chip);
-    });
-
-    // DE/EN pill: drives the site-wide language capsule (omi-i18n.js) so the
-    // page, banner and chat switch together; falls back to chat-only if the
-    // capsule isn't loaded.
-    root.querySelectorAll(".rexity-chatbot__lang-btn").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var next = btn.getAttribute("data-rxlang") === "de" ? "de" : "en";
-        if (typeof window.rexitySetLang === "function") {
-          window.rexitySetLang(next);
-        } else {
-          try { window.localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
-          renderChatLanguage(next);
-        }
-      });
     });
 
     renderChatLanguage(lang);
