@@ -137,6 +137,6 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     console.error("[lead] insert failed:", error && error.message);
     res.statusCode = 502;
-    res.end(JSON.stringify({ ok: false, error: "Could not save your message. Please email sunny@rexity.ai." }));
+    res.end(JSON.stringify({ ok: false, error: "Could not save your message. Please email hello@rexity.ai." }));
   }
 };

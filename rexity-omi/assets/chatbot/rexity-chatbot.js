@@ -1,14 +1,39 @@
 (function () {
   var STORAGE_KEY = "rexity_lang";
+  var INTRO_SEEN_KEY = "rexity_intro_seen";
+
+  // Time-of-day greeting per PRD: computed for Europe/Berlin regardless of
+  // the visitor's timezone (client clock converted via Intl; marked
+  // client-derived per PRD fallback rule).
+  function berlinHour() {
+    try {
+      return parseInt(new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Berlin", hour: "2-digit", hour12: false
+      }).format(new Date()), 10);
+    } catch (e) { return new Date().getHours(); }
+  }
+  function tagesgruss(lang) {
+    var h = berlinHour();
+    if (h >= 5 && h < 11) return lang === "de" ? "Guten Morgen" : "Good morning";
+    if (h >= 11 && h < 18) return lang === "de" ? "Guten Tag" : "Good afternoon";
+    return lang === "de" ? "Guten Abend" : "Good evening";
+  }
+  function greetingText(lang) {
+    if (lang === "de") {
+      return tagesgruss("de") + ", ich bin Rexity, Ihr virtueller Assistent. Ich helfe Ihnen gerne bei unseren Services: Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitale Automatisierungen und Dashboards. Wie kann ich Ihnen weiterhelfen?";
+    }
+    return tagesgruss("en") + ", I am Rexity, your virtual assistant. I can help you with our services: Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. How can I help?";
+  }
+
   var copy = {
     en: {
       quickQuestions: [
         "What does Rexity do?",
-        "Book a demo",
-        "I need a website",
-        "Automate my business",
-        "Tell me about LevelKraft",
-        "Pricing in English?"
+        "Web & app development",
+        "AI agents",
+        "Digital automations",
+        "Dashboards",
+        "Book a demo"
       ],
       rootLabel: "Rexity chat assistant",
       openLabel: "Open Rexity chat",
@@ -18,22 +43,21 @@
       messageLabel: "Message Rexity",
       sendLabel: "Send message",
       pillTitle: "Ask Rexity",
-      pillSubtitle: "Design, AI, demos",
+      pillSubtitle: "Your virtual assistant",
       introTitle: "How can we help?",
-      introCopy: "Ask about Rexity services, products, automation, AI systems, or booking a demo.",
+      introCopy: "Ask about web & app development, digital marketing, AI agents, automations, or dashboards.",
       placeholder: "Ask about Rexity...",
-      footnote: "The assistant answers from approved Rexity information only. Admin, refund, billing, and policy topics go to admin@rexity.ai.",
-      greeting: "Hi. I can help with Rexity services, products, automation, design, development, scaling, and demos.",
+      footnote: "Rexity is a virtual assistant and answers from approved Rexity information only. Business, billing, and policy topics go to hello@rexity.ai.",
       loading: "Checking Rexity knowledge..."
     },
     de: {
       quickQuestions: [
         "Was macht Rexity?",
-        "Demo buchen",
-        "Ich brauche eine Website",
-        "Mein Business automatisieren",
-        "Erzähl mir von LevelKraft",
-        "Preise auf Deutsch?"
+        "Web- & App-Entwicklung",
+        "AI Agents",
+        "Digitale Automatisierungen",
+        "Dashboards",
+        "Demo buchen"
       ],
       rootLabel: "Rexity Chat-Assistent",
       openLabel: "Rexity Chat öffnen",
@@ -43,12 +67,11 @@
       messageLabel: "Nachricht an Rexity",
       sendLabel: "Nachricht senden",
       pillTitle: "Rexity fragen",
-      pillSubtitle: "Design, KI, Demos",
+      pillSubtitle: "Ihr virtueller Assistent",
       introTitle: "Wie können wir helfen?",
-      introCopy: "Fragen Sie zu Rexity Services, Produkten, Automatisierung, KI-Systemen oder einer Demo.",
+      introCopy: "Fragen Sie zu Web- & App-Entwicklung, Digital Marketing, AI Agents, Automatisierungen oder Dashboards.",
       placeholder: "Fragen Sie Rexity...",
-      footnote: "Der Assistent antwortet nur auf Basis freigegebener Rexity Informationen. Admin-, Erstattungs-, Rechnungs- und Richtlinienthemen gehen an admin@rexity.ai.",
-      greeting: "Hallo. Ich helfe bei Rexity Services, Produkten, Automatisierung, Design, Entwicklung, Skalierung und Demos.",
+      footnote: "Rexity ist ein virtueller Assistent und antwortet nur auf Basis freigegebener Rexity-Informationen. Business-, Rechnungs- und Richtlinienthemen gehen an hello@rexity.ai.",
       loading: "Rexity Wissen wird geprüft..."
     }
   };
@@ -107,13 +130,13 @@
     var text = String(message || "").toLowerCase();
     if (/refund|erstattung|billing|rechnung|policy|legal|admin|chargeback|vertrag/i.test(text)) {
       return lang === "de"
-        ? "Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an admin@rexity.ai."
-        : "I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email admin@rexity.ai.";
+        ? "Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an hello@rexity.ai."
+        : "I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email hello@rexity.ai.";
     }
     if (/demo|meeting|call|requirement|requirements|termin|beratung|project|quote|proposal/i.test(text)) {
       return lang === "de"
-        ? "Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an sunny@rexity.ai."
-        : "For requirements, demos, or a project discussion, please email sunny@rexity.ai.";
+        ? "Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an hello@rexity.ai."
+        : "For requirements, demos, or a project discussion, please email hello@rexity.ai.";
     }
     var scored = fallbackKnowledge.map(function (entry) {
       var score = entry.keys.reduce(function (sum, key) {
@@ -237,20 +260,41 @@
     });
 
     renderChatLanguage(lang);
-    addMessage(messages, activeCopy.greeting, "bot");
+    addMessage(messages, greetingText(lang), "bot");
     window.addEventListener("rexity:languagechange", function (event) {
       renderChatLanguage(event.detail && event.detail.lang);
     });
 
+    function markIntroSeen() {
+      try { window.sessionStorage.setItem(INTRO_SEEN_KEY, "true"); } catch (e) {}
+    }
+    function introSeen() {
+      try { return window.sessionStorage.getItem(INTRO_SEEN_KEY) === "true"; } catch (e) { return true; }
+    }
+
     pill.addEventListener("click", function () {
+      markIntroSeen();
       root.classList.add("is-open");
       window.setTimeout(function () { input.focus(); }, 180);
     });
 
     close.addEventListener("click", function () {
+      markIntroSeen();
       root.classList.remove("is-open");
       pill.focus();
     });
+
+    // PRD launch behavior: expand once, 8-10 s after load, with the greeting
+    // already in place. Once per browser session; never again after the
+    // visitor closes or opens it themselves. Desktop only — auto-opening a
+    // near-fullscreen panel on mobile is intrusive.
+    if (!introSeen() && window.innerWidth >= 640) {
+      window.setTimeout(function () {
+        if (introSeen() || root.classList.contains("is-open")) return;
+        markIntroSeen();
+        root.classList.add("is-open");
+      }, 9000);
+    }
 
     input.addEventListener("keydown", function (event) {
       if (event.key === "Enter" && !event.shiftKey) {

@@ -6,6 +6,14 @@ const knowledge = JSON.parse(fs.readFileSync(knowledgePath, "utf8"));
 
 const ADMIN_EMAIL = knowledge.brand.contact.admin;
 const DEMO_EMAIL = knowledge.brand.contact.demo;
+const COPY = knowledge.copy || {};
+const ASSISTANT_NAME = (knowledge.brand && knowledge.brand.assistantName) || "Rexity";
+
+function approvedCopy(key, lang) {
+  const c = COPY[key];
+  if (!c) return null;
+  return c[lang] || c.en || null;
+}
 
 // DeepSeek (OpenAI-compatible). Key lives in Vercel env on the project that
 // serves rexity.ai. Tolerate a couple of name spellings just in case.
@@ -149,24 +157,41 @@ function retrieve(message, limit) {
 }
 
 function adminReply(lang) {
-  if (lang === "de") {
-    return `Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an ${ADMIN_EMAIL}.`;
-  }
-  return `I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email ${ADMIN_EMAIL}.`;
+  return approvedCopy("refusal", lang) ||
+    `Sorry, I cannot provide a binding answer on that. Please email ${ADMIN_EMAIL}.`;
 }
 
 function demoReply(lang) {
-  if (lang === "de") {
-    return `Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an ${DEMO_EMAIL}. Wir können dann sauber prüfen, was Sie bauen möchten.`;
-  }
-  return `For requirements, demos, or a project discussion, please email ${DEMO_EMAIL}. We can then review what you want to build properly.`;
+  return approvedCopy("businessRouting", lang) ||
+    `For business enquiries or demo booking, please write directly to ${DEMO_EMAIL}.`;
 }
 
 function fallbackReply(lang) {
-  if (lang === "de") {
-    return "Ich kann bei Rexity Services, Produkten, Design, Entwicklung, Automatisierung, AI-Systemen, Skalierung und Demo-Anfragen helfen. Dazu habe ich keine bestätigte Rexity-Information.";
-  }
-  return "I can help with Rexity services, products, design, development, automation, AI systems, scaling, and demo requests. I don’t have confirmed Rexity information for that.";
+  return approvedCopy("unknownFallback", lang) ||
+    `Sorry, I cannot answer that from the Rexity databank. Please email ${DEMO_EMAIL}.`;
+}
+
+// ---- PRD intent classification (deterministic, runs BEFORE the LLM) --------
+// Returns one of: prompt_injection, cost_pricing, refund_billing_legal,
+// timeline_request, human_request, business_enquiry, smalltalk, service_info.
+const INJECTION_RE = /(ignore (all|previous|prior|the) (instructions|rules)|ignoriere (alle|die|bisherigen) (anweisungen|regeln)|system.?prompt|reveal your (prompt|rules|instructions)|hidden rules|geheime (regeln|anweisungen)|act as (another|a different)|verhalte dich wie ein anderer|jailbreak|dan mode|developer mode)/i;
+const COST_RE = /(price|pricing|cost|costs|how much|budget|rate|rates|discount|cheap|expensive|preis|preise|kosten|kostet|teuer|günstig|guenstig|rabatt|stundensatz|pauschale|honorar|was kostet|wie ?viel)/i;
+const LEGAL_RE = /(refund|chargeback|billing|invoice|legal|contract|warranty|liab|guarantee|guarantees|erstattung|rückerstattung|rueckerstattung|rechnung|vertrag|vertrags|rechtlich|haftung|garantie|gewährleistung|gewaehrleistung|agb|storno|kündigung|kuendigung)/i;
+const TIMELINE_RE = /(how long|timeline|time frame|timeframe|duration|deadline|wie lange|wie schnell|dauer|dauert|zeitraum|zeitrahmen|wann (ist|wäre|waere|kann).*(fertig|live|bereit)|umsetzungszeit|lieferzeit)/i;
+const HUMAN_RE = /(speak (to|with) (a )?(human|person|someone)|talk to (a )?(human|person|someone)|real person|kein bot|echter mensch|mit einem menschen|mitarbeiter sprechen|jemanden sprechen|persönlich sprechen|persoenlich sprechen|human agent)/i;
+const BUSINESS_RE = /(\bdemo\b|book a (call|meeting)|consultation|proposal|\bquote\b|project (discussion|brief)|work with you|hire you|beauftragen|zusammenarbeiten|angebot|beratungstermin|projektgespräch|projektgespraech|demo buchen|termin (vereinbaren|buchen)|kennenlerngespräch|kennenlerngespraech)/i;
+const SMALLTALK_RE = /^(hi|hey|hallo|hello|moin|servus|guten (tag|morgen|abend)|good (morning|afternoon|evening)|danke|thanks|thank you|ok|okay|cool|super|alles klar|tschüss|tschuess|bye|ciao|wer bist du|who are you|was bist du|what are you)[\s!.?,]*$/i;
+
+function classifyIntent(message) {
+  const raw = String(message || "");
+  if (INJECTION_RE.test(raw)) return "prompt_injection";
+  if (SMALLTALK_RE.test(raw.trim())) return "smalltalk";
+  if (COST_RE.test(raw)) return "cost_pricing";
+  if (LEGAL_RE.test(raw)) return "refund_billing_legal";
+  if (TIMELINE_RE.test(raw)) return "timeline_request";
+  if (HUMAN_RE.test(raw)) return "human_request";
+  if (BUSINESS_RE.test(raw)) return "business_enquiry";
+  return "service_info";
 }
 
 // Deterministic, retrieval-only answer. Used when the LLM is unavailable or
@@ -208,8 +233,11 @@ function buildSystemPrompt(lang, contextLines) {
     .join("\n");
 
   return [
-    `You are the Rexity assistant, a concise, warm, professional chat assistant on the Rexity Labs website (rexity.ai).`,
-    `Rexity Labs UG builds AI workspaces and automation for ambitious teams: websites & SaaS, mobile apps, business-process automation, AI voice & WhatsApp bots, testing & support, and SEO & AI video. Everything is built to be production-grade, DSGVO/GDPR-compliant and EU-hosted.`,
+    `You are ${ASSISTANT_NAME}, the virtual assistant on the Rexity Labs website (rexity.ai). You are a constrained service guide, not an open-ended chatbot: you help visitors discover Rexity services, answer only from approved information, and route business enquiries to ${DEMO_EMAIL}. If asked who or what you are, say you are ${ASSISTANT_NAME}, Rexity's virtual assistant — never pretend to be human.`,
+    `Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards, plus enterprise topics such as SAP Agentic AI Workflows. Everything is production-grade, DSGVO/GDPR-compliant and EU-hosted.`,
+    ``,
+    `TIMELINE — only if the visitor asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope; never present this as binding, never promise fixed dates, and for SAP or enterprise projects say timeline depends on scope and route to ${DEMO_EMAIL}.`,
+    `CONTACT — the only contact channel is email: ${DEMO_EMAIL}. Never mention or invent a phone number.`,
     ``,
     `LANGUAGE — strict:`,
     `Reply ONLY in ${langName}. The conversation language follows the visitor: it was resolved from their messages, so do not switch languages on your own, even if the context snippets or earlier turns are in another language. ${lang === "de" ? "Schreiben Sie natürliches, klares Deutsch in der Sie-Form — wie ein kompetenter Mensch im Chat, nicht wie eine Broschüre." : "Write natural, clear, conversational English — like a competent human in a chat, not a brochure."}`,
@@ -283,25 +311,41 @@ async function retrieveSemantic(message, lang, limit) {
   if (!resp.ok) throw new Error("kb rpc " + resp.status);
   const rows = await resp.json();
   if (!Array.isArray(rows) || !rows.length) throw new Error("kb empty");
-  return rows.map((r) => `- ${r.title}: ${r.text}`);
+  return {
+    lines: rows.map((r) => `- ${r.title}: ${r.text}`),
+    confidence: Math.max(...rows.map((r) => Number(r.similarity) || 0))
+  };
 }
 
 function retrieveKeywordLines(message, lang, limit) {
   const matches = retrieve(message, limit || 4);
-  const list = matches.length ? matches : knowledge.entries.slice(0, 4);
-  return list.map((e) => `- ${e.title}: ${e[lang] || e.en}`);
+  return {
+    lines: (matches.length ? matches : knowledge.entries.slice(0, 4))
+      .map((e) => `- ${e.title}: ${e[lang] || e.en}`),
+    matched: matches.length > 0
+  };
 }
+
+// PRD §12: answer only when a relevant databank entry is retrieved with
+// sufficient confidence. The PRD's 0.72 figure assumes normalized retrieval
+// scores; calibrated against gemini-embedding-001 cosine similarities, good
+// matches land around 0.65-0.73 and off-topic around 0.45-0.55, so the
+// equivalent floor here is 0.60.
+const RAG_CONFIDENCE_FLOOR = 0.6;
 
 async function buildContext(message, lang) {
   if (SUPABASE_URL && SUPABASE_KEY && GEMINI_KEY) {
     try {
-      const lines = await retrieveSemantic(message, lang, 4);
-      return { lines: lines, retrieval: "vector" };
+      const sem = await retrieveSemantic(message, lang, 4);
+      return { lines: sem.lines, retrieval: "vector", confidence: sem.confidence };
     } catch (error) {
       console.error("[chat] semantic retrieval failed:", error && error.message);
     }
   }
-  return { lines: retrieveKeywordLines(message, lang, 4), retrieval: "keyword" };
+  const kw = retrieveKeywordLines(message, lang, 4);
+  // Keyword fallback has no cosine score; treat a keyword hit as confident
+  // enough and a zero-hit as below floor.
+  return { lines: kw.lines, retrieval: "keyword", confidence: kw.matched ? 1 : 0 };
 }
 
 function sanitizeHistory(history) {
@@ -405,11 +449,21 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Safety guardrail stays deterministic: never let the model improvise on
-  // refunds / billing / legal / contract decisions.
-  if (includesAny(text, knowledge.rules.adminTopics)) {
+  // PRD §11: classify every message BEFORE answering. Blocked and routing
+  // intents are answered deterministically with approved copy — the LLM
+  // never improvises on them.
+  const intent = classifyIntent(message);
+  const deterministic = {
+    prompt_injection: approvedCopy("injection", lang),
+    cost_pricing: approvedCopy("costRefusal", lang),
+    refund_billing_legal: approvedCopy("refusal", lang),
+    timeline_request: approvedCopy("timeline", lang),
+    human_request: approvedCopy("humanRequest", lang),
+    business_enquiry: approvedCopy("businessRouting", lang)
+  };
+  if (deterministic[intent]) {
     res.statusCode = 200;
-    res.end(JSON.stringify({ answer: adminReply(lang), sources: ["admin"], engine: "guardrail" }));
+    res.end(JSON.stringify({ answer: deterministic[intent], lang: lang, intent: intent, engine: "policy" }));
     return;
   }
 
@@ -418,6 +472,15 @@ module.exports = async function handler(req, res) {
   if (DEEPSEEK_KEY) {
     try {
       const ctx = await buildContext(message, lang);
+      // PRD §12: no answer without a confidently retrieved databank entry.
+      // Smalltalk is exempt (greetings need no entry), and follow-ups in an
+      // ongoing conversation inherit the already-established grounding.
+      const isFollowUp = history.some((m) => m.role === "user");
+      if (intent !== "smalltalk" && !isFollowUp && ctx.confidence < RAG_CONFIDENCE_FLOOR) {
+        res.statusCode = 200;
+        res.end(JSON.stringify({ answer: fallbackReply(lang), lang: lang, intent: "unknown", engine: "policy" }));
+        return;
+      }
       const messages = [
         { role: "system", content: buildSystemPrompt(lang, ctx.lines) },
         ...history,
@@ -428,6 +491,7 @@ module.exports = async function handler(req, res) {
       res.end(JSON.stringify({
         answer: toPlainText(answer),
         lang: lang,
+        intent: intent,
         retrieval: ctx.retrieval,
         engine: "deepseek"
       }));

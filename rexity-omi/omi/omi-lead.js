@@ -10,14 +10,14 @@
       sending: "Sending…",
       ok: "Thanks — we’ve got your message and will be in touch shortly.",
       invalid: "Please enter your name and a valid email.",
-      err: "Something went wrong. Please email sunny@rexity.ai.",
+      err: "Something went wrong. Please email hello@rexity.ai.",
       submit: "Submit"
     },
     de: {
       sending: "Wird gesendet…",
       ok: "Danke — wir haben Ihre Nachricht erhalten und melden uns in Kürze.",
       invalid: "Bitte geben Sie Ihren Namen und eine gültige E-Mail an.",
-      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an sunny@rexity.ai.",
+      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an hello@rexity.ai.",
       submit: "Absenden"
     }
   };
