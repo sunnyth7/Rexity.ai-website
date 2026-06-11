@@ -30,6 +30,19 @@ function clientIp(req) {
   return (typeof fwd === "string" ? fwd.split(",")[0].trim() : "") || req.socket.remoteAddress || "unknown";
 }
 
+// Per-instance global ceiling: caps total lead inserts per warm instance per
+// minute, so a distributed bot (many IPs each under the per-IP limit) can't
+// flood the Lead table without bound.
+const GLOBAL_LEAD_CEILING = 40;
+const globalHits = [];
+function globalCeilingExceeded() {
+  const now = Date.now();
+  while (globalHits.length && now - globalHits[0] > 60000) globalHits.shift();
+  if (globalHits.length >= GLOBAL_LEAD_CEILING) return true;
+  globalHits.push(now);
+  return false;
+}
+
 async function insertLead(lead) {
   const resp = await fetch(SUPABASE_URL + "/rest/v1/Lead", {
     method: "POST",
@@ -57,7 +70,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (rateLimited(clientIp(req), 8, 10 * 60 * 1000)) {
+  if (rateLimited(clientIp(req), 8, 10 * 60 * 1000) || globalCeilingExceeded()) {
     res.statusCode = 429;
     res.setHeader("Retry-After", "300");
     res.end(JSON.stringify({ ok: false, error: "Too many requests. Please try again later." }));

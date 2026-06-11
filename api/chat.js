@@ -119,6 +119,22 @@ function clientIp(req) {
   return (typeof fwd === "string" ? fwd.split(",")[0].trim() : "") || req.socket.remoteAddress || "unknown";
 }
 
+// ---- Per-instance GLOBAL ceiling (second layer for distributed attacks).
+// Per-IP limits don't stop a botnet of many IPs each staying under the cap.
+// This caps TOTAL LLM-bound requests per warm instance per minute; once hit,
+// the handler degrades to the cost-free keyword retrieval (still answers the
+// visitor, but spends nothing on Gemini/DeepSeek). Bounds the bill no matter
+// how the traffic is spread across IPs. Set generously so real users never
+// see it — only sustained abuse does.
+const GLOBAL_LLM_CEILING = 120; // LLM calls per instance per minute
+const globalHits = [];
+function globalCeilingExceeded() {
+  const now = Date.now();
+  while (globalHits.length && now - globalHits[0] > 60000) globalHits.shift();
+  return globalHits.length >= GLOBAL_LLM_CEILING;
+}
+function recordGlobalHit() { globalHits.push(Date.now()); }
+
 function includesAny(text, terms) {
   return terms.some((term) => normalize(text).includes(normalize(term)));
 }
@@ -496,9 +512,20 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  // Cost circuit breaker: if this instance is over its per-minute LLM ceiling
+  // (sustained / distributed abuse), skip the paid Gemini+DeepSeek path and
+  // answer from the cost-free keyword retrieval. The visitor still gets a
+  // relevant reply; we spend nothing.
+  if (globalCeilingExceeded()) {
+    res.statusCode = 200;
+    res.end(JSON.stringify(Object.assign({ lang: lang, engine: "fallback", degraded: true }, composeAnswer(message, lang))));
+    return;
+  }
+
   // Primary path: grounded DeepSeek answer (semantic retrieval when the
   // KbChunk store + Gemini key are available, keyword retrieval otherwise).
   if (DEEPSEEK_KEY) {
+    recordGlobalHit();
     try {
       const ctx = await buildContext(message, lang);
       // PRD §12: no answer without a confidently retrieved databank entry.
