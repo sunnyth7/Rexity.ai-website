@@ -121,8 +121,20 @@
     'Services Provided': 'Erbrachte Leistungen',
     'Watch the Interview': 'Interview ansehen',
     'Learn More': 'Mehr erfahren',
-    'Mobile app for a German GmbH — DSGVO from day one.':
-      'Mobile App für eine deutsche GmbH — DSGVO ab dem ersten Tag.',
+    'Clevr — built for people who love to host.':
+      'Clevr — gemacht für alle, die gerne Gastgeber sind.',
+    'LevelKraft is an app Rexity Labs built for language learners. It prepares people for the German TELC and Goethe exams, from A1 all the way to C2.':
+      'LevelKraft ist eine App, die Rexity Labs für Sprachlernende entwickelt hat. Sie bereitet auf die deutschen TELC- und Goethe-Prüfungen vor, von A1 bis C2.',
+    'Inside the app: full-length practice tests, instant feedback on speaking and writing, and short daily sessions that quietly adapt to each learner’s weak spots — calm, focused, no clutter.':
+      'In der App: vollständige Übungstests, sofortiges Feedback zu Sprechen und Schreiben und kurze tägliche Einheiten, die sich unaufdringlich an die Schwächen jedes Lernenden anpassen — ruhig, fokussiert, ohne Ballast.',
+    'Clevr is an app Rexity Labs built for party planners. Hosting usually means juggling five different chats and apps; Clevr brings it all into one place.':
+      'Clevr ist eine App, die Rexity Labs für Partyplaner entwickelt hat. Eine Feier zu organisieren bedeutet meist, fünf verschiedene Chats und Apps zu jonglieren; Clevr bündelt alles an einem Ort.',
+    'Shared invites, food and drink polls, a collaborative playlist, expense splitting, games and a group chat. Plan, invite, celebrate — without the coordination chaos.':
+      'Gemeinsame Einladungen, Abstimmungen zu Essen und Getränken, eine geteilte Playlist, Kostenteilung, Spiele und ein Gruppenchat. Planen, einladen, feiern — ohne Organisations-Chaos.',
+    'Fresh&Save is an app Rexity Labs built around the family kitchen — a shared food inventory that fights waste and the dreaded double-buy.':
+      'Fresh&Save ist eine App, die Rexity Labs rund um die Familienküche entwickelt hat — ein gemeinsamer Lebensmittelvorrat gegen Verschwendung und Doppelkäufe.',
+    'See what’s in the kitchen at a glance, plan meals, save recipes, and keep one live shopping list the whole family shares, so nothing expires and nothing’s forgotten.':
+      'Die Küche auf einen Blick sehen, Mahlzeiten planen, Rezepte speichern und eine gemeinsame Einkaufsliste für die ganze Familie führen, damit nichts verdirbt und nichts vergessen wird.',
 
     // ---- Stack ----
     'Built on a proven technology stack': 'Auf einem erprobten Technologie-Stack gebaut',
