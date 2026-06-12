@@ -27,43 +27,43 @@
   // before translation, not faithfully translated as-is.
   var DICT = {
     // ---- Hero ----
-    'AI built for ambitious teams.':
-      'KI für ambitionierte Teams.',
-    'Behind every great AI deployment is a team that understands your business. Our technically led approach combines deep AI expertise with a focus on production-grade software that helps your team stay ahead of change.':
-      'Hinter jedem erfolgreichen KI-Einsatz steht ein Team, das Ihr Unternehmen versteht. Unser technisch geführter Ansatz verbindet tiefe KI-Expertise mit produktionsreifer Software, die Ihrem Team hilft, dem Wandel stets einen Schritt voraus zu sein.',
-    'We take the time to understand your goals and constraints, tailoring AI workspaces and automations that work for your people, not against them.':
-      'Wir nehmen uns die Zeit, Ihre Ziele und Rahmenbedingungen zu verstehen, und gestalten KI-Workspaces und Automatisierungen, die für Ihre Mitarbeitenden arbeiten – nicht gegen sie.',
-    'With Rexity Labs you gain more than a vendor — you gain a partner who helps you build a defensible, EU-compliant AI foundation for the long term.':
-      'Mit Rexity Labs gewinnen Sie mehr als einen Dienstleister – Sie gewinnen einen Partner, der mit Ihnen ein belastbares, EU-konformes KI-Fundament für die Zukunft aufbaut.',
-    'Our team’s experience, AI fluency, and forward-thinking mindset ensure your stack continues to evolve in line with your business ambitions.':
-      'Die Erfahrung, KI-Kompetenz und Weitsicht unseres Teams sorgen dafür, dass sich Ihr Stack im Takt Ihrer unternehmerischen Ambitionen weiterentwickelt.',
+    'Software built for ambitious teams.':
+      'Software, die ambitionierte Teams voranbringt.',
+    'Behind every great digital solution is a team that understands your business. Our engineering-led approach combines deep expertise with a focus on production-grade software that helps your team stay ahead of change.':
+      'Hinter jeder guten digitalen Lösung steht ein Team, das Ihr Unternehmen versteht. Unser technisch geführter Ansatz verbindet tiefes Fachwissen mit produktionsreifer Software, die Ihrem Team hilft, dem Wandel stets einen Schritt voraus zu sein.',
+    'We take the time to understand your goals and constraints, tailoring digital workspaces and automations that work for your people, not against them.':
+      'Wir nehmen uns die Zeit, Ihre Ziele und Rahmenbedingungen zu verstehen, und gestalten digitale Arbeitsplätze und Automatisierungen, die für Ihre Mitarbeitenden arbeiten – nicht gegen sie.',
+    'With Rexity Labs you gain more than a vendor — you gain a partner who helps you build a defensible, EU-compliant digital foundation for the long term.':
+      'Mit Rexity Labs gewinnen Sie mehr als einen Dienstleister – Sie gewinnen einen Partner, der mit Ihnen ein belastbares, EU-konformes digitales Fundament für die Zukunft aufbaut.',
+    'Our team’s experience, technical depth, and forward-thinking mindset ensure your systems continue to evolve in line with your business ambitions.':
+      'Die Erfahrung, technische Kompetenz und Weitsicht unseres Teams sorgen dafür, dass sich Ihre Systeme im Takt Ihrer unternehmerischen Ambitionen weiterentwickeln.',
     'Let’s Talk.': 'Sprechen wir.',
 
     // ---- Section intro ----
-    'AI workspaces and automation, end to end.':
-      'KI-Workspaces und Automatisierung – durchgängig.',
+    'Digital workspaces and automation, end to end.':
+      'Digitale Arbeitsplätze und Automatisierung – durchgängig.',
     'IT Solutions built to support your business today and ready for tomorrow.':
       'IT-Lösungen, die Ihr Unternehmen heute unterstützen und für morgen bereit sind.',
 
     // ---- Service cards: headings + subheadings ----
     'Website Development': 'Website-Entwicklung',
-    'Business websites and SaaS platforms, backend + frontend, AI chatbots included':
-      'Business-Websites und SaaS-Plattformen, Backend + Frontend, inklusive KI-Chatbots',
+    'Business websites and SaaS platforms, backend + frontend, smart chatbots included':
+      'Business-Websites und SaaS-Plattformen, Backend + Frontend, inklusive intelligenter Chatbots',
     'Mobile Apps.': 'Mobile Apps.',
     'iOS and Android apps designed in Figma, engineered to last (Kotlin / Swift / React Native)':
       'iOS- und Android-Apps, in Figma gestaltet, langlebig entwickelt (Kotlin / Swift / React Native)',
     'Business Process Automation': 'Geschäftsprozess-Automatisierung',
     'VoIP7 cloud receptionist, WhatsApp for Business, internal workflow automations':
       'VoIP-Cloud-Rezeption, WhatsApp for Business, interne Workflow-Automatisierungen',
-    'AI Voice & WhatsApp.': 'KI-Voice & WhatsApp.',
-    'Rexona voice assistant + WhatsApp bot — DSGVO-konform, EU-hosted, opt-out by design':
-      'Rexona Voice-Assistent + WhatsApp-Bot — DSGVO-konform, EU-gehostet, Opt-out ab Werk',
+    'Voice & WhatsApp automation.': 'Sprach- & WhatsApp-Automatisierung.',
+    'Phone and WhatsApp assistants that answer calls and enquiries around the clock — DSGVO-compliant, EU-hosted':
+      'Telefon- und WhatsApp-Assistenten, die Anrufe und Anfragen rund um die Uhr beantworten — DSGVO-konform, EU-gehostet',
     'Testing & Support.': 'Testing & Support.',
     'End-to-end QA, device and platform coverage, post-launch monitoring':
       'Durchgängige QA, Geräte- und Plattformabdeckung, Monitoring nach dem Launch',
-    'SEO & AI Video': 'SEO & KI-Video',
-    'Technical SEO that compounds + AI video marketing at scale (avatars, realistic shots, shorts)':
-      'Technisches SEO mit Zinseszinseffekt + KI-Videomarketing in großem Stil (Avatare, realistische Aufnahmen, Shorts)',
+    'SEO & Video Marketing': 'SEO & Video-Marketing',
+    'Technical SEO that compounds + video marketing at scale (avatars, realistic shots, shorts)':
+      'Technisches SEO mit Langzeitwirkung + Video-Marketing in großem Stil (Avatare, realistische Aufnahmen, Shorts)',
 
     // ---- Service card CTAs (Workspace-IT labels kept, translated faithfully) ----
     'Streamline Your Devices': 'Mehr erfahren',
@@ -97,7 +97,7 @@
       'Jede Herausforderung ist eine Chance, besser zu werden. Unser Team nutzt das Gelernte, um Lösungen zu entwickeln, die maßgeschneidert, verlässlich und auf einen reibungslosen Betrieb ausgelegt sind.',
     'With vigilant, proactive IT management, we ensure your infrastructure is secure, efficient, and always ready to support your business goals. Proactive Innovation helps you stay ahead, minimise risk, and get the most from your technology.':
       'Mit aufmerksamem, proaktivem Management sorgen wir dafür, dass Ihre Infrastruktur sicher, effizient und jederzeit bereit ist, Ihre Ziele zu unterstützen. Proaktive Innovation hält Sie vorn, minimiert Risiken und holt das Maximum aus Ihrer Technologie.',
-    'AI-native, not AI-themed.': 'KI-nativ, nicht KI-bemalt.',
+    'Results, not buzzwords.': 'Ergebnisse, keine Buzzwords.',
     'Great ideas come from different perspectives. At Rexity Labs, we believe that inclusivity drives innovation and that benefits every customer we work with.':
       'Gute Ideen entstehen aus unterschiedlichen Perspektiven. Bei Rexity Labs sind wir überzeugt, dass Vielfalt Innovation antreibt – und davon profitiert jede Kundin und jeder Kunde.',
     'Our diverse team brings a range of experiences and insights that shape creative, practical IT solutions. By working collaboratively, we find better ways to solve challenges and deliver results that truly fit each organisation.':
@@ -111,8 +111,8 @@
       'Expert:innen aus mehreren Disziplinen, die zusammenarbeiten, damit Ihre IT sicher, effizient und auf Ihre Ziele ausgerichtet bleibt.',
     'Sunny Thakur.': 'Sunny Thakur.',
     'Founder & CEO.': 'Gründer & CEO.',
-    'Sunny Thakur is the founder of Rexity Labs. He leads the company’s AI-first approach — building websites, apps, WhatsApp and voice automation, and AI video for ambitious teams. With a background spanning product, engineering and go-to-market, Sunny focuses on shipping production-grade software that is DSGVO-compliant, EU-hosted, and built to last.':
-      'Sunny Thakur ist der Gründer von Rexity Labs. Er verantwortet den AI-first-Ansatz des Unternehmens – Websites, Apps, WhatsApp- und Voice-Automatisierung sowie KI-Video für ambitionierte Teams. Mit einem Hintergrund über Produkt, Engineering und Go-to-Market hinweg konzentriert sich Sunny darauf, produktionsreife Software auszuliefern, die DSGVO-konform, EU-gehostet und auf Langlebigkeit gebaut ist.',
+    'Sunny Thakur is the founder of Rexity Labs. He leads the company’s technology-first approach — building websites, apps, WhatsApp and phone automation, and video for ambitious teams. With a background spanning product, engineering and go-to-market, Sunny focuses on shipping production-grade software that is DSGVO-compliant, EU-hosted, and built to last.':
+      'Sunny Thakur ist der Gründer von Rexity Labs. Er verantwortet den technologiegetriebenen Ansatz des Unternehmens – Websites, Apps, WhatsApp- und Telefon-Automatisierung sowie Video für ambitionierte Teams. Mit einem Hintergrund über Produkt, Engineering und Go-to-Market hinweg konzentriert sich Sunny darauf, produktionsreife Software auszuliefern, die DSGVO-konform, EU-gehostet und auf Langlebigkeit gebaut ist.',
     'Book a call': 'Termin buchen',
 
     // ---- Case study spine ----
@@ -125,9 +125,9 @@
       'Mobile App für eine deutsche GmbH — DSGVO ab dem ersten Tag.',
 
     // ---- Stack ----
-    'Built on a tested AI stack': 'Auf einem erprobten KI-Stack gebaut',
-    'We build on best-in-class cloud, AI, GPU, database and deployment platforms — the infrastructure behind everything we deliver.':
-      'Wir bauen auf erstklassige Cloud-, KI-, GPU-, Datenbank- und Deployment-Plattformen — die Infrastruktur hinter allem, was wir liefern.',
+    'Built on a proven technology stack': 'Auf einem erprobten Technologie-Stack gebaut',
+    'We build on best-in-class cloud, compute, database and deployment platforms — the infrastructure behind everything we deliver.':
+      'Wir bauen auf erstklassige Cloud-, Rechen-, Datenbank- und Deployment-Plattformen — die Infrastruktur hinter allem, was wir liefern.',
 
     // ---- Contact ----
     'Talk to Rexity Labs.': 'Sprechen Sie mit Rexity Labs.',
@@ -138,8 +138,8 @@
 
   // GSAP SplitText wraps the case-study quote word-by-word, so it can't be
   // matched as one text node. Handle it at the element level instead.
-  var QUOTE_EN = '“At Rexity Labs, we measure our success by what clients actually ship. A website, an app, a WhatsApp assistant, an AI voice agent — we build it to be fast, EU-compliant and genuinely useful, then we stay until it works in the real world.”';
-  var QUOTE_DE = '„Bei Rexity Labs messen wir unseren Erfolg daran, was unsere Kund:innen tatsächlich live bringen. Eine Website, eine App, ein WhatsApp-Assistent, ein KI-Voice-Agent – wir bauen es schnell, EU-konform und wirklich nützlich und bleiben dann an Bord, bis es in der Praxis funktioniert.“';
+  var QUOTE_EN = '“At Rexity Labs, we measure our success by what clients actually ship. A website, an app, a WhatsApp assistant, a phone assistant — we build it to be fast, EU-compliant and genuinely useful, then we stay until it works in the real world.”';
+  var QUOTE_DE = '„Bei Rexity Labs messen wir unseren Erfolg daran, was unsere Kund:innen tatsächlich live bringen. Eine Website, eine App, ein WhatsApp-Assistent, ein Telefon-Assistent – wir bauen es schnell, EU-konform und wirklich nützlich und bleiben dann an Bord, bis es in der Praxis funktioniert.“';
   var QUOTE_SEL = '#headline-4933-88, .type-fade-reveal';
 
   function getStored() {
