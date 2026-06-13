@@ -237,6 +237,96 @@
           "en": "A designer arranging UI shapes and colour swatches",
           "de": "Designer ordnet UI-Formen und Farbmuster"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Good design isn't decoration — it's the shortest path from a visitor's question to your answer. Here's how we get there.",
+          "de": "Gutes Design ist keine Dekoration — es ist der kürzeste Weg von der Frage eines Besuchers zu Ihrer Antwort. So kommen wir dorthin."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Discovery & goals",
+              "de": "Discovery & Ziele"
+            }
+          },
+          {
+            "node": {
+              "en": "Wireframes",
+              "de": "Wireframes"
+            }
+          },
+          {
+            "node": {
+              "en": "Visual design",
+              "de": "Visuelles Design"
+            }
+          },
+          {
+            "node": {
+              "en": "Prototype & review",
+              "de": "Prototyp & Review"
+            }
+          },
+          {
+            "node": {
+              "en": "Design system handoff",
+              "de": "Designsystem-Übergabe"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Discovery & goals",
+              "de": "Discovery & Ziele"
+            },
+            "body": {
+              "en": "We map your audience, content and goals before a pixel moves.",
+              "de": "Wir kartieren Zielgruppe, Inhalte und Ziele, bevor ein Pixel gesetzt wird."
+            }
+          },
+          {
+            "title": {
+              "en": "Wireframes",
+              "de": "Wireframes"
+            },
+            "body": {
+              "en": "Low-fidelity structure for every key screen, so the flow is right first.",
+              "de": "Low-Fidelity-Struktur für jeden wichtigen Screen — damit der Flow zuerst stimmt."
+            }
+          },
+          {
+            "title": {
+              "en": "Visual design",
+              "de": "Visuelles Design"
+            },
+            "body": {
+              "en": "Brand, type, colour and components — reviewable every week.",
+              "de": "Marke, Typografie, Farbe und Komponenten — jede Woche review-fähig."
+            }
+          },
+          {
+            "title": {
+              "en": "Prototype & review",
+              "de": "Prototyp & Review"
+            },
+            "body": {
+              "en": "A clickable prototype to feel the real thing before we build it.",
+              "de": "Ein klickbarer Prototyp, um das echte Gefühl zu testen, bevor wir bauen."
+            }
+          },
+          {
+            "title": {
+              "en": "Handoff",
+              "de": "Übergabe"
+            },
+            "body": {
+              "en": "A clean Figma design system the engineers build straight from.",
+              "de": "Ein sauberes Figma-Designsystem, aus dem die Entwicklung direkt baut."
+            }
+          }
+        ]
       }
     },
     {
@@ -359,6 +449,106 @@
           "en": "A developer building on a laptop",
           "de": "Entwickler arbeitet am Laptop"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "A website should be fast, findable and easy to change. We build on a proven stack so it stays that way.",
+          "de": "Eine Website sollte schnell, auffindbar und leicht änderbar sein. Wir bauen auf einem erprobten Stack, damit das so bleibt."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Architecture",
+              "de": "Architektur"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Frontend",
+                "de": "Frontend"
+              },
+              {
+                "en": "Backend",
+                "de": "Backend"
+              },
+              {
+                "en": "Integrations",
+                "de": "Integrationen"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "QA & testing",
+              "de": "QA & Tests"
+            }
+          },
+          {
+            "node": {
+              "en": "Launch",
+              "de": "Launch"
+            }
+          },
+          {
+            "node": {
+              "en": "Measure & iterate",
+              "de": "Messen & iterieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Architecture",
+              "de": "Architektur"
+            },
+            "body": {
+              "en": "We choose the stack and structure for speed, SEO and easy growth.",
+              "de": "Wir wählen Stack und Struktur für Tempo, SEO und einfaches Wachstum."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Entwicklung"
+            },
+            "body": {
+              "en": "Frontend, backend and integrations, shipped in reviewable increments.",
+              "de": "Frontend, Backend und Integrationen — in review-fähigen Schritten geliefert."
+            }
+          },
+          {
+            "title": {
+              "en": "QA",
+              "de": "QA"
+            },
+            "body": {
+              "en": "Automated and manual testing across devices and browsers.",
+              "de": "Automatisierte und manuelle Tests über Geräte und Browser hinweg."
+            }
+          },
+          {
+            "title": {
+              "en": "Launch",
+              "de": "Launch"
+            },
+            "body": {
+              "en": "We deploy with monitoring, analytics and a safe rollback path.",
+              "de": "Wir deployen mit Monitoring, Analytics und sicherem Rollback-Pfad."
+            }
+          },
+          {
+            "title": {
+              "en": "Iterate",
+              "de": "Iterieren"
+            },
+            "body": {
+              "en": "After go-live we measure, fix and keep improving.",
+              "de": "Nach dem Go-live messen, beheben und verbessern wir kontinuierlich."
+            }
+          }
+        ]
       }
     },
     {
@@ -472,6 +662,106 @@
           "en": "A laptop showing an abstract product dashboard",
           "de": "Laptop mit abstraktem Produkt-Dashboard"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Turning an idea into software people pay for is about sequencing — ship the core, learn from real users, then scale.",
+          "de": "Aus einer Idee Software zu machen, für die Menschen zahlen, ist eine Frage der Reihenfolge — den Kern ausliefern, von echten Nutzern lernen, dann skalieren."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Scope",
+              "de": "Scope"
+            }
+          },
+          {
+            "node": {
+              "en": "MVP design",
+              "de": "MVP-Design"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Auth & billing",
+                "de": "Auth & Billing"
+              },
+              {
+                "en": "Core features",
+                "de": "Kernfunktionen"
+              },
+              {
+                "en": "Admin",
+                "de": "Admin"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Beta with users",
+              "de": "Beta mit Nutzern"
+            }
+          },
+          {
+            "node": {
+              "en": "Scale & iterate",
+              "de": "Skalieren & iterieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Scope",
+              "de": "Scope"
+            },
+            "body": {
+              "en": "We define the smallest product that delivers real value.",
+              "de": "Wir definieren das kleinste Produkt, das echten Mehrwert liefert."
+            }
+          },
+          {
+            "title": {
+              "en": "Design",
+              "de": "Design"
+            },
+            "body": {
+              "en": "Flows, data model and UI for that first version.",
+              "de": "Flows, Datenmodell und UI für diese erste Version."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Entwicklung"
+            },
+            "body": {
+              "en": "Auth, billing, the core features and an admin layer.",
+              "de": "Auth, Billing, die Kernfunktionen und eine Admin-Ebene."
+            }
+          },
+          {
+            "title": {
+              "en": "Beta",
+              "de": "Beta"
+            },
+            "body": {
+              "en": "Ship to real users, gather feedback, fix fast.",
+              "de": "An echte Nutzer ausliefern, Feedback sammeln, schnell beheben."
+            }
+          },
+          {
+            "title": {
+              "en": "Scale",
+              "de": "Skalieren"
+            },
+            "body": {
+              "en": "Add features and harden the platform for growth.",
+              "de": "Funktionen ergänzen und die Plattform für Wachstum härten."
+            }
+          }
+        ]
       }
     },
     {
@@ -585,6 +875,106 @@
           "en": "Hands holding a phone with an app screen",
           "de": "Hände halten ein Smartphone mit App-Screen"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "A good app feels native, ships to both stores, and keeps working after launch. Here's the path.",
+          "de": "Eine gute App fühlt sich nativ an, erscheint in beiden Stores und funktioniert auch nach dem Launch. So gehen wir vor."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Design",
+              "de": "Design"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "iOS",
+                "de": "iOS"
+              },
+              {
+                "en": "Android",
+                "de": "Android"
+              },
+              {
+                "en": "Shared backend",
+                "de": "Gemeinsames Backend"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Device testing",
+              "de": "Geräte-Tests"
+            }
+          },
+          {
+            "node": {
+              "en": "Store submission",
+              "de": "Store-Einreichung"
+            }
+          },
+          {
+            "node": {
+              "en": "Updates & upkeep",
+              "de": "Updates & Pflege"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Design",
+              "de": "Design"
+            },
+            "body": {
+              "en": "Native-feeling UX, designed in Figma.",
+              "de": "Nativ wirkende UX, gestaltet in Figma."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Entwicklung"
+            },
+            "body": {
+              "en": "iOS and Android (Kotlin / Swift / React Native) on a shared backend.",
+              "de": "iOS und Android (Kotlin / Swift / React Native) auf einem gemeinsamen Backend."
+            }
+          },
+          {
+            "title": {
+              "en": "Test",
+              "de": "Test"
+            },
+            "body": {
+              "en": "Real-device testing for performance and stability.",
+              "de": "Tests auf echten Geräten für Performance und Stabilität."
+            }
+          },
+          {
+            "title": {
+              "en": "Publish",
+              "de": "Veröffentlichen"
+            },
+            "body": {
+              "en": "App Store and Play Store submission handled end to end.",
+              "de": "App-Store- und Play-Store-Einreichung — durchgängig betreut."
+            }
+          },
+          {
+            "title": {
+              "en": "Maintain",
+              "de": "Pflege"
+            },
+            "body": {
+              "en": "Updates, monitoring and OS-version upkeep.",
+              "de": "Updates, Monitoring und Pflege neuer OS-Versionen."
+            }
+          }
+        ]
       }
     },
     {
@@ -696,6 +1086,96 @@
           "en": "A wall monitor of abstract charts",
           "de": "Wandmonitor mit abstrakten Diagrammen"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "A dashboard is only useful if the numbers are trustworthy and the view answers a real question. That's what we build.",
+          "de": "Ein Dashboard ist nur nützlich, wenn die Zahlen vertrauenswürdig sind und die Ansicht eine echte Frage beantwortet. Genau das bauen wir."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Connect sources",
+              "de": "Quellen verbinden"
+            }
+          },
+          {
+            "node": {
+              "en": "Model & clean",
+              "de": "Modellieren & bereinigen"
+            }
+          },
+          {
+            "node": {
+              "en": "Design views",
+              "de": "Ansichten gestalten"
+            }
+          },
+          {
+            "node": {
+              "en": "Build dashboard",
+              "de": "Dashboard bauen"
+            }
+          },
+          {
+            "node": {
+              "en": "Automate refresh & alerts",
+              "de": "Aktualisierung & Alerts automatisieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Connect",
+              "de": "Verbinden"
+            },
+            "body": {
+              "en": "We plug into your data — databases, sheets and APIs.",
+              "de": "Wir binden Ihre Daten an — Datenbanken, Sheets und APIs."
+            }
+          },
+          {
+            "title": {
+              "en": "Model",
+              "de": "Modellieren"
+            },
+            "body": {
+              "en": "Clean and structure it so the numbers can be trusted.",
+              "de": "Bereinigen und strukturieren, damit den Zahlen zu trauen ist."
+            }
+          },
+          {
+            "title": {
+              "en": "Design",
+              "de": "Gestalten"
+            },
+            "body": {
+              "en": "The few views that actually drive decisions.",
+              "de": "Die wenigen Ansichten, die wirklich Entscheidungen treiben."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Bauen"
+            },
+            "body": {
+              "en": "Interactive, fast, role-based dashboards.",
+              "de": "Interaktive, schnelle, rollenbasierte Dashboards."
+            }
+          },
+          {
+            "title": {
+              "en": "Automate",
+              "de": "Automatisieren"
+            },
+            "body": {
+              "en": "Scheduled refresh and threshold alerts.",
+              "de": "Geplante Aktualisierung und Schwellenwert-Alerts."
+            }
+          }
+        ]
       }
     },
     {
@@ -841,6 +1321,102 @@
           "en": "Documents being sorted automatically",
           "de": "Dokumente werden automatisch sortiert"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Automation pays off when it's pointed at the right work and watched closely. We map first, automate the repetitive parts, and keep a human on the exceptions.",
+          "de": "Automatisierung zahlt sich aus, wenn sie auf die richtige Arbeit gerichtet und genau überwacht wird. Wir kartieren zuerst, automatisieren das Wiederkehrende und behalten den Menschen bei Ausnahmen."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Map the process",
+              "de": "Prozess kartieren"
+            }
+          },
+          {
+            "node": {
+              "en": "Pick steps to automate",
+              "de": "Schritte auswählen"
+            }
+          },
+          {
+            "node": {
+              "en": "Build the bot",
+              "de": "Bot bauen"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Happy path",
+                "de": "Normalfall"
+              },
+              {
+                "en": "Exceptions to a human",
+                "de": "Ausnahmen an Menschen"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Run, monitor, audit",
+              "de": "Laufen, überwachen, protokollieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Map",
+              "de": "Kartieren"
+            },
+            "body": {
+              "en": "We document the current manual process end to end.",
+              "de": "Wir dokumentieren den aktuellen manuellen Prozess von A bis Z."
+            }
+          },
+          {
+            "title": {
+              "en": "Target",
+              "de": "Auswählen"
+            },
+            "body": {
+              "en": "Pick the high-volume, rule-based steps worth automating.",
+              "de": "Die häufigen, regelbasierten Schritte auswählen, die sich lohnen."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Bauen"
+            },
+            "body": {
+              "en": "A bot that moves data between your systems reliably.",
+              "de": "Ein Bot, der Daten zuverlässig zwischen Ihren Systemen bewegt."
+            }
+          },
+          {
+            "title": {
+              "en": "Validate",
+              "de": "Validieren"
+            },
+            "body": {
+              "en": "Test happy paths and exceptions; people handle the edge cases.",
+              "de": "Normalfälle und Ausnahmen testen; Sonderfälle übernehmen Menschen."
+            }
+          },
+          {
+            "title": {
+              "en": "Run",
+              "de": "Betrieb"
+            },
+            "body": {
+              "en": "Scheduled runs with monitoring and a full audit trail.",
+              "de": "Geplante Läufe mit Monitoring und vollständigem Audit-Trail."
+            }
+          }
+        ]
       }
     },
     {
@@ -1175,6 +1751,104 @@
           "en": "A headset and microphone with sound-wave light",
           "de": "Headset und Mikrofon mit Schallwellen-Licht"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Every call gets answered, the right things happen automatically, and anything sensitive reaches a human — with the full context.",
+          "de": "Jeder Anruf wird angenommen, das Richtige passiert automatisch, und alles Sensible erreicht einen Menschen — mit dem vollen Kontext."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Call comes in",
+              "de": "Anruf kommt rein"
+            }
+          },
+          {
+            "node": {
+              "en": "Speech to intent",
+              "de": "Sprache zu Absicht"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Answer FAQ",
+                "de": "FAQ beantworten"
+              },
+              {
+                "en": "Route to team",
+                "de": "Ans Team leiten"
+              },
+              {
+                "en": "Book appointment",
+                "de": "Termin buchen"
+              },
+              {
+                "en": "Take a message",
+                "de": "Nachricht aufnehmen"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Log & notify",
+              "de": "Protokollieren & benachrichtigen"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Call in",
+              "de": "Anruf"
+            },
+            "body": {
+              "en": "Inbound calls are answered instantly, around the clock.",
+              "de": "Eingehende Anrufe werden sofort angenommen — rund um die Uhr."
+            }
+          },
+          {
+            "title": {
+              "en": "Understand",
+              "de": "Verstehen"
+            },
+            "body": {
+              "en": "The assistant turns speech into a clear intent.",
+              "de": "Der Assistent macht aus Sprache eine klare Absicht."
+            }
+          },
+          {
+            "title": {
+              "en": "Act",
+              "de": "Handeln"
+            },
+            "body": {
+              "en": "It answers common questions, routes, or books a slot.",
+              "de": "Er beantwortet häufige Fragen, leitet weiter oder bucht einen Termin."
+            }
+          },
+          {
+            "title": {
+              "en": "Handoff",
+              "de": "Übergabe"
+            },
+            "body": {
+              "en": "Complex calls reach the right person with context.",
+              "de": "Komplexe Anrufe erreichen die richtige Person — mit Kontext."
+            }
+          },
+          {
+            "title": {
+              "en": "Log",
+              "de": "Protokoll"
+            },
+            "body": {
+              "en": "Every call is summarised in your CRM.",
+              "de": "Jeder Anruf wird in Ihrem CRM zusammengefasst."
+            }
+          }
+        ]
       }
     },
     {
@@ -1285,6 +1959,100 @@
           "en": "A laptop with an abstract chat interface",
           "de": "Laptop mit abstrakter Chat-Oberfläche"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "A website assistant should answer from your content, capture interest, and know when to step aside for a human.",
+          "de": "Ein Website-Assistent sollte aus Ihren Inhalten antworten, Interesse erfassen und wissen, wann er einem Menschen Platz macht."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Visitor asks",
+              "de": "Besucher fragt"
+            }
+          },
+          {
+            "node": {
+              "en": "Retrieve from your content",
+              "de": "Aus Ihren Inhalten abrufen"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Answer",
+                "de": "Antworten"
+              },
+              {
+                "en": "Capture lead",
+                "de": "Lead erfassen"
+              },
+              {
+                "en": "Hand to a human",
+                "de": "An Mensch übergeben"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Log conversation",
+              "de": "Gespräch protokollieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Ask",
+              "de": "Fragen"
+            },
+            "body": {
+              "en": "A visitor asks in plain language on your site.",
+              "de": "Ein Besucher fragt in normaler Sprache auf Ihrer Site."
+            }
+          },
+          {
+            "title": {
+              "en": "Retrieve",
+              "de": "Abrufen"
+            },
+            "body": {
+              "en": "The assistant answers only from your approved content.",
+              "de": "Der Assistent antwortet ausschließlich aus Ihren freigegebenen Inhalten."
+            }
+          },
+          {
+            "title": {
+              "en": "Act",
+              "de": "Handeln"
+            },
+            "body": {
+              "en": "It answers, captures the lead, or escalates.",
+              "de": "Er antwortet, erfasst den Lead oder eskaliert."
+            }
+          },
+          {
+            "title": {
+              "en": "Escalate",
+              "de": "Eskalieren"
+            },
+            "body": {
+              "en": "Hard questions go to your team with context.",
+              "de": "Schwierige Fragen gehen mit Kontext an Ihr Team."
+            }
+          },
+          {
+            "title": {
+              "en": "Log",
+              "de": "Protokoll"
+            },
+            "body": {
+              "en": "Conversations and leads land in your CRM.",
+              "de": "Gespräche und Leads landen in Ihrem CRM."
+            }
+          }
+        ]
       }
     },
     {
@@ -1429,6 +2197,96 @@
           "en": "A laptop with a rising graph and magnifier",
           "de": "Laptop mit steigender Kurve und Lupe"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Rankings follow when the technical base is solid, the content matches real intent, and you keep improving on the data.",
+          "de": "Rankings folgen, wenn die technische Basis stimmt, die Inhalte zur echten Suchabsicht passen und man anhand der Daten weiter verbessert."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Audit",
+              "de": "Audit"
+            }
+          },
+          {
+            "node": {
+              "en": "Keyword & topic map",
+              "de": "Keyword- & Themen-Map"
+            }
+          },
+          {
+            "node": {
+              "en": "On-page + technical fixes",
+              "de": "On-Page- & Technik-Fixes"
+            }
+          },
+          {
+            "node": {
+              "en": "Content",
+              "de": "Content"
+            }
+          },
+          {
+            "node": {
+              "en": "Measure & iterate",
+              "de": "Messen & iterieren"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Audit",
+              "de": "Audit"
+            },
+            "body": {
+              "en": "We find what's holding rankings back — technical and content.",
+              "de": "Wir finden, was Rankings bremst — technisch und inhaltlich."
+            }
+          },
+          {
+            "title": {
+              "en": "Map",
+              "de": "Map"
+            },
+            "body": {
+              "en": "Keyword and topic clusters tied to real search intent.",
+              "de": "Keyword- und Themencluster, an echter Suchabsicht ausgerichtet."
+            }
+          },
+          {
+            "title": {
+              "en": "Fix",
+              "de": "Beheben"
+            },
+            "body": {
+              "en": "On-page and technical work — speed, structure, schema.",
+              "de": "On-Page- und Technik-Arbeit — Tempo, Struktur, Schema."
+            }
+          },
+          {
+            "title": {
+              "en": "Content",
+              "de": "Content"
+            },
+            "body": {
+              "en": "Pages that genuinely answer the queries that matter.",
+              "de": "Seiten, die die relevanten Fragen wirklich beantworten."
+            }
+          },
+          {
+            "title": {
+              "en": "Measure",
+              "de": "Messen"
+            },
+            "body": {
+              "en": "Track rankings and traffic, then double down on winners.",
+              "de": "Rankings und Traffic verfolgen, dann auf Gewinner setzen."
+            }
+          }
+        ]
       }
     },
     {
@@ -1540,6 +2398,96 @@
           "en": "A content creator's desk flat-lay",
           "de": "Schreibtisch-Flat-Lay einer Content-Creatorin"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Consistent, on-brand content beats occasional bursts. We plan it, make it, and learn from what lands.",
+          "de": "Konsistenter, markentreuer Content schlägt gelegentliche Ausbrüche. Wir planen ihn, erstellen ihn und lernen aus dem, was ankommt."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Strategy",
+              "de": "Strategie"
+            }
+          },
+          {
+            "node": {
+              "en": "Plan calendar",
+              "de": "Kalender planen"
+            }
+          },
+          {
+            "node": {
+              "en": "Create",
+              "de": "Erstellen"
+            }
+          },
+          {
+            "node": {
+              "en": "Publish across channels",
+              "de": "Über Kanäle veröffentlichen"
+            }
+          },
+          {
+            "node": {
+              "en": "Measure & repurpose",
+              "de": "Messen & wiederverwerten"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Strategy",
+              "de": "Strategie"
+            },
+            "body": {
+              "en": "Themes and channels aligned to your audience.",
+              "de": "Themen und Kanäle, auf Ihre Zielgruppe abgestimmt."
+            }
+          },
+          {
+            "title": {
+              "en": "Plan",
+              "de": "Planen"
+            },
+            "body": {
+              "en": "A calendar so output is consistent, not ad-hoc.",
+              "de": "Ein Kalender, damit Output konsistent statt zufällig ist."
+            }
+          },
+          {
+            "title": {
+              "en": "Create",
+              "de": "Erstellen"
+            },
+            "body": {
+              "en": "Posts, articles and assets in your voice.",
+              "de": "Posts, Artikel und Assets in Ihrer Tonalität."
+            }
+          },
+          {
+            "title": {
+              "en": "Publish",
+              "de": "Veröffentlichen"
+            },
+            "body": {
+              "en": "Scheduled across the right channels.",
+              "de": "Geplant über die richtigen Kanäle."
+            }
+          },
+          {
+            "title": {
+              "en": "Measure",
+              "de": "Messen"
+            },
+            "body": {
+              "en": "See what resonates and repurpose the winners.",
+              "de": "Sehen, was ankommt, und Gewinner wiederverwerten."
+            }
+          }
+        ]
       }
     },
     {
@@ -1652,6 +2600,96 @@
           "en": "A small video studio with camera and light",
           "de": "Kleines Videostudio mit Kamera und Licht"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "A short, well-made video earns attention. We take your message from script to the formats each platform needs.",
+          "de": "Ein kurzes, gut gemachtes Video gewinnt Aufmerksamkeit. Wir bringen Ihre Botschaft vom Skript in die Formate, die jede Plattform braucht."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Concept & script",
+              "de": "Konzept & Skript"
+            }
+          },
+          {
+            "node": {
+              "en": "Produce",
+              "de": "Produktion"
+            }
+          },
+          {
+            "node": {
+              "en": "Edit & brand",
+              "de": "Schnitt & Branding"
+            }
+          },
+          {
+            "node": {
+              "en": "Publish & distribute",
+              "de": "Veröffentlichen & verteilen"
+            }
+          },
+          {
+            "node": {
+              "en": "Measure",
+              "de": "Messen"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Concept",
+              "de": "Konzept"
+            },
+            "body": {
+              "en": "We turn your message into a short, watchable script.",
+              "de": "Wir machen aus Ihrer Botschaft ein kurzes, sehenswertes Skript."
+            }
+          },
+          {
+            "title": {
+              "en": "Produce",
+              "de": "Produktion"
+            },
+            "body": {
+              "en": "Footage or generated visuals, on brand.",
+              "de": "Aufnahmen oder generierte Visuals — markentreu."
+            }
+          },
+          {
+            "title": {
+              "en": "Edit",
+              "de": "Schnitt"
+            },
+            "body": {
+              "en": "Cut, caption and brand for each platform.",
+              "de": "Schneiden, untertiteln und branden für jede Plattform."
+            }
+          },
+          {
+            "title": {
+              "en": "Distribute",
+              "de": "Verteilen"
+            },
+            "body": {
+              "en": "Published in the right formats and aspect ratios.",
+              "de": "Veröffentlicht in den richtigen Formaten und Seitenverhältnissen."
+            }
+          },
+          {
+            "title": {
+              "en": "Measure",
+              "de": "Messen"
+            },
+            "body": {
+              "en": "Track views and engagement, iterate on the hooks.",
+              "de": "Views und Engagement verfolgen, die Hooks iterieren."
+            }
+          }
+        ]
       }
     },
     {
@@ -1765,6 +2803,96 @@
           "en": "A corporate boardroom with an abstract network screen",
           "de": "Boardroom mit abstraktem Netzwerk-Screen"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Agentic workflows can run real SAP steps — but only behind your controls, approvals and a full log. Safety first.",
+          "de": "Agentische Workflows können echte SAP-Schritte ausführen — aber nur hinter Ihren Kontrollen, Freigaben und einem vollständigen Log. Sicherheit zuerst."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Discover the process",
+              "de": "Prozess erfassen"
+            }
+          },
+          {
+            "node": {
+              "en": "Connect SAP securely",
+              "de": "SAP sicher anbinden"
+            }
+          },
+          {
+            "node": {
+              "en": "Build agent workflow",
+              "de": "Agent-Workflow bauen"
+            }
+          },
+          {
+            "node": {
+              "en": "Validate against controls",
+              "de": "Gegen Kontrollen prüfen"
+            }
+          },
+          {
+            "node": {
+              "en": "Deploy & monitor",
+              "de": "Deployen & überwachen"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Discover",
+              "de": "Erfassen"
+            },
+            "body": {
+              "en": "We map the SAP process and the manual steps around it.",
+              "de": "Wir kartieren den SAP-Prozess und die manuellen Schritte drumherum."
+            }
+          },
+          {
+            "title": {
+              "en": "Connect",
+              "de": "Anbinden"
+            },
+            "body": {
+              "en": "Secure, permissioned access to your SAP systems.",
+              "de": "Sicherer, berechtigter Zugang zu Ihren SAP-Systemen."
+            }
+          },
+          {
+            "title": {
+              "en": "Build",
+              "de": "Bauen"
+            },
+            "body": {
+              "en": "An agentic workflow that executes steps within guardrails.",
+              "de": "Ein agentischer Workflow, der Schritte innerhalb von Leitplanken ausführt."
+            }
+          },
+          {
+            "title": {
+              "en": "Validate",
+              "de": "Prüfen"
+            },
+            "body": {
+              "en": "Tested against controls and approvals — nothing runs unchecked.",
+              "de": "Gegen Kontrollen und Freigaben getestet — nichts läuft ungeprüft."
+            }
+          },
+          {
+            "title": {
+              "en": "Deploy",
+              "de": "Deployen"
+            },
+            "body": {
+              "en": "Go live with monitoring, logging and human oversight.",
+              "de": "Go-live mit Monitoring, Logging und menschlicher Aufsicht."
+            }
+          }
+        ]
       }
     },
     {
@@ -1875,6 +3003,102 @@
           "en": "A support engineer at a clean helpdesk",
           "de": "Support-Engineer an einem aufgeräumten Helpdesk"
         }
+      },
+      "workflow": {
+        "intro": {
+          "en": "Good support is a loop: reproduce, fix at the root, verify, and prevent the next one — not just close the ticket.",
+          "de": "Guter Support ist ein Kreislauf: reproduzieren, an der Wurzel beheben, verifizieren und den nächsten Fall verhindern — nicht nur das Ticket schließen."
+        },
+        "flow": [
+          {
+            "node": {
+              "en": "Triage & reproduce",
+              "de": "Triage & reproduzieren"
+            }
+          },
+          {
+            "node": {
+              "en": "Diagnose root cause",
+              "de": "Ursache diagnostizieren"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Fix",
+                "de": "Beheben"
+              },
+              {
+                "en": "Escalate with context",
+                "de": "Mit Kontext eskalieren"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Verify",
+              "de": "Verifizieren"
+            }
+          },
+          {
+            "node": {
+              "en": "Monitor & prevent",
+              "de": "Überwachen & vorbeugen"
+            }
+          }
+        ],
+        "steps": [
+          {
+            "title": {
+              "en": "Triage",
+              "de": "Triage"
+            },
+            "body": {
+              "en": "Issues are logged, reproduced and prioritised.",
+              "de": "Probleme werden erfasst, reproduziert und priorisiert."
+            }
+          },
+          {
+            "title": {
+              "en": "Diagnose",
+              "de": "Diagnose"
+            },
+            "body": {
+              "en": "We find the root cause, not just the symptom.",
+              "de": "Wir finden die Ursache, nicht nur das Symptom."
+            }
+          },
+          {
+            "title": {
+              "en": "Fix",
+              "de": "Beheben"
+            },
+            "body": {
+              "en": "Resolve it, or escalate with full context.",
+              "de": "Beheben — oder mit vollem Kontext eskalieren."
+            }
+          },
+          {
+            "title": {
+              "en": "Verify",
+              "de": "Verifizieren"
+            },
+            "body": {
+              "en": "Confirm the fix and add a test so it stays fixed.",
+              "de": "Fix bestätigen und einen Test ergänzen, damit es behoben bleibt."
+            }
+          },
+          {
+            "title": {
+              "en": "Prevent",
+              "de": "Vorbeugen"
+            },
+            "body": {
+              "en": "Monitoring and checks to catch the next one early.",
+              "de": "Monitoring und Checks, um den nächsten Fall früh zu erkennen."
+            }
+          }
+        ]
       }
     }
   ]
