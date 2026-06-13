@@ -157,13 +157,39 @@ function leafBody(p) {
   return sections.join("\n");
 }
 
+function indexBody() {
+  const sections = data.nav
+    .map((n) => {
+      const hub = byslug[n.slug];
+      const kids = n.children.length ? n.children : [n.slug];
+      const cards = kids
+        .map((slug) => {
+          const c = byslug[slug];
+          return `<a class="rx-card" href="${urlOf(c)}">
+        <span class="rx-card-code">${esc(c.code)}</span>
+        ${t(c.title, "h3", "")}
+        ${t(c.tagline, "p", "")}
+        <span class="rx-card-go" data-en="Learn more →" data-de="Mehr erfahren →">Mehr erfahren →</span>
+      </a>`;
+        })
+        .join("");
+      const heading = n.children.length
+        ? `<a class="rx-cat-h" href="${urlOf(hub)}">${t(hub.title, "h2", "")}<span class="rx-cat-go" data-en="View all →" data-de="Alle ansehen →">Alle ansehen →</span></a>`
+        : "";
+      return `<section class="rx-cat">${heading}<div class="rx-grid rx-grid-tight">${cards}</div></section>`;
+    })
+    .join("");
+  return sections;
+}
+
 function renderPage(p) {
   const isHub = p.type === "hub";
-  const body = isHub ? childCards(p) : leafBody(p);
+  const isIndex = p.type === "index";
+  const body = isIndex ? indexBody() : isHub ? childCards(p) : leafBody(p);
   const crumb = p.parent
-    ? `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/${p.parent}">${esc(byslug[p.parent].title.de)}</a> / <span>${esc(p.title.de)}</span></nav>`
-    : `<nav class="rx-crumb"><a href="/">Home</a> / <span>${esc(p.title.de)}</span></nav>`;
-  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub)}${body}</main>${tail()}`;
+    ? `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/${p.parent}">${tText(byslug[p.parent].title)}</a> / ${tText(p.title)}</nav>`
+    : `<nav class="rx-crumb"><a href="/">Home</a> / ${tText(p.title)}</nav>`;
+  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub || isIndex)}${body}</main>${tail()}`;
 }
 
 // ============================================================================
@@ -230,6 +256,13 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq p{margin:0;color:var(--muted)}
 .rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
 .rx-rel:hover{border-color:var(--red)}
+/* services index */
+.rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
+.rx-cat:last-of-type{border-bottom:0}
+.rx-cat-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.rx-cat-h h2{font-size:clamp(22px,3vw,30px);font-weight:700}
+.rx-cat-go{font-size:14px;font-weight:600;color:var(--red);white-space:nowrap}
+.rx-grid-tight{padding:0 0 8px}
 /* cta */
 .rx-cta{max-width:var(--maxw);margin:0 auto;padding:64px 24px;text-align:center}
 .rx-cta h2{font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:12px}

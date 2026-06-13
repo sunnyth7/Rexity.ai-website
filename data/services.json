@@ -14,6 +14,19 @@
   ],
   "pages": [
     {
+      "slug": "services", "type": "index", "code": "00",
+      "title": { "en": "Services", "de": "Leistungen" },
+      "tagline": { "en": "Everything we build, in one place.", "de": "Alles, was wir bauen — an einem Ort." },
+      "summary": {
+        "en": "Software, automation and growth, built by Rexity Labs. Browse every service and pick where to start.",
+        "de": "Software, Automatisierung und Wachstum — gebaut von Rexity Labs. Durchstöbern Sie alle Leistungen und wählen Sie, wo Sie starten."
+      },
+      "hero": {
+        "en": "From websites and apps to automation, marketing and enterprise SAP workflows — here's everything we do.",
+        "de": "Von Websites und Apps über Automatisierung und Marketing bis zu Enterprise-SAP-Workflows — hier ist alles, was wir tun."
+      }
+    },
+    {
       "slug": "web", "type": "hub", "code": "01",
       "title": { "en": "Web & Apps", "de": "Web & Apps" },
       "tagline": { "en": "Digital products people trust on the first click.", "de": "Digitale Produkte, denen man beim ersten Klick vertraut." },
