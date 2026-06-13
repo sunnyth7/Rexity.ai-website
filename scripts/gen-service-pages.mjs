@@ -100,6 +100,14 @@ function list(bi) {
 // Hero media: real photo if the file is on disk, else a branded placeholder
 // (so layout holds while WAN images are pending). Returns "" when no image.
 function heroMedia(p) {
+  // A looping muted video showcase takes priority (e.g. the MacBook M5 clip).
+  if (p.video) {
+    const alt = p.video.alt ? esc(p.video.alt.de) : "";
+    const poster = p.video.poster ? ` poster="${esc(p.video.poster)}"` : "";
+    const webm = p.video.webm ? `<source src="${esc(p.video.webm)}" type="video/webm">` : "";
+    const mp4 = p.video.mp4 ? `<source src="${esc(p.video.mp4)}" type="video/mp4">` : "";
+    return `<div class="rx-hero-media rx-hero-video"><video autoplay muted loop playsinline preload="metadata"${poster} aria-label="${alt}">${webm}${mp4}</video></div>`;
+  }
   if (!p.image) return "";
   const onDisk = existsSync(join(ROOT, p.image.src.replace(/^\//, "")));
   if (onDisk) {
@@ -320,6 +328,8 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
 .rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
 .rx-hero-media img{display:block;width:100%;height:100%;object-fit:cover}
+.rx-hero-video{aspect-ratio:16/9;background:#0c0c0d;border-color:#1d1d1f}
+.rx-hero-video video{display:block;width:100%;height:100%;object-fit:cover}
 .rx-hero-ph{display:grid;place-items:center;background:linear-gradient(135deg,#fff,#f0efe9 55%,#ffe9e9);position:relative}
 .rx-hero-ph span{position:relative;z-index:1;font:700 12px/1 Inter,sans-serif;letter-spacing:.2em;color:var(--red);border:1px solid var(--line);background:rgba(255,255,255,.7);padding:8px 14px;border-radius:999px}
 .rx-hero-ph:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(255,45,45,.12),transparent 60%)}

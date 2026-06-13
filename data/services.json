@@ -541,6 +541,15 @@
             }
           }
         ]
+      },
+      "video": {
+        "mp4": "/rexity-omi/assets/it/showcase/macbook-m5.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/macbook-m5.webm",
+        "poster": "/rexity-omi/assets/it/showcase/macbook-m5-poster.jpg",
+        "alt": {
+          "en": "A MacBook product build we developed",
+          "de": "Ein von uns entwickeltes MacBook-Produkt-Build"
+        }
       }
     },
     {
