@@ -3,20 +3,81 @@
   "brand": {
     "name": "Rexity Labs",
     "email": "hello@rexity.ai",
-    "tagline": { "en": "Software, automation and growth, built by Rexity Labs.", "de": "Software, Automatisierung und Wachstum — gebaut von Rexity Labs." }
+    "tagline": {
+      "en": "Software, automation and growth, built by Rexity Labs.",
+      "de": "Software, Automatisierung und Wachstum — gebaut von Rexity Labs."
+    }
   },
   "nav": [
-    { "slug": "web", "title": { "en": "Web & Apps", "de": "Web & Apps" }, "children": ["web-design", "web-development", "saas", "mobile-apps", "dashboards"] },
-    { "slug": "automation", "title": { "en": "Automation", "de": "Automatisierung" }, "children": ["rpa", "whatsapp", "voice", "chatbots"] },
-    { "slug": "marketing", "title": { "en": "Marketing", "de": "Marketing" }, "children": ["seo", "content", "video"] },
-    { "slug": "sap", "title": { "en": "SAP Agentic", "de": "SAP Agentic" }, "children": [] },
-    { "slug": "testing-support", "title": { "en": "Testing & Support", "de": "Testing & Support" }, "children": [] }
+    {
+      "slug": "web",
+      "title": {
+        "en": "Web & Apps",
+        "de": "Web & Apps"
+      },
+      "children": [
+        "web-design",
+        "web-development",
+        "saas",
+        "mobile-apps",
+        "dashboards"
+      ]
+    },
+    {
+      "slug": "automation",
+      "title": {
+        "en": "Automation",
+        "de": "Automatisierung"
+      },
+      "children": [
+        "rpa",
+        "whatsapp",
+        "voice",
+        "chatbots"
+      ]
+    },
+    {
+      "slug": "marketing",
+      "title": {
+        "en": "Marketing",
+        "de": "Marketing"
+      },
+      "children": [
+        "seo",
+        "content",
+        "video"
+      ]
+    },
+    {
+      "slug": "sap",
+      "title": {
+        "en": "SAP Agentic",
+        "de": "SAP Agentic"
+      },
+      "children": []
+    },
+    {
+      "slug": "testing-support",
+      "title": {
+        "en": "Testing & Support",
+        "de": "Testing & Support"
+      },
+      "children": []
+    }
   ],
   "pages": [
     {
-      "slug": "services", "type": "index", "code": "00",
-      "title": { "en": "Services", "de": "Leistungen" },
-      "tagline": { "en": "Everything we build, in one place.", "de": "Alles, was wir bauen — an einem Ort." },
+      "slug": "services",
+      "type": "index",
+      "code": "00",
+      "title": {
+        "en": "Services",
+        "de": "Leistungen"
+      },
+      "tagline": {
+        "en": "Everything we build, in one place.",
+        "de": "Alles, was wir bauen — an einem Ort."
+      },
       "summary": {
         "en": "Software, automation and growth, built by Rexity Labs. Browse every service and pick where to start.",
         "de": "Software, Automatisierung und Wachstum — gebaut von Rexity Labs. Durchstöbern Sie alle Leistungen und wählen Sie, wo Sie starten."
@@ -24,12 +85,27 @@
       "hero": {
         "en": "From websites and apps to automation, marketing and enterprise SAP workflows — here's everything we do.",
         "de": "Von Websites und Apps über Automatisierung und Marketing bis zu Enterprise-SAP-Workflows — hier ist alles, was wir tun."
+      },
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-services.jpg",
+        "alt": {
+          "en": "A modern studio workspace overview",
+          "de": "Überblick über einen modernen Studio-Arbeitsplatz"
+        }
       }
     },
     {
-      "slug": "web", "type": "hub", "code": "01",
-      "title": { "en": "Web & Apps", "de": "Web & Apps" },
-      "tagline": { "en": "Digital products people trust on the first click.", "de": "Digitale Produkte, denen man beim ersten Klick vertraut." },
+      "slug": "web",
+      "type": "hub",
+      "code": "01",
+      "title": {
+        "en": "Web & Apps",
+        "de": "Web & Apps"
+      },
+      "tagline": {
+        "en": "Digital products people trust on the first click.",
+        "de": "Digitale Produkte, denen man beim ersten Klick vertraut."
+      },
       "summary": {
         "en": "From a marketing site to a full SaaS platform or a native app — we design, build and ship the digital products that carry your business.",
         "de": "Von der Marketing-Site bis zur kompletten SaaS-Plattform oder nativen App — wir gestalten, bauen und liefern die digitalen Produkte, die Ihr Geschäft tragen."
@@ -38,154 +114,602 @@
         "en": "Websites, SaaS platforms, mobile apps and dashboards — designed and engineered end to end. Pick a discipline below.",
         "de": "Websites, SaaS-Plattformen, Mobile Apps und Dashboards — durchgängig gestaltet und entwickelt. Wählen Sie unten eine Disziplin."
       },
-      "children": ["web-design", "web-development", "saas", "mobile-apps", "dashboards"]
+      "children": [
+        "web-design",
+        "web-development",
+        "saas",
+        "mobile-apps",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-web.jpg",
+        "alt": {
+          "en": "A designer-developer workspace",
+          "de": "Ein Design- und Entwicklungs-Arbeitsplatz"
+        }
+      }
     },
     {
-      "slug": "web-design", "type": "leaf", "parent": "web", "code": "01.1",
-      "title": { "en": "Web Design", "de": "Webdesign" },
-      "tagline": { "en": "Interfaces that feel obvious.", "de": "Oberflächen, die sich selbst erklären." },
+      "slug": "web-design",
+      "type": "leaf",
+      "parent": "web",
+      "code": "01.1",
+      "title": {
+        "en": "Web Design",
+        "de": "Webdesign"
+      },
+      "tagline": {
+        "en": "Interfaces that feel obvious.",
+        "de": "Oberflächen, die sich selbst erklären."
+      },
       "summary": {
         "en": "Brand-true, responsive design that turns first-time visitors into customers — wireframes to a polished design system, built in Figma.",
         "de": "Markentreues, responsives Design, das Erstbesucher zu Kunden macht — von Wireframes bis zum fertigen Designsystem, gebaut in Figma."
       },
       "offerings": {
-        "en": ["UX research and wireframes", "Visual and brand design", "Responsive design systems in Figma", "Design-to-build handoff"],
-        "de": ["UX-Recherche und Wireframes", "Visuelles und Marken-Design", "Responsive Designsysteme in Figma", "Design-to-Build-Übergabe"]
+        "en": [
+          "UX research and wireframes",
+          "Visual and brand design",
+          "Responsive design systems in Figma",
+          "Design-to-build handoff"
+        ],
+        "de": [
+          "UX-Recherche und Wireframes",
+          "Visuelles und Marken-Design",
+          "Responsive Designsysteme in Figma",
+          "Design-to-Build-Übergabe"
+        ]
       },
       "outcomes": {
-        "en": ["A look that earns trust instantly", "Layouts that work on every screen", "A design system the build can reuse"],
-        "de": ["Ein Auftritt, der sofort Vertrauen schafft", "Layouts, die auf jedem Bildschirm funktionieren", "Ein Designsystem, das die Entwicklung wiederverwendet"]
+        "en": [
+          "A look that earns trust instantly",
+          "Layouts that work on every screen",
+          "A design system the build can reuse"
+        ],
+        "de": [
+          "Ein Auftritt, der sofort Vertrauen schafft",
+          "Layouts, die auf jedem Bildschirm funktionieren",
+          "Ein Designsystem, das die Entwicklung wiederverwendet"
+        ]
       },
       "process": [
-        { "title": { "en": "Discovery & wireframes", "de": "Discovery & Wireframes" }, "body": { "en": "We map flows, content and structure before a pixel moves.", "de": "Wir kartieren Flows, Inhalte und Struktur, bevor ein Pixel gesetzt wird." } },
-        { "title": { "en": "Visual design", "de": "Visuelles Design" }, "body": { "en": "Brand, typography and components — reviewable every week.", "de": "Marke, Typografie und Komponenten — wöchentlich review-fähig." } },
-        { "title": { "en": "Handoff", "de": "Übergabe" }, "body": { "en": "A clean design system the engineers build straight from.", "de": "Ein sauberes Designsystem, aus dem die Entwicklung direkt baut." } }
+        {
+          "title": {
+            "en": "Discovery & wireframes",
+            "de": "Discovery & Wireframes"
+          },
+          "body": {
+            "en": "We map flows, content and structure before a pixel moves.",
+            "de": "Wir kartieren Flows, Inhalte und Struktur, bevor ein Pixel gesetzt wird."
+          }
+        },
+        {
+          "title": {
+            "en": "Visual design",
+            "de": "Visuelles Design"
+          },
+          "body": {
+            "en": "Brand, typography and components — reviewable every week.",
+            "de": "Marke, Typografie und Komponenten — wöchentlich review-fähig."
+          }
+        },
+        {
+          "title": {
+            "en": "Handoff",
+            "de": "Übergabe"
+          },
+          "body": {
+            "en": "A clean design system the engineers build straight from.",
+            "de": "Ein sauberes Designsystem, aus dem die Entwicklung direkt baut."
+          }
+        }
       ],
-      "who": { "en": "For teams who know first impressions decide whether a visitor stays.", "de": "Für Teams, die wissen, dass der erste Eindruck über Bleiben oder Gehen entscheidet." },
-      "stack": ["Figma", "Framer", "Adobe", "Webflow"],
+      "who": {
+        "en": "For teams who know first impressions decide whether a visitor stays.",
+        "de": "Für Teams, die wissen, dass der erste Eindruck über Bleiben oder Gehen entscheidet."
+      },
+      "stack": [
+        "Figma",
+        "Framer",
+        "Adobe",
+        "Webflow"
+      ],
       "faqs": [
-        { "q": { "en": "Do you redesign existing sites?", "de": "Gestalten Sie bestehende Sites neu?" }, "a": { "en": "Yes. We start with a short audit, then a redesign you can ship in stages.", "de": "Ja. Wir starten mit einem kurzen Audit, dann ein Redesign, das Sie in Stufen ausliefern können." } }
+        {
+          "q": {
+            "en": "Do you redesign existing sites?",
+            "de": "Gestalten Sie bestehende Sites neu?"
+          },
+          "a": {
+            "en": "Yes. We start with a short audit, then a redesign you can ship in stages.",
+            "de": "Ja. Wir starten mit einem kurzen Audit, dann ein Redesign, das Sie in Stufen ausliefern können."
+          }
+        }
       ],
-      "related": ["web-development", "saas", "dashboards"]
+      "related": [
+        "web-development",
+        "saas",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-web-design.jpg",
+        "alt": {
+          "en": "A designer arranging UI shapes and colour swatches",
+          "de": "Designer ordnet UI-Formen und Farbmuster"
+        }
+      }
     },
     {
-      "slug": "web-development", "type": "leaf", "parent": "web", "code": "01.2",
-      "title": { "en": "Web Development", "de": "Web-Entwicklung" },
-      "tagline": { "en": "Sites that ship, scale, and sell.", "de": "Websites, die liefern, skalieren und verkaufen." },
+      "slug": "web-development",
+      "type": "leaf",
+      "parent": "web",
+      "code": "01.2",
+      "title": {
+        "en": "Web Development",
+        "de": "Web-Entwicklung"
+      },
+      "tagline": {
+        "en": "Sites that ship, scale, and sell.",
+        "de": "Websites, die liefern, skalieren und verkaufen."
+      },
       "summary": {
         "en": "Production-grade business websites with end-to-end frontend, backend and clean APIs — fast, SEO-ready and built to last.",
         "de": "Produktionsreife Business-Websites mit End-to-End-Frontend, -Backend und sauberen APIs — schnell, SEO-fertig und langlebig gebaut."
       },
       "offerings": {
-        "en": ["Business and marketing websites", "Full backend and frontend integration", "Clean APIs and managed databases", "Chatbot and tooling integration"],
-        "de": ["Business- und Marketing-Websites", "Vollständige Backend- und Frontend-Integration", "Saubere APIs und gemanagte Datenbanken", "Chatbot- und Tool-Integration"]
+        "en": [
+          "Business and marketing websites",
+          "Full backend and frontend integration",
+          "Clean APIs and managed databases",
+          "Chatbot and tooling integration"
+        ],
+        "de": [
+          "Business- und Marketing-Websites",
+          "Vollständige Backend- und Frontend-Integration",
+          "Saubere APIs und gemanagte Datenbanken",
+          "Chatbot- und Tool-Integration"
+        ]
       },
       "outcomes": {
-        "en": ["Fast, SEO-ready builds", "Clean APIs and managed databases", "A site your team can actually maintain"],
-        "de": ["Schnelle, SEO-fertige Builds", "Saubere APIs und gemanagte Datenbanken", "Eine Site, die Ihr Team wirklich pflegen kann"]
+        "en": [
+          "Fast, SEO-ready builds",
+          "Clean APIs and managed databases",
+          "A site your team can actually maintain"
+        ],
+        "de": [
+          "Schnelle, SEO-fertige Builds",
+          "Saubere APIs und gemanagte Datenbanken",
+          "Eine Site, die Ihr Team wirklich pflegen kann"
+        ]
       },
       "process": [
-        { "title": { "en": "Discovery", "de": "Discovery" }, "body": { "en": "We map flows, content and integrations up front.", "de": "Wir kartieren Flows, Inhalte und Integrationen vorab." } },
-        { "title": { "en": "Build", "de": "Build" }, "body": { "en": "Componentized UI, real CMS, real database. Reviewable weekly.", "de": "Komponentenbasiertes UI, echtes CMS, echte Datenbank. Wöchentlich review-fähig." } },
-        { "title": { "en": "Launch & iterate", "de": "Launch & Iterieren" }, "body": { "en": "Ship, instrument and improve on real traffic.", "de": "Ausliefern, messen und auf Basis echter Daten verbessern." } }
+        {
+          "title": {
+            "en": "Discovery",
+            "de": "Discovery"
+          },
+          "body": {
+            "en": "We map flows, content and integrations up front.",
+            "de": "Wir kartieren Flows, Inhalte und Integrationen vorab."
+          }
+        },
+        {
+          "title": {
+            "en": "Build",
+            "de": "Build"
+          },
+          "body": {
+            "en": "Componentized UI, real CMS, real database. Reviewable weekly.",
+            "de": "Komponentenbasiertes UI, echtes CMS, echte Datenbank. Wöchentlich review-fähig."
+          }
+        },
+        {
+          "title": {
+            "en": "Launch & iterate",
+            "de": "Launch & Iterieren"
+          },
+          "body": {
+            "en": "Ship, instrument and improve on real traffic.",
+            "de": "Ausliefern, messen und auf Basis echter Daten verbessern."
+          }
+        }
       ],
-      "who": { "en": "For businesses that need a site to perform, not just exist.", "de": "Für Unternehmen, deren Site liefern soll — nicht nur existieren." },
-      "stack": ["Next.js", "TypeScript", "Tailwind", "Prisma", "Postgres", "Vercel"],
+      "who": {
+        "en": "For businesses that need a site to perform, not just exist.",
+        "de": "Für Unternehmen, deren Site liefern soll — nicht nur existieren."
+      },
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind",
+        "Prisma",
+        "Postgres",
+        "Vercel"
+      ],
       "faqs": [
-        { "q": { "en": "How long does a typical website take?", "de": "Wie lange dauert eine typische Website?" }, "a": { "en": "Marketing sites: 2–4 weeks. Larger builds scope individually.", "de": "Marketing-Sites: 2–4 Wochen. Größere Builds werden individuell geplant." } },
-        { "q": { "en": "Do you handle hosting?", "de": "Übernehmen Sie das Hosting?" }, "a": { "en": "Yes. We deploy and can manage hosting end to end.", "de": "Ja. Wir deployen und können das Hosting komplett betreuen." } }
+        {
+          "q": {
+            "en": "How long does a typical website take?",
+            "de": "Wie lange dauert eine typische Website?"
+          },
+          "a": {
+            "en": "Marketing sites: 2–4 weeks. Larger builds scope individually.",
+            "de": "Marketing-Sites: 2–4 Wochen. Größere Builds werden individuell geplant."
+          }
+        },
+        {
+          "q": {
+            "en": "Do you handle hosting?",
+            "de": "Übernehmen Sie das Hosting?"
+          },
+          "a": {
+            "en": "Yes. We deploy and can manage hosting end to end.",
+            "de": "Ja. Wir deployen und können das Hosting komplett betreuen."
+          }
+        }
       ],
-      "related": ["web-design", "saas", "dashboards"]
+      "related": [
+        "web-design",
+        "saas",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-web-development.jpg",
+        "alt": {
+          "en": "A developer building on a laptop",
+          "de": "Entwickler arbeitet am Laptop"
+        }
+      }
     },
     {
-      "slug": "saas", "type": "leaf", "parent": "web", "code": "01.3",
-      "title": { "en": "SaaS Platforms", "de": "SaaS-Plattformen" },
-      "tagline": { "en": "Turn an idea into a product people pay for.", "de": "Aus einer Idee ein Produkt machen, für das Menschen zahlen." },
+      "slug": "saas",
+      "type": "leaf",
+      "parent": "web",
+      "code": "01.3",
+      "title": {
+        "en": "SaaS Platforms",
+        "de": "SaaS-Plattformen"
+      },
+      "tagline": {
+        "en": "Turn an idea into a product people pay for.",
+        "de": "Aus einer Idee ein Produkt machen, für das Menschen zahlen."
+      },
       "summary": {
         "en": "Multi-tenant SaaS platforms with auth, billing, dashboards and the backend to run them — engineered to grow with your user base.",
         "de": "Multi-Tenant-SaaS-Plattformen mit Auth, Billing, Dashboards und dem Backend dahinter — entwickelt, um mit Ihrer Nutzerbasis zu wachsen."
       },
       "offerings": {
-        "en": ["Multi-tenant architecture", "Authentication, roles and billing", "Admin and customer dashboards", "Scalable backend and managed databases"],
-        "de": ["Multi-Tenant-Architektur", "Authentifizierung, Rollen und Billing", "Admin- und Kunden-Dashboards", "Skalierbares Backend und gemanagte Datenbanken"]
+        "en": [
+          "Multi-tenant architecture",
+          "Authentication, roles and billing",
+          "Admin and customer dashboards",
+          "Scalable backend and managed databases"
+        ],
+        "de": [
+          "Multi-Tenant-Architektur",
+          "Authentifizierung, Rollen und Billing",
+          "Admin- und Kunden-Dashboards",
+          "Skalierbares Backend und gemanagte Datenbanken"
+        ]
       },
       "outcomes": {
-        "en": ["A v1 you can put in front of real users", "Billing and access that just work", "An architecture that survives growth"],
-        "de": ["Eine v1, die Sie echten Nutzern zeigen können", "Billing und Zugriff, die einfach funktionieren", "Eine Architektur, die Wachstum übersteht"]
+        "en": [
+          "A v1 you can put in front of real users",
+          "Billing and access that just work",
+          "An architecture that survives growth"
+        ],
+        "de": [
+          "Eine v1, die Sie echten Nutzern zeigen können",
+          "Billing und Zugriff, die einfach funktionieren",
+          "Eine Architektur, die Wachstum übersteht"
+        ]
       },
       "process": [
-        { "title": { "en": "Product scoping", "de": "Produkt-Scoping" }, "body": { "en": "We define the v1 that proves the model.", "de": "Wir definieren die v1, die das Modell beweist." } },
-        { "title": { "en": "Build the core", "de": "Kern bauen" }, "body": { "en": "Auth, tenancy, billing and the first real workflows.", "de": "Auth, Mandantenfähigkeit, Billing und die ersten echten Workflows." } },
-        { "title": { "en": "Launch & expand", "de": "Launch & Ausbau" }, "body": { "en": "Ship to users, then build what the data asks for.", "de": "An Nutzer ausliefern, dann bauen, was die Daten verlangen." } }
+        {
+          "title": {
+            "en": "Product scoping",
+            "de": "Produkt-Scoping"
+          },
+          "body": {
+            "en": "We define the v1 that proves the model.",
+            "de": "Wir definieren die v1, die das Modell beweist."
+          }
+        },
+        {
+          "title": {
+            "en": "Build the core",
+            "de": "Kern bauen"
+          },
+          "body": {
+            "en": "Auth, tenancy, billing and the first real workflows.",
+            "de": "Auth, Mandantenfähigkeit, Billing und die ersten echten Workflows."
+          }
+        },
+        {
+          "title": {
+            "en": "Launch & expand",
+            "de": "Launch & Ausbau"
+          },
+          "body": {
+            "en": "Ship to users, then build what the data asks for.",
+            "de": "An Nutzer ausliefern, dann bauen, was die Daten verlangen."
+          }
+        }
       ],
-      "who": { "en": "For founders and teams turning a workflow into a sellable product.", "de": "Für Gründer und Teams, die aus einem Workflow ein verkaufbares Produkt machen." },
-      "stack": ["Next.js", "TypeScript", "Prisma", "Postgres", "Stripe", "Supabase", "Vercel"],
+      "who": {
+        "en": "For founders and teams turning a workflow into a sellable product.",
+        "de": "Für Gründer und Teams, die aus einem Workflow ein verkaufbares Produkt machen."
+      },
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Prisma",
+        "Postgres",
+        "Stripe",
+        "Supabase",
+        "Vercel"
+      ],
       "faqs": [
-        { "q": { "en": "Can you take over an existing SaaS?", "de": "Können Sie ein bestehendes SaaS übernehmen?" }, "a": { "en": "Yes — we start with a short code and architecture audit.", "de": "Ja — wir starten mit einem kurzen Code- und Architektur-Audit." } }
+        {
+          "q": {
+            "en": "Can you take over an existing SaaS?",
+            "de": "Können Sie ein bestehendes SaaS übernehmen?"
+          },
+          "a": {
+            "en": "Yes — we start with a short code and architecture audit.",
+            "de": "Ja — wir starten mit einem kurzen Code- und Architektur-Audit."
+          }
+        }
       ],
-      "related": ["web-development", "dashboards", "mobile-apps"]
+      "related": [
+        "web-development",
+        "dashboards",
+        "mobile-apps"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-saas.jpg",
+        "alt": {
+          "en": "A laptop showing an abstract product dashboard",
+          "de": "Laptop mit abstraktem Produkt-Dashboard"
+        }
+      }
     },
     {
-      "slug": "mobile-apps", "type": "leaf", "parent": "web", "code": "01.4",
-      "title": { "en": "Mobile Apps", "de": "Mobile Apps" },
-      "tagline": { "en": "Native and cross-platform, built to last.", "de": "Nativ und plattformübergreifend, gebaut für die Dauer." },
+      "slug": "mobile-apps",
+      "type": "leaf",
+      "parent": "web",
+      "code": "01.4",
+      "title": {
+        "en": "Mobile Apps",
+        "de": "Mobile Apps"
+      },
+      "tagline": {
+        "en": "Native and cross-platform, built to last.",
+        "de": "Nativ und plattformübergreifend, gebaut für die Dauer."
+      },
       "summary": {
         "en": "Android and iOS apps across every domain — designed in Figma, engineered in Kotlin, Swift and React Native where it fits.",
         "de": "Android- und iOS-Apps in jeder Domäne — in Figma designt, in Kotlin, Swift und React Native entwickelt, wo es passt."
       },
       "offerings": {
-        "en": ["Native Android (Kotlin)", "Native iOS (Swift)", "Cross-platform builds", "Figma design systems"],
-        "de": ["Natives Android (Kotlin)", "Natives iOS (Swift)", "Cross-Platform-Builds", "Figma-Designsysteme"]
+        "en": [
+          "Native Android (Kotlin)",
+          "Native iOS (Swift)",
+          "Cross-platform builds",
+          "Figma design systems"
+        ],
+        "de": [
+          "Natives Android (Kotlin)",
+          "Natives iOS (Swift)",
+          "Cross-Platform-Builds",
+          "Figma-Designsysteme"
+        ]
       },
       "outcomes": {
-        "en": ["App-store-ready releases", "Design systems that survive v2", "Backends that don't fall over"],
-        "de": ["App-Store-fertige Releases", "Designsysteme, die v2 überleben", "Backends, die nicht umkippen"]
+        "en": [
+          "App-store-ready releases",
+          "Design systems that survive v2",
+          "Backends that don't fall over"
+        ],
+        "de": [
+          "App-Store-fertige Releases",
+          "Designsysteme, die v2 überleben",
+          "Backends, die nicht umkippen"
+        ]
       },
       "process": [
-        { "title": { "en": "UX & prototype", "de": "UX & Prototyp" }, "body": { "en": "A clickable Figma prototype before any code.", "de": "Ein klickbarer Figma-Prototyp vor jedem Code." } },
-        { "title": { "en": "Native build", "de": "Native Entwicklung" }, "body": { "en": "Kotlin/Swift for native, React Native where it pays off.", "de": "Kotlin/Swift für nativ, React Native wo es sich lohnt." } },
-        { "title": { "en": "Store submission", "de": "Store-Einreichung" }, "body": { "en": "Compliance, screenshots and listing copy — handled.", "de": "Compliance, Screenshots und Listing-Texte — alles inklusive." } }
+        {
+          "title": {
+            "en": "UX & prototype",
+            "de": "UX & Prototyp"
+          },
+          "body": {
+            "en": "A clickable Figma prototype before any code.",
+            "de": "Ein klickbarer Figma-Prototyp vor jedem Code."
+          }
+        },
+        {
+          "title": {
+            "en": "Native build",
+            "de": "Native Entwicklung"
+          },
+          "body": {
+            "en": "Kotlin/Swift for native, React Native where it pays off.",
+            "de": "Kotlin/Swift für nativ, React Native wo es sich lohnt."
+          }
+        },
+        {
+          "title": {
+            "en": "Store submission",
+            "de": "Store-Einreichung"
+          },
+          "body": {
+            "en": "Compliance, screenshots and listing copy — handled.",
+            "de": "Compliance, Screenshots und Listing-Texte — alles inklusive."
+          }
+        }
       ],
-      "who": { "en": "For teams shipping to phones, not just browsers.", "de": "Für Teams, die auf Smartphones ausliefern, nicht nur im Browser." },
-      "stack": ["Kotlin", "Swift", "React Native", "Expo", "Figma", "Firebase", "Supabase"],
+      "who": {
+        "en": "For teams shipping to phones, not just browsers.",
+        "de": "Für Teams, die auf Smartphones ausliefern, nicht nur im Browser."
+      },
+      "stack": [
+        "Kotlin",
+        "Swift",
+        "React Native",
+        "Expo",
+        "Figma",
+        "Firebase",
+        "Supabase"
+      ],
       "faqs": [
-        { "q": { "en": "Native or cross-platform?", "de": "Nativ oder Cross-Platform?" }, "a": { "en": "Depends on the product. We recommend based on performance and team.", "de": "Hängt vom Produkt ab. Wir empfehlen basierend auf Performance und Team." } }
+        {
+          "q": {
+            "en": "Native or cross-platform?",
+            "de": "Nativ oder Cross-Platform?"
+          },
+          "a": {
+            "en": "Depends on the product. We recommend based on performance and team.",
+            "de": "Hängt vom Produkt ab. Wir empfehlen basierend auf Performance und Team."
+          }
+        }
       ],
-      "related": ["web-development", "saas", "dashboards"]
+      "related": [
+        "web-development",
+        "saas",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-mobile-apps.jpg",
+        "alt": {
+          "en": "Hands holding a phone with an app screen",
+          "de": "Hände halten ein Smartphone mit App-Screen"
+        }
+      }
     },
     {
-      "slug": "dashboards", "type": "leaf", "parent": "web", "code": "01.5",
-      "title": { "en": "Dashboards & Reporting", "de": "Dashboards & Reporting" },
-      "tagline": { "en": "See the business at a glance.", "de": "Das Geschäft auf einen Blick." },
+      "slug": "dashboards",
+      "type": "leaf",
+      "parent": "web",
+      "code": "01.5",
+      "title": {
+        "en": "Dashboards & Reporting",
+        "de": "Dashboards & Reporting"
+      },
+      "tagline": {
+        "en": "See the business at a glance.",
+        "de": "Das Geschäft auf einen Blick."
+      },
       "summary": {
         "en": "KPI, operations and reporting dashboards that present the metrics and processes that matter — so teams decide on evidence, not gut feel.",
         "de": "KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch."
       },
       "offerings": {
-        "en": ["KPI and operations dashboards", "Lead and conversion reporting", "Data source mapping", "Admin and monitoring views"],
-        "de": ["KPI- und Operations-Dashboards", "Lead- und Conversion-Reporting", "Datenquellen-Mapping", "Admin- und Monitoring-Ansichten"]
+        "en": [
+          "KPI and operations dashboards",
+          "Lead and conversion reporting",
+          "Data source mapping",
+          "Admin and monitoring views"
+        ],
+        "de": [
+          "KPI- und Operations-Dashboards",
+          "Lead- und Conversion-Reporting",
+          "Datenquellen-Mapping",
+          "Admin- und Monitoring-Ansichten"
+        ]
       },
       "outcomes": {
-        "en": ["One screen for the metrics that matter", "Decisions backed by clean data", "Less time pulling reports by hand"],
-        "de": ["Ein Bildschirm für die wichtigen Kennzahlen", "Entscheidungen auf Basis sauberer Daten", "Weniger Zeit für manuelle Reports"]
+        "en": [
+          "One screen for the metrics that matter",
+          "Decisions backed by clean data",
+          "Less time pulling reports by hand"
+        ],
+        "de": [
+          "Ein Bildschirm für die wichtigen Kennzahlen",
+          "Entscheidungen auf Basis sauberer Daten",
+          "Weniger Zeit für manuelle Reports"
+        ]
       },
       "process": [
-        { "title": { "en": "Define KPIs", "de": "KPIs definieren" }, "body": { "en": "We agree the metrics and map the data sources.", "de": "Wir legen die Kennzahlen fest und kartieren die Datenquellen." } },
-        { "title": { "en": "Build the views", "de": "Views bauen" }, "body": { "en": "Wireframe, then a working dashboard with real data.", "de": "Wireframe, dann ein funktionierendes Dashboard mit echten Daten." } },
-        { "title": { "en": "Roll out", "de": "Ausrollen" }, "body": { "en": "Access, roles and monitoring so it stays trustworthy.", "de": "Zugriff, Rollen und Monitoring, damit es verlässlich bleibt." } }
+        {
+          "title": {
+            "en": "Define KPIs",
+            "de": "KPIs definieren"
+          },
+          "body": {
+            "en": "We agree the metrics and map the data sources.",
+            "de": "Wir legen die Kennzahlen fest und kartieren die Datenquellen."
+          }
+        },
+        {
+          "title": {
+            "en": "Build the views",
+            "de": "Views bauen"
+          },
+          "body": {
+            "en": "Wireframe, then a working dashboard with real data.",
+            "de": "Wireframe, dann ein funktionierendes Dashboard mit echten Daten."
+          }
+        },
+        {
+          "title": {
+            "en": "Roll out",
+            "de": "Ausrollen"
+          },
+          "body": {
+            "en": "Access, roles and monitoring so it stays trustworthy.",
+            "de": "Zugriff, Rollen und Monitoring, damit es verlässlich bleibt."
+          }
+        }
       ],
-      "who": { "en": "For leaders tired of stitching numbers together in spreadsheets.", "de": "Für Verantwortliche, die Zahlen nicht länger in Tabellen zusammenstückeln wollen." },
-      "stack": ["Next.js", "Postgres", "Looker Studio", "Metabase", "Recharts"],
+      "who": {
+        "en": "For leaders tired of stitching numbers together in spreadsheets.",
+        "de": "Für Verantwortliche, die Zahlen nicht länger in Tabellen zusammenstückeln wollen."
+      },
+      "stack": [
+        "Next.js",
+        "Postgres",
+        "Looker Studio",
+        "Metabase",
+        "Recharts"
+      ],
       "faqs": [
-        { "q": { "en": "Can it pull from our existing tools?", "de": "Kann es aus unseren bestehenden Tools ziehen?" }, "a": { "en": "Yes — we map your CRM, ads and database into one place.", "de": "Ja — wir führen CRM, Ads und Datenbank an einem Ort zusammen." } }
+        {
+          "q": {
+            "en": "Can it pull from our existing tools?",
+            "de": "Kann es aus unseren bestehenden Tools ziehen?"
+          },
+          "a": {
+            "en": "Yes — we map your CRM, ads and database into one place.",
+            "de": "Ja — wir führen CRM, Ads und Datenbank an einem Ort zusammen."
+          }
+        }
       ],
-      "related": ["saas", "web-development", "rpa"]
+      "related": [
+        "saas",
+        "web-development",
+        "rpa"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-dashboards.jpg",
+        "alt": {
+          "en": "A wall monitor of abstract charts",
+          "de": "Wandmonitor mit abstrakten Diagrammen"
+        }
+      }
     },
-
     {
-      "slug": "automation", "type": "hub", "code": "02",
-      "title": { "en": "Automation", "de": "Automatisierung" },
-      "tagline": { "en": "Stop paying people to do robot work.", "de": "Keine Menschen mehr für Roboter-Arbeit bezahlen." },
+      "slug": "automation",
+      "type": "hub",
+      "code": "02",
+      "title": {
+        "en": "Automation",
+        "de": "Automatisierung"
+      },
+      "tagline": {
+        "en": "Stop paying people to do robot work.",
+        "de": "Keine Menschen mehr für Roboter-Arbeit bezahlen."
+      },
       "summary": {
         "en": "Automate the calls, messages and workflows that eat your team's day — from process automation to WhatsApp, voice and website assistants.",
         "de": "Automatisieren Sie Anrufe, Nachrichten und Workflows, die Ihrem Team den Tag fressen — von Prozessautomatisierung bis WhatsApp-, Voice- und Website-Assistenten."
@@ -194,63 +718,222 @@
         "en": "Process automation, WhatsApp agents, cloud voice reception and website assistants. Pick where to start.",
         "de": "Prozessautomatisierung, WhatsApp-Agenten, Cloud-Voice-Empfang und Website-Assistenten. Wählen Sie, wo Sie starten."
       },
-      "children": ["rpa", "whatsapp", "voice", "chatbots"]
+      "children": [
+        "rpa",
+        "whatsapp",
+        "voice",
+        "chatbots"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-automation.jpg",
+        "alt": {
+          "en": "A workspace with an abstract automation flow",
+          "de": "Arbeitsplatz mit abstraktem Automatisierungs-Fluss"
+        }
+      }
     },
     {
-      "slug": "rpa", "type": "leaf", "parent": "automation", "code": "02.1",
-      "title": { "en": "RPA & Process Automation", "de": "RPA & Prozessautomatisierung" },
-      "tagline": { "en": "Auditable, repeatable, hands-off.", "de": "Auditierbar, wiederholbar, ohne Handarbeit." },
+      "slug": "rpa",
+      "type": "leaf",
+      "parent": "automation",
+      "code": "02.1",
+      "title": {
+        "en": "RPA & Process Automation",
+        "de": "RPA & Prozessautomatisierung"
+      },
+      "tagline": {
+        "en": "Auditable, repeatable, hands-off.",
+        "de": "Auditierbar, wiederholbar, ohne Handarbeit."
+      },
       "summary": {
         "en": "We map the repetitive work your team does by hand and turn it into reliable automated workflows — across your CRM, inbox and internal tools.",
         "de": "Wir kartieren die wiederkehrende Handarbeit Ihres Teams und verwandeln sie in zuverlässige automatisierte Workflows — über CRM, Postfach und interne Tools hinweg."
       },
       "offerings": {
-        "en": ["Internal workflow automation", "CRM and tool integration", "Document and data handling", "Process monitoring and alerts"],
-        "de": ["Interne Workflow-Automatisierung", "CRM- und Tool-Integration", "Dokumenten- und Datenverarbeitung", "Prozess-Monitoring und Alerts"]
+        "en": [
+          "Internal workflow automation",
+          "CRM and tool integration",
+          "Document and data handling",
+          "Process monitoring and alerts"
+        ],
+        "de": [
+          "Interne Workflow-Automatisierung",
+          "CRM- und Tool-Integration",
+          "Dokumenten- und Datenverarbeitung",
+          "Prozess-Monitoring und Alerts"
+        ]
       },
       "outcomes": {
-        "en": ["Hours back every week", "Fewer manual errors", "Auditable, repeatable processes"],
-        "de": ["Jede Woche Stunden zurück", "Weniger manuelle Fehler", "Auditierbare, wiederholbare Prozesse"]
+        "en": [
+          "Hours back every week",
+          "Fewer manual errors",
+          "Auditable, repeatable processes"
+        ],
+        "de": [
+          "Jede Woche Stunden zurück",
+          "Weniger manuelle Fehler",
+          "Auditierbare, wiederholbare Prozesse"
+        ]
       },
       "process": [
-        { "title": { "en": "Process audit", "de": "Prozess-Audit" }, "body": { "en": "We map what your team does manually today.", "de": "Wir kartieren, was Ihr Team heute manuell erledigt." } },
-        { "title": { "en": "Automate", "de": "Automatisieren" }, "body": { "en": "Workflows, integrations and the glue between tools.", "de": "Workflows, Integrationen und die Verbindung zwischen Tools." } },
-        { "title": { "en": "Measure & expand", "de": "Messen & Ausweiten" }, "body": { "en": "Track time saved, then scale what works.", "de": "Zeitersparnis messen, dann skalieren, was funktioniert." } }
+        {
+          "title": {
+            "en": "Process audit",
+            "de": "Prozess-Audit"
+          },
+          "body": {
+            "en": "We map what your team does manually today.",
+            "de": "Wir kartieren, was Ihr Team heute manuell erledigt."
+          }
+        },
+        {
+          "title": {
+            "en": "Automate",
+            "de": "Automatisieren"
+          },
+          "body": {
+            "en": "Workflows, integrations and the glue between tools.",
+            "de": "Workflows, Integrationen und die Verbindung zwischen Tools."
+          }
+        },
+        {
+          "title": {
+            "en": "Measure & expand",
+            "de": "Messen & Ausweiten"
+          },
+          "body": {
+            "en": "Track time saved, then scale what works.",
+            "de": "Zeitersparnis messen, dann skalieren, was funktioniert."
+          }
+        }
       ],
-      "who": { "en": "For teams drowning in copy-paste and manual handoffs.", "de": "Für Teams, die in Copy-Paste und manuellen Übergaben versinken." },
-      "stack": ["n8n", "Zapier", "Make", "HubSpot", "Salesforce"],
+      "who": {
+        "en": "For teams drowning in copy-paste and manual handoffs.",
+        "de": "Für Teams, die in Copy-Paste und manuellen Übergaben versinken."
+      },
+      "stack": [
+        "n8n",
+        "Zapier",
+        "Make",
+        "HubSpot",
+        "Salesforce"
+      ],
       "faqs": [
-        { "q": { "en": "How do you decide what to automate first?", "de": "Wie entscheiden Sie, was zuerst automatisiert wird?" }, "a": { "en": "We start where the time savings are biggest and the risk is lowest.", "de": "Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist." } }
+        {
+          "q": {
+            "en": "How do you decide what to automate first?",
+            "de": "Wie entscheiden Sie, was zuerst automatisiert wird?"
+          },
+          "a": {
+            "en": "We start where the time savings are biggest and the risk is lowest.",
+            "de": "Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist."
+          }
+        }
       ],
-      "related": ["whatsapp", "voice", "dashboards"]
+      "related": [
+        "whatsapp",
+        "voice",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-rpa.jpg",
+        "alt": {
+          "en": "Documents being sorted automatically",
+          "de": "Dokumente werden automatisch sortiert"
+        }
+      }
     },
     {
-      "slug": "whatsapp", "type": "leaf", "parent": "automation", "code": "02.2",
-      "title": { "en": "WhatsApp Agents", "de": "WhatsApp-Agenten" },
-      "tagline": { "en": "Answer every chat, day or night.", "de": "Jeden Chat beantworten, Tag und Nacht." },
+      "slug": "whatsapp",
+      "type": "leaf",
+      "parent": "automation",
+      "code": "02.2",
+      "title": {
+        "en": "WhatsApp Agents",
+        "de": "WhatsApp-Agenten"
+      },
+      "tagline": {
+        "en": "Answer every chat, day or night.",
+        "de": "Jeden Chat beantworten, Tag und Nacht."
+      },
       "summary": {
         "en": "Automated WhatsApp Business flows that qualify leads, answer common questions and book appointments — on the official API, with opt-in.",
         "de": "Automatisierte WhatsApp-Business-Flows, die Leads qualifizieren, häufige Fragen beantworten und Termine buchen — über die offizielle API, mit Opt-in."
       },
       "offerings": {
-        "en": ["WhatsApp Business API setup", "Lead qualification flows", "FAQ and booking automation", "Human handoff for complex cases"],
-        "de": ["WhatsApp Business API-Setup", "Lead-Qualifizierungs-Flows", "FAQ- und Buchungs-Automatisierung", "Human Handoff für komplexe Fälle"]
+        "en": [
+          "WhatsApp Business API setup",
+          "Lead qualification flows",
+          "FAQ and booking automation",
+          "Human handoff for complex cases"
+        ],
+        "de": [
+          "WhatsApp Business API-Setup",
+          "Lead-Qualifizierungs-Flows",
+          "FAQ- und Buchungs-Automatisierung",
+          "Human Handoff für komplexe Fälle"
+        ]
       },
       "outcomes": {
-        "en": ["Instant replies, even after hours", "More qualified leads, less manual triage", "Compliant, opt-in messaging"],
-        "de": ["Sofortige Antworten, auch nach Feierabend", "Mehr qualifizierte Leads, weniger manuelle Triage", "Konforme Opt-in-Kommunikation"]
+        "en": [
+          "Instant replies, even after hours",
+          "More qualified leads, less manual triage",
+          "Compliant, opt-in messaging"
+        ],
+        "de": [
+          "Sofortige Antworten, auch nach Feierabend",
+          "Mehr qualifizierte Leads, weniger manuelle Triage",
+          "Konforme Opt-in-Kommunikation"
+        ]
       },
       "process": [
-        { "title": { "en": "Map the conversations", "de": "Gespräche kartieren" }, "body": { "en": "We script the flows your customers actually start.", "de": "Wir skripten die Flows, die Ihre Kunden wirklich starten." } },
-        { "title": { "en": "Build & connect", "de": "Bauen & Verbinden" }, "body": { "en": "Official API, your CRM, clear handoff rules.", "de": "Offizielle API, Ihr CRM, klare Handoff-Regeln." } },
-        { "title": { "en": "Refine", "de": "Verfeinern" }, "body": { "en": "Tune the flows on real conversations.", "de": "Die Flows anhand echter Gespräche optimieren." } }
+        {
+          "title": {
+            "en": "Map the conversations",
+            "de": "Gespräche kartieren"
+          },
+          "body": {
+            "en": "We script the flows your customers actually start.",
+            "de": "Wir skripten die Flows, die Ihre Kunden wirklich starten."
+          }
+        },
+        {
+          "title": {
+            "en": "Build & connect",
+            "de": "Bauen & Verbinden"
+          },
+          "body": {
+            "en": "Official API, your CRM, clear handoff rules.",
+            "de": "Offizielle API, Ihr CRM, klare Handoff-Regeln."
+          }
+        },
+        {
+          "title": {
+            "en": "Refine",
+            "de": "Verfeinern"
+          },
+          "body": {
+            "en": "Tune the flows on real conversations.",
+            "de": "Die Flows anhand echter Gespräche optimieren."
+          }
+        }
       ],
-      "who": { "en": "For businesses whose customers already message on WhatsApp.", "de": "Für Unternehmen, deren Kunden bereits über WhatsApp schreiben." },
-      "stack": ["WhatsApp Business API", "Twilio", "n8n", "HubSpot"],
+      "who": {
+        "en": "For businesses whose customers already message on WhatsApp.",
+        "de": "Für Unternehmen, deren Kunden bereits über WhatsApp schreiben."
+      },
+      "stack": [
+        "WhatsApp Business API",
+        "Twilio",
+        "n8n",
+        "HubSpot"
+      ],
       "image": {
         "src": "/rexity-omi/assets/it/img/svc-whatsapp.jpg",
-        "alt": { "en": "A WhatsApp Business chat answering a customer automatically", "de": "Ein WhatsApp-Business-Chat, der einem Kunden automatisch antwortet" },
-        "prompt": "Close-up photograph of a hand holding a modern smartphone showing a clean WhatsApp business chat conversation, a customer enquiry being answered instantly, bright modern office softly blurred in the background, warm natural daylight, shallow depth of field, realistic, professional, high detail, no text overlays"
+        "alt": {
+          "en": "A phone glowing with abstract chat bubbles",
+          "de": "Smartphone mit abstrakten Chat-Blasen"
+        }
       },
       "workflow": {
         "intro": {
@@ -258,92 +941,364 @@
           "de": "Jede WhatsApp-Nachricht durchläuft denselben sicheren, nachvollziehbaren Pfad. Der Assistent beantwortet, was er kann, qualifiziert und bucht, wo es hilft, und übergibt alles Sensible direkt an Ihr Team — mit dem vollen Kontext."
         },
         "flow": [
-          { "node": { "en": "Customer message", "de": "Kundennachricht" } },
-          { "node": { "en": "WhatsApp Business API", "de": "WhatsApp Business API" } },
-          { "node": { "en": "Intent detection", "de": "Absichtserkennung" } },
-          { "branch": [
-            { "en": "Answer FAQ", "de": "FAQ beantworten" },
-            { "en": "Qualify lead", "de": "Lead qualifizieren" },
-            { "en": "Book appointment", "de": "Termin buchen" },
-            { "en": "Hand off to a human", "de": "An Mensch übergeben" }
-          ] },
-          { "node": { "en": "Log to CRM & notify team", "de": "Im CRM protokollieren & Team benachrichtigen" } }
+          {
+            "node": {
+              "en": "Customer message",
+              "de": "Kundennachricht"
+            }
+          },
+          {
+            "node": {
+              "en": "WhatsApp Business API",
+              "de": "WhatsApp Business API"
+            }
+          },
+          {
+            "node": {
+              "en": "Intent detection",
+              "de": "Absichtserkennung"
+            }
+          },
+          {
+            "branch": [
+              {
+                "en": "Answer FAQ",
+                "de": "FAQ beantworten"
+              },
+              {
+                "en": "Qualify lead",
+                "de": "Lead qualifizieren"
+              },
+              {
+                "en": "Book appointment",
+                "de": "Termin buchen"
+              },
+              {
+                "en": "Hand off to a human",
+                "de": "An Mensch übergeben"
+              }
+            ]
+          },
+          {
+            "node": {
+              "en": "Log to CRM & notify team",
+              "de": "Im CRM protokollieren & Team benachrichtigen"
+            }
+          }
         ],
         "steps": [
-          { "title": { "en": "A customer messages your number", "de": "Ein Kunde schreibt Ihre Nummer an" }, "body": { "en": "The conversation starts on the channel they already use. Messages arrive through the official WhatsApp Business API, with opt-in respected end to end.", "de": "Das Gespräch beginnt auf dem Kanal, den sie ohnehin nutzen. Nachrichten kommen über die offizielle WhatsApp Business API — Opt-in durchgängig gewahrt." } },
-          { "title": { "en": "The assistant reads the intent", "de": "Der Assistent erkennt die Absicht" }, "body": { "en": "It classifies what the person actually wants — a question, a quote, a booking, or something only a human should handle.", "de": "Er klassifiziert, was die Person wirklich will — eine Frage, ein Angebot, eine Buchung oder etwas, das nur ein Mensch erledigen sollte." } },
-          { "title": { "en": "It answers or acts", "de": "Er antwortet oder handelt" }, "body": { "en": "Common questions are answered instantly from your approved content; qualifying questions capture the lead; booking requests offer real time slots.", "de": "Häufige Fragen werden sofort aus Ihren freigegebenen Inhalten beantwortet; qualifizierende Fragen erfassen den Lead; Buchungsanfragen bieten echte Zeitfenster an." } },
-          { "title": { "en": "Complex cases go to a human", "de": "Komplexe Fälle gehen an einen Menschen" }, "body": { "en": "Anything sensitive or out of scope is handed to your team with the full conversation context, so nothing is lost in the transfer.", "de": "Alles Sensible oder außerhalb des Rahmens wird mit dem vollen Gesprächskontext an Ihr Team übergeben — nichts geht bei der Übergabe verloren." } },
-          { "title": { "en": "Everything is logged", "de": "Alles wird protokolliert" }, "body": { "en": "Each conversation lands in your CRM with its outcome, so you keep a clean, auditable trail and can follow up at the right moment.", "de": "Jedes Gespräch landet mit Ergebnis in Ihrem CRM — ein sauberer, nachvollziehbarer Verlauf, mit dem Sie zum richtigen Zeitpunkt nachfassen können." } }
+          {
+            "title": {
+              "en": "A customer messages your number",
+              "de": "Ein Kunde schreibt Ihre Nummer an"
+            },
+            "body": {
+              "en": "The conversation starts on the channel they already use. Messages arrive through the official WhatsApp Business API, with opt-in respected end to end.",
+              "de": "Das Gespräch beginnt auf dem Kanal, den sie ohnehin nutzen. Nachrichten kommen über die offizielle WhatsApp Business API — Opt-in durchgängig gewahrt."
+            }
+          },
+          {
+            "title": {
+              "en": "The assistant reads the intent",
+              "de": "Der Assistent erkennt die Absicht"
+            },
+            "body": {
+              "en": "It classifies what the person actually wants — a question, a quote, a booking, or something only a human should handle.",
+              "de": "Er klassifiziert, was die Person wirklich will — eine Frage, ein Angebot, eine Buchung oder etwas, das nur ein Mensch erledigen sollte."
+            }
+          },
+          {
+            "title": {
+              "en": "It answers or acts",
+              "de": "Er antwortet oder handelt"
+            },
+            "body": {
+              "en": "Common questions are answered instantly from your approved content; qualifying questions capture the lead; booking requests offer real time slots.",
+              "de": "Häufige Fragen werden sofort aus Ihren freigegebenen Inhalten beantwortet; qualifizierende Fragen erfassen den Lead; Buchungsanfragen bieten echte Zeitfenster an."
+            }
+          },
+          {
+            "title": {
+              "en": "Complex cases go to a human",
+              "de": "Komplexe Fälle gehen an einen Menschen"
+            },
+            "body": {
+              "en": "Anything sensitive or out of scope is handed to your team with the full conversation context, so nothing is lost in the transfer.",
+              "de": "Alles Sensible oder außerhalb des Rahmens wird mit dem vollen Gesprächskontext an Ihr Team übergeben — nichts geht bei der Übergabe verloren."
+            }
+          },
+          {
+            "title": {
+              "en": "Everything is logged",
+              "de": "Alles wird protokolliert"
+            },
+            "body": {
+              "en": "Each conversation lands in your CRM with its outcome, so you keep a clean, auditable trail and can follow up at the right moment.",
+              "de": "Jedes Gespräch landet mit Ergebnis in Ihrem CRM — ein sauberer, nachvollziehbarer Verlauf, mit dem Sie zum richtigen Zeitpunkt nachfassen können."
+            }
+          }
         ]
       },
       "faqs": [
-        { "q": { "en": "Is WhatsApp automation compliant?", "de": "Ist WhatsApp-Automatisierung konform?" }, "a": { "en": "Yes — we use the official WhatsApp Business API with opt-in flows.", "de": "Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in." } },
-        { "q": { "en": "Will customers know it's automated?", "de": "Merken Kunden, dass es automatisiert ist?" }, "a": { "en": "We're transparent about the assistant, and a human is always one step away.", "de": "Wir sind transparent über den Assistenten, und ein Mensch ist immer nur einen Schritt entfernt." } }
+        {
+          "q": {
+            "en": "Is WhatsApp automation compliant?",
+            "de": "Ist WhatsApp-Automatisierung konform?"
+          },
+          "a": {
+            "en": "Yes — we use the official WhatsApp Business API with opt-in flows.",
+            "de": "Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in."
+          }
+        },
+        {
+          "q": {
+            "en": "Will customers know it's automated?",
+            "de": "Merken Kunden, dass es automatisiert ist?"
+          },
+          "a": {
+            "en": "We're transparent about the assistant, and a human is always one step away.",
+            "de": "Wir sind transparent über den Assistenten, und ein Mensch ist immer nur einen Schritt entfernt."
+          }
+        }
       ],
-      "related": ["voice", "chatbots", "rpa"]
+      "related": [
+        "voice",
+        "chatbots",
+        "rpa"
+      ]
     },
     {
-      "slug": "voice", "type": "leaf", "parent": "automation", "code": "02.3",
-      "title": { "en": "Voice Agents", "de": "Voice-Agenten" },
-      "tagline": { "en": "A receptionist that never sleeps.", "de": "Ein Empfang, der nie schläft." },
+      "slug": "voice",
+      "type": "leaf",
+      "parent": "automation",
+      "code": "02.3",
+      "title": {
+        "en": "Voice Agents",
+        "de": "Voice-Agenten"
+      },
+      "tagline": {
+        "en": "A receptionist that never sleeps.",
+        "de": "Ein Empfang, der nie schläft."
+      },
       "summary": {
         "en": "A cloud phone assistant that answers calls, routes them and captures details around the clock — so no enquiry goes to voicemail.",
         "de": "Ein Cloud-Telefonassistent, der Anrufe rund um die Uhr annimmt, weiterleitet und Details erfasst — damit keine Anfrage in der Mailbox landet."
       },
       "offerings": {
-        "en": ["Cloud receptionist setup", "Call routing and capture", "Appointment and callback booking", "CRM logging of every call"],
-        "de": ["Cloud-Empfang einrichten", "Anrufweiterleitung und -erfassung", "Termin- und Rückruf-Buchung", "CRM-Protokoll jedes Anrufs"]
+        "en": [
+          "Cloud receptionist setup",
+          "Call routing and capture",
+          "Appointment and callback booking",
+          "CRM logging of every call"
+        ],
+        "de": [
+          "Cloud-Empfang einrichten",
+          "Anrufweiterleitung und -erfassung",
+          "Termin- und Rückruf-Buchung",
+          "CRM-Protokoll jedes Anrufs"
+        ]
       },
       "outcomes": {
-        "en": ["24/7 answer rate without 24/7 staffing", "No missed enquiries", "Every call logged and actionable"],
-        "de": ["24/7-Erreichbarkeit ohne 24/7-Personal", "Keine verpassten Anfragen", "Jeder Anruf protokolliert und nutzbar"]
+        "en": [
+          "24/7 answer rate without 24/7 staffing",
+          "No missed enquiries",
+          "Every call logged and actionable"
+        ],
+        "de": [
+          "24/7-Erreichbarkeit ohne 24/7-Personal",
+          "Keine verpassten Anfragen",
+          "Jeder Anruf protokolliert und nutzbar"
+        ]
       },
       "process": [
-        { "title": { "en": "Define the call flows", "de": "Anruf-Flows definieren" }, "body": { "en": "Greetings, routing, what to capture and when to escalate.", "de": "Begrüßung, Routing, was erfasst wird und wann eskaliert wird." } },
-        { "title": { "en": "Set up the assistant", "de": "Assistent einrichten" }, "body": { "en": "Cloud reception connected to your numbers and CRM.", "de": "Cloud-Empfang verbunden mit Ihren Nummern und dem CRM." } },
-        { "title": { "en": "Tune", "de": "Optimieren" }, "body": { "en": "Refine prompts and routing on real calls.", "de": "Prompts und Routing anhand echter Anrufe verfeinern." } }
+        {
+          "title": {
+            "en": "Define the call flows",
+            "de": "Anruf-Flows definieren"
+          },
+          "body": {
+            "en": "Greetings, routing, what to capture and when to escalate.",
+            "de": "Begrüßung, Routing, was erfasst wird und wann eskaliert wird."
+          }
+        },
+        {
+          "title": {
+            "en": "Set up the assistant",
+            "de": "Assistent einrichten"
+          },
+          "body": {
+            "en": "Cloud reception connected to your numbers and CRM.",
+            "de": "Cloud-Empfang verbunden mit Ihren Nummern und dem CRM."
+          }
+        },
+        {
+          "title": {
+            "en": "Tune",
+            "de": "Optimieren"
+          },
+          "body": {
+            "en": "Refine prompts and routing on real calls.",
+            "de": "Prompts und Routing anhand echter Anrufe verfeinern."
+          }
+        }
       ],
-      "who": { "en": "For teams losing business to missed and after-hours calls.", "de": "Für Teams, die Geschäft durch verpasste Anrufe verlieren." },
-      "stack": ["VoIP7", "Twilio", "ElevenLabs", "n8n"],
+      "who": {
+        "en": "For teams losing business to missed and after-hours calls.",
+        "de": "Für Teams, die Geschäft durch verpasste Anrufe verlieren."
+      },
+      "stack": [
+        "VoIP7",
+        "Twilio",
+        "ElevenLabs",
+        "n8n"
+      ],
       "faqs": [
-        { "q": { "en": "Can it transfer to a real person?", "de": "Kann es an einen Menschen übergeben?" }, "a": { "en": "Yes — complex or sensitive calls route straight to your team.", "de": "Ja — komplexe oder sensible Anrufe gehen direkt an Ihr Team." } }
+        {
+          "q": {
+            "en": "Can it transfer to a real person?",
+            "de": "Kann es an einen Menschen übergeben?"
+          },
+          "a": {
+            "en": "Yes — complex or sensitive calls route straight to your team.",
+            "de": "Ja — komplexe oder sensible Anrufe gehen direkt an Ihr Team."
+          }
+        }
       ],
-      "related": ["whatsapp", "chatbots", "rpa"]
+      "related": [
+        "whatsapp",
+        "chatbots",
+        "rpa"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-voice.jpg",
+        "alt": {
+          "en": "A headset and microphone with sound-wave light",
+          "de": "Headset und Mikrofon mit Schallwellen-Licht"
+        }
+      }
     },
     {
-      "slug": "chatbots", "type": "leaf", "parent": "automation", "code": "02.4",
-      "title": { "en": "Website Chatbots", "de": "Website-Chatbots" },
-      "tagline": { "en": "The assistant on this very site.", "de": "Der Assistent auf genau dieser Seite." },
+      "slug": "chatbots",
+      "type": "leaf",
+      "parent": "automation",
+      "code": "02.4",
+      "title": {
+        "en": "Website Chatbots",
+        "de": "Website-Chatbots"
+      },
+      "tagline": {
+        "en": "The assistant on this very site.",
+        "de": "Der Assistent auf genau dieser Seite."
+      },
       "summary": {
         "en": "A website assistant that answers approved questions from your own knowledge base, guides visitors and hands complex cases to a human — the same kind we run here.",
         "de": "Ein Website-Assistent, der freigegebene Fragen aus Ihrer eigenen Wissensbasis beantwortet, Besucher führt und komplexe Fälle an einen Menschen übergibt — genau wie der hier."
       },
       "offerings": {
-        "en": ["Assistant persona and disclosure", "Knowledge base from your content", "Guardrails and human handoff", "Multilingual answering"],
-        "de": ["Assistenten-Persona und Offenlegung", "Wissensbasis aus Ihren Inhalten", "Guardrails und Human Handoff", "Mehrsprachige Antworten"]
+        "en": [
+          "Assistant persona and disclosure",
+          "Knowledge base from your content",
+          "Guardrails and human handoff",
+          "Multilingual answering"
+        ],
+        "de": [
+          "Assistenten-Persona und Offenlegung",
+          "Wissensbasis aus Ihren Inhalten",
+          "Guardrails und Human Handoff",
+          "Mehrsprachige Antworten"
+        ]
       },
       "outcomes": {
-        "en": ["Visitors get answers instantly", "Replies grounded in your real content", "Safe, on-brand, and honest about limits"],
-        "de": ["Besucher erhalten sofort Antworten", "Antworten basieren auf Ihren echten Inhalten", "Sicher, markenkonform und ehrlich über Grenzen"]
+        "en": [
+          "Visitors get answers instantly",
+          "Replies grounded in your real content",
+          "Safe, on-brand, and honest about limits"
+        ],
+        "de": [
+          "Besucher erhalten sofort Antworten",
+          "Antworten basieren auf Ihren echten Inhalten",
+          "Sicher, markenkonform und ehrlich über Grenzen"
+        ]
       },
       "process": [
-        { "title": { "en": "Build the knowledge base", "de": "Wissensbasis aufbauen" }, "body": { "en": "We turn your approved content into a retrieval databank.", "de": "Wir verwandeln Ihre freigegebenen Inhalte in eine Retrieval-Datenbank." } },
-        { "title": { "en": "Set guardrails", "de": "Guardrails setzen" }, "body": { "en": "Intent rules, handoff and prompt-injection protection.", "de": "Intent-Regeln, Handoff und Schutz vor Prompt-Injection." } },
-        { "title": { "en": "Launch & monitor", "de": "Launch & Monitoring" }, "body": { "en": "Go live, then refine on real conversations.", "de": "Live gehen, dann anhand echter Gespräche verfeinern." } }
+        {
+          "title": {
+            "en": "Build the knowledge base",
+            "de": "Wissensbasis aufbauen"
+          },
+          "body": {
+            "en": "We turn your approved content into a retrieval databank.",
+            "de": "Wir verwandeln Ihre freigegebenen Inhalte in eine Retrieval-Datenbank."
+          }
+        },
+        {
+          "title": {
+            "en": "Set guardrails",
+            "de": "Guardrails setzen"
+          },
+          "body": {
+            "en": "Intent rules, handoff and prompt-injection protection.",
+            "de": "Intent-Regeln, Handoff und Schutz vor Prompt-Injection."
+          }
+        },
+        {
+          "title": {
+            "en": "Launch & monitor",
+            "de": "Launch & Monitoring"
+          },
+          "body": {
+            "en": "Go live, then refine on real conversations.",
+            "de": "Live gehen, dann anhand echter Gespräche verfeinern."
+          }
+        }
       ],
-      "who": { "en": "For sites that get the same questions over and over.", "de": "Für Sites, die immer wieder die gleichen Fragen bekommen." },
-      "stack": ["Retrieval (RAG)", "DeepSeek", "Postgres", "pgvector"],
+      "who": {
+        "en": "For sites that get the same questions over and over.",
+        "de": "Für Sites, die immer wieder die gleichen Fragen bekommen."
+      },
+      "stack": [
+        "Retrieval (RAG)",
+        "DeepSeek",
+        "Postgres",
+        "pgvector"
+      ],
       "faqs": [
-        { "q": { "en": "Will it make things up?", "de": "Erfindet es Dinge?" }, "a": { "en": "It answers from your approved content and defers when unsure.", "de": "Es antwortet aus Ihren freigegebenen Inhalten und verweist bei Unsicherheit weiter." } }
+        {
+          "q": {
+            "en": "Will it make things up?",
+            "de": "Erfindet es Dinge?"
+          },
+          "a": {
+            "en": "It answers from your approved content and defers when unsure.",
+            "de": "Es antwortet aus Ihren freigegebenen Inhalten und verweist bei Unsicherheit weiter."
+          }
+        }
       ],
-      "related": ["whatsapp", "voice", "sap"]
+      "related": [
+        "whatsapp",
+        "voice",
+        "sap"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-chatbots.jpg",
+        "alt": {
+          "en": "A laptop with an abstract chat interface",
+          "de": "Laptop mit abstrakter Chat-Oberfläche"
+        }
+      }
     },
-
     {
-      "slug": "marketing", "type": "hub", "code": "03",
-      "title": { "en": "Digital Marketing", "de": "Digitales Marketing" },
-      "tagline": { "en": "Be found, be remembered, be chosen.", "de": "Gefunden werden, im Kopf bleiben, gewählt werden." },
+      "slug": "marketing",
+      "type": "hub",
+      "code": "03",
+      "title": {
+        "en": "Digital Marketing",
+        "de": "Digitales Marketing"
+      },
+      "tagline": {
+        "en": "Be found, be remembered, be chosen.",
+        "de": "Gefunden werden, im Kopf bleiben, gewählt werden."
+      },
       "summary": {
         "en": "Search, content and video that turn attention into customers — built as a durable acquisition channel, not a one-off campaign.",
         "de": "Suche, Content und Video, die Aufmerksamkeit in Kunden verwandeln — als dauerhafter Akquise-Kanal, nicht als Einmal-Kampagne."
@@ -352,152 +1307,575 @@
         "en": "SEO, content and video marketing. Pick the channel you want to grow.",
         "de": "SEO, Content und Video-Marketing. Wählen Sie den Kanal, den Sie ausbauen wollen."
       },
-      "children": ["seo", "content", "video"]
+      "children": [
+        "seo",
+        "content",
+        "video"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-marketing.jpg",
+        "alt": {
+          "en": "A marketer's creative flat-lay",
+          "de": "Kreatives Flat-Lay einer Marketerin"
+        }
+      }
     },
     {
-      "slug": "seo", "type": "leaf", "parent": "marketing", "code": "03.1",
-      "title": { "en": "SEO", "de": "SEO" },
-      "tagline": { "en": "Traffic that compounds.", "de": "Traffic, der sich aufbaut." },
+      "slug": "seo",
+      "type": "leaf",
+      "parent": "marketing",
+      "code": "03.1",
+      "title": {
+        "en": "SEO",
+        "de": "SEO"
+      },
+      "tagline": {
+        "en": "Traffic that compounds.",
+        "de": "Traffic, der sich aufbaut."
+      },
       "summary": {
         "en": "Technical SEO, content and link strategy that turns your site into a durable acquisition channel — higher rankings on the queries that matter.",
         "de": "Technisches SEO, Content und Link-Strategie, die Ihre Site zu einem dauerhaften Akquise-Kanal machen — bessere Rankings bei relevanten Suchanfragen."
       },
       "offerings": {
-        "en": ["Technical SEO audits", "Content and keyword strategy", "Authority and link building", "Reporting and tracking"],
-        "de": ["Technische SEO-Audits", "Content- und Keyword-Strategie", "Authority- und Linkaufbau", "Reporting und Tracking"]
+        "en": [
+          "Technical SEO audits",
+          "Content and keyword strategy",
+          "Authority and link building",
+          "Reporting and tracking"
+        ],
+        "de": [
+          "Technische SEO-Audits",
+          "Content- und Keyword-Strategie",
+          "Authority- und Linkaufbau",
+          "Reporting und Tracking"
+        ]
       },
       "outcomes": {
-        "en": ["Higher rankings on the queries that matter", "Compounding organic traffic", "Lower blended acquisition cost over time"],
-        "de": ["Bessere Rankings bei relevanten Suchanfragen", "Wachsender organischer Traffic", "Niedrigere Akquise-Kosten über Zeit"]
+        "en": [
+          "Higher rankings on the queries that matter",
+          "Compounding organic traffic",
+          "Lower blended acquisition cost over time"
+        ],
+        "de": [
+          "Bessere Rankings bei relevanten Suchanfragen",
+          "Wachsender organischer Traffic",
+          "Niedrigere Akquise-Kosten über Zeit"
+        ]
       },
       "process": [
-        { "title": { "en": "Audit", "de": "Audit" }, "body": { "en": "Crawl, ranks, gaps and opportunities.", "de": "Crawl, Rankings, Lücken und Chancen." } },
-        { "title": { "en": "Fix & publish", "de": "Fixen & Publizieren" }, "body": { "en": "Technical fixes plus a 12-week content plan.", "de": "Technische Fixes plus 12-Wochen-Content-Plan." } },
-        { "title": { "en": "Compound", "de": "Aufbauen" }, "body": { "en": "Earn authority through links and depth.", "de": "Authority aufbauen durch Links und Tiefe." } }
+        {
+          "title": {
+            "en": "Audit",
+            "de": "Audit"
+          },
+          "body": {
+            "en": "Crawl, ranks, gaps and opportunities.",
+            "de": "Crawl, Rankings, Lücken und Chancen."
+          }
+        },
+        {
+          "title": {
+            "en": "Fix & publish",
+            "de": "Fixen & Publizieren"
+          },
+          "body": {
+            "en": "Technical fixes plus a 12-week content plan.",
+            "de": "Technische Fixes plus 12-Wochen-Content-Plan."
+          }
+        },
+        {
+          "title": {
+            "en": "Compound",
+            "de": "Aufbauen"
+          },
+          "body": {
+            "en": "Earn authority through links and depth.",
+            "de": "Authority aufbauen durch Links und Tiefe."
+          }
+        }
       ],
-      "who": { "en": "For businesses that want search to pay them back for years.", "de": "Für Unternehmen, denen die Suche über Jahre zurückzahlen soll." },
-      "stack": ["Ahrefs", "Semrush", "Screaming Frog", "Google Search Console", "Looker Studio"],
+      "who": {
+        "en": "For businesses that want search to pay them back for years.",
+        "de": "Für Unternehmen, denen die Suche über Jahre zurückzahlen soll."
+      },
+      "stack": [
+        "Ahrefs",
+        "Semrush",
+        "Screaming Frog",
+        "Google Search Console",
+        "Looker Studio"
+      ],
       "faqs": [
-        { "q": { "en": "When will I see results?", "de": "Wann sehe ich Ergebnisse?" }, "a": { "en": "Technical wins in weeks. Content-driven traffic in 3–6 months.", "de": "Technische Gewinne in Wochen. Content-Traffic in 3–6 Monaten." } }
+        {
+          "q": {
+            "en": "When will I see results?",
+            "de": "Wann sehe ich Ergebnisse?"
+          },
+          "a": {
+            "en": "Technical wins in weeks. Content-driven traffic in 3–6 months.",
+            "de": "Technische Gewinne in Wochen. Content-Traffic in 3–6 Monaten."
+          }
+        }
       ],
-      "related": ["content", "web-development", "dashboards"]
+      "related": [
+        "content",
+        "web-development",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-seo.jpg",
+        "alt": {
+          "en": "A laptop with a rising graph and magnifier",
+          "de": "Laptop mit steigender Kurve und Lupe"
+        }
+      }
     },
     {
-      "slug": "content", "type": "leaf", "parent": "marketing", "code": "03.2",
-      "title": { "en": "Content & Social", "de": "Content & Social" },
-      "tagline": { "en": "Show up where your customers scroll.", "de": "Dort auftauchen, wo Ihre Kunden scrollen." },
+      "slug": "content",
+      "type": "leaf",
+      "parent": "marketing",
+      "code": "03.2",
+      "title": {
+        "en": "Content & Social",
+        "de": "Content & Social"
+      },
+      "tagline": {
+        "en": "Show up where your customers scroll.",
+        "de": "Dort auftauchen, wo Ihre Kunden scrollen."
+      },
       "summary": {
         "en": "A content engine — articles, social posts and creative — that keeps your brand visible and your pipeline warm, planned and produced on a steady cadence.",
         "de": "Eine Content-Maschine — Artikel, Social Posts und Creatives — die Ihre Marke sichtbar und Ihre Pipeline warm hält, geplant und produziert im festen Rhythmus."
       },
       "offerings": {
-        "en": ["Content strategy and calendar", "Articles and landing copy", "Social posts and creative", "Repurposing across channels"],
-        "de": ["Content-Strategie und -Kalender", "Artikel und Landing-Texte", "Social Posts und Creatives", "Wiederverwertung über Kanäle"]
+        "en": [
+          "Content strategy and calendar",
+          "Articles and landing copy",
+          "Social posts and creative",
+          "Repurposing across channels"
+        ],
+        "de": [
+          "Content-Strategie und -Kalender",
+          "Artikel und Landing-Texte",
+          "Social Posts und Creatives",
+          "Wiederverwertung über Kanäle"
+        ]
       },
       "outcomes": {
-        "en": ["A steady drumbeat of on-brand content", "Less scrambling for what to post", "Content that feeds SEO and ads"],
-        "de": ["Ein steter Takt markenkonformer Inhalte", "Weniger Hektik, was gepostet wird", "Content, der SEO und Ads speist"]
+        "en": [
+          "A steady drumbeat of on-brand content",
+          "Less scrambling for what to post",
+          "Content that feeds SEO and ads"
+        ],
+        "de": [
+          "Ein steter Takt markenkonformer Inhalte",
+          "Weniger Hektik, was gepostet wird",
+          "Content, der SEO und Ads speist"
+        ]
       },
       "process": [
-        { "title": { "en": "Strategy", "de": "Strategie" }, "body": { "en": "Audience, themes and a calendar you can keep.", "de": "Zielgruppe, Themen und ein Kalender, den man hält." } },
-        { "title": { "en": "Produce", "de": "Produzieren" }, "body": { "en": "Write, design and schedule on a steady cadence.", "de": "Schreiben, gestalten und planen im festen Rhythmus." } },
-        { "title": { "en": "Repurpose", "de": "Wiederverwerten" }, "body": { "en": "One idea, many formats across channels.", "de": "Eine Idee, viele Formate über alle Kanäle." } }
+        {
+          "title": {
+            "en": "Strategy",
+            "de": "Strategie"
+          },
+          "body": {
+            "en": "Audience, themes and a calendar you can keep.",
+            "de": "Zielgruppe, Themen und ein Kalender, den man hält."
+          }
+        },
+        {
+          "title": {
+            "en": "Produce",
+            "de": "Produzieren"
+          },
+          "body": {
+            "en": "Write, design and schedule on a steady cadence.",
+            "de": "Schreiben, gestalten und planen im festen Rhythmus."
+          }
+        },
+        {
+          "title": {
+            "en": "Repurpose",
+            "de": "Wiederverwerten"
+          },
+          "body": {
+            "en": "One idea, many formats across channels.",
+            "de": "Eine Idee, viele Formate über alle Kanäle."
+          }
+        }
       ],
-      "who": { "en": "For brands that know they should post consistently but never do.", "de": "Für Marken, die wissen, dass sie konstant posten sollten — es aber nie tun." },
-      "stack": ["Notion", "Figma", "CapCut", "Buffer", "Canva"],
+      "who": {
+        "en": "For brands that know they should post consistently but never do.",
+        "de": "Für Marken, die wissen, dass sie konstant posten sollten — es aber nie tun."
+      },
+      "stack": [
+        "Notion",
+        "Figma",
+        "CapCut",
+        "Buffer",
+        "Canva"
+      ],
       "faqs": [
-        { "q": { "en": "Do you write in German and English?", "de": "Schreiben Sie auf Deutsch und Englisch?" }, "a": { "en": "Yes — both, tuned to the platform and audience.", "de": "Ja — beides, abgestimmt auf Plattform und Zielgruppe." } }
+        {
+          "q": {
+            "en": "Do you write in German and English?",
+            "de": "Schreiben Sie auf Deutsch und Englisch?"
+          },
+          "a": {
+            "en": "Yes — both, tuned to the platform and audience.",
+            "de": "Ja — beides, abgestimmt auf Plattform und Zielgruppe."
+          }
+        }
       ],
-      "related": ["seo", "video", "web-design"]
+      "related": [
+        "seo",
+        "video",
+        "web-design"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-content.jpg",
+        "alt": {
+          "en": "A content creator's desk flat-lay",
+          "de": "Schreibtisch-Flat-Lay einer Content-Creatorin"
+        }
+      }
     },
     {
-      "slug": "video", "type": "leaf", "parent": "marketing", "code": "03.3",
-      "title": { "en": "AI Video Marketing", "de": "KI-Videomarketing" },
-      "tagline": { "en": "Campaign-grade video without a film crew.", "de": "Kampagnenreifes Video ohne Filmcrew." },
+      "slug": "video",
+      "type": "leaf",
+      "parent": "marketing",
+      "code": "03.3",
+      "title": {
+        "en": "AI Video Marketing",
+        "de": "KI-Videomarketing"
+      },
+      "tagline": {
+        "en": "Campaign-grade video without a film crew.",
+        "de": "Kampagnenreifes Video ohne Filmcrew."
+      },
       "summary": {
         "en": "Produce marketing video at scale — avatars, realistic AI shots and short-form edits — so you get more on-brand creative for the same budget.",
         "de": "Marketingvideo im großen Maßstab produzieren — Avatare, realistische KI-Shots und Short-Form-Edits — für mehr markenkonforme Creatives bei gleichem Budget."
       },
       "offerings": {
-        "en": ["Video marketing campaigns", "Digital avatar videos", "Realistic AI-generated shots", "Short-form edits for social"],
-        "de": ["Video-Marketingkampagnen", "Digitale Avatar-Videos", "Realistische KI-generierte Shots", "Short-Form-Edits für Social"]
+        "en": [
+          "Video marketing campaigns",
+          "Digital avatar videos",
+          "Realistic AI-generated shots",
+          "Short-form edits for social"
+        ],
+        "de": [
+          "Video-Marketingkampagnen",
+          "Digitale Avatar-Videos",
+          "Realistische KI-generierte Shots",
+          "Short-Form-Edits für Social"
+        ]
       },
       "outcomes": {
-        "en": ["More output for the same budget", "On-brand creative, every time", "Faster test-and-learn loops"],
-        "de": ["Mehr Output bei gleichem Budget", "Markenkonforme Creatives, jedes Mal", "Schnellere Test-and-Learn-Zyklen"]
+        "en": [
+          "More output for the same budget",
+          "On-brand creative, every time",
+          "Faster test-and-learn loops"
+        ],
+        "de": [
+          "Mehr Output bei gleichem Budget",
+          "Markenkonforme Creatives, jedes Mal",
+          "Schnellere Test-and-Learn-Zyklen"
+        ]
       },
       "process": [
-        { "title": { "en": "Concept", "de": "Konzept" }, "body": { "en": "Hooks, scripts and shotlists tuned to the platform.", "de": "Hooks, Skripte und Shotlists, abgestimmt auf die Plattform." } },
-        { "title": { "en": "Produce", "de": "Produzieren" }, "body": { "en": "Avatars, b-roll and voiceover, with real footage where it helps.", "de": "Avatare, B-Roll und Voiceover, mit echtem Material wo es hilft." } },
-        { "title": { "en": "Edit & ship", "de": "Schnitt & Launch" }, "body": { "en": "Final edits, captions, A/B variants, scheduled posting.", "de": "Finaler Schnitt, Captions, A/B-Varianten, geplantes Posting." } }
+        {
+          "title": {
+            "en": "Concept",
+            "de": "Konzept"
+          },
+          "body": {
+            "en": "Hooks, scripts and shotlists tuned to the platform.",
+            "de": "Hooks, Skripte und Shotlists, abgestimmt auf die Plattform."
+          }
+        },
+        {
+          "title": {
+            "en": "Produce",
+            "de": "Produzieren"
+          },
+          "body": {
+            "en": "Avatars, b-roll and voiceover, with real footage where it helps.",
+            "de": "Avatare, B-Roll und Voiceover, mit echtem Material wo es hilft."
+          }
+        },
+        {
+          "title": {
+            "en": "Edit & ship",
+            "de": "Schnitt & Launch"
+          },
+          "body": {
+            "en": "Final edits, captions, A/B variants, scheduled posting.",
+            "de": "Finaler Schnitt, Captions, A/B-Varianten, geplantes Posting."
+          }
+        }
       ],
-      "who": { "en": "For teams that need a steady stream of video but can't film weekly.", "de": "Für Teams, die laufend Video brauchen, aber nicht wöchentlich drehen können." },
-      "stack": ["HeyGen", "Synthesia", "Runway", "Veo", "ElevenLabs", "CapCut"],
+      "who": {
+        "en": "For teams that need a steady stream of video but can't film weekly.",
+        "de": "Für Teams, die laufend Video brauchen, aber nicht wöchentlich drehen können."
+      },
+      "stack": [
+        "HeyGen",
+        "Synthesia",
+        "Runway",
+        "Veo",
+        "ElevenLabs",
+        "CapCut"
+      ],
       "faqs": [
-        { "q": { "en": "Will it look fake?", "de": "Sieht es künstlich aus?" }, "a": { "en": "Modern AI video is strong. We mix it with real footage where needed.", "de": "Moderne KI-Videos sind stark. Wir mischen sie mit echtem Material, wenn nötig." } }
+        {
+          "q": {
+            "en": "Will it look fake?",
+            "de": "Sieht es künstlich aus?"
+          },
+          "a": {
+            "en": "Modern AI video is strong. We mix it with real footage where needed.",
+            "de": "Moderne KI-Videos sind stark. Wir mischen sie mit echtem Material, wenn nötig."
+          }
+        }
       ],
-      "related": ["content", "seo", "web-design"]
+      "related": [
+        "content",
+        "seo",
+        "web-design"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-video.jpg",
+        "alt": {
+          "en": "A small video studio with camera and light",
+          "de": "Kleines Videostudio mit Kamera und Licht"
+        }
+      }
     },
-
     {
-      "slug": "sap", "type": "standalone", "code": "04",
-      "title": { "en": "SAP Agentic AI Workflows", "de": "SAP Agentic AI Workflows" },
-      "tagline": { "en": "Intelligent automation inside SAP.", "de": "Intelligente Automatisierung in SAP." },
+      "slug": "sap",
+      "type": "standalone",
+      "code": "04",
+      "title": {
+        "en": "SAP Agentic AI Workflows",
+        "de": "SAP Agentic AI Workflows"
+      },
+      "tagline": {
+        "en": "Intelligent automation inside SAP.",
+        "de": "Intelligente Automatisierung in SAP."
+      },
       "summary": {
         "en": "Agents that prepare and optimize SAP processes — order handling, procurement, maintenance and project coordination — so your enterprise workflows run with less manual effort.",
         "de": "Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen."
       },
       "offerings": {
-        "en": ["Sales and purchase order agents", "Asset and plant maintenance agents", "Project management agents", "SAP process transformation"],
-        "de": ["Sales- und Purchase-Order-Agenten", "Asset- und Plant-Maintenance-Agenten", "Projektmanagement-Agenten", "SAP-Prozesstransformation"]
+        "en": [
+          "Sales and purchase order agents",
+          "Asset and plant maintenance agents",
+          "Project management agents",
+          "SAP process transformation"
+        ],
+        "de": [
+          "Sales- und Purchase-Order-Agenten",
+          "Asset- und Plant-Maintenance-Agenten",
+          "Projektmanagement-Agenten",
+          "SAP-Prozesstransformation"
+        ]
       },
       "outcomes": {
-        "en": ["Less manual effort in core SAP processes", "Faster, more consistent order and maintenance handling", "A clear, scoped path to agentic workflows"],
-        "de": ["Weniger Handarbeit in zentralen SAP-Prozessen", "Schnellere, konsistentere Auftrags- und Wartungsabwicklung", "Ein klarer, abgesteckter Weg zu agentischen Workflows"]
+        "en": [
+          "Less manual effort in core SAP processes",
+          "Faster, more consistent order and maintenance handling",
+          "A clear, scoped path to agentic workflows"
+        ],
+        "de": [
+          "Weniger Handarbeit in zentralen SAP-Prozessen",
+          "Schnellere, konsistentere Auftrags- und Wartungsabwicklung",
+          "Ein klarer, abgesteckter Weg zu agentischen Workflows"
+        ]
       },
       "process": [
-        { "title": { "en": "Scope", "de": "Scope" }, "body": { "en": "We identify the SAP processes worth automating first.", "de": "Wir identifizieren die SAP-Prozesse, die sich zuerst lohnen." } },
-        { "title": { "en": "Prototype", "de": "Prototyp" }, "body": { "en": "A focused agent proves the value before rollout.", "de": "Ein fokussierter Agent beweist den Nutzen vor dem Rollout." } },
-        { "title": { "en": "Implement", "de": "Umsetzen" }, "body": { "en": "Enterprise implementation, planned to your governance.", "de": "Enterprise-Umsetzung, geplant nach Ihrer Governance." } }
+        {
+          "title": {
+            "en": "Scope",
+            "de": "Scope"
+          },
+          "body": {
+            "en": "We identify the SAP processes worth automating first.",
+            "de": "Wir identifizieren die SAP-Prozesse, die sich zuerst lohnen."
+          }
+        },
+        {
+          "title": {
+            "en": "Prototype",
+            "de": "Prototyp"
+          },
+          "body": {
+            "en": "A focused agent proves the value before rollout.",
+            "de": "Ein fokussierter Agent beweist den Nutzen vor dem Rollout."
+          }
+        },
+        {
+          "title": {
+            "en": "Implement",
+            "de": "Umsetzen"
+          },
+          "body": {
+            "en": "Enterprise implementation, planned to your governance.",
+            "de": "Enterprise-Umsetzung, geplant nach Ihrer Governance."
+          }
+        }
       ],
-      "who": { "en": "For enterprises running SAP who want agents on real processes.", "de": "Für Unternehmen mit SAP, die Agenten auf echte Prozesse setzen wollen." },
-      "stack": ["SAP", "SAP Joule", "RAG", "Enterprise integration"],
+      "who": {
+        "en": "For enterprises running SAP who want agents on real processes.",
+        "de": "Für Unternehmen mit SAP, die Agenten auf echte Prozesse setzen wollen."
+      },
+      "stack": [
+        "SAP",
+        "SAP Joule",
+        "RAG",
+        "Enterprise integration"
+      ],
       "note": {
         "en": "Enterprise SAP timelines are scoped individually — initial scoping or a prototype can be quick, but full implementation is not a fixed 14–21 day engagement.",
         "de": "Enterprise-SAP-Zeitpläne werden individuell geplant — erstes Scoping oder ein Prototyp kann schnell gehen, die volle Umsetzung ist aber kein fester 14–21-Tage-Auftrag."
       },
       "faqs": [
-        { "q": { "en": "Do you replace our SAP team?", "de": "Ersetzen Sie unser SAP-Team?" }, "a": { "en": "No — we add agents that prepare work and hand decisions to people.", "de": "Nein — wir ergänzen Agenten, die Arbeit vorbereiten und Entscheidungen an Menschen übergeben." } }
+        {
+          "q": {
+            "en": "Do you replace our SAP team?",
+            "de": "Ersetzen Sie unser SAP-Team?"
+          },
+          "a": {
+            "en": "No — we add agents that prepare work and hand decisions to people.",
+            "de": "Nein — wir ergänzen Agenten, die Arbeit vorbereiten und Entscheidungen an Menschen übergeben."
+          }
+        }
       ],
-      "related": ["chatbots", "rpa", "dashboards"]
+      "related": [
+        "chatbots",
+        "rpa",
+        "dashboards"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-sap.jpg",
+        "alt": {
+          "en": "A corporate boardroom with an abstract network screen",
+          "de": "Boardroom mit abstraktem Netzwerk-Screen"
+        }
+      }
     },
     {
-      "slug": "testing-support", "type": "standalone", "code": "05",
-      "title": { "en": "Testing & Support", "de": "Testing & Support" },
-      "tagline": { "en": "Ship without holding your breath.", "de": "Ausliefern, ohne die Luft anzuhalten." },
+      "slug": "testing-support",
+      "type": "standalone",
+      "code": "05",
+      "title": {
+        "en": "Testing & Support",
+        "de": "Testing & Support"
+      },
+      "tagline": {
+        "en": "Ship without holding your breath.",
+        "de": "Ausliefern, ohne die Luft anzuhalten."
+      },
       "summary": {
         "en": "End-to-end testing and post-launch support so releases land cleanly and stay healthy — across devices, browsers and OS versions.",
         "de": "End-to-End-Testing und Post-Launch-Support — damit Releases sauber landen und gesund bleiben, über Geräte, Browser und OS-Versionen hinweg."
       },
       "offerings": {
-        "en": ["Functional and regression testing", "Device, OS and browser coverage", "Post-launch monitoring", "Ongoing support and triage"],
-        "de": ["Funktions- und Regressionstests", "Geräte-, OS- und Browser-Abdeckung", "Post-Launch-Monitoring", "Laufender Support und Triage"]
+        "en": [
+          "Functional and regression testing",
+          "Device, OS and browser coverage",
+          "Post-launch monitoring",
+          "Ongoing support and triage"
+        ],
+        "de": [
+          "Funktions- und Regressionstests",
+          "Geräte-, OS- und Browser-Abdeckung",
+          "Post-Launch-Monitoring",
+          "Laufender Support und Triage"
+        ]
       },
       "outcomes": {
-        "en": ["Fewer rollback fire drills", "Higher store and user ratings", "A predictable release cadence"],
-        "de": ["Weniger Rollback-Stress", "Bessere Store- und Nutzerbewertungen", "Ein planbarer Release-Rhythmus"]
+        "en": [
+          "Fewer rollback fire drills",
+          "Higher store and user ratings",
+          "A predictable release cadence"
+        ],
+        "de": [
+          "Weniger Rollback-Stress",
+          "Bessere Store- und Nutzerbewertungen",
+          "Ein planbarer Release-Rhythmus"
+        ]
       },
       "process": [
-        { "title": { "en": "Test plan", "de": "Testplan" }, "body": { "en": "A coverage matrix tied to your real users.", "de": "Eine Coverage-Matrix anhand echter Nutzer." } },
-        { "title": { "en": "Execute", "de": "Ausführen" }, "body": { "en": "Manual and automated across devices and OS versions.", "de": "Manuell und automatisiert über Geräte und OS-Versionen." } },
-        { "title": { "en": "Support", "de": "Support" }, "body": { "en": "Ongoing monitoring and triage after launch.", "de": "Laufendes Monitoring und Triage nach dem Launch." } }
+        {
+          "title": {
+            "en": "Test plan",
+            "de": "Testplan"
+          },
+          "body": {
+            "en": "A coverage matrix tied to your real users.",
+            "de": "Eine Coverage-Matrix anhand echter Nutzer."
+          }
+        },
+        {
+          "title": {
+            "en": "Execute",
+            "de": "Ausführen"
+          },
+          "body": {
+            "en": "Manual and automated across devices and OS versions.",
+            "de": "Manuell und automatisiert über Geräte und OS-Versionen."
+          }
+        },
+        {
+          "title": {
+            "en": "Support",
+            "de": "Support"
+          },
+          "body": {
+            "en": "Ongoing monitoring and triage after launch.",
+            "de": "Laufendes Monitoring und Triage nach dem Launch."
+          }
+        }
       ],
-      "who": { "en": "For teams who'd rather catch bugs before their users do.", "de": "Für Teams, die Bugs lieber vor ihren Nutzern finden." },
-      "stack": ["Playwright", "Cypress", "BrowserStack", "Sentry", "Datadog"],
+      "who": {
+        "en": "For teams who'd rather catch bugs before their users do.",
+        "de": "Für Teams, die Bugs lieber vor ihren Nutzern finden."
+      },
+      "stack": [
+        "Playwright",
+        "Cypress",
+        "BrowserStack",
+        "Sentry",
+        "Datadog"
+      ],
       "faqs": [
-        { "q": { "en": "Can you take over an existing app?", "de": "Können Sie eine bestehende App übernehmen?" }, "a": { "en": "Yes. We start with a 1-week audit before recommending next steps.", "de": "Ja. Wir starten mit einem 1-wöchigen Audit, bevor wir nächste Schritte empfehlen." } }
+        {
+          "q": {
+            "en": "Can you take over an existing app?",
+            "de": "Können Sie eine bestehende App übernehmen?"
+          },
+          "a": {
+            "en": "Yes. We start with a 1-week audit before recommending next steps.",
+            "de": "Ja. Wir starten mit einem 1-wöchigen Audit, bevor wir nächste Schritte empfehlen."
+          }
+        }
       ],
-      "related": ["web-development", "mobile-apps", "saas"]
+      "related": [
+        "web-development",
+        "mobile-apps",
+        "saas"
+      ],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-testing-support.jpg",
+        "alt": {
+          "en": "A support engineer at a clean helpdesk",
+          "de": "Support-Engineer an einem aufgeräumten Helpdesk"
+        }
+      }
     }
   ]
 }
