@@ -69,6 +69,31 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq p{margin:0;color:var(--muted)}
 .rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
 .rx-rel:hover{border-color:var(--red)}
+/* hero with media */
+.rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
+.rx-hero-media img{display:block;width:100%;height:100%;object-fit:cover}
+.rx-hero-ph{display:grid;place-items:center;background:linear-gradient(135deg,#fff,#f0efe9 55%,#ffe9e9);position:relative}
+.rx-hero-ph span{position:relative;z-index:1;font:700 12px/1 Inter,sans-serif;letter-spacing:.2em;color:var(--red);border:1px solid var(--line);background:rgba(255,255,255,.7);padding:8px 14px;border-radius:999px}
+.rx-hero-ph:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(255,45,45,.12),transparent 60%)}
+@media(max-width:820px){.rx-hero-split{grid-template-columns:1fr;gap:26px}.rx-hero-media{order:-1;aspect-ratio:16/10}}
+/* how it works */
+.rx-work-intro{font-size:18px;color:var(--ink);max-width:62ch;margin:-4px 0 30px}
+.rx-work-grid{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:42px;align-items:start}
+@media(max-width:820px){.rx-work-grid{grid-template-columns:1fr;gap:30px}}
+.rx-flow{display:flex;flex-direction:column;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 16px}
+.rx-fnode{width:100%;max-width:280px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;font-size:14px}
+.rx-fnode:first-child{background:#111214;color:#fff;border-color:#111214}
+.rx-fnode:last-child{background:#fff7f7;border-color:#f3d6d6}
+.rx-fconn{width:2px;height:22px;background:#cfcfca;position:relative}
+.rx-fconn:after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #cfcfca}
+.rx-fbranch{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;max-width:300px}
+.rx-fitem{flex:1 1 calc(50% - 8px);min-width:118px;text-align:center;background:#faf3f3;border:1px solid #f1dada;border-radius:10px;padding:9px 10px;font-size:12.5px;font-weight:600;color:#b3261e}
+.rx-work-steps{display:grid;gap:16px}
+.rx-wstep{display:flex;gap:16px;align-items:flex-start}
+.rx-wnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.rx-wstep h3{font-size:17px;font-weight:700;margin-bottom:3px}
+.rx-wstep p{margin:0;color:var(--muted);font-size:15px}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
@@ -96,11 +121,14 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
   <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/sap" data-en="SAP Agentic" data-de="SAP Agentic">SAP Agentic</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
   <button class="rx-pill" id="rx-lang" type="button" aria-label="Sprache wechseln"><span data-lang="de">DE</span><span class="sep">/</span><span data-lang="en">EN</span></button>
 </header><main><nav class="rx-crumb"><a href="/">Home</a> / <span data-en="SAP Agentic AI Workflows" data-de="SAP Agentic AI Workflows">SAP Agentic AI Workflows</span></nav><section class="rx-hero">
-  <div class="rx-code">04</div>
-  <h1 data-en="SAP Agentic AI Workflows" data-de="SAP Agentic AI Workflows">SAP Agentic AI Workflows</h1>
-  <p class="rx-tag" data-en="Intelligent automation inside SAP." data-de="Intelligente Automatisierung in SAP.">Intelligente Automatisierung in SAP.</p>
-  <p class="rx-lead" data-en="Agents that prepare and optimize SAP processes — order handling, procurement, maintenance and project coordination — so your enterprise workflows run with less manual effort." data-de="Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen.">Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen.</p>
-  <a class="rx-btn" href="mailto:hello@rexity.ai"><span data-en="Start a conversation" data-de="Gespräch starten">Gespräch starten</span></a>
+  <div class="rx-hero-text">
+    <div class="rx-code">04</div>
+    <h1 data-en="SAP Agentic AI Workflows" data-de="SAP Agentic AI Workflows">SAP Agentic AI Workflows</h1>
+    <p class="rx-tag" data-en="Intelligent automation inside SAP." data-de="Intelligente Automatisierung in SAP.">Intelligente Automatisierung in SAP.</p>
+    <p class="rx-lead" data-en="Agents that prepare and optimize SAP processes — order handling, procurement, maintenance and project coordination — so your enterprise workflows run with less manual effort." data-de="Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen.">Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen.</p>
+    <a class="rx-btn" href="mailto:hello@rexity.ai"><span data-en="Start a conversation" data-de="Gespräch starten">Gespräch starten</span></a>
+  </div>
+  
 </section><section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks"><li><span data-en="Sales and purchase order agents" data-de="Sales- und Purchase-Order-Agenten">Sales- und Purchase-Order-Agenten</span></li><li><span data-en="Asset and plant maintenance agents" data-de="Asset- und Plant-Maintenance-Agenten">Asset- und Plant-Maintenance-Agenten</span></li><li><span data-en="Project management agents" data-de="Projektmanagement-Agenten">Projektmanagement-Agenten</span></li><li><span data-en="SAP process transformation" data-de="SAP-Prozesstransformation">SAP-Prozesstransformation</span></li></ul></section>
 <section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks"><li><span data-en="Less manual effort in core SAP processes" data-de="Weniger Handarbeit in zentralen SAP-Prozessen">Weniger Handarbeit in zentralen SAP-Prozessen</span></li><li><span data-en="Faster, more consistent order and maintenance handling" data-de="Schnellere, konsistentere Auftrags- und Wartungsabwicklung">Schnellere, konsistentere Auftrags- und Wartungsabwicklung</span></li><li><span data-en="A clear, scoped path to agentic workflows" data-de="Ein klarer, abgesteckter Weg zu agentischen Workflows">Ein klarer, abgesteckter Weg zu agentischen Workflows</span></li></ul></section>
 <section class="rx-sec"><h2 data-en="How we work" data-de="Wie wir arbeiten">Wie wir arbeiten</h2><div class="rx-steps"><div class="rx-step"><span class="rx-step-n">1</span><div><h3 data-en="Scope" data-de="Scope">Scope</h3><p data-en="We identify the SAP processes worth automating first." data-de="Wir identifizieren die SAP-Prozesse, die sich zuerst lohnen.">Wir identifizieren die SAP-Prozesse, die sich zuerst lohnen.</p></div></div><div class="rx-step"><span class="rx-step-n">2</span><div><h3 data-en="Prototype" data-de="Prototyp">Prototyp</h3><p data-en="A focused agent proves the value before rollout." data-de="Ein fokussierter Agent beweist den Nutzen vor dem Rollout.">Ein fokussierter Agent beweist den Nutzen vor dem Rollout.</p></div></div><div class="rx-step"><span class="rx-step-n">3</span><div><h3 data-en="Implement" data-de="Umsetzen">Umsetzen</h3><p data-en="Enterprise implementation, planned to your governance." data-de="Enterprise-Umsetzung, geplant nach Ihrer Governance.">Enterprise-Umsetzung, geplant nach Ihrer Governance.</p></div></div></div></section>
@@ -131,6 +159,9 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
       if(el.tagName==='TITLE'){el.textContent=v;}
       else if(el.tagName==='META'){el.setAttribute('content',v);}
       else{el.textContent=v;}
+    });
+    document.querySelectorAll('[data-alt-de][data-alt-en]').forEach(function(el){
+      var v=el.getAttribute('data-alt-'+l); if(v!=null)el.setAttribute('alt',v);
     });
     document.querySelectorAll('#rx-lang [data-lang]').forEach(function(s){
       s.classList.toggle('on', s.getAttribute('data-lang')===l);

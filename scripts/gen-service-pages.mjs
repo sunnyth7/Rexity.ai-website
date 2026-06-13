@@ -7,7 +7,7 @@
    These pages share the brand (self-hosted Inter, brand palette, chatbot,
    DE/EN via the same rexity_lang localStorage key as the homepage). */
 
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -97,13 +97,60 @@ function list(bi) {
     .join("");
 }
 
+// Hero media: real photo if the file is on disk, else a branded placeholder
+// (so layout holds while WAN images are pending). Returns "" when no image.
+function heroMedia(p) {
+  if (!p.image) return "";
+  const onDisk = existsSync(join(ROOT, p.image.src.replace(/^\//, "")));
+  if (onDisk) {
+    return `<div class="rx-hero-media"><img src="${esc(p.image.src)}" alt="${esc(p.image.alt.de)}" data-alt-en="${esc(p.image.alt.en)}" data-alt-de="${esc(p.image.alt.de)}" loading="eager" decoding="async"></div>`;
+  }
+  return `<div class="rx-hero-media rx-hero-ph" role="img" aria-label="${esc(p.image.alt.de)}"><span>${esc(p.code)}</span></div>`;
+}
+
 function heroBlock(p, isHub) {
-  return `<section class="rx-hero">
-  <div class="rx-code">${esc(p.code)}</div>
-  ${t(p.title, "h1", "")}
-  ${t(p.tagline, "p", "rx-tag")}
-  ${t(isHub ? p.hero : p.summary, "p", "rx-lead")}
-  <a class="rx-btn" href="mailto:${EMAIL}">${"<span data-en=\"Start a conversation\" data-de=\"Gespräch starten\">Gespräch starten</span>"}</a>
+  const media = heroMedia(p);
+  return `<section class="rx-hero${media ? " rx-hero-split" : ""}">
+  <div class="rx-hero-text">
+    <div class="rx-code">${esc(p.code)}</div>
+    ${t(p.title, "h1", "")}
+    ${t(p.tagline, "p", "rx-tag")}
+    ${t(isHub ? p.hero : p.summary, "p", "rx-lead")}
+    <a class="rx-btn" href="mailto:${EMAIL}">${"<span data-en=\"Start a conversation\" data-de=\"Gespräch starten\">Gespräch starten</span>"}</a>
+  </div>
+  ${media}
+</section>`;
+}
+
+// HTML/CSS workflow diagram (wraps + responsive + bilingual; better than SVG
+// for long DE labels). Renders the flow as connected pills with a branch row.
+function flowDiagram(flow) {
+  const parts = flow
+    .map((stage, idx) => {
+      const conn = idx > 0 ? `<div class="rx-fconn" aria-hidden="true"></div>` : "";
+      if (stage.node) return `${conn}<div class="rx-fnode">${tText(stage.node)}</div>`;
+      if (stage.branch) {
+        const items = stage.branch.map((b) => `<div class="rx-fitem">${tText(b)}</div>`).join("");
+        return `${conn}<div class="rx-fbranch">${items}</div>`;
+      }
+      return "";
+    })
+    .join("");
+  return `<div class="rx-flow">${parts}</div>`;
+}
+
+function workflowSection(p) {
+  if (!p.workflow) return "";
+  const w = p.workflow;
+  const steps = w.steps
+    .map((s, i) => `<div class="rx-wstep"><span class="rx-wnum">${i + 1}</span><div>${t(s.title, "h3", "")}${t(s.body, "p", "")}</div></div>`)
+    .join("");
+  return `<section class="rx-sec rx-work"><h2 data-en="How it works" data-de="So funktioniert's">So funktioniert's</h2>
+  ${t(w.intro, "p", "rx-work-intro")}
+  <div class="rx-work-grid">
+    <div class="rx-work-diagram">${flowDiagram(w.flow)}</div>
+    <div class="rx-work-steps">${steps}</div>
+  </div>
 </section>`;
 }
 
@@ -124,14 +171,19 @@ function childCards(p) {
 
 function leafBody(p) {
   const sections = [];
+  // The real "How it works" workflow is the centerpiece — show it first.
+  if (p.workflow) sections.push(workflowSection(p));
   sections.push(`<section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks">${list(p.offerings)}</ul></section>`);
   sections.push(`<section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks">${list(p.outcomes)}</ul></section>`);
-  const steps = p.process
-    .map(
-      (s, i) => `<div class="rx-step"><span class="rx-step-n">${i + 1}</span><div>${t(s.title, "h3", "")}${t(s.body, "p", "")}</div></div>`
-    )
-    .join("");
-  sections.push(`<section class="rx-sec"><h2 data-en="How we work" data-de="Wie wir arbeiten">Wie wir arbeiten</h2><div class="rx-steps">${steps}</div></section>`);
+  // Generic 3-step process only when there's no richer workflow (avoids dupes).
+  if (!p.workflow) {
+    const steps = p.process
+      .map(
+        (s, i) => `<div class="rx-step"><span class="rx-step-n">${i + 1}</span><div>${t(s.title, "h3", "")}${t(s.body, "p", "")}</div></div>`
+      )
+      .join("");
+    sections.push(`<section class="rx-sec"><h2 data-en="How we work" data-de="Wie wir arbeiten">Wie wir arbeiten</h2><div class="rx-steps">${steps}</div></section>`);
+  }
   if (p.who) sections.push(`<section class="rx-sec rx-who">${t(p.who, "p", "")}</section>`);
   if (p.note) sections.push(`<section class="rx-sec rx-note">${t(p.note, "p", "")}</section>`);
   if (p.stack && p.stack.length) {
@@ -256,6 +308,31 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq p{margin:0;color:var(--muted)}
 .rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
 .rx-rel:hover{border-color:var(--red)}
+/* hero with media */
+.rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
+.rx-hero-media img{display:block;width:100%;height:100%;object-fit:cover}
+.rx-hero-ph{display:grid;place-items:center;background:linear-gradient(135deg,#fff,#f0efe9 55%,#ffe9e9);position:relative}
+.rx-hero-ph span{position:relative;z-index:1;font:700 12px/1 Inter,sans-serif;letter-spacing:.2em;color:var(--red);border:1px solid var(--line);background:rgba(255,255,255,.7);padding:8px 14px;border-radius:999px}
+.rx-hero-ph:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(255,45,45,.12),transparent 60%)}
+@media(max-width:820px){.rx-hero-split{grid-template-columns:1fr;gap:26px}.rx-hero-media{order:-1;aspect-ratio:16/10}}
+/* how it works */
+.rx-work-intro{font-size:18px;color:var(--ink);max-width:62ch;margin:-4px 0 30px}
+.rx-work-grid{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:42px;align-items:start}
+@media(max-width:820px){.rx-work-grid{grid-template-columns:1fr;gap:30px}}
+.rx-flow{display:flex;flex-direction:column;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 16px}
+.rx-fnode{width:100%;max-width:280px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;font-size:14px}
+.rx-fnode:first-child{background:#111214;color:#fff;border-color:#111214}
+.rx-fnode:last-child{background:#fff7f7;border-color:#f3d6d6}
+.rx-fconn{width:2px;height:22px;background:#cfcfca;position:relative}
+.rx-fconn:after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #cfcfca}
+.rx-fbranch{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;max-width:300px}
+.rx-fitem{flex:1 1 calc(50% - 8px);min-width:118px;text-align:center;background:#faf3f3;border:1px solid #f1dada;border-radius:10px;padding:9px 10px;font-size:12.5px;font-weight:600;color:#b3261e}
+.rx-work-steps{display:grid;gap:16px}
+.rx-wstep{display:flex;gap:16px;align-items:flex-start}
+.rx-wnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.rx-wstep h3{font-size:17px;font-weight:700;margin-bottom:3px}
+.rx-wstep p{margin:0;color:var(--muted);font-size:15px}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
@@ -289,6 +366,9 @@ const LANG_JS = `
       if(el.tagName==='TITLE'){el.textContent=v;}
       else if(el.tagName==='META'){el.setAttribute('content',v);}
       else{el.textContent=v;}
+    });
+    document.querySelectorAll('[data-alt-de][data-alt-en]').forEach(function(el){
+      var v=el.getAttribute('data-alt-'+l); if(v!=null)el.setAttribute('alt',v);
     });
     document.querySelectorAll('#rx-lang [data-lang]').forEach(function(s){
       s.classList.toggle('on', s.getAttribute('data-lang')===l);

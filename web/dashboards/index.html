@@ -69,6 +69,31 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq p{margin:0;color:var(--muted)}
 .rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
 .rx-rel:hover{border-color:var(--red)}
+/* hero with media */
+.rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
+.rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
+.rx-hero-media img{display:block;width:100%;height:100%;object-fit:cover}
+.rx-hero-ph{display:grid;place-items:center;background:linear-gradient(135deg,#fff,#f0efe9 55%,#ffe9e9);position:relative}
+.rx-hero-ph span{position:relative;z-index:1;font:700 12px/1 Inter,sans-serif;letter-spacing:.2em;color:var(--red);border:1px solid var(--line);background:rgba(255,255,255,.7);padding:8px 14px;border-radius:999px}
+.rx-hero-ph:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 72% 28%,rgba(255,45,45,.12),transparent 60%)}
+@media(max-width:820px){.rx-hero-split{grid-template-columns:1fr;gap:26px}.rx-hero-media{order:-1;aspect-ratio:16/10}}
+/* how it works */
+.rx-work-intro{font-size:18px;color:var(--ink);max-width:62ch;margin:-4px 0 30px}
+.rx-work-grid{display:grid;grid-template-columns:minmax(240px,330px) 1fr;gap:42px;align-items:start}
+@media(max-width:820px){.rx-work-grid{grid-template-columns:1fr;gap:30px}}
+.rx-flow{display:flex;flex-direction:column;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 16px}
+.rx-fnode{width:100%;max-width:280px;text-align:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;font-size:14px}
+.rx-fnode:first-child{background:#111214;color:#fff;border-color:#111214}
+.rx-fnode:last-child{background:#fff7f7;border-color:#f3d6d6}
+.rx-fconn{width:2px;height:22px;background:#cfcfca;position:relative}
+.rx-fconn:after{content:"";position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #cfcfca}
+.rx-fbranch{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;width:100%;max-width:300px}
+.rx-fitem{flex:1 1 calc(50% - 8px);min-width:118px;text-align:center;background:#faf3f3;border:1px solid #f1dada;border-radius:10px;padding:9px 10px;font-size:12.5px;font-weight:600;color:#b3261e}
+.rx-work-steps{display:grid;gap:16px}
+.rx-wstep{display:flex;gap:16px;align-items:flex-start}
+.rx-wnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
+.rx-wstep h3{font-size:17px;font-weight:700;margin-bottom:3px}
+.rx-wstep p{margin:0;color:var(--muted);font-size:15px}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
@@ -96,11 +121,14 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
   <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/sap" data-en="SAP Agentic" data-de="SAP Agentic">SAP Agentic</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
   <button class="rx-pill" id="rx-lang" type="button" aria-label="Sprache wechseln"><span data-lang="de">DE</span><span class="sep">/</span><span data-lang="en">EN</span></button>
 </header><main><nav class="rx-crumb"><a href="/">Home</a> / <a href="/web"><span data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</span></a> / <span data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</span></nav><section class="rx-hero">
-  <div class="rx-code">01.5</div>
-  <h1 data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</h1>
-  <p class="rx-tag" data-en="See the business at a glance." data-de="Das Geschäft auf einen Blick.">Das Geschäft auf einen Blick.</p>
-  <p class="rx-lead" data-en="KPI, operations and reporting dashboards that present the metrics and processes that matter — so teams decide on evidence, not gut feel." data-de="KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.">KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.</p>
-  <a class="rx-btn" href="mailto:hello@rexity.ai"><span data-en="Start a conversation" data-de="Gespräch starten">Gespräch starten</span></a>
+  <div class="rx-hero-text">
+    <div class="rx-code">01.5</div>
+    <h1 data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</h1>
+    <p class="rx-tag" data-en="See the business at a glance." data-de="Das Geschäft auf einen Blick.">Das Geschäft auf einen Blick.</p>
+    <p class="rx-lead" data-en="KPI, operations and reporting dashboards that present the metrics and processes that matter — so teams decide on evidence, not gut feel." data-de="KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.">KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.</p>
+    <a class="rx-btn" href="mailto:hello@rexity.ai"><span data-en="Start a conversation" data-de="Gespräch starten">Gespräch starten</span></a>
+  </div>
+  
 </section><section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks"><li><span data-en="KPI and operations dashboards" data-de="KPI- und Operations-Dashboards">KPI- und Operations-Dashboards</span></li><li><span data-en="Lead and conversion reporting" data-de="Lead- und Conversion-Reporting">Lead- und Conversion-Reporting</span></li><li><span data-en="Data source mapping" data-de="Datenquellen-Mapping">Datenquellen-Mapping</span></li><li><span data-en="Admin and monitoring views" data-de="Admin- und Monitoring-Ansichten">Admin- und Monitoring-Ansichten</span></li></ul></section>
 <section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks"><li><span data-en="One screen for the metrics that matter" data-de="Ein Bildschirm für die wichtigen Kennzahlen">Ein Bildschirm für die wichtigen Kennzahlen</span></li><li><span data-en="Decisions backed by clean data" data-de="Entscheidungen auf Basis sauberer Daten">Entscheidungen auf Basis sauberer Daten</span></li><li><span data-en="Less time pulling reports by hand" data-de="Weniger Zeit für manuelle Reports">Weniger Zeit für manuelle Reports</span></li></ul></section>
 <section class="rx-sec"><h2 data-en="How we work" data-de="Wie wir arbeiten">Wie wir arbeiten</h2><div class="rx-steps"><div class="rx-step"><span class="rx-step-n">1</span><div><h3 data-en="Define KPIs" data-de="KPIs definieren">KPIs definieren</h3><p data-en="We agree the metrics and map the data sources." data-de="Wir legen die Kennzahlen fest und kartieren die Datenquellen.">Wir legen die Kennzahlen fest und kartieren die Datenquellen.</p></div></div><div class="rx-step"><span class="rx-step-n">2</span><div><h3 data-en="Build the views" data-de="Views bauen">Views bauen</h3><p data-en="Wireframe, then a working dashboard with real data." data-de="Wireframe, dann ein funktionierendes Dashboard mit echten Daten.">Wireframe, dann ein funktionierendes Dashboard mit echten Daten.</p></div></div><div class="rx-step"><span class="rx-step-n">3</span><div><h3 data-en="Roll out" data-de="Ausrollen">Ausrollen</h3><p data-en="Access, roles and monitoring so it stays trustworthy." data-de="Zugriff, Rollen und Monitoring, damit es verlässlich bleibt.">Zugriff, Rollen und Monitoring, damit es verlässlich bleibt.</p></div></div></div></section>
@@ -130,6 +158,9 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
       if(el.tagName==='TITLE'){el.textContent=v;}
       else if(el.tagName==='META'){el.setAttribute('content',v);}
       else{el.textContent=v;}
+    });
+    document.querySelectorAll('[data-alt-de][data-alt-en]').forEach(function(el){
+      var v=el.getAttribute('data-alt-'+l); if(v!=null)el.setAttribute('alt',v);
     });
     document.querySelectorAll('#rx-lang [data-lang]').forEach(function(s){
       s.classList.toggle('on', s.getAttribute('data-lang')===l);

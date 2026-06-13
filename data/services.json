@@ -247,8 +247,39 @@
       ],
       "who": { "en": "For businesses whose customers already message on WhatsApp.", "de": "Für Unternehmen, deren Kunden bereits über WhatsApp schreiben." },
       "stack": ["WhatsApp Business API", "Twilio", "n8n", "HubSpot"],
+      "image": {
+        "src": "/rexity-omi/assets/it/img/svc-whatsapp.jpg",
+        "alt": { "en": "A WhatsApp Business chat answering a customer automatically", "de": "Ein WhatsApp-Business-Chat, der einem Kunden automatisch antwortet" },
+        "prompt": "Close-up photograph of a hand holding a modern smartphone showing a clean WhatsApp business chat conversation, a customer enquiry being answered instantly, bright modern office softly blurred in the background, warm natural daylight, shallow depth of field, realistic, professional, high detail, no text overlays"
+      },
+      "workflow": {
+        "intro": {
+          "en": "Every WhatsApp message runs through the same safe, auditable path. The assistant answers what it can, qualifies and books where it helps, and hands anything sensitive straight to your team — with the full context.",
+          "de": "Jede WhatsApp-Nachricht durchläuft denselben sicheren, nachvollziehbaren Pfad. Der Assistent beantwortet, was er kann, qualifiziert und bucht, wo es hilft, und übergibt alles Sensible direkt an Ihr Team — mit dem vollen Kontext."
+        },
+        "flow": [
+          { "node": { "en": "Customer message", "de": "Kundennachricht" } },
+          { "node": { "en": "WhatsApp Business API", "de": "WhatsApp Business API" } },
+          { "node": { "en": "Intent detection", "de": "Absichtserkennung" } },
+          { "branch": [
+            { "en": "Answer FAQ", "de": "FAQ beantworten" },
+            { "en": "Qualify lead", "de": "Lead qualifizieren" },
+            { "en": "Book appointment", "de": "Termin buchen" },
+            { "en": "Hand off to a human", "de": "An Mensch übergeben" }
+          ] },
+          { "node": { "en": "Log to CRM & notify team", "de": "Im CRM protokollieren & Team benachrichtigen" } }
+        ],
+        "steps": [
+          { "title": { "en": "A customer messages your number", "de": "Ein Kunde schreibt Ihre Nummer an" }, "body": { "en": "The conversation starts on the channel they already use. Messages arrive through the official WhatsApp Business API, with opt-in respected end to end.", "de": "Das Gespräch beginnt auf dem Kanal, den sie ohnehin nutzen. Nachrichten kommen über die offizielle WhatsApp Business API — Opt-in durchgängig gewahrt." } },
+          { "title": { "en": "The assistant reads the intent", "de": "Der Assistent erkennt die Absicht" }, "body": { "en": "It classifies what the person actually wants — a question, a quote, a booking, or something only a human should handle.", "de": "Er klassifiziert, was die Person wirklich will — eine Frage, ein Angebot, eine Buchung oder etwas, das nur ein Mensch erledigen sollte." } },
+          { "title": { "en": "It answers or acts", "de": "Er antwortet oder handelt" }, "body": { "en": "Common questions are answered instantly from your approved content; qualifying questions capture the lead; booking requests offer real time slots.", "de": "Häufige Fragen werden sofort aus Ihren freigegebenen Inhalten beantwortet; qualifizierende Fragen erfassen den Lead; Buchungsanfragen bieten echte Zeitfenster an." } },
+          { "title": { "en": "Complex cases go to a human", "de": "Komplexe Fälle gehen an einen Menschen" }, "body": { "en": "Anything sensitive or out of scope is handed to your team with the full conversation context, so nothing is lost in the transfer.", "de": "Alles Sensible oder außerhalb des Rahmens wird mit dem vollen Gesprächskontext an Ihr Team übergeben — nichts geht bei der Übergabe verloren." } },
+          { "title": { "en": "Everything is logged", "de": "Alles wird protokolliert" }, "body": { "en": "Each conversation lands in your CRM with its outcome, so you keep a clean, auditable trail and can follow up at the right moment.", "de": "Jedes Gespräch landet mit Ergebnis in Ihrem CRM — ein sauberer, nachvollziehbarer Verlauf, mit dem Sie zum richtigen Zeitpunkt nachfassen können." } }
+        ]
+      },
       "faqs": [
-        { "q": { "en": "Is WhatsApp automation compliant?", "de": "Ist WhatsApp-Automatisierung konform?" }, "a": { "en": "Yes — we use the official WhatsApp Business API with opt-in flows.", "de": "Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in." } }
+        { "q": { "en": "Is WhatsApp automation compliant?", "de": "Ist WhatsApp-Automatisierung konform?" }, "a": { "en": "Yes — we use the official WhatsApp Business API with opt-in flows.", "de": "Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in." } },
+        { "q": { "en": "Will customers know it's automated?", "de": "Merken Kunden, dass es automatisiert ist?" }, "a": { "en": "We're transparent about the assistant, and a human is always one step away.", "de": "Wir sind transparent über den Assistenten, und ein Mensch ist immer nur einen Schritt entfernt." } }
       ],
       "related": ["voice", "chatbots", "rpa"]
     },
