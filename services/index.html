@@ -47,9 +47,12 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-card p{color:var(--muted);font-size:15px;margin:0 0 18px}
 .rx-card-go{font-size:14px;font-weight:600;color:var(--ink)}
 /* leaf sections */
-.rx-sec{padding:40px 0;border-bottom:1px solid var(--line)}
-.rx-sec>h2{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
-.rx-alt{background:linear-gradient(0deg,#fff,#fff);}
+.rx-sec{padding:44px 0;border-bottom:1px solid var(--line)}
+.rx-sec>h2{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.rx-sec>h2:before{content:"";width:20px;height:2px;border-radius:2px;background:var(--red);flex:none}
+/* alt sections become contained cards */
+.rx-alt{border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:20px;background:#fff;padding:36px 34px;margin:18px 0;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+@media(max-width:560px){.rx-alt{padding:26px 20px}}
 .rx-ticks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .rx-ticks li{position:relative;padding-left:28px;font-size:16px}
 .rx-ticks li:before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:50%;background:var(--red);opacity:.16}
@@ -59,7 +62,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-step-n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
 .rx-step h3{font-size:18px;font-weight:700;margin-bottom:4px}
 .rx-step p{margin:0;color:var(--muted);font-size:15px}
-.rx-who p{font-size:21px;font-weight:600;letter-spacing:-.01em;max-width:34ch;color:var(--ink)}
+.rx-who{border-bottom:1px solid var(--line)}
+.rx-who-card{background:linear-gradient(105deg,#fff,#fdf2f2);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:16px;padding:26px 30px}
+.rx-who-label{display:block;font:600 12px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.rx-who-card p{font-size:22px;font-weight:600;letter-spacing:-.01em;max-width:42ch;color:var(--ink);margin:0;line-height:1.35}
 .rx-note p{font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:10px;padding:14px 16px;margin:0}
 .rx-chips,.rx-rels{display:flex;flex-wrap:wrap;gap:10px}
 .rx-chip{font-size:13px;font-weight:500;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
@@ -67,8 +73,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq:first-of-type{border-top:0}
 .rx-faq h3{font-size:17px;font-weight:700;margin-bottom:6px}
 .rx-faq p{margin:0;color:var(--muted)}
-.rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
-.rx-rel:hover{border-color:var(--red)}
+.rx-rel{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 18px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.rx-rel:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.3)}
+.rx-rel-go{color:var(--red);font-weight:700;transition:transform .15s}
+.rx-rel:hover .rx-rel-go{transform:translateX(3px)}
 /* hero with media */
 .rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
 .rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
@@ -118,14 +126,14 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 </style>
 </head><body><header class="rx-hd">
   <a class="rx-logo" href="/" aria-label="Rexity Labs"><img src="/rexity-omi/assets/brand/final/rexity-logo-horizontal.svg" alt="Rexity Labs" width="132" height="28"></a>
-  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/sap" data-en="SAP Agentic" data-de="SAP Agentic">SAP Agentic</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
+  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
   <button class="rx-pill" id="rx-lang" type="button" aria-label="Sprache wechseln"><span data-lang="de">DE</span><span class="sep">/</span><span data-lang="en">EN</span></button>
 </header><main><nav class="rx-crumb"><a href="/">Home</a> / <span data-en="Services" data-de="Leistungen">Leistungen</span></nav><section class="rx-hero rx-hero-split">
   <div class="rx-hero-text">
     <div class="rx-code">00</div>
     <h1 data-en="Services" data-de="Leistungen">Leistungen</h1>
     <p class="rx-tag" data-en="Everything we build, in one place." data-de="Alles, was wir bauen — an einem Ort.">Alles, was wir bauen — an einem Ort.</p>
-    <p class="rx-lead" data-en="From websites and apps to automation, marketing and enterprise SAP workflows — here's everything we do." data-de="Von Websites und Apps über Automatisierung und Marketing bis zu Enterprise-SAP-Workflows — hier ist alles, was wir tun.">Von Websites und Apps über Automatisierung und Marketing bis zu Enterprise-SAP-Workflows — hier ist alles, was wir tun.</p>
+    <p class="rx-lead" data-en="From websites and apps to automation and marketing — here's everything we do." data-de="Von Websites und Apps über Automatisierung bis Marketing — hier ist alles, was wir tun.">Von Websites und Apps über Automatisierung bis Marketing — hier ist alles, was wir tun.</p>
     <a class="rx-btn" href="mailto:hello@rexity.ai"><span data-en="Start a conversation" data-de="Gespräch starten">Gespräch starten</span></a>
   </div>
   <div class="rx-hero-media"><img src="/rexity-omi/assets/it/img/svc-services.jpg" alt="Überblick über einen modernen Studio-Arbeitsplatz" data-alt-en="A modern studio workspace overview" data-alt-de="Überblick über einen modernen Studio-Arbeitsplatz" loading="eager" decoding="async"></div>
@@ -188,11 +196,6 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
         <span class="rx-card-code">03.3</span>
         <h3 data-en="AI Video Marketing" data-de="KI-Videomarketing">KI-Videomarketing</h3>
         <p data-en="Campaign-grade video without a film crew." data-de="Kampagnenreifes Video ohne Filmcrew.">Kampagnenreifes Video ohne Filmcrew.</p>
-        <span class="rx-card-go" data-en="Learn more →" data-de="Mehr erfahren →">Mehr erfahren →</span>
-      </a></div></section><section class="rx-cat"><div class="rx-grid rx-grid-tight"><a class="rx-card" href="/sap">
-        <span class="rx-card-code">04</span>
-        <h3 data-en="SAP Agentic AI Workflows" data-de="SAP Agentic AI Workflows">SAP Agentic AI Workflows</h3>
-        <p data-en="Intelligent automation inside SAP." data-de="Intelligente Automatisierung in SAP.">Intelligente Automatisierung in SAP.</p>
         <span class="rx-card-go" data-en="Learn more →" data-de="Mehr erfahren →">Mehr erfahren →</span>
       </a></div></section><section class="rx-cat"><div class="rx-grid rx-grid-tight"><a class="rx-card" href="/testing-support">
         <span class="rx-card-code">05</span>

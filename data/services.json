@@ -49,14 +49,6 @@
       ]
     },
     {
-      "slug": "sap",
-      "title": {
-        "en": "SAP Agentic",
-        "de": "SAP Agentic"
-      },
-      "children": []
-    },
-    {
       "slug": "testing-support",
       "title": {
         "en": "Testing & Support",
@@ -83,8 +75,8 @@
         "de": "Software, Automatisierung und Wachstum — gebaut von Rexity Labs. Durchstöbern Sie alle Leistungen und wählen Sie, wo Sie starten."
       },
       "hero": {
-        "en": "From websites and apps to automation, marketing and enterprise SAP workflows — here's everything we do.",
-        "de": "Von Websites und Apps über Automatisierung und Marketing bis zu Enterprise-SAP-Workflows — hier ist alles, was wir tun."
+        "en": "From websites and apps to automation and marketing — here's everything we do.",
+        "de": "Von Websites und Apps über Automatisierung bis Marketing — hier ist alles, was wir tun."
       },
       "image": {
         "src": "/rexity-omi/assets/it/img/svc-services.jpg",
@@ -1950,8 +1942,7 @@
       ],
       "related": [
         "whatsapp",
-        "voice",
-        "sap"
+        "voice"
       ],
       "image": {
         "src": "/rexity-omi/assets/it/img/svc-chatbots.jpg",
@@ -2687,209 +2678,6 @@
             "body": {
               "en": "Track views and engagement, iterate on the hooks.",
               "de": "Views und Engagement verfolgen, die Hooks iterieren."
-            }
-          }
-        ]
-      }
-    },
-    {
-      "slug": "sap",
-      "type": "standalone",
-      "code": "04",
-      "title": {
-        "en": "SAP Agentic AI Workflows",
-        "de": "SAP Agentic AI Workflows"
-      },
-      "tagline": {
-        "en": "Intelligent automation inside SAP.",
-        "de": "Intelligente Automatisierung in SAP."
-      },
-      "summary": {
-        "en": "Agents that prepare and optimize SAP processes — order handling, procurement, maintenance and project coordination — so your enterprise workflows run with less manual effort.",
-        "de": "Agenten, die SAP-Prozesse vorbereiten und optimieren — Auftragsabwicklung, Einkauf, Wartung und Projektkoordination — damit Ihre Enterprise-Workflows mit weniger Handarbeit laufen."
-      },
-      "offerings": {
-        "en": [
-          "Sales and purchase order agents",
-          "Asset and plant maintenance agents",
-          "Project management agents",
-          "SAP process transformation"
-        ],
-        "de": [
-          "Sales- und Purchase-Order-Agenten",
-          "Asset- und Plant-Maintenance-Agenten",
-          "Projektmanagement-Agenten",
-          "SAP-Prozesstransformation"
-        ]
-      },
-      "outcomes": {
-        "en": [
-          "Less manual effort in core SAP processes",
-          "Faster, more consistent order and maintenance handling",
-          "A clear, scoped path to agentic workflows"
-        ],
-        "de": [
-          "Weniger Handarbeit in zentralen SAP-Prozessen",
-          "Schnellere, konsistentere Auftrags- und Wartungsabwicklung",
-          "Ein klarer, abgesteckter Weg zu agentischen Workflows"
-        ]
-      },
-      "process": [
-        {
-          "title": {
-            "en": "Scope",
-            "de": "Scope"
-          },
-          "body": {
-            "en": "We identify the SAP processes worth automating first.",
-            "de": "Wir identifizieren die SAP-Prozesse, die sich zuerst lohnen."
-          }
-        },
-        {
-          "title": {
-            "en": "Prototype",
-            "de": "Prototyp"
-          },
-          "body": {
-            "en": "A focused agent proves the value before rollout.",
-            "de": "Ein fokussierter Agent beweist den Nutzen vor dem Rollout."
-          }
-        },
-        {
-          "title": {
-            "en": "Implement",
-            "de": "Umsetzen"
-          },
-          "body": {
-            "en": "Enterprise implementation, planned to your governance.",
-            "de": "Enterprise-Umsetzung, geplant nach Ihrer Governance."
-          }
-        }
-      ],
-      "who": {
-        "en": "For enterprises running SAP who want agents on real processes.",
-        "de": "Für Unternehmen mit SAP, die Agenten auf echte Prozesse setzen wollen."
-      },
-      "stack": [
-        "SAP",
-        "SAP Joule",
-        "RAG",
-        "Enterprise integration"
-      ],
-      "note": {
-        "en": "Enterprise SAP timelines are scoped individually — initial scoping or a prototype can be quick, but full implementation is not a fixed 14–21 day engagement.",
-        "de": "Enterprise-SAP-Zeitpläne werden individuell geplant — erstes Scoping oder ein Prototyp kann schnell gehen, die volle Umsetzung ist aber kein fester 14–21-Tage-Auftrag."
-      },
-      "faqs": [
-        {
-          "q": {
-            "en": "Do you replace our SAP team?",
-            "de": "Ersetzen Sie unser SAP-Team?"
-          },
-          "a": {
-            "en": "No — we add agents that prepare work and hand decisions to people.",
-            "de": "Nein — wir ergänzen Agenten, die Arbeit vorbereiten und Entscheidungen an Menschen übergeben."
-          }
-        }
-      ],
-      "related": [
-        "chatbots",
-        "rpa",
-        "dashboards"
-      ],
-      "image": {
-        "src": "/rexity-omi/assets/it/img/svc-sap.jpg",
-        "alt": {
-          "en": "A corporate boardroom with an abstract network screen",
-          "de": "Boardroom mit abstraktem Netzwerk-Screen"
-        }
-      },
-      "workflow": {
-        "intro": {
-          "en": "Agentic workflows can run real SAP steps — but only behind your controls, approvals and a full log. Safety first.",
-          "de": "Agentische Workflows können echte SAP-Schritte ausführen — aber nur hinter Ihren Kontrollen, Freigaben und einem vollständigen Log. Sicherheit zuerst."
-        },
-        "flow": [
-          {
-            "node": {
-              "en": "Discover the process",
-              "de": "Prozess erfassen"
-            }
-          },
-          {
-            "node": {
-              "en": "Connect SAP securely",
-              "de": "SAP sicher anbinden"
-            }
-          },
-          {
-            "node": {
-              "en": "Build agent workflow",
-              "de": "Agent-Workflow bauen"
-            }
-          },
-          {
-            "node": {
-              "en": "Validate against controls",
-              "de": "Gegen Kontrollen prüfen"
-            }
-          },
-          {
-            "node": {
-              "en": "Deploy & monitor",
-              "de": "Deployen & überwachen"
-            }
-          }
-        ],
-        "steps": [
-          {
-            "title": {
-              "en": "Discover",
-              "de": "Erfassen"
-            },
-            "body": {
-              "en": "We map the SAP process and the manual steps around it.",
-              "de": "Wir kartieren den SAP-Prozess und die manuellen Schritte drumherum."
-            }
-          },
-          {
-            "title": {
-              "en": "Connect",
-              "de": "Anbinden"
-            },
-            "body": {
-              "en": "Secure, permissioned access to your SAP systems.",
-              "de": "Sicherer, berechtigter Zugang zu Ihren SAP-Systemen."
-            }
-          },
-          {
-            "title": {
-              "en": "Build",
-              "de": "Bauen"
-            },
-            "body": {
-              "en": "An agentic workflow that executes steps within guardrails.",
-              "de": "Ein agentischer Workflow, der Schritte innerhalb von Leitplanken ausführt."
-            }
-          },
-          {
-            "title": {
-              "en": "Validate",
-              "de": "Prüfen"
-            },
-            "body": {
-              "en": "Tested against controls and approvals — nothing runs unchecked.",
-              "de": "Gegen Kontrollen und Freigaben getestet — nichts läuft ungeprüft."
-            }
-          },
-          {
-            "title": {
-              "en": "Deploy",
-              "de": "Deployen"
-            },
-            "body": {
-              "en": "Go live with monitoring, logging and human oversight.",
-              "de": "Go-live mit Monitoring, Logging und menschlicher Aufsicht."
             }
           }
         ]

@@ -47,9 +47,12 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-card p{color:var(--muted);font-size:15px;margin:0 0 18px}
 .rx-card-go{font-size:14px;font-weight:600;color:var(--ink)}
 /* leaf sections */
-.rx-sec{padding:40px 0;border-bottom:1px solid var(--line)}
-.rx-sec>h2{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:22px}
-.rx-alt{background:linear-gradient(0deg,#fff,#fff);}
+.rx-sec{padding:44px 0;border-bottom:1px solid var(--line)}
+.rx-sec>h2{display:flex;align-items:center;gap:11px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.rx-sec>h2:before{content:"";width:20px;height:2px;border-radius:2px;background:var(--red);flex:none}
+/* alt sections become contained cards */
+.rx-alt{border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:20px;background:#fff;padding:36px 34px;margin:18px 0;box-shadow:0 1px 0 rgba(0,0,0,.02)}
+@media(max-width:560px){.rx-alt{padding:26px 20px}}
 .rx-ticks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
 .rx-ticks li{position:relative;padding-left:28px;font-size:16px}
 .rx-ticks li:before{content:"";position:absolute;left:0;top:8px;width:14px;height:14px;border-radius:50%;background:var(--red);opacity:.16}
@@ -59,7 +62,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-step-n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--black);color:#fff;display:grid;place-items:center;font-weight:700;font-size:15px}
 .rx-step h3{font-size:18px;font-weight:700;margin-bottom:4px}
 .rx-step p{margin:0;color:var(--muted);font-size:15px}
-.rx-who p{font-size:21px;font-weight:600;letter-spacing:-.01em;max-width:34ch;color:var(--ink)}
+.rx-who{border-bottom:1px solid var(--line)}
+.rx-who-card{background:linear-gradient(105deg,#fff,#fdf2f2);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:16px;padding:26px 30px}
+.rx-who-label{display:block;font:600 12px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.rx-who-card p{font-size:22px;font-weight:600;letter-spacing:-.01em;max-width:42ch;color:var(--ink);margin:0;line-height:1.35}
 .rx-note p{font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-left:3px solid var(--red);border-radius:10px;padding:14px 16px;margin:0}
 .rx-chips,.rx-rels{display:flex;flex-wrap:wrap;gap:10px}
 .rx-chip{font-size:13px;font-weight:500;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
@@ -67,8 +73,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-faq:first-of-type{border-top:0}
 .rx-faq h3{font-size:17px;font-weight:700;margin-bottom:6px}
 .rx-faq p{margin:0;color:var(--muted)}
-.rx-rel{font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
-.rx-rel:hover{border-color:var(--red)}
+.rx-rel{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:600;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 18px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.rx-rel:hover{border-color:var(--red);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.3)}
+.rx-rel-go{color:var(--red);font-weight:700;transition:transform .15s}
+.rx-rel:hover .rx-rel-go{transform:translateX(3px)}
 /* hero with media */
 .rx-hero-split{display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
 .rx-hero-media{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#ece9e4;aspect-ratio:4/3}
@@ -118,7 +126,7 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 </style>
 </head><body><header class="rx-hd">
   <a class="rx-logo" href="/" aria-label="Rexity Labs"><img src="/rexity-omi/assets/brand/final/rexity-logo-horizontal.svg" alt="Rexity Labs" width="132" height="28"></a>
-  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/sap" data-en="SAP Agentic" data-de="SAP Agentic">SAP Agentic</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
+  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
   <button class="rx-pill" id="rx-lang" type="button" aria-label="Sprache wechseln"><span data-lang="de">DE</span><span class="sep">/</span><span data-lang="en">EN</span></button>
 </header><main><nav class="rx-crumb"><a href="/">Home</a> / <a href="/automation"><span data-en="Automation" data-de="Automatisierung">Automatisierung</span></a> / <span data-en="RPA &amp; Process Automation" data-de="RPA &amp; Prozessautomatisierung">RPA &amp; Prozessautomatisierung</span></nav><section class="rx-hero rx-hero-split">
   <div class="rx-hero-text">
@@ -138,10 +146,10 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 </section>
 <section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks"><li><span data-en="Internal workflow automation" data-de="Interne Workflow-Automatisierung">Interne Workflow-Automatisierung</span></li><li><span data-en="CRM and tool integration" data-de="CRM- und Tool-Integration">CRM- und Tool-Integration</span></li><li><span data-en="Document and data handling" data-de="Dokumenten- und Datenverarbeitung">Dokumenten- und Datenverarbeitung</span></li><li><span data-en="Process monitoring and alerts" data-de="Prozess-Monitoring und Alerts">Prozess-Monitoring und Alerts</span></li></ul></section>
 <section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks"><li><span data-en="Hours back every week" data-de="Jede Woche Stunden zurück">Jede Woche Stunden zurück</span></li><li><span data-en="Fewer manual errors" data-de="Weniger manuelle Fehler">Weniger manuelle Fehler</span></li><li><span data-en="Auditable, repeatable processes" data-de="Auditierbare, wiederholbare Prozesse">Auditierbare, wiederholbare Prozesse</span></li></ul></section>
-<section class="rx-sec rx-who"><p data-en="For teams drowning in copy-paste and manual handoffs." data-de="Für Teams, die in Copy-Paste und manuellen Übergaben versinken.">Für Teams, die in Copy-Paste und manuellen Übergaben versinken.</p></section>
+<section class="rx-sec rx-who"><div class="rx-who-card"><span class="rx-who-label" data-en="Who it's for" data-de="Für wen">Für wen</span><p data-en="For teams drowning in copy-paste and manual handoffs." data-de="Für Teams, die in Copy-Paste und manuellen Übergaben versinken.">Für Teams, die in Copy-Paste und manuellen Übergaben versinken.</p></div></section>
 <section class="rx-sec"><h2 data-en="Stack" data-de="Technologie">Technologie</h2><div class="rx-chips"><span class="rx-chip">n8n</span><span class="rx-chip">Zapier</span><span class="rx-chip">Make</span><span class="rx-chip">HubSpot</span><span class="rx-chip">Salesforce</span></div></section>
 <section class="rx-sec rx-alt"><h2 data-en="FAQ" data-de="FAQ">FAQ</h2><div class="rx-faq"><h3 data-en="How do you decide what to automate first?" data-de="Wie entscheiden Sie, was zuerst automatisiert wird?">Wie entscheiden Sie, was zuerst automatisiert wird?</h3><p data-en="We start where the time savings are biggest and the risk is lowest." data-de="Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist.">Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist.</p></div></section>
-<section class="rx-sec"><h2 data-en="Related services" data-de="Verwandte Leistungen">Verwandte Leistungen</h2><div class="rx-rels"><a class="rx-rel" href="/automation/whatsapp"><span data-en="WhatsApp Agents" data-de="WhatsApp-Agenten">WhatsApp-Agenten</span></a><a class="rx-rel" href="/automation/voice"><span data-en="Voice Agents" data-de="Voice-Agenten">Voice-Agenten</span></a><a class="rx-rel" href="/web/dashboards"><span data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</span></a></div></section></main><section class="rx-cta">
+<section class="rx-sec"><h2 data-en="Related services" data-de="Verwandte Leistungen">Verwandte Leistungen</h2><div class="rx-rels"><a class="rx-rel" href="/automation/whatsapp"><span data-en="WhatsApp Agents" data-de="WhatsApp-Agenten">WhatsApp-Agenten</span><span class="rx-rel-go" aria-hidden="true">→</span></a><a class="rx-rel" href="/automation/voice"><span data-en="Voice Agents" data-de="Voice-Agenten">Voice-Agenten</span><span class="rx-rel-go" aria-hidden="true">→</span></a><a class="rx-rel" href="/web/dashboards"><span data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</span><span class="rx-rel-go" aria-hidden="true">→</span></a></div></section></main><section class="rx-cta">
   <h2 data-en="Have a project in mind?" data-de="Ein Projekt im Kopf?">Ein Projekt im Kopf?</h2>
   <p data-en="Tell us what you're building. We reply within a day." data-de="Erzählen Sie uns, was Sie bauen. Wir antworten innerhalb eines Tages.">Erzählen Sie uns, was Sie bauen. Wir antworten innerhalb eines Tages.</p>
   <a class="rx-btn" href="mailto:hello@rexity.ai">hello@rexity.ai</a>
