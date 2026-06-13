@@ -8,9 +8,9 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/rexity-omi",
-      "permanent": false
+      "source": "/rexity-omi",
+      "destination": "/",
+      "permanent": true
     },
     {
       "source": "/LevelKraft-TELC%20Prep%20AI/Privacypolicy",
