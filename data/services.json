@@ -1177,6 +1177,15 @@
             }
           }
         ]
+      },
+      "video": {
+        "mp4": "/rexity-omi/assets/it/showcase/dashboards.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/dashboards.webm",
+        "poster": "/rexity-omi/assets/it/showcase/dashboards-poster.jpg",
+        "alt": {
+          "en": "An animated analytics dashboard we built",
+          "de": "Ein von uns gebautes animiertes Analyse-Dashboard"
+        }
       }
     },
     {
