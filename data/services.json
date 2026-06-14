@@ -319,6 +319,15 @@
             }
           }
         ]
+      },
+      "video": {
+        "mp4": "/rexity-omi/assets/it/showcase/macbook-m5.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/macbook-m5.webm",
+        "poster": "/rexity-omi/assets/it/showcase/macbook-m5-poster.jpg",
+        "alt": {
+          "en": "A MacBook product page we designed",
+          "de": "Eine von uns gestaltete MacBook-Produktseite"
+        }
       }
     },
     {
@@ -543,12 +552,12 @@
         ]
       },
       "video": {
-        "mp4": "/rexity-omi/assets/it/showcase/macbook-m5.mp4",
-        "webm": "/rexity-omi/assets/it/showcase/macbook-m5.webm",
-        "poster": "/rexity-omi/assets/it/showcase/macbook-m5-poster.jpg",
+        "mp4": "/rexity-omi/assets/it/showcase/web-development.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/web-development.webm",
+        "poster": "/rexity-omi/assets/it/showcase/web-development-poster.jpg",
         "alt": {
-          "en": "A MacBook product build we developed",
-          "de": "Ein von uns entwickeltes MacBook-Produkt-Build"
+          "en": "Web development work in motion",
+          "de": "Web-Entwicklung in Bewegung"
         }
       }
     },
@@ -976,6 +985,15 @@
             }
           }
         ]
+      },
+      "video": {
+        "mp4": "/rexity-omi/assets/it/showcase/mobile-apps.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/mobile-apps.webm",
+        "poster": "/rexity-omi/assets/it/showcase/mobile-apps-poster.jpg",
+        "alt": {
+          "en": "A mobile app we built",
+          "de": "Eine von uns gebaute Mobile App"
+        }
       }
     },
     {
@@ -1651,7 +1669,16 @@
         "voice",
         "chatbots",
         "rpa"
-      ]
+      ],
+      "video": {
+        "mp4": "/rexity-omi/assets/it/showcase/whatsapp.mp4",
+        "webm": "/rexity-omi/assets/it/showcase/whatsapp.webm",
+        "poster": "/rexity-omi/assets/it/showcase/whatsapp-poster.jpg",
+        "alt": {
+          "en": "WhatsApp automation in action",
+          "de": "WhatsApp-Automatisierung in Aktion"
+        }
+      }
     },
     {
       "slug": "voice",
