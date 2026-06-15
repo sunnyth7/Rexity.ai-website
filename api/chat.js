@@ -197,13 +197,18 @@ const TIMELINE_RE = /(how long|timeline|time frame|timeframe|duration|deadline|w
 const HUMAN_RE = /(speak (to|with) (a )?(real )?(human|person|someone)|talk to (a )?(real )?(human|person|someone)|real person|kein bot|echte[rn]? mensch|mit einem (echten )?menschen|mitarbeiter sprechen|jemanden sprechen|persönlich sprechen|persoenlich sprechen|human agent)/i;
 const BUSINESS_RE = /(\bdemo\b|book a (call|meeting)|consultation|proposal|\bquote\b|project (discussion|brief)|work with you|hire you|beauftragen|zusammenarbeiten|angebot|beratungstermin|projektgespräch|projektgespraech|demo buchen|termin (vereinbaren|buchen)|kennenlerngespräch|kennenlerngespraech)/i;
 const SMALLTALK_RE = /^(hi|hey|hallo|hello|moin|servus|guten (tag|morgen|abend)|good (morning|afternoon|evening)|danke|thanks|thank you|ok|okay|cool|super|alles klar|tschüss|tschuess|bye|ciao|wer bist du|who are you|was bist du|what are you)[\s!.?,]*$/i;
+// Automation/RPA wording — words like "invoice"/"Rechnung" also live in the
+// legal/billing regex, so a question about AUTOMATING invoices would wrongly
+// be refused as a billing matter. When automation intent is present, treat it
+// as a service question instead.
+const AUTOMATION_RE = /(automat|rpa|workflow|prozess|streamline|integrat)/i;
 
 function classifyIntent(message) {
   const raw = String(message || "");
   if (INJECTION_RE.test(raw)) return "prompt_injection";
   if (SMALLTALK_RE.test(raw.trim())) return "smalltalk";
   if (COST_RE.test(raw)) return "cost_pricing";
-  if (LEGAL_RE.test(raw)) return "refund_billing_legal";
+  if (LEGAL_RE.test(raw) && !AUTOMATION_RE.test(raw)) return "refund_billing_legal";
   if (TIMELINE_RE.test(raw)) return "timeline_request";
   if (HUMAN_RE.test(raw)) return "human_request";
   if (BUSINESS_RE.test(raw)) return "business_enquiry";
@@ -269,9 +274,9 @@ function buildSystemPrompt(lang, contextLines) {
 
   return [
     `You are ${ASSISTANT_NAME}, the virtual assistant on the Rexity Labs website (rexity.ai). You are a constrained service guide, not an open-ended chatbot: you help visitors discover Rexity services, answer only from approved information, and route business enquiries to ${DEMO_EMAIL}. If asked who or what you are, say you are ${ASSISTANT_NAME}, Rexity's virtual assistant — never pretend to be human.`,
-    `Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards, plus enterprise topics such as SAP Agentic AI Workflows. Everything is production-grade, DSGVO/GDPR-compliant and EU-hosted.`,
+    `Rexity supports companies with Web & App Design and Development (web design, web development, SaaS platforms, mobile apps, dashboards), Digital Marketing (SEO, content, video), AI Agents and Digital Automations (website chatbots, WhatsApp agents, voice agents, and RPA / process automation), and Testing & Support. Everything is production-grade, DSGVO/GDPR-compliant and EU-hosted. Rexity does NOT offer SAP, SAP Joule, or SAP Agentic services — if a visitor asks about SAP, say plainly that Rexity does not offer SAP and point them to what Rexity does do.`,
     ``,
-    `TIMELINE — only if the visitor asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope; never present this as binding, never promise fixed dates, and for SAP or enterprise projects say timeline depends on scope and route to ${DEMO_EMAIL}.`,
+    `TIMELINE — only if the visitor asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope; never present this as binding, never promise fixed dates, and for larger enterprise projects say timeline depends on scope and route to ${DEMO_EMAIL}.`,
     `CONTACT — the only contact channel is email: ${DEMO_EMAIL}. Never mention or invent a phone number.`,
     ``,
     `LANGUAGE — strict:`,
