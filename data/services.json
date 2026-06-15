@@ -49,6 +49,14 @@
       ]
     },
     {
+      "slug": "work",
+      "title": {
+        "en": "Work",
+        "de": "Arbeiten"
+      },
+      "children": []
+    },
+    {
       "slug": "testing-support",
       "title": {
         "en": "Testing & Support",
@@ -2933,6 +2941,82 @@
           }
         ]
       }
+    },
+    {
+      "slug": "work",
+      "type": "work",
+      "code": "06",
+      "title": {
+        "en": "Work",
+        "de": "Arbeiten"
+      },
+      "tagline": {
+        "en": "Apps we designed and built.",
+        "de": "Apps, die wir gestaltet und gebaut haben."
+      },
+      "summary": {
+        "en": "A few products Rexity Labs designed and shipped end to end — for party planners, language learners and families.",
+        "de": "Einige Produkte, die Rexity Labs durchgängig gestaltet und ausgeliefert hat — für Party-Planer, Sprachlernende und Familien."
+      },
+      "hero": {
+        "en": "Real products we designed, built and shipped end to end.",
+        "de": "Echte Produkte, die wir durchgängig gestaltet, gebaut und ausgeliefert haben."
+      },
+      "cases": [
+        {
+          "name": "Clevr",
+          "image": "/rexity-omi/assets/it/img/app-clevr.jpg",
+          "logo": "/rexity-omi/assets/it/img/app-clevr-logo.png",
+          "link": "https://clevr.social",
+          "tagline": {
+            "en": "Built for people who love to host.",
+            "de": "Für alle, die gern Gastgeber sind."
+          },
+          "audience": {
+            "en": "Party planners",
+            "de": "Party-Planer"
+          },
+          "body": {
+            "en": "An app Rexity Labs built for party planners. Hosting usually means juggling five different chats and apps — Clevr brings it all into one place: shared invites, food and drink polls, a collaborative playlist, expense splitting, games and a group chat.",
+            "de": "Eine App, die Rexity Labs für Party-Planer gebaut hat. Gastgeben heißt sonst, fünf Chats und Apps zu jonglieren — Clevr bringt alles an einen Ort: gemeinsame Einladungen, Essens- und Getränke-Abstimmungen, eine kollaborative Playlist, Kostenteilung, Spiele und Gruppenchat."
+          }
+        },
+        {
+          "name": "LevelKraft",
+          "image": "/rexity-omi/assets/it/img/app-levelkraft.jpg",
+          "logo": "/rexity-omi/assets/it/img/app-levelkraft-logo.svg",
+          "link": "https://levelkraft.de",
+          "tagline": {
+            "en": "Built for language learners.",
+            "de": "Für Sprachlernende gebaut."
+          },
+          "audience": {
+            "en": "Language learners",
+            "de": "Sprachlernende"
+          },
+          "body": {
+            "en": "An app Rexity Labs built to prepare people for the German TELC and Goethe exams, from A1 to C2 — full-length practice tests, instant feedback on speaking and writing, and short daily sessions that adapt to each learner’s weak spots.",
+            "de": "Eine App, die Rexity Labs gebaut hat, um auf die deutschen TELC- und Goethe-Prüfungen vorzubereiten, von A1 bis C2 — vollständige Übungstests, sofortiges Feedback zu Sprechen und Schreiben und kurze tägliche Einheiten, die sich an die Schwächen jedes Lernenden anpassen."
+          }
+        },
+        {
+          "name": "Fresh&Save",
+          "image": "/rexity-omi/assets/it/img/app-freshsave.jpg",
+          "logo": "/rexity-omi/assets/it/img/app-savefresh-logo.png",
+          "tagline": {
+            "en": "Built around the family kitchen.",
+            "de": "Rund um die Familienküche gebaut."
+          },
+          "audience": {
+            "en": "Households",
+            "de": "Haushalte"
+          },
+          "body": {
+            "en": "An app Rexity Labs built to fight food waste and the dreaded double-buy — a shared food inventory the whole family uses: see what’s in the kitchen at a glance, plan meals, save recipes, and keep one live shopping list everyone shares.",
+            "de": "Eine App, die Rexity Labs gegen Lebensmittelverschwendung und den gefürchteten Doppelkauf gebaut hat — ein gemeinsames Lebensmittel-Inventar für die ganze Familie: auf einen Blick sehen, was da ist, Mahlzeiten planen, Rezepte speichern und eine gemeinsame Einkaufsliste führen."
+          }
+        }
+      ]
     }
   ]
 }

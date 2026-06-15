@@ -104,6 +104,21 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-wnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
 .rx-wstep h3{font-size:17px;font-weight:700;margin-bottom:3px}
 .rx-wstep p{margin:0;color:var(--muted);font-size:15px}
+/* work / case studies */
+.rx-cases{display:grid;grid-template-columns:1fr;gap:22px}
+.rx-case{display:grid;grid-template-columns:minmax(220px,300px) 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+@media(max-width:700px){.rx-case{grid-template-columns:1fr}}
+.rx-case-img{background:#ece9e4}
+.rx-case-img img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.rx-case-body{padding:26px 28px}
+.rx-case-logo{height:26px;width:auto;margin-bottom:12px;display:block}
+.rx-case-name{font-weight:700;font-size:14px;margin-bottom:8px}
+.rx-case h3{font-size:22px;font-weight:700;margin:0 0 6px}
+.rx-case-tag{font-size:15px;font-weight:600;color:var(--ink);margin:0 0 12px}
+.rx-case-aud{display:inline-block;font:600 12px/1 Inter,sans-serif;letter-spacing:.04em;color:var(--red);background:#fdf2f2;border:1px solid #f3d6d6;border-radius:999px;padding:5px 11px;margin:0 0 14px}
+.rx-case-text{color:var(--muted);font-size:15px;margin:0 0 16px}
+.rx-case-link{font-weight:600;color:var(--ink)}
+.rx-case-link:hover{color:var(--red)}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
@@ -128,7 +143,7 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 </style>
 </head><body><header class="rx-hd">
   <a class="rx-logo" href="/" aria-label="Rexity Labs"><img src="/rexity-omi/assets/brand/final/rexity-logo-horizontal.svg" alt="Rexity Labs" width="132" height="28"></a>
-  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
+  <nav class="rx-nav"><a href="/web" data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</a><a href="/automation" data-en="Automation" data-de="Automatisierung">Automatisierung</a><a href="/marketing" data-en="Marketing" data-de="Marketing">Marketing</a><a href="/work" data-en="Work" data-de="Arbeiten">Arbeiten</a><a href="/testing-support" data-en="Testing &amp; Support" data-de="Testing &amp; Support">Testing &amp; Support</a></nav>
   <button class="rx-pill" id="rx-lang" type="button" aria-label="Sprache wechseln"><span data-lang="de">DE</span><span class="sep">/</span><span data-lang="en">EN</span></button>
 </header><main><nav class="rx-crumb"><a href="/">Home</a> / <a href="/web"><span data-en="Web &amp; Apps" data-de="Web &amp; Apps">Web &amp; Apps</span></a> / <span data-en="Dashboards &amp; Reporting" data-de="Dashboards &amp; Reporting">Dashboards &amp; Reporting</span></nav><section class="rx-hero rx-hero-split">
   <div class="rx-hero-text">

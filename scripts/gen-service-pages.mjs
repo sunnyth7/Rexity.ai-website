@@ -242,14 +242,27 @@ function indexBody() {
   return sections;
 }
 
+function caseCard(c) {
+  const img = c.image ? `<div class="rx-case-img"><img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy" decoding="async"></div>` : "";
+  const logo = c.logo ? `<img class="rx-case-logo" src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy">` : `<div class="rx-case-name">${esc(c.name)}</div>`;
+  const link = c.link ? `<a class="rx-case-link" href="${esc(c.link)}" target="_blank" rel="noopener">${tText({ en: "Visit site →", de: "Zur Website →" })}</a>` : "";
+  return `<article class="rx-case">${img}<div class="rx-case-body">${logo}<h3>${esc(c.name)}</h3>${t(c.tagline, "p", "rx-case-tag")}${t(c.audience, "span", "rx-case-aud")}${t(c.body, "p", "rx-case-text")}${link}</div></article>`;
+}
+
+function workBody(p) {
+  const cards = (p.cases || []).map(caseCard).join("");
+  return `<section class="rx-sec"><h2 data-en="Selected work" data-de="Ausgewählte Arbeiten">Ausgewählte Arbeiten</h2><div class="rx-cases">${cards}</div></section>`;
+}
+
 function renderPage(p) {
   const isHub = p.type === "hub";
   const isIndex = p.type === "index";
-  const body = isIndex ? indexBody() : isHub ? childCards(p) : leafBody(p);
+  const isWork = p.type === "work";
+  const body = isIndex ? indexBody() : isWork ? workBody(p) : isHub ? childCards(p) : leafBody(p);
   const crumb = p.parent
     ? `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/${p.parent}">${tText(byslug[p.parent].title)}</a> / ${tText(p.title)}</nav>`
     : `<nav class="rx-crumb"><a href="/">Home</a> / ${tText(p.title)}</nav>`;
-  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub || isIndex)}${body}</main>${tail()}`;
+  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub || isIndex || isWork)}${body}</main>${tail()}`;
 }
 
 // ============================================================================
@@ -351,6 +364,21 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-wnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px}
 .rx-wstep h3{font-size:17px;font-weight:700;margin-bottom:3px}
 .rx-wstep p{margin:0;color:var(--muted);font-size:15px}
+/* work / case studies */
+.rx-cases{display:grid;grid-template-columns:1fr;gap:22px}
+.rx-case{display:grid;grid-template-columns:minmax(220px,300px) 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+@media(max-width:700px){.rx-case{grid-template-columns:1fr}}
+.rx-case-img{background:#ece9e4}
+.rx-case-img img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:4/3}
+.rx-case-body{padding:26px 28px}
+.rx-case-logo{height:26px;width:auto;margin-bottom:12px;display:block}
+.rx-case-name{font-weight:700;font-size:14px;margin-bottom:8px}
+.rx-case h3{font-size:22px;font-weight:700;margin:0 0 6px}
+.rx-case-tag{font-size:15px;font-weight:600;color:var(--ink);margin:0 0 12px}
+.rx-case-aud{display:inline-block;font:600 12px/1 Inter,sans-serif;letter-spacing:.04em;color:var(--red);background:#fdf2f2;border:1px solid #f3d6d6;border-radius:999px;padding:5px 11px;margin:0 0 14px}
+.rx-case-text{color:var(--muted);font-size:15px;margin:0 0 16px}
+.rx-case-link{font-weight:600;color:var(--ink)}
+.rx-case-link:hover{color:var(--red)}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
