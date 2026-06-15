@@ -245,6 +245,69 @@
     });
   }
 
+  // Turn bare http(s)/www URLs in a bot bubble into real clickable links.
+  function linkifyUrls(el) {
+    if (!el) return;
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+    var hits = [];
+    var node;
+    while ((node = walker.nextNode())) {
+      if (node.parentNode && node.parentNode.tagName === "A") continue;
+      if (/(https?:\/\/|www\.)/i.test(node.nodeValue || "")) hits.push(node);
+    }
+    hits.forEach(function (tn) {
+      var s = tn.nodeValue;
+      var frag = document.createDocumentFragment();
+      var re = /(https?:\/\/[^\s<>()]+)|(www\.[^\s<>()]+)/gi;
+      var last = 0;
+      var m;
+      while ((m = re.exec(s))) {
+        if (m.index > last) frag.appendChild(document.createTextNode(s.slice(last, m.index)));
+        var raw = m[0];
+        var trail = "";
+        while (/[.,;:!?)\]]$/.test(raw)) { trail = raw.slice(-1) + trail; raw = raw.slice(0, -1); }
+        var a = document.createElement("a");
+        a.className = "rexity-chatbot__link";
+        a.href = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = raw;
+        frag.appendChild(a);
+        if (trail) frag.appendChild(document.createTextNode(trail));
+        last = m.index + m[0].length;
+      }
+      if (last < s.length) frag.appendChild(document.createTextNode(s.slice(last)));
+      tn.parentNode.replaceChild(frag, tn);
+    });
+  }
+
+  // Apply both linkifiers to a finished bot bubble.
+  function linkifyBot(el) { linkifyEmail(el); linkifyUrls(el); }
+
+  // A "thinking" bubble: three bouncing dots (animated), shown while the
+  // model works. Static markup only — never model output.
+  function addThinking(container) {
+    var item = document.createElement("div");
+    item.className = "rexity-chatbot__message rexity-chatbot__message--bot rexity-chatbot__message--loading";
+    item.setAttribute("aria-label", (activeCopy && activeCopy.loadingThink) || "…");
+    var dots = document.createElement("span");
+    dots.className = "rexity-chatbot__dots";
+    dots.innerHTML = "<span></span><span></span><span></span>";
+    item.appendChild(dots);
+    container.appendChild(item);
+    container.scrollTop = container.scrollHeight;
+    return item;
+  }
+
+  // Replace a thinking bubble with the final answer + clickable links.
+  function setBotAnswer(el, text) {
+    el.classList.remove("rexity-chatbot__message--loading");
+    el.removeAttribute("aria-label");
+    el.textContent = text;
+    linkifyBot(el);
+    if (el.parentNode) el.parentNode.scrollTop = el.parentNode.scrollHeight;
+  }
+
   // Close any open chooser when clicking elsewhere.
   document.addEventListener("click", function (e) {
     if (e.target.closest && (e.target.closest(".rexity-chatbot__maillink") || e.target.closest(".rexity-chatbot__mailmenu"))) return;
@@ -255,7 +318,7 @@
     var item = document.createElement("div");
     item.className = "rexity-chatbot__message rexity-chatbot__message--" + type;
     item.textContent = text;
-    if (type.indexOf("bot") > -1) linkifyEmail(item);
+    if (type.indexOf("bot") > -1) linkifyBot(item);
     container.appendChild(item);
     container.scrollTop = container.scrollHeight;
     return item;
@@ -430,25 +493,21 @@
       });
       var curLang = (window.rexityGetLang && window.rexityGetLang()) || lang;
       addMessage(messages, message, "user");
-      // Two-stage status like a human typing: "denkt …" first, then
-      // "schreibt …" while the answer is being generated.
-      var loading = addMessage(messages, activeCopy.loadingThink, "bot rexity-chatbot__message--loading");
-      var writeTimer = window.setTimeout(function () {
-        if (loading.classList.contains("rexity-chatbot__message--loading")) {
-          loading.textContent = activeCopy.loadingWrite;
-        }
-      }, 1500);
+      // Show an animated "thinking" indicator (bouncing dots), and keep it
+      // visible for a minimum beat so even an instant API reply reads as a
+      // considered response rather than a flash.
+      var loading = addThinking(messages);
+      var minWait = new Promise(function (resolve) { window.setTimeout(resolve, 850); });
+      var answer;
       try {
-        loading.textContent = await askApi(message, curLang, history.slice(-12));
+        answer = await askApi(message, curLang, history.slice(-12));
       } catch (_error) {
-        loading.textContent = localReply(message);
-      } finally {
-        window.clearTimeout(writeTimer);
-        loading.classList.remove("rexity-chatbot__message--loading");
-        linkifyEmail(loading);
-        send.disabled = false;
-        input.focus();
+        answer = localReply(message);
       }
+      await minWait;
+      setBotAnswer(loading, answer);
+      send.disabled = false;
+      input.focus();
     });
   }
 

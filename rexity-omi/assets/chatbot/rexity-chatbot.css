@@ -275,13 +275,44 @@
 
 .rexity-chatbot__message--loading {
   color: var(--rx-muted);
-  animation: rexityThinking 1.4s ease-in-out infinite;
+  display: inline-flex;
+  align-items: center;
+  min-height: 20px;
 }
 
-@keyframes rexityThinking {
-  0%, 100% { opacity: 0.45; }
-  50% { opacity: 1; }
+.rexity-chatbot__dots {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 2px 0;
 }
+
+.rexity-chatbot__dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rx-muted, #9aa0a6);
+  display: inline-block;
+  animation: rexityDot 1.2s ease-in-out infinite;
+}
+
+.rexity-chatbot__dots span:nth-child(2) { animation-delay: 0.18s; }
+.rexity-chatbot__dots span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes rexityDot {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+
+.rexity-chatbot__link {
+  color: var(--rx-red, #ff2d2d);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  word-break: break-word;
+}
+
+.rexity-chatbot__link:hover { opacity: 0.8; }
 
 .rexity-chatbot__maillink {
   color: inherit;

@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(ROOT, "data/services.json"), "utf8"));
-const CHAT_V = "20260615"; // keep in sync with the homepage chatbot cache-buster
+const CHAT_V = "20260615b"; // keep in sync with the homepage chatbot cache-buster
 const EMAIL = data.brand.email;
 
 const byslug = Object.fromEntries(data.pages.map((p) => [p.slug, p]));
