@@ -75,12 +75,12 @@
 
     // ---- Stats ----
     'Numbers That Earn Trust.': 'Zahlen, die Vertrauen schaffen.',
-    'Teams across Germany and the EU rely on our engineering to keep their operations running smoothly and securely. Each partnership is built on trust, expertise, and measurable results.':
-      'Unternehmen in Deutschland und der EU verlassen sich auf unsere Arbeit, damit ihr Betrieb reibungslos und sicher läuft. Jede Partnerschaft beruht auf Vertrauen, Expertise und messbaren Ergebnissen.',
+    'Organisations across the UK rely on our managed IT services to keep their operations running smoothly and securely. Each partnership is built on trust, expertise, and measurable results.':
+      'Unternehmen verlassen sich auf unsere Services, damit ihr Betrieb reibungslos und sicher läuft. Jede Partnerschaft beruht auf Vertrauen, Expertise und messbaren Ergebnissen.',
     'Service lines': 'Leistungsbereiche',
     'Production apps in app stores': 'Produktiv-Apps in den App-Stores',
     'Audit-logged, EU-hosted': 'Audit-protokolliert, EU-gehostet',
-    'Let’s talk.': 'Sprechen wir.',
+    'Let’s Talk IT!': 'Sprechen wir über IT!',
 
     // ---- Values ----
     'Outcomes over output.': 'Ergebnisse statt Output.',
