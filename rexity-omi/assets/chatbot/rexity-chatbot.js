@@ -289,7 +289,7 @@
   function addThinking(container) {
     var item = document.createElement("div");
     item.className = "rexity-chatbot__message rexity-chatbot__message--bot rexity-chatbot__message--loading";
-    item.setAttribute("aria-label", (activeCopy && activeCopy.loadingThink) || "…");
+    item.setAttribute("aria-label", "…");
     var dots = document.createElement("span");
     dots.className = "rexity-chatbot__dots";
     dots.innerHTML = "<span></span><span></span><span></span>";
