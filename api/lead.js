@@ -1,7 +1,8 @@
-// /api/lead — persists a website contact-form submission as a Lead row in
-// Supabase (project ixzgyqiteepitseywqlc). Uses the service_role key over the
-// REST API (no Prisma/npm — this is a no-build static site). The key lives in
-// Vercel env and is NEVER exposed to the client.
+// /api/lead — persists a website contact-form / chatbot-gate submission as a
+// Lead row in Supabase (project tfulzkthogypqzpmcoft; the original website
+// project no longer exists). SUPABASE_SERVICE_ROLE_KEY holds an INSERT-ONLY
+// anon key (RLS: insert policy only, no reads) over the REST API — no
+// Prisma/npm, this is a no-build static site. Key lives in Vercel env.
 
 const crypto = require("crypto");
 
