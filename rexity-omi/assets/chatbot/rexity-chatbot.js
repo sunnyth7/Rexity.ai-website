@@ -562,6 +562,20 @@
       }
       gateErrorEl.hidden = true;
       saveLead({ name: name, phone: gatePhoneEl.value.trim(), ts: new Date().getTime() });
+      // Persist the lead server-side (Supabase Lead table) so chat access is
+      // attributable; fire-and-forget, chat opens regardless.
+      try {
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            phone: gatePhoneEl.value.trim(),
+            service: "Chatbot",
+            message: "Chatbot-Freischaltung über das Kontakt-Widget"
+          })
+        }).catch(function () {});
+      } catch (e) {}
       applyGateState();
       input.focus();
     });

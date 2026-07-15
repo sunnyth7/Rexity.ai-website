@@ -1,7 +1,7 @@
-// /api/lead — persists a website contact-form submission as a Lead row in
-// Supabase (project ixzgyqiteepitseywqlc). Uses the service_role key over the
-// REST API (no Prisma/npm — this is a no-build static site). The key lives in
-// Vercel env and is NEVER exposed to the client.
+// /api/book — persists a "Termin buchen" appointment request in Supabase
+// (same project/tables as /api/lead): one Lead row (pipeline) plus one linked
+// Appointment row (startTime/endTime, status PENDING). Service-role key over
+// the REST API; the key lives in Vercel env and is NEVER exposed to the client.
 
 const crypto = require("crypto");
 
@@ -9,6 +9,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SLOT_MINUTES = 45;
 
 function clip(v, n) {
   return typeof v === "string" ? v.slice(0, n) : "";
@@ -30,21 +31,18 @@ function clientIp(req) {
   return (typeof fwd === "string" ? fwd.split(",")[0].trim() : "") || req.socket.remoteAddress || "unknown";
 }
 
-// Per-instance global ceiling: caps total lead inserts per warm instance per
-// minute, so a distributed bot (many IPs each under the per-IP limit) can't
-// flood the Lead table without bound.
-const GLOBAL_LEAD_CEILING = 40;
+const GLOBAL_BOOK_CEILING = 20;
 const globalHits = [];
 function globalCeilingExceeded() {
   const now = Date.now();
   while (globalHits.length && now - globalHits[0] > 60000) globalHits.shift();
-  if (globalHits.length >= GLOBAL_LEAD_CEILING) return true;
+  if (globalHits.length >= GLOBAL_BOOK_CEILING) return true;
   globalHits.push(now);
   return false;
 }
 
-async function insertLead(lead) {
-  const resp = await fetch(SUPABASE_URL + "/rest/v1/Lead", {
+async function insertRow(table, row) {
+  const resp = await fetch(SUPABASE_URL + "/rest/v1/" + table, {
     method: "POST",
     headers: {
       apikey: SERVICE_KEY,
@@ -52,11 +50,11 @@ async function insertLead(lead) {
       "Content-Type": "application/json",
       Prefer: "return=minimal"
     },
-    body: JSON.stringify(lead)
+    body: JSON.stringify(row)
   });
   if (!resp.ok) {
     const detail = await resp.text().catch(() => "");
-    throw new Error("supabase " + resp.status + " " + detail.slice(0, 200));
+    throw new Error("supabase " + table + " " + resp.status + " " + detail.slice(0, 200));
   }
 }
 
@@ -70,7 +68,7 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  if (rateLimited(clientIp(req), 8, 10 * 60 * 1000) || globalCeilingExceeded()) {
+  if (rateLimited(clientIp(req), 5, 10 * 60 * 1000) || globalCeilingExceeded()) {
     res.statusCode = 429;
     res.setHeader("Retry-After", "300");
     res.end(JSON.stringify({ ok: false, error: "Too many requests. Please try again later." }));
@@ -96,62 +94,87 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Honeypot: real users never fill this hidden field. Pretend success so bots
-  // get no signal, but write nothing.
+  // Honeypot: real users never fill this hidden field.
   if (clip(data.company_website || data._gotcha, 100).trim()) {
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));
     return;
   }
 
-  // Accept both the CF7 field names and plain ones.
-  const name = clip(data.name || data["your-name"], 200).trim();
-  const email = clip(data.email || data["your-email"], 200).trim();
-  const subject = clip(data.subject || data["your-subject"], 300).trim();
-  const message = clip(data.message || data["your-message"], 4000).trim();
+  const name = clip(data.name, 200).trim();
+  const email = clip(data.email, 200).trim();
   const phone = clip(data.phone, 60).trim();
-  const company = clip(data.company, 200).trim();
-  const service = clip(data.service, 300).trim();
+  const message = clip(data.message, 4000).trim();
+  const startRaw = clip(data.start, 40).trim();
 
-  // Contact-form leads carry an email; chatbot-gate leads carry a phone.
-  if (!name || (!email && !phone)) {
+  if (!name || !email || !EMAIL_RE.test(email)) {
     res.statusCode = 422;
-    res.end(JSON.stringify({ ok: false, error: "Name and email or phone are required." }));
+    res.end(JSON.stringify({ ok: false, error: "Name and a valid email are required." }));
     return;
   }
-  if (email && !EMAIL_RE.test(email)) {
+  const start = new Date(startRaw);
+  if (!startRaw || isNaN(start.getTime())) {
     res.statusCode = 422;
-    res.end(JSON.stringify({ ok: false, error: "Please enter a valid email address." }));
+    res.end(JSON.stringify({ ok: false, error: "Please pick a preferred date and time." }));
+    return;
+  }
+  if (start.getTime() < Date.now() - 60 * 60 * 1000 || start.getTime() > Date.now() + 366 * 24 * 60 * 60 * 1000) {
+    res.statusCode = 422;
+    res.end(JSON.stringify({ ok: false, error: "Please pick a date in the future (within a year)." }));
     return;
   }
 
   if (!SUPABASE_URL || !SERVICE_KEY) {
-    console.error("[lead] missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY env");
+    console.error("[book] missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY env");
     res.statusCode = 500;
     res.end(JSON.stringify({ ok: false, error: "Server not configured." }));
     return;
   }
 
   const now = new Date().toISOString();
+  const end = new Date(start.getTime() + SLOT_MINUTES * 60 * 1000);
+  const leadId = "web_" + crypto.randomUUID();
+
   const lead = {
-    id: "web_" + crypto.randomUUID(),
+    id: leadId,
     name: name,
-    email: email || null,
+    email: email,
     phone: phone || null,
-    company: company || null,
-    service: service || subject || null,
+    service: "Terminanfrage",
     message: message || null,
     source: "WEBSITE",
     updatedAt: now
   };
+  const appointment = {
+    id: "apt_" + crypto.randomUUID(),
+    leadId: leadId,
+    clientName: name,
+    clientEmail: email,
+    clientPhone: phone || null,
+    startTime: start.toISOString(),
+    endTime: end.toISOString(),
+    status: "PENDING",
+    source: "WEBSITE",
+    notesSummary: message ? message.slice(0, 1000) : null,
+    idempotencyKey: "web_" + crypto.createHash("sha256").update(email + "|" + start.toISOString()).digest("hex").slice(0, 40),
+    updatedAt: now
+  };
 
   try {
-    await insertLead(lead);
+    await insertRow("Lead", lead);
+    await insertRow("Appointment", appointment);
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));
   } catch (error) {
-    console.error("[lead] insert failed:", error && error.message);
+    // Duplicate idempotency key = same person re-submitting the same slot;
+    // treat as success rather than surfacing an error.
+    if (/23505|duplicate/i.test(String(error && error.message))) {
+      res.statusCode = 200;
+      res.end(JSON.stringify({ ok: true }));
+      return;
+    }
+    console.error("[book] insert failed:", error && error.message);
     res.statusCode = 502;
-    res.end(JSON.stringify({ ok: false, error: "Could not save your message. Please email hello@rexity.ai." }));
+    res.end(JSON.stringify({ ok: false, error: "Could not save your booking. Please email hello@rexity.ai." }));
   }
 };
