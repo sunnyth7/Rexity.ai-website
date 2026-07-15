@@ -4,8 +4,7 @@
   var LEAD_KEY = "rexity_chat_lead";
   var CONTACT = {
     email: "hello@rexity.ai",
-    // TODO: replace with the real WhatsApp business number before launch.
-    whatsapp: "491700000000"
+    whatsapp: "491742471435"
   };
   function getLead() {
     try { return JSON.parse(window.localStorage.getItem(LEAD_KEY) || "null"); } catch (e) { return null; }
