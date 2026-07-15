@@ -2320,6 +2320,17 @@ html body .ct-div-block.p-item.team-item :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
 html body .ct-section .ct-text-block.button-text,
 html body .ct-section .ct-text-block.button-text :is(span,div),
 html body .ct-section .ct-headline.header-text { color: #ffffff !important; }
+/* team card: keep the name/pill clear of the card's top edge */
+html body .ct-div-block.p-item.team-item .team-right-div {
+  padding-top: 56px !important;
+  padding-bottom: 44px !important;
+}
+@media (max-width: 991px) {
+  html body .ct-div-block.p-item.team-item .team-right-div {
+    padding-top: 28px !important;
+    padding-bottom: 32px !important;
+  }
+}
 </style>
 </head>
 <body class="home wp-singular page-template-default page page-id-10 wp-embed-responsive wp-theme-oxygen-is-not-a-theme  oxygen-body" >
@@ -2405,7 +2416,39 @@ window._$W = window;document.addEventListener("DOMContentLoaded",()=>{document.b
 <script data-optimized="1" src="/rexity-omi/assets/it/js/litespeed-bundle.js" defer></script><style id="omi-iframe-fix">
 html, body, .ct-section, .ct-section-inner-wrap, [class*="smooth"] { background-color:#f7f7f4 !important; }
 </style>
-<style id="omi-sprint1-hide">#contact-us .wpcf7,#contact-us form.wpcf7-form,#contact-us .oxy-ou-cf7-styler{display:none!important}#section-71-1569{display:none!important}</style><style id="omi-hide-scrollbar">html{scrollbar-width:none!important}body{scrollbar-width:none!important}::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}</style><style>.omi-hide{display:none!important}</style><style>.omi-ai-logo{display:inline-flex;align-items:center;justify-content:center;padding:0 42px}.omi-ai-logo img{height:40px;width:auto;display:block;opacity:.72;filter:saturate(.9);transition:opacity .25s ease}.omi-ai-logo:hover img{opacity:1}@media(max-width:640px){.omi-ai-logo{padding:0 26px}.omi-ai-logo img{height:30px}}</style><script src="/rexity-omi/omi/omi-i18n.js"></script><script src="/rexity-omi/omi/omi-lead.js"></script><script src="/rexity-omi/omi/omi-team.js"></script><script src="/rexity-omi/omi/omi-service-links.js"></script><script src="/rexity-omi/omi/omi-cleanup.js"></script></body>
+<style id="omi-sprint1-hide">#contact-us .wpcf7,#contact-us form.wpcf7-form,#contact-us .oxy-ou-cf7-styler{display:none!important}#section-71-1569{display:none!important}</style><style id="omi-hide-scrollbar">html{scrollbar-width:none!important}body{scrollbar-width:none!important}::-webkit-scrollbar{width:0!important;height:0!important;display:none!important}</style><style>.omi-hide{display:none!important}</style><style>.omi-ai-logo{display:inline-flex;align-items:center;justify-content:center;padding:0 42px}.omi-ai-logo img{height:40px;width:auto;display:block;opacity:.72;filter:saturate(.9);transition:opacity .25s ease}.omi-ai-logo:hover img{opacity:1}@media(max-width:640px){.omi-ai-logo{padding:0 26px}.omi-ai-logo img{height:30px}}</style><script src="/rexity-omi/omi/omi-i18n.js"></script><script src="/rexity-omi/omi/omi-lead.js"></script><script src="/rexity-omi/omi/omi-team.js"></script><script src="/rexity-omi/omi/omi-service-links.js"></script><script src="/rexity-omi/omi/omi-cleanup.js"></script><script id="rexity-select-bridge">
+/* The shell embeds this page as a pointer-events:none iframe so one parent
+   scrollbar drives everything (see omi-scroll.js). That also made all text
+   unselectable. On mouse devices the shell re-enables pointer events on the
+   iframe, and this bridge forwards wheel/keyboard scrolling to the parent so
+   the single-scroll behavior survives while text becomes selectable. */
+(function () {
+  if (window.top === window) return;
+  var fine;
+  try { fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches; } catch (e) { fine = true; }
+  if (!fine) return;
+  window.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    try { window.parent.scrollBy(0, dy); } catch (err) {}
+  }, { passive: false, capture: true });
+  window.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    var h = window.innerHeight, step = 0;
+    if (e.key === 'ArrowDown') step = 60;
+    else if (e.key === 'ArrowUp') step = -60;
+    else if (e.key === 'PageDown') step = h * 0.9;
+    else if (e.key === 'PageUp') step = -h * 0.9;
+    else if (e.key === ' ') step = e.shiftKey ? -h * 0.9 : h * 0.9;
+    if (!step) return;
+    e.preventDefault();
+    try { window.parent.scrollBy(0, step); } catch (err) {}
+  }, true);
+})();
+</script></body>
 </html>
 
 
