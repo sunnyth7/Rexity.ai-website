@@ -1,6 +1,18 @@
 (function () {
   var STORAGE_KEY = "rexity_lang";
   var INTRO_SEEN_KEY = "rexity_intro_seen";
+  var LEAD_KEY = "rexity_chat_lead";
+  var CONTACT = {
+    email: "hello@rexity.ai",
+    // TODO: replace with the real WhatsApp business number before launch.
+    whatsapp: "491700000000"
+  };
+  function getLead() {
+    try { return JSON.parse(window.localStorage.getItem(LEAD_KEY) || "null"); } catch (e) { return null; }
+  }
+  function saveLead(lead) {
+    try { window.localStorage.setItem(LEAD_KEY, JSON.stringify(lead)); } catch (e) {}
+  }
 
   // Time-of-day greeting per PRD: computed for Europe/Berlin regardless of
   // the visitor's timezone (client clock converted via Intl; marked
@@ -49,7 +61,20 @@
       placeholder: "Ask about Rexity...",
       footnote: "Our Rexity chatbot is powered by a modern AI agent and can make mistakes. Please contact us before drawing any conclusions — we can help you better: hello@rexity.ai.",
       loadingThink: "Rexity is thinking …",
-      loadingWrite: "Rexity is writing …"
+      loadingWrite: "Rexity is writing …",
+      contactTitle: "Contact us",
+      contactSubtitle: "Chat · WhatsApp · Email",
+      contactChat: "Chatbot",
+      contactWhatsApp: "WhatsApp",
+      contactEmail: "Email",
+      waText: "Hi Rexity Labs, I have a question",
+      mailSubject: "Enquiry via rexity.ai",
+      gateTitle: "Before we chat",
+      gateCopy: "Please leave your name and phone number — this keeps the assistant available for real enquiries.",
+      gateName: "Your name",
+      gatePhone: "Phone number",
+      gateSubmit: "Start chat",
+      gateError: "Please enter a valid name and phone number."
     },
     de: {
       quickQuestions: [
@@ -74,7 +99,20 @@
       placeholder: "Fragen Sie Rexity...",
       footnote: "Unser Rexity-Chatbot basiert auf einem modernen KI-Agenten und kann Fehler machen. Bitte kontaktieren Sie uns, bevor Sie Entscheidungen daraus ableiten — wir helfen Ihnen gerne besser weiter: hello@rexity.ai.",
       loadingThink: "Rexity denkt …",
-      loadingWrite: "Rexity schreibt …"
+      loadingWrite: "Rexity schreibt …",
+      contactTitle: "Kontakt",
+      contactSubtitle: "Chat · WhatsApp · E-Mail",
+      contactChat: "Chatbot",
+      contactWhatsApp: "WhatsApp",
+      contactEmail: "E-Mail",
+      waText: "Hallo Rexity Labs, ich habe eine Frage",
+      mailSubject: "Anfrage über rexity.ai",
+      gateTitle: "Bevor wir chatten",
+      gateCopy: "Bitte nennen Sie uns Ihren Namen und Ihre Telefonnummer — so bleibt der Assistent für echte Anfragen verfügbar.",
+      gateName: "Ihr Name",
+      gatePhone: "Telefonnummer",
+      gateSubmit: "Chat starten",
+      gateError: "Bitte geben Sie einen gültigen Namen und eine Telefonnummer ein."
     }
   };
 
@@ -106,6 +144,12 @@
   ];
 
   function svgIcon(name) {
+    if (name === "wa") {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 8.5c0 4 3 7 7 7 .9 0 1.2-.6 1.2-1.2 0-.3-1.8-1.3-2.1-1.3-.5 0-.7.8-1.1.8-.8 0-3-2.2-3-3 0-.4.8-.6.8-1.1 0-.3-1-2.1-1.3-2.1-.6 0-1.2.3-1.2 1.2z" fill="currentColor"/></svg>';
+    }
+    if (name === "mail") {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4.5 7.5 7.5 5.5 7.5-5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+    }
     if (name === "send") {
       return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
@@ -328,7 +372,7 @@
     var response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message, lang: lang, history: history || [] })
+      body: JSON.stringify({ message: message, lang: lang, history: history || [], lead: getLead() || undefined })
     });
     if (!response.ok) throw new Error("Chat request failed");
     var data = await response.json();
@@ -344,6 +388,11 @@
     root.className = "rexity-chatbot";
     root.setAttribute("aria-label", activeCopy.rootLabel);
     root.innerHTML = [
+      '<div class="rexity-chatbot__menu" hidden>',
+        '<button class="rexity-chatbot__menu-item rexity-chatbot__menu-chat" type="button">' + svgIcon("mark") + '<span></span></button>',
+        '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-wa" target="_blank" rel="noopener">' + svgIcon("wa") + '<span></span></a>',
+        '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-mail">' + svgIcon("mail") + '<span></span></a>',
+      '</div>',
       '<button class="rexity-chatbot__pill" type="button" aria-label="' + activeCopy.openLabel + '">',
         '<span class="rexity-chatbot__mark">' + svgIcon("mark") + '</span>',
         '<span class="rexity-chatbot__pill-text">',
@@ -362,6 +411,14 @@
             '<p class="rexity-chatbot__intro-copy">' + activeCopy.introCopy + '</p>',
           '</div>',
         '</div>',
+        '<form class="rexity-chatbot__gate" novalidate>',
+          '<h3 class="rexity-chatbot__gate-title"></h3>',
+          '<p class="rexity-chatbot__gate-copy"></p>',
+          '<input class="rexity-chatbot__gate-name" type="text" maxlength="80" autocomplete="name">',
+          '<input class="rexity-chatbot__gate-phone" type="tel" maxlength="24" autocomplete="tel">',
+          '<button class="rexity-chatbot__gate-submit" type="submit"></button>',
+          '<p class="rexity-chatbot__gate-error" hidden></p>',
+        '</form>',
         '<div class="rexity-chatbot__quick" aria-label="' + activeCopy.quickLabel + '"></div>',
         '<div class="rexity-chatbot__messages" aria-live="polite"></div>',
         '<form class="rexity-chatbot__form">',
@@ -381,6 +438,31 @@
     var form = root.querySelector(".rexity-chatbot__form");
     var input = root.querySelector(".rexity-chatbot__input");
     var send = root.querySelector(".rexity-chatbot__send");
+    var menu = root.querySelector(".rexity-chatbot__menu");
+    var menuChatBtn = root.querySelector(".rexity-chatbot__menu-chat");
+    var menuWa = root.querySelector(".rexity-chatbot__menu-wa");
+    var menuMail = root.querySelector(".rexity-chatbot__menu-mail");
+    var gate = root.querySelector(".rexity-chatbot__gate");
+    var gateTitleEl = root.querySelector(".rexity-chatbot__gate-title");
+    var gateCopyEl = root.querySelector(".rexity-chatbot__gate-copy");
+    var gateNameEl = root.querySelector(".rexity-chatbot__gate-name");
+    var gatePhoneEl = root.querySelector(".rexity-chatbot__gate-phone");
+    var gateSubmitEl = root.querySelector(".rexity-chatbot__gate-submit");
+    var gateErrorEl = root.querySelector(".rexity-chatbot__gate-error");
+
+    // Chat is gated behind name + phone so the assistant (and its API budget)
+    // is reserved for real enquiries rather than anonymous drive-by use.
+    function applyGateState() {
+      var lead = getLead();
+      gate.hidden = !!lead;
+      quick.style.display = lead ? "" : "none";
+      messages.style.display = lead ? "" : "none";
+      form.style.display = lead ? "" : "none";
+    }
+
+    function hideMenu() {
+      menu.setAttribute("hidden", "");
+    }
 
     function renderChatLanguage(nextLang) {
       lang = nextLang === "de" ? "de" : "en";
@@ -393,8 +475,19 @@
       input.setAttribute("placeholder", activeCopy.placeholder);
       input.setAttribute("aria-label", activeCopy.messageLabel);
       send.setAttribute("aria-label", activeCopy.sendLabel);
-      root.querySelector(".rexity-chatbot__pill-title").textContent = activeCopy.pillTitle;
-      root.querySelector(".rexity-chatbot__pill-subtitle").textContent = activeCopy.pillSubtitle;
+      root.querySelector(".rexity-chatbot__pill-title").textContent = activeCopy.contactTitle;
+      root.querySelector(".rexity-chatbot__pill-subtitle").textContent = activeCopy.contactSubtitle;
+      menuChatBtn.querySelector("span").textContent = activeCopy.contactChat;
+      menuWa.querySelector("span").textContent = activeCopy.contactWhatsApp;
+      menuWa.href = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(activeCopy.waText);
+      menuMail.querySelector("span").textContent = activeCopy.contactEmail;
+      menuMail.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent(activeCopy.mailSubject);
+      gateTitleEl.textContent = activeCopy.gateTitle;
+      gateCopyEl.textContent = activeCopy.gateCopy;
+      gateNameEl.setAttribute("placeholder", activeCopy.gateName);
+      gatePhoneEl.setAttribute("placeholder", activeCopy.gatePhone);
+      gateSubmitEl.textContent = activeCopy.gateSubmit;
+      gateErrorEl.textContent = activeCopy.gateError;
       root.querySelector(".rexity-chatbot__intro-title").textContent = activeCopy.introTitle;
       root.querySelector(".rexity-chatbot__intro-copy").textContent = activeCopy.introCopy;
       root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
@@ -439,10 +532,42 @@
     }
 
     pill.addEventListener("click", function () {
-      markIntroSeen();
-      root.classList.add("is-open");
-      window.setTimeout(function () { input.focus(); }, 180);
+      if (menu.hasAttribute("hidden")) menu.removeAttribute("hidden");
+      else hideMenu();
     });
+
+    menuChatBtn.addEventListener("click", function () {
+      markIntroSeen();
+      hideMenu();
+      applyGateState();
+      root.classList.add("is-open");
+      window.setTimeout(function () {
+        (getLead() ? input : gateNameEl).focus();
+      }, 180);
+    });
+
+    menuWa.addEventListener("click", hideMenu);
+    menuMail.addEventListener("click", hideMenu);
+
+    document.addEventListener("click", function (event) {
+      if (!root.contains(event.target)) hideMenu();
+    });
+
+    gate.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var name = gateNameEl.value.trim();
+      var digits = gatePhoneEl.value.replace(/\D/g, "");
+      if (name.length < 2 || digits.length < 7 || digits.length > 15) {
+        gateErrorEl.hidden = false;
+        return;
+      }
+      gateErrorEl.hidden = true;
+      saveLead({ name: name, phone: gatePhoneEl.value.trim(), ts: new Date().getTime() });
+      applyGateState();
+      input.focus();
+    });
+
+    applyGateState();
 
     close.addEventListener("click", function () {
       markIntroSeen();
@@ -464,6 +589,7 @@
       window.setTimeout(function () {
         if (introSeen() || root.classList.contains("is-open") || isMobileViewport()) return;
         markIntroSeen();
+        applyGateState();
         root.classList.add("is-open");
       }, 9000);
     }
@@ -477,6 +603,7 @@
 
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
+      if (!getLead()) { applyGateState(); return; }
       var message = input.value.trim();
       if (!message) return;
       input.value = "";

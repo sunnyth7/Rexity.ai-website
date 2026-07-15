@@ -2273,6 +2273,54 @@ font-size: 20px!important;
 <link rel='stylesheet' id='oxygen-cache-10-css' href='/rexity-omi/assets/vendor/css/10.css' media='all' />
 <link rel='stylesheet' id='oxygen-universal-styles-css' href='/rexity-omi/assets/vendor/css/universal.css' media='all' />
 <!-- END OF WP_HEAD() -->
+<style id="rexity-blue-theme">
+/* Rexity cobalt re-theme: blue page, ivory tiles, navy ink. */
+:root {
+  --rx-blue: #1560BD;
+  --rx-blue-deep: #0E479B;
+  --rx-card: #F7F3EA;
+  --rx-ink: #10233F;
+  --rx-text: #F4F8FF;
+}
+html, body { background-color: var(--rx-blue) !important; }
+html body { background: linear-gradient(180deg, #1152A9 0%, var(--rx-blue) 240px) !important; }
+html body section.ct-section,
+html body .ct-section .ct-section-inner-wrap { background-color: transparent !important; }
+html body .ct-div-block.h-scroll-trigger { background-color: transparent !important; }
+/* text sitting on the blue: white */
+html body .ct-section :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div) { color: var(--rx-text) !important; }
+/* ivory tiles (formerly white/near-white cards) */
+html body .ct-div-block.port-item,
+html body .ct-div-block.review-box,
+html body .ct-div-block.p-item.team-item,
+#div_block-4804-10, #div_block-2159-10, #div_block-2140-10, #div_block-2127-10,
+#div_block-5075-10, #div_block-4933-10, #div_block-5803-10, #div_block-5815-10,
+#div_block-64-1569, #div_block-9-1569,
+#div_block-3938-10, #div_block-3977-10, #div_block-3979-10 {
+  background-color: var(--rx-card) !important;
+}
+/* text inside ivory tiles: navy ink (declared after the white rule so it wins) */
+html body .ct-div-block.port-item :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+html body .ct-div-block.review-box :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+html body .ct-div-block.p-item.team-item :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-4804-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2159-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2140-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2127-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5075-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-4933-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5803-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5815-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-64-1569 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-9-1569 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3938-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3977-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3979-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div) { color: var(--rx-ink) !important; }
+/* button labels stay white on green pills; headlines on legacy-blue boxes stay white */
+html body .ct-section .ct-text-block.button-text,
+html body .ct-section .ct-text-block.button-text :is(span,div),
+html body .ct-section .ct-headline.header-text { color: #ffffff !important; }
+</style>
 </head>
 <body class="home wp-singular page-template-default page page-id-10 wp-embed-responsive wp-theme-oxygen-is-not-a-theme  oxygen-body" >
 
