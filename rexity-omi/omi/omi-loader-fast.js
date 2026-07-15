@@ -7,7 +7,7 @@
    video autoplays underneath regardless. Also signals loader-complete so the
    chatbot can init. Reversible: delete this file + its include. */
 (function () {
-  var CAP = 1400; // ms after this script runs (≈ DOMContentLoaded)
+  var CAP = 4200; // ms — failsafe only: normal teardown at 3760ms; fires only if the inline loader script failed (≈ DOMContentLoaded)
   function reveal() {
     var el = document.querySelector(".intro");
     if (!el || el.__rxFast) return;
