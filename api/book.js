@@ -1,7 +1,7 @@
 // /api/book — persists a "Termin buchen" appointment request in Supabase
 // (same project/tables as /api/lead): one Lead row (pipeline) plus one linked
-// Appointment row (startTime/endTime, status PENDING). SUPABASE_SERVICE_ROLE_KEY
-// holds an INSERT-ONLY anon key (RLS: insert policy only); lives in Vercel env.
+// Appointment row (startTime/endTime, status PENDING). Uses the service_role
+// key over the REST API (RLS deny-by-default); key lives in Vercel env.
 
 const crypto = require("crypto");
 

@@ -1,8 +1,8 @@
 // /api/lead — persists a website contact-form / chatbot-gate submission as a
-// Lead row in Supabase (project tfulzkthogypqzpmcoft; the original website
-// project no longer exists). SUPABASE_SERVICE_ROLE_KEY holds an INSERT-ONLY
-// anon key (RLS: insert policy only, no reads) over the REST API — no
-// Prisma/npm, this is a no-build static site. Key lives in Vercel env.
+// Lead row in Supabase (project ixzgyqiteepitseywqlc, the dedicated Rexity
+// backend). Uses the service_role key over the REST API (RLS is deny-by-
+// default on every table; service_role bypasses it). No Prisma/npm — this is
+// a no-build static site. The key lives in Vercel env, never client-side.
 
 const crypto = require("crypto");
 
