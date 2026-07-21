@@ -1,0 +1,2157 @@
+<link rel='stylesheet' id='oxygen-universal-styles-css' href='//workspace-it.com/wp-content/uploads/oxygen/css/universal.css?cache=1778842697&#038;ver=7.0' media='all' />
+<!-- END OF WP_HEAD() -->
+</head>
+<body class="error404 wp-embed-responsive wp-theme-oxygen-is-not-a-theme  oxygen-body" >
+
+
+
+
+										<article id="post-7260" class="post-7260 post type-post status-publish format-standard has-post-thumbnail hentry category-application-management category-general category-numecent-cloudpaging">
+					<header>
+						<h1>CloudPaging Apps with Citrix</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph">Anyone who has been around <a href="https://www.citrix.com/" target="_blank" rel="noreferrer noopener">Citrix</a> for any length of time will know that one of the main challenges is how to manage your template (or gold image) to keep applications up to date.</p>
+
+
+
+<p class="wp-block-paragraph">There are many ways you can achieve this including:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Update a template containing all of your manually installed apps</li>
+
+
+
+<li>Use an automated build to freshly install the latest versions of each app</li>
+
+
+
+<li>Use AppAttach – this is limited to MSIX and AppV applications only</li>
+
+
+
+<li>Use AppV – this is end of life in 2026</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">These methods are all time-consuming or imperfect, but there is another way – Numecent CloudPager.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img fetchpriority="high" decoding="async" width="831" height="157" src="https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging.png" alt="CloudPaging with Citrix" class="wp-image-7251" srcset="https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging.png 831w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging-300x57.png 300w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging-768x145.png 768w" sizes="(max-width: 831px) 100vw, 831px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">CloudPager is an application container management system for Windows desktop. It can deliver MSIX and AppV applications, but crucially it can also deliver Numecent’s own CloudPaging apps.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img decoding="async" width="1024" height="636" src="https://workspace-it.com/wp-content/uploads/2025/04/CloudPager-Applications.png" alt="Numecent CloudPager Applications" class="wp-image-7254" srcset="https://workspace-it.com/wp-content/uploads/2025/04/CloudPager-Applications.png 1024w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPager-Applications-300x186.png 300w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPager-Applications-768x477.png 768w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">CloudPaging is a rarity among application virtualisation technologies in that its claim that it can virtualise any application is pretty much true. The traditional limitations of AppV and MSIX do not apply here due to the unique way that CloudPaging can differentiate between components and using “layers” can choose to virtualise them or physically install them – this means that device drivers for example are not a problem.</p>
+
+
+
+<p class="wp-block-paragraph">What does this mean for your Citrix persona management? It means that you can simply have a template that contains the Windows operating system only and then quickly and dynamically stream in your applications. The Cloud Player agent acts in the background and populates the users Desktop and Start Menu with the shortcuts to applications they need for their role based on “pods” or groups of applications. Compared with other streaming technologies, Cloud Player is very fast, and applications start instantly for the user.</p>
+
+
+
+<figure class="wp-block-video"><video autoplay controls loop muted src="https://workspace-it.com/wp-content/uploads/2025/04/CloudPager-Apps-UI-vid.mp4"></video></figure>
+
+
+
+<p class="wp-block-paragraph">Updating application versions is fast and dynamic too. No need for installation or downtime, just update your application or pod with the new version, remove the old version and almost instantly the user is up to date. It’s equally easy to roll back if you need to.</p>
+
+
+
+<p class="wp-block-paragraph">At <a href="https://workspace-it.com" target="_blank" rel="noreferrer noopener">Workspace IT</a>, we have an Application Packaging team who are comfortable with all the leading technologies from the traditional Windows Installer MSI to <a href="https://learn.microsoft.com/en-us/previous-versions/windows/microsoft-desktop-optimization-pack/appv-v4/overview-of-application-virtualization" target="_blank" rel="noreferrer noopener">AppV</a>, <a href="https://learn.microsoft.com/en-us/windows/msix/overview" target="_blank" rel="noreferrer noopener">MSIX</a>, <a href="https://workspace-it.com/blog/psappdeploytoolkit-what-is-it-and-why-do-we-use-it/" target="_blank" rel="noreferrer noopener">PSADT</a> and of course <a href="https://www.numecent.com/" target="_blank" rel="noreferrer noopener">CloudPaging</a>.</p>
+					</div>
+
+				</article>
+								<article id="post-7250" class="post-7250 post type-post status-publish format-standard has-post-thumbnail hentry category-application-management category-general category-numecent-cloudpaging">
+					<header>
+						<h1>Numecent CloudPaging and CloudPager</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph">At Workspace IT, we have an Application Packaging team who are comfortable with all the leading technologies from the traditional Windows Installer MSI to <a href="https://learn.microsoft.com/en-us/previous-versions/windows/microsoft-desktop-optimization-pack/appv-v4/overview-of-application-virtualization" target="_blank" rel="noreferrer noopener">AppV</a>, <a href="https://learn.microsoft.com/en-us/windows/msix/overview" target="_blank" rel="noreferrer noopener">MSIX</a> and <a href="https://workspace-it.com/blog/psappdeploytoolkit-what-is-it-and-why-do-we-use-it/" target="_blank" rel="noreferrer noopener">PSADT</a>. However, one of our favourites is <a href="https://www.numecent.com/" target="_blank" rel="noreferrer noopener">CloudPaging</a> from Numecent.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img decoding="async" width="831" height="157" src="https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging.png" alt="Numecent" class="wp-image-7251" srcset="https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging.png 831w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging-300x57.png 300w, https://workspace-it.com/wp-content/uploads/2025/04/CloudPaging-768x145.png 768w" sizes="(max-width: 831px) 100vw, 831px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Having been historically embedded in the higher education sector in the UK, the CloudPaging packaging technologies are now being recognised and breaking out into other industries and sectors. One of the main reasons – the claim that any application can be packaged is pretty much true. This is due to the unique way the technology can isolate or virtualize some part of an application and physically install others. The perennial problem of delivering device drivers as part of a virtual package is not a problem for CloudPaging. This is a major difference not to be overlooked when evaluating packaging tools.</p>
+
+
+
+<p class="wp-block-paragraph"><br>In tandem with the <a href="https://www.numecent.com/cloudpager/" target="_blank" rel="noreferrer noopener">CloudPager</a>, which is Numecent’s application container management platform, you can easily and quickly deploy any application to a Windows desktop without installing it. The application can be a Cloudpaging app, AppV or MSIX and can be instantly updated or rolled back with no downtime or restarts.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="986" height="745" src="https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Apps.png" alt="Numecent CloudPager Applications" class="wp-image-7253" srcset="https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Apps.png 986w, https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Apps-300x227.png 300w, https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Apps-768x580.png 768w" sizes="auto, (max-width: 986px) 100vw, 986px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">This is particularly useful if you manage Virtual Desktops such as <a href="https://www.citrix.com/" target="_blank" rel="noreferrer noopener">Citrix</a>, <a href="https://azure.microsoft.com/en-us/products/virtual-desktop">AVD</a> or <a href="https://www.parallels.com/products/ras/remote-application-server/" target="_blank" rel="noreferrer noopener">Parallels</a> – no need to have any applications in your base template or “gold image”.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="458" src="https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Platform-1024x458.png" alt="Numecent CloudPaging Platform" class="wp-image-7252" srcset="https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Platform-1024x458.png 1024w, https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Platform-300x134.png 300w, https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Platform-768x343.png 768w, https://workspace-it.com/wp-content/uploads/2025/04/Numecent-Platform.png 1112w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Some benefits of Numecent’s CloudPaging and CloudPager technologies include:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Accelerated deployment and management</li>
+
+
+
+<li>Simplified base templates and dynamic application delivery for VDI</li>
+
+
+
+<li>Improved compatibility and legacy software support</li>
+
+
+
+<li>Enhanced security and compliance</li>
+
+
+
+<li>Simplified application updates and patch management</li>
+
+
+
+<li>Optimised performance and end-user experience</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Numecent’s innovative approach to application packaging through Cloudpaging revolutionizes software deployment by making it faster, more cost-effective, and more secure. Whether your organization is dealing with complex software rollouts, legacy application support, or the need for greater flexibility, Numecent CloudPaging provides a powerful solution that enhances efficiency while reducing IT overhead.</p>
+					</div>
+
+				</article>
+								<article id="post-6481" class="post-6481 post type-post status-publish format-standard has-post-thumbnail hentry category-general category-memcm category-microsoft category-sccm">
+					<header>
+						<h1>The end of the road for Microsoft Deployment Toolkit (MDT)!</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>The end of the road for Microsoft Deployment Toolkit</em> (<em>MDT)!</em></p>
+
+
+
+<p class="wp-block-paragraph">The <a href="https://learn.microsoft.com/en-us/intune/configmgr/mdt/" target="_blank" rel="noreferrer noopener">Microsoft Deployment Toolkit (MDT)</a> is a free Microsoft solution designed to simplify and automate the deployment of Windows Operating Systems and applications.</p>
+
+
+
+<p class="wp-block-paragraph">It has been the “go-to” tool set for IT professionals for decades and provides tools to create, customize, automate and manage Windows images across multiple devices.</p>
+
+
+
+<p class="wp-block-paragraph">However, from October 10 2025, Microsoft is deprecating the Microsoft Deployment Toolkit (MDT) integration with Configuration Manager (ConfigMgr/SCCM). Continuing to use it beyond this date may cause corruption with Task Sequences, and will not be supported.&nbsp;</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="869" height="176" src="https://workspace-it.com/wp-content/uploads/2025/03/MDT.png" alt="Microsoft Deployment Toolkit" class="wp-image-6482" srcset="https://workspace-it.com/wp-content/uploads/2025/03/MDT.png 869w, https://workspace-it.com/wp-content/uploads/2025/03/MDT-300x61.png 300w, https://workspace-it.com/wp-content/uploads/2025/03/MDT-768x156.png 768w" sizes="auto, (max-width: 869px) 100vw, 869px" /></figure>
+
+
+
+<p class="wp-block-paragraph"></p>
+
+
+
+<p class="wp-block-paragraph">Continuing to use it beyond this date may cause corruption with Task Sequences, and will not be supported. </p>
+
+
+
+<h4 class="wp-block-heading">Do you utilise MDT either as standalone infrastructure, or integrated into ConfigMgr?</h4>
+
+
+
+<p class="wp-block-paragraph">To make sure you migrate easily without issues, organizations should review their use of MDT and plan to move its features to other solutions.</p>
+
+
+
+<h4 class="wp-block-heading">How Workspace Can Help:</h4>
+
+
+
+<p class="wp-block-paragraph">Here at <a href="https://workspace-it.com" target="_blank" rel="noreferrer noopener">Workspace IT</a> our extensive product knowledge around ConfigMgr and MDT can help you understand the size of the problem:</p>
+
+
+
+<p class="wp-block-paragraph">One of our consultants will complete a remote assessment to understand and document your organisations reliance on MDT, the integration with ConfigMgr, legacy scripts in use, and deprecated functionality that may require alternative solutions.</p>
+
+
+
+<p class="wp-block-paragraph">Workspace IT will provide you with a migration plan, detailing recommendations to complete a smooth transition away from MDT, minimising disruption to production systems.</p>
+
+
+
+<h4 class="wp-block-heading">Get Started Today - Prepare for MDT deprecation.</h4>
+
+
+
+<p class="wp-block-paragraph">Contact us to schedule your assessment and receive a tailored migration strategy.</p>
+
+
+
+<p class="wp-block-paragraph">Ref: <a href="https://learn.microsoft.com/en-us/intune/configmgr/core/plan-design/changes/deprecated/removed-and-deprecated-cmfeatures" target="_blank" rel="noreferrer noopener">Deprecated features - Configuration Manager | Microsoft Learn</a></p>
+					</div>
+
+				</article>
+								<article id="post-5684" class="post-5684 post type-post status-publish format-standard has-post-thumbnail hentry category-charity category-general category-sun-screen-it">
+					<header>
+						<h1>Ghana 2025 - My Journal.</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>Written by Dan Goss - My Journal. </em></p>
+
+
+
+<h3 class="wp-block-heading">The Sun Screen IT Mission</h3>
+
+
+
+<ul class="wp-block-list">
+<li>To end E-Waste and the illegal dumping of millions of tonnes of toxic computer waste every year. </li>
+
+
+
+<li>To provide IT access in the form of sustainable, energy efficient Thin Client labs to developing countries.</li>
+
+
+
+<li>Changing lives with volunteers sharing IT and teaching skills enhancing the learning environment for underprivileged children globally. </li>
+</ul>
+
+
+
+<h3 class="wp-block-heading">My Journal</h3>
+
+
+
+<h6 class="wp-block-heading">Medaase - Thank you</h6>
+
+
+
+<p class="wp-block-paragraph">“Medaase” to all the people who supported me in joining <a href="https://www.sunscreenitfoundation.org/" target="_blank" rel="noreferrer noopener">Sun Screen IT Foundation</a> on their latest mission to deliver IT labs to 2 schools in Akropong, Ghana. The experience was unbelievable, and I am incredibly grateful to have had the opportunity to make a real difference and meet many unforgettable people along the way.</p>
+
+
+
+<p class="wp-block-paragraph">The local language in the village of Akropong is "Twi". Thank you in Twi is Medaase.</p>
+
+
+
+<p class="wp-block-paragraph">To keep the memories fresh and to give my personal view and experiences throughout the journey I write this post. I hope to convey the gratitude and emotions I experienced while in Ghana.</p>
+
+
+
+<h6 class="wp-block-heading">Saturday 1<sup>st</sup> February 2025 – The dream team assembled. </h6>
+
+
+
+<p class="wp-block-paragraph">Myself. Volunteer - Laurence Tucker, Operations Director extraordinaire. Charity Trustee and tech wizard - Steven Jones. Charity Founder - Nathaniel Comer, the change the world needs.&nbsp;&nbsp;&nbsp;</p>
+
+
+
+<p class="wp-block-paragraph">Now I was fortunate enough to see the enthusiasm and thankfulness of the people we would be visiting before we arrived which settled any anxiety I was feeling. This was due to a message received from the Headmistress of one of the schools we would be visiting.</p>
+
+
+
+<p class="wp-block-paragraph"><em>“Good evening. We wanted to express our heartfelt gratitude for your unwavering love and support towards our students. The Akropong Community is truly proud of your contributions. We eagerly look forward to welcoming you soon! God richly bless you.”</em></p>
+
+
+
+<h6 class="wp-block-heading">Sunday 2<sup>nd</sup> February 2025 – Let’s go!</h6>
+
+
+
+<p class="wp-block-paragraph">Now if like me you thought transporting equipment via airplane would be a doddle, you couldn’t be more wrong :-D. We started early, packing 10 suitcases!! We needed to wrap equipment securely to ensure they arrived in one piece after each bag made its way through the airport to the plane and back to us in Ghana. This was no simple task, imagine trying to transport 3 suitcases weighing around 30kgs each along with hand luggage, laptops etc.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="598" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_1-1024x598.jpg" alt="" class="wp-image-5687" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_1-1024x598.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_1-300x175.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_1-768x449.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_1-1536x897.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_1.jpg 1808w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Thankfully after a smooth yet full flight with British Airways, we arrived on time in Accra and retrieved 10 still in one-piece suitcases… phew! Challenge 1 completed.</p>
+
+
+
+<p class="wp-block-paragraph">Upon arrival in Ghana I was unsure what to expect but the airport was smooth, well developed and we managed to get through passport control without issue. The first sign I noticed was a single huge word “Akwaaba” – Welcome.</p>
+
+
+
+<p class="wp-block-paragraph">After finding our transport, driver Albert and our dedicated helper Ben we set off on the hour-long journey to the village of <a href="https://en.wikipedia.org/wiki/Akropong" target="_blank" rel="noreferrer noopener">Akropong</a>. We made it to our hotel around 11:30pm. A long but well executed day.</p>
+
+
+
+<h6 class="wp-block-heading">Monday 3<sup>rd</sup> February – This is Africa!</h6>
+
+
+
+<p class="wp-block-paragraph">First up, an early breakfast of Bread, Sausage, Egg and Salad with a topping of Beans (Like Heinz), different but pleasantly surprised.</p>
+
+
+
+<p class="wp-block-paragraph">Next, we set off on our 10–15-minute journey to check out the first of the 2 schools to make sure it was in the state we would expect and decide if we needed to make some adjustments or new plans.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_2-1024x577.jpg" alt="" class="wp-image-5689" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_2-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_2-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_2-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_2-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_2.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_3-1024x577.jpg" alt="" class="wp-image-5690" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_3-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_3-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_3-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_3-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_3.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">On arrival at the Presbyterian Kindergarten &amp; Primary School (PPS), my eyes were wide open with wonder and excitement. On exiting the van, I quickly realised my excitement was pale in comparison to the absolute beacons of smiling, happy faces of the students once they saw we were there.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1003" height="566" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_41.png" alt="" class="wp-image-5812" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_41.png 1003w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_41-300x169.png 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_41-768x433.png 768w" sizes="auto, (max-width: 1003px) 100vw, 1003px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">The IT room, that had been prepared for our arrival was in great condition, we had working electrics and network cables. Desks, chairs and benches for the students. Amazing! In this picture aside from the dream team from left to right we can see the Headmistress, Joseph (Electrician), Daniel Okeyre (Teacher) and Ben (Our local helper).</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_4-1024x577.jpg" alt="" class="wp-image-5692" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_4-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_4-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_4-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_4-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_4.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">After a quick check of the building everything looked good so we hopped back in the van and headed off to the second school we would be providing IT to. The PCE Demonstration Primary and Asamoah K.G School. The school is part of a campus, it has multiple schools within including the JHS school which Sun Screen IT Foundation delivered an IT lab to back in April 2025.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="595" height="349" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_5.png" alt="" class="wp-image-5693" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_5.png 595w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_5-300x176.png 300w" sizes="auto, (max-width: 595px) 100vw, 595px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Again, another ready to go room, freshly painted, some left-over monitors in place from the previous deployment at JHS. Cabling all neatly hidden in some trunking. At this point, the 4 of us were very happy to see 2 well-prepared rooms. Quite the opposite to some previous deployments I learnt from some of the war stories we talked about during our time together.</p>
+
+
+
+<p class="wp-block-paragraph">Now back to the smiling, happy faces I mentioned… I have no words to adequately convey the pure joy these children expressed each and every single time they saw us. I really have never been so popular. The chants and call outs of “Obroni” (white man) will stay with me forever.</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/EZBkWweWZ2c" title="Ghana 1 - VID 20250203 WA0010" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">After a few minutes in the room the children could not contain themselves and were flooding into the room to ask what was happening, what we were doing so the head teacher, Christian Anane, called an assembly to introduce us to the 100s of eager children and explain why we were there and what we would be doing.</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/fwbQOJ-hA1M" title="Ghana 2 - VID 20250203 WA0009" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">After some inspirational words from Nathaniel to the children, we stopped quickly at the JHS school to see how they are getting on with their delivery back in April and everyone was very happy to see a bustling busy classroom.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_6-1024x577.jpg" alt="" class="wp-image-5694" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_6-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_6-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_6-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_6-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_6.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_7-1024x577.jpg" alt="" class="wp-image-5695" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_7-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_7-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_7-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_7-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_7.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">We headed back to the hotel to regroup and start preparing the IT kit into 2 lots to configure and transport to each school. Now you might think this was all glamour and comfortable, in reality we had 2 techies crouched on a bed configuring and testing 60 Thin clients, 2 Servers and 2 Switches. The other 2 were working through the cases organising and separating ready for transport when ready. All in a small, very hot, very humid hotel room.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Disaster</strong> – One of the switches appeared to have broken during transport and the monitors we sourced in Ghana had different display outputs to what the thin clients had. Ben our helper sprang into action speaking to contacts all around Accra to try to source the needed equipment and replacements.</p>
+
+
+
+<p class="wp-block-paragraph">Late evening, we experienced our first “doom so” or “off on” – a power cut that knocked out power everywhere without a generator for around 1hr. Nothing we could do now except sit on some plastic chairs and enjoy a cold refreshing bottle of Star beer. </p>
+
+
+
+<h6 class="wp-block-heading">Tuesday 4<sup>th</sup> February – Visit to Accra &amp; PCE Demo</h6>
+
+
+
+<p class="wp-block-paragraph">8am start, today we split into 2 teams, Steven and I headed into one of the schools to get started while the others headed into Accra to find and purchase the bits we needed. A couple of hours they needed…. At 7.30pm, they arrived back at the hotel with everything we needed. This is commonly referred to as “African time”.</p>
+
+
+
+<p class="wp-block-paragraph">Meanwhile Steven and I had a successful day getting most of the devices on desks and had them connecting to the servers. It was starting to come together nicely.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_8-1024x577.jpg" alt="" class="wp-image-5697" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_8-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_8-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_8-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_8-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_8.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Around midday, I had the absolute pleasure to meet Michaella and Christabel who came into the room and asked me “How do you type?”</p>
+
+
+
+<p class="wp-block-paragraph">Now I will admit, for someone in a computer tech role for many years, I found it quite challenging to reset my mind to realise these students had never had a keyboard in front of them, or a mouse and really didn’t know how to use them.</p>
+
+
+
+<p class="wp-block-paragraph">Christabel – Left, Michaella – Right.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="768" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_9-1024x768.jpg" alt="" class="wp-image-5698" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_9-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_9-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_9-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_9-1536x1152.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_9.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">These two 8 year old girls were beautiful, happy souls and spent a good half an hour talking with me, I learnt their favourite book is “The Red Hunter”, they love their teachers and coming to school. They have many friends, girls not the boys of course.</p>
+
+
+
+<p class="wp-block-paragraph">I showed them how to type while I was using my laptop and then with a computer keyboard. They knew all the letters and they took the keyboard and spent 20 minutes practising on the keyboard that at this point was not connected to a computer. Once they finished, they were asking me how to change the desktop background – an interesting question from someone who had never used a computer, but I spent some time showing them how on my laptop, they then both had a go and were extremely excited and happy to get to do it. They then hurried back to class.</p>
+
+
+
+<p class="wp-block-paragraph">At the end of school, they both re-appeared, Michaella had to stay at school to wait for her older sister and Christabel had to wait daily 2-3 hours for her driver to arrive and take her home. Can you imagine, 2-3hrs of waiting at school every day?</p>
+
+
+
+<p class="wp-block-paragraph">The girls brought me a book to take back and read… to be continued</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="722" height="1024" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_10-722x1024.jpg" alt="" class="wp-image-5699" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_10-722x1024.jpg 722w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_10-212x300.jpg 212w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_10-768x1089.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_10-1083x1536.jpg 1083w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_10.jpg 1128w" sizes="auto, (max-width: 722px) 100vw, 722px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Around 5pm the school was closed, all lessons finished but some of the older students came to pray. Now I am talking about 100s of students, ages ranging from 6 to 23, all what to me sounded like cheering/chanting/singing. You could feel and I really mean you could feel the passion and might during this time. I recorded the sound to replay, at this point I was not sure if it might be disrespectful to video so decided not to.</p>
+
+
+
+<figure class="wp-block-audio aligncenter"><audio controls src="https://workspace-it.com/wp-content/uploads/2025/02/Ghana-Audio-1.mp3"></audio></figure>
+
+
+
+<p class="wp-block-paragraph">At the end of the day, Mr Anane gave us a lift home in his car, it drove but for much longer I am not sure. Every light that could be lit on the dashboard, was lit.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-1024x577.jpg" alt="" class="wp-image-5701" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Upon returning to the Hotel, we were shown some footage of the trip to Accra, I have some images from what was seen by Laurence and Nathaniel in the multiple IT shops, quite unbelievable.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="816" height="459" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_11.png" alt="" class="wp-image-5702" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_11.png 816w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-300x169.png 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_11-768x432.png 768w" sizes="auto, (max-width: 816px) 100vw, 816px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="823" height="456" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_12.png" alt="" class="wp-image-5703" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_12.png 823w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_12-300x166.png 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_12-768x426.png 768w" sizes="auto, (max-width: 823px) 100vw, 823px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="767" height="551" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_13.png" alt="" class="wp-image-5704" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_13.png 767w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_13-300x216.png 300w" sizes="auto, (max-width: 767px) 100vw, 767px" /></figure>
+</div></div>
+</div>
+
+
+
+<h6 class="wp-block-heading">Wednesday 5<sup>th</sup> February – All hands to the pump!</h6>
+
+
+
+<p class="wp-block-paragraph">An earlier start today, meet for breakfast at 7am, not feeling particularly refreshed after a 20-minute dribbling shower but nevertheless we were up and raring to go again.</p>
+
+
+
+<p class="wp-block-paragraph">Today was about major progress so we split into 3 teams, Nathaniel headed down to the JHS schools to do some interviews with the students who had been using the computers since April.</p>
+
+
+
+<p class="wp-block-paragraph">Steven and I went back to PCE Demo to finish up some bits and pieces now we had the other monitors, cables and replacement parts. Laurence headed to the PPS school to get started setting up the computers, monitors and cabling at that school.</p>
+
+
+
+<p class="wp-block-paragraph">With DJ Nathaniel upfront in the van we of course had some tunes to get us fired up for the day…</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/I5WbQr1b3ag" title="Ghana 3 - 20250205 080506" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/w4gb2eb0i2g" title="Ghana 4 - 20250205 080611" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<p class="wp-block-paragraph">After some further work in the school, we are almost there, the students brought in some chairs and the teachers brought in some banners, it’s starting to look finished.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="768" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_14-1024x768.jpg" alt="" class="wp-image-5705" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_14-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_14-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_14-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_14-1536x1152.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_14.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_15-1024x577.jpg" alt="" class="wp-image-5706" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_15-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_15-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_15-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_15-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_15.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Next, we jetted back to the other school with our driver Albert, we were there in no time to find Laurence had pulled a blinder and had all the Thin clients and monitors on desks! Great effort and a huge relief.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="576" src="https://workspace-it.com/wp-content/uploads/2025/02/Journal_16-1024x576.jpg" alt="" class="wp-image-5707" srcset="https://workspace-it.com/wp-content/uploads/2025/02/Journal_16-1024x576.jpg 1024w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_16-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_16-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_16-1536x864.jpg 1536w, https://workspace-it.com/wp-content/uploads/2025/02/Journal_16.jpg 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">After some time spent configuring the server, switches and access points in the computer room we were making good time.</p>
+
+
+
+<p class="wp-block-paragraph">The teacher who had been working with Sun Screen IT trying to get an IT lab at his school was Daniel Okeyre. His colleague Joseph another teacher is also shown in this picture, both will be teaching IT and managing the environment going forward. Two exceptional teachers.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="768" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_17-1024x768.jpg" alt="" class="wp-image-5710" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_17-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_17-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_17-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_17-1536x1152.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_17.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Some of the students at this school were desperate to be introduced to the Obroni, Daniel told one of them to just come over and talk to me. </p>
+
+
+
+<p class="wp-block-paragraph">Here I met 14yr old Felicia, a strong character in herself, super bright and inquisitive, we spoke briefly about her family, she has a 1yr old baby sister, an older sister in another village called Essos and a 4yr old brother called Godwin who was at the same school. Felicia told me she likes science and wants to do medicine and become a doctor. She excused herself and re-appeared after a couple of minutes with her brother Godwin who was a little shy, but I managed to get him talking and he told me Felicia is a good sister. Unfortunately, I did not manage to get a photo with them as they had to shoot back to class. Another couple of children I won’t forget speaking with, so much life and enthusiasm, it’s heartwarming to see.</p>
+
+
+
+<p class="wp-block-paragraph">Tonight, we escaped to a local bar owned by Mr Darko, we got to see and hear about the local drinks, expertly explained by Ben. No samples of the local stuff, none of us dared to try them.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="2000" height="1500" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_39.jpg" alt="" class="wp-image-5810" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_39.jpg 2000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_39-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_39-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_39-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_39-1536x1152.jpg 1536w" sizes="auto, (max-width: 2000px) 100vw, 2000px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="2000" height="1500" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_40.jpg" alt="" class="wp-image-5811" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_40.jpg 2000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_40-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_40-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_40-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_40-1536x1152.jpg 1536w" sizes="auto, (max-width: 2000px) 100vw, 2000px" /></figure>
+</div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Afterwards Ben was kind enough to invite us to his house to meet his family. We also met his landlord who used to be a mariner who spent time in Russia. When questioned on where he prefers to be Russia or Ghana, he laughed and said it’s not really a question. He conversed in English and was happy to answer our “stupid questions” as he had plenty of “stupid answers”. A very interesting funny chap.</p>
+
+
+
+<p class="wp-block-paragraph">We headed back to the hotel to regroup, refuel with some “Hot Shito” and get ready for the next day. Shito, is a chilli sauce that works with the majority of African dishes, it came with every meal and provided hours of entertainment throughout the week with every pun imaginable.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="400" height="400" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_18.jpg" alt="" class="wp-image-5712" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_18.jpg 400w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_18-300x300.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_18-150x150.jpg 150w" sizes="auto, (max-width: 400px) 100vw, 400px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="960" height="960" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_19.jpg" alt="" class="wp-image-5713" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_19.jpg 960w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_19-300x300.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_19-150x150.jpg 150w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_19-768x768.jpg 768w" sizes="auto, (max-width: 960px) 100vw, 960px" /></figure>
+</div>
+</div>
+
+
+
+<p class="wp-block-paragraph">The joy of the evening shower when the water pressure was up – relief after 3 days of dribbling water pressure.</p>
+
+
+
+<h6 class="wp-block-heading">Thursday 6<sup>th</sup> February – It’s all coming together!</h6>
+
+
+
+<p class="wp-block-paragraph">Another split operation today, Nathaniel and Laurence headed back out to Accra to pickup a few more bits we needed to finish up physically. An exciting day of rejecting “Papaya” for lunch until finally realising it was Chicken from a shop call Papaya! Who would have guessed?!</p>
+
+
+
+<p class="wp-block-paragraph">A visit to Agbogbloshie before heading home provided some video and photographic evidence of why Sun Screen IT Foundation exists and why the world should take note and start making a change to stop E-Waste. Checkout some of what was seen:</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1000" height="511" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_20.png" alt="" class="wp-image-5715" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_20.png 1000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_20-300x153.png 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_20-768x392.png 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1000" height="527" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_21.png" alt="" class="wp-image-5716" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_21.png 1000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_21-300x158.png 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_21-768x405.png 768w" sizes="auto, (max-width: 1000px) 100vw, 1000px" /></figure>
+</div></div>
+</div>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/x0AkcusyIgU" title="Ghana 5 - Agbogbloshie" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/YNp9ueKRcwg" title="Ghana - Agbogbloshie" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph"><strong><em>We must do something to stop this practice of “dumping” in areas of poverty and economic need.</em></strong></p>
+
+
+
+<p class="wp-block-paragraph">Steven and I headed back to PCE Demo school for some final configuration changes and enhancements. A morning not without some adventure, we thought we got lucky with a Mercedes that came to pick us up, a local guy Mr Darko borrowed it while we ate breakfast for 10 minutes and returned 30 minutes later with this taxi as the Merc had broken down. Now remember we are transporting equipment, in a case for protection…</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="2000" height="1500" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_22.jpg" alt="" class="wp-image-5718" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_22.jpg 2000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_22-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_22-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_22-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_22-1536x1152.jpg 1536w" sizes="auto, (max-width: 2000px) 100vw, 2000px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="2000" height="1126" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_23.jpg" alt="" class="wp-image-5719" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_23.jpg 2000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_23-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_23-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_23-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_23-1536x865.jpg 1536w" sizes="auto, (max-width: 2000px) 100vw, 2000px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">We managed the 10-minute drive with the boot open, squashed in this tiny taxi without any further hiccups 😀</p>
+
+
+
+<p class="wp-block-paragraph">Today we had the pleasure of being visited by a force of nature, Hilda, 22, a student teacher in her 4<sup>th</sup> year with 1 year left to go before she qualifies and gets her own teaching role. Hilda stood out from the crowd due to her enthusiasm, happiness and general demeanour, we talked for a couple of hours about all things Ghana and the United Kingdom. Hilda was floating around the room, gently singing to herself while swaying side to side whenever not being engaged in conversation, this was a common theme with Ghanian people in general and it was amazing to see.</p>
+
+
+
+<p class="wp-block-paragraph">This is Hilda, aka TikTok phenom and aspiring Journalist. She has 9,500 TikTok followers @miss_fenteng</p>
+
+
+
+<p class="wp-block-paragraph">Hilda told me she uses TikTok to release educational content and practise her journalism by interviewing others. She has also been interviewed and appeared on TV in Ghana. I have no doubt she has an incredibly bright future whatever she decides to do. The brief TikToks she had me watched looked very professional, nothing like the TikTok videos I have seen floating around the internet back at home.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1126" height="2000" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_24.jpg" alt="" class="wp-image-5721" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_24.jpg 1126w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_24-169x300.jpg 169w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_24-577x1024.jpg 577w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_24-768x1364.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_24-865x1536.jpg 865w" sizes="auto, (max-width: 1126px) 100vw, 1126px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1275" height="1700" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_25.jpg" alt="" class="wp-image-5722" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_25.jpg 1275w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_25-225x300.jpg 225w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_25-768x1024.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_25-1152x1536.jpg 1152w" sizes="auto, (max-width: 1275px) 100vw, 1275px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Hilda, as an educator took great pleasure in helping correctly spell some of Twi words, I had been making notes of to try and learn some of the local language. For reference, those notes are as follows:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Medaase - Thank you</li>
+
+
+
+<li>On off - Doom so</li>
+
+
+
+<li>Kofi - Friday</li>
+
+
+
+<li>Bra Yaw - Brother Thursday</li>
+
+
+
+<li>Akwaaba - Welcome</li>
+
+
+
+<li>Nyame nhyira wo - God bless you</li>
+
+
+
+<li>Mimowachi - Good morning</li>
+
+
+
+<li>Maajo - Good evening</li>
+
+
+
+<li>Ete sen - How are you</li>
+
+
+
+<li>Obroni - White person</li>
+
+
+
+<li>Aye yeah - Good/Cool</li>
+
+
+
+<li>Papa - Good</li>
+
+
+
+<li>Yanko - Let's go</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">Bra, is a respectful term, Yaw is the word for Thursday, Bra Yaw is how I would be called instead of Daniel, people are often called using the day they were born. Example, Laurence was known as Kofi Laurence during his time in Ghana.</p>
+
+
+
+<p class="wp-block-paragraph">We regrouped at the hotel around 6pm to prepare for a dinner with lots of the people we were working with in the area. Nathaniel, arranged for around 20 people to have dinner at a local restaurant with the help of Joseph, our main local contact. In another example of “<strong>African Time</strong>”, this was scheduled for a 7pm start, approximately 9pm we arrived while others were still arriving…</p>
+
+
+
+<p class="wp-block-paragraph">What an evening, music, beautiful people, new friends, started and finished with a prayer from the local pastor We got to meet some of the peoples families, wives and children. A special evening that ended in some African dancing which we all “tried” to take part in, some more successfully than others (A+ to Laurence!). A core memory locked in.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="2000" height="1500" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_26.jpg" alt="" class="wp-image-5726" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_26.jpg 2000w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_26-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_26-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_26-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_26-1536x1152.jpg 1536w" sizes="auto, (max-width: 2000px) 100vw, 2000px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/ot0VOEomBxM" title="Ghana 6 - VID 20250206 WA0024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<h6 class="wp-block-heading">Friday 7<sup>th</sup> February – Mission Complete!!</h6>
+
+
+
+<p class="wp-block-paragraph">My favourite day, an incredibly long, emotional roller coaster where all the work came to a head, and we were rewarded with a truly magical day.</p>
+
+
+
+<p class="wp-block-paragraph">First up, we headed down to the PPS school to see Daniel and Joseph deliver their first lesson to the children. On arrival at the school, we received a warm welcome by some of the students clapping as we walked towards the classroom for the final time.</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/jpYD2dz706Q" title="Ghana 7 - VID 20250207 WA0015" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">The dream team excited and ready to see the students enter for their first lesson.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="768" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_27-1024x768.jpg" alt="" class="wp-image-5732" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_27-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_27-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_27-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_27-1536x1152.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_27.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Here we go, Daniel &amp; Joseph delivering the first lesson on Microsoft PowerPoint, how to open it, select a template, type your name and add an animation – MAGIC!</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/LaI03-kOigU" title="Ghana 8 - 20250207 092731" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Something I wanted to do was donate some pens and pencils to the school along with some sweets from the UK for the students to try. At the end of the lesson, Daniel handed each student a Moam ball shaped sweet as a well done to them. A huge success, once the flavours hit the faces lit up and it was beautiful to watch after a wonderful lesson given by the two teachers. </p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_28-1024x577.jpg" alt="" class="wp-image-5735" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_28-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_28-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_28-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_28-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_28.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/-Aqg-lNahnc" title="Ghana 9 - 20250207 093222" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">As a final step, a message was left on the whiteboard which was also signed by the 4 of us.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>DREAM BIG WORK HARD</strong></p>
+
+
+
+<p class="wp-block-paragraph">After some goodbyes, one of who was Felicia who I mentioned earlier, we headed to the PCE Demo school.</p>
+
+
+
+<p class="wp-block-paragraph">Teacher “Sir Confidence” gave a lesson in this fully kitted out room, the floor changed overnight, curtains and posters to finish it off. The lesson consisted of how to use the mouse and keyboard, how to create and rename a folder and change the desktop background.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_29-1024x577.jpg" alt="" class="wp-image-5738" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_29-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_29-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_29-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_29-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_29.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">After the lesson finished up, we were in for something extraordinary, a ceremony of sorts that I cannot express in words but hope the following pictures and videos can at least show what we experienced.</p>
+
+
+
+<p class="wp-block-paragraph">We are asked to sit front and centre, on some black leather chairs, in 38c heat, without really knowing what to expect. Slowly we were joined by head teachers, village chiefs, a pastor and so on. The ceremony lasted around 2hrs, an incredible amount of thanks and appreciation was given to us, along with being given some traditional clothing each. This was without a doubt my trip highlight and I feel incredibly lucky to have been able to take part and witness it. I am not afraid to admit, I was filled with emotion throughout and had to wipe my eyes a few times (It must of been the dust).</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1100" height="1192" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_30.jpg" alt="" class="wp-image-5740" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_30.jpg 1100w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_30-277x300.jpg 277w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_30-945x1024.jpg 945w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_30-768x832.jpg 768w" sizes="auto, (max-width: 1100px) 100vw, 1100px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1100" height="1271" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_31.jpg" alt="" class="wp-image-5741" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_31.jpg 1100w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_31-260x300.jpg 260w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_31-886x1024.jpg 886w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_31-768x887.jpg 768w" sizes="auto, (max-width: 1100px) 100vw, 1100px" /></figure>
+</div></div>
+</div>
+
+
+
+<p class="wp-block-paragraph">And now for the dancing…</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/mAECfPk1-MY" title="Ghana 10 - 20250207 115728" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/PDUC6nZMpW8" title="Ghana 11" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/n9zk4xPGd0g" title="Ghana 13 - 20250207 120230" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/QpUF2NL2sec" title="Ghana 14" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots"/>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/J2Nwlrdhl1I" title="Ghana 15 - 20250207 124021" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-dots" style="margin-top:0;margin-bottom:0"/>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1126" height="2000" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_32.jpg" alt="" class="wp-image-5746" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_32.jpg 1126w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_32-169x300.jpg 169w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_32-577x1024.jpg 577w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_32-768x1364.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_32-865x1536.jpg 865w" sizes="auto, (max-width: 1126px) 100vw, 1126px" /></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="1126" height="1690" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_33.jpg" alt="" class="wp-image-5747" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_33.jpg 1126w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_33-200x300.jpg 200w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_33-682x1024.jpg 682w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_33-768x1153.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_33-1023x1536.jpg 1023w" sizes="auto, (max-width: 1126px) 100vw, 1126px" /></figure>
+</div></div>
+</div>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/4tShWGSzHEM" title="Ghana 14 - VID 20250208 WA0005" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Money being given to the dancers was a sign of respect that they had done a great job. We thought they all did a great job, and we were later told that its tradition the money is shared amongst the dancers.<br><br>Upon questioning Albert (our driver) later, he explained that the dancing all had meaning, the colours of the clothing, the patterns on the clothing, the arm movements, everything meant something. Some examples he explained:<br><br>Colours often relate to the tribes, the black outfit symbolises a hunter. It then made sense as one of the movements looked like a throat being cut, we were told that this is protection for us against all enemies behind us.</p>
+
+
+
+<p class="wp-block-paragraph">Other movements included an expression of unity, coming together. The pointing up referenced god above all. As the ceremony concluded, the IT lab was officially opened.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_34-1024x577.jpg" alt="" class="wp-image-5756" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_34-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_34-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_34-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_34-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_34.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Now we had to nip back to the PPS school as we forgot something and saw the only “bit” of rain throughout our visit. The sky went dark, real fast.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_35-1024x577.jpg" alt="" class="wp-image-5758" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_35-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_35-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_35-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_35-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_35.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Luckily, we had made it inside the school as the rain arrived in force!</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/vvyxUySVeuk" title="Ghana 16 - 20250207 183445" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">As quick as it came, it stopped after around 15 minutes, we headed back to the hotel to get the rest of our stuff before leaving for our return flight. We said our final goodbyes and headed home.</p>
+
+
+
+<p class="wp-block-paragraph">As I have mentioned them throughout, I would like to introduce Ben (front and center), 29, our helper, aspiring Chef. Ben was our 5<sup>th</sup> team member while out in Ghana and made things easier when we would have been struggling otherwise. He stayed with us for the week but he kindly invited us to his house to introduce his wife Esther, son Wind, and their 2 dogs, “Next time” and “Roly”.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="811" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_36-1024x811.jpg" alt="" class="wp-image-5760" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_36-1024x811.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_36-300x237.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_36-768x608.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_36-1536x1216.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_36.jpg 2048w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Also pictured from left to right. Nathaniel, Laurence, Steven and me – The Dream Team.</p>
+
+
+
+<p class="wp-block-paragraph">And finally, Albert, our driver, the man who got us where we needed to be and never left our side. Albert drives for a living but is also a mechanic, has a wife and 2 boys who took great pleasure seeing the Obroni via video call. Albert was a fount of knowledge; he managed to answer my many questions throughout our time together and give insight into the Ghanian way of life which was greatly appreciated.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="768" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_37-1024x768.jpg" alt="" class="wp-image-5762" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_37-1024x768.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_37-300x225.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_37-768x576.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_37-1536x1152.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_37.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Upon arrival home, I was greeted with this picture hung in the window. After 7 days away from my family, seeing two smiling faces eagerly waiting for me as I opened the front door was an amazing feeling.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img loading="lazy" decoding="async" width="1024" height="577" src="https://workspace-it.com/wp-content/uploads/2019/02/Journal_38-1024x577.jpg" alt="" class="wp-image-5763" srcset="https://workspace-it.com/wp-content/uploads/2019/02/Journal_38-1024x577.jpg 1024w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_38-300x169.jpg 300w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_38-768x432.jpg 768w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_38-1536x865.jpg 1536w, https://workspace-it.com/wp-content/uploads/2019/02/Journal_38.jpg 2000w" sizes="auto, (max-width: 1024px) 100vw, 1024px" /></figure>
+</div>
+
+
+<h6 class="wp-block-heading">Ghana 2025 key takeaways</h6>
+
+
+
+<p class="wp-block-paragraph">The Ghanian way of life is so full of love, energy and respect it was a real joy to see. Many of them don't have much in comparison to people in the UK but you really wouldn't know it by their attitudes, everyone was super friendly, wanted to help and showed a huge amount of enthusiasm. I have no concerns that the two IT labs won't be used, the teachers and students could not wait to get in and start using them. Before i finished writing this I received a view from Daniel at the PPS school showing another lesson in progress with him explaining everyone is loving the IT lab and the students gave a big shout out to Sun Screen IT - AMAZING.</p>
+
+
+
+<p class="wp-block-paragraph"><span style="text-decoration: underline;">A couple of quotes heard throughout the week will stay with me:</span><br><strong>"I have never seen so many people, working so hard, so slowly"<br>"DREAM BIG WORK HARD"<br>"I might be able to make a difference, so therefore I must" <br>"You can be the change"</strong></p>
+
+
+
+<p class="wp-block-paragraph">And finally, for the techies among us that might be interested I made a note of what was deployed at each school.</p>
+
+
+
+<p class="wp-block-paragraph"><strong>Hardware:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li>1x APC BX UPS</li>
+
+
+
+<li>1x TPLink Omada Access Point</li>
+
+
+
+<li>1x Cisco 2960 48 Port Switch</li>
+
+
+
+<li>1x Physical Server running Proxmox Hypervisor</li>
+
+
+
+<li>7x Virtual Servers, including Infrastructure services and an RDS Farm</li>
+
+
+
+<li>30x IGEL UD3 Thin Client devices</li>
+
+
+
+<li>8x Lenovo ThinkPad Laptops</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph"><strong>Software:</strong></p>
+
+
+
+<ul class="wp-block-list">
+<li>Infrastructure Services
+<ul class="wp-block-list">
+<li>Domain Controller</li>
+
+
+
+<li>IGEL UMS</li>
+
+
+
+<li>File Server</li>
+</ul>
+</li>
+
+
+
+<li>RDS Farm
+<ul class="wp-block-list">
+<li>Office 365 Apps </li>
+
+
+
+<li>ScratchJr</li>
+
+
+
+<li>Rapid Typing</li>
+
+
+
+<li>Kiwix</li>
+
+
+
+<li>Scratch </li>
+
+
+
+<li>Inkspace</li>
+
+
+
+<li>Gimp </li>
+
+
+
+<li>Visual Studio Code</li>
+
+
+
+<li>HTML Games including Space Invaders! (I noticed a young boy wearing a Space Invaders jumper on our first day to had to get this for them).</li>
+</ul>
+</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph"></p>
+					</div>
+
+				</article>
+								<article id="post-4312" class="post-4312 post type-post status-publish format-standard has-post-thumbnail hentry category-general category-hardware category-igel category-lenovo category-sustainability">
+					<header>
+						<h1>Carbon Positive DaaS - Environmentally Friendly Devices</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>Carbon Positive DaaS - Environmentally Friendly Devices</em></p>
+
+
+
+<p class="wp-block-paragraph">At Workspace IT, we’re setting a new standard in device management with our <strong>affordable, sustainable managed solutions</strong>. We believe we are the UK’s first Managed Service Provider to offer a carbon-positive - fully managed service, we are committed to helping you manage your IT devices in a way that reduces costs while prioritizing environmental responsibility and ethical practices. </p>
+
+
+
+<p class="wp-block-paragraph">Whether you’re optimizing existing devices or upgrading to new ones, our services align with your values and business needs.</p>
+
+
+
+<h2 class="wp-block-heading">Energy Efficient Endpoints.</h2>
+
+
+
+<p class="wp-block-paragraph">The new devices we deploy, such as those from <a href="https://www.lenovo.com/" target="_blank" rel="noreferrer noopener"><strong>Lenovo</strong></a>, are selected for their low energy consumption and compliance with leading environmental standards, including <strong>Energy Star</strong>, <strong>EPEAT</strong>, <strong>RoHS</strong>, and <strong>TCO Certified 9.0</strong>. These devices also meet <strong>Volatile Organic Compound (VOC)</strong> certification &amp; <strong>ERP Lot 3 and Lot 7 requirements</strong>, ensuring they contribute to a greener IT environment.</p>
+
+
+
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="991" height="380" src="https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-7.png" alt="CPDaaS-7" class="wp-image-4510" srcset="https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-7.png 991w, https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-7-300x115.png 300w, https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-7-768x294.png 768w" sizes="auto, (max-width: 991px) 100vw, 991px" /></figure>
+
+
+
+<h6 class="wp-block-heading">50-60% Reduction in energy cost</h6>
+
+
+
+<p class="wp-block-paragraph">Additional savings due to lower cost devices.</p>
+
+
+
+<h6 class="wp-block-heading">Scope 3 Emissions</h6>
+
+
+
+<p class="wp-block-paragraph">Product Carbon Footprint (PCF) documents for Scope 3 reporting CO2 Offset included with every device deployed.</p>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-default" style="margin-top:var(--wp--preset--spacing--10);margin-bottom:var(--wp--preset--spacing--10)"/>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:66.66%">
+<figure class="wp-block-pullquote has-large-font-size" style="margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10)"><blockquote><p>“Lenovo are excited to be part of Workspace IT’s managed endpoint solution. Utilising the most efficient, modern technology and built with a strategic focus on security and energy efficiency in mind, this cost effective, carbon friendly solution stack promises to deliver incredible value to the market.”</p><cite>Joe Cleary<br>Solutions Manager - Lenovo</cite></blockquote></figure>
+</div>
+
+
+
+<div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:33.33%"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="144" height="208" src="https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-8.png" alt="CPDaaS-8" class="wp-image-4508"/></figure>
+</div></div>
+</div>
+
+
+
+<hr class="wp-block-separator has-alpha-channel-opacity is-style-default" style="margin-top:var(--wp--preset--spacing--10);margin-bottom:var(--wp--preset--spacing--10)"/>
+
+
+
+<p class="wp-block-paragraph">In the the following short video you get to hear from one of our Partners, Nathaniel Comer of <a href="https://www.sunscreenit.com/" target="_blank" rel="noreferrer noopener"><strong>Sun Screen IT</strong></a> as we interviewed him exploring his views on our Carbon Positive Device as a Service (DaaS).</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/daLyEaUasW0" title="Carbon Positive DaaS - Environmentally Friendly Devices" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Partnering with<strong> <a href="https://workspace-it.com/" target="_blank" rel="noreferrer noopener">Workspace IT</a></strong> means more than just effective device management— it’s a commitment to a <strong>greener</strong>, more <strong>responsible </strong>future. With our innovative approach, you’ll benefit from <strong>cost-effective</strong>, <strong>sustainable services</strong> that make a tangible difference to your environmental footprint. Join us in <strong>leading the charge</strong> toward ethical IT practices and experience the peace of mind that comes with knowing your technology choices are contributing to a better world.</p>
+
+
+
+<p class="wp-block-paragraph">To find out more about our Carbon Positive DaaS - Environmentally Friendly Devices please <a href="https://workspace-it.com/contact-workspace-it/" target="_blank" rel="noreferrer noopener">contact us</a> and we would love to tell you all about it.</p>
+					</div>
+
+				</article>
+								<article id="post-4612" class="post-4612 post type-post status-publish format-standard has-post-thumbnail hentry category-environment category-general category-itad category-sustainability">
+					<header>
+						<h1>Partnering with Sun Screen IT: A Commitment to Ethical IT Asset Disposal and Social Change</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>Partnering with Sun Screen IT: A Commitment to Ethical IT Asset Disposal and Social Change</em></p>
+
+
+
+<p class="wp-block-paragraph">At <a href="https://workspace-it.com" target="_blank" rel="noreferrer noopener">Workspace IT</a>, we are dedicated to promoting sustainable and ethical practices in IT asset disposal. Our partnership with <a href="https://www.sunscreenit.com/" target="_blank" rel="noreferrer noopener">Sun Screen IT</a> is a testament to this commitment. Together, we are on a mission to eliminate e-waste and ensure that IT asset disposal processes are environmentally responsible and compliant with all relevant regulations, including <strong>WEEE</strong>, <strong>ROHS</strong>, <strong>GDPR</strong>, and <strong>ADISA</strong>.</p>
+
+
+
+<h4 class="wp-block-heading">Eliminating E-Waste and Promoting Positive Environmental Impact</h4>
+
+
+
+<p class="wp-block-paragraph">E-waste is a growing global concern, with millions of tons of electronic waste being generated each year. By partnering with Sun Screen IT, we empower our clients to take full advantage of comprehensive services that focus on refurbishing or ecologically sound disposal of IT assets within developed nations. This collaboration helps prevent the illegal dumping of toxic computer waste, significantly reducing the environmental footprint of IT asset disposal.</p>
+
+
+
+<h4 class="wp-block-heading">Driving Social Change and Supporting Charitable Initiatives</h4>
+
+
+
+<p class="wp-block-paragraph">Our partnership with Sun Screen IT goes beyond environmental impact. We are proud to support their charitable initiatives, such as deploying and maintaining Thin Client IT Labs in schools across developing countries. Through the Sun Screen IT Foundation, we contribute to giving children access to technology and enhancing their learning environments. This initiative not only bridges the digital divide but also empowers the next generation with the tools they need to succeed.</p>
+
+
+
+<h4 class="wp-block-heading">Volunteering and Making a Tangible Difference</h4>
+
+
+
+<p class="wp-block-paragraph">In addition to our environmental and educational efforts, our partnership extends to offering life-changing volunteering opportunities. Individuals from our team travel to less privileged communities, providing hands-on support and making a tangible difference in the lives of underprivileged children. These experiences are not only transformative for the communities we serve but also for our volunteers, fostering a sense of global responsibility and empathy.</p>
+
+
+
+<div style="width: 50%; margin: 0 auto;">
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://www.youtube-nocookie.com/embed/JIG7BY_mLEM" title="Partnership with Workspace IT" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
+</div>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-vertically-aligned-center is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:33.33%"><div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="140" height="182" src="https://workspace-it.com/wp-content/uploads/2024/12/CPDaaS-10.png" alt="CPDaaS-10" class="wp-image-4509"/></figure>
+</div></div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow" style="flex-basis:66.66%">
+<figure class="wp-block-pullquote has-large-font-size"><blockquote><p>“We are delighted to be in  Partnership with Workspace IT who are already demonstrating their commitment not only to ethical business practice but transforming their customers services into Carbon-Positive outcomes, whilst driving funding into Social Change.”</p><cite>Nathaniel Comer<br>Founder - Sun Screen IT</cite></blockquote></figure>
+</div>
+</div>
+
+
+
+<h4 class="wp-block-heading">Continuing Our Mission</h4>
+
+
+
+<p class="wp-block-paragraph">At Workspace IT, we believe that ethical IT asset disposal is not just a responsibility but an opportunity to drive positive change. Our partnership with Sun Screen IT exemplifies our commitment to sustainability, social responsibility, and community support. Together, we are making a difference, one IT asset at a time.<br><br>To find out more about our partnership with Sun Screen IT, our ITAD Services and ways to positively impact the environment, get in contact and lets discover how to be better <strong>together</strong>.</p>
+					</div>
+
+				</article>
+								<article id="post-4616" class="post-4616 post type-post status-publish format-standard has-post-thumbnail hentry category-featured category-general category-intune category-microsoft">
+					<header>
+						<h1>Troubleshooting Company Portal Installation Issues in Intune</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>Troubleshooting Company Portal Installation Issues in Intune - written by Nathan Hodgson</em></p>
+
+
+
+<p class="wp-block-paragraph">If you're having trouble installing the Company Portal via Intune, don't worry, the team at <a href="https://workspace-it.com" target="_blank" rel="noreferrer noopener">Workspace IT</a> have put together some tips and tricks when troubleshooting Company Portal and other Intune deployed applications. Here are some steps you can follow to get things working again:</p>
+
+
+
+<h4 class="wp-block-heading">1. Check Primary User Assignment</h4>
+
+
+
+<p class="wp-block-paragraph">First, make sure the device has a primary user assigned in Intune. This is important because Intune uses this information to apply the right policies and apps.</p>
+
+
+
+<h4 class="wp-block-heading">2. Verify Device Sync</h4>
+
+
+
+<p class="wp-block-paragraph">Next, check if the device can sync with Intune. Here's how:</p>
+
+
+
+<p class="wp-block-paragraph">Go to Start &gt; Access work or school.<br>Click on Connected to….<br>Click Info.<br>Scroll down and click Sync.</p>
+
+
+
+<h4 class="wp-block-heading">3. Run System File Checker and DISM Commands</h4>
+
+
+
+<p class="wp-block-paragraph">Sometimes, system files can get corrupted and cause issues. Run these commands in an admin command prompt to fix them:</p>
+
+
+
+<div class="wp-block-group" style="border-width:3px;padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10)"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph">sfc /scannow<br>Dism /online /cleanup-image /checkhealth<br>Dism /online /cleanup-image /scanhealth<br>Dism /online /cleanup-image /restorehealth</p>
+</div></div>
+
+
+
+<h4 class="wp-block-heading">4. Reset Windows Update Components</h4>
+
+
+
+<p class="wp-block-paragraph">Issues with Windows Update can also prevent installations. Resetting these components can help. Run these commands in an admin command prompt:</p>
+
+
+
+<div class="wp-block-group" style="border-width:3px;padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10)"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph">net stop wuauserv<br>net stop cryptSvc<br>net stop bits<br>net stop msiserver<br>ren C:\Windows\SoftwareDistribution SoftwareDistribution.old<br>ren C:\Windows\System32\catroot2 catroot2.old<br>net start wuauserv<br>net start cryptSvc<br>net start bits<br>net start msiserver</p>
+</div></div>
+
+
+
+<p class="wp-block-paragraph">Then, restart your machine.</p>
+
+
+
+<h4 class="wp-block-heading">5. Repair Windows Store</h4>
+
+
+
+<p class="wp-block-paragraph">The Company Portal is distributed through the Microsoft Store, so if there are issues with the Store, repairing it can help. Run this PowerShell command:</p>
+
+
+
+<div class="wp-block-group" style="border-width:3px;padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10)"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph">Get-AppXPackage | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register "$($_.InstallLocation)\AppXManifest.xml"}</p>
+</div></div>
+
+
+
+<h4 class="wp-block-heading">6. Manually Delete Registry Keys</h4>
+
+
+
+<p class="wp-block-paragraph">Sometimes, leftover registry keys can cause problems. Deleting these keys can force Intune to reinstall the app. Check out the steps in this Deployment Research article.</p>
+
+
+
+<p class="wp-block-paragraph">This post by Johan Arwidmark shows how to do it:<br><a href="https://www.deploymentresearch.com/force-application-reinstall-in-microsoft-intune-win32-apps/" target="_blank" rel="noreferrer noopener">Force Application Reinstall in Microsoft Intune (Win32 Apps) - Deployment Research</a></p>
+
+
+
+<h4 class="wp-block-heading">7. Leave and Rejoin Azure AD</h4>
+
+
+
+<p class="wp-block-paragraph">If all else fails, leaving and rejoining Azure AD can reset the device's connection to Intune. Run this command in an admin command prompt:</p>
+
+
+
+<div class="wp-block-group" style="border-width:3px;padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10)"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph">dsregcmd /leave</p>
+</div></div>
+
+
+
+<p class="wp-block-paragraph">Reboot your machine, then run this PowerShell command:</p>
+
+
+
+<div class="wp-block-group" style="border-width:3px;padding-top:var(--wp--preset--spacing--10);padding-right:var(--wp--preset--spacing--10);padding-bottom:var(--wp--preset--spacing--10);padding-left:var(--wp--preset--spacing--10)"><div class="wp-block-group__inner-container is-layout-flow wp-block-group-is-layout-flow">
+<p class="wp-block-paragraph">Start-ScheduledTask "\Microsoft\Windows\Workplace Join\Automatic-Device-Join"</p>
+</div></div>
+
+
+
+<h6 class="wp-block-heading">Common Error Codes</h6>
+
+
+
+<p class="wp-block-paragraph">0xC002001B: There's a problem with the device's connection to Intune.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="432" height="207" src="https://workspace-it.com/wp-content/uploads/2024/12/0xC002001B.png" alt="0xC002001B" class="wp-image-4620" srcset="https://workspace-it.com/wp-content/uploads/2024/12/0xC002001B.png 432w, https://workspace-it.com/wp-content/uploads/2024/12/0xC002001B-300x144.png 300w" sizes="auto, (max-width: 432px) 100vw, 432px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">0x87D1041C: The application installation timed out.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="551" height="194" src="https://workspace-it.com/wp-content/uploads/2024/12/0x87D1041C.png" alt="0x87D1041C" class="wp-image-4619" srcset="https://workspace-it.com/wp-content/uploads/2024/12/0x87D1041C.png 551w, https://workspace-it.com/wp-content/uploads/2024/12/0x87D1041C-300x106.png 300w" sizes="auto, (max-width: 551px) 100vw, 551px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">0x0: The operation completed successfully.... or did it?!</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="264" height="157" src="https://workspace-it.com/wp-content/uploads/2024/12/0x0.png" alt="0x0" class="wp-image-4618"/></figure>
+</div>
+
+
+<p class="wp-block-paragraph">If you're still struggling with Company Portal Installation Issues or any other application and would like a chat with one of our experts, get in touch and we will be more than happy to help. </p>
+					</div>
+
+				</article>
+								<article id="post-2729" class="post-2729 post type-post status-publish format-standard has-post-thumbnail hentry category-general category-igel">
+					<header>
+						<h1>IGEL OSCW Enhanced - Under the Hood</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>IGEL OSCW Enhanced - Under the Hood - Written by Dan Goss</em></p>
+
+
+
+<p class="wp-block-paragraph">Recently we published this <a href="https://workspace-it.com/blog/igel-os-creator-for-windows-oscw-enhanced/" target="_blank" rel="noreferrer noopener">blog</a> about the ability to convert Windows Devices to become IGEL devices with minimal input from a user and without the need for a UMS server to trigger the conversion. </p>
+
+
+
+<p class="wp-block-paragraph">The blog generated a huge amount of interest within IGEL, their Resellers, Customers and Prospects. To that end, we decided to detail the steps which occur in order for this to work so others can benefit. </p>
+
+
+
+<p class="wp-block-paragraph">I am detailing the unattended version of the package so no user interaction will be required once this is deployed by your application deployment tool. This means there will be no Start Menu icons created.</p>
+
+
+
+<h4 class="wp-block-heading"><strong><span style="text-decoration: underline;">Components Needed?</span></strong></h4>
+
+
+
+<p class="wp-block-paragraph">First up we need the latest version of OSCW, you can download that from the IGEL website here: <a href="https://www.igel.com/software-downloads/igel-os-12-secure-endpoint/" target="_blank" rel="noreferrer noopener">Software Downloads | IGEL</a> </p>
+
+
+
+<p class="wp-block-paragraph">At the time of writing the blog the version available is: 2.1.1</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="329" height="85" src="https://workspace-it.com/wp-content/uploads/2024/10/image.png" alt="OSCW2.1.1" class="wp-image-2730" srcset="https://workspace-it.com/wp-content/uploads/2024/10/image.png 329w, https://workspace-it.com/wp-content/uploads/2024/10/image-300x78.png 300w" sizes="auto, (max-width: 329px) 100vw, 329px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Next we need the ISO for OS 12, you can download from IGEL using the same link as above. At the time of writing the blog the version available is: 12.5.0</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="457" height="182" src="https://workspace-it.com/wp-content/uploads/2024/10/image-1.png" alt="OS12.5.0" class="wp-image-2731" srcset="https://workspace-it.com/wp-content/uploads/2024/10/image-1.png 457w, https://workspace-it.com/wp-content/uploads/2024/10/image-1-300x119.png 300w" sizes="auto, (max-width: 457px) 100vw, 457px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">Once downloaded we just need to extract the ISO from the Zip file:</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full"><img loading="lazy" decoding="async" width="627" height="467" src="https://workspace-it.com/wp-content/uploads/2024/10/image-2.png" alt="OSC-12.5.0" class="wp-image-2732" srcset="https://workspace-it.com/wp-content/uploads/2024/10/image-2.png 627w, https://workspace-it.com/wp-content/uploads/2024/10/image-2-300x223.png 300w" sizes="auto, (max-width: 627px) 100vw, 627px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">To enable the unattended install of IGEL OS we actually need an unattended version of the ISO, to create one, you can follow the steps here:<br><a href="https://github.com/IGEL-Community/IGEL-Custom-Partitions/tree/master/CP_Source/Tools_Drivers/Make_OSC_Unattended_ISO_Boot" target="_blank" rel="noreferrer noopener">Make_OSC_Unattended_ISO_Boot at master · IGEL-Community (github.com)</a></p>
+
+
+
+<p class="wp-block-paragraph">The final piece needed if you wish to replicate directly what we have done is the PowerShell App Deployment toolkit which can be downloaded here:<br><a href="https://github.com/psappdeploytoolkit/psappdeploytoolkit/releases" target="_blank" rel="noreferrer noopener">PSAppDeployToolkit/PSAppDeployToolkit (github.com)</a></p>
+
+
+
+<h4 class="wp-block-heading"><strong><span style="text-decoration: underline;">Now What?</span></strong></h4>
+
+
+
+<p class="wp-block-paragraph">So we now have everything we need but what do we need to do in order to make it do something? After the hard work was done the solution is actually quite simple, the steps are as follows:</p>
+
+
+
+<ul class="wp-block-list">
+<li>Install OSCW </li>
+
+
+
+<li>Rename the osc-12.5.0.iso to osc.iso<em> (Make sure this is the unattended version of the ISO you created earlier)</em></li>
+
+
+
+<li>Copy the osc.iso into the C:\OSC folder </li>
+
+
+
+<li>Rename grub.cfg to grub.cfg.old</li>
+
+
+
+<li>Rename osc.cfg to grub.cfg</li>
+
+
+
+<li>Restart the device</li>
+</ul>
+
+
+
+<p class="wp-block-paragraph">And that's it, the device will boot using the GRUB boot loader which will trigger the IGEL installation from the ISO we placed earlier.                  </p>
+
+
+
+<h4 class="wp-block-heading"><span style=""><strong style="text-decoration-line: underline;">What about PSADT?</strong></span></h4>
+
+
+
+<p class="wp-block-paragraph">We at Workspace IT use PSADT as an application packaging tool due to its flexibility and completeness. For more info on PSADT read about it on another of our blog posts here: <a href="https://workspace-it.com/blog/psappdeploytoolkit-what-is-it-and-why-do-we-use-it/" target="_blank" rel="noreferrer noopener">PSAppDeployToolkit - Workspace IT</a></p>
+
+
+
+<p class="wp-block-paragraph">Long story short, here's how PSADT enables us to deliver the unattended package utilising most application deployment tools.</p>
+
+
+
+<h5 class="wp-block-heading">Installation Phase</h5>
+
+
+
+<pre class="wp-block-code"><code>##*===============================================
+##* INSTALLATION
+##*===============================================
+&#91;String]$installPhase = 'Installation'
+## Handle Zero-Config MSI Installations
+Execute-MSI -Action Install -Path "$DirFiles\setup-igel-osc-for-windows_2.1.0.msi" -Parameters "/qn" -IgnoreExitCodes "1603"</code></pre>
+
+
+
+<p class="wp-block-paragraph">Here we are simply installing OSCW using the /qn parameter which means install with no UI aka Silent.</p>
+
+
+
+<h5 class="wp-block-heading">Post Installation Phase</h5>
+
+
+
+<pre class="wp-block-code"><code>##*===============================================
+##* POST-INSTALLATION
+##*===============================================
+&#91;String]$installPhase = 'Post-Installation'
+Copy-File "$DirFiles\osc.iso" -Destination "C:\OSC"
+Rename-Item C:\grub2\grub.cfg -NewName C:\grub2\grub.cfg.old -Force
+Rename-Item C:\grub2\osc.cfg -NewName C:\grub2\grub.cfg -Force
+Show-InstallationRestartPrompt -CountdownSeconds 900 -CountdownNoHideSeconds 300</code></pre>
+
+
+
+<p class="wp-block-paragraph">Now as detailed above already we are copying the ISO and renaming the files required. The last step provides a restart notification which last for 15 minutes, once the timer is elapsed the reboot happens.</p>
+
+
+
+<p class="wp-block-paragraph">The timer will look similar to this without the customisation: </p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><img loading="lazy" decoding="async" width="455" height="297" src="https://workspace-it.com/wp-content/uploads/2024/08/IGEL-OS-Converter-Restart.png" alt="IGEL OS Converter Restart Prompt" class="wp-image-2065" style="width:500px" srcset="https://workspace-it.com/wp-content/uploads/2024/08/IGEL-OS-Converter-Restart.png 455w, https://workspace-it.com/wp-content/uploads/2024/08/IGEL-OS-Converter-Restart-300x196.png 300w" sizes="auto, (max-width: 455px) 100vw, 455px" /></figure>
+</div>
+
+
+<p class="wp-block-paragraph">You should now have everything you need to recreate your own solution to enable simpler IGEL OS12 roll outs. </p>
+
+
+
+<p class="wp-block-paragraph">For further assistance or to find out more about our services and solutions, please contact <a href="https://workspace-it.com/contact-workspace-it/" target="_blank" rel="noreferrer noopener">Workspace IT</a>. Or reach out to me direct at <a href="mailto:Dan.Goss@Workspace-IT.com" target="_blank" rel="noreferrer noopener">Dan.Goss@Workspace-IT.com</a>.</p>
+
+
+
+<p class="wp-block-paragraph"><em>Disclaimer - Not officially supported by IGEL, it</em>s <em>purpose built to provide a workaround to the problem detailed above.</em></p>
+
+
+
+<p class="wp-block-paragraph"></p>
+					</div>
+
+				</article>
+								<article id="post-2555" class="post-2555 post type-post status-publish format-standard has-post-thumbnail hentry category-application-management category-featured category-general category-vulnerabillity">
+					<header>
+						<h1>How Application Rationalisation Can Save Your Business Money</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>How Application Rationalisation Can Save Your Business Money</em></p>
+
+
+
+<p class="wp-block-paragraph">When was the last time you audited your organisation’s application portfolio – all the software that’s currently sitting in your network? If you preside over a particularly large IT network with many users, the chances are you’ll be quite shocked at what you find.</p>
+
+
+
+<p class="wp-block-paragraph">More importantly, however, there’s a good chance that you’ll be surprised at just how much software waste is costing your business.</p>
+
+
+
+<p class="wp-block-paragraph">You may be paying for software applications you don’t really need. You may be paying for multiple application licences when you only need one. That’s needless waste that directly impacts your bottom line.</p>
+
+
+
+<p class="wp-block-paragraph">To perform a full application usage audit across all your user accounts, devices and networks would take you away from your primary responsibilities. Not only that; once the results are in, it is potentially much more time and effort to deal with the duplications and unused software titles.</p>
+
+
+
+<p class="wp-block-paragraph">That’s where Workspace IT can help. We offer a comprehensive application rationalisation service that separates the wheat from the chaff. Most organisations will have a tool or software product to audit installed software. This may be a specialist monitoring product, or it could be your deployment tool such as Config Manager, Intune or ManageEngine. Workspace IT can take the output and use it to identify redundant software and streamline your entire portfolio.</p>
+
+
+
+<p class="wp-block-paragraph">In short, our software waste experts can help decide which applications you need, which can be consolidated, and which can be reduced or permanently deleted.</p>
+
+
+
+<p class="wp-block-paragraph">Want to find out more about our approach to application rationalisation? Keep reading!</p>
+
+
+
+<h2 class="wp-block-heading">Software Underutilisation Is Costing Your Business in a Number of Ways</h2>
+
+
+
+<p class="wp-block-paragraph">The most obvious cost of underutilised software is the upfront cost of the software or licences. If your business genuinely benefits from a particular application, great! Embrace it. Double down on it. Make it the go-to application in your business. But if only Bob from accounts is using it while your other 200 employees are using something else, it has to go.</p>
+
+
+
+<p class="wp-block-paragraph">Whether it’s CRM software or accounting applications, underutilised software is eating into your profitability. Redundant, dormant and duplicate licenses are also a big problem. Given the right raw information, our end-user computing specialists can review and optimise resource utilisation to prevent some or all of these potential pitfalls.</p>
+
+
+
+<h5 class="wp-block-heading">Wasted Resources</h5>
+
+
+
+<p class="wp-block-paragraph">Some business software is paid for via a licence or subscription – based on the required features and user count. If you don’t need all the features or most users are utilising alternative applications that do the same job, you’re pretty much throwing money away.</p>
+
+
+
+<p class="wp-block-paragraph">If 90% of your employees use McAfee but you’re paying for multiple AVG licences, you’re needlessly wasting money. The same goes for CRM software, word processing packages, accounting platforms and countless other applications.</p>
+
+
+
+<h5 class="wp-block-heading">Security and Compliance Risks</h5>
+
+
+
+<p class="wp-block-paragraph">All applications receive regular updates and security patches. Even for a single application with multiple end-users, staying on top of these essential security updates can be a logistical nightmare unless you have the necessary expertise and specialised software. If you have five applications to manage, your workload and risk factors increase five-fold. In short, the more applications you have – regardless of how often they’re used – the greater the risk of data breaches and cyber threats.</p>
+
+
+
+<h5 class="wp-block-heading">Remove Freeware</h5>
+
+
+
+<p class="wp-block-paragraph">Freeware software can be a risk to an organisation. It rarely comes with any warranty or support and is often littered with advertisements or requests for donations. Vulnerabilities in the software are common and there is no guarantee that the developer will make any effort to address them. An enterprise business should not reply on freeware, if there is a business need for software to perform a particular function, it should be paid for, supported and maintained. The team at Workspace IT will identify these products and highlight opportunities to improve your security posture.</p>
+
+
+
+<h5 class="wp-block-heading">Decreased Productivity</h5>
+
+
+
+<p class="wp-block-paragraph">Perhaps you’re paying for a great application that no one is using. Whether it’s due to a lack of training or operational issues, underutilising a valuable application might lead to members of your team performing vital functions manually or turning to less capable alternatives. The results include less efficient workflows, slower processing times and missed automation opportunities.</p>
+
+
+
+<h5 class="wp-block-heading">Employee Frustration</h5>
+
+
+
+<p class="wp-block-paragraph">It’s easy to become frustrated when you’re trying to deliver a project, and seven members of your team are using seven different applications. When this is the case, software is rarely optimised, which can exacerbate frustrations and lead to low morale levels and higher staff turnover rates.</p>
+
+
+
+<h5 class="wp-block-heading">Reduced Competitiveness</h5>
+
+
+
+<p class="wp-block-paragraph">When you’re utilising multiple applications when sticking to the best one for the job will suffice, you’re probably not using any of those applications to their full potential. This can leave you at a competitive disadvantage and prevent your organisation from scaling up when growth starts to kick in.</p>
+
+
+
+<h5 class="wp-block-heading">Higher Training Costs</h5>
+
+
+
+<p class="wp-block-paragraph">If you stick to a single PDF solution across your organisation, you can deliver one training session to address features. If you have 10 PDF editor solutions in operation, however, you’ll need 10 different training sessions. That’s expensive. It’s also needlessly time-consuming.</p>
+
+
+
+<h2 class="wp-block-heading">The Benefits of Removing Unused Software</h2>
+
+
+
+<p class="wp-block-paragraph">Now imagine the expert team of end-user computing specialists from Workspace IT is on the case. After reviewing the software inventory or usage reports, they identify the software that can be removed without affecting your operations. The benefits are as impressive as they are tangible.</p>
+
+
+
+<h5 class="wp-block-heading">Cost Savings</h5>
+
+
+
+<p class="wp-block-paragraph">Why pay for five licenses when one covers all your users? Why use three FTP programs when one will do? You’re paying for software you simply don’t need. Get rid of it, and you can save a significant amount of money – improving your cash flow and freeing up capital for long-term investments in your business.</p>
+
+
+
+<h5 class="wp-block-heading">Improved Security</h5>
+
+
+
+<p class="wp-block-paragraph">The more applications you have, the more vulnerabilities you have – it really is that simple. By drastically reducing the number of applications and software licences on your system, you drastically reduce the number of cyber threats you must contend with. Also, by streamlining your software environment, you make IT security and compliance a great deal easier, cheaper and more effective.</p>
+
+
+
+<h5 class="wp-block-heading">Enhanced Productivity</h5>
+
+
+
+<p class="wp-block-paragraph">What happens when three people in your organisation are performing the same task using three different applications? Maybe nothing. However, there’s a chance that all three applications deliver very different results. Or, at the very least, they deliver results at different speeds.</p>
+
+
+
+<p class="wp-block-paragraph">Maybe some employees are confused about which application to use, so they use multiple options when only one will do. Switch to one software platform across your entire organisation, and you negate these potential issues and enhance productivity with minimal effort on your part.</p>
+
+
+
+<h5 class="wp-block-heading">Simplified Training and Onboarding</h5>
+
+
+
+<p class="wp-block-paragraph">When you have multiple applications running concurrently in your organisation, the logistics involved in training and onboarding everyone are mind-blowing. But when you whittle your software down to just one title, you can simplify and streamline your training processes – saving you time, money and a lot of headaches!</p>
+
+
+
+<h5 class="wp-block-heading">Improved Decision-Making</h5>
+
+
+
+<p class="wp-block-paragraph">If everyone in your organisation uses a single application, the data and insights you get will be high-quality, reliable, and contemporaneous – and that’s a recipe for better-informed decision-making. Get rid of the noise and irrelevant metrics produced by having multiple applications running at once, and drill down on the data that really matters.</p>
+
+
+
+<h5 class="wp-block-heading">Improved Collaborative Working</h5>
+
+
+
+<p class="wp-block-paragraph">It stands to reason that collaborations between people and departments in an organisation are easier and more efficient when everyone is singing from the same hymn sheet. And by hymn sheet, we mean software application. You won’t need to call a meeting to discuss processes and communication methods every time you decide to collaborate if everyone is already using a particular tool from the outset.</p>
+
+
+
+<h2 class="wp-block-heading">Reclaim Value from Your Software Assets with Application Rationalisation</h2>
+
+
+
+<p class="wp-block-paragraph">You really can have it all: lower costs, better decision-making, optimised resource allocation, enhanced IT security, streamlined operational processes and more. All you need to do is embrace application usage tracking and the insights it delivers.</p>
+
+
+
+<p class="wp-block-paragraph">Here at Workspace IT, we perform detailed and rigorous software rationalisations to identify needless software waste. Our approach to application rationalisation that leaves no stone unturned in pursuit of software to optimise.</p>
+
+
+
+<h5 class="wp-block-heading">Analysis of Your Software’s Productivity</h5>
+
+
+
+<p class="wp-block-paragraph">A full assessment of your organisation’s use of applications provides application rationalisation experts with a clear picture of how your users perform their duties. The software that goes unused or underutilised is then flagged for review. Recommendations are made as to which applications are essential to overall productivity and which can be discarded.</p>
+
+
+
+<h5 class="wp-block-heading">Analysis of Potential Security and Compliance Risks</h5>
+
+
+
+<p class="wp-block-paragraph">Applications that don’t receive regular updates and patches because they’re rarely used can jeopardise your entire system. Application rationalisation identifies these applications and assesses the security risks they represent. Using specialised software and a tried-and-tested process, IT specialists can identify unauthorised use of applications, policy violations and risks. To cut a long story short, this means a streamlined IT security process that’s easy to follow for all users.</p>
+
+
+
+<h2 class="wp-block-heading">Streamline Your Application Usage with the Help of Workspace IT</h2>
+
+
+
+<p class="wp-block-paragraph">Application usage is a vital part of your operational efficiency. More importantly, it has a direct and significant impact on your organisation’s cost base. All we need to get started is the output from your existing software inventory. By removing redundant apps, streamlining processes, and getting all your users singing from the same hymn sheet, you can make a positive difference to both the service you deliver and the health of your bottom line.</p>
+
+
+
+<p class="wp-block-paragraph">Want to save your business a small fortune on software waste and inappropriate or profligate application usage? Get in touch today for an initial consultation.</p>
+					</div>
+
+				</article>
+								<article id="post-2561" class="post-2561 post type-post status-publish format-standard has-post-thumbnail hentry category-application-management category-general">
+					<header>
+						<h1>PSAppDeployToolkit - What is it and why do we use it?</h1>					</header>
+
+					<div>
+						
+<p class="wp-block-paragraph"><em>PSAppDeployToolkit - What is it and why do we use it?</em> <em>- written by Donald Leckie</em></p>
+
+
+
+<h2 class="wp-block-heading">What is the PSAppDeployToolkit?</h2>
+
+
+
+<p class="wp-block-paragraph">The Powershell Application Deployment Toolkit or PSADT is an essential tool for the Application Packaging team at Workspace IT, not one day goes past without it. It is a powerful and robust wrapper, that I would encourage anyone who is into application packaging or application deployments to spend a little time getting familiar with.</p>
+
+
+
+<h2 class="wp-block-heading">What does the PSAppDeployToolkit do?</h2>
+
+
+
+<p class="wp-block-paragraph">Well, if delivered as part of the payload or installation media of an app package, it can be used to control the installation. If you have multiple MSI's with MST's you can script them all in order and just call the overarching executable at launch and it will take care of the rest. Same if you have a few executables with various prerequisites. Yes, I did say "script" it, so why is it better than VBScripting, Command Prompt, or just plain Powershell? Well, let me answer by explaining why we use it.</p>
+
+
+
+<h2 class="wp-block-heading">Why do we use PSAppDeployToolkit?</h2>
+
+
+
+<p class="wp-block-paragraph">PSADT is a very complete toolkit that already has inbuilt features for many scenarios that an applications packager will likely experience on a day to day basis. For example, there is an inbuilt command that can uninstall all versions of a particular application by name without needing the relevant MSI product code. You can use PSADT to copy files or directories into&nbsp;user profile locations at the point of install, meaning that you don’t have to wait for a reboot or for something like active setup to come in and copy those files in place. Similar tasks can be performed with user registry values.</p>
+
+
+
+<p class="wp-block-paragraph">Admittedly, this could all be done through any of the aforementioned scripting methods, so PSADT isn't really doing that much new if you look at it from a certain perspective. What it does do though, is it simplifies and puts all these options in one place. If you include PSADT as part of your packaging template, you will ensure a greater level of consistency and your method and process, and it makes future updates to an application package simpler and more straightforward.</p>
+
+
+
+<h5 class="wp-block-heading">Favourite Features</h5>
+
+
+
+<p class="wp-block-paragraph">Two of my favorite features of PSADT are the logging, and the customization:</p>
+
+
+
+<p class="wp-block-paragraph">The logging is consistent and easy to read. It clearly tells you the exit codes or what is wrong with your package. Error handling is fairly robust, and the exit codes are well documented online. This makes PSADT easy to learn and troubleshoot. Customization isn't necessary for every application, but it is important if you have multiple customers with different requirements. </p>
+
+
+
+<p class="wp-block-paragraph">At Workspace IT we place our customers' needs and wants at the forefront of any solution. We have packages which deliver silently for the majority of customers, but we also cater to customers where an update to critical software at a time where they are using it could lose them their work. For this, we use PSADT to prompt users to check if it is ok to install, even if the deployment tool would otherwise allow it. And even yet, we have some niche or bespoke applications which just will not install silently or conventionally at all, and in some instances we have to rely on Send-Keys functionality to get the job done – again this is built in to PSADT should you require it. Custom dialogue prompts can be used to reassure the user as this is happening, if it is necessary. It isn't always pretty, but we can use it to get the job done where others can't.</p>
+
+
+
+<div class="wp-block-columns is-layout-flex wp-container-core-columns-is-layout-3a88641f wp-block-columns-is-layout-flex">
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="492" height="214" src="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Install.png" alt="" class="wp-image-2572" srcset="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Install.png 492w, https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Install-300x130.png 300w" sizes="auto, (max-width: 492px) 100vw, 492px" /></figure>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="492" height="247" src="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Cleanup.png" alt="" class="wp-image-2573" srcset="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Cleanup.png 492w, https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Cleanup-300x151.png 300w" sizes="auto, (max-width: 492px) 100vw, 492px" /></figure>
+</div>
+
+
+
+<div class="wp-block-column is-layout-flow wp-block-column-is-layout-flow">
+<figure class="wp-block-image size-full"><img loading="lazy" decoding="async" width="492" height="326" src="https://workspace-it.com/wp-content/uploads/2024/10/PSAST-ACC.png" alt="PSAppDeployToolkit" class="wp-image-2564" srcset="https://workspace-it.com/wp-content/uploads/2024/10/PSAST-ACC.png 492w, https://workspace-it.com/wp-content/uploads/2024/10/PSAST-ACC-300x199.png 300w" sizes="auto, (max-width: 492px) 100vw, 492px" /></figure>
+</div>
+</div>
+
+
+
+<p class="wp-block-paragraph">Ultimately, I feel that PSADT is a value add to any App Packager who gets to know it. It works with most deployment platforms such as Config Manager, Intune or ManageEngine, so will be suitable for most environments. It can be as hands off or as hands on as you need it to be. I feel that it is a useful arrow in an application packager's quiver, and with the years of work that has been put into it already making it an excellent tool, and the stewardship it has received from PatchMyPC, I look forward to see what we can do with PSAppDeployToolkit next.</p>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-full is-resized"><img loading="lazy" decoding="async" width="378" height="296" src="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Dark.png" alt="PSAppDeployToolkit" class="wp-image-2570" style="width:423px;height:auto" srcset="https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Dark.png 378w, https://workspace-it.com/wp-content/uploads/2024/10/PSADT_Dark-300x235.png 300w" sizes="auto, (max-width: 378px) 100vw, 378px" /></figure>
+</div>					</div>
+
+				</article>
+					<!-- WP_FOOTER -->
+<script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/twentytwentyfour/*","/wp-content/themes/oxygen-is-not-a-theme/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+<script id='script-65ccbf87834e4-js' type='text/javascript'>
+jQuery(document).ready(function () {
+  // Add hover event to each button in the resources menu
+  jQuery('.wit-resources-dropdown .dropdown-links a').hover(
+    function () {
+      // Get the index of the hovered <a> element
+      var index = jQuery(this).index();
+
+      // Remove active class from previously hovered button and dropdown div
+      jQuery('.wit-resources-dropdown .dropdown-links a.dropdown-link-active').removeClass('dropdown-link-active');
+      jQuery('.wit-resources-dropdown .dropdown-divs > div.dropdown-div-active').removeClass('dropdown-div-active');
+
+      // Add active class to current button
+      jQuery(this).addClass('dropdown-link-active');
+
+      // Set the opacity of the corresponding menu to 1 with a smooth transition
+      jQuery('.wit-resources-dropdown .dropdown-divs > div').eq(index).addClass('dropdown-div-active');
+    },
+    function () {
+      // You can add additional behavior on mouse out if needed
+    }
+  );
+
+  // Hover in event for resources-menu-button
+  jQuery('.resources-menu-button').mouseenter(function () {
+    // Add the menu-open class to body
+    jQuery('body').addClass('menu-open-resources');
+  });
+
+  // Hover out event for resources-menu-button
+  jQuery('.resources-menu-button').mouseleave(function () {
+    // Check if the mouse is still over .wit-resources-dropdown
+    if (!jQuery('.wit-resources-dropdown').is(':hover')) {
+      // Remove the menu-open class from body
+      jQuery('body').removeClass('menu-open-resources');
+    }
+  });
+
+  // Hover in and out events for .wit-resources-dropdown
+  jQuery('.wit-resources-dropdown').hover(
+    function () {
+      // Add the menu-open class to body
+      jQuery('body').addClass('menu-open-resources');
+    },
+    function () {
+      // Remove the menu-open class from body
+      jQuery('body').removeClass('menu-open-resources');
+    }
+  );
+});
+
+</script>
+<script id='script-65cf8a61266de-js' type='text/javascript'>
+		
+	jQuery(".hamburger").click(function(){
+  jQuery(".mobile-menu").toggleClass("mobile-open");
+    jQuery(".hamburger").toggleClass("is-active");
+        jQuery("body").toggleClass("body-mobile-open");
+
+});
+
+
+
+</script>
+<script id='script-65f1c4b599ace-js' type='text/javascript'>
+
+  // Wait for the document to be fully loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    // Function to swap the data-status attribute after 3 seconds
+    function swapDataStatus() {
+      var form = document.querySelector('form[data-status="sent"]'); // Find the form element
+      if (form) {
+        // Swap the data-status attribute value after 3 seconds
+        setTimeout(function() {
+          form.setAttribute('data-status', 'init');
+        }, 3000);
+      }
+    }
+    
+    // Call the function initially
+    swapDataStatus();
+    
+    // Watch for changes in the DOM using MutationObserver
+    var observer = new MutationObserver(function(mutationsList) {
+      // Check if the data-status="sent" attribute has been added
+      mutationsList.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-status' && mutation.target.getAttribute('data-status') === 'sent') {
+          // If data-status="sent" attribute added, call the function to swap it after 3 seconds
+          swapDataStatus();
+        }
+      });
+    });
+    
+    // Start observing changes in the DOM
+    observer.observe(document.body, { attributes: true, subtree: true });
+  });
+
+</script>
+<script id='script-68406134b1144-js' type='text/javascript'>
+window.addEventListener("load", function () {
+  if (window.ScrollTrigger) {
+    setTimeout(() => {
+      window.ScrollTrigger.refresh();
+    }, 200); // Delay to allow final layout
+  }
+});
+</script>
+<script>jQuery(document).on('click','a[href*="#"]',function(t){if(jQuery(t.target).closest('.wc-tabs').length>0){return}if(jQuery(this).is('[href="#"]')||jQuery(this).is('[href="#0"]')||jQuery(this).is('[href*="replytocom"]')){return};if(location.pathname.replace(/^\//,"")==this.pathname.replace(/^\//,"")&&location.hostname==this.hostname){var e=jQuery(this.hash);(e=e.length?e:jQuery("[name="+this.hash.slice(1)+"]")).length&&(t.preventDefault(),jQuery("html, body").animate({scrollTop:e.offset().top-0},400))}});</script><style id="wp-block-paragraph-inline-css">
+.is-small-text{font-size:.875em}.is-regular-text{font-size:1em}.is-large-text{font-size:2.25em}.is-larger-text{font-size:3em}.has-drop-cap:not(:focus):first-letter{float:left;font-size:8.4em;font-style:normal;font-weight:100;line-height:.68;margin:.05em .1em 0 0;text-transform:uppercase}body.rtl .has-drop-cap:not(:focus):first-letter{float:none;margin-left:.1em}p.has-drop-cap.has-background{overflow:hidden}:root :where(p.has-background){padding:1.25em 2.375em}:where(p.has-text-color:not(.has-link-color)) a{color:inherit}p.has-text-align-left[style*="writing-mode:vertical-lr"],p.has-text-align-right[style*="writing-mode:vertical-rl"]{rotate:180deg}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/paragraph/style.min.css */
+</style>
+<style id="wp-block-list-inline-css">
+ol,ul{box-sizing:border-box}:root :where(.wp-block-list.has-background){padding:1.25em 2.375em}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/list/style.min.css */
+</style>
+<style id="wp-block-image-inline-css">
+.wp-block-image>a,.wp-block-image>figure>a{display:inline-block}.wp-block-image img{box-sizing:border-box;height:auto;max-width:100%;vertical-align:bottom}@media not (prefers-reduced-motion){.wp-block-image img.hide{visibility:hidden}.wp-block-image img.show{animation:show-content-image .4s}}.wp-block-image[style*=border-radius] img,.wp-block-image[style*=border-radius]>a{border-radius:inherit}.wp-block-image.has-custom-border img{box-sizing:border-box}.wp-block-image.aligncenter{text-align:center}.wp-block-image.alignfull>a,.wp-block-image.alignwide>a{width:100%}.wp-block-image.alignfull img,.wp-block-image.alignwide img{height:auto;width:100%}.wp-block-image .aligncenter,.wp-block-image .alignleft,.wp-block-image .alignright,.wp-block-image.aligncenter,.wp-block-image.alignleft,.wp-block-image.alignright{display:table}.wp-block-image .aligncenter>figcaption,.wp-block-image .alignleft>figcaption,.wp-block-image .alignright>figcaption,.wp-block-image.aligncenter>figcaption,.wp-block-image.alignleft>figcaption,.wp-block-image.alignright>figcaption{caption-side:bottom;display:table-caption}.wp-block-image .alignleft{float:left;margin:.5em 1em .5em 0}.wp-block-image .alignright{float:right;margin:.5em 0 .5em 1em}.wp-block-image .aligncenter{margin-left:auto;margin-right:auto}.wp-block-image :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-image.is-style-circle-mask img{border-radius:9999px}@supports ((-webkit-mask-image:none) or (mask-image:none)) or (-webkit-mask-image:none){.wp-block-image.is-style-circle-mask img{border-radius:0;-webkit-mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-image:url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50"/></svg>');mask-mode:alpha;-webkit-mask-position:center;mask-position:center;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:contain;mask-size:contain}}:root :where(.wp-block-image.is-style-rounded img,.wp-block-image .is-style-rounded img){border-radius:9999px}.wp-block-image figure{margin:0}.wp-lightbox-container{display:flex;flex-direction:column;position:relative}.wp-lightbox-container img{cursor:zoom-in}.wp-lightbox-container img:hover+button{opacity:1}.wp-lightbox-container button{align-items:center;backdrop-filter:blur(16px) saturate(180%);background-color:#5a5a5a40;border:none;border-radius:4px;cursor:zoom-in;display:flex;height:20px;justify-content:center;opacity:0;padding:0;position:absolute;right:16px;text-align:center;top:16px;width:20px;z-index:100}@media not (prefers-reduced-motion){.wp-lightbox-container button{transition:opacity .2s ease}}.wp-lightbox-container button:focus-visible{outline:3px auto #5a5a5a40;outline:3px auto -webkit-focus-ring-color;outline-offset:3px}.wp-lightbox-container button:hover{cursor:pointer;opacity:1}.wp-lightbox-container button:focus{opacity:1}.wp-lightbox-container button:focus,.wp-lightbox-container button:hover,.wp-lightbox-container button:not(:hover):not(:active):not(.has-background){background-color:#5a5a5a40;border:none}.wp-lightbox-overlay{box-sizing:border-box;cursor:zoom-out;height:100vh;left:0;overflow:hidden;position:fixed;top:0;visibility:hidden;width:100%;z-index:100000}.wp-lightbox-overlay .wp-lightbox-close-button{align-items:center;cursor:pointer;display:flex;font-family:inherit;gap:8px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 4px;position:absolute;right:calc(env(safe-area-inset-right) + 16px);top:calc(env(safe-area-inset-top) + 16px);z-index:5000000}.wp-lightbox-overlay .wp-lightbox-close-button:focus,.wp-lightbox-overlay .wp-lightbox-close-button:hover,.wp-lightbox-overlay .wp-lightbox-close-button:not(:hover):not(:active):not(.has-background){background:none;border:none}.wp-lightbox-overlay .wp-lightbox-close-button:has(.wp-lightbox-close-text:not([hidden])) .wp-lightbox-close-icon svg{height:1em;width:1em}.wp-lightbox-overlay .wp-lightbox-close-icon svg{display:block}.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{align-items:center;bottom:16px;cursor:pointer;display:flex;font-family:inherit;gap:4px;justify-content:center;line-height:1;min-height:40px;min-width:40px;padding:0 8px;position:absolute;z-index:2000002}.wp-lightbox-overlay .wp-lightbox-navigation-button-next[hidden],.wp-lightbox-overlay .wp-lightbox-navigation-button-prev[hidden]{display:none}@media (min-width:960px){.wp-lightbox-overlay .wp-lightbox-navigation-button-next,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{bottom:50%;transform:translateY(-50%)}}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-next:not(:hover):not(:active):not(.has-background),.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:focus,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:hover,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:not(:hover):not(:active):not(.has-background){background:none;border:none;padding:0 8px}.wp-lightbox-overlay .wp-lightbox-navigation-button-next:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg,.wp-lightbox-overlay .wp-lightbox-navigation-button-prev:has(.wp-lightbox-navigation-text:not([hidden])) .wp-lightbox-navigation-icon svg{display:block;height:1.5em;width:1.5em}.wp-lightbox-overlay .wp-lightbox-navigation-button-prev{left:calc(env(safe-area-inset-left) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-button-next{right:calc(env(safe-area-inset-right) + 16px)}.wp-lightbox-overlay .wp-lightbox-navigation-icon svg{vertical-align:middle}.wp-lightbox-overlay .lightbox-image-container{height:var(--wp--lightbox-container-height);left:50%;overflow:hidden;position:absolute;top:50%;transform:translate(-50%,-50%);transform-origin:top left;width:var(--wp--lightbox-container-width);z-index:2000001}.wp-lightbox-overlay .wp-block-image{align-items:center;box-sizing:border-box;display:flex;height:100%;justify-content:center;margin:0;position:relative;transform-origin:0 0;width:100%;z-index:3000000}.wp-lightbox-overlay .wp-block-image img{height:var(--wp--lightbox-image-height);min-height:var(--wp--lightbox-image-height);min-width:var(--wp--lightbox-image-width);width:var(--wp--lightbox-image-width)}.wp-lightbox-overlay .wp-block-image figcaption{display:none}.wp-lightbox-overlay button{background:none;border:none}.wp-lightbox-overlay .scrim{background-color:#fff;height:100%;opacity:.9;position:absolute;width:100%;z-index:2000000}.wp-lightbox-overlay.active{visibility:visible}@media not (prefers-reduced-motion){.wp-lightbox-overlay.active{animation:turn-on-visibility .25s both}.wp-lightbox-overlay.active img{animation:turn-on-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active){animation:turn-off-visibility .35s both}.wp-lightbox-overlay.show-closing-animation:not(.active) img{animation:turn-off-visibility .25s both}.wp-lightbox-overlay.zoom.active{animation:none;opacity:1;visibility:visible}.wp-lightbox-overlay.zoom.active .lightbox-image-container{animation:lightbox-zoom-in .4s}.wp-lightbox-overlay.zoom.active .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.active .scrim{animation:turn-on-visibility .4s forwards}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active){animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container{animation:lightbox-zoom-out .4s}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .lightbox-image-container img{animation:none}.wp-lightbox-overlay.zoom.show-closing-animation:not(.active) .scrim{animation:turn-off-visibility .4s forwards}}@keyframes show-content-image{0%{visibility:hidden}99%{visibility:hidden}to{visibility:visible}}@keyframes turn-on-visibility{0%{opacity:0}to{opacity:1}}@keyframes turn-off-visibility{0%{opacity:1;visibility:visible}99%{opacity:0;visibility:visible}to{opacity:0;visibility:hidden}}@keyframes lightbox-zoom-in{0%{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale))}to{transform:translate(-50%,-50%) scale(1)}}@keyframes lightbox-zoom-out{0%{transform:translate(-50%,-50%) scale(1);visibility:visible}99%{visibility:visible}to{transform:translate(calc((-100vw + var(--wp--lightbox-scrollbar-width))/2 + var(--wp--lightbox-initial-left-position)),calc(-50vh + var(--wp--lightbox-initial-top-position))) scale(var(--wp--lightbox-scale));visibility:hidden}}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/image/style.min.css */
+</style>
+<style id="wp-block-video-inline-css">
+.wp-block-video{box-sizing:border-box}.wp-block-video video{height:auto;vertical-align:middle;width:100%}@supports (position:sticky){.wp-block-video [poster]{object-fit:cover}}.wp-block-video.aligncenter{text-align:center}.wp-block-video :where(figcaption){margin-bottom:1em;margin-top:.5em}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/video/style.min.css */
+</style>
+<style id="wp-block-heading-inline-css">
+h1:where(.wp-block-heading).has-background,h2:where(.wp-block-heading).has-background,h3:where(.wp-block-heading).has-background,h4:where(.wp-block-heading).has-background,h5:where(.wp-block-heading).has-background,h6:where(.wp-block-heading).has-background{padding:1.25em 2.375em}h1.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h1.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h2.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h2.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h3.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h3.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h4.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h4.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h5.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h5.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]),h6.has-text-align-left[style*=writing-mode]:where([style*=vertical-lr]),h6.has-text-align-right[style*=writing-mode]:where([style*=vertical-rl]){rotate:180deg}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/heading/style.min.css */
+</style>
+<style id="wp-block-columns-inline-css">
+.wp-block-columns{box-sizing:border-box;display:flex;flex-wrap:wrap!important}@media (min-width:782px){.wp-block-columns{flex-wrap:nowrap!important}}.wp-block-columns{align-items:normal!important}.wp-block-columns.are-vertically-aligned-top{align-items:flex-start}.wp-block-columns.are-vertically-aligned-center{align-items:center}.wp-block-columns.are-vertically-aligned-bottom{align-items:flex-end}@media (max-width:781px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:100%!important}}@media (min-width:782px){.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column[style*=flex-basis]{flex-grow:0}}.wp-block-columns.is-not-stacked-on-mobile{flex-wrap:nowrap!important}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column{flex-basis:0;flex-grow:1}.wp-block-columns.is-not-stacked-on-mobile>.wp-block-column[style*=flex-basis]{flex-grow:0}:where(.wp-block-columns){margin-bottom:1.75em}:where(.wp-block-columns.has-background){padding:1.25em 2.375em}.wp-block-column{flex-grow:1;min-width:0;overflow-wrap:break-word;word-break:break-word}.wp-block-column.is-vertically-aligned-top{align-self:flex-start}.wp-block-column.is-vertically-aligned-center{align-self:center}.wp-block-column.is-vertically-aligned-bottom{align-self:flex-end}.wp-block-column.is-vertically-aligned-stretch{align-self:stretch}.wp-block-column.is-vertically-aligned-bottom,.wp-block-column.is-vertically-aligned-center,.wp-block-column.is-vertically-aligned-top{width:100%}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/columns/style.min.css */
+</style>
+<style id="wp-block-audio-inline-css">
+.wp-block-audio{box-sizing:border-box}.wp-block-audio :where(figcaption){margin-bottom:1em;margin-top:.5em}.wp-block-audio audio{min-width:300px;width:100%}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/audio/style.min.css */
+</style>
+<style id="wp-block-separator-inline-css">
+@charset "UTF-8";.wp-block-separator{border:none;border-top:2px solid}:root :where(.wp-block-separator.is-style-dots){height:auto;line-height:1;text-align:center}:root :where(.wp-block-separator.is-style-dots):before{color:currentColor;content:"···";font-family:serif;font-size:1.5em;letter-spacing:2em;padding-left:2em}.wp-block-separator.is-style-dots{background:none!important;border:none!important}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/separator/style.min.css */
+</style>
+<style id="wp-block-pullquote-inline-css">
+.wp-block-pullquote{box-sizing:border-box;margin:0 0 1em;overflow-wrap:break-word;padding:4em 0;text-align:center}.wp-block-pullquote blockquote,.wp-block-pullquote p{color:inherit}.wp-block-pullquote blockquote{margin:0}.wp-block-pullquote p{margin-top:0}.wp-block-pullquote p:last-child{margin-bottom:0}.wp-block-pullquote.alignleft,.wp-block-pullquote.alignright{max-width:420px}.wp-block-pullquote cite,.wp-block-pullquote footer{position:relative}.wp-block-pullquote .has-text-color a{color:inherit}.wp-block-pullquote.has-text-align-left blockquote{text-align:left}.wp-block-pullquote.has-text-align-right blockquote{text-align:right}.wp-block-pullquote.has-text-align-center blockquote{text-align:center}.wp-block-pullquote.is-style-solid-color{border:none}.wp-block-pullquote.is-style-solid-color blockquote{margin-left:auto;margin-right:auto;max-width:60%}.wp-block-pullquote.is-style-solid-color blockquote p{font-size:2em;margin-bottom:0;margin-top:0}.wp-block-pullquote.is-style-solid-color blockquote cite{font-style:normal;text-transform:none}.wp-block-pullquote :where(cite){color:inherit;display:block}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/pullquote/style.min.css */
+</style>
+<style id="wp-block-group-inline-css">
+.wp-block-group{box-sizing:border-box}:where(.wp-block-group.wp-block-group-is-layout-constrained){position:relative}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/group/style.min.css */
+</style>
+<style id="wp-block-code-inline-css">
+.wp-block-code{box-sizing:border-box}.wp-block-code code{direction:ltr;display:block;font-family:inherit;overflow-wrap:break-word;text-align:initial;white-space:pre-wrap}
+/*# sourceURL=https://workspace-it.com/wp-includes/blocks/code/style.min.css */
+</style>
+<script id="wp-hooks-js" src="https://workspace-it.com/wp-includes/js/dist/hooks.min.js?ver=7496969728ca0f95732d"></script>
+<script id="wp-i18n-js" src="https://workspace-it.com/wp-includes/js/dist/i18n.min.js?ver=781d11515ad3d91786ec"></script>
+<script id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+//# sourceURL=wp-i18n-js-after
+</script>
+<script id="swv-js" src="https://workspace-it.com/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.6"></script>
+<script id="contact-form-7-js-before">
+var wpcf7 = {
+    "api": {
+        "root": "https:\/\/workspace-it.com\/wp-json\/",
+        "namespace": "contact-form-7\/v1"
+    },
+    "cached": 1
+};
+//# sourceURL=contact-form-7-js-before
+</script>
+<script id="contact-form-7-js" src="https://workspace-it.com/wp-content/plugins/contact-form-7/includes/js/index.js?ver=6.1.6"></script>
+<script id="google-recaptcha-js" src="https://www.google.com/recaptcha/api.js?render=6LdsjpgpAAAAALpBt6DEqvRnpd7K5F9IHOPn1cym&#038;ver=3.0"></script>
+<script id="wp-polyfill-js" src="https://workspace-it.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0"></script>
+<script id="wpcf7-recaptcha-js-before">
+var wpcf7_recaptcha = {
+    "sitekey": "6LdsjpgpAAAAALpBt6DEqvRnpd7K5F9IHOPn1cym",
+    "actions": {
+        "homepage": "homepage",
+        "contactform": "contactform"
+    }
+};
+//# sourceURL=wpcf7-recaptcha-js-before
+</script>
+<script id="wpcf7-recaptcha-js" src="https://workspace-it.com/wp-content/plugins/contact-form-7/modules/recaptcha/index.js?ver=6.1.6"></script>
+<script data-mp=true data-cfasync=false id="mp-gsap-js" src="https://workspace-it.com/wp-content/plugins/motionpage/assets/js/gsap/gsap.min.js?ver=3.12.5"></script>
+<script data-mp=true data-cfasync=false id="mp-ScrollTrigger-js" src="https://workspace-it.com/wp-content/plugins/motionpage/assets/js/gsap/ScrollTrigger.min.js?ver=3.12.5"></script>
+<script data-mp=true data-cfasync=false id="mp-ScrollSmoother-js" src="https://workspace-it.com/wp-content/plugins/motionpage/assets/js/gsap/ScrollSmoother.min.js?ver=3.12.5"></script>
+<script data-mp=true data-cfasync=false id="mp-ScrollSmoother-js-after">
+window._$W = window;document.addEventListener("DOMContentLoaded",()=>{document.body.style.overflowX="hidden";gsap.registerPlugin({name:"transition",init(t,e,r){return this.target=t,this.tween=r,this.reverting=gsap.core.reverting||function(){},!!t.style},render(t,{target:e,tween:r,reverting:i}){e.style.transition=(1===r.progress()||!r._time&&i())&&"isFromStart"!==r.data?"":"unset"}});gsap.defaults({duration:1,transition:"unset"});gsap.config({nullTargetWarn:false});matchMedia("(min-width: 576px)").matches&&document.querySelector("#smooth-wrapper")&&document.querySelector("#smooth-content")&&(_$W._mp_smoother=ScrollSmoother.create({wrapper:"#smooth-wrapper",content:"#smooth-content",onUpdate:()=>{"function"==typeof _$W.onSmootherUpdate&&_$W.onSmootherUpdate()}}),document.querySelectorAll('a[href*="#"]').forEach(e=>{let t=e.getAttribute("href");t&&t.length>1&&("#"===t.at(0)||"/#"===t.substring(0,2))&&e.addEventListener("click",e=>{e.preventDefault(),_$W._mp_smoother.scrollTo(t)})}),addEventListener("load",()=>{location.hash&&_$W._mp_smoother.scrollTo(location.hash,!0,"top top")}));addEventListener("load",(()=>{if("ScrollSmoother"in _$W&&"function"==typeof ScrollSmoother.get){const o=ScrollSmoother.get();o&&"function"==typeof o.refresh&&o.refresh(!0)}}));if(!matchMedia("(prefers-reduced-motion: reduce)").matches){_$W._mp_1711703715=[],gsap.utils.toArray(".port-item").forEach(item=>{var _item_closest,_item_closest1;let _n="_mp_1711703715_"+(_mp_1711703715.length+1);_mp_1711703715.push(_n);let _t=gsap.timeline().to(item,{background:"linear-gradient(180deg, #1e73be, #004a89)",duration:.2},0).to(item.querySelectorAll([".port-text"]),{color:"rgba(255, 255, 255, 1)",duration:.2},0).to(item.querySelectorAll([".port-heading"]),{color:"rgba(255, 255, 255, 1)",duration:.2},0).to(item.querySelectorAll([".port-sub"]),{color:"rgba(255, 255, 255, 1)",duration:.2},0).pause();_$W[_n]=_t,null==(_item_closest=item.closest(".port-item"))||_item_closest.addEventListener("mouseenter",()=>_t.play()),null==(_item_closest1=item.closest(".port-item"))||_item_closest1.addEventListener("mouseleave",()=>_t.reverse())});}_$W._mp_1721402445_CTX=gsap.context(()=>{_$W._mp_1721402445=gsap.timeline().to(".client-logo-container-1",{ease:"none",repeat:-1,xPercent:-100,duration:60},0)});_$W._mp_refresher=(t=0)=>{ScrollTrigger&&setTimeout((()=>{ScrollTrigger.sort(),ScrollTrigger.getAll().forEach((r)=>r.refresh())}),t)},addEventListener("load",(()=>_mp_refresher(92)));});
+//# sourceURL=mp-ScrollSmoother-js-after
+</script>
+<script type="text/javascript" id="ct-footer-js"></script><script>
+    (function (o, u, t, b, a, s, e, p) {
+        window[b] = window[b] || {}; (e = e || [])['key'] = o; e['__obr'] = u.location.href; e['__obrf'] = u.referrer || 0; a = [];
+        u.location.search.replace('?', '').split('&').forEach(function (q) { if (q.startsWith(b) || q.startsWith('_obid')) e[q.split('=')[0]] = q.split('=')[1]; });
+        e['_obid'] = e['_obid'] || (u.cookie.match(/(^|;)\s*_obid\s*=\s*([^;]+)/) || []).pop() || 0;
+        for (k in e) { if (e.hasOwnProperty(k)) a.push(encodeURIComponent(k) + '=' + encodeURIComponent(e[k])); }
+        s = u.createElement('script'); s.async = true; s.src = t + '?' + a.join('&'); p = u.getElementsByTagName('script')[0]; p.parentNode.insertBefore(s, p);
+    })('e90691e4-7a45-494f-9701-702c08e1bacc', document, 'https://plugin.sopro.io/hq.js', 'outbase')
+</script>
+			<!-- /WP_FOOTER --> 
+</body>
+</html>
