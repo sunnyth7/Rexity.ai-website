@@ -70,5 +70,6 @@ Nothing in C blocks B. B is the revenue-relevant path ("live site that gets foun
 | Date | Decision | By |
 |---|---|---|
 | 2026-07-21 | Plan created; A→B→C sequencing agreed | — |
-| | C4: Omi role = (a)/(b)/(c)? | **PENDING — Sunny** |
-| | B3: EN strategy (hreflang vs DE-only) | PENDING |
+| 2026-07-21 | **Constraint: keep the current deployed German "Rexity Labs" site as THE live site.** | Sunny |
+| 2026-07-21 | **C4 = Omi as a `/omi` route on prod, `noindex`.** Never replaces `/`; showcase only; won't compete for SEO. | Sunny (delegated) |
+| 2026-07-21 | **B3 = German-only canonical for now.** `lang="de"`, German canonicals, defer `/en/` hreflang split until indexing recovers. | Sunny (delegated) |
