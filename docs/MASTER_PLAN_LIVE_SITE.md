@@ -8,8 +8,14 @@ Created: 2026-07-21 · Owner: Sunny · Repo: https://github.com/sunnyth7/Rexity.
 
 | Branch | What it is | Deploys |
 |---|---|---|
-| `origin/main` | **Production rexity.ai** — German "Rexity Labs" Next.js site (24 sitemap pages: /web, /automation, /marketing, legal pages). Vercel project `um2g`, deploys on push to main. | ✅ Live at www.rexity.ai |
-| `rexity-v3-website-video-theme-base` | The **Omi page** (Rexity hero + Workspace IT body, GSAP, scroll-proxy) + Sprint O hardening. HEAD `92f93fd`. Known-good pre-Sprint-O checkpoint: `8fd62ee`. | Local only |
+| `origin/main` | **Production rexity.ai** — a **STATIC site** (corrected 2026-07-21): Cobalt-themed `index.html` at repo root + static route dirs (/automation, /marketing, /services, /rexity-omi, portfolio) + legal pages + `api/{chat,lead,book}.js` serverless functions (DeepSeek chatbot with pre-chat info/lead layer, Supabase persistence). Vercel project `um2g`, deploys on push to main. **This is the newest work overall** — it superseded the Next.js lineage AND the wip snapshot (388 files in rexity-omi/ incl. omi-booking, card-hotspots, loader-fast, service-links). | ✅ Live at www.rexity.ai |
+| `rexity-v3-website-video-theme-base` | The older **Next.js lineage** (Omi page dev history, scroll-proxy, Sprint O). Superseded by main's static evolution; kept for history + this plan doc. Checkpoints: `8fd62ee` (good), `6cecb35` (WIP-restored). | Local only |
+| `wip/sprint-o-snapshot-2026-07-21` | Preservation snapshot of 109 uncommitted files. rexity-omi subset restored to v3 branch; app-level Next WIP (prisma, RPA/RAG libs, admin APIs) parked here. | Never |
+| `rexity-retheme` | Retheme experiments — reverted on main, superseded by Cobalt. Historical, kept on remote. | Never |
+
+**Local serving:** `.claude/launch.json` config `rexity-main` serves a worktree of `main` statically (scratchpad `main-live`). Note: `api/*.js` functions don't run under static serve — chatbot send needs `vercel dev` or prod.
+
+> ⚠️ **B2 correction:** prod is static — canonicals/`lang="de"`/metadata fixes go into the **static HTML `<head>`s** (index.html + 23 route pages), NOT Next.js `generateMetadata`. The 307→308 domain fix (B1, Vercel dashboard) is unchanged.
 
 **SEO status (Phase 1 diagnosis, 2026-07-21):** only ~1/24 pages indexed; Google cache is stale (pre-rebrand title). Root causes: 307 (temporary) apex→www redirect, missing canonicals, CSR-only metadata on subpages, no `<html lang>`. robots.txt + sitemap are healthy. Full findings: see report in session / summary below.
 
