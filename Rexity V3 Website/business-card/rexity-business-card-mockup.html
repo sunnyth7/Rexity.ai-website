@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rexity Premium Business Card Mockup</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --violet: #7c3aed;
+      --ink: #111827;
+      --muted: #6b7280;
+      --paper: #ffffff;
+      --trim-w: 51mm;
+      --trim-h: 89mm;
+      --bleed-w: 57mm;
+      --bleed-h: 95mm;
+      --radius: 4.5mm;
+      --shadow: 0 28px 70px rgba(10, 18, 40, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(37, 99, 235, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 80%, rgba(124, 58, 237, 0.18), transparent 30%),
+        #eef2f8;
+      color: var(--ink);
+      font-family: Inter, Montserrat, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      padding: 38px;
+    }
+
+    .mockup {
+      width: min(1280px, 96vw);
+      display: grid;
+      gap: 28px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      color: #334155;
+      letter-spacing: 0.01em;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 750;
+    }
+
+    .header p {
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 54px;
+      padding: 42px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    .side {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      margin: 94px 48px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    .card {
+      position: relative;
+      width: var(--bleed-w);
+      height: var(--bleed-h);
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+      transform: scale(1.42);
+      transform-origin: center;
+    }
+
+    .trim-guide {
+      position: absolute;
+      inset: 3mm;
+      border: 0.2mm dashed rgba(255, 255, 255, 0.4);
+      border-radius: 3.2mm;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .front .trim-guide {
+      border-color: rgba(37, 99, 235, 0.22);
+    }
+
+    .circuit,
+    .dots {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .circuit {
+      opacity: 0.23;
+      background-image:
+        linear-gradient(90deg, currentColor 1px, transparent 1px),
+        linear-gradient(currentColor 1px, transparent 1px);
+      background-size: 15mm 15mm;
+      color: rgba(255, 255, 255, 0.52);
+      mask-image:
+        linear-gradient(90deg, transparent 0 7%, #000 22% 82%, transparent 96%),
+        linear-gradient(#000, #000);
+    }
+
+    .circuit::before,
+    .circuit::after {
+      content: "";
+      position: absolute;
+      border: 0.24mm solid currentColor;
+      border-right: 0;
+      border-bottom: 0;
+      width: 28mm;
+      height: 20mm;
+      top: 14mm;
+      left: 7mm;
+    }
+
+    .circuit::after {
+      width: 22mm;
+      height: 30mm;
+      top: auto;
+      left: auto;
+      right: 6mm;
+      bottom: 10mm;
+      transform: rotate(180deg);
+    }
+
+    .dots {
+      opacity: 0.24;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.82) 0.42mm, transparent 0.46mm);
+      background-size: 2.15mm 2.15mm;
+      mask-image: radial-gradient(circle at 82% 17%, #000 0 24%, transparent 39%),
+        radial-gradient(circle at 15% 82%, #000 0 18%, transparent 35%);
+    }
+
+    .back {
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.2), transparent 21%),
+        radial-gradient(circle at 78% 82%, rgba(255,255,255,0.13), transparent 25%),
+        linear-gradient(145deg, #0b1b62 0%, var(--blue) 38%, #5830e8 68%, var(--violet) 100%);
+    }
+
+    .back::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, transparent 0 18%, rgba(255,255,255,0.16) 18.3% 18.8%, transparent 19.2% 100%),
+        linear-gradient(300deg, transparent 0 61%, rgba(255,255,255,0.12) 61.2% 61.8%, transparent 62.2% 100%);
+      z-index: 2;
+    }
+
+    .brand-lockup {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      justify-items: center;
+      gap: 4.2mm;
+      width: 82%;
+      text-align: center;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 34mm;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .brand-word {
+      color: #fff;
+      font-size: 7.8mm;
+      font-weight: 860;
+      line-height: 0.9;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1.75mm;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .front {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .front .circuit {
+      color: rgba(37, 99, 235, 0.36);
+      opacity: 0.11;
+      background-size: 12mm 12mm;
+      mask-image: linear-gradient(120deg, transparent 0 4%, #000 20% 88%, transparent 100%);
+    }
+
+    .front-inner {
+      position: relative;
+      z-index: 5;
+      height: 100%;
+      padding: 9.5mm 8.5mm 8mm;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 6.5mm;
+    }
+
+    .front-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6mm;
+    }
+
+    .front-logo-chip {
+      min-width: 25mm;
+      height: 8mm;
+      display: grid;
+      place-items: center;
+      padding: 1.5mm 2.5mm;
+      border-radius: 999px;
+      background: linear-gradient(120deg, var(--blue), var(--violet));
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.22);
+    }
+
+    .front-logo-chip img {
+      width: 21mm;
+      height: auto;
+      display: block;
+    }
+
+    .qr {
+      width: 15mm;
+      height: 15mm;
+      border-radius: 2mm;
+      padding: 1.4mm;
+      background: #fff;
+      border: 0.3mm solid rgba(17, 24, 39, 0.08);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .qr-grid {
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(#111827 0 0) 0 0 / 3.2mm 3.2mm no-repeat,
+        linear-gradient(#111827 0 0) 8.8mm 0 / 3.2mm 3.2mm no-repeat,
+        linear-gradient(#111827 0 0) 0 8.8mm / 3.2mm 3.2mm no-repeat,
+        repeating-linear-gradient(90deg, #111827 0 0.6mm, transparent 0.6mm 1.18mm),
+        repeating-linear-gradient(0deg, transparent 0 0.6mm, #111827 0.6mm 1.18mm);
+      opacity: 0.92;
+    }
+
+    .name-banner {
+      margin-left: -8.5mm;
+      width: calc(100% + 17mm);
+      min-height: 21mm;
+      padding: 4.5mm 8.5mm 4.8mm;
+      color: white;
+      background:
+        linear-gradient(100deg, var(--blue) 0%, #3556ef 42%, var(--violet) 100%);
+      clip-path: polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.28);
+    }
+
+    .name-banner h2 {
+      margin: 0;
+      font-size: 6.4mm;
+      line-height: 1;
+      letter-spacing: 0;
+      font-weight: 820;
+      text-transform: uppercase;
+    }
+
+    .name-banner p {
+      margin: 1.8mm 0 0;
+      font-size: 2.55mm;
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .contact {
+      display: grid;
+      align-content: center;
+      gap: 3mm;
+      padding-top: 1mm;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 5.8mm 1fr;
+      align-items: center;
+      gap: 3mm;
+      min-height: 6mm;
+      color: #1f2937;
+      font-size: 3mm;
+      font-weight: 620;
+    }
+
+    .icon {
+      width: 5.8mm;
+      height: 5.8mm;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      box-shadow: 0 5px 12px rgba(37, 99, 235, 0.24);
+      font-size: 2.85mm;
+      line-height: 1;
+    }
+
+    .accent {
+      position: absolute;
+      z-index: 6;
+      width: 6mm;
+      height: 6mm;
+      border-radius: 1.2mm;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.28);
+    }
+
+    .accent.tl { top: 3mm; left: 3mm; }
+    .accent.br { right: 3mm; bottom: 3mm; }
+    .accent.tr {
+      top: 3mm;
+      right: 3mm;
+      width: 3.2mm;
+      height: 3.2mm;
+      opacity: 0.78;
+    }
+
+    .print-note {
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+      .header,
+      .label,
+      .print-note {
+        display: none;
+      }
+      .stage {
+        box-shadow: none;
+        background: white;
+        padding: 0;
+        gap: 8mm;
+      }
+      .card {
+        box-shadow: none;
+        break-inside: avoid;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="mockup" aria-label="Rexity double-sided business card mockup">
+    <header class="header">
+      <div>
+        <h1>Rexity Premium Business Card</h1>
+        <p>Portrait trim: 51 × 89 mm. Bleed artwork: 57 × 95 mm with 3 mm bleed.</p>
+      </div>
+      <p>Palette: #2563EB → #7C3AED</p>
+    </header>
+
+    <section class="stage">
+      <div class="side">
+        <div class="label">Back side</div>
+        <article class="card back">
+          <div class="circuit"></div>
+          <div class="dots"></div>
+          <div class="brand-lockup">
+            <img class="brand-logo" src="assets/rexity-labs-logo-white.png" alt="Rexity" />
+            <div class="brand-word">Rexity</div>
+            <p class="tagline">AI Automation &amp; Software</p>
+          </div>
+          <div class="trim-guide" aria-hidden="true"></div>
+        </article>
+      </div>
+
+      <div class="side">
+        <div class="label">Front side</div>
+        <article class="card front">
+          <div class="circuit"></div>
+          <div class="accent tl"></div>
+          <div class="accent tr"></div>
+          <div class="accent br"></div>
+          <div class="front-inner">
+            <div class="front-top">
+              <div class="front-logo-chip">
+                <img src="assets/rexity-labs-logo-white.png" alt="Rexity" />
+              </div>
+              <div class="qr" aria-label="QR code placeholder for https://rexity.ai">
+                <div class="qr-grid"></div>
+              </div>
+            </div>
+
+            <section class="name-banner">
+              <h2>[Your Name]</h2>
+              <p>[Your Title]</p>
+            </section>
+
+            <section class="contact" aria-label="Contact details">
+              <div class="contact-row">
+                <span class="icon">☎</span>
+                <span>[+49 XXX XXXXXXX]</span>
+              </div>
+              <div class="contact-row">
+                <span class="icon">✉</span>
+                <span>hello@rexity.ai</span>
+              </div>
+              <div class="contact-row">
+                <span class="icon">↗</span>
+                <span>https://rexity.ai</span>
+              </div>
+            </section>
+          </div>
+          <div class="trim-guide" aria-hidden="true"></div>
+        </article>
+      </div>
+    </section>
+
+    <p class="print-note">Dashed inner line marks final trim; artwork extends 3 mm for bleed. Replace placeholders before print export.</p>
+  </main>
+</body>
+</html>

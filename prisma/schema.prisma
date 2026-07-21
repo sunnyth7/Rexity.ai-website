@@ -7,16 +7,190 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ChannelType {
+  WEBSITE
+  WHATSAPP
+  VOICE
+  EMAIL
+  SMS
+  INTERNAL
+}
+
+enum ConversationState {
+  IDLE
+  DISCLOSURE
+  CONSENT
+  FAQ
+  BOOKING_COLLECT_DETAILS
+  SLOT_SCANNING
+  SLOT_OFFERED
+  PENDING_CONFIRMATION
+  CONFIRMED
+  RESCHEDULE_VERIFY
+  RESCHEDULE_HOLD_NEW_SLOT
+  RESCHEDULE_SWAP
+  CANCEL_VERIFY
+  CANCELLED
+  HANDOFF_REQUESTED
+  HANDOFF_ACTIVE
+  FAILED_SAFE
+  OPTED_OUT
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  RESCHEDULED
+  EXPIRED
+}
+
+enum AuditEventType {
+  STATE_TRANSITION
+  STATE_TRANSITION_REJECTED
+  WEBHOOK_RECEIVED
+  WEBHOOK_DUPLICATE
+  IDEMPOTENCY_REPLAY
+  SESSION_LOCK_ACQUIRED
+  SESSION_LOCK_REJECTED
+  SAFE_SUMMARY_UPDATED
+  SUPPRESSION_CREATED
+  APPOINTMENT_LEASED
+  APPOINTMENT_CONFIRMED
+  APPOINTMENT_CANCELLED
+  APPOINTMENT_RESCHEDULED
+  RETENTION_CLEANUP
+  HANDOFF_REQUESTED
+  POLICY_BLOCKED
+}
+
+enum SuppressionReason {
+  OPT_OUT
+  BOUNCE
+  MANUAL
+  COMPLIANCE
+}
+
 model Lead {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  company   String?
-  service   String?
-  message   String
-  source    String?
-  createdAt DateTime @default(now())
+  id           String                 @id @default(cuid())
+  name         String?
+  email        String?
+  phone        String?
+  company      String?
+  service      String?
+  message      String?
+  source       ChannelType            @default(WEBSITE)
+  safeSummary  String?
+  appointments Appointment[]
+  sessions     CommunicationSession[]
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @updatedAt
 
   @@index([email])
+  @@index([phone])
   @@index([createdAt])
+}
+
+model Appointment {
+  id                  String            @id @default(cuid())
+  leadId              String?
+  lead                Lead?             @relation(fields: [leadId], references: [id])
+  clientName          String?
+  clientPhone         String?
+  clientEmail         String?
+  startTime           DateTime
+  endTime             DateTime
+  status              AppointmentStatus @default(PENDING)
+  source              ChannelType
+  notesSummary        String?
+  calendarEventId     String?
+  leaseExpiresAt      DateTime?
+  idempotencyKey      String?           @unique
+  rescheduledFromId   String?
+  verificationSummary String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+
+  @@index([clientPhone])
+  @@index([clientEmail])
+  @@index([startTime])
+  @@index([endTime])
+  @@index([status])
+  @@index([leaseExpiresAt])
+}
+
+model CommunicationSession {
+  id                   String            @id @default(cuid())
+  leadId               String?
+  lead                 Lead?             @relation(fields: [leadId], references: [id])
+  channelId            String
+  channelType          ChannelType
+  currentState         ConversationState @default(IDLE)
+  recordingConsent     Boolean           @default(false)
+  aiDisclosureAccepted Boolean           @default(false)
+  marketingConsent     Boolean           @default(false)
+  privacyNoticeVersion String?
+  consentTimestamp     DateTime?
+  consentChannel       String?
+  safeSummary          String?
+  redactedContext      Json?
+  lockVersion          Int               @default(0)
+  lockedUntil          DateTime?
+  lastActive           DateTime          @default(now())
+  createdAt            DateTime          @default(now())
+  updatedAt            DateTime          @updatedAt
+
+  @@unique([channelId, channelType])
+  @@index([currentState])
+  @@index([lastActive])
+  @@index([lockedUntil])
+}
+
+model WebhookEvent {
+  id              String      @id @default(cuid())
+  provider        String
+  providerEventId String
+  channelType     ChannelType
+  idempotencyKey  String      @unique
+  processedAt     DateTime?
+  status          String
+  errorSummary    String?
+  createdAt       DateTime    @default(now())
+
+  @@unique([provider, providerEventId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model AuditEvent {
+  id              String         @id @default(cuid())
+  type            AuditEventType
+  sessionId       String?
+  leadId          String?
+  appointmentId   String?
+  idempotencyKey  String?
+  actor           String
+  redactedContext Json?
+  safeSummary     String?
+  createdAt       DateTime       @default(now())
+
+  @@index([type])
+  @@index([sessionId])
+  @@index([appointmentId])
+  @@index([createdAt])
+}
+
+model SuppressionEntry {
+  id          String            @id @default(cuid())
+  channelType ChannelType
+  identifier  String
+  reason      SuppressionReason @default(OPT_OUT)
+  source      String?
+  safeSummary String?
+  createdAt   DateTime          @default(now())
+  expiresAt   DateTime?
+
+  @@unique([channelType, identifier])
+  @@index([identifier])
+  @@index([expiresAt])
 }

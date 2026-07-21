@@ -324,3 +324,15 @@ html, body {
   background: rgba(34, 211, 238, 0.35);
   color: #fff;
 }
+
+/* ------------------------------------------------------------------ *
+ * MacBook Pro M5 scrollytelling page
+ * ------------------------------------------------------------------ */
+.mbp-m5-stage {
+  background-color: #070708;
+}
+/* Canvas image-sequence frames blend seamlessly into pure dark. */
+.mbp-m5-stage canvas {
+  display: block;
+  background-color: #070708;
+}

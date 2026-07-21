@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!--
+    LevelKraft — Final App Icon
+    Concept: Speech bubble + ascending level steps + checkmark at peak
+    Story: "Speak German → Level up → Pass your exam"
+    One shape. One read. Works at 16px.
+  -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="white" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="white" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: rounded square -->
+  <rect width="512" height="512" rx="108" fill="url(#bg)"/>
+
+  <!-- Subtle inner glow -->
+  <rect width="512" height="512" rx="108" fill="white" opacity="0.04"/>
+
+  <!--
+    THE ICON: 3 ascending bars (A→B→C levels) inside a speech bubble silhouette
+    The tallest bar peaks into a checkmark = "reached your goal"
+    The bubble tail = this is about LANGUAGE
+  -->
+
+  <!-- Speech bubble body (subtle, rounded) -->
+  <rect x="96" y="80" width="320" height="280" rx="40" fill="white" opacity="0.12"/>
+  <!-- Speech bubble tail -->
+  <polygon points="160,360 200,360 140,420" fill="white" opacity="0.12"/>
+
+  <!-- Bar 1 (shortest) — Level A -->
+  <rect x="144" y="260" width="56" height="80" rx="12" fill="url(#bar)"/>
+
+  <!-- Bar 2 (medium) — Level B -->
+  <rect x="228" y="200" width="56" height="140" rx="12" fill="url(#bar)"/>
+
+  <!-- Bar 3 (tallest) — Level C / Goal -->
+  <rect x="312" y="140" width="56" height="200" rx="12" fill="url(#bar)"/>
+
+  <!-- Checkmark on top of tallest bar — "PASSED" -->
+  <path d="M322 162 L338 180 L362 148"
+        fill="none" stroke="#34d399" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Tiny level labels inside bars -->
+  <text x="172" y="318" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#047857" opacity="0.7">A</text>
+  <text x="256" y="318" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#047857" opacity="0.7">B</text>
+  <text x="340" y="318" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#047857" opacity="0.7">C</text>
+
+  <!-- App name below icon (for full logo usage, not in-store icon) -->
+  <text x="256" y="460" text-anchor="middle" font-family="system-ui, -apple-system, 'SF Pro Display', sans-serif" font-size="44" font-weight="900" fill="white" letter-spacing="-1.5">LevelKraft</text>
+</svg>

@@ -13,7 +13,6 @@ export async function POST(req: Request) {
     const message = String(body.message ?? "").trim()
     const company = body.company ? String(body.company).trim() : null
     const service = body.service ? String(body.service).trim() : null
-    const source = body.source ? String(body.source).trim() : "website"
 
     if (!name || name.length > 200) {
       return NextResponse.json({ error: "Name is required." }, { status: 400 })
@@ -36,7 +35,7 @@ export async function POST(req: Request) {
     }
 
     const lead = await prisma.lead.create({
-      data: { name, email, message, company, service, source },
+      data: { name, email, message, company, service, source: "WEBSITE" },
       select: { id: true },
     })
 
