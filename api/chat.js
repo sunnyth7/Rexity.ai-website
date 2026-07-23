@@ -15,15 +15,31 @@ function approvedCopy(key, lang) {
   return c[lang] || c.en || null;
 }
 
-// DeepSeek (OpenAI-compatible). Key lives in Vercel env on the project that
-// serves rexity.ai. Tolerate a couple of name spellings just in case.
-const DEEPSEEK_KEY =
-  process.env.Deepseek_API_Key ||
-  process.env.DEEPSEEK_API_KEY ||
-  process.env.DEEPSEEK_KEY ||
-  "";
-const DEEPSEEK_URL = "https://api.deepseek.com/chat/completions";
-const DEEPSEEK_MODEL = "deepseek-chat";
+// ---- Azure OpenAI (EU data zone) --------------------------------------------
+// Inference runs on our own Azure OpenAI instance in Germany West Central with
+// a DataZoneStandard deployment, so prompts and completions stay inside the EU
+// data zone. This is a compliance promise we advertise: do NOT add any
+// non-EU model provider (OpenAI, DeepSeek, Gemini, ...) as a fallback here.
+//
+// Azure differs from the OpenAI API in three ways that matter:
+//   - auth header is "api-key", not "Authorization: Bearer"
+//   - the model is the deployment name in the URL, never a body field
+//   - token cap is "max_completion_tokens" ("max_tokens" is rejected by the
+//     deployed gpt-5.4-mini)
+const AZURE_ENDPOINT = String(process.env.AZURE_OPENAI_ENDPOINT || "").replace(/\/+$/, "");
+const AZURE_KEY = process.env.AZURE_OPENAI_KEY || "";
+const AZURE_DEPLOYMENT = process.env.AZURE_OPENAI_DEPLOYMENT || "";
+const AZURE_API_VERSION = process.env.AZURE_OPENAI_API_VERSION || "2024-12-01-preview";
+// Optional: embedding deployment on the same instance, used for semantic
+// retrieval. Without it we degrade to keyword retrieval — never to a
+// non-EU embedding provider.
+const AZURE_EMBED_DEPLOYMENT = process.env.AZURE_OPENAI_EMBED_DEPLOYMENT || "";
+
+const AZURE_READY = Boolean(AZURE_ENDPOINT && AZURE_KEY && AZURE_DEPLOYMENT);
+
+function azureUrl(deployment, route) {
+  return `${AZURE_ENDPOINT}/openai/deployments/${deployment}/${route}?api-version=${AZURE_API_VERSION}`;
+}
 
 function normalize(value) {
   return String(value || "")
@@ -123,7 +139,7 @@ function clientIp(req) {
 // Per-IP limits don't stop a botnet of many IPs each staying under the cap.
 // This caps TOTAL LLM-bound requests per warm instance per minute; once hit,
 // the handler degrades to the cost-free keyword retrieval (still answers the
-// visitor, but spends nothing on Gemini/DeepSeek). Bounds the bill no matter
+// visitor, but spends nothing on Azure OpenAI). Bounds the bill no matter
 // how the traffic is spread across IPs. Set generously so real users never
 // see it — only sustained abuse does.
 const GLOBAL_LLM_CEILING = 120; // LLM calls per instance per minute
@@ -264,7 +280,7 @@ function composeAnswer(message, forcedLang) {
   return { answer, sources: matches.map((entry) => entry.id) };
 }
 
-// ---- DeepSeek layer ---------------------------------------------------------
+// ---- Prompt construction ----------------------------------------------------
 
 function buildSystemPrompt(lang, contextLines) {
   const langName = lang === "de" ? "German (Sie-Form, professional)" : "English";
@@ -306,28 +322,28 @@ function buildSystemPrompt(lang, contextLines) {
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "";
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
-const GEMINI_KEY = process.env.GEMINI_API_KEY || "";
 
+// Embeddings run on the same EU Azure OpenAI instance as the chat model.
+// 1536 dimensions to match the pgvector column the KbChunk store was built on.
 async function embedQuery(text) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 6000);
   try {
-    const resp = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:embedContent?key=" + GEMINI_KEY,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content: { parts: [{ text: text.slice(0, 1500) }] },
-          taskType: "RETRIEVAL_QUERY",
-          outputDimensionality: 1536
-        }),
-        signal: controller.signal
-      }
-    );
-    if (!resp.ok) throw new Error("gemini embed " + resp.status);
+    const resp = await fetch(azureUrl(AZURE_EMBED_DEPLOYMENT, "embeddings"), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": AZURE_KEY
+      },
+      body: JSON.stringify({
+        input: text.slice(0, 1500),
+        dimensions: 1536
+      }),
+      signal: controller.signal
+    });
+    if (!resp.ok) throw new Error("azure embed " + resp.status);
     const data = await resp.json();
-    const vec = data && data.embedding && data.embedding.values;
+    const vec = data && data.data && data.data[0] && data.data[0].embedding;
     if (!Array.isArray(vec) || vec.length !== 1536) throw new Error("bad embedding");
     return vec;
   } finally {
@@ -376,7 +392,7 @@ function retrieveKeywordLines(message, lang, limit) {
 const RAG_CONFIDENCE_FLOOR = 0.6;
 
 async function buildContext(message, lang) {
-  if (SUPABASE_URL && SUPABASE_KEY && GEMINI_KEY) {
+  if (SUPABASE_URL && SUPABASE_KEY && AZURE_EMBED_DEPLOYMENT && AZURE_READY) {
     try {
       const sem = await retrieveSemantic(message, lang, 4);
       return { lines: sem.lines, retrieval: "vector", confidence: sem.confidence };
@@ -401,35 +417,42 @@ function sanitizeHistory(history) {
     }));
 }
 
-async function callDeepSeek(messages) {
+async function callAzureOpenAI(messages) {
   if (typeof fetch !== "function") throw new Error("fetch unavailable");
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 18000);
   try {
-    const resp = await fetch(DEEPSEEK_URL, {
+    const resp = await fetch(azureUrl(AZURE_DEPLOYMENT, "chat/completions"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + DEEPSEEK_KEY
+        // Azure uses a raw api-key header, not a Bearer token.
+        "api-key": AZURE_KEY
       },
+      // No "model" field (it's the deployment in the URL) and no "max_tokens"
+      // (gpt-5.4-mini rejects it) — Azure wants max_completion_tokens.
       body: JSON.stringify({
-        model: DEEPSEEK_MODEL,
         messages: messages,
-        temperature: 0.3,
-        max_tokens: 500,
-        stream: false
+        max_completion_tokens: 500
       }),
       signal: controller.signal
     });
     if (!resp.ok) {
+      // Log the status server-side only; the body can echo request content and
+      // must never reach the client.
       const detail = await resp.text().catch(() => "");
-      throw new Error("DeepSeek " + resp.status + " " + detail.slice(0, 200));
+      console.error(
+        "[chat] Azure OpenAI HTTP " + resp.status + " " + detail.slice(0, 300)
+      );
+      const err = new Error("azure http " + resp.status);
+      err.status = resp.status;
+      throw err;
     }
     const data = await resp.json();
     const answer =
       data && data.choices && data.choices[0] && data.choices[0].message &&
       data.choices[0].message.content;
-    if (!answer || !String(answer).trim()) throw new Error("Empty DeepSeek response");
+    if (!answer || !String(answer).trim()) throw new Error("empty azure response");
     return String(answer).trim();
   } finally {
     clearTimeout(timer);
@@ -518,7 +541,7 @@ module.exports = async function handler(req, res) {
   }
 
   // Cost circuit breaker: if this instance is over its per-minute LLM ceiling
-  // (sustained / distributed abuse), skip the paid Gemini+DeepSeek path and
+  // (sustained / distributed abuse), skip the paid Azure OpenAI path and
   // answer from the cost-free keyword retrieval. The visitor still gets a
   // relevant reply; we spend nothing.
   if (globalCeilingExceeded()) {
@@ -527,9 +550,10 @@ module.exports = async function handler(req, res) {
     return;
   }
 
-  // Primary path: grounded DeepSeek answer (semantic retrieval when the
-  // KbChunk store + Gemini key are available, keyword retrieval otherwise).
-  if (DEEPSEEK_KEY) {
+  // Primary path: grounded Azure OpenAI answer (semantic retrieval when the
+  // KbChunk store + Azure embedding deployment are available, keyword
+  // retrieval otherwise). Everything here stays inside the EU data zone.
+  if (AZURE_READY) {
     recordGlobalHit();
     try {
       const ctx = await buildContext(message, lang);
@@ -547,24 +571,44 @@ module.exports = async function handler(req, res) {
         ...history,
         { role: "user", content: message }
       ];
-      const answer = await callDeepSeek(messages);
+      const answer = await callAzureOpenAI(messages);
       res.statusCode = 200;
       res.end(JSON.stringify({
         answer: toPlainText(answer),
         lang: lang,
         intent: intent,
         retrieval: ctx.retrieval,
-        engine: "deepseek"
+        engine: "azure-openai"
       }));
       return;
     } catch (error) {
-      // fall through to retrieval — assistant must keep working
-      console.error("[chat] DeepSeek failed:", error && error.message);
+      // Log server-side only (status code, never the key or raw body), then
+      // fall through to deterministic retrieval — the assistant must keep
+      // working even when the model is unavailable.
+      console.error(
+        "[chat] Azure OpenAI failed" +
+          (error && error.status ? " (status " + error.status + ")" : "") +
+          ": " + (error && error.message)
+      );
     }
   }
 
-  // Fallback: deterministic retrieval.
-  const fallback = composeAnswer(message, lang);
-  res.statusCode = 200;
-  res.end(JSON.stringify(Object.assign({ engine: "fallback" }, fallback)));
+  // Fallback: deterministic retrieval (no model call, no external request).
+  // Last line of defence — if even this throws we still answer politely in the
+  // visitor's language rather than leaking an error or a 500.
+  try {
+    const fallback = composeAnswer(message, lang);
+    res.statusCode = 200;
+    res.end(JSON.stringify(Object.assign({ engine: "fallback", lang: lang }, fallback)));
+  } catch (error) {
+    console.error("[chat] fallback failed:", error && error.message);
+    res.statusCode = 200;
+    res.end(JSON.stringify({
+      answer: lang === "en"
+        ? "Sorry — the assistant is briefly unavailable. Please email " + DEMO_EMAIL + " and we'll get right back to you."
+        : "Entschuldigung — der Assistent ist gerade kurz nicht erreichbar. Bitte schreiben Sie an " + DEMO_EMAIL + ", wir melden uns umgehend.",
+      lang: lang,
+      engine: "unavailable"
+    }));
+  }
 };
