@@ -68,15 +68,15 @@
   },
   "copy": {
     "greeting": {
-      "de": "Hallo! Wie kann ich helfen?",
+      "de": "Hallo! Wie kann ich Ihnen helfen?",
       "en": "Hi! How can I help?"
     },
     "howAreYou": {
-      "de": "Danke, gut! Wie kann ich helfen?",
+      "de": "Danke, gut! Wie kann ich Ihnen helfen?",
       "en": "Doing well, thanks! How can I help?"
     },
     "closing": {
-      "de": "Gerne! Melden Sie sich jederzeit.",
+      "de": "Sehr gerne! Melden Sie sich jederzeit.",
       "en": "Anytime — just ask if anything else comes up."
     },
     "costRefusal": {
