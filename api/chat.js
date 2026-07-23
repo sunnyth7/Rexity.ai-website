@@ -212,7 +212,21 @@ const LEGAL_RE = /(refund|chargeback|billing|invoice|legal|contract|warranty|lia
 const TIMELINE_RE = /(how long|timeline|time frame|timeframe|duration|deadline|wie lange|wie schnell|dauer|dauert|zeitraum|zeitrahmen|wann (ist|wäre|waere|kann).*(fertig|live|bereit)|umsetzungszeit|lieferzeit)/i;
 const HUMAN_RE = /(speak (to|with) (a )?(real )?(human|person|someone)|talk to (a )?(real )?(human|person|someone)|real person|kein bot|echte[rn]? mensch|mit einem (echten )?menschen|mitarbeiter sprechen|jemanden sprechen|persönlich sprechen|persoenlich sprechen|human agent)/i;
 const BUSINESS_RE = /(\bdemo\b|book a (call|meeting)|consultation|proposal|\bquote\b|project (discussion|brief)|work with you|hire you|beauftragen|zusammenarbeiten|angebot|beratungstermin|projektgespräch|projektgespraech|demo buchen|termin (vereinbaren|buchen)|kennenlerngespräch|kennenlerngespraech)/i;
-const SMALLTALK_RE = /^(hi|hey|hallo|hello|moin|servus|guten (tag|morgen|abend)|good (morning|afternoon|evening)|danke|thanks|thank you|ok|okay|cool|super|alles klar|tschüss|tschuess|bye|ciao|wer bist du|who are you|was bist du|what are you)[\s!.?,]*$/i;
+// Smalltalk = greetings, pleasantries and sign-offs. Built from parts so a
+// greeting FOLLOWED BY a pleasantry ("hey how are you?", "hallo, wie geht's?")
+// still classifies as smalltalk — otherwise it leaks into keyword retrieval and
+// the visitor gets a wall of service copy in reply to "hi".
+const ST_GREET = "hi|hey|hallo|hello|moin|servus|guten (?:tag|morgen|abend)|good (?:morning|afternoon|evening)";
+const ST_HOWRU = "how(?:'s| is| are)? ?(?:you|it going|things|everything)(?: doing| today)?|wie geht(?:'s| es)?(?: dir| ihnen| euch)?|alles klar|na wie geht";
+const ST_CLOSE = "danke(?: schön| sehr)?|thanks|thank you|ok|okay|cool|super|prima|tschüss|tschuess|bye|goodbye|ciao|wer bist du|who are you|was bist du|what are you";
+const SMALLTALK_RE = new RegExp(
+  "^(?:" +
+    "(?:" + ST_GREET + ")[\\s!.?,]*(?:" + ST_HOWRU + ")?" + "|" +
+    "(?:" + ST_HOWRU + ")" + "|" +
+    "(?:" + ST_CLOSE + ")" +
+  ")[\\s!.?,]*$",
+  "i"
+);
 // Automation/RPA wording — words like "invoice"/"Rechnung" also live in the
 // legal/billing regex, so a question about AUTOMATING invoices would wrongly
 // be refused as a billing matter. When automation intent is present, treat it
@@ -597,6 +611,19 @@ module.exports = async function handler(req, res) {
   // Last line of defence — if even this throws we still answer politely in the
   // visitor's language rather than leaking an error or a 500.
   try {
+    // Greetings must never fall into keyword retrieval: "hey how are you?" has
+    // no databank entry, so retrieval would answer a greeting with a wall of
+    // service copy. Answer smalltalk as smalltalk.
+    if (intent === "smalltalk") {
+      // "danke"/"bye" deserve a sign-off, not a "hello, I'm doing well".
+      const isClosing = /^(danke|thanks|thank you|ok|okay|cool|super|prima|tschüss|tschuess|bye|goodbye|ciao)[\s!.?,]*$/i.test(message.trim());
+      const reply = approvedCopy(isClosing ? "closing" : "greeting", lang);
+      if (reply) {
+        res.statusCode = 200;
+        res.end(JSON.stringify({ answer: reply, lang: lang, intent: "smalltalk", engine: "policy" }));
+        return;
+      }
+    }
     const fallback = composeAnswer(message, lang);
     res.statusCode = 200;
     res.end(JSON.stringify(Object.assign({ engine: "fallback", lang: lang }, fallback)));

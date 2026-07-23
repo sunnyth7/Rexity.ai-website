@@ -67,6 +67,14 @@
     ]
   },
   "copy": {
+    "greeting": {
+      "de": "Hallo! Mir geht es gut, danke — ich bin Rexity, der virtuelle Assistent von Rexity Labs. Womit kann ich Ihnen helfen? Fragen Sie mich gern zu Websites und Apps, Automatisierungen, KI-Agenten oder Marketing.",
+      "en": "Hello! I'm doing well, thanks — I'm Rexity, the virtual assistant at Rexity Labs. How can I help? Feel free to ask about websites and apps, automations, AI agents or marketing."
+    },
+    "closing": {
+      "de": "Sehr gerne! Wenn Sie noch etwas zu Websites, Apps, Automatisierungen oder KI-Agenten wissen möchten, fragen Sie einfach. Für ein konkretes Projekt erreichen Sie uns unter hello@rexity.ai.",
+      "en": "You're very welcome! If you'd like to know more about websites, apps, automations or AI agents, just ask. For a concrete project you can reach us at hello@rexity.ai."
+    },
     "costRefusal": {
       "de": "Es tut mir leid, zu Kosten oder Preisen kann ich keine Auskunft geben. Für Business-Anfragen schreiben Sie bitte direkt an hello@rexity.ai.",
       "en": "Sorry, I cannot give information on costs or pricing. For business enquiries, please write directly to hello@rexity.ai."
