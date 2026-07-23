@@ -111,7 +111,7 @@
       'font:13px/1.5 Inter, system-ui, -apple-system, sans-serif;';
 
     var copy = document.createElement('span');
-    copy.textContent = '© ' + new Date().getFullYear() + ' Rexity Labs UG (haftungsbeschränkt) i. Gr.';
+    copy.textContent = '© ' + new Date().getFullYear() + ' Rexity Labs UG (haftungsbeschränkt)';
     copy.style.cssText = 'color:rgba(255,255,255,.7);font-weight:500;letter-spacing:.01em';
 
     var nav = document.createElement('nav');
