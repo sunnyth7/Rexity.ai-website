@@ -405,8 +405,18 @@ function retrieveKeywordLines(message, lang, limit) {
 // equivalent floor here is 0.60.
 const RAG_CONFIDENCE_FLOOR = 0.6;
 
+// Semantic (vector) retrieval only works when the KbChunk store was embedded
+// with the SAME model that embeds the query. The KB was originally seeded with
+// Gemini vectors; querying it with Azure vectors yields meaningless cosine
+// scores (every query reads as low-confidence → refused). So the vector path
+// stays OFF until the KB is re-seeded with Azure embeddings
+// (`node scripts/seed-kb.mjs`), at which point set KB_EMBEDDINGS=azure in the
+// environment to switch it back on. Until then we use keyword retrieval, which
+// is embedding-independent and correct.
+const KB_VECTORS_READY = process.env.KB_EMBEDDINGS === "azure";
+
 async function buildContext(message, lang) {
-  if (SUPABASE_URL && SUPABASE_KEY && AZURE_EMBED_DEPLOYMENT && AZURE_READY) {
+  if (KB_VECTORS_READY && SUPABASE_URL && SUPABASE_KEY && AZURE_EMBED_DEPLOYMENT && AZURE_READY) {
     try {
       const sem = await retrieveSemantic(message, lang, 4);
       return { lines: sem.lines, retrieval: "vector", confidence: sem.confidence };
