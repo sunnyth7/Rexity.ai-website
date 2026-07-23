@@ -615,9 +615,13 @@ module.exports = async function handler(req, res) {
     // no databank entry, so retrieval would answer a greeting with a wall of
     // service copy. Answer smalltalk as smalltalk.
     if (intent === "smalltalk") {
-      // "danke"/"bye" deserve a sign-off, not a "hello, I'm doing well".
-      const isClosing = /^(danke|thanks|thank you|ok|okay|cool|super|prima|tschüss|tschuess|bye|goodbye|ciao)[\s!.?,]*$/i.test(message.trim());
-      const reply = approvedCopy(isClosing ? "closing" : "greeting", lang);
+      // Keep it short and human. Only answer "how are you" when it was
+      // actually asked, and give thanks/bye a sign-off rather than a hello.
+      const raw = message.trim();
+      const isClosing = /^(danke|thanks|thank you|ok|okay|cool|super|prima|tschüss|tschuess|bye|goodbye|ciao)[\s!.?,]*$/i.test(raw);
+      const asksHowAreYou = new RegExp("(?:" + ST_HOWRU + ")", "i").test(raw);
+      const key = isClosing ? "closing" : (asksHowAreYou ? "howAreYou" : "greeting");
+      const reply = approvedCopy(key, lang);
       if (reply) {
         res.statusCode = 200;
         res.end(JSON.stringify({ answer: reply, lang: lang, intent: "smalltalk", engine: "policy" }));
