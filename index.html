@@ -8555,10 +8555,59 @@ h1, h2, h3, h4, h5, h6, p, li, blockquote,
     });
   }
 
+  // Show the intro only on a genuine first arrival. Skip it (jump straight to
+  // the revealed homepage) on browser back/forward navigation, and after it
+  // has already played once in this tab session — so hitting "back" to the
+  // homepage never replays the dark preloader.
+  function isBackForward() {
+    try {
+      var nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || null;
+      if (nav && nav.type) return nav.type === 'back_forward';
+      // legacy fallback (deprecated API): 2 === TYPE_BACK_FORWARD
+      return !!(performance.navigation && performance.navigation.type === 2);
+    } catch (e) { return false; }
+  }
+  function introAlreadySeen() {
+    try { return sessionStorage.getItem('rexity.introSeen') === '1'; } catch (e) { return false; }
+  }
+  function markIntroSeen() {
+    try { sessionStorage.setItem('rexity.introSeen', '1'); } catch (e) {}
+  }
+
+  function skipIntro() {
+    var intro = document.querySelector('.intro');
+    var logo = document.querySelector('.logo-load');
+    if (intro) {
+      intro.classList.add('rexity-loader-complete');
+      setImportant(intro, 'display', 'none');
+      setImportant(intro, 'visibility', 'hidden');
+      setImportant(intro, 'pointer-events', 'none');
+    }
+    if (logo) setImportant(logo, 'opacity', '0');
+    // Reveal the page exactly as the finished intro would have.
+    document.body.classList.add('rexity-main-ready');
+    ['.navigation-top', '.hero-content'].forEach(function (selector) {
+      var el = document.querySelector(selector);
+      if (!el) return;
+      setImportant(el, 'visibility', 'visible');
+      setImportant(el, 'opacity', '1');
+      setImportant(el, 'transform', 'translate3d(0px, 0px, 0px)');
+    });
+  }
+
+  function start() {
+    if (isBackForward() || introAlreadySeen()) {
+      skipIntro();
+    } else {
+      markIntroSeen();
+      polishLoader();
+    }
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', polishLoader);
+    document.addEventListener('DOMContentLoaded', start);
   } else {
-    polishLoader();
+    start();
   }
 })();
 </script><script>
