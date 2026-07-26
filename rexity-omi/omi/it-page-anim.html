@@ -2524,6 +2524,31 @@ html body .ct-div-block.p-item.team-item .team-right-div {
     padding-bottom: 32px !important;
   }
 }
+
+/* ink-on-ivory guarantee (2026-07): every container that receives the ivory tile background ALSO forces navy ink on its text. The previous hand-maintained ID whitelist missed cards (e.g. #div_block-5887-10 "Results, not buzzwords"), leaving ice-white text on ivory. Generated from the bg selector list itself so the pair cannot diverge. */
+html body .ct-div-block.port-item :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+html body .ct-div-block.review-box :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+html body .ct-div-block.p-item.team-item :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-4804-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2159-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2140-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2127-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5075-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-4933-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5803-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-5815-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-64-1569 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-9-1569 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3938-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3977-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3979-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#section-5856-10 .ct-div-block :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-2661-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#div_block-3953-10 :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#section-5070-10 .ct-div-block :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div),
+#section-2167-10 .float-div :is(h1,h2,h3,h4,h5,h6,p,li,span,a,div) { color: var(--rx-ink) !important; }
+/* buttons inside tiles keep their own colors */
+html body .green-button, html body .green-button :is(span,div), html body .anchor-button :is(span,div) { color: #fff !important; }
 </style>
 </head>
 <body class="home wp-singular page-template-default page page-id-10 wp-embed-responsive wp-theme-oxygen-is-not-a-theme  oxygen-body" >
