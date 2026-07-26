@@ -1,8 +1,8 @@
 /* omi-cleanup.js — Sprint 1 runtime fixes inside the iframe body.
    1. Makes the dead "Learn More" button (a bare <div>, no <a>) scroll to the
       contact section like the other CTAs.
-   2. Belt-and-suspenders: neutralizes any anchor still pointing off-site to
-      workspace-it.com (in case a cached/older markup slips through).
+   2. Belt-and-suspenders: neutralizes any anchor still pointing to an
+      external origin (in case cached/older markup slips through).
    No structural/layout changes — only event wiring. */
 (function () {
   function scrollToContact() {
@@ -33,8 +33,11 @@
       }
     }
     // Any straggler off-site link -> contact section.
-    document.querySelectorAll('a[href*="workspace-it.com"]').forEach(function (a) {
-      a.setAttribute("href", "#contact-us");
+    document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+      try {
+        var u = new URL(a.href);
+        if (!/(^|\.)rexity\.ai$/.test(u.hostname)) a.setAttribute("href", "#contact-us");
+      } catch (e) {}
     });
   }
 

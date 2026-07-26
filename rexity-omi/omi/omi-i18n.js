@@ -21,7 +21,7 @@
   var KEY = 'rexity_lang';
 
   // EN -> DE for the real Rexity content spine. Keys are the EXACT
-  // trimmed text of a single text node. Placeholder/Workspace-IT debt
+  // trimmed text of a single text node. Placeholder/legacy-template debt
   // (team bios, testimonials, case-study bodies, device-mgmt copy) is
   // intentionally excluded — it should be rewritten as real content
   // before translation, not faithfully translated as-is.
@@ -65,7 +65,7 @@
     'Technical SEO that compounds + video marketing at scale (avatars, realistic shots, shorts)':
       'Technisches SEO mit Langzeitwirkung + Video-Marketing in großem Stil (Avatare, realistische Aufnahmen, Shorts)',
 
-    // ---- Service card CTAs (Workspace-IT labels kept, translated faithfully) ----
+    // ---- Service card CTAs (legacy template labels, translated faithfully) ----
     'Streamline Your Devices': 'Mehr erfahren',
     'Manage Your Applications': 'Mehr erfahren',
     'Optimise Your Resources': 'Mehr erfahren',

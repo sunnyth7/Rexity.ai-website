@@ -24,7 +24,7 @@
     document.querySelectorAll('.p-scroll-section .team-item, .p-scroll-section .p-item').forEach(function (card) {
       if (card.__omiTeamHid) return;
       var t = (card.textContent || '').replace(/\s+/g, ' ');
-      if (/\[Team Member 0[234]\]|Role — placeholder|placeholder copy|\bColin\b|\bDaniel\b|\bDan\b|\bJanet\b/.test(t)) {
+      if (/\[Team Member 0[234]\]|Role — placeholder|placeholder copy/.test(t)) {
         card.style.display = 'none';
         card.__omiTeamHid = 1;
         hidden++;
