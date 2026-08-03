@@ -25,13 +25,18 @@ export const LEGAL_LINKS = [
 ];
 
 export const HERO_CONTENT = {
+  monoTag: "EU-HOSTED · DSGVO · AZURE OPENAI",
   badge: {
     de: "AI-Native Software Studio · EU-Gehostet",
     en: "AI-Native Software Studio · EU-Hosted",
   },
-  promise: {
-    de: "Verstehen. Bauen. Automatisieren.",
-    en: "Understand. Build. Automate.",
+  promiseLead: {
+    de: "Verstehen. Bauen.",
+    en: "Understand. Build.",
+  },
+  promiseAccent: {
+    de: "Automatisieren.",
+    en: "Automate.",
   },
   subline: {
     de: "Rexity entwickelt moderne Websites, intelligente KI-Agenten und nahtlose Prozessautomatisierungen für ambitionierte Teams — 100% DSGVO-konform, revisionssicher und maßgeschneidert.",
@@ -48,6 +53,7 @@ export const HERO_CONTENT = {
 };
 
 export const PROBLEM_CONTENT = {
+  monoTag: "PROBLEM IDENTIFICATION · GERMAN SMB REALITY",
   badge: {
     de: "Das Problem",
     en: "The Problem",
@@ -165,7 +171,102 @@ export const CASE_STUDIES = [
   },
 ];
 
+export const BENTO_SERVICES = [
+  {
+    id: "automation",
+    isFlagship: true,
+    href: "/automation",
+    title: {
+      de: "Automatisierung & KI-Agenten",
+      en: "Automation & AI Agents",
+    },
+    tagline: {
+      de: "Intelligente Assistenten & autonome Workflows",
+      en: "Intelligent AI assistants & autonomous business workflows",
+    },
+    desc: {
+      de: "Verbindung von KI-Agenten und Business-Systemen: Autonome WhatsApp-Beantwortung, Voice Intake, RAG-Chatbots und revisionssichere RPA-Abläufe.",
+      en: "Connecting AI agents with enterprise tools: Autonomous WhatsApp replies, voice intake, retrieval-augmented chatbots, and audit-logged RPA workflows.",
+    },
+    chips: [
+      { label: { de: "RPA & Prozessautomatisierung", en: "RPA & Process Automation" }, href: "/automation/rpa" },
+      { label: { de: "WhatsApp-Agenten", en: "WhatsApp Agents" }, href: "/automation/whatsapp" },
+      { label: { de: "Voice-Agenten", en: "Voice Agents" }, href: "/automation/voice", hasWaveform: true },
+      { label: { de: "Website-Chatbots", en: "Website Chatbots" }, href: "/automation/chatbots" },
+    ],
+  },
+  {
+    id: "web",
+    isFlagship: false,
+    href: "/web",
+    title: {
+      de: "Web & Apps",
+      en: "Web & Apps",
+    },
+    tagline: {
+      de: "Digitale Produkte mit erstklassigem UI/UX",
+      en: "Digital products built with senior design & stable backend",
+    },
+    desc: {
+      de: "Von performanten Websites bis zu komplexen SaaS-Plattformen und nativen iOS/Android Apps.",
+      en: "From high-conversion websites to complex SaaS platforms and mobile applications.",
+    },
+    chips: [
+      { label: { de: "Webdesign", en: "Web Design" }, href: "/web/web-design" },
+      { label: { de: "Web-Entwicklung", en: "Web Development" }, href: "/web/web-development" },
+      { label: { de: "SaaS-Plattformen", en: "SaaS Platforms" }, href: "/web/saas" },
+      { label: { de: "Mobile Apps", en: "Mobile Apps" }, href: "/web/mobile-apps" },
+      { label: { de: "Dashboards & Reporting", en: "Dashboards & Reporting" }, href: "/web/dashboards" },
+    ],
+  },
+  {
+    id: "marketing",
+    isFlagship: false,
+    href: "/marketing",
+    title: {
+      de: "Digitales Marketing",
+      en: "Digital Marketing",
+    },
+    tagline: {
+      de: "Messbares digitales Wachstum & SEO",
+      en: "Measurable digital growth & search visibility",
+    },
+    desc: {
+      de: "Technisches SEO, KI-gestütztes Videomarketing und optimierte Content-Architekturen.",
+      en: "Technical SEO audits, AI video production, and conversion-engineered content strategies.",
+    },
+    chips: [
+      { label: { de: "SEO", en: "SEO" }, href: "/marketing/seo" },
+      { label: { de: "Content & Social", en: "Content & Social" }, href: "/marketing/content" },
+      { label: { de: "KI-Videomarketing", en: "AI Video Marketing" }, href: "/marketing/video" },
+    ],
+  },
+  {
+    id: "testing-support",
+    isFlagship: false,
+    href: "/testing-support",
+    title: {
+      de: "Testing & Support",
+      en: "Testing & Support",
+    },
+    tagline: {
+      de: "Revisionssichere QS & Dauerhafter Betrieb",
+      en: "Production-grade QA & dependable maintenance",
+    },
+    desc: {
+      de: "Automatisierte End-to-End Tests, DSGVO-Audits und verlässliche Wartung durch Senior-Entwickelnde.",
+      en: "Automated E2E testing, GDPR compliance audits, and direct SLA maintenance support.",
+    },
+    chips: [
+      { label: { de: "Automatisierte E2E-Tests", en: "Automated E2E Testing" }, href: "/testing-support" },
+      { label: { de: "DSGVO-Compliance Audit", en: "GDPR Compliance Audit" }, href: "/testing-support" },
+      { label: { de: "SLA & Wartung", en: "SLA & Maintenance" }, href: "/testing-support" },
+    ],
+  },
+];
+
 export const PROCESS_CONTENT = {
+  monoTag: "METHODOLOGY · 14-21 DAY SCOPING WINDOW",
   badge: {
     de: "Der Prozess",
     en: "Our Process",
@@ -210,74 +311,6 @@ export const PROCESS_CONTENT = {
     },
   ],
 };
-
-export const SERVICES_CONTENT = [
-  {
-    id: "web-app",
-    href: "/web",
-    title: {
-      de: "Web & App Entwicklung",
-      en: "Web & App Development",
-    },
-    desc: {
-      de: "Moderne Websites, SaaS-Plattformen und mobile Anwendungen für iOS & Android. Schnelles Frontend, stabiles Backend.",
-      en: "Modern websites, SaaS platforms, and mobile apps for iOS & Android. Blazing fast frontend and scalable backend.",
-    },
-    tags: ["Next.js", "React Native", "UI/UX Figma", "SaaS Architecture"],
-  },
-  {
-    id: "ai-agents",
-    href: "/automation",
-    title: {
-      de: "AI Agents (Chat, WhatsApp, Voice)",
-      en: "AI Agents (Chat, WhatsApp, Voice)",
-    },
-    desc: {
-      de: "Intelligente Assistenten, die Kundenanfragen beantworten, Leads qualifizieren und Prozesse autonom vorbereiten.",
-      en: "Intelligent assistants that answer customer questions, qualify leads, and prepare workflows autonomously.",
-    },
-    tags: ["RAG Databank", "WhatsApp Bot", "Voice Intake", "EU Data Zone"],
-  },
-  {
-    id: "automations",
-    href: "/automation",
-    title: {
-      de: "Geschäftsprozess-Automatisierung & RPA",
-      en: "Business Process Automation & RPA",
-    },
-    desc: {
-      de: "Verbindung von CRM, Buchhaltung, WhatsApp und internen Tools zur Eliminierung manueller Dateneingaben.",
-      en: "Connecting your CRM, accounting, messaging, and internal databases to eliminate manual data entry.",
-    },
-    tags: ["Workflow Mapping", "CRM Sync", "n8n / Zapier", "Audit Logs"],
-  },
-  {
-    id: "testing-support",
-    href: "/testing-support",
-    title: {
-      de: "Testing, QA & Maintenance Support",
-      en: "Testing, QA & Maintenance Support",
-    },
-    desc: {
-      de: "Revisionssichere Qualitätssicherung, automatisierte Tests und verlässlicher Langzeit-Support für Ihre Software.",
-      en: "Production-grade QA, automated end-to-end testing, and dependable long-term maintenance support.",
-    },
-    tags: ["End-to-End Testing", "Performance Audits", "DSGVO Checks", "SLA Support"],
-  },
-  {
-    id: "marketing",
-    href: "/marketing",
-    title: {
-      de: "Digital Marketing & Content Workflows",
-      en: "Digital Marketing & Content Workflows",
-    },
-    desc: {
-      de: "Technisches SEO, KI-gestützte Videoproduktion und datenbasierte Akquise-Pipelinedesigns.",
-      en: "Technical SEO audits, AI-assisted video workflows, and structured digital acquisition pipelines.",
-    },
-    tags: ["Technical SEO", "AI Video Scripts", "Content Maps", "Conversion Design"],
-  },
-];
 
 export const STATS_CONTENT = [
   {

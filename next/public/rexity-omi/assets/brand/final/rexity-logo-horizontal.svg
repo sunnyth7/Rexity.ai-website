@@ -1,9 +1,8 @@
 <svg width="720" height="184" viewBox="0 0 720 184" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
-  <title id="title">Rexity trademark logo</title>
+  <title id="title">Rexity logo</title>
   <g transform="translate(20 18) scale(.58)" color="#050505">
     <path fill="currentColor" d="M45.7 43.8h99.1c43.4 0 73.8 28.8 73.8 70.6 0 28.1-14 51.6-36.7 63.6l27.8 27.8c9.1 9.1 2.7 24.7-10.2 24.7h-28.8c-3.8 0-7.4-1.5-10.2-4.2l-55.1-55.1H74.2c-13.3 0-19.6-16.3-9.8-25.3l.6-.5c2.7-2.4 6.1-3.7 9.8-3.7h69.4c18.4 0 32.1-11.6 32.1-29.1 0-17.9-13.7-29.6-32.1-29.6H67.8c-4.1 0-8-1.7-10.7-4.8L35 54.1c-5.9-6.5-1.3-16.8 7.5-16.8 1.2 0 2.3.2 3.2.5Z"/>
     <path fill="currentColor" d="M55.7 157.8h26.8c4.1 0 8.1 1.7 10.9 4.7l35.5 38c8.4 9 2 23.8-10.3 23.8H55.7c-7.8 0-14.2-6.4-14.2-14.2v-38.1c0-7.8 6.4-14.2 14.2-14.2Z"/>
   </g>
   <text x="198" y="118" fill="#050505" font-family="Inter, Arial, Helvetica, sans-serif" font-size="92" font-weight="700" letter-spacing="-1">Rexity</text>
-  <text x="520" y="76" fill="#050505" font-family="Inter, Arial, Helvetica, sans-serif" font-size="30" font-weight="800">TM</text>
 </svg>
