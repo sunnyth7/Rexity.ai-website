@@ -281,19 +281,19 @@ export default function HomePage() {
 
       {/* 6. STATS & IMPACT BAND */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl bg-[#10233F] text-white p-8 sm:p-14 shadow-lg">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-white/10">
+        <div className="rounded-3xl border border-[#E8E5DF] bg-white text-[#10233F] p-8 sm:p-14 shadow-sm">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-[#E8E5DF]">
             {STATS_CONTENT.map((stat, idx) => (
               <div key={idx} className={`space-y-2 text-center ${idx > 0 ? "pt-6 lg:pt-0" : ""}`}>
-                <div className="text-3xl sm:text-5xl font-extrabold text-[#0FB5A6]">
+                <div className="text-3xl sm:text-5xl font-extrabold text-[#1560BD]">
                   {stat.value}{" "}
                   {stat.unit && (
-                    <span className="text-lg font-normal text-white">
+                    <span className="text-lg font-bold text-[#10233F]">
                       {typeof stat.unit === "string" ? stat.unit : t(stat.unit)}
                     </span>
                   )}
                 </div>
-                <p className="text-xs sm:text-sm text-gray-300 max-w-xs mx-auto font-medium">
+                <p className="text-xs sm:text-sm text-[#4A5568] max-w-xs mx-auto font-medium">
                   {t(stat.label)}
                 </p>
               </div>
@@ -307,20 +307,20 @@ export default function HomePage() {
 
       {/* 8. SCOPE CTA BAND (REPLACES PRICING) */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="rounded-3xl border border-[#E8E5DF] bg-gradient-to-r from-[#1560BD] to-[#114E9B] text-white p-8 sm:p-14 text-center space-y-6 shadow-xl">
-          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight">
+        <div className="rounded-3xl border border-[#E8E5DF] bg-[#FAF8F4] text-[#10233F] p-8 sm:p-14 text-center space-y-6 shadow-sm">
+          <h2 className="text-2xl sm:text-4xl font-bold tracking-tight text-[#10233F]">
             {t(CTA_BAND_CONTENT.heading)}
           </h2>
-          <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-[#4A5568] max-w-2xl mx-auto leading-relaxed">
             {t(CTA_BAND_CONTENT.subline)}
           </p>
           <div className="pt-2">
             <a
               href={`mailto:${SITE_CONFIG.email}`}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-bold text-[#10233F] hover:bg-[#FAF8F4] transition-all shadow-md transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full bg-[#1560BD] px-8 py-4 text-base font-bold text-white hover:bg-[#114E9B] transition-all shadow-md transform hover:-translate-y-0.5"
             >
               <span>{t(CTA_BAND_CONTENT.button)}</span>
-              <ArrowRight className="h-5 w-5 text-[#1560BD]" />
+              <ArrowRight className="h-5 w-5 text-white" />
             </a>
           </div>
         </div>

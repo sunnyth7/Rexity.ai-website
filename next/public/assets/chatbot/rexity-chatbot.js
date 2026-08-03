@@ -397,13 +397,7 @@
       var w = window.innerWidth || (window.screen && window.screen.width) || 0;
       return w > 0 && w < 640;
     }
-    if (!introSeen()) {
-      window.setTimeout(function () {
-        if (introSeen() || root.classList.contains("is-open") || isMobileViewport()) return;
-        markIntroSeen();
-        root.classList.add("is-open");
-      }, 9000);
-    }
+    // Chatbot stays closed by default. Opens only when user clicks launcher.
 
     input.addEventListener("keydown", function (event) {
       if (event.key === "Enter" && !event.shiftKey) {
