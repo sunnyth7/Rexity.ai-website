@@ -2,16 +2,15 @@
 
 :root {
   color-scheme: light;
-  --background: #FAF8F4;
-  --foreground: #10233F;
-  --bg: #FAF8F4;
-  --bg-card: #FFFFFF;
-  --ink: #10233F;
-  --muted: #4A5568;
-  --accent: #1560BD;
-  --accent-hover: #114E9B;
-  --accent-teal: #0FB5A6;
-  --line: #E8E5DF;
+  --bg: #FFFFFF;
+  --bg-tint: #F6F3FC;
+  --ink: #1E1B4B;
+  --muted: #6B6690;
+  --primary: #7C3AED;
+  --primary-deep: #5B21B6;
+  --lilac: #A78BFA;
+  --footer: #1E1B4B;
+  --line: #E9E4F8;
 }
 
 @theme inline {
@@ -20,8 +19,8 @@
 }
 
 html, body {
-  background-color: #FAF8F4 !important;
-  color: #10233F !important;
+  background-color: #FFFFFF !important;
+  color: #1E1B4B !important;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }

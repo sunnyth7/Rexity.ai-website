@@ -7,12 +7,73 @@ export const SITE_CONFIG = {
   founder: "Sunny Thakur",
 };
 
-export const NAV_LINKS = [
-  { href: "/web", label: { de: "Web & Apps", en: "Web & Apps" } },
-  { href: "/automation", label: { de: "Automatisierung", en: "Automation" } },
-  { href: "/marketing", label: { de: "Marketing", en: "Marketing" } },
-  { href: "/work", label: { de: "Arbeiten", en: "Work" } },
-  { href: "/services", label: { de: "Leistungen", en: "Services" } },
+export const NAV_PILLARS = [
+  {
+    slug: "web",
+    href: "/web",
+    title: { de: "Web & Apps", en: "Web & Apps" },
+    desc: { de: "Websites, SaaS-Plattformen und mobile Apps", en: "Websites, SaaS platforms, and mobile applications" },
+    children: [
+      { href: "/web/web-design", label: { de: "Webdesign", en: "Web Design" }, desc: { de: "Wireframes bis Figma-Designsystem", en: "Wireframes to Figma design systems" } },
+      { href: "/web/web-development", label: { de: "Web-Entwicklung", en: "Web Development" }, desc: { de: "Performantes Next.js & React-Frontend", en: "High-performance Next.js & React frontend" } },
+      { href: "/web/saas", label: { de: "SaaS-Plattformen", en: "SaaS Platforms" }, desc: { de: "Skalierbare Cloud-Software mit Auth", en: "Scalable cloud software with auth & APIs" } },
+      { href: "/web/mobile-apps", label: { de: "Mobile Apps", en: "Mobile Apps" }, desc: { de: "Native iOS & Android Anwendungen", en: "Native iOS & Android applications" } },
+      { href: "/web/dashboards", label: { de: "Dashboards", en: "Dashboards" }, desc: { de: "KPI-, Ops- und Datenansichten", en: "KPI, operations and data reporting" } },
+    ],
+  },
+  {
+    slug: "automation",
+    href: "/automation",
+    title: { de: "Automatisierung", en: "Automation" },
+    desc: { de: "KI-Agenten, WhatsApp, Voice & RPA", en: "AI agents, WhatsApp, Voice & RPA" },
+    children: [
+      { href: "/automation/rpa", label: { de: "RPA & Prozessautomatisierung", en: "RPA & Process Automation" }, desc: { de: "Workflows zwischen CRM, E-Mail & Tools", en: "Workflows across CRM, email & tools" } },
+      { href: "/automation/whatsapp", label: { de: "WhatsApp-Agenten", en: "WhatsApp Agents" }, desc: { de: "Autonome Lead-Qualifizierung & Buchung", en: "Autonomous lead intake & booking" } },
+      { href: "/automation/voice", label: { de: "Voice-Agenten", en: "Voice Agents" }, desc: { de: "Cloud-Empfang rund um die Uhr", en: "24/7 cloud receptionist & intake" } },
+      { href: "/automation/chatbots", label: { de: "Website-Chatbots", en: "Website Chatbots" }, desc: { de: "RAG-Antworten aus Ihrer Wissensbasis", en: "RAG responses from your knowledge base" } },
+    ],
+  },
+  {
+    slug: "marketing",
+    href: "/marketing",
+    title: { de: "Digitales Marketing", en: "Digital Marketing" },
+    desc: { de: "SEO, Content & KI-Videoproduktion", en: "SEO, content & AI video production" },
+    children: [
+      { href: "/marketing/seo", label: { de: "SEO", en: "SEO" }, desc: { de: "Technisches SEO & Suchmaschinenranking", en: "Technical SEO & search engine rankings" } },
+      { href: "/marketing/content", label: { de: "Content & Social", en: "Content & Social" }, desc: { de: "Content-Maschine für B2B & B2C", en: "Structured content engine for B2B & B2C" } },
+      { href: "/marketing/video", label: { de: "KI-Videomarketing", en: "AI Video Marketing" }, desc: { de: "Avatare & Short-Form Creatives", en: "AI avatars & short-form video creatives" } },
+    ],
+  },
+  {
+    slug: "testing-support",
+    href: "/testing-support",
+    title: { de: "Testing & Support", en: "Testing & Support" },
+    desc: { de: "Automatisierte Tests & verlässlicher Betrieb", en: "Automated testing & dependable maintenance" },
+    children: [
+      { href: "/testing-support", label: { de: "Automatisierte E2E-Tests", en: "Automated E2E Testing" }, desc: { de: "Releases ohne Regressionsfehler", en: "Releases without regressions" } },
+      { href: "/testing-support", label: { de: "DSGVO-Compliance Audit", en: "GDPR Compliance Audit" }, desc: { de: "Revisionssichere Datenschutz-Prüfung", en: "Auditable data protection verification" } },
+      { href: "/testing-support", label: { de: "SLA & Wartung", en: "SLA & Maintenance Support" }, desc: { de: "Direkter Support durch Senior-Entwickler", en: "Direct SLA support by senior engineers" } },
+    ],
+  },
+];
+
+export const ALL_17_SERVICE_LINKS = [
+  { href: "/web", label: { de: "Web & Apps (Hub)", en: "Web & Apps (Hub)" } },
+  { href: "/web/web-design", label: { de: "Webdesign", en: "Web Design" } },
+  { href: "/web/web-development", label: { de: "Web-Entwicklung", en: "Web Development" } },
+  { href: "/web/saas", label: { de: "SaaS-Plattformen", en: "SaaS Platforms" } },
+  { href: "/web/mobile-apps", label: { de: "Mobile Apps", en: "Mobile Apps" } },
+  { href: "/web/dashboards", label: { de: "Dashboards & Reporting", en: "Dashboards & Reporting" } },
+  { href: "/automation", label: { de: "Automatisierung (Hub)", en: "Automation (Hub)" } },
+  { href: "/automation/rpa", label: { de: "RPA & Prozessautomatisierung", en: "RPA & Process Automation" } },
+  { href: "/automation/whatsapp", label: { de: "WhatsApp-Agenten", en: "WhatsApp Agents" } },
+  { href: "/automation/voice", label: { de: "Voice-Agenten", en: "Voice Agents" } },
+  { href: "/automation/chatbots", label: { de: "Website-Chatbots", en: "Website Chatbots" } },
+  { href: "/marketing", label: { de: "Digitales Marketing (Hub)", en: "Digital Marketing (Hub)" } },
+  { href: "/marketing/seo", label: { de: "SEO", en: "SEO" } },
+  { href: "/marketing/content", label: { de: "Content & Social", en: "Content & Social" } },
+  { href: "/marketing/video", label: { de: "KI-Videomarketing", en: "AI Video Marketing" } },
+  { href: "/services", label: { de: "Leistungen (Übersicht)", en: "All Services (Index)" } },
   { href: "/testing-support", label: { de: "Testing & Support", en: "Testing & Support" } },
 ];
 

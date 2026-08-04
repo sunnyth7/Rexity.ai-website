@@ -24,20 +24,20 @@ export function BentoServicesGrid() {
         return (
           <div
             key={pillar.id}
-            className={`rounded-3xl border border-[#E8E5DF] bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#1560BD]/50 transition-all duration-200 group relative ${
-              isFlagship ? "lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-white via-white to-[#FAF8F4]" : ""
+            className={`rounded-3xl border border-[#E9E4F8] bg-white p-6 sm:p-8 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#7C3AED]/50 hover:bg-[#F6F3FC]/50 transition-all duration-200 group relative ${
+              isFlagship ? "lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-white via-white to-[#F6F3FC]" : ""
             }`}
           >
             <div className="space-y-6">
               {/* Header / Badge */}
               <div className="flex items-center justify-between">
-                <span className="font-mono text-xs font-bold text-[#1560BD] tracking-wider uppercase flex items-center gap-1.5">
-                  {isFlagship && <Sparkles className="h-4 w-4 text-[#0FB5A6]" />}
+                <span className="font-mono text-xs font-bold text-[#7C3AED] tracking-wider uppercase flex items-center gap-1.5">
+                  {isFlagship && <Sparkles className="h-4 w-4 text-[#A78BFA]" />}
                   <span>{isFlagship ? "AI FLAGSHIP PILLAR" : "SERVICE PILLAR"}</span>
                 </span>
                 <Link
                   href={pillar.href}
-                  className="w-9 h-9 rounded-full bg-[#FAF8F4] border border-[#E8E5DF] flex items-center justify-center text-[#10233F] group-hover:bg-[#1560BD] group-hover:text-white transition-colors"
+                  className="w-9 h-9 rounded-full bg-[#F6F3FC] border border-[#E9E4F8] flex items-center justify-center text-[#1E1B4B] group-hover:bg-[#7C3AED] group-hover:text-white transition-colors"
                   aria-label={t(pillar.title)}
                 >
                   <ArrowUpRight className="h-4 w-4" />
@@ -46,13 +46,13 @@ export function BentoServicesGrid() {
 
               {/* Title & Tagline */}
               <div className="space-y-2">
-                <h3 className={`font-extrabold text-[#10233F] ${isFlagship ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"}`}>
-                  <Link href={pillar.href} className="hover:text-[#1560BD] transition-colors">
+                <h3 className={`font-extrabold text-[#1E1B4B] ${isFlagship ? "text-2xl sm:text-3xl" : "text-xl sm:text-2xl"}`}>
+                  <Link href={pillar.href} className="hover:text-[#7C3AED] transition-colors">
                     {t(pillar.title)}
                   </Link>
                 </h3>
-                <p className="text-sm font-semibold text-[#1560BD]">{t(pillar.tagline)}</p>
-                <p className={`text-[#4A5568] leading-relaxed ${isFlagship ? "text-base max-w-xl" : "text-sm"}`}>
+                <p className="text-sm font-semibold text-[#7C3AED]">{t(pillar.tagline)}</p>
+                <p className={`text-[#6B6690] leading-relaxed ${isFlagship ? "text-base max-w-xl" : "text-sm"}`}>
                   {t(pillar.desc)}
                 </p>
               </div>
@@ -67,7 +67,7 @@ export function BentoServicesGrid() {
 
               {/* Named Sub-Services Chips */}
               <div className="space-y-2 pt-2">
-                <span className="text-[11px] font-mono font-bold text-[#4A5568] tracking-wider uppercase block">
+                <span className="text-[11px] font-mono font-bold text-[#6B6690] tracking-wider uppercase block">
                   {t({ de: "Spezifische Leistungen & Routen:", en: "Sub-Services & Direct Routes:" })}
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -75,11 +75,11 @@ export function BentoServicesGrid() {
                     <Link
                       key={idx}
                       href={chip.href}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-[#E8E5DF] bg-[#FAF8F4] px-3.5 py-1.5 text-xs font-semibold text-[#10233F] hover:bg-[#1560BD] hover:text-white hover:border-[#1560BD] transition-all shadow-2xs group/chip"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-[#E9E4F8] bg-[#F6F3FC] px-3.5 py-1.5 text-xs font-semibold text-[#1E1B4B] hover:bg-[#7C3AED] hover:text-white hover:border-[#7C3AED] transition-all shadow-2xs group/chip"
                     >
                       <span>{t(chip.label)}</span>
                       {chip.hasWaveform && <VoiceWaveformVisual />}
-                      <ChevronRight className="h-3 w-3 text-[#1560BD] group-hover/chip:text-white transition-colors" />
+                      <ChevronRight className="h-3 w-3 text-[#7C3AED] group-hover/chip:text-white transition-colors" />
                     </Link>
                   ))}
                 </div>
@@ -87,15 +87,15 @@ export function BentoServicesGrid() {
             </div>
 
             {/* Bottom Link */}
-            <div className="pt-6 border-t border-[#E8E5DF] mt-6 flex items-center justify-between">
+            <div className="pt-6 border-t border-[#E9E4F8] mt-6 flex items-center justify-between">
               <Link
                 href={pillar.href}
-                className="text-xs font-bold text-[#1560BD] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-[#7C3AED] hover:underline flex items-center gap-1"
               >
                 <span>{t({ de: "Zur Hauptseite", en: "Go to Pillar Hub" })}</span>
                 <ChevronRight className="h-3.5 w-3.5" />
               </Link>
-              <span className="font-mono text-[10px] text-[#4A5568]">
+              <span className="font-mono text-[10px] text-[#6B6690]">
                 {pillar.chips.length} {t({ de: "Routen", en: "Routes" })}
               </span>
             </div>
