@@ -362,9 +362,18 @@ function start() {
       frameId = requestAnimationFrame(render);
       return;
     }
-    if (introStart === null) introStart = time;
+    // Hold the spin-up until the site loader has actually gone. The decay runs for
+    // 3.6s from whenever it starts; measured from page load it was finishing behind
+    // the ~3.4s loader, so the wheel was already at idle by the time anyone saw it —
+    // the fast-then-slow opening never appeared. Same cause as the blue reveal, which
+    // is gated on the identical .rx3d-go class the loader trigger adds.
+    if (introStart === null) {
+      if (!hero || hero.classList.contains('rx3d-go')) introStart = time;
+    }
 
-    const settle = Math.min(1, (time - introStart) / SPIN_SETTLE);
+    // Before it starts, settle stays 0 so the ring spins at full intro speed behind
+    // the loader and the decay is the first thing the viewer sees.
+    const settle = introStart === null ? 0 : Math.min(1, (time - introStart) / SPIN_SETTLE);
     const eased = 1 - (1 - settle) ** 2;
     const introSpeed = isMobile() ? SPIN_INTRO_MOBILE : SPIN_INTRO_DESKTOP;
     const speed = reduceMotion.matches ? 0 : THREE.MathUtils.lerp(introSpeed, SPIN_IDLE, eased);
