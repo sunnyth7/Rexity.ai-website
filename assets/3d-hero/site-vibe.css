@@ -1,0 +1,29 @@
+/* Parent-page ground, pass 2. The hero is white but html/body and both sections below
+   it paint #1560BD, so the page read as white hero -> blue ground -> beige cards.
+   Each section paints its own background, so these are retoned individually rather
+   than forcing html/body globally. */
+html, body { background: #ffffff !important; }
+.omi-it-embed { background: #ffffff !important; }
+.section.for-services.for-ftr { background: #ffffff !important; }
+.section.for-services.for-ftr .gray-big-div {
+  background: #ffffff !important;
+  border: 1px solid rgba(16, 35, 63, .10);
+}
+
+/* Pass 2 regression fix. This footer section was white text on the blue ground; turning
+   the ground white left it white-on-white and invisible. Same failure as --rx-text
+   inside the embed — a ground and its text colour have to move together. */
+.section.for-services.for-ftr .top-text.logo,
+.section.for-services.for-ftr .big-text-btn,
+.section.for-services.for-ftr .gsap_split_letter,
+.section.for-services.for-ftr .top-text:not(.logo) {
+  color: #10233F !important;
+}
+/* The index numbers read as a quiet marginal note, not body text. */
+.section.for-services.for-ftr .number-small-big-menu {
+  color: rgba(16, 35, 63, .38) !important;
+}
+/* Menu rules were light-on-blue too. */
+.section.for-services.for-ftr .slot-line {
+  background-color: rgba(16, 35, 63, .16) !important;
+}

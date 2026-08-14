@@ -7,3 +7,10 @@ node_modules
 .env.local
 .env.*.local
 !.env.example
+
+# Build output and local scaffolding — never ship these.
+# They were committed by accident on the previous branch because they were untracked
+# when a broad `git add -A` ran.
+.next/
+tsconfig.tsbuildinfo
+next-env.d.ts
