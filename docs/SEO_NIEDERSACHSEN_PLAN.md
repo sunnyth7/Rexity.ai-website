@@ -1,7 +1,8 @@
 # Niedersachsen Local-SEO Sprint — Implementation Plan
 
 Owner: Rexity Labs UG (haftungsbeschränkt) i. G. · Willighäuser Weg 11, 29320 Südheide
-Status: planned (not yet built). Prereq shipped: indexing unblocked, commit `43215bf`.
+Status: planned (not yet built). Prereqs shipped: indexing unblocked (commit `43215bf`);
+Search Console verified for `rexitylabs@gmail.com`, sitemap submitted, 21 URLs discovered.
 
 ## Ground rules
 
@@ -112,7 +113,10 @@ Tag city-page leads with the city so we can see which pages actually earn revenu
 ## 30 / 60 / 90
 
 ### Days 1–30 — foundation
-1. Search Console verified, sitemap submitted, the 10 priority URLs inspected. *(blocked on Phase 3, see report)*
+1. ~~Search Console verified, sitemap submitted, the 10 priority URLs inspected.~~ **Done.**
+   9/10 queued; homepage hit a transient GSC processing error — it is in the sitemap,
+   so recrawl happens naturally. Retry the inspection once only if it is still
+   unindexed after ~2 weeks.
 2. Ship `/niedersachsen` hub — the single best page, 1200+ words, real content.
 3. Add `Organization` + `BreadcrumbList` + `Service` schema across existing pages.
 4. Write up Clevr, LevelKraft and Fresh&Save as proper case studies on `/work`.
