@@ -175,6 +175,6 @@ module.exports = async function handler(req, res) {
     }
     console.error("[book] insert failed:", error && error.message);
     res.statusCode = 502;
-    res.end(JSON.stringify({ ok: false, error: "Could not save your booking. Please email hello@rexity.ai." }));
+    res.end(JSON.stringify({ ok: false, error: "Could not save your booking. Please email info@rexity.ai." }));
   }
 };

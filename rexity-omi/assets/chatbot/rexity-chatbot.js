@@ -3,7 +3,7 @@
   var INTRO_SEEN_KEY = "rexity_intro_seen";
   var LEAD_KEY = "rexity_chat_lead";
   var CONTACT = {
-    email: "hello@rexity.ai",
+    email: "info@rexity.ai",
     whatsapp: "491742471435"
   };
   function getLead() {
@@ -58,7 +58,7 @@
       introTitle: "How can we help?",
       introCopy: "Ask about web & app development, digital marketing, AI agents, automations, or dashboards.",
       placeholder: "Ask about Rexity...",
-      footnote: "Our Rexity chatbot is powered by a modern AI agent and can make mistakes. Please contact us before drawing any conclusions — we can help you better: hello@rexity.ai.",
+      footnote: "Our Rexity chatbot is powered by a modern AI agent and can make mistakes. Please contact us before drawing any conclusions — we can help you better: info@rexity.ai.",
       loadingThink: "Rexity is thinking …",
       loadingWrite: "Rexity is writing …",
       contactTitle: "Contact us",
@@ -96,7 +96,7 @@
       introTitle: "Wie können wir helfen?",
       introCopy: "Fragen Sie zu Web- & App-Entwicklung, Digital Marketing, AI Agents, Automatisierungen oder Dashboards.",
       placeholder: "Fragen Sie Rexity...",
-      footnote: "Unser Rexity-Chatbot basiert auf einem modernen KI-Agenten und kann Fehler machen. Bitte kontaktieren Sie uns, bevor Sie Entscheidungen daraus ableiten — wir helfen Ihnen gerne besser weiter: hello@rexity.ai.",
+      footnote: "Unser Rexity-Chatbot basiert auf einem modernen KI-Agenten und kann Fehler machen. Bitte kontaktieren Sie uns, bevor Sie Entscheidungen daraus ableiten — wir helfen Ihnen gerne besser weiter: info@rexity.ai.",
       loadingThink: "Rexity denkt …",
       loadingWrite: "Rexity schreibt …",
       contactTitle: "Kontakt",
@@ -175,13 +175,13 @@
     var text = String(message || "").toLowerCase();
     if (/refund|erstattung|billing|rechnung|policy|legal|admin|chargeback|vertrag/i.test(text)) {
       return lang === "de"
-        ? "Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an hello@rexity.ai."
-        : "I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email hello@rexity.ai.";
+        ? "Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an info@rexity.ai."
+        : "I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email info@rexity.ai.";
     }
     if (/demo|meeting|call|requirement|requirements|termin|beratung|project|quote|proposal/i.test(text)) {
       return lang === "de"
-        ? "Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an hello@rexity.ai."
-        : "For requirements, demos, or a project discussion, please email hello@rexity.ai.";
+        ? "Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an info@rexity.ai."
+        : "For requirements, demos, or a project discussion, please email info@rexity.ai.";
     }
     var scored = fallbackKnowledge.map(function (entry) {
       var score = entry.keys.reduce(function (sum, key) {
@@ -195,12 +195,12 @@
       : "I can help with Rexity services, products, design, development, automation, AI systems, scaling, and demo requests.";
   }
 
-  // ---- hello@rexity.ai → clickable, pre-filled email -----------------------
+  // ---- info@rexity.ai → clickable, pre-filled email -----------------------
   // Every appearance of the contact address in bot messages and the footnote
   // becomes a link. Clicking opens a tiny chooser (Gmail / Outlook / mail
   // app) — each target gets To, Subject and Body pre-filled in the chat
   // language. Built with DOM nodes only (never innerHTML on model output).
-  var CONTACT_EMAIL = "hello@rexity.ai";
+  var CONTACT_EMAIL = "info@rexity.ai";
 
   function mailPrefill(lang) {
     if (lang === "de") {

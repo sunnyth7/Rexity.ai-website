@@ -8,7 +8,7 @@
       "lib/services.ts",
       "https://www.rexity.ai/"
     ],
-    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to hello@rexity.ai. Phone references removed until a business number is procured. v3.1: deterministic FAQ layer added — crisp layman answers, matched before the LLM."
+    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to info@rexity.ai. Phone references removed until a business number is procured. v3.1: deterministic FAQ layer added — crisp layman answers, matched before the LLM."
   },
   "brand": {
     "name": "Rexity Labs",
@@ -18,8 +18,8 @@
     "founder": "Sunny Thakur, Founder & CEO",
     "positioning": "Rexity Labs builds AI workspaces and automation for ambitious teams — production-grade software that is DSGVO-compliant, EU-hosted, audit-logged, and opt-out by design.",
     "contact": {
-      "demo": "hello@rexity.ai",
-      "admin": "hello@rexity.ai"
+      "demo": "info@rexity.ai",
+      "admin": "info@rexity.ai"
     }
   },
   "rules": {
@@ -27,8 +27,8 @@
       "en",
       "de"
     ],
-    "pricingPolicy": "Never quote prices, ranges, or ballparks. Always route to hello@rexity.ai.",
-    "timelinePolicy": "Only when the user asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope, never binding, never for SAP/enterprise as a committed window. Route to hello@rexity.ai for a confirmed estimate.",
+    "pricingPolicy": "Never quote prices, ranges, or ballparks. Always route to info@rexity.ai.",
+    "timelinePolicy": "Only when the user asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope, never binding, never for SAP/enterprise as a committed window. Route to info@rexity.ai for a confirmed estimate.",
     "promoteProducts": false,
     "neverSay": [
       "Never quote prices, price ranges, discounts, or hourly rates.",
@@ -80,32 +80,32 @@
       "en": "Anytime — just ask if anything else comes up."
     },
     "costRefusal": {
-      "de": "Es tut mir leid, zu Kosten oder Preisen kann ich keine Auskunft geben. Für Business-Anfragen schreiben Sie bitte direkt an hello@rexity.ai.",
-      "en": "Sorry, I cannot give information on costs or pricing. For business enquiries, please write directly to hello@rexity.ai."
+      "de": "Es tut mir leid, zu Kosten oder Preisen kann ich keine Auskunft geben. Für Business-Anfragen schreiben Sie bitte direkt an info@rexity.ai.",
+      "en": "Sorry, I cannot give information on costs or pricing. For business enquiries, please write directly to info@rexity.ai."
     },
     "refusal": {
-      "de": "Es tut mir leid, dazu kann ich keine verbindliche Auskunft geben. Bitte schreiben Sie uns eine E-Mail an hello@rexity.ai.",
-      "en": "Sorry, I cannot provide a binding answer on that. Please email hello@rexity.ai."
+      "de": "Es tut mir leid, dazu kann ich keine verbindliche Auskunft geben. Bitte schreiben Sie uns eine E-Mail an info@rexity.ai.",
+      "en": "Sorry, I cannot provide a binding answer on that. Please email info@rexity.ai."
     },
     "unknownFallback": {
-      "de": "Es tut mir leid, dazu habe ich in der Rexity-Datenbank keine freigegebene Information. Bitte schreiben Sie uns eine E-Mail an hello@rexity.ai.",
-      "en": "Sorry, I cannot answer that from the Rexity databank. Please email hello@rexity.ai."
+      "de": "Es tut mir leid, dazu habe ich in der Rexity-Datenbank keine freigegebene Information. Bitte schreiben Sie uns eine E-Mail an info@rexity.ai.",
+      "en": "Sorry, I cannot answer that from the Rexity databank. Please email info@rexity.ai."
     },
     "businessRouting": {
-      "de": "Für Business-Anfragen oder eine Demo schreiben Sie bitte direkt an hello@rexity.ai. Das Rexity-Team meldet sich mit den nächsten Schritten.",
-      "en": "For business enquiries or demo booking, please write directly to hello@rexity.ai. The Rexity team will follow up with next steps."
+      "de": "Für Business-Anfragen oder eine Demo schreiben Sie bitte direkt an info@rexity.ai. Das Rexity-Team meldet sich mit den nächsten Schritten.",
+      "en": "For business enquiries or demo booking, please write directly to info@rexity.ai. The Rexity team will follow up with next steps."
     },
     "humanRequest": {
-      "de": "Gerne. Am schnellsten erreichen Sie das Rexity-Team per E-Mail an hello@rexity.ai — wir melden uns mit den nächsten Schritten.",
-      "en": "Of course. The fastest way to reach the Rexity team is by email at hello@rexity.ai — we will follow up with next steps."
+      "de": "Gerne. Am schnellsten erreichen Sie das Rexity-Team per E-Mail an info@rexity.ai — wir melden uns mit den nächsten Schritten.",
+      "en": "Of course. The fastest way to reach the Rexity team is by email at info@rexity.ai — we will follow up with next steps."
     },
     "timeline": {
-      "de": "Ein optimaler Implementierungszeitraum liegt je nach Umfang meist bei etwa 14 bis 21 Tagen. Für eine verbindliche Einschätzung schreiben Sie bitte an hello@rexity.ai.",
-      "en": "An optimal implementation window is usually around 14-21 days depending on scope. For a confirmed estimate, please email hello@rexity.ai."
+      "de": "Ein optimaler Implementierungszeitraum liegt je nach Umfang meist bei etwa 14 bis 21 Tagen. Für eine verbindliche Einschätzung schreiben Sie bitte an info@rexity.ai.",
+      "en": "An optimal implementation window is usually around 14-21 days depending on scope. For a confirmed estimate, please email info@rexity.ai."
     },
     "injection": {
-      "de": "Ich kann nur mit freigegebenen Rexity-Informationen helfen. Gerne erkläre ich Ihnen unsere Services, oder Sie schreiben an hello@rexity.ai.",
-      "en": "I can only help with approved Rexity information. I am happy to explain our services, or you can write to hello@rexity.ai."
+      "de": "Ich kann nur mit freigegebenen Rexity-Informationen helfen. Gerne erkläre ich Ihnen unsere Services, oder Sie schreiben an info@rexity.ai.",
+      "en": "I can only help with approved Rexity information. I am happy to explain our services, or you can write to info@rexity.ai."
     }
   },
   "entries": [
@@ -263,8 +263,8 @@
         "overview",
         "wer seid ihr"
       ],
-      "en": "Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. Everything Rexity ships is production-grade, DSGVO-compliant and EU-hosted, built by a senior, embedded team led by founder Sunny Thakur. For a concrete project discussion, write to hello@rexity.ai.",
-      "de": "Rexity unterstützt Unternehmen bei Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitalen Automatisierungen und Dashboards. Alles, was Rexity ausliefert, ist produktionsreif, DSGVO-konform und EU-gehostet — gebaut von einem senioren, eng eingebundenen Team unter der Leitung von Gründer Sunny Thakur. Für ein konkretes Projektgespräch schreiben Sie an hello@rexity.ai."
+      "en": "Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. Everything Rexity ships is production-grade, DSGVO-compliant and EU-hosted, built by a senior, embedded team led by founder Sunny Thakur. For a concrete project discussion, write to info@rexity.ai.",
+      "de": "Rexity unterstützt Unternehmen bei Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitalen Automatisierungen und Dashboards. Alles, was Rexity ausliefert, ist produktionsreif, DSGVO-konform und EU-gehostet — gebaut von einem senioren, eng eingebundenen Team unter der Leitung von Gründer Sunny Thakur. Für ein konkretes Projektgespräch schreiben Sie an info@rexity.ai."
     },
     {
       "id": "industries",
@@ -404,8 +404,8 @@
         "have you built",
         "live apps"
       ],
-      "en": "Rexity has shipped production software across web, mobile, automation and AI — including live apps in the app stores and automation systems with audit-logged, EU-hosted operation. For specific references or a tailored example for your industry, email hello@rexity.ai.",
-      "de": "Rexity hat produktionsreife Software in Web, Mobile, Automatisierung und KI ausgeliefert — darunter Live-Apps in den App-Stores und Automatisierungssysteme mit audit-protokolliertem, EU-gehostetem Betrieb. Für konkrete Referenzen oder ein passendes Beispiel für Ihre Branche schreiben Sie an hello@rexity.ai."
+      "en": "Rexity has shipped production software across web, mobile, automation and AI — including live apps in the app stores and automation systems with audit-logged, EU-hosted operation. For specific references or a tailored example for your industry, email info@rexity.ai.",
+      "de": "Rexity hat produktionsreife Software in Web, Mobile, Automatisierung und KI ausgeliefert — darunter Live-Apps in den App-Stores und Automatisierungssysteme mit audit-protokolliertem, EU-gehostetem Betrieb. Für konkrete Referenzen oder ein passendes Beispiel für Ihre Branche schreiben Sie an info@rexity.ai."
     },
     {
       "id": "demo",
@@ -426,8 +426,8 @@
         "contact",
         "loslegen"
       ],
-      "en": "For business enquiries or demo booking, please write directly to hello@rexity.ai — or use the contact form on this page. The Rexity team will follow up with next steps, usually within one business day.",
-      "de": "Für Business-Anfragen oder eine Demo schreiben Sie bitte direkt an hello@rexity.ai — oder nutzen Sie das Kontaktformular auf dieser Seite. Das Rexity-Team meldet sich mit den nächsten Schritten, in der Regel innerhalb eines Werktags."
+      "en": "For business enquiries or demo booking, please write directly to info@rexity.ai — or use the contact form on this page. The Rexity team will follow up with next steps, usually within one business day.",
+      "de": "Für Business-Anfragen oder eine Demo schreiben Sie bitte direkt an info@rexity.ai — oder nutzen Sie das Kontaktformular auf dieser Seite. Das Rexity-Team meldet sich mit den nächsten Schritten, in der Regel innerhalb eines Werktags."
     },
     {
       "id": "admin",
@@ -446,8 +446,8 @@
         "invoice",
         "admin"
       ],
-      "en": "For refunds, billing disputes, contracts, legal or policy matters, please email hello@rexity.ai. The assistant cannot make refund, billing, legal or policy decisions.",
-      "de": "Für Erstattungen, Rechnungsstreitigkeiten, Verträge, rechtliche oder Richtlinien-Themen schreiben Sie bitte an hello@rexity.ai. Der Assistent kann keine Erstattungs-, Rechnungs-, Rechts- oder Richtlinienentscheidungen treffen."
+      "en": "For refunds, billing disputes, contracts, legal or policy matters, please email info@rexity.ai. The assistant cannot make refund, billing, legal or policy decisions.",
+      "de": "Für Erstattungen, Rechnungsstreitigkeiten, Verträge, rechtliche oder Richtlinien-Themen schreiben Sie bitte an info@rexity.ai. Der Assistent kann keine Erstattungs-, Rechnungs-, Rechts- oder Richtlinienentscheidungen treffen."
     },
     {
       "id": "svc-web-design",
@@ -676,8 +676,8 @@
         "bist du ein bot",
         "bist du eine ki"
       ],
-      "en": "I am Rexity, the virtual assistant of Rexity Labs. I can explain our services and point you to the right one. For everything deeper, the team is at hello@rexity.ai.",
-      "de": "Ich bin Rexity, der virtuelle Assistent von Rexity Labs. Ich erkläre Ihnen unsere Services und zeige Ihnen den passenden. Für alles Weitere erreichen Sie das Team unter hello@rexity.ai."
+      "en": "I am Rexity, the virtual assistant of Rexity Labs. I can explain our services and point you to the right one. For everything deeper, the team is at info@rexity.ai.",
+      "de": "Ich bin Rexity, der virtuelle Assistent von Rexity Labs. Ich erkläre Ihnen unsere Services und zeige Ihnen den passenden. Für alles Weitere erreichen Sie das Team unter info@rexity.ai."
     },
     {
       "id": "faq-what-is-rexity",
@@ -713,8 +713,8 @@
         "alle services",
         "alle leistungen"
       ],
-      "en": "We do five things: we build websites and apps, we help people find you online (digital marketing), we build AI helpers that answer your customers (AI agents), we automate repetitive work (digital automations), and we build dashboards that show your numbers at a glance. Ask me about any of them — or email hello@rexity.ai.",
-      "de": "Wir machen fünf Dinge: Wir bauen Websites und Apps, wir sorgen dafür, dass Kunden Sie online finden (Digital Marketing), wir bauen KI-Helfer, die Ihren Kunden antworten (AI Agents), wir automatisieren wiederkehrende Arbeit (digitale Automatisierungen), und wir bauen Dashboards, die Ihre Zahlen auf einen Blick zeigen. Fragen Sie mich zu jedem davon — oder schreiben Sie an hello@rexity.ai."
+      "en": "We do five things: we build websites and apps, we help people find you online (digital marketing), we build AI helpers that answer your customers (AI agents), we automate repetitive work (digital automations), and we build dashboards that show your numbers at a glance. Ask me about any of them — or email info@rexity.ai.",
+      "de": "Wir machen fünf Dinge: Wir bauen Websites und Apps, wir sorgen dafür, dass Kunden Sie online finden (Digital Marketing), wir bauen KI-Helfer, die Ihren Kunden antworten (AI Agents), wir automatisieren wiederkehrende Arbeit (digitale Automatisierungen), und wir bauen Dashboards, die Ihre Zahlen auf einen Blick zeigen. Fragen Sie mich zu jedem davon — oder schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-web-design",
@@ -729,8 +729,8 @@
         "what is web development",
         "was ist webentwicklung"
       ],
-      "en": "Web design is how your website looks; web development is building it so it works. Rexity does both: we design and build your site — your digital storefront that is open day and night, looks professional, and brings you customers. Want one for your business? Email hello@rexity.ai.",
-      "de": "Webdesign ist, wie Ihre Website aussieht; Webentwicklung ist, sie so zu bauen, dass sie funktioniert. Rexity macht beides: Wir gestalten und bauen Ihre Website — Ihr digitales Schaufenster, das Tag und Nacht geöffnet ist, professionell aussieht und Ihnen Kunden bringt. Sie möchten eine? Schreiben Sie an hello@rexity.ai."
+      "en": "Web design is how your website looks; web development is building it so it works. Rexity does both: we design and build your site — your digital storefront that is open day and night, looks professional, and brings you customers. Want one for your business? Email info@rexity.ai.",
+      "de": "Webdesign ist, wie Ihre Website aussieht; Webentwicklung ist, sie so zu bauen, dass sie funktioniert. Rexity macht beides: Wir gestalten und bauen Ihre Website — Ihr digitales Schaufenster, das Tag und Nacht geöffnet ist, professionell aussieht und Ihnen Kunden bringt. Sie möchten eine? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-app-development",
@@ -745,8 +745,8 @@
         "what is mobile development",
         "app development?"
       ],
-      "en": "App development means building a mobile app — the kind people install from the App Store or Google Play. Rexity designs and builds apps for iPhone and Android: you describe what the app should do, we handle everything from the design to the launch in the stores. Want an app for your business? Email hello@rexity.ai.",
-      "de": "App-Entwicklung heißt: eine Handy-App bauen — also das, was man aus dem App Store oder von Google Play installiert. Rexity gestaltet und baut Apps für iPhone und Android: Sie beschreiben, was die App können soll, wir kümmern uns um alles vom Design bis zum Start in den Stores. Sie möchten eine App? Schreiben Sie an hello@rexity.ai."
+      "en": "App development means building a mobile app — the kind people install from the App Store or Google Play. Rexity designs and builds apps for iPhone and Android: you describe what the app should do, we handle everything from the design to the launch in the stores. Want an app for your business? Email info@rexity.ai.",
+      "de": "App-Entwicklung heißt: eine Handy-App bauen — also das, was man aus dem App Store oder von Google Play installiert. Rexity gestaltet und baut Apps für iPhone und Android: Sie beschreiben, was die App können soll, wir kümmern uns um alles vom Design bis zum Start in den Stores. Sie möchten eine App? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-digital-marketing",
@@ -759,8 +759,8 @@
         "what is online marketing",
         "was ist online marketing"
       ],
-      "en": "Digital marketing means getting your business found online. Rexity helps with three things: showing up on Google (SEO), content that attracts customers, and AI-made marketing videos. More customers find you — without you chasing them. Interested? Email hello@rexity.ai.",
-      "de": "Digital Marketing heißt: Ihr Unternehmen wird online gefunden. Rexity hilft bei drei Dingen: bei Google sichtbar werden (SEO), Inhalte, die Kunden anziehen, und KI-erstellte Marketing-Videos. Mehr Kunden finden Sie — ohne dass Sie ihnen hinterherlaufen. Interesse? Schreiben Sie an hello@rexity.ai."
+      "en": "Digital marketing means getting your business found online. Rexity helps with three things: showing up on Google (SEO), content that attracts customers, and AI-made marketing videos. More customers find you — without you chasing them. Interested? Email info@rexity.ai.",
+      "de": "Digital Marketing heißt: Ihr Unternehmen wird online gefunden. Rexity hilft bei drei Dingen: bei Google sichtbar werden (SEO), Inhalte, die Kunden anziehen, und KI-erstellte Marketing-Videos. Mehr Kunden finden Sie — ohne dass Sie ihnen hinterherlaufen. Interesse? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-ai-agents",
@@ -776,8 +776,8 @@
         "what is a voice agent",
         "was ist ein sprachassistent"
       ],
-      "en": "An AI agent is a digital helper that talks to your customers for you — on your website, on WhatsApp, or on the phone. It answers questions and books appointments day and night, and hands tricky cases to a human. Rexity builds these for your business, fully compliant with EU data rules. Curious? Email hello@rexity.ai.",
-      "de": "Ein KI-Agent ist ein digitaler Helfer, der für Sie mit Ihren Kunden spricht — auf Ihrer Website, über WhatsApp oder am Telefon. Er beantwortet Fragen und bucht Termine, Tag und Nacht, und übergibt knifflige Fälle an einen Menschen. Rexity baut solche Helfer für Ihr Unternehmen, vollständig DSGVO-konform. Neugierig? Schreiben Sie an hello@rexity.ai."
+      "en": "An AI agent is a digital helper that talks to your customers for you — on your website, on WhatsApp, or on the phone. It answers questions and books appointments day and night, and hands tricky cases to a human. Rexity builds these for your business, fully compliant with EU data rules. Curious? Email info@rexity.ai.",
+      "de": "Ein KI-Agent ist ein digitaler Helfer, der für Sie mit Ihren Kunden spricht — auf Ihrer Website, über WhatsApp oder am Telefon. Er beantwortet Fragen und bucht Termine, Tag und Nacht, und übergibt knifflige Fälle an einen Menschen. Rexity baut solche Helfer für Ihr Unternehmen, vollständig DSGVO-konform. Neugierig? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-automations",
@@ -792,8 +792,8 @@
         "was ist rpa",
         "what is workflow automation"
       ],
-      "en": "Automation means letting software do your repetitive work. Think of WhatsApp replies sent automatically, appointments prepared without phone tag, or customer data moved between tools without anyone typing. Rexity sets this up so your team saves hours every week. Want to know what we could automate for you? Email hello@rexity.ai.",
-      "de": "Automatisierung heißt: Software erledigt Ihre wiederkehrende Arbeit. Zum Beispiel WhatsApp-Antworten, die automatisch rausgehen, Termine, die ohne Telefon-Pingpong vorbereitet werden, oder Kundendaten, die ohne Abtippen zwischen Programmen wandern. Rexity richtet das ein — Ihr Team spart jede Woche Stunden. Was wir bei Ihnen automatisieren könnten? Schreiben Sie an hello@rexity.ai."
+      "en": "Automation means letting software do your repetitive work. Think of WhatsApp replies sent automatically, appointments prepared without phone tag, or customer data moved between tools without anyone typing. Rexity sets this up so your team saves hours every week. Want to know what we could automate for you? Email info@rexity.ai.",
+      "de": "Automatisierung heißt: Software erledigt Ihre wiederkehrende Arbeit. Zum Beispiel WhatsApp-Antworten, die automatisch rausgehen, Termine, die ohne Telefon-Pingpong vorbereitet werden, oder Kundendaten, die ohne Abtippen zwischen Programmen wandern. Rexity richtet das ein — Ihr Team spart jede Woche Stunden. Was wir bei Ihnen automatisieren könnten? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-dashboards",
@@ -805,8 +805,8 @@
         "what is a kpi dashboard",
         "was ist reporting"
       ],
-      "en": "A dashboard is one screen that shows how your business is doing — sales, customers, marketing — in simple charts. Instead of digging through spreadsheets, you see your numbers at a glance. Rexity builds dashboards tailored to what matters in your business. Interested? Email hello@rexity.ai.",
-      "de": "Ein Dashboard ist ein Bildschirm, der zeigt, wie Ihr Geschäft läuft — Umsatz, Kunden, Marketing — in einfachen Diagrammen. Statt in Tabellen zu wühlen, sehen Sie Ihre Zahlen auf einen Blick. Rexity baut Dashboards, zugeschnitten auf das, was in Ihrem Geschäft zählt. Interesse? Schreiben Sie an hello@rexity.ai."
+      "en": "A dashboard is one screen that shows how your business is doing — sales, customers, marketing — in simple charts. Instead of digging through spreadsheets, you see your numbers at a glance. Rexity builds dashboards tailored to what matters in your business. Interested? Email info@rexity.ai.",
+      "de": "Ein Dashboard ist ein Bildschirm, der zeigt, wie Ihr Geschäft läuft — Umsatz, Kunden, Marketing — in einfachen Diagrammen. Statt in Tabellen zu wühlen, sehen Sie Ihre Zahlen auf einen Blick. Rexity baut Dashboards, zugeschnitten auf das, was in Ihrem Geschäft zählt. Interesse? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-how-help",
@@ -821,8 +821,8 @@
         "can you help me",
         "könnt ihr mir helfen"
       ],
-      "en": "Tell me what eats your time or where you lose customers — missed calls, an outdated website, no app, manual paperwork, numbers you can't see. I will point you to the right Rexity solution. For a concrete plan, email hello@rexity.ai.",
-      "de": "Sagen Sie mir, was Ihre Zeit frisst oder wo Sie Kunden verlieren — verpasste Anrufe, eine veraltete Website, keine App, Papierkram von Hand, Zahlen ohne Überblick. Ich zeige Ihnen die passende Rexity-Lösung. Für einen konkreten Plan schreiben Sie an hello@rexity.ai."
+      "en": "Tell me what eats your time or where you lose customers — missed calls, an outdated website, no app, manual paperwork, numbers you can't see. I will point you to the right Rexity solution. For a concrete plan, email info@rexity.ai.",
+      "de": "Sagen Sie mir, was Ihre Zeit frisst oder wo Sie Kunden verlieren — verpasste Anrufe, eine veraltete Website, keine App, Papierkram von Hand, Zahlen ohne Überblick. Ich zeige Ihnen die passende Rexity-Lösung. Für einen konkreten Plan schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-know-more",
@@ -839,8 +839,8 @@
         "nächste schritte",
         "wie geht es weiter"
       ],
-      "en": "Happy to go deeper on any service — just name it. For duration, plans, a demo, or anything binding, the Rexity team handles that personally: email hello@rexity.ai.",
-      "de": "Gerne gehe ich bei jedem Service tiefer — nennen Sie ihn einfach. Für Dauer, Pläne, eine Demo oder alles Verbindliche ist das Rexity-Team persönlich da: Schreiben Sie an hello@rexity.ai."
+      "en": "Happy to go deeper on any service — just name it. For duration, plans, a demo, or anything binding, the Rexity team handles that personally: email info@rexity.ai.",
+      "de": "Gerne gehe ich bei jedem Service tiefer — nennen Sie ihn einfach. Für Dauer, Pläne, eine Demo oder alles Verbindliche ist das Rexity-Team persönlich da: Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-whatsapp",

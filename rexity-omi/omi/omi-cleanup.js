@@ -50,7 +50,7 @@
     var body = de
       ? "Hallo Rexity-Team,\n\nich interessiere mich für Ihre Services und würde gerne mehr erfahren.\n\nViele Grüße"
       : "Hi Rexity team,\n\nI'm interested in your services and would like to know more.\n\nBest regards";
-    return "mailto:hello@rexity.ai?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    return "mailto:info@rexity.ai?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
   }
   function injectContactCta() {
     var sec = document.getElementById("contact-us");
@@ -62,7 +62,7 @@
     wrap.style.cssText = "margin-top:18px;font:16px/1.6 Inter,system-ui,sans-serif;";
     var a = document.createElement("a");
     a.href = mailtoHref(de);
-    a.textContent = "hello@rexity.ai";
+    a.textContent = "info@rexity.ai";
     a.style.cssText = "color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;";
     wrap.appendChild(document.createTextNode(de
       ? "Schreiben Sie uns direkt an "

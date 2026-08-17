@@ -10,14 +10,14 @@
       sending: "Sending…",
       ok: "Thanks — we’ve got your message and will be in touch shortly.",
       invalid: "Please enter your name and a valid email.",
-      err: "Something went wrong. Please email hello@rexity.ai.",
+      err: "Something went wrong. Please email info@rexity.ai.",
       submit: "Submit"
     },
     de: {
       sending: "Wird gesendet…",
       ok: "Danke — wir haben Ihre Nachricht erhalten und melden uns in Kürze.",
       invalid: "Bitte geben Sie Ihren Namen und eine gültige E-Mail an.",
-      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an hello@rexity.ai.",
+      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an info@rexity.ai.",
       submit: "Absenden"
     }
   };
@@ -27,8 +27,8 @@
   }
   function t(k) { return (T[lang()] || T.en)[k]; }
 
-  // hello@rexity.ai in status messages becomes a pre-filled mailto link.
-  var EMAIL = "hello@rexity.ai";
+  // info@rexity.ai in status messages becomes a pre-filled mailto link.
+  var EMAIL = "info@rexity.ai";
   function mailtoHref() {
     var de = lang() === "de";
     var subject = de ? "Ich benötige mehr Informationen" : "I need more info on this topic";

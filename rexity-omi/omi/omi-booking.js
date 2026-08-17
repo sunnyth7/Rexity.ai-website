@@ -22,7 +22,7 @@
       sending: "Wird gesendet…",
       ok: "Danke! Ihre Terminanfrage ist eingegangen — wir bestätigen in Kürze per E-Mail.",
       invalid: "Bitte Name, gültige E-Mail und Wunschtermin angeben.",
-      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an hello@rexity.ai.",
+      err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an info@rexity.ai.",
       close: "Schließen",
       privacy: "Ihre Daten werden DSGVO-konform in der EU gespeichert und nur zur Terminabstimmung verwendet."
     },
@@ -38,7 +38,7 @@
       sending: "Sending…",
       ok: "Thanks! Your request is in — we will confirm by email shortly.",
       invalid: "Please provide your name, a valid email and a preferred time.",
-      err: "Something went wrong. Please email hello@rexity.ai.",
+      err: "Something went wrong. Please email info@rexity.ai.",
       close: "Close",
       privacy: "Your data is stored GDPR-compliant in the EU and only used to arrange the appointment."
     }
