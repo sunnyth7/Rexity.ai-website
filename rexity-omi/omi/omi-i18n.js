@@ -117,6 +117,20 @@
 
     // ---- Case study spine ----
     'Selected work.': 'Ausgewählte Arbeiten.',
+    // ---- Selected work tiles (#rx-work-tiles) ----
+    'Website & class booking': 'Website & Kursbuchung',
+    'A new website with online class booking for a gym in Hermannsburg.': 'Neue Website mit Online-Kursbuchung für ein Fitnessstudio in Hermannsburg.',
+    'approx. 6 weeks · live': 'ca. 6 Wochen · live',
+    'Website & appointment booking': 'Website & Terminbuchung',
+    'A website with online appointment booking for a car detailer in Celle.': 'Website mit Online-Terminbuchung für einen Fahrzeugaufbereiter in Celle.',
+    'approx. 5 weeks': 'ca. 5 Wochen',
+    'App for iPhone, Android & web': 'App für iPhone, Android & Web',
+    'Exam preparation for TELC and Goethe — as an app and in the browser.': 'Prüfungsvorbereitung für TELC und Goethe — als App und im Browser.',
+    '10+ months · live': 'Über 10 Monate · live',
+    'View project →': 'Projekt ansehen →',
+    'All projects': 'Alle Projekte',
+    'Real screens, duration and outcome for every project.': 'Echte Screens, Dauer und Ergebnis zu jedem Projekt.',
+    'See all work →': 'Alle Arbeiten ansehen →',
     'How We Helped': 'So haben wir geholfen',
     'Services Provided': 'Erbrachte Leistungen',
     'Watch the Interview': 'Interview ansehen',
