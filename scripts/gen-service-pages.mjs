@@ -40,6 +40,8 @@ function head(p) {
 <link rel="icon" href="/rexity-omi/assets/brand/final/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/rexity-omi/assets/brand/final/apple-touch-icon.png">
 <link rel="stylesheet" href="/rexity-omi/assets/vendor/css/inter.css">
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <link rel="stylesheet" href="/rexity-omi/assets/chatbot/rexity-chatbot.css?v=${CHAT_V}">
 <style>${CSS}</style>
 </head><body>`;

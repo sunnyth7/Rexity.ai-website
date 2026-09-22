@@ -13,7 +13,7 @@
   // 1. Nav click → iframe section
   // ============================================================
   var NAV_MAP = {
-    'about':    'welcome',
+    'about':    'section-2167-10',  // "The Team Behind Rexity Labs"
     'services': 'section-1027-10',
     'work':     'section-5070-10',
     'contact':  'contact-us',
