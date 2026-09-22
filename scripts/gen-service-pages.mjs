@@ -259,15 +259,49 @@ function workBody(p) {
 }
 
 // --- case study detail pages (/work/<slug>) ---------------------------------
-function screenFlow(c) {
-  const shot = (s, i) => `<figure class="rx-shot rx-shot-${s.kind === "phone" ? "phone" : "desk"}"><div class="rx-shot-frame"><img src="${esc(s.src)}" alt="${esc(s.caption.de)}" data-alt-en="${esc(s.caption.en)}" data-alt-de="${esc(s.caption.de)}" loading="${i < 2 ? "eager" : "lazy"}" decoding="async"></div><figcaption><span class="rx-shot-n">${String(i + 1).padStart(2, "0")}</span>${tText(s.caption)}</figcaption></figure>`;
-  const desk = c.flow.filter((s) => s.kind !== "phone");
-  const phone = c.flow.filter((s) => s.kind === "phone");
-  let n = 0;
-  const deskHtml = desk.map((s) => shot(s, n++)).join("");
-  const phoneHtml = phone.length ? `<div class="rx-shots-phone">${phone.map((s) => shot(s, n++)).join("")}</div>` : "";
-  return `<section class="rx-sec"><h2 data-en="The flow, screen by screen" data-de="Der Ablauf, Screen für Screen">Der Ablauf, Screen für Screen</h2>${t(c.flowIntro, "p", "rx-work-intro")}<div class="rx-shots-desk">${deskHtml}</div>${phoneHtml}</section>`;
+// Scroll-through preview of the real pages: full-length captures, sliced into
+// tiles, inside a browser window + a phone frame. (The live sites send
+// X-Frame-Options: DENY, and a live frame would allow real bookings anyway.)
+const biText = (v) => (typeof v === "string" ? esc(v) : tText(v));
+function livePane(pg, i, device) {
+  const lbl = esc(pg.label.de);
+  if (pg.slides) {
+    const imgs = pg.slides.map((src, k) => `<img src="${esc(src)}" width="${pg.w}" height="${pg.h}" alt="${lbl} ${k + 1}" loading="lazy" decoding="async">`).join("");
+    return `<div class="rx-pane rx-pane-slides" role="tabpanel" tabindex="0" aria-label="${lbl}"${i ? " hidden" : ""}>${imgs}</div>`;
+  }
+  const tiles = pg.tiles.map((h, k) => `<img src="${esc(pg.src)}-${k + 1}.webp" width="${pg.w}" height="${h}" alt="${k ? "" : lbl}" loading="${!i && !k && device === "desk" ? "eager" : "lazy"}" decoding="async">`).join("");
+  return `<div class="rx-pane" role="tabpanel" tabindex="0" aria-label="${lbl}" data-path="${esc(pg.path || "")}"${i ? " hidden" : ""}>${tiles}</div>`;
 }
+function liveTabs(pages) {
+  return `<div class="rx-live-tabs" role="tablist">${pages.map((pg, i) => `<button type="button" role="tab" aria-selected="${i ? "false" : "true"}" data-i="${i}">${tText(pg.label)}</button>`).join("")}</div>`;
+}
+function screenFlow(c) {
+  const pv = c.preview;
+  const desk = `<div class="rx-browser rx-live-box" data-live>
+    <div class="rx-browser-bar"><span class="rx-dots" aria-hidden="true"></span><div class="rx-url"><span class="rx-url-lock" aria-hidden="true"></span>${biText(pv.host)}<span class="rx-url-path">${esc(pv.desktop[0].path || "")}</span></div></div>
+    ${liveTabs(pv.desktop)}
+    <div class="rx-screen rx-screen-desk">${pv.desktop.map((pg, i) => livePane(pg, i, "desk")).join("")}<span class="rx-scroll-hint" aria-hidden="true">${tText({ en: "Scroll", de: "Scrollen" })} ↓</span></div>
+  </div>`;
+  const phone = `<div class="rx-phone rx-live-box" data-live>
+    ${liveTabs(pv.mobile)}
+    <div class="rx-phone-shell"><div class="rx-screen rx-screen-phone">${pv.mobile.map((pg, i) => livePane(pg, i, "phone")).join("")}<span class="rx-scroll-hint" aria-hidden="true">${pv.mobile[0].slides ? `← ${tText({ en: "Swipe", de: "Wischen" })} →` : `${tText({ en: "Scroll", de: "Scrollen" })} ↓`}</span></div></div>
+  </div>`;
+  const live = c.link ? ` <a href="${esc(c.link)}" target="_blank" rel="noopener">${tText({ en: "Open the live site ↗", de: "Echte Seite öffnen ↗" })}</a>` : "";
+  return `<section class="rx-sec"><h2 data-en="Try it yourself" data-de="Selbst ausprobieren">Selbst ausprobieren</h2>${t(c.flowIntro, "p", "rx-work-intro")}<div class="rx-live">${desk}${phone}</div><p class="rx-live-note">${tText({ en: "Preview of the real pages — scroll inside the windows.", de: "Vorschau der echten Seiten — einfach im Fenster scrollen." })}${live}</p></section>`;
+}
+
+const LIVE_JS = `
+document.querySelectorAll('[data-live]').forEach(function(box){
+  var tabs=box.querySelectorAll('[role=tab]'), panes=box.querySelectorAll('.rx-pane'), path=box.querySelector('.rx-url-path'), hint=box.querySelector('.rx-scroll-hint');
+  function show(i){
+    tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false')});
+    panes.forEach(function(p,k){p.hidden=k!==i; if(k===i){p.scrollTop=0;p.scrollLeft=0}});
+    if(path)path.textContent=panes[i].getAttribute('data-path')||'';
+  }
+  tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)})});
+  panes.forEach(function(p){p.addEventListener('scroll',function(){if(hint)hint.classList.add('off')},{passive:true})});
+});
+`;
 
 function feedbackVideo(c) {
   const v = c.video;
@@ -302,7 +336,7 @@ function renderCase(c, i, all) {
   const prev = all[(i - 1 + all.length) % all.length], next = all[(i + 1) % all.length];
   const pager = `<nav class="rx-pager"><a href="${caseUrl(prev)}"><span data-en="← Previous project" data-de="← Vorheriges Projekt">← Vorheriges Projekt</span><strong>${esc(prev.name)}</strong></a><a href="/work" class="rx-pager-mid"><span data-en="All projects" data-de="Alle Projekte">Alle Projekte</span></a><a href="${caseUrl(next)}" class="rx-pager-next"><span data-en="Next project →" data-de="Nächstes Projekt →">Nächstes Projekt →</span><strong>${esc(next.name)}</strong></a></nav>`;
   const crumb = `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/work">${tText(byslug.work.title)}</a> / <span>${esc(c.name)}</span></nav>`;
-  return `${head(page)}${header()}<main>${crumb}${hero}${built}${screenFlow(c)}${outcome}${feedbackVideo(c)}${pager}</main>${tail()}`;
+  return `${head(page)}${header()}<main>${crumb}${hero}${built}${screenFlow(c)}${outcome}${feedbackVideo(c)}${pager}</main>${tail().replace("</body>", `<script>${LIVE_JS}</script>\n</body>`)}`;
 }
 
 function renderPage(p) {
@@ -445,19 +479,36 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-fact-k{display:block;font:600 11px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
 .rx-fact-v{display:block;font-size:15px;font-weight:600;line-height:1.35}
 @media(max-width:820px){.rx-facts{grid-template-columns:1fr 1fr}.rx-fact:nth-child(3){border-left:0}.rx-fact:nth-child(n+3){border-top:1px solid var(--line)}}
-.rx-shots-desk{display:grid;grid-template-columns:1fr 1fr;gap:34px 26px}
-.rx-shots-desk>.rx-shot:first-child,.rx-shots-desk>.rx-shot:last-child:nth-child(even){grid-column:1/-1}
-@media(max-width:700px){.rx-shots-desk{grid-template-columns:1fr}}
-.rx-shots-phone{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:40px}
-.rx-shot{margin:0}
-.rx-shot-frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 22px 44px -34px rgba(0,0,0,.4)}
-.rx-shot-desk .rx-shot-frame{padding-top:22px;position:relative;background:#ecebe7}
-.rx-shot-desk .rx-shot-frame:before{content:"";position:absolute;top:8px;left:12px;width:7px;height:7px;border-radius:50%;background:#d4d3ce;box-shadow:12px 0 0 #d4d3ce,24px 0 0 #d4d3ce}
-.rx-shot-phone .rx-shot-frame{border-radius:22px;border:6px solid #111214;max-width:260px;margin:0 auto}
-.rx-shot img{display:block;width:100%;height:auto}
-.rx-shot figcaption{display:flex;gap:10px;align-items:baseline;font-size:15px;color:var(--muted);margin-top:12px}
-.rx-shot-phone figcaption{justify-content:center;text-align:center;font-size:13.5px}
-.rx-shot-n{font:700 12px/1 Inter,sans-serif;color:var(--red);letter-spacing:.08em}
+.rx-live{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:30px;align-items:start}
+@media(max-width:900px){.rx-live{grid-template-columns:1fr;gap:34px}.rx-phone{order:-1;justify-self:center;width:100%;max-width:290px}.rx-screen-desk{height:clamp(300px,58vh,520px)!important}}
+.rx-live-box{min-width:0}
+.rx-browser{border:1px solid #d9d8d3;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 34px 70px -44px rgba(0,0,0,.5)}
+.rx-browser-bar{display:flex;align-items:center;gap:14px;padding:10px 14px;background:#ecebe7;border-bottom:1px solid #dddcd7}
+.rx-dots{flex:none;width:7px;height:7px;border-radius:50%;background:#ff5f57;box-shadow:12px 0 0 #febc2e,24px 0 0 #28c840;margin-right:24px}
+.rx-url{flex:1;min-width:0;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #dddcd7;border-radius:8px;padding:5px 11px;font-size:12.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rx-url-path{color:var(--muted)}
+.rx-url-lock{flex:none;width:9px;height:7px;border:1.5px solid var(--muted);border-radius:2px;position:relative;margin-top:3px}
+.rx-url-lock:before{content:"";position:absolute;left:1px;top:-6px;width:4px;height:5px;border:1.5px solid var(--muted);border-bottom:0;border-radius:3px 3px 0 0}
+.rx-live-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:10px 12px;border-bottom:1px solid var(--line);background:#faf9f7}
+.rx-phone .rx-live-tabs{justify-content:center;border:0;background:none;padding:0 0 12px}
+.rx-live-tabs button{font:600 12.5px/1 Inter,sans-serif;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
+.rx-live-tabs button:hover{color:var(--ink);border-color:#cfcfca}
+.rx-live-tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.rx-screen{position:relative;background:#111}
+.rx-screen-desk{height:596px}
+.rx-pane{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+.rx-pane[hidden]{display:none}
+.rx-pane:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.rx-pane img{display:block;width:100%;height:auto}
+.rx-pane-slides{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory}
+.rx-pane-slides img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:top;scroll-snap-align:start}
+.rx-phone-shell{border:9px solid #111214;border-radius:40px;overflow:hidden;background:#111214;box-shadow:0 34px 70px -40px rgba(0,0,0,.55)}
+.rx-screen-phone{aspect-ratio:390/844;border-radius:31px;overflow:hidden}
+.rx-scroll-hint{position:absolute;left:12px;bottom:14px;pointer-events:none;font:600 12px/1 Inter,sans-serif;color:#fff;background:rgba(17,18,20,.78);backdrop-filter:blur(6px);padding:8px 13px;border-radius:999px;transition:opacity .4s;white-space:nowrap}
+.rx-scroll-hint.off{opacity:0}
+.rx-live-note{font-size:13.5px;color:var(--muted);margin:18px 0 0}
+.rx-live-note a{font-weight:600;color:var(--ink);margin-left:6px}
+.rx-live-note a:hover{color:var(--red)}
 .rx-fb-media{border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#0c0c0d}
 .rx-fb-media video{display:block;width:100%;height:100%;object-fit:cover}
 .rx-fb-ph{display:grid;place-content:center;justify-items:center;gap:6px;text-align:center;background:radial-gradient(circle at 50% 38%,#26262a,#0c0c0d 70%);color:#fff;padding:24px}

@@ -3019,51 +3019,9 @@
             ]
           },
           "flowIntro": {
-            "de": "Vom ersten Eindruck bis zum gebuchten Kursplatz — so bewegen sich Mitglieder durch die Seite.",
-            "en": "From first impression to a booked class spot — this is how members move through the site."
+            "de": "Scrollen Sie selbst durch die echte Website — am Rechner und auf dem Handy. Oben wechseln Sie zwischen den Seiten.",
+            "en": "Scroll through the real website yourself — on desktop and on mobile. Switch between pages at the top."
           },
-          "flow": [
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/body-and-care/01-start.webp",
-              "caption": {
-                "de": "Startseite: Das Studio auf einen Blick, mit direktem Weg zur Kursbuchung und zum Probetraining.",
-                "en": "Homepage: the studio at a glance, with a direct path to class booking and trial sessions."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/body-and-care/02-kurse.webp",
-              "caption": {
-                "de": "Kursplan: Alle Kurse der Woche mit Trainerinnen und Trainern.",
-                "en": "Class schedule: every class of the week with its trainers."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/body-and-care/03-buchen.webp",
-              "caption": {
-                "de": "Kursplatz verwalten: Platz sichern oder wieder freigeben — in unter einer Minute.",
-                "en": "Manage your spot: book or release it in under a minute."
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/body-and-care/m-start.webp",
-              "caption": {
-                "de": "Mobil: Startseite",
-                "en": "Mobile: homepage"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/body-and-care/m-buchen.webp",
-              "caption": {
-                "de": "Mobil: Kursbuchung",
-                "en": "Mobile: class booking"
-              }
-            }
-          ],
           "outcome": {
             "de": [
               "Seit dem 14.09.2026 live auf bodycare-fitness.de",
@@ -3082,7 +3040,83 @@
             "de": "Kundenstimme: Body & Care Hermannsburg",
             "en": "Client voice: Body & Care Hermannsburg"
           },
-          "video": null
+          "video": null,
+          "preview": {
+            "host": "bodycare-fitness.de",
+            "desktop": [
+              {
+                "src": "/rexity-omi/assets/work/body-and-care/live/bc-start",
+                "w": 1440,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  900
+                ],
+                "label": {
+                  "de": "Startseite",
+                  "en": "Home"
+                },
+                "path": "/"
+              },
+              {
+                "src": "/rexity-omi/assets/work/body-and-care/live/bc-kurse",
+                "w": 1440,
+                "tiles": [
+                  2400,
+                  696
+                ],
+                "label": {
+                  "de": "Kurse",
+                  "en": "Classes"
+                },
+                "path": "/kurse"
+              },
+              {
+                "src": "/rexity-omi/assets/work/body-and-care/live/bc-buchen",
+                "w": 1440,
+                "tiles": [
+                  2384
+                ],
+                "label": {
+                  "de": "Kursplatz buchen",
+                  "en": "Book a class"
+                },
+                "path": "/kurs-buchen"
+              }
+            ],
+            "mobile": [
+              {
+                "src": "/rexity-omi/assets/work/body-and-care/live/bc-m-start",
+                "w": 600,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2086
+                ],
+                "label": {
+                  "de": "Start",
+                  "en": "Home"
+                },
+                "path": ""
+              },
+              {
+                "src": "/rexity-omi/assets/work/body-and-care/live/bc-m-buchen",
+                "w": 600,
+                "tiles": [
+                  2400,
+                  1817
+                ],
+                "label": {
+                  "de": "Buchen",
+                  "en": "Book"
+                },
+                "path": ""
+              }
+            ]
+          }
         },
         {
           "slug": "chara",
@@ -3139,59 +3173,9 @@
             ]
           },
           "flowIntro": {
-            "de": "Von der Startseite bis zum fest gebuchten Termin — in wenigen Klicks.",
-            "en": "From the homepage to a confirmed appointment — in just a few clicks."
+            "de": "Scrollen Sie selbst durch die Website — von der Startseite bis zur Terminbuchung, am Rechner und auf dem Handy.",
+            "en": "Scroll through the website yourself — from the homepage to booking, on desktop and on mobile."
           },
-          "flow": [
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/chara/01-start.webp",
-              "caption": {
-                "de": "Startseite: Die Arbeit spricht für sich — mit Google-Bewertung und direktem Weg zum Termin.",
-                "en": "Homepage: the work speaks for itself — with the Google rating and a direct path to booking."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/chara/02-leistungen.webp",
-              "caption": {
-                "de": "Leistungen: Jede Leistung mit eigener Seite und echten Bildern.",
-                "en": "Services: every service with its own page and real photos."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/chara/03-termin.webp",
-              "caption": {
-                "de": "Terminbuchung: Leistung wählen, freien Tag und Uhrzeit aussuchen, fertig.",
-                "en": "Booking: pick a service, choose a free day and time, done."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/chara/04-kontakt.webp",
-              "caption": {
-                "de": "Kontakt & Anfahrt: Telefon, WhatsApp und Karte auf einen Blick.",
-                "en": "Contact & directions: phone, WhatsApp and map at a glance."
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/chara/m-start.webp",
-              "caption": {
-                "de": "Mobil: Startseite",
-                "en": "Mobile: homepage"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/chara/m-termin.webp",
-              "caption": {
-                "de": "Mobil: Terminbuchung",
-                "en": "Mobile: booking"
-              }
-            }
-          ],
           "outcome": {
             "de": [
               "Kunden buchen ihren Termin selbst — rund um die Uhr, ohne auf einen Rückruf zu warten",
@@ -3210,7 +3194,90 @@
             "de": "Kundenstimme: Chara Fahrzeugaufbereitung",
             "en": "Client voice: Chara Fahrzeugaufbereitung"
           },
-          "video": null
+          "video": null,
+          "preview": {
+            "host": {
+              "de": "Vorschau · Chara Fahrzeugaufbereitung",
+              "en": "Preview · Chara Fahrzeugaufbereitung"
+            },
+            "desktop": [
+              {
+                "src": "/rexity-omi/assets/work/chara/live/ch-start",
+                "w": 1440,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  1002
+                ],
+                "label": {
+                  "de": "Startseite",
+                  "en": "Home"
+                },
+                "path": "/"
+              },
+              {
+                "src": "/rexity-omi/assets/work/chara/live/ch-leistung",
+                "w": 1440,
+                "tiles": [
+                  2330
+                ],
+                "label": {
+                  "de": "Leistungen",
+                  "en": "Services"
+                },
+                "path": "/leistungen"
+              },
+              {
+                "src": "/rexity-omi/assets/work/chara/live/ch-termin",
+                "w": 1440,
+                "tiles": [
+                  1689
+                ],
+                "label": {
+                  "de": "Termin buchen",
+                  "en": "Book"
+                },
+                "path": "/termin"
+              }
+            ],
+            "mobile": [
+              {
+                "src": "/rexity-omi/assets/work/chara/live/ch-m-start",
+                "w": 600,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  1566
+                ],
+                "label": {
+                  "de": "Start",
+                  "en": "Home"
+                },
+                "path": ""
+              },
+              {
+                "src": "/rexity-omi/assets/work/chara/live/ch-m-termin",
+                "w": 600,
+                "tiles": [
+                  2400,
+                  2400,
+                  34
+                ],
+                "label": {
+                  "de": "Termin",
+                  "en": "Book"
+                },
+                "path": ""
+              }
+            ]
+          }
         },
         {
           "slug": "levelkraft",
@@ -3266,67 +3333,9 @@
             ]
           },
           "flowIntro": {
-            "de": "Von der Website in die App: vom ersten Übungstest bis zur Auswertung.",
-            "en": "From the website into the app: from the first practice test to the results."
+            "de": "Scrollen Sie durch die Website und wischen Sie durch die App — so, wie Lernende sie nutzen.",
+            "en": "Scroll through the website and swipe through the app — the way learners use it."
           },
-          "flow": [
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/levelkraft/01-website.webp",
-              "caption": {
-                "de": "Website: Einstieg mit App-Download oder direktem Test im Browser.",
-                "en": "Website: start with an app download or a test right in the browser."
-              }
-            },
-            {
-              "kind": "desktop",
-              "src": "/rexity-omi/assets/work/levelkraft/02-ueben.webp",
-              "caption": {
-                "de": "Kostenlos üben: Übungen nach Niveau und Prüfungsteil, ohne Login.",
-                "en": "Free practice: exercises by level and exam section, no login needed."
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/levelkraft/app-01.webp",
-              "caption": {
-                "de": "Dashboard mit Lernplan",
-                "en": "Dashboard with study plan"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/levelkraft/app-03.webp",
-              "caption": {
-                "de": "Modelltest: Lesen",
-                "en": "Model test: reading"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/levelkraft/app-06.webp",
-              "caption": {
-                "de": "Sprechen üben",
-                "en": "Speaking practice"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/levelkraft/app-07.webp",
-              "caption": {
-                "de": "Feedback mit Korrektur",
-                "en": "Feedback with corrections"
-              }
-            },
-            {
-              "kind": "phone",
-              "src": "/rexity-omi/assets/work/levelkraft/app-09.webp",
-              "caption": {
-                "de": "Fortschritt pro Prüfungsteil",
-                "en": "Progress per exam section"
-              }
-            }
-          ],
           "outcome": {
             "de": [
               "Live im App Store, bei Google Play und als Web-App",
@@ -3345,7 +3354,80 @@
             "de": "Nutzerstimme: LevelKraft",
             "en": "User voice: LevelKraft"
           },
-          "video": null
+          "video": null,
+          "preview": {
+            "host": "levelkraft.de",
+            "desktop": [
+              {
+                "src": "/rexity-omi/assets/work/levelkraft/live/lk-start",
+                "w": 1440,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  429
+                ],
+                "label": {
+                  "de": "Startseite",
+                  "en": "Home"
+                },
+                "path": "/"
+              },
+              {
+                "src": "/rexity-omi/assets/work/levelkraft/live/lk-ueben",
+                "w": 1440,
+                "tiles": [
+                  2400,
+                  642
+                ],
+                "label": {
+                  "de": "Kostenlos üben",
+                  "en": "Free practice"
+                },
+                "path": "/kostenlos-ueben"
+              }
+            ],
+            "mobile": [
+              {
+                "label": {
+                  "de": "App",
+                  "en": "App"
+                },
+                "slides": [
+                  "/rexity-omi/assets/work/levelkraft/app-01.webp",
+                  "/rexity-omi/assets/work/levelkraft/app-03.webp",
+                  "/rexity-omi/assets/work/levelkraft/app-06.webp",
+                  "/rexity-omi/assets/work/levelkraft/app-07.webp",
+                  "/rexity-omi/assets/work/levelkraft/app-09.webp"
+                ],
+                "w": 540,
+                "h": 1170
+              },
+              {
+                "src": "/rexity-omi/assets/work/levelkraft/live/lk-m-start",
+                "w": 600,
+                "tiles": [
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  2400,
+                  143
+                ],
+                "label": {
+                  "de": "Website",
+                  "en": "Website"
+                },
+                "path": ""
+              }
+            ]
+          }
         }
       ]
     }
