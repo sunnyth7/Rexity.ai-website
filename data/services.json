@@ -2951,70 +2951,401 @@
         "de": "Arbeiten"
       },
       "tagline": {
-        "en": "Apps we designed and built.",
-        "de": "Apps, die wir gestaltet und gebaut haben."
+        "de": "Projekte, die wir für echte Kunden gebaut haben.",
+        "en": "Projects we built for real clients."
       },
       "summary": {
-        "en": "A few products Rexity Labs designed and shipped end to end — for party planners, language learners and families.",
-        "de": "Einige Produkte, die Rexity Labs durchgängig gestaltet und ausgeliefert hat — für Party-Planer, Sprachlernende und Familien."
+        "de": "Websites und Apps, die Rexity Labs von der Idee bis zum Go-live umgesetzt hat — mit echten Screens, Projektdauer und Ergebnis.",
+        "en": "Websites and apps Rexity Labs took from idea to launch — with real screens, project duration and outcome."
       },
       "hero": {
-        "en": "Real products we designed, built and shipped end to end.",
-        "de": "Echte Produkte, die wir durchgängig gestaltet, gebaut und ausgeliefert haben."
+        "de": "Echte Projekte, echte Screens: So sieht unsere Arbeit im Einsatz aus.",
+        "en": "Real projects, real screens: this is what our work looks like in use."
       },
       "cases": [
         {
-          "name": "Clevr",
-          "image": "/rexity-omi/assets/it/img/app-clevr.jpg",
-          "logo": "/rexity-omi/assets/it/img/app-clevr-logo.png",
-          "link": "https://clevr.social",
-          "tagline": {
-            "en": "Built for people who love to host.",
-            "de": "Für alle, die gern Gastgeber sind."
-          },
+          "slug": "body-and-care",
+          "name": "Body & Care Hermannsburg",
+          "image": "/rexity-omi/assets/work/body-and-care/01-start.webp",
+          "link": "https://www.bodycare-fitness.de",
           "audience": {
-            "en": "Party planners",
-            "de": "Party-Planer"
+            "de": "Website & Online-Kursbuchung",
+            "en": "Website & online class booking"
+          },
+          "tagline": {
+            "de": "Neue Website mit Online-Kursbuchung für ein Fitnessstudio in Hermannsburg.",
+            "en": "A new website with online class booking for a gym in Hermannsburg."
           },
           "body": {
-            "en": "An app Rexity Labs built for party planners. Hosting usually means juggling five different chats and apps — Clevr brings it all into one place: shared invites, food and drink polls, a collaborative playlist, expense splitting, games and a group chat.",
-            "de": "Eine App, die Rexity Labs für Party-Planer gebaut hat. Gastgeben heißt sonst, fünf Chats und Apps zu jonglieren — Clevr bringt alles an einen Ort: gemeinsame Einladungen, Essens- und Getränke-Abstimmungen, eine kollaborative Playlist, Kostenteilung, Spiele und Gruppenchat."
-          }
+            "de": "Für das Fitness- und Gesundheitszentrum Body & Care, seit 2002 in Hermannsburg, haben wir den kompletten Webauftritt neu gebaut — inklusive einer Kursbuchung, über die Mitglieder ihren Platz selbst reservieren und wieder freigeben.",
+            "en": "For Body & Care, a fitness and health centre in Hermannsburg since 2002, we rebuilt the entire web presence — including class booking that lets members reserve and release their own spot."
+          },
+          "duration": {
+            "de": "ca. 6 Wochen",
+            "en": "approx. 6 weeks"
+          },
+          "period": {
+            "de": "August – September 2026",
+            "en": "August – September 2026"
+          },
+          "status": {
+            "de": "Live seit 14.09.2026",
+            "en": "Live since 14 Sep 2026"
+          },
+          "challenge": {
+            "de": "Die alte Website war in die Jahre gekommen. Gebraucht wurde ein moderner Auftritt, der das Studio zeigt, wie es ist — und Kursplätze, die Mitglieder ohne Anruf selbst buchen können.",
+            "en": "The old website had aged. The studio needed a modern presence that shows it as it really is — and class spots members can book themselves, without a phone call."
+          },
+          "built": {
+            "de": [
+              "Komplett neue Website: Studio, Kurse, Preise, Team, Probetraining, Bewertungen und Kontakt",
+              "Online-Kursbuchung mit Live-Anzeige der freien Plätze pro Kurs",
+              "Selbst-Stornierung ohne Kundenkonto — der Platz wird sofort wieder frei",
+              "Kursverwaltung für das Studio-Team",
+              "Anfragen für Probetraining und Kontakt, dazu WhatsApp und Telefon mit einem Tipp",
+              "Google-Bewertungen direkt auf der Website",
+              "Umzug auf die eigene Domain inklusive Weiterleitung der alten Adresse",
+              "Datenschutz von Anfang an: keine Werbe-Cookies, Buchungsdaten werden automatisch gelöscht"
+            ],
+            "en": [
+              "A completely new website: studio, classes, pricing, team, trial session, reviews and contact",
+              "Online class booking with live availability per class",
+              "Self-service cancellation without an account — the spot is released instantly",
+              "Class management for the studio team",
+              "Enquiry forms for trial sessions and contact, plus one-tap WhatsApp and phone",
+              "Google reviews shown right on the site",
+              "Move to the studio’s own domain, including a redirect from the old address",
+              "Privacy by design: no advertising cookies, booking data deleted automatically"
+            ]
+          },
+          "flowIntro": {
+            "de": "Vom ersten Eindruck bis zum gebuchten Kursplatz — so bewegen sich Mitglieder durch die Seite.",
+            "en": "From first impression to a booked class spot — this is how members move through the site."
+          },
+          "flow": [
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/body-and-care/01-start.webp",
+              "caption": {
+                "de": "Startseite: Das Studio auf einen Blick, mit direktem Weg zur Kursbuchung und zum Probetraining.",
+                "en": "Homepage: the studio at a glance, with a direct path to class booking and trial sessions."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/body-and-care/02-kurse.webp",
+              "caption": {
+                "de": "Kursplan: Alle Kurse der Woche mit Trainerinnen und Trainern.",
+                "en": "Class schedule: every class of the week with its trainers."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/body-and-care/03-buchen.webp",
+              "caption": {
+                "de": "Kursplatz verwalten: Platz sichern oder wieder freigeben — in unter einer Minute.",
+                "en": "Manage your spot: book or release it in under a minute."
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/body-and-care/m-start.webp",
+              "caption": {
+                "de": "Mobil: Startseite",
+                "en": "Mobile: homepage"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/body-and-care/m-buchen.webp",
+              "caption": {
+                "de": "Mobil: Kursbuchung",
+                "en": "Mobile: class booking"
+              }
+            }
+          ],
+          "outcome": {
+            "de": [
+              "Seit dem 14.09.2026 live auf bodycare-fitness.de",
+              "Mitglieder buchen und stornieren Kursplätze jetzt selbst — rund um die Uhr, ohne Anruf",
+              "Die ersten Buchungstage liefen ohne einen einzigen Serverfehler",
+              "Das Studio-Team pflegt Kurse selbst, ohne auf uns warten zu müssen"
+            ],
+            "en": [
+              "Live on bodycare-fitness.de since 14 Sep 2026",
+              "Members now book and cancel class spots themselves — around the clock, without a call",
+              "The first booking days ran without a single server error",
+              "The studio team maintains classes itself, without waiting on us"
+            ]
+          },
+          "feedbackLabel": {
+            "de": "Kundenstimme: Body & Care Hermannsburg",
+            "en": "Client voice: Body & Care Hermannsburg"
+          },
+          "video": null
         },
         {
+          "slug": "chara",
+          "name": "Chara Fahrzeugaufbereitung",
+          "image": "/rexity-omi/assets/work/chara/01-start.webp",
+          "audience": {
+            "de": "Website & Online-Terminbuchung",
+            "en": "Website & online appointment booking"
+          },
+          "tagline": {
+            "de": "Website mit Online-Terminbuchung für einen Fahrzeugaufbereiter in Celle.",
+            "en": "A website with online appointment booking for a car detailer in Celle."
+          },
+          "body": {
+            "de": "Für die Fahrzeugaufbereitung Chara in Celle haben wir eine Website gebaut, auf der Kundinnen und Kunden ihren Termin direkt online buchen — mit einer eigenen Seite für jede Leistung und echten Vorher-nachher-Aufnahmen aus der Werkstatt.",
+            "en": "For Chara, a car detailing business in Celle, we built a website where customers book their appointment directly online — with a dedicated page for every service and real before-and-after footage from the workshop."
+          },
+          "duration": {
+            "de": "ca. 5 Wochen",
+            "en": "approx. 5 weeks"
+          },
+          "period": {
+            "de": "Juli – August 2026",
+            "en": "July – August 2026"
+          },
+          "status": {
+            "de": "Fertiggestellt · Go-live auf eigener Domain in Vorbereitung",
+            "en": "Completed · launch on own domain in preparation"
+          },
+          "challenge": {
+            "de": "Termine liefen bisher über Telefon und Nachrichten. Ziel war eine Website, die die Arbeit zeigt und über die Kunden selbst einen freien Termin finden und fest buchen können.",
+            "en": "Appointments used to run through phone calls and messages. The goal was a website that shows the work and lets customers find and book a free slot themselves."
+          },
+          "built": {
+            "de": [
+              "Website mit eigener Seite für jede der acht Leistungen",
+              "Online-Terminbuchung in vier Schritten: Leistung, Tag, Uhrzeit, Kontaktdaten — der Termin ist sofort verbindlich",
+              "Nur wirklich freie Zeiten werden angezeigt; Doppelbuchungen sind technisch ausgeschlossen",
+              "Termin mit einem Klick in den eigenen Kalender übernehmen",
+              "Verwaltungsbereich für den Inhaber: alle Termine nach Tag, mit Anruf oder WhatsApp per Tipp",
+              "Echte Vorher-nachher-Videos aus Aufträgen, Kennzeichen unkenntlich gemacht",
+              "Auf dem Smartphone wie eine App installierbar",
+              "Datenschutz: Buchungsdaten werden 30 Tage nach dem Termin vollständig gelöscht"
+            ],
+            "en": [
+              "A website with its own page for each of the eight services",
+              "Online booking in four steps: service, day, time, contact details — the appointment is confirmed instantly",
+              "Only genuinely free slots are shown; double bookings are technically impossible",
+              "Add the appointment to your own calendar in one click",
+              "An owner dashboard: every appointment by day, with one-tap call or WhatsApp",
+              "Real before-and-after videos from jobs, with number plates blurred",
+              "Installable on a smartphone like an app",
+              "Privacy: booking data is fully deleted 30 days after the appointment"
+            ]
+          },
+          "flowIntro": {
+            "de": "Von der Startseite bis zum fest gebuchten Termin — in wenigen Klicks.",
+            "en": "From the homepage to a confirmed appointment — in just a few clicks."
+          },
+          "flow": [
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/chara/01-start.webp",
+              "caption": {
+                "de": "Startseite: Die Arbeit spricht für sich — mit Google-Bewertung und direktem Weg zum Termin.",
+                "en": "Homepage: the work speaks for itself — with the Google rating and a direct path to booking."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/chara/02-leistungen.webp",
+              "caption": {
+                "de": "Leistungen: Jede Leistung mit eigener Seite und echten Bildern.",
+                "en": "Services: every service with its own page and real photos."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/chara/03-termin.webp",
+              "caption": {
+                "de": "Terminbuchung: Leistung wählen, freien Tag und Uhrzeit aussuchen, fertig.",
+                "en": "Booking: pick a service, choose a free day and time, done."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/chara/04-kontakt.webp",
+              "caption": {
+                "de": "Kontakt & Anfahrt: Telefon, WhatsApp und Karte auf einen Blick.",
+                "en": "Contact & directions: phone, WhatsApp and map at a glance."
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/chara/m-start.webp",
+              "caption": {
+                "de": "Mobil: Startseite",
+                "en": "Mobile: homepage"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/chara/m-termin.webp",
+              "caption": {
+                "de": "Mobil: Terminbuchung",
+                "en": "Mobile: booking"
+              }
+            }
+          ],
+          "outcome": {
+            "de": [
+              "Kunden buchen ihren Termin selbst — rund um die Uhr, ohne auf einen Rückruf zu warten",
+              "Der Inhaber sieht alle Termine gesammelt an einem Ort statt verteilt auf Telefon und Chats",
+              "Keine Doppelbuchungen, keine Rückfragen zu freien Zeiten",
+              "Fertig gebaut und abgestimmt; der Umzug auf die eigene Domain folgt"
+            ],
+            "en": [
+              "Customers book their own appointment — around the clock, without waiting for a callback",
+              "The owner sees every appointment in one place instead of scattered across calls and chats",
+              "No double bookings, no back-and-forth about free slots",
+              "Built and signed off; the move to the business’s own domain follows"
+            ]
+          },
+          "feedbackLabel": {
+            "de": "Kundenstimme: Chara Fahrzeugaufbereitung",
+            "en": "Client voice: Chara Fahrzeugaufbereitung"
+          },
+          "video": null
+        },
+        {
+          "slug": "levelkraft",
           "name": "LevelKraft",
-          "image": "/rexity-omi/assets/it/img/app-levelkraft.jpg",
-          "logo": "/rexity-omi/assets/it/img/app-levelkraft-logo.svg",
+          "image": "/rexity-omi/assets/work/levelkraft/01-website.webp",
           "link": "https://levelkraft.de",
-          "tagline": {
-            "en": "Built for language learners.",
-            "de": "Für Sprachlernende gebaut."
-          },
           "audience": {
-            "en": "Language learners",
-            "de": "Sprachlernende"
+            "de": "App für iPhone, Android & Web",
+            "en": "App for iPhone, Android & web"
+          },
+          "tagline": {
+            "de": "Prüfungsvorbereitung für TELC und Goethe — als App und im Browser.",
+            "en": "Exam preparation for TELC and Goethe — as an app and in the browser."
           },
           "body": {
-            "en": "An app Rexity Labs built to prepare people for the German TELC and Goethe exams, from A1 to C2 — full-length practice tests, instant feedback on speaking and writing, and short daily sessions that adapt to each learner’s weak spots.",
-            "de": "Eine App, die Rexity Labs gebaut hat, um auf die deutschen TELC- und Goethe-Prüfungen vorzubereiten, von A1 bis C2 — vollständige Übungstests, sofortiges Feedback zu Sprechen und Schreiben und kurze tägliche Einheiten, die sich an die Schwächen jedes Lernenden anpassen."
-          }
-        },
-        {
-          "name": "Fresh&Save",
-          "image": "/rexity-omi/assets/it/img/app-freshsave.jpg",
-          "logo": "/rexity-omi/assets/it/img/app-savefresh-logo.png",
-          "tagline": {
-            "en": "Built around the family kitchen.",
-            "de": "Rund um die Familienküche gebaut."
+            "de": "LevelKraft ist unser eigenes Produkt: eine Lern-App, die auf die deutschen TELC- und Goethe-Prüfungen vorbereitet — mit vollständigen Modelltests, sofortigem Feedback zu Sprechen und Schreiben und kurzen täglichen Einheiten.",
+            "en": "LevelKraft is our own product: a learning app that prepares people for the German TELC and Goethe exams — with full model tests, instant feedback on speaking and writing, and short daily sessions."
           },
-          "audience": {
-            "en": "Households",
-            "de": "Haushalte"
+          "duration": {
+            "de": "Über 10 Monate, laufend",
+            "en": "10+ months, ongoing"
           },
-          "body": {
-            "en": "An app Rexity Labs built to fight food waste and the dreaded double-buy — a shared food inventory the whole family uses: see what’s in the kitchen at a glance, plan meals, save recipes, and keep one live shopping list everyone shares.",
-            "de": "Eine App, die Rexity Labs gegen Lebensmittelverschwendung und den gefürchteten Doppelkauf gebaut hat — ein gemeinsames Lebensmittel-Inventar für die ganze Familie: auf einen Blick sehen, was da ist, Mahlzeiten planen, Rezepte speichern und eine gemeinsame Einkaufsliste führen."
-          }
+          "period": {
+            "de": "Seit November 2025",
+            "en": "Since November 2025"
+          },
+          "status": {
+            "de": "Live im App Store, bei Google Play und im Web",
+            "en": "Live on the App Store, Google Play and the web"
+          },
+          "challenge": {
+            "de": "Wer eine Deutschprüfung ablegt, braucht realistische Übung und ehrliches Feedback — vor allem beim Sprechen und Schreiben, wo man allein kaum weiß, wo man steht.",
+            "en": "Anyone taking a German exam needs realistic practice and honest feedback — especially for speaking and writing, where it is hard to judge your level alone."
+          },
+          "built": {
+            "de": [
+              "Eine App für iPhone und Android plus Web-App — alles aus einer gemeinsamen Grundlage",
+              "Vollständige Modelltests für Lesen, Hören, Sprachbausteine, Schreiben und Sprechen",
+              "Sofortiges Feedback zu Sprechen und Schreiben, mit Korrektur und Erklärung",
+              "Ein Sprach-Tutor, der die mündliche Prüfung im Gespräch simuliert",
+              "Tägliche Kurztests, Fortschritt pro Prüfungsteil und eine Rangliste",
+              "Abonnements direkt in der App auf iPhone und Android",
+              "Eine Website mit über 30 Prüfungs- und Übungsseiten, die Suchende direkt in einen kostenlosen Test führt"
+            ],
+            "en": [
+              "An app for iPhone and Android plus a web app — all from one shared foundation",
+              "Full model tests for reading, listening, grammar, writing and speaking",
+              "Instant feedback on speaking and writing, with corrections and explanations",
+              "A speaking tutor that simulates the oral exam as a conversation",
+              "Daily mini-tests, progress per exam section and a leaderboard",
+              "In-app subscriptions on iPhone and Android",
+              "A website with 30+ exam and practice pages that takes searchers straight into a free test"
+            ]
+          },
+          "flowIntro": {
+            "de": "Von der Website in die App: vom ersten Übungstest bis zur Auswertung.",
+            "en": "From the website into the app: from the first practice test to the results."
+          },
+          "flow": [
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/levelkraft/01-website.webp",
+              "caption": {
+                "de": "Website: Einstieg mit App-Download oder direktem Test im Browser.",
+                "en": "Website: start with an app download or a test right in the browser."
+              }
+            },
+            {
+              "kind": "desktop",
+              "src": "/rexity-omi/assets/work/levelkraft/02-ueben.webp",
+              "caption": {
+                "de": "Kostenlos üben: Übungen nach Niveau und Prüfungsteil, ohne Login.",
+                "en": "Free practice: exercises by level and exam section, no login needed."
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/levelkraft/app-01.webp",
+              "caption": {
+                "de": "Dashboard mit Lernplan",
+                "en": "Dashboard with study plan"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/levelkraft/app-03.webp",
+              "caption": {
+                "de": "Modelltest: Lesen",
+                "en": "Model test: reading"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/levelkraft/app-06.webp",
+              "caption": {
+                "de": "Sprechen üben",
+                "en": "Speaking practice"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/levelkraft/app-07.webp",
+              "caption": {
+                "de": "Feedback mit Korrektur",
+                "en": "Feedback with corrections"
+              }
+            },
+            {
+              "kind": "phone",
+              "src": "/rexity-omi/assets/work/levelkraft/app-09.webp",
+              "caption": {
+                "de": "Fortschritt pro Prüfungsteil",
+                "en": "Progress per exam section"
+              }
+            }
+          ],
+          "outcome": {
+            "de": [
+              "Live im App Store, bei Google Play und als Web-App",
+              "Lernende üben alle Prüfungsteile an einem Ort — auf dem Handy oder am Rechner",
+              "Besucher der Website starten ohne Anmeldung direkt einen kostenlosen Test",
+              "Wird laufend weiterentwickelt — regelmäßige Updates auf allen Plattformen"
+            ],
+            "en": [
+              "Live on the App Store, Google Play and as a web app",
+              "Learners practise every exam section in one place — on their phone or computer",
+              "Website visitors start a free test right away, without signing up",
+              "Continuously developed — regular updates on every platform"
+            ]
+          },
+          "feedbackLabel": {
+            "de": "Nutzerstimme: LevelKraft",
+            "en": "User voice: LevelKraft"
+          },
+          "video": null
         }
       ]
     }

@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const data = JSON.parse(readFileSync(join(ROOT, "data/services.json"), "utf8"));
-const CHAT_V = "20260615b"; // keep in sync with the homepage chatbot cache-buster
+const CHAT_V = "20260817a"; // keep in sync with the homepage chatbot cache-buster
 const EMAIL = data.brand.email;
 
 const byslug = Object.fromEntries(data.pages.map((p) => [p.slug, p]));
@@ -34,7 +34,8 @@ function head(p) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title data-en="${esc(p.title.en)} — Rexity Labs" data-de="${esc(title)}">${esc(title)}</title>
 <meta name="description" data-en="${esc(p.summary.en)}" data-de="${esc(desc)}" content="${esc(desc)}">
-<meta name="robots" content="noindex,nofollow">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.rexity.ai${urlOf(p)}">
 <meta name="theme-color" content="#f5f5f3">
 <link rel="icon" href="/rexity-omi/assets/brand/final/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/rexity-omi/assets/brand/final/apple-touch-icon.png">
@@ -71,7 +72,7 @@ function footer() {
     <a class="rx-ft-mail" href="mailto:${EMAIL}">${EMAIL}</a>
   </div>
   <nav class="rx-ft-links">${legal}</nav>
-  <p class="rx-ft-copy">© Rexity Labs UG ${"2026"}. ${"<span data-en=\"All rights reserved.\" data-de=\"Alle Rechte vorbehalten.\">Alle Rechte vorbehalten.</span>"}</p>
+  <p class="rx-ft-copy">© Rexity Labs UG (haftungsbeschränkt) 2026 · HRB 213911 · Amtsgericht Lüneburg. ${"<span data-en=\"All rights reserved.\" data-de=\"Alle Rechte vorbehalten.\">Alle Rechte vorbehalten.</span>"}</p>
 </footer>`;
 }
 
@@ -87,7 +88,8 @@ function tail() {
   return `${cta()}${footer()}
 <script src="/rexity-omi/assets/chatbot/rexity-chatbot.js?v=${CHAT_V}" defer></script>
 <script>${LANG_JS}</script>
-</body></html>`;
+</body></html>
+`;
 }
 
 function list(bi) {
@@ -242,16 +244,65 @@ function indexBody() {
   return sections;
 }
 
+const caseUrl = (c) => `/work/${c.slug}`;
+
 function caseCard(c) {
-  const img = c.image ? `<div class="rx-case-img"><img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy" decoding="async"></div>` : "";
-  const logo = c.logo ? `<img class="rx-case-logo" src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy">` : `<div class="rx-case-name">${esc(c.name)}</div>`;
-  const link = c.link ? `<a class="rx-case-link" href="${esc(c.link)}" target="_blank" rel="noopener">${tText({ en: "Visit site →", de: "Zur Website →" })}</a>` : "";
-  return `<article class="rx-case">${img}<div class="rx-case-body">${logo}<h3>${esc(c.name)}</h3>${t(c.tagline, "p", "rx-case-tag")}${t(c.audience, "span", "rx-case-aud")}${t(c.body, "p", "rx-case-text")}${link}</div></article>`;
+  const url = caseUrl(c);
+  const img = c.image ? `<a class="rx-case-img" href="${url}" tabindex="-1" aria-hidden="true"><img src="${esc(c.image)}" alt="${esc(c.name)}" loading="lazy" decoding="async"></a>` : "";
+  const meta = c.duration ? `<p class="rx-case-meta">${tText({ en: "Duration", de: "Dauer" })}: ${tText(c.duration)}</p>` : "";
+  return `<article class="rx-case">${img}<div class="rx-case-body">${t(c.audience, "span", "rx-case-aud")}<h3><a href="${url}">${esc(c.name)}</a></h3>${t(c.tagline, "p", "rx-case-tag")}${t(c.body, "p", "rx-case-text")}${meta}<a class="rx-case-link" href="${url}">${tText({ en: "View case study →", de: "Projekt ansehen →" })}</a></div></article>`;
 }
 
 function workBody(p) {
   const cards = (p.cases || []).map(caseCard).join("");
   return `<section class="rx-sec"><h2 data-en="Selected work" data-de="Ausgewählte Arbeiten">Ausgewählte Arbeiten</h2><div class="rx-cases">${cards}</div></section>`;
+}
+
+// --- case study detail pages (/work/<slug>) ---------------------------------
+function screenFlow(c) {
+  const shot = (s, i) => `<figure class="rx-shot rx-shot-${s.kind === "phone" ? "phone" : "desk"}"><div class="rx-shot-frame"><img src="${esc(s.src)}" alt="${esc(s.caption.de)}" data-alt-en="${esc(s.caption.en)}" data-alt-de="${esc(s.caption.de)}" loading="${i < 2 ? "eager" : "lazy"}" decoding="async"></div><figcaption><span class="rx-shot-n">${String(i + 1).padStart(2, "0")}</span>${tText(s.caption)}</figcaption></figure>`;
+  const desk = c.flow.filter((s) => s.kind !== "phone");
+  const phone = c.flow.filter((s) => s.kind === "phone");
+  let n = 0;
+  const deskHtml = desk.map((s) => shot(s, n++)).join("");
+  const phoneHtml = phone.length ? `<div class="rx-shots-phone">${phone.map((s) => shot(s, n++)).join("")}</div>` : "";
+  return `<section class="rx-sec"><h2 data-en="The flow, screen by screen" data-de="Der Ablauf, Screen für Screen">Der Ablauf, Screen für Screen</h2>${t(c.flowIntro, "p", "rx-work-intro")}<div class="rx-shots-desk">${deskHtml}</div>${phoneHtml}</section>`;
+}
+
+function feedbackVideo(c) {
+  const v = c.video;
+  const media = v && v.mp4
+    ? `<div class="rx-fb-media"><video controls playsinline preload="metadata"${v.poster ? ` poster="${esc(v.poster)}"` : ""}><source src="${esc(v.mp4)}" type="video/mp4"></video></div>`
+    : `<div class="rx-fb-media rx-fb-ph" role="img" aria-label="${esc(c.feedbackLabel.de)}"><span class="rx-fb-play" aria-hidden="true"></span>${t({ en: "Video feedback coming soon", de: "Video-Feedback folgt in Kürze" }, "p", "rx-fb-soon")}${t(c.feedbackLabel, "p", "rx-fb-who")}</div>`;
+  return `<section class="rx-sec"><h2 data-en="In their words" data-de="In eigenen Worten">In eigenen Worten</h2>${media}</section>`;
+}
+
+function renderCase(c, i, all) {
+  const page = { slug: c.slug, parent: "work", code: String(i + 1).padStart(2, "0"), title: { en: c.name, de: c.name }, summary: c.tagline };
+  const facts = [
+    [{ en: "Duration", de: "Dauer" }, c.duration],
+    [{ en: "Timeframe", de: "Zeitraum" }, c.period],
+    [{ en: "Type", de: "Art" }, c.audience],
+    [{ en: "Status", de: "Status" }, c.status],
+  ].map(([k, v]) => `<div class="rx-fact">${t(k, "span", "rx-fact-k")}${t(v, "span", "rx-fact-v")}</div>`).join("");
+  const visit = c.link ? `<a class="rx-btn rx-btn-ghost" href="${esc(c.link)}" target="_blank" rel="noopener">${tText({ en: "Visit the live site ↗", de: "Live ansehen ↗" })}</a>` : "";
+  const hero = `<section class="rx-hero rx-hero-split rx-case-hero">
+  <div class="rx-hero-text">
+    <div class="rx-code">${esc(page.code)}</div>
+    <h1>${esc(c.name)}</h1>
+    ${t(c.tagline, "p", "rx-tag")}
+    ${t(c.body, "p", "rx-lead")}
+    <div class="rx-hero-ctas"><a class="rx-btn" href="mailto:${EMAIL}">${tText({ en: "Start a similar project", de: "Ähnliches Projekt anfragen" })}</a>${visit}</div>
+  </div>
+  <div class="rx-hero-media rx-hero-shot"><img src="${esc(c.image)}" alt="${esc(c.name)}" loading="eager" decoding="async"></div>
+</section>
+<div class="rx-facts">${facts}</div>`;
+  const built = `<section class="rx-sec"><h2 data-en="What we built" data-de="Was wir gebaut haben">Was wir gebaut haben</h2>${t(c.challenge, "p", "rx-work-intro")}<ul class="rx-ticks">${list(c.built)}</ul></section>`;
+  const outcome = `<section class="rx-sec rx-alt"><h2 data-en="The outcome" data-de="Das Ergebnis">Das Ergebnis</h2><ul class="rx-ticks">${list(c.outcome)}</ul></section>`;
+  const prev = all[(i - 1 + all.length) % all.length], next = all[(i + 1) % all.length];
+  const pager = `<nav class="rx-pager"><a href="${caseUrl(prev)}"><span data-en="← Previous project" data-de="← Vorheriges Projekt">← Vorheriges Projekt</span><strong>${esc(prev.name)}</strong></a><a href="/work" class="rx-pager-mid"><span data-en="All projects" data-de="Alle Projekte">Alle Projekte</span></a><a href="${caseUrl(next)}" class="rx-pager-next"><span data-en="Next project →" data-de="Nächstes Projekt →">Nächstes Projekt →</span><strong>${esc(next.name)}</strong></a></nav>`;
+  const crumb = `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/work">${tText(byslug.work.title)}</a> / <span>${esc(c.name)}</span></nav>`;
+  return `${head(page)}${header()}<main>${crumb}${hero}${built}${screenFlow(c)}${outcome}${feedbackVideo(c)}${pager}</main>${tail()}`;
 }
 
 function renderPage(p) {
@@ -379,6 +430,48 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-case-text{color:var(--muted);font-size:15px;margin:0 0 16px}
 .rx-case-link{font-weight:600;color:var(--ink)}
 .rx-case-link:hover{color:var(--red)}
+/* case study cards + detail pages */
+.rx-case h3 a:hover{color:var(--red)}
+.rx-case-img{display:block}
+.rx-case-meta{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 14px}
+.rx-hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.rx-btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.rx-btn-ghost:hover{background:#fff;color:var(--red);border-color:var(--red)}
+.rx-hero-shot{aspect-ratio:16/10;box-shadow:0 30px 60px -38px rgba(0,0,0,.45)}
+.rx-hero-shot img{object-position:top}
+.rx-facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;background:#fff;margin:28px 0 0;overflow:hidden}
+.rx-fact{padding:18px 20px;border-left:1px solid var(--line)}
+.rx-fact:first-child{border-left:0}
+.rx-fact-k{display:block;font:600 11px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.rx-fact-v{display:block;font-size:15px;font-weight:600;line-height:1.35}
+@media(max-width:820px){.rx-facts{grid-template-columns:1fr 1fr}.rx-fact:nth-child(3){border-left:0}.rx-fact:nth-child(n+3){border-top:1px solid var(--line)}}
+.rx-shots-desk{display:grid;grid-template-columns:1fr 1fr;gap:34px 26px}
+.rx-shots-desk>.rx-shot:first-child,.rx-shots-desk>.rx-shot:last-child:nth-child(even){grid-column:1/-1}
+@media(max-width:700px){.rx-shots-desk{grid-template-columns:1fr}}
+.rx-shots-phone{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:40px}
+.rx-shot{margin:0}
+.rx-shot-frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 22px 44px -34px rgba(0,0,0,.4)}
+.rx-shot-desk .rx-shot-frame{padding-top:22px;position:relative;background:#ecebe7}
+.rx-shot-desk .rx-shot-frame:before{content:"";position:absolute;top:8px;left:12px;width:7px;height:7px;border-radius:50%;background:#d4d3ce;box-shadow:12px 0 0 #d4d3ce,24px 0 0 #d4d3ce}
+.rx-shot-phone .rx-shot-frame{border-radius:22px;border:6px solid #111214;max-width:260px;margin:0 auto}
+.rx-shot img{display:block;width:100%;height:auto}
+.rx-shot figcaption{display:flex;gap:10px;align-items:baseline;font-size:15px;color:var(--muted);margin-top:12px}
+.rx-shot-phone figcaption{justify-content:center;text-align:center;font-size:13.5px}
+.rx-shot-n{font:700 12px/1 Inter,sans-serif;color:var(--red);letter-spacing:.08em}
+.rx-fb-media{border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#0c0c0d}
+.rx-fb-media video{display:block;width:100%;height:100%;object-fit:cover}
+.rx-fb-ph{display:grid;place-content:center;justify-items:center;gap:6px;text-align:center;background:radial-gradient(circle at 50% 38%,#26262a,#0c0c0d 70%);color:#fff;padding:24px}
+.rx-fb-play{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.35);position:relative;margin-bottom:14px}
+.rx-fb-play:after{content:"";position:absolute;left:29px;top:22px;border-left:22px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent}
+.rx-fb-soon{font-size:clamp(18px,2.4vw,24px);font-weight:700;margin:0}
+.rx-fb-who{font-size:14px;color:rgba(255,255,255,.62);margin:0}
+.rx-pager{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding:36px 0 10px}
+.rx-pager a{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.rx-pager a strong{font-size:17px;color:var(--ink)}
+.rx-pager a:hover strong{color:var(--red)}
+.rx-pager-next{text-align:right;align-items:flex-end}
+.rx-pager-mid{font-weight:600;color:var(--ink)!important;border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:#fff}
+@media(max-width:560px){.rx-pager{grid-template-columns:1fr 1fr}.rx-pager-mid{display:none!important}}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
@@ -441,5 +534,13 @@ for (const p of data.pages) {
   mkdirSync(outDir, { recursive: true });
   writeFileSync(join(outDir, "index.html"), renderPage(p));
   count++;
+  if (p.type === "work") {
+    (p.cases || []).forEach((c, i, all) => {
+      const dir = join(ROOT, "work", c.slug);
+      mkdirSync(dir, { recursive: true });
+      writeFileSync(join(dir, "index.html"), renderCase(c, i, all));
+      count++;
+    });
+  }
 }
 console.log(`Generated ${count} service pages.`);

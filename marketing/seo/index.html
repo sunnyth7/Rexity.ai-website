@@ -120,6 +120,48 @@ h1,h2,h3{line-height:1.12;letter-spacing:-.02em;margin:0}
 .rx-case-text{color:var(--muted);font-size:15px;margin:0 0 16px}
 .rx-case-link{font-weight:600;color:var(--ink)}
 .rx-case-link:hover{color:var(--red)}
+/* case study cards + detail pages */
+.rx-case h3 a:hover{color:var(--red)}
+.rx-case-img{display:block}
+.rx-case-meta{font-size:13px;font-weight:600;color:var(--muted);margin:0 0 14px}
+.rx-hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.rx-btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.rx-btn-ghost:hover{background:#fff;color:var(--red);border-color:var(--red)}
+.rx-hero-shot{aspect-ratio:16/10;box-shadow:0 30px 60px -38px rgba(0,0,0,.45)}
+.rx-hero-shot img{object-position:top}
+.rx-facts{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:16px;background:#fff;margin:28px 0 0;overflow:hidden}
+.rx-fact{padding:18px 20px;border-left:1px solid var(--line)}
+.rx-fact:first-child{border-left:0}
+.rx-fact-k{display:block;font:600 11px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.rx-fact-v{display:block;font-size:15px;font-weight:600;line-height:1.35}
+@media(max-width:820px){.rx-facts{grid-template-columns:1fr 1fr}.rx-fact:nth-child(3){border-left:0}.rx-fact:nth-child(n+3){border-top:1px solid var(--line)}}
+.rx-shots-desk{display:grid;grid-template-columns:1fr 1fr;gap:34px 26px}
+.rx-shots-desk>.rx-shot:first-child,.rx-shots-desk>.rx-shot:last-child:nth-child(even){grid-column:1/-1}
+@media(max-width:700px){.rx-shots-desk{grid-template-columns:1fr}}
+.rx-shots-phone{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:40px}
+.rx-shot{margin:0}
+.rx-shot-frame{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 22px 44px -34px rgba(0,0,0,.4)}
+.rx-shot-desk .rx-shot-frame{padding-top:22px;position:relative;background:#ecebe7}
+.rx-shot-desk .rx-shot-frame:before{content:"";position:absolute;top:8px;left:12px;width:7px;height:7px;border-radius:50%;background:#d4d3ce;box-shadow:12px 0 0 #d4d3ce,24px 0 0 #d4d3ce}
+.rx-shot-phone .rx-shot-frame{border-radius:22px;border:6px solid #111214;max-width:260px;margin:0 auto}
+.rx-shot img{display:block;width:100%;height:auto}
+.rx-shot figcaption{display:flex;gap:10px;align-items:baseline;font-size:15px;color:var(--muted);margin-top:12px}
+.rx-shot-phone figcaption{justify-content:center;text-align:center;font-size:13.5px}
+.rx-shot-n{font:700 12px/1 Inter,sans-serif;color:var(--red);letter-spacing:.08em}
+.rx-fb-media{border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#0c0c0d}
+.rx-fb-media video{display:block;width:100%;height:100%;object-fit:cover}
+.rx-fb-ph{display:grid;place-content:center;justify-items:center;gap:6px;text-align:center;background:radial-gradient(circle at 50% 38%,#26262a,#0c0c0d 70%);color:#fff;padding:24px}
+.rx-fb-play{width:74px;height:74px;border-radius:50%;border:2px solid rgba(255,255,255,.35);position:relative;margin-bottom:14px}
+.rx-fb-play:after{content:"";position:absolute;left:29px;top:22px;border-left:22px solid #fff;border-top:15px solid transparent;border-bottom:15px solid transparent}
+.rx-fb-soon{font-size:clamp(18px,2.4vw,24px);font-weight:700;margin:0}
+.rx-fb-who{font-size:14px;color:rgba(255,255,255,.62);margin:0}
+.rx-pager{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;padding:36px 0 10px}
+.rx-pager a{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+.rx-pager a strong{font-size:17px;color:var(--ink)}
+.rx-pager a:hover strong{color:var(--red)}
+.rx-pager-next{text-align:right;align-items:flex-end}
+.rx-pager-mid{font-weight:600;color:var(--ink)!important;border:1px solid var(--line);border-radius:999px;padding:9px 16px;background:#fff}
+@media(max-width:560px){.rx-pager{grid-template-columns:1fr 1fr}.rx-pager-mid{display:none!important}}
 /* services index */
 .rx-cat{padding:34px 0 8px;border-bottom:1px solid var(--line)}
 .rx-cat:last-of-type{border-bottom:0}
