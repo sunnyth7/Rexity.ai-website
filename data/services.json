@@ -3439,11 +3439,11 @@
         }
       ],
       "related": [
+        "fitnessstudio-website",
+        "kfz-aufbereitung-website",
         "web-design",
         "web-development",
-        "mobile-apps",
-        "whatsapp",
-        "chatbots"
+        "mobile-apps"
       ],
       "schema": [
         {
@@ -3910,9 +3910,10 @@
         }
       ],
       "related": [
+        "fitnessstudio-website",
+        "kfz-aufbereitung-website",
         "web-development",
         "mobile-apps",
-        "automation",
         "niedersachsen"
       ],
       "schema": [
@@ -4049,6 +4050,955 @@
                   "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Alle Preise verstehen sich netto zuzüglich der gesetzlichen Mehrwertsteuer."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "kfz-aufbereitung-website",
+      "type": "standalone",
+      "code": "B2",
+      "title": {
+        "en": "Online appointment booking for car detailers & workshops",
+        "de": "Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten"
+      },
+      "tagline": {
+        "en": "A website where customers pick a service, a free day and a time — and book firmly, confirmed on the spot.",
+        "de": "Eine Website, auf der Kunden Leistung, freien Tag und Uhrzeit wählen und fest buchen — bestätigt in dem Moment, in dem sie tippen."
+      },
+      "summary": {
+        "en": "We build websites for car detailers, car-care businesses and small workshops that do more than display an address: customers choose a service, see only genuinely free days and times and book their appointment firmly. The confirmation arrives immediately, the appointment lands in your calendar, and the phone stays quiet while you are working on a vehicle.",
+        "de": "Wir bauen Websites für Fahrzeugaufbereiter, Autopflege-Betriebe und kleine Werkstätten, die mehr können als eine Adresse anzeigen: Kunden wählen eine Leistung, sehen nur wirklich freie Tage und Uhrzeiten und buchen ihren Termin verbindlich. Die Bestätigung kommt sofort, der Termin landet in Ihrem Kalender, und das Telefon bleibt still, während Sie am Fahrzeug arbeiten."
+      },
+      "seo": {
+        "title": {
+          "de": "Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten",
+          "en": "Online appointment booking for detailers & workshops"
+        },
+        "description": {
+          "de": "Werkstatt-Website mit Online-Terminbuchung für Kfz-Aufbereiter: nur freie Zeiten, keine Doppelbuchung, Verwaltung am Handy. Ab 2.900 €, 12 Monate Wartung.",
+          "en": "Workshop website with online appointment booking for car detailers: free slots only, no double bookings, admin on your phone. From €2,900, 12-month upkeep."
+        }
+      },
+      "phone": "+49 174 2471435",
+      "image": {
+        "src": "/rexity-omi/assets/work/chara/03-termin.webp",
+        "alt": {
+          "en": "Online appointment booking on the website of Fahrzeugpflege Celle",
+          "de": "Online-Terminbuchung auf der Website von Fahrzeugpflege Celle"
+        }
+      },
+      "sections": [
+        {
+          "heading": {
+            "de": "Das Problem im Werkstattalltag",
+            "en": "The problem in everyday workshop life"
+          },
+          "paras": [
+            {
+              "de": "Wer Fahrzeuge aufbereitet, hat die Hände selten frei. Das Telefon klingelt, während gerade die Politur läuft oder der Innenraum ausgesaugt wird. Entweder geht man ran, unterbricht die Arbeit und verhandelt mit nassen Handschuhen einen Termin — oder man geht nicht ran, und der Kunde ruft beim nächsten Betrieb an. Beides kostet Geld, und beides passiert an einem normalen Tag mehrfach.",
+              "en": "Anyone who details vehicles rarely has their hands free. The phone rings while the polisher is running or the interior is being vacuumed. Either you answer, interrupt the job and negotiate an appointment with wet gloves — or you do not answer, and the customer calls the next business. Both cost money, and both happen several times on an ordinary day."
+            },
+            {
+              "de": "Dazu kommen die Nachrichten. Terminanfragen per WhatsApp verteilen sich über Dutzende Chats: Ein Kunde fragt nach einem Termin am Freitag, ein anderer will wissen, ob Samstag noch etwas frei ist, ein dritter schickt drei Fotos und fragt, was eine Lackreinigung kostet. Abends sitzt der Inhaber mit dem Handy in der Hand und arbeitet die Verläufe ab. Wer welchen Termin wann bestätigt bekommen hat, steht irgendwo in diesen Chats, im Kopf oder auf einem Zettel neben der Kasse.",
+              "en": "Then there are the messages. Appointment requests via WhatsApp spread across dozens of chats: one customer asks for Friday, another wants to know whether Saturday is still free, a third sends three photos and asks what a paint decontamination costs. In the evening the owner sits with the phone in hand and works through the threads. Who was confirmed for which appointment lives somewhere in those chats, in memory or on a note next to the till."
+            },
+            {
+              "de": "So entstehen Doppelbuchungen: Zwei Fahrzeuge stehen zur gleichen Zeit auf dem Hof, ein Kunde muss wieder wegfahren und ist verständlicherweise verärgert. Oder das Gegenteil passiert — ein Termin wurde mündlich zugesagt, aber nie notiert, und die Hebebühne bleibt an dem Tag leer. Es fehlt ein Ort, an dem alle Termine stehen, und es fehlt ein Weg, wie Kunden sich selbst einen Termin nehmen können, ohne dass jemand in der Werkstatt dafür die Arbeit unterbrechen muss. Genau diesen Ort bauen wir.",
+              "en": "That is how double bookings happen: two vehicles arrive in the yard at the same time, one customer has to leave again and is understandably annoyed. Or the opposite happens — an appointment was promised verbally but never written down, and the lift stays empty that day. What is missing is one place where all appointments live, and a way for customers to take an appointment themselves without anyone in the workshop having to stop working. That is the place we build."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was die Website kann",
+            "en": "What the website does"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Keine Broschüre mit Kontaktformular, sondern ein Werkzeug, das Ihnen Arbeit abnimmt. Die Website zeigt Ihre Leistungen, lässt Kunden selbst buchen und gibt Ihnen einen Überblick, der auf dem Handy in der Werkstatt genauso funktioniert wie am Rechner im Büro.",
+              "en": "Not a brochure with a contact form, but a tool that takes work off your hands. The website presents your services, lets customers book themselves and gives you an overview that works on a phone in the workshop just as well as on the office computer."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Eigene Seite je Leistung",
+                "en": "One page per service"
+              },
+              "body": {
+                "de": "Wäsche, Politur, Innenraumaufbereitung, Lackreinigung, Versiegelung und was Sie sonst anbieten: Jede Leistung bekommt eine eigene Seite mit Beschreibung, Dauer, Preisrahmen und Bildern. So finden Kunden über die Suche genau das, was sie brauchen, und wissen vor der Buchung, was sie bekommen.",
+                "en": "Wash, polish, interior detailing, paint decontamination, coating and whatever else you offer: every service gets its own page with description, duration, price range and images. Customers find exactly what they need via search and know what they get before they book."
+              }
+            },
+            {
+              "title": {
+                "de": "Terminbuchung in vier Schritten",
+                "en": "Booking in four steps"
+              },
+              "body": {
+                "de": "Leistung wählen, Tag wählen, Uhrzeit wählen, Name und Telefonnummer eintragen. Mehr braucht es nicht. Die Bestätigung erscheint sofort auf dem Bildschirm, ohne Rückruf und ohne Warten auf eine Antwort.",
+                "en": "Choose the service, choose the day, choose the time, enter name and phone number. Nothing more is needed. The confirmation appears on screen immediately, with no call back and no waiting for a reply."
+              }
+            },
+            {
+              "title": {
+                "de": "Nur wirklich freie Zeiten",
+                "en": "Only genuinely free slots"
+              },
+              "body": {
+                "de": "Der Kalender kennt Ihre Öffnungszeiten, die Dauer jeder Leistung und die bereits gebuchten Termine. Kunden sehen ausschließlich Zeiten, die tatsächlich frei sind — und nur so viele, wie Sie gleichzeitig bearbeiten können.",
+                "en": "The calendar knows your opening hours, the duration of each service and the appointments already booked. Customers see only times that are actually free — and only as many as you can handle at once."
+              }
+            },
+            {
+              "title": {
+                "de": "Doppelbuchung technisch ausgeschlossen",
+                "en": "Double bookings technically impossible"
+              },
+              "body": {
+                "de": "Sobald ein Termin gebucht ist, verschwindet die Zeit für alle anderen. Auch wenn zwei Kunden gleichzeitig auf dieselbe Uhrzeit tippen, bekommt nur einer die Zusage; der andere sieht die nächste freie Zeit. Das regelt das System, nicht Ihre Aufmerksamkeit.",
+                "en": "As soon as an appointment is booked, that time disappears for everyone else. Even if two customers tap the same slot at the same moment, only one gets the confirmation; the other sees the next free time. The system handles this, not your attention."
+              }
+            },
+            {
+              "title": {
+                "de": "Termin in den eigenen Kalender",
+                "en": "Appointment in your own calendar"
+              },
+              "body": {
+                "de": "Jede Buchung lässt sich mit einem Tipp in den Kalender auf dem Handy übernehmen — bei Ihnen und beim Kunden. Der Kunde bekommt so eine Erinnerung, ohne dass Sie eine schreiben müssen.",
+                "en": "Every booking can be added to the phone calendar with one tap — on your side and the customer's. The customer gets a reminder without you having to write one."
+              }
+            },
+            {
+              "title": {
+                "de": "Verwaltungsbereich für den Inhaber",
+                "en": "Admin area for the owner"
+              },
+              "body": {
+                "de": "Ein geschützter Bereich zeigt alle Termine nach Tag geordnet: wer kommt wann mit welcher Leistung. Anruf oder WhatsApp an den Kunden mit einem Tipp, Termin verschieben oder absagen ebenfalls. Keine Schulung nötig, keine Software auf dem Rechner.",
+                "en": "A protected area shows all appointments ordered by day: who comes when for which service. Call or message the customer with one tap, move or cancel an appointment just as easily. No training needed, no software to install."
+              }
+            },
+            {
+              "title": {
+                "de": "Vorher-nachher-Fotos und -Videos",
+                "en": "Before-and-after photos and videos"
+              },
+              "body": {
+                "de": "Nichts überzeugt bei Fahrzeugaufbereitung so sehr wie das Ergebnis. Die Website zeigt echte Aufnahmen aus Ihren Aufträgen, Kennzeichen werden unkenntlich gemacht. Neue Aufnahmen laden Sie selbst hoch.",
+                "en": "Nothing convinces in car detailing like the result. The website shows real footage from your jobs, with number plates made unrecognisable. You upload new footage yourself."
+              }
+            },
+            {
+              "title": {
+                "de": "Google-Bewertung eingebunden",
+                "en": "Google rating embedded"
+              },
+              "body": {
+                "de": "Ihre bestehende Bewertung aus dem Google-Eintrag erscheint direkt auf der Website. Kunden sehen, was andere über Ihre Arbeit sagen, bevor sie buchen — ohne dass Sie Bewertungen abtippen oder pflegen müssen.",
+                "en": "Your existing rating from your Google listing appears directly on the website. Customers see what others say about your work before they book — without you having to copy or maintain reviews."
+              }
+            },
+            {
+              "title": {
+                "de": "Als App auf dem Handy",
+                "en": "As an app on the phone"
+              },
+              "body": {
+                "de": "Die Website lässt sich auf dem Smartphone wie eine App auf dem Startbildschirm ablegen — für Sie als Verwaltung und für Stammkunden, die regelmäßig buchen. Ohne App-Store, ohne Installation, ohne laufende Gebühren.",
+                "en": "The website can be placed on a smartphone home screen like an app — for you as the admin and for regulars who book often. No app store, no installation, no recurring fees."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Das Referenzprojekt",
+            "en": "The reference project"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Alles, was oben beschrieben ist, haben wir für einen Fahrzeugpflege-Betrieb in Celle gebaut — in rund fünf Wochen zwischen Juli und August 2026. Das Projekt ist fertiggestellt und lässt sich in unserer Projektübersicht mit echten Screens am Rechner und auf dem Handy ansehen, von der Startseite bis zur fertigen Buchung.",
+              "en": "Everything described above we built for a car-care business in Celle — in about five weeks between July and August 2026. The project is completed and can be viewed in our project overview with real screens on desktop and phone, from the homepage to the finished booking."
+            }
+          ],
+          "items": [
+            {
+              "code": "CELLE",
+              "href": "/work/chara",
+              "title": {
+                "de": "Fahrzeugpflege Celle",
+                "en": "Fahrzeugpflege Celle"
+              },
+              "body": {
+                "de": "Website mit Online-Terminbuchung für einen Fahrzeugaufbereiter: eine Seite je Leistung, nur freie Zeiten sichtbar, feste Buchung mit sofortiger Bestätigung, Verwaltungsbereich für den Inhaber, echte Vorher-nachher-Aufnahmen.",
+                "en": "Website with online appointment booking for a car detailer: one page per service, only free slots visible, firm booking with instant confirmation, admin area for the owner, real before-and-after footage."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was es kostet",
+            "en": "What it costs"
+          },
+          "paras": [
+            {
+              "de": "Eine Werkstatt-Website mit Online-Terminbuchung beginnt bei 2.900 € (Festpreis nach Angebot, 12 Monate Wartung inklusive). Marktüblich sind für vergleichbare Projekte in Deutschland etwa 3.900 € bis 8.000 €. Der Preis wird nach einem kurzen Gespräch fest vereinbart — wenn wir genau wissen, was Sie brauchen, in welchem Zeitrahmen und mit welchem Umfang, ist auch der Preis verhandelbar.",
+              "en": "A workshop website with online appointment booking starts at €2,900 (fixed price by quote, 12 months of maintenance included). The usual market range for comparable projects in Germany is roughly €3,900 to €8,000. The price is agreed firmly after a short call — once we know exactly what you need, in which timeframe and at which scope, the price is negotiable as well."
+            },
+            {
+              "de": "Es gibt keine monatliche Lizenz für die Buchung und keine Provision pro Termin. Die Website gehört Ihnen, läuft auf Ihrer Domain und auf Hosting innerhalb der EU. Nach den zwölf Monaten entscheiden Sie, ob Sie die Wartung verlängern oder die Seite selbst weiterbetreiben.",
+              "en": "There is no monthly licence for the booking and no commission per appointment. The website belongs to you, runs on your domain and on hosting within the EU. After the twelve months you decide whether to extend maintenance or run the site yourself."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Im Preis enthalten",
+                "en": "Included in the price"
+              },
+              "body": {
+                "de": "Design, Umsetzung, Online-Terminbuchung, Verwaltungsbereich für den Inhaber, Einrichtung auf Ihrer Domain, Abstimmung der DSGVO-Texte mit Ihnen, zwölf Monate Wartung.",
+                "en": "Design, build, online appointment booking, admin area for the owner, set-up on your domain, coordination of the GDPR texts with you, twelve months of maintenance."
+              }
+            },
+            {
+              "title": {
+                "de": "Nicht enthalten",
+                "en": "Not included"
+              },
+              "body": {
+                "de": "Fotografie und Video vor Ort, Texte in Fremdsprachen, laufende Werbung. Auf Wunsch vermitteln oder kalkulieren wir diese Punkte separat.",
+                "en": "Photography and video on site, texts in foreign languages, ongoing advertising. On request we arrange or quote these items separately."
+              }
+            }
+          ]
+        }
+      ],
+      "offerings": {
+        "de": [
+          "Beratung und festes Angebot nach einem kurzen Gespräch",
+          "Design und Umsetzung für Handy und Desktop",
+          "Online-Terminbuchung mit Leistung, Tag, Uhrzeit und sofortiger Bestätigung",
+          "Verwaltungsbereich für Termine, Öffnungszeiten und Sperrtage",
+          "Einrichtung auf Ihrer Domain, Hosting innerhalb der EU",
+          "Abstimmung der Datenschutztexte und automatische Löschfristen",
+          "Zwölf Monate Wartung im Paket enthalten"
+        ],
+        "en": [
+          "Consultation and a fixed quote after a short call",
+          "Design and build for phone and desktop",
+          "Online appointment booking with service, day, time and instant confirmation",
+          "Admin area for appointments, opening hours and blocked days",
+          "Set-up on your domain, hosting within the EU",
+          "Coordination of privacy texts and automatic deletion periods",
+          "Twelve months of maintenance included in the package"
+        ]
+      },
+      "outcomes": {
+        "de": [
+          "Weniger Anrufe während der Arbeit — Kunden buchen selbst, auch abends und am Wochenende",
+          "Keine Doppelbuchungen und keine vergessenen Zusagen",
+          "Alle Termine an einem Ort, auf dem Handy in der Werkstatt einsehbar",
+          "Eine Website, die Ihre Arbeit zeigt und Ihnen gehört"
+        ],
+        "en": [
+          "Fewer calls during work — customers book themselves, in the evening and at weekends too",
+          "No double bookings and no forgotten promises",
+          "All appointments in one place, viewable on the phone in the workshop",
+          "A website that shows your work and belongs to you"
+        ]
+      },
+      "process": [
+        {
+          "title": {
+            "de": "Gespräch",
+            "en": "Call"
+          },
+          "body": {
+            "de": "30 Minuten per Video oder vor Ort im Raum Celle: Welche Leistungen bieten Sie an, wie lange dauern sie, wie viele Fahrzeuge schaffen Sie parallel, wie kommen Termine heute herein.",
+            "en": "30 minutes by video or on site around Celle: which services you offer, how long they take, how many vehicles you handle in parallel, how appointments come in today."
+          }
+        },
+        {
+          "title": {
+            "de": "Angebot",
+            "en": "Quote"
+          },
+          "body": {
+            "de": "Ein schriftliches Festpreis-Angebot mit Umfang, Zeitplan und allem, was enthalten ist. Keine versteckten Posten, keine laufenden Lizenzkosten.",
+            "en": "A written fixed-price quote with scope, timeline and everything that is included. No hidden items, no recurring licence costs."
+          }
+        },
+        {
+          "title": {
+            "de": "Umsetzung",
+            "en": "Build"
+          },
+          "body": {
+            "de": "Sie sehen regelmäßig Vorschau-Links und testen die Buchung selbst auf dem Handy. Ihr Feedback fließt direkt ein. Typisch sind vier bis sechs Wochen.",
+            "en": "You see regular preview links and test the booking yourself on your phone. Your feedback goes straight in. Four to six weeks is typical."
+          }
+        },
+        {
+          "title": {
+            "de": "Go-live und Wartung",
+            "en": "Go-live and maintenance"
+          },
+          "body": {
+            "de": "Abnahme, Start auf Ihrer Domain, kurze Einweisung in den Verwaltungsbereich — danach zwölf Monate Wartung mit einem Ansprechpartner, der die Seite gebaut hat.",
+            "en": "Hand-over, launch on your domain, a short walkthrough of the admin area — then twelve months of maintenance with a contact person who built the site."
+          }
+        }
+      ],
+      "who": {
+        "de": "Für Fahrzeugaufbereiter, Autopflege-Betriebe, Smart-Repair-Anbieter und kleine Werkstätten mit ein bis fünf Mitarbeitern, bei denen heute das Telefon und die Nachrichten die Terminplanung bestimmen.",
+        "en": "For car detailers, car-care businesses, smart-repair providers and small workshops with one to five staff, where the phone and messages currently dictate the scheduling."
+      },
+      "faqs": [
+        {
+          "q": {
+            "de": "Bekomme ich eine E-Mail bei jeder Buchung?",
+            "en": "Do I get an email for every booking?"
+          },
+          "a": {
+            "de": "Wahlweise. Wir können bei jeder neuen Buchung, Verschiebung oder Absage eine E-Mail an Sie schicken. Manche Betriebe wollen das bewusst nicht, weil das Postfach sonst zur zweiten Terminliste wird — sie schauen morgens einmal in den Verwaltungsbereich und sehen dort den ganzen Tag. Beides ist möglich, Sie entscheiden bei der Einrichtung.",
+            "en": "Optionally. We can send you an email for every new booking, change or cancellation. Some businesses deliberately do not want that, because the inbox would become a second appointment list — they check the admin area once in the morning and see the whole day there. Both are possible; you decide during set-up."
+          }
+        },
+        {
+          "q": {
+            "de": "Was ist mit Leistungen, die mehrere Tage dauern?",
+            "en": "What about services that take several days?"
+          },
+          "a": {
+            "de": "Eine Komplettaufbereitung oder eine Lackversiegelung mit Trocknungszeit passt nicht in ein Zeitfenster von zwei Stunden. Solche Leistungen werden auf der Website als Anfrage statt als feste Buchung angelegt: Der Kunde nennt Wunschzeitraum und Fahrzeug, Sie bestätigen den Termin nach einem kurzen Blick in den Kalender. So bleibt die Sofortbuchung den Leistungen vorbehalten, bei denen sie wirklich funktioniert.",
+            "en": "A full detail or a paint coating with curing time does not fit into a two-hour slot. Such services are set up on the website as a request rather than a firm booking: the customer states a preferred period and the vehicle, you confirm the appointment after a quick look at the calendar. Instant booking stays reserved for the services where it genuinely works."
+          }
+        },
+        {
+          "q": {
+            "de": "Kann ich Öffnungszeiten und Urlaub sperren?",
+            "en": "Can I block opening hours and holidays?"
+          },
+          "a": {
+            "de": "Ja. Im Verwaltungsbereich legen Sie Ihre regulären Öffnungszeiten fest und sperren einzelne Tage oder ganze Wochen — für Urlaub, Feiertage, Messen oder einfach, weil der Hof voll ist. Gesperrte Zeiten erscheinen Kunden nicht als buchbar. Bereits gebuchte Termine in einem gesperrten Zeitraum werden Ihnen angezeigt, damit Sie die Kunden informieren können.",
+            "en": "Yes. In the admin area you set your regular opening hours and block individual days or whole weeks — for holidays, public holidays, trade fairs or simply because the yard is full. Blocked times do not appear as bookable to customers. Appointments already booked within a blocked period are shown to you so you can inform those customers."
+          }
+        },
+        {
+          "q": {
+            "de": "Wie lange werden Kundendaten gespeichert?",
+            "en": "How long is customer data stored?"
+          },
+          "a": {
+            "de": "Nur so lange wie nötig. Name, Telefonnummer und Fahrzeugangaben werden nach einer festen Frist automatisch gelöscht, zum Beispiel 30 Tage nach dem Termin. Die Frist stimmen wir mit Ihnen ab und tragen sie in die Datenschutzerklärung ein. Es wird nichts an Dritte weitergegeben, und die Daten liegen auf Servern innerhalb der EU — das entspricht den Anforderungen der DSGVO.",
+            "en": "Only as long as necessary. Name, phone number and vehicle details are deleted automatically after a fixed period, for example 30 days after the appointment. We agree the period with you and record it in the privacy policy. Nothing is passed on to third parties, and the data sits on servers within the EU — in line with the GDPR."
+          }
+        },
+        {
+          "q": {
+            "de": "Funktioniert das mit meinem bestehenden Google-Eintrag?",
+            "en": "Does this work with my existing Google listing?"
+          },
+          "a": {
+            "de": "Ja. Ihre Bewertung aus dem bestehenden Eintrag wird auf der Website eingebunden, und der Termin-Link kann direkt im Profil hinterlegt werden. Wer Sie über die Suche oder die Karte findet, kommt so mit einem Tipp zur Buchung. Den Eintrag selbst behalten Sie; wir helfen bei der Verknüpfung.",
+            "en": "Yes. The rating from your existing listing is embedded on the website, and the booking link can be placed directly in the profile. Anyone who finds you via search or the map reaches the booking with one tap. You keep the listing itself; we help with the connection."
+          }
+        },
+        {
+          "q": {
+            "de": "Brauche ich eine eigene Domain?",
+            "en": "Do I need my own domain?"
+          },
+          "a": {
+            "de": "Ja, und sie gehört Ihnen. Wenn Sie schon eine Domain haben, richten wir die Website darauf ein. Wenn nicht, registrieren wir eine auf Ihren Namen — die Einrichtung ist im Preis enthalten, die jährliche Domain-Gebühr zahlen Sie direkt an den Registrar. Sie bekommen alle Zugänge; wir sind nicht der Vermieter Ihrer eigenen Website.",
+            "en": "Yes, and it belongs to you. If you already have a domain, we set the website up on it. If not, we register one in your name — set-up is included in the price, the annual domain fee you pay directly to the registrar. You receive all credentials; we are not the landlord of your own website."
+          }
+        }
+      ],
+      "related": [
+        "web-development",
+        "automation",
+        "niedersachsen",
+        "work"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Service",
+              "@id": "https://www.rexity.ai/kfz-aufbereitung-website#service",
+              "name": "Werkstatt-Website mit Online-Terminbuchung",
+              "serviceType": "Website mit Online-Terminbuchung für Kfz-Aufbereiter und Werkstätten",
+              "description": "Website für Fahrzeugaufbereiter und Werkstätten: eine Seite je Leistung, Online-Terminbuchung mit sofortiger Bestätigung, nur freie Zeiten, keine Doppelbuchungen, Verwaltungsbereich für den Inhaber.",
+              "url": "https://www.rexity.ai/kfz-aufbereitung-website",
+              "image": "https://www.rexity.ai/rexity-omi/assets/work/chara/03-termin.webp",
+              "provider": {
+                "@type": "Organization",
+                "@id": "https://www.rexity.ai/#organization",
+                "name": "Rexity Labs UG (haftungsbeschränkt)",
+                "alternateName": "Rexity Labs",
+                "url": "https://www.rexity.ai",
+                "email": "info@rexity.ai",
+                "telephone": "+49 174 2471435"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Deutschland"
+              },
+              "audience": {
+                "@type": "BusinessAudience",
+                "name": "Kfz-Aufbereiter, Autopflege-Betriebe und Werkstätten"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.rexity.ai/kfz-aufbereitung-website",
+                "priceCurrency": "EUR",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "minPrice": 2900,
+                  "priceCurrency": "EUR",
+                  "valueAddedTaxIncluded": false
+                },
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.rexity.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten",
+                  "item": "https://www.rexity.ai/kfz-aufbereitung-website"
+                }
+              ]
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Bekomme ich eine E-Mail bei jeder Buchung?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Wahlweise. Wir können bei jeder neuen Buchung, Verschiebung oder Absage eine E-Mail an Sie schicken. Manche Betriebe wollen das bewusst nicht, weil das Postfach sonst zur zweiten Terminliste wird — sie schauen morgens einmal in den Verwaltungsbereich und sehen dort den ganzen Tag. Beides ist möglich, Sie entscheiden bei der Einrichtung."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was ist mit Leistungen, die mehrere Tage dauern?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Eine Komplettaufbereitung oder eine Lackversiegelung mit Trocknungszeit passt nicht in ein Zeitfenster von zwei Stunden. Solche Leistungen werden auf der Website als Anfrage statt als feste Buchung angelegt: Der Kunde nennt Wunschzeitraum und Fahrzeug, Sie bestätigen den Termin nach einem kurzen Blick in den Kalender. So bleibt die Sofortbuchung den Leistungen vorbehalten, bei denen sie wirklich funktioniert."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Kann ich Öffnungszeiten und Urlaub sperren?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Im Verwaltungsbereich legen Sie Ihre regulären Öffnungszeiten fest und sperren einzelne Tage oder ganze Wochen — für Urlaub, Feiertage, Messen oder einfach, weil der Hof voll ist. Gesperrte Zeiten erscheinen Kunden nicht als buchbar. Bereits gebuchte Termine in einem gesperrten Zeitraum werden Ihnen angezeigt, damit Sie die Kunden informieren können."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wie lange werden Kundendaten gespeichert?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nur so lange wie nötig. Name, Telefonnummer und Fahrzeugangaben werden nach einer festen Frist automatisch gelöscht, zum Beispiel 30 Tage nach dem Termin. Die Frist stimmen wir mit Ihnen ab und tragen sie in die Datenschutzerklärung ein. Es wird nichts an Dritte weitergegeben, und die Daten liegen auf Servern innerhalb der EU — das entspricht den Anforderungen der DSGVO."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Funktioniert das mit meinem bestehenden Google-Eintrag?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Ihre Bewertung aus dem bestehenden Eintrag wird auf der Website eingebunden, und der Termin-Link kann direkt im Profil hinterlegt werden. Wer Sie über die Suche oder die Karte findet, kommt so mit einem Tipp zur Buchung. Den Eintrag selbst behalten Sie; wir helfen bei der Verknüpfung."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Brauche ich eine eigene Domain?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja, und sie gehört Ihnen. Wenn Sie schon eine Domain haben, richten wir die Website darauf ein. Wenn nicht, registrieren wir eine auf Ihren Namen — die Einrichtung ist im Preis enthalten, die jährliche Domain-Gebühr zahlen Sie direkt an den Registrar. Sie bekommen alle Zugänge; wir sind nicht der Vermieter Ihrer eigenen Website."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "fitnessstudio-website",
+      "type": "standalone",
+      "code": "B1",
+      "title": {
+        "en": "Website with online class booking for gyms",
+        "de": "Website mit Online-Kursbuchung für Fitnessstudios"
+      },
+      "tagline": {
+        "en": "Members book and cancel their class spot themselves — the front desk stays free.",
+        "de": "Mitglieder buchen und stornieren ihren Kursplatz selbst — die Theke bleibt frei."
+      },
+      "summary": {
+        "en": "A website on which your members see the class schedule, book a spot and release it again — without a call, without a customer account, on their phone. Your team maintains classes and capacities itself; bookings run on EU hosting on your own domain. Built for a fitness and health centre in Hermannsburg, fixed price from 2,900 €.",
+        "de": "Eine Website, auf der Ihre Mitglieder den Kursplan sehen, einen Platz buchen und ihn wieder freigeben — ohne Anruf, ohne Kundenkonto, auf dem Handy. Ihr Team pflegt Kurse und Plätze selbst; Buchungen laufen auf EU-Hosting auf Ihrer eigenen Domain. Umgesetzt für ein Fitness- und Gesundheitszentrum in Hermannsburg, Festpreis ab 2.900 €."
+      },
+      "seo": {
+        "title": {
+          "de": "Fitnessstudio-Website mit Online-Kursbuchung | Rexity Labs",
+          "en": "Gym Website with Online Class Booking | Rexity Labs"
+        },
+        "description": {
+          "de": "Website für Ihr Fitnessstudio mit Online-Kursbuchung: Mitglieder buchen und stornieren Kursplätze selbst, ohne Kundenkonto. Festpreis ab 2.900 €.",
+          "en": "Gym website with online class booking: members book and cancel class spots themselves, no customer account needed. Fixed price from 2,900 €."
+        }
+      },
+      "phone": "+49 174 2471435",
+      "image": {
+        "src": "/rexity-omi/assets/work/body-and-care/02-kurse.webp",
+        "alt": {
+          "en": "Class schedule page of Body & Care Hermannsburg",
+          "de": "Kursplan-Seite von Body & Care Hermannsburg"
+        }
+      },
+      "sections": [
+        {
+          "heading": {
+            "de": "Das Problem im Studioalltag",
+            "en": "The problem in everyday studio life"
+          },
+          "paras": [
+            {
+              "de": "In den meisten Studios laufen Kursbuchungen noch über das Telefon oder über eine Liste an der Theke. Wer einen Platz im Rückenkurs am Dienstagabend möchte, ruft an, fragt nach, wird eingetragen — und wer es sich anders überlegt, ruft im besten Fall noch einmal an. Im schlechteren Fall bleibt der Platz einfach leer, obwohl jemand anderes gern gekommen wäre. Die Person an der Rezeption ist derweil mit dem Hörer in der Hand beschäftigt, während vor ihr ein Neukunde wartet, der eigentlich ein Probetraining vereinbaren wollte.",
+              "en": "In most studios class bookings still run over the phone or via a list at the front desk. Whoever wants a spot in the back class on Tuesday evening calls, asks, gets written in — and whoever changes their mind calls again, in the best case. In the worse case the spot simply stays empty although someone else would have liked to come. Meanwhile the person at reception is busy with the receiver in hand while a new customer waits in front of them who actually wanted to arrange a trial session."
+            },
+            {
+              "de": "Papierlisten haben noch ein zweites Problem: Sie sind nur im Studio sichtbar. Mitglieder wissen abends nicht, ob im Kurs am nächsten Morgen noch ein Platz frei ist, und Trainer wissen bis kurz vor Kursbeginn nicht, wie viele Teilnehmer wirklich kommen. Nicht erschienene Teilnehmer fallen erst auf, wenn der Kurs schon läuft. Dann ist es zu spät, jemanden von der Warteliste anzurufen.",
+              "en": "Paper lists have a second problem: they are only visible inside the studio. Members do not know in the evening whether there is still a spot in the class the next morning, and trainers do not know until shortly before the class starts how many participants will really come. No-shows only become apparent once the class is already running. By then it is too late to call anyone from the waiting list."
+            },
+            {
+              "de": "All das ist keine Frage von Fleiß oder Organisation. Es ist eine Frage des Werkzeugs. Eine Website mit Online-Kursbuchung verlagert genau diese Handgriffe dorthin, wo sie hingehören: zu den Mitgliedern selbst, auf deren Handy, zu jeder Tageszeit. Ihr Team behält den Überblick, ohne den Hörer abzunehmen.",
+              "en": "None of this is a question of diligence or organisation. It is a question of tooling. A website with online class booking moves exactly these tasks to where they belong: to the members themselves, on their phone, at any time of day. Your team keeps the overview without picking up the receiver."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was die Website kann",
+            "en": "What the website does"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Der Umfang ist bewusst schlank gehalten: Es geht um die Dinge, die im Studioalltag täglich vorkommen — nicht um eine Mitgliederverwaltung mit hundert Einstellungen. Jede Funktion ist auf dem Handy genauso bedienbar wie am Rechner.",
+              "en": "The scope is deliberately lean: it is about the things that happen in the studio every day — not a membership system with a hundred settings. Every function is just as usable on a phone as on a computer."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Kursplan mit Live-Plätzen",
+                "en": "Class schedule with live capacity"
+              },
+              "body": {
+                "de": "Der Wochenplan zeigt für jeden Kurs, wie viele Plätze noch frei sind. Ist ein Kurs voll, steht das dort — niemand muss nachfragen.",
+                "en": "The weekly schedule shows for every class how many spots are still free. If a class is full, it says so — nobody has to ask."
+              }
+            },
+            {
+              "title": {
+                "de": "Buchen und Stornieren ohne Kundenkonto",
+                "en": "Booking and cancelling without a customer account"
+              },
+              "body": {
+                "de": "Mitglieder tragen Name und Kontakt ein, bestätigen, fertig. Kein Passwort, keine Registrierung. Stornieren geht über den Link in der Bestätigung; der Platz wird sofort wieder frei.",
+                "en": "Members enter name and contact, confirm, done. No password, no registration. Cancelling works via the link in the confirmation; the spot is released immediately."
+              }
+            },
+            {
+              "title": {
+                "de": "Probetraining-Anfrage",
+                "en": "Trial session request"
+              },
+              "body": {
+                "de": "Interessenten fragen ein Probetraining mit Wunschtermin an. Die Anfrage landet als E-Mail bei Ihnen, der Absender bekommt eine automatische Eingangsbestätigung.",
+                "en": "Prospects request a trial session with a preferred date. The request arrives with you as an email; the sender receives an automatic acknowledgement."
+              }
+            },
+            {
+              "title": {
+                "de": "Preise und Öffnungszeiten",
+                "en": "Prices and opening hours"
+              },
+              "body": {
+                "de": "Mitgliedschaften, Zusatzangebote und Öffnungszeiten an einer Stelle gepflegt — inklusive Feiertagsregelungen, damit die Telefonzentrale an Ostern ruhig bleibt.",
+                "en": "Memberships, add-ons and opening hours maintained in one place — including holiday exceptions, so the phone stays quiet at Easter."
+              }
+            },
+            {
+              "title": {
+                "de": "Google-Bewertungen eingebunden",
+                "en": "Google reviews embedded"
+              },
+              "body": {
+                "de": "Ihre echten Bewertungen erscheinen auf der Startseite, ohne dass Sie sie abtippen müssen. Neue Bewertungen tauchen automatisch auf.",
+                "en": "Your real reviews appear on the start page without you having to retype them. New reviews show up automatically."
+              }
+            },
+            {
+              "title": {
+                "de": "WhatsApp und Telefon mit einem Tipp",
+                "en": "WhatsApp and phone with one tap"
+              },
+              "body": {
+                "de": "Auf dem Handy reicht ein Tipp auf die Nummer oder das WhatsApp-Symbol. Wer doch lieber sprechen möchte, findet den Weg in zwei Sekunden.",
+                "en": "On a phone one tap on the number or the WhatsApp icon is enough. Anyone who prefers to talk finds the way in two seconds."
+              }
+            },
+            {
+              "title": {
+                "de": "Kursverwaltung für das Team",
+                "en": "Class management for the team"
+              },
+              "body": {
+                "de": "Ein einfacher Bereich, in dem Ihr Team Kurse anlegt, Plätze anpasst, Ausfälle einträgt und die Teilnehmerliste für den nächsten Kurs sieht. Ohne Schulung bedienbar.",
+                "en": "A simple area in which your team creates classes, adjusts capacities, records cancellations and sees the participant list for the next class. Usable without training."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Das Referenzprojekt",
+            "en": "The reference project"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Wir beschreiben hier kein Konzept, sondern eine Website, die läuft. Body & Care Hermannsburg ist ein Fitness- und Gesundheitszentrum in der Südheide, das seit 2002 besteht. Die Kurse wurden bis dahin telefonisch und über Listen im Studio vergeben. Die neue Website mit Online-Kursbuchung ist seit dem 14.09.2026 live; die Umsetzung hat rund sechs Wochen gedauert. Auf der Projektseite können Sie die echten Seiten für Desktop und Handy durchscrollen.",
+              "en": "We are not describing a concept here but a website that is running. Body & Care Hermannsburg is a fitness and health centre in the Südheide that has existed since 2002. Until then classes were allocated by phone and via lists in the studio. The new website with online class booking has been live since 14 September 2026; the build took about six weeks. On the project page you can scroll through the real pages for desktop and phone."
+            }
+          ],
+          "items": [
+            {
+              "code": "HERMANNSBURG",
+              "href": "/work/body-and-care",
+              "title": {
+                "de": "Body & Care Hermannsburg",
+                "en": "Body & Care Hermannsburg"
+              },
+              "body": {
+                "de": "Fitness- und Gesundheitszentrum seit 2002. Website mit Online-Kursbuchung, live seit 14.09.2026, Umsetzung in rund sechs Wochen.",
+                "en": "Fitness and health centre since 2002. Website with online class booking, live since 14 September 2026, built in about six weeks."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was es kostet",
+            "en": "What it costs"
+          },
+          "paras": [
+            {
+              "de": "Eine Studio-Website mit Online-Kursbuchung beginnt bei 2.900 € (Festpreis nach Angebot, 12 Monate Wartung inklusive). Marktüblich sind für vergleichbare Projekte in Deutschland etwa 3.900 € bis 8.000 €. Der Preis wird nach einem kurzen Gespräch fest vereinbart — wenn wir genau wissen, was Sie brauchen, in welchem Zeitrahmen und mit welchem Umfang, ist auch der Preis verhandelbar.",
+              "en": "A studio website with online class booking starts at 2,900 € (fixed price after quote, 12 months of maintenance included). For comparable projects in Germany the going rate is roughly 3,900 € to 8,000 €. The price is fixed after a short call — once we know exactly what you need, in what timeframe and with what scope, the price is negotiable as well."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Im Preis enthalten",
+                "en": "Included in the price"
+              },
+              "body": {
+                "de": "Design, Umsetzung, Online-Kursbuchung mit Buchen und Stornieren, Einrichtung auf Ihrer Domain, Abstimmung der DSGVO-Texte mit Ihnen, 12 Monate Wartung.",
+                "en": "Design, build, online class booking with booking and cancelling, set-up on your domain, coordination of the GDPR texts with you, 12 months of maintenance."
+              }
+            },
+            {
+              "title": {
+                "de": "Nicht enthalten",
+                "en": "Not included"
+              },
+              "body": {
+                "de": "Fotografie vor Ort, Texte in Fremdsprachen, laufende Werbung. Diese Punkte bieten wir auf Wunsch gesondert an oder Sie bringen sie selbst mit.",
+                "en": "On-site photography, texts in foreign languages, ongoing advertising. We offer these separately on request, or you bring them yourself."
+              }
+            }
+          ]
+        }
+      ],
+      "offerings": {
+        "de": [
+          "Gespräch und schriftliches Festpreis-Angebot",
+          "Design und Umsetzung für Handy und Desktop",
+          "Kursplan mit Live-Plätzen, Buchen und Stornieren ohne Kundenkonto",
+          "Probetraining-Anfrage mit automatischer Eingangsbestätigung",
+          "Kursverwaltung für Ihr Team, ohne Schulung bedienbar",
+          "EU-Hosting, Domain auf Ihren Namen, DSGVO-Texte gemeinsam abgestimmt",
+          "Einweisung und zwölf Monate Wartung im Paket"
+        ],
+        "en": [
+          "Call and written fixed-price quote",
+          "Design and build for phone and desktop",
+          "Class schedule with live capacity, booking and cancelling without a customer account",
+          "Trial session request with automatic acknowledgement",
+          "Class management for your team, usable without training",
+          "EU hosting, domain in your name, GDPR texts coordinated together",
+          "Walkthrough and twelve months of maintenance in the package"
+        ]
+      },
+      "outcomes": {
+        "de": [
+          "Weniger Anrufe für Buchungen, die Mitglieder selbst erledigen",
+          "Freie Plätze sind sofort wieder buchbar, statt leer zu bleiben",
+          "Trainer sehen vor Kursbeginn, wer kommt",
+          "Die Theke hat Zeit für die Menschen, die vor ihr stehen",
+          "Eine Website, die auf dem Handy in Sekunden lädt",
+          "Ein Ansprechpartner, der die Seite gebaut hat und erreichbar bleibt"
+        ],
+        "en": [
+          "Fewer calls for bookings members handle themselves",
+          "Freed spots are bookable again immediately instead of staying empty",
+          "Trainers see before the class who is coming",
+          "The front desk has time for the people standing in front of it",
+          "A website that loads on a phone in seconds",
+          "A contact person who built the site and stays reachable"
+        ]
+      },
+      "process": [
+        {
+          "title": {
+            "de": "Gespräch",
+            "en": "Call"
+          },
+          "body": {
+            "de": "30 Minuten, per Video oder vor Ort im Studio: Wie werden Kurse heute vergeben, welche Kurse gibt es, wer pflegt den Plan? Danach wissen beide Seiten, was gebraucht wird.",
+            "en": "30 minutes, by video or on site in the studio: how are classes allocated today, which classes exist, who maintains the schedule? Afterwards both sides know what is needed."
+          }
+        },
+        {
+          "title": {
+            "de": "Angebot",
+            "en": "Quote"
+          },
+          "body": {
+            "de": "Ein schriftliches Festpreis-Angebot mit klarem Umfang, Zeitplan und allem, was enthalten ist. Keine versteckten Posten, keine Überraschungen am Ende.",
+            "en": "A written fixed-price quote with a clear scope, timeline and everything that is included. No hidden items, no surprises at the end."
+          }
+        },
+        {
+          "title": {
+            "de": "Umsetzung",
+            "en": "Build"
+          },
+          "body": {
+            "de": "Regelmäßige Vorschau-Links, Ihr Feedback fließt direkt ein. Sie sehen den Kursplan mit Ihren echten Kursen, bevor irgendetwas live geht. Typisch vier bis acht Wochen.",
+            "en": "Regular preview links, your feedback goes straight in. You see the schedule with your real classes before anything goes live. Typically four to eight weeks."
+          }
+        },
+        {
+          "title": {
+            "de": "Go-live & Wartung",
+            "en": "Go-live & maintenance"
+          },
+          "body": {
+            "de": "Abnahme, Start auf Ihrer Domain, Einweisung für das Team — und zwölf Monate Wartung inklusive. Danach verlängern Sie oder betreiben die Seite selbst.",
+            "en": "Hand-over, launch on your domain, walkthrough for the team — and twelve months of maintenance included. After that you extend or run the site yourself."
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "q": {
+            "de": "Brauchen meine Mitglieder ein Kundenkonto?",
+            "en": "Do my members need a customer account?"
+          },
+          "a": {
+            "de": "Nein. Mitglieder buchen mit Name und Kontaktdaten, ohne Registrierung und ohne Passwort. Das senkt die Hürde deutlich — gerade für Mitglieder, die sich sonst nicht mit Online-Diensten beschäftigen. Die Bestätigung kommt per E-Mail und enthält den Link zum Stornieren.",
+            "en": "No. Members book with name and contact details, without registration and without a password. That lowers the barrier considerably — especially for members who otherwise do not deal with online services. The confirmation arrives by email and contains the link for cancelling."
+          }
+        },
+        {
+          "q": {
+            "de": "Was passiert bei einer Stornierung?",
+            "en": "What happens when someone cancels?"
+          },
+          "a": {
+            "de": "Der Platz ist sofort wieder frei und im Kursplan für alle sichtbar. Niemand muss eine Liste korrigieren oder einen Rückruf machen. Wenn Sie möchten, legen wir eine Frist fest, bis zu der storniert werden kann — zum Beispiel bis zwei Stunden vor Kursbeginn.",
+            "en": "The spot is free again immediately and visible to everyone in the schedule. Nobody has to correct a list or make a call-back. If you wish, we set a deadline until which cancelling is possible — for example up to two hours before the class starts."
+          }
+        },
+        {
+          "q": {
+            "de": "Können wir Kurse selbst pflegen?",
+            "en": "Can we maintain the classes ourselves?"
+          },
+          "a": {
+            "de": "Ja. Ihr Team legt Kurse an, ändert Zeiten, passt die Platzzahl an und trägt Ausfälle ein — in einem einfachen Verwaltungsbereich, der ohne Schulung bedienbar ist. Bei der Einweisung gehen wir das gemeinsam durch, und wir bleiben in den zwölf Monaten Wartung erreichbar, wenn eine Frage auftaucht.",
+            "en": "Yes. Your team creates classes, changes times, adjusts capacity and records cancellations — in a simple admin area that is usable without training. We go through it together during the walkthrough, and we stay reachable during the twelve months of maintenance if a question comes up."
+          }
+        },
+        {
+          "q": {
+            "de": "Läuft die Buchung auch auf dem Handy?",
+            "en": "Does booking work on a phone as well?"
+          },
+          "a": {
+            "de": "Ja, und zwar zuerst dort. Die Website wird mobile-first gebaut, weil die meisten Mitglieder abends auf dem Sofa buchen und nicht am Schreibtisch. Kursplan, Buchung und Stornierung sind mit dem Daumen bedienbar; der Desktop bekommt dieselben Funktionen mit mehr Platz.",
+            "en": "Yes, and there first of all. The website is built mobile-first because most members book on the sofa in the evening, not at a desk. Schedule, booking and cancelling are usable with a thumb; the desktop gets the same functions with more space."
+          }
+        },
+        {
+          "q": {
+            "de": "Wo liegen die Buchungsdaten?",
+            "en": "Where is the booking data stored?"
+          },
+          "a": {
+            "de": "Auf EU-Hosting. Buchungsdaten werden innerhalb der EU verarbeitet und nach einer festgelegten Frist automatisch gelöscht, sobald sie nicht mehr gebraucht werden. Die Datenschutzerklärung und die Hinweise im Buchungsformular stimmen wir gemeinsam mit Ihnen ab, damit die DSGVO eingehalten wird. Die Domain bleibt auf Ihren Namen registriert und Sie bekommen alle Zugänge.",
+            "en": "On EU hosting. Booking data is processed within the EU and deleted automatically after a defined period once it is no longer needed. We coordinate the privacy policy and the notices in the booking form together with you so the GDPR is respected. The domain stays registered in your name and you receive all credentials."
+          }
+        },
+        {
+          "q": {
+            "de": "Was ist mit Rehasport oder ärztlicher Verordnung?",
+            "en": "What about rehab sport or medical prescriptions?"
+          },
+          "a": {
+            "de": "Kurse, die eine Verordnung oder eine persönliche Absprache voraussetzen, können bewusst aus der Online-Buchung ausgenommen werden. Sie erscheinen dann im Kursplan mit dem Hinweis, dass die Anmeldung telefonisch erfolgt. So hält es auch Body & Care Hermannsburg: Freie Kurse werden online gebucht, Rehasport wird weiterhin persönlich abgestimmt.",
+            "en": "Classes that require a prescription or a personal consultation can be deliberately excluded from online booking. They then appear in the schedule with a note that registration is by phone. That is how Body & Care Hermannsburg handles it as well: open classes are booked online, rehab sport continues to be arranged personally."
+          }
+        }
+      ],
+      "related": [
+        "web-development",
+        "whatsapp",
+        "niedersachsen",
+        "work"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Service",
+              "@id": "https://www.rexity.ai/fitnessstudio-website#service",
+              "name": "Website mit Online-Kursbuchung für Fitnessstudios",
+              "serviceType": "Webentwicklung mit Online-Kursbuchung",
+              "url": "https://www.rexity.ai/fitnessstudio-website",
+              "image": "https://www.rexity.ai/rexity-omi/assets/work/body-and-care/02-kurse.webp",
+              "provider": {
+                "@type": "Organization",
+                "@id": "https://www.rexity.ai/#organization",
+                "name": "Rexity Labs UG (haftungsbeschränkt)",
+                "url": "https://www.rexity.ai"
+              },
+              "areaServed": {
+                "@type": "Country",
+                "name": "Deutschland"
+              },
+              "audience": {
+                "@type": "BusinessAudience",
+                "name": "Fitnessstudios"
+              },
+              "offers": {
+                "@type": "Offer",
+                "url": "https://www.rexity.ai/fitnessstudio-website",
+                "priceSpecification": {
+                  "@type": "PriceSpecification",
+                  "minPrice": 2900,
+                  "priceCurrency": "EUR"
+                }
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.rexity.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Website mit Online-Kursbuchung für Fitnessstudios",
+                  "item": "https://www.rexity.ai/fitnessstudio-website"
+                }
+              ]
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Brauchen meine Mitglieder ein Kundenkonto?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nein. Mitglieder buchen mit Name und Kontaktdaten, ohne Registrierung und ohne Passwort. Das senkt die Hürde deutlich — gerade für Mitglieder, die sich sonst nicht mit Online-Diensten beschäftigen. Die Bestätigung kommt per E-Mail und enthält den Link zum Stornieren."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was passiert bei einer Stornierung?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Der Platz ist sofort wieder frei und im Kursplan für alle sichtbar. Niemand muss eine Liste korrigieren oder einen Rückruf machen. Wenn Sie möchten, legen wir eine Frist fest, bis zu der storniert werden kann — zum Beispiel bis zwei Stunden vor Kursbeginn."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Können wir Kurse selbst pflegen?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Ihr Team legt Kurse an, ändert Zeiten, passt die Platzzahl an und trägt Ausfälle ein — in einem einfachen Verwaltungsbereich, der ohne Schulung bedienbar ist. Bei der Einweisung gehen wir das gemeinsam durch, und wir bleiben in den zwölf Monaten Wartung erreichbar, wenn eine Frage auftaucht."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Läuft die Buchung auch auf dem Handy?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja, und zwar zuerst dort. Die Website wird mobile-first gebaut, weil die meisten Mitglieder abends auf dem Sofa buchen und nicht am Schreibtisch. Kursplan, Buchung und Stornierung sind mit dem Daumen bedienbar; der Desktop bekommt dieselben Funktionen mit mehr Platz."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wo liegen die Buchungsdaten?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Auf EU-Hosting. Buchungsdaten werden innerhalb der EU verarbeitet und nach einer festgelegten Frist automatisch gelöscht, sobald sie nicht mehr gebraucht werden. Die Datenschutzerklärung und die Hinweise im Buchungsformular stimmen wir gemeinsam mit Ihnen ab, damit die DSGVO eingehalten wird. Die Domain bleibt auf Ihren Namen registriert und Sie bekommen alle Zugänge."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was ist mit Rehasport oder ärztlicher Verordnung?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Kurse, die eine Verordnung oder eine persönliche Absprache voraussetzen, können bewusst aus der Online-Buchung ausgenommen werden. Sie erscheinen dann im Kursplan mit dem Hinweis, dass die Anmeldung telefonisch erfolgt. So hält es auch Body & Care Hermannsburg: Freie Kurse werden online gebucht, Rehasport wird weiterhin persönlich abgestimmt."
                   }
                 }
               ]
