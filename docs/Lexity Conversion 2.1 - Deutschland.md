@@ -2,7 +2,7 @@
 
 Sprint plan for Rexity Labs · 23 September 2026 · supersedes `Lexity Conversion 2.0.md` on geography, language and offer.
 
-Status: planning document. Nothing in it has been deployed. "Lexity Conversion" is the initiative name; the public company remains Rexity Labs UG (haftungsbeschränkt), Hermannsburg.
+Status: **Sprint 1 complete (23 Sep 2026). Now in Sprint 2.** Hub and both industry pages shipped early (Sprints 3–5 partially done). "Lexity Conversion" is the initiative name; the public company remains Rexity Labs UG (haftungsbeschränkt), Hermannsburg.
 
 ## 1. Decision
 
@@ -133,11 +133,11 @@ Buyer path: referral / Google / GBP → case study or industry page → offer �
 
 | Sprint | Work | Gate |
 |---|---|---|
-| **1** (wk 1–2) | ~~Request indexing for the 9 pending URLs~~ (done 23 Sep). Cost the three offers. ~~Get written permission~~ (contractual, verified 23 Sep). Create Google Business Profile. Fix homepage German-first copy. | Offers priced; GBP submitted; permissions in writing; homepage main-document German text live |
+| **1** (wk 1–2) — **DONE 23 Sep** | ~~Indexing requested (9 URLs + /niedersachsen)~~ · ~~Offers priced → /preise live~~ · ~~Permissions (contractual)~~ · ~~GBP completed (categories, services, description, service area, hours, website)~~ · ~~Homepage German-first section~~ | Offers priced; GBP submitted; permissions in writing; homepage main-document German text live |
 | **2** (wk 3–4) | Enquiry form live → inbox + RexDesk. Add feedback videos / quotes where permission exists. Footer credits on client sites. | Form tested end-to-end incl. failure path; at least one client credit live |
-| **3** (wk 5–6) | `/niedersachsen` hub. Schema on hub + `/work`. IHK + directory listings. | Hub live and indexed-requested; NAP identical on all listings |
-| **4** (wk 7–8) | Industry page 1 (Fitness/Kursbuchung) + article 1. Ask for the two referrals. Press pitch. | Page + article live; two referral asks sent |
-| **5** (wk 9–10) | Industry page 2 (Kfz/Terminbuchung) + article 2. Review GSC: non-brand queries appearing? | Page + article live; GSC reviewed with dated notes |
+| **3** (wk 5–6) | ~~`/niedersachsen` hub + schema~~ (done 23 Sep, ahead of plan) · IHK + directory listings (open) · nav entry done | Hub live and indexed-requested; NAP identical on all listings |
+| **4** (wk 7–8) | ~~Industry page 1 (Fitness)~~ (done 23 Sep) · article 1 · referral asks · press pitch | Page + article live; two referral asks sent |
+| **5** (wk 9–10) | ~~Industry page 2 (Kfz)~~ (done 23 Sep) · article 2 · GSC review | Page + article live; GSC reviewed with dated notes |
 | **6** (wk 11–12) | Review: leads by source, qualified vs. not, proposals. Decide per channel: keep / deepen / drop. Decide whether Ring 3 industry pages start. | Written review; next-quarter decision |
 
 Minimum launch scope (end of Sprint 2): German-first homepage, `/work`, three priced offers, working enquiry form, GBP, one referral ask. Everything after that is growth, not launch.
@@ -158,4 +158,4 @@ Weekly, 15 minutes: non-brand impressions/clicks (GSC), visits by source (Vercel
 2. ~~Written OK from Melanie and Aref~~ **Done 23 Sep** — reference use is contractual: Chara Vertrag 2026-005 § 8 (naming + linking on rexity.ai and in offers), Body & Care Vertrag 2026-004 § 10 (5) (reference + portfolio); both signed. Still open by choice: publishing Body & Care's booking numbers, and feedback videos.
 3. Chara own-domain go-live date (blocks "live" status and the visit link).
 4. Whether RexDesk ever gets an external user — otherwise it stays an internal tool, not a case study.
-5. ~~GBP creation~~ **A profile already exists and is verified** (audited 23 Sep, Maps ID `/g/11ntdwv18h`, owner = `rexitylabs@gmail.com` account in Chrome). Filled: name "Rexity Labs UG", category Softwareentwickler/-hersteller, description (mentions Celle/Hermannsburg/Südheide, but also "generative KI und Sprachmodelle"), phone, SMS chat, website `https://rexity.ai/` (non-www), hours **Mo–So 10–19**, service area **only Südheide-Hermannsburg**, 3 services, 1 review (Joanna, 5★), photos last added 61 days ago (incl. an unrelated pizza image). Empty: secondary categories, social profiles, opening date, all attributes, posts, Q&A. Google itself flags "Profil vervollständigen". Fix list in §9.2.
+5. ~~GBP~~ **Done 23 Sep.** Categories (6), services (5 × Ab-Preis + 2 standard), description, website www, service area (14, Ring 1+2), hours Mo–Fr. Open: Eröffnungsdatum, LinkedIn link, photos (pizza image), first 3 posts, review asks.
