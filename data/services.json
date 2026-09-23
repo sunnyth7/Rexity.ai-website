@@ -3625,8 +3625,8 @@
           "en": "Pricing — Website, App & Automation | Rexity Labs"
         },
         "description": {
-          "de": "Website mit Online-Buchung ab 2.900 €, App ab 4.900 €, Automatisierung ab 1.490 € — rund 25 % unter marktüblichen Agenturpreisen in Deutschland. Festpreis nach Gespräch.",
-          "en": "Website with online booking from €2,900, app from €4,900, automation from €1,490 — around 25% below typical German agency prices. Fixed price after a call."
+          "de": "Website mit Online-Buchung ab 2.900 €, mit Online-Checkout ab 5.999 €, App ab 4.900 €, Automatisierung ab 1.490 € — rund 25 % unter marktüblichen Agenturpreisen. Festpreis nach Gespräch.",
+          "en": "Website with booking from €2,900, with online checkout from €5,999, app from €4,900, automation from €1,490 — around 25% below typical German agency prices."
         }
       },
       "phone": "+49 174 2471435",
@@ -3671,6 +3671,16 @@
               "body": {
                 "de": "Design und Umsetzung, Kurs- oder Terminbuchung, Einrichtung auf Ihrer Domain, Abstimmung der DSGVO-Texte, zwölf Monate Wartung. Marktüblich: etwa 3.900 bis 8.000 € für eine kleine Unternehmenswebsite mit Buchung.",
                 "en": "Design and build, class or appointment booking, setup on your domain, coordination of privacy texts, twelve months of maintenance. Typical market: around €3,900 to €8,000 for a small business website with booking."
+              }
+            },
+            {
+              "title": {
+                "de": "Website mit Online-Checkout — ab 5.999 €",
+                "en": "Website with online checkout — from €5,999"
+              },
+              "body": {
+                "de": "Für Betriebe, die online verkaufen oder buchen und bezahlen lassen: Hotel- und Ferienwohnungsbuchung, Online-Shop, Kursplattform oder Mitgliedschaften. Mit Bezahlung per Kreditkarte, PayPal, Klarna, Apple Pay oder Google Pay, Rechnungs- und Bestellmails, Lager- oder Verfügbarkeitslogik und einem Verwaltungsbereich. Marktüblich: 8.000 bis 20.000 € für Shop- und Buchungsprojekte mit Bezahlfunktion.",
+                "en": "For businesses that sell or take paid bookings online: hotel and holiday-let booking, online shop, course platform or memberships. With payment by card, PayPal, Klarna, Apple Pay or Google Pay, invoice and order emails, stock or availability logic and an admin area. Typical market: €8,000 to €20,000 for shop and booking projects with payment."
               }
             },
             {
@@ -3964,6 +3974,20 @@
                   "priceSpecification": {
                     "@type": "PriceSpecification",
                     "minPrice": 2900,
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false
+                  },
+                  "seller": {
+                    "@id": "https://www.rexity.ai/#organization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Website mit Online-Checkout",
+                  "priceCurrency": "EUR",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 5999,
                     "priceCurrency": "EUR",
                     "valueAddedTaxIncluded": false
                   },
