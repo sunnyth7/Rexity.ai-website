@@ -57,6 +57,22 @@
       "children": []
     },
     {
+      "slug": "niedersachsen",
+      "title": {
+        "en": "Niedersachsen",
+        "de": "Niedersachsen"
+      },
+      "children": []
+    },
+    {
+      "slug": "preise",
+      "title": {
+        "de": "Preise",
+        "en": "Pricing"
+      },
+      "children": []
+    },
+    {
       "slug": "testing-support",
       "title": {
         "en": "Testing & Support",
@@ -3579,6 +3595,460 @@
                   "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Ja. In unseren Website-Projekten sind zwölf Monate Wartung im Paket enthalten: Updates, Sicherheits-Patches, kleine Textänderungen und ein Ansprechpartner, wenn etwas nicht funktioniert. Danach können Sie die Wartung verlängern oder die Seite komplett selbst betreiben — die Zugänge haben Sie ohnehin."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "preise",
+      "type": "standalone",
+      "code": "P",
+      "title": {
+        "de": "Preise",
+        "en": "Pricing"
+      },
+      "tagline": {
+        "de": "Feste Preise, rund 25 Prozent unter dem deutschen Agenturmarkt.",
+        "en": "Fixed prices, around 25 percent below the German agency market."
+      },
+      "summary": {
+        "de": "Was eine Website mit Online-Buchung, eine App oder eine Automatisierung bei Rexity Labs kostet — mit Vergleich zu marktüblichen Agenturpreisen in Deutschland. Festpreis nach Angebot, verhandelbar nach Umfang.",
+        "en": "What a website with online booking, an app or an automation costs at Rexity Labs — compared with typical agency prices in Germany. Fixed price after quote, negotiable by scope."
+      },
+      "seo": {
+        "title": {
+          "de": "Preise — Website, App & Automatisierung | Rexity Labs",
+          "en": "Pricing — Website, App & Automation | Rexity Labs"
+        },
+        "description": {
+          "de": "Website mit Online-Buchung ab 2.900 €, App ab 4.900 €, Automatisierung ab 1.490 € — rund 25 % unter marktüblichen Agenturpreisen in Deutschland. Festpreis nach Gespräch.",
+          "en": "Website with online booking from €2,900, app from €4,900, automation from €1,490 — around 25% below typical German agency prices. Fixed price after a call."
+        }
+      },
+      "phone": "+49 174 2471435",
+      "sections": [
+        {
+          "heading": {
+            "de": "Wie unsere Preise entstehen",
+            "en": "How our prices are set"
+          },
+          "paras": [
+            {
+              "de": "Wir orientieren uns an dem, was Agenturen in Deutschland für vergleichbare Projekte verlangen, und liegen bewusst rund 25 Prozent darunter. Das geht, weil wir klein sind, remote aus Hermannsburg arbeiten und keine Vertriebsabteilung mitfinanzieren. Die Marktspannen unten stammen aus öffentlich einsehbaren Preisübersichten deutscher Agenturen (Stand 2026); sie sind Orientierung, kein Versprechen anderer Anbieter.",
+              "en": "We benchmark against what agencies in Germany charge for comparable projects and deliberately sit around 25 percent below. That works because we are small, work remotely from Hermannsburg and do not carry a sales department. The market ranges below come from publicly available price overviews of German agencies (as of 2026); they are orientation, not a promise by other providers."
+            },
+            {
+              "de": "Der Preis wird nach einem kurzen Gespräch fest vereinbart — wenn wir genau wissen, was Sie brauchen, in welchem Zeitrahmen und mit welchem Umfang, ist auch der Preis verhandelbar.",
+              "en": "The price is fixed after a short call — once we know exactly what you need, in what timeframe and at what scope, the price is negotiable too."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Unsere Angebote",
+            "en": "Our offers"
+          },
+          "items": [
+            {
+              "title": {
+                "de": "Website-Check — ab 249 €",
+                "en": "Website check — from €249"
+              },
+              "body": {
+                "de": "Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Marktüblich: 250 bis 400 € für eine vergleichbare Beratungsstunde.",
+                "en": "One hour reviewing your existing website and your booking or enquiry path, followed by written findings with concrete recommendations. Typical market: €250 to €400 for a comparable consulting hour."
+              }
+            },
+            {
+              "title": {
+                "de": "Website mit Online-Buchung — ab 2.900 €",
+                "en": "Website with online booking — from €2,900"
+              },
+              "body": {
+                "de": "Design und Umsetzung, Kurs- oder Terminbuchung, Einrichtung auf Ihrer Domain, Abstimmung der DSGVO-Texte, zwölf Monate Wartung. Marktüblich: etwa 3.900 bis 8.000 € für eine kleine Unternehmenswebsite mit Buchung.",
+                "en": "Design and build, class or appointment booking, setup on your domain, coordination of privacy texts, twelve months of maintenance. Typical market: around €3,900 to €8,000 for a small business website with booking."
+              }
+            },
+            {
+              "title": {
+                "de": "Mobile App (iPhone & Android) — ab 4.900 €",
+                "en": "Mobile app (iPhone & Android) — from €4,900"
+              },
+              "body": {
+                "de": "Eine App aus einer gemeinsamen Codebasis für beide Plattformen, Veröffentlichung in den Stores inklusive. Marktüblich: 5.000 bis 15.000 € für eine einfache App bei deutschen Agenturen.",
+                "en": "One app from a shared codebase for both platforms, store publication included. Typical market: €5,000 to €15,000 for a simple app at German agencies."
+              }
+            },
+            {
+              "title": {
+                "de": "Automatisierung & Chat-Assistent — ab 1.490 €",
+                "en": "Automation & chat assistant — from €1,490"
+              },
+              "body": {
+                "de": "Ein Prozess, der ohne manuelle Zwischenschritte läuft, oder ein Chat-Assistent mit Ihren eigenen Inhalten auf Website oder WhatsApp. Marktüblich: 2.000 bis 8.000 € Einrichtung.",
+                "en": "One process that runs without manual steps, or a chat assistant with your own content on your website or WhatsApp. Typical market: €2,000 to €8,000 setup."
+              }
+            },
+            {
+              "title": {
+                "de": "Wartung — im ersten Jahr inklusive",
+                "en": "Maintenance — included in year one"
+              },
+              "body": {
+                "de": "Sicherheitsupdates, Sicherungen und kleine Änderungen sind zwölf Monate lang im Projektpreis enthalten. Danach ab 49 € im Monat. Marktüblich: 50 bis 500 € im Monat.",
+                "en": "Security updates, backups and small changes are included in the project price for twelve months. After that from €49 a month. Typical market: €50 to €500 a month."
+              }
+            },
+            {
+              "title": {
+                "de": "Stundensatz für alles andere — 89 €",
+                "en": "Hourly rate for everything else — €89"
+              },
+              "body": {
+                "de": "Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. Marktüblich: 100 bis 180 € bei deutschen Agenturen.",
+                "en": "For extensions, consulting or work outside a fixed price. Typical market: €100 to €180 at German agencies."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was im Festpreis immer enthalten ist",
+            "en": "Always included in the fixed price"
+          },
+          "items": [
+            {
+              "title": {
+                "de": "Ein Angebot, das alles nennt",
+                "en": "A quote that names everything"
+              },
+              "body": {
+                "de": "Umfang, Zeitplan, Zahlungsplan und was nicht enthalten ist — schriftlich, bevor es losgeht.",
+                "en": "Scope, schedule, payment plan and what is not included — in writing, before we start."
+              }
+            },
+            {
+              "title": {
+                "de": "Ratenzahlung",
+                "en": "Instalments"
+              },
+              "body": {
+                "de": "Anzahlung bei Start, Rest nach Meilensteinen oder in bis zu zehn Monatsraten — wie Sie es brauchen.",
+                "en": "Deposit at start, remainder by milestone or in up to ten monthly instalments — as you need it."
+              }
+            },
+            {
+              "title": {
+                "de": "Domain und Daten gehören Ihnen",
+                "en": "Domain and data are yours"
+              },
+              "body": {
+                "de": "Die Domain läuft auf Ihren Namen, die Daten liegen in der EU, und Sie bekommen alle Zugänge übergeben.",
+                "en": "The domain runs in your name, data is hosted in the EU, and you receive all access details."
+              }
+            },
+            {
+              "title": {
+                "de": "Keine Vertragslaufzeit",
+                "en": "No lock-in"
+              },
+              "body": {
+                "de": "Nach dem ersten Jahr können Sie die Wartung monatlich kündigen oder die Seite selbst betreuen.",
+                "en": "After the first year you can cancel maintenance monthly or maintain the site yourself."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Nicht enthalten",
+            "en": "Not included"
+          },
+          "slot": "bottom",
+          "paras": [
+            {
+              "de": "Laufende Kosten Dritter (Domain, Hosting über den ersten Betrieb hinaus, Telefon- oder Nachrichtengebühren), Fotografie vor Ort, Texte in Fremdsprachen und laufende Werbung. Diese Punkte stehen einzeln im Angebot, wenn sie gewünscht sind.",
+              "en": "Ongoing third-party costs (domain, hosting beyond initial operation, phone or messaging fees), on-site photography, texts in foreign languages and ongoing advertising. These appear as separate lines in the quote when wanted."
+            }
+          ]
+        }
+      ],
+      "offerings": {
+        "de": [
+          "Festpreis nach Angebot",
+          "Rund 25 Prozent unter marktüblichen Agenturpreisen",
+          "Verhandelbar, sobald Umfang und Zeitrahmen feststehen",
+          "Zwölf Monate Wartung inklusive",
+          "Ratenzahlung möglich"
+        ],
+        "en": [
+          "Fixed price after quote",
+          "Around 25 percent below typical agency prices",
+          "Negotiable once scope and timeframe are clear",
+          "Twelve months of maintenance included",
+          "Instalments possible"
+        ]
+      },
+      "outcomes": {
+        "de": [
+          "Sie wissen vor dem Start, was es kostet",
+          "Kein Stundenzählen während des Projekts",
+          "Ein Ansprechpartner, der die Seite selbst gebaut hat"
+        ],
+        "en": [
+          "You know the cost before we start",
+          "No counting hours during the project",
+          "One contact who built the site himself"
+        ]
+      },
+      "process": [
+        {
+          "title": {
+            "de": "Gespräch",
+            "en": "Call"
+          },
+          "body": {
+            "de": "30 Minuten, kostenlos: Was brauchen Sie, bis wann, in welchem Umfang.",
+            "en": "30 minutes, free: what you need, by when, at what scope."
+          }
+        },
+        {
+          "title": {
+            "de": "Angebot",
+            "en": "Quote"
+          },
+          "body": {
+            "de": "Festpreis mit allem, was enthalten ist. Hier verhandeln wir, wenn nötig.",
+            "en": "Fixed price with everything included. This is where we negotiate if needed."
+          }
+        },
+        {
+          "title": {
+            "de": "Umsetzung",
+            "en": "Build"
+          },
+          "body": {
+            "de": "Typisch vier bis acht Wochen für eine Website mit Buchung, mit Zwischenständen.",
+            "en": "Typically four to eight weeks for a website with booking, with interim reviews."
+          }
+        },
+        {
+          "title": {
+            "de": "Go-live & Wartung",
+            "en": "Go-live & maintenance"
+          },
+          "body": {
+            "de": "Umzug auf Ihre Domain, Einweisung, zwölf Monate Wartung.",
+            "en": "Move to your domain, handover, twelve months of maintenance."
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "q": {
+            "de": "Warum sind Sie günstiger als andere Agenturen?",
+            "en": "Why are you cheaper than other agencies?"
+          },
+          "a": {
+            "de": "Wir sind ein kleines Team ohne Büro in der Stadt, ohne Vertrieb und ohne Zwischenebenen. Der Aufwand pro Projekt ist der gleiche, die Nebenkosten sind kleiner. Die Ersparnis geben wir weiter, weil wir Referenzen in der Region aufbauen.",
+            "en": "We are a small team without a city office, without sales staff and without middle layers. The effort per project is the same, the overheads are smaller. We pass the saving on because we are building references in the region."
+          }
+        },
+        {
+          "q": {
+            "de": "Ist der Preis wirklich verhandelbar?",
+            "en": "Is the price really negotiable?"
+          },
+          "a": {
+            "de": "Ja — sobald wir genau wissen, was Sie brauchen, in welchem Zeitrahmen und mit welchem Umfang. Ein kleinerer Umfang, ein flexibler Zeitplan oder Vorarbeiten von Ihrer Seite senken den Preis. Was wir nicht tun: einen Preis nennen, bevor der Umfang klar ist.",
+            "en": "Yes — once we know exactly what you need, in what timeframe and at what scope. A smaller scope, a flexible schedule or preparatory work on your side lower the price. What we do not do: name a price before the scope is clear."
+          }
+        },
+        {
+          "q": {
+            "de": "Gibt es versteckte Kosten?",
+            "en": "Are there hidden costs?"
+          },
+          "a": {
+            "de": "Nein. Alles, was nicht im Festpreis enthalten ist, steht als eigene Zeile im Angebot oder unter „Nicht enthalten“ auf dieser Seite.",
+            "en": "No. Anything not in the fixed price appears as its own line in the quote or under “Not included” on this page."
+          }
+        },
+        {
+          "q": {
+            "de": "Kann ich in Raten zahlen?",
+            "en": "Can I pay in instalments?"
+          },
+          "a": {
+            "de": "Ja. Üblich ist eine Anzahlung bei Projektstart und der Rest nach Meilensteinen; auf Wunsch auch bis zu zehn Monatsraten.",
+            "en": "Yes. Typical is a deposit at project start and the remainder by milestone; on request also up to ten monthly instalments."
+          }
+        },
+        {
+          "q": {
+            "de": "Was kostet ein Projekt, das hier nicht aufgeführt ist?",
+            "en": "What does a project not listed here cost?"
+          },
+          "a": {
+            "de": "Wir kalkulieren es nach demselben Prinzip: marktüblicher Aufwand, rund 25 Prozent darunter, als Festpreis. Schreiben Sie uns kurz, worum es geht.",
+            "en": "We calculate it the same way: typical market effort, around 25 percent below, as a fixed price. Send us a short note about what it is."
+          }
+        },
+        {
+          "q": {
+            "de": "Sind die Preise inklusive Mehrwertsteuer?",
+            "en": "Do prices include VAT?"
+          },
+          "a": {
+            "de": "Alle Preise verstehen sich netto zuzüglich der gesetzlichen Mehrwertsteuer.",
+            "en": "All prices are net plus statutory VAT."
+          }
+        }
+      ],
+      "related": [
+        "web-development",
+        "mobile-apps",
+        "automation",
+        "niedersachsen"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.rexity.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Preise",
+                  "item": "https://www.rexity.ai/preise"
+                }
+              ]
+            },
+            {
+              "@type": "OfferCatalog",
+              "name": "Rexity Labs Preise",
+              "url": "https://www.rexity.ai/preise",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "name": "Website-Check",
+                  "priceCurrency": "EUR",
+                  "price": "249",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 249,
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false
+                  },
+                  "seller": {
+                    "@id": "https://www.rexity.ai/#organization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Website mit Online-Buchung",
+                  "priceCurrency": "EUR",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 2900,
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false
+                  },
+                  "seller": {
+                    "@id": "https://www.rexity.ai/#organization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Mobile App",
+                  "priceCurrency": "EUR",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 4900,
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false
+                  },
+                  "seller": {
+                    "@id": "https://www.rexity.ai/#organization"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Automatisierung & Chat-Assistent",
+                  "priceCurrency": "EUR",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 1490,
+                    "priceCurrency": "EUR",
+                    "valueAddedTaxIncluded": false
+                  },
+                  "seller": {
+                    "@id": "https://www.rexity.ai/#organization"
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Warum sind Sie günstiger als andere Agenturen?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Wir sind ein kleines Team ohne Büro in der Stadt, ohne Vertrieb und ohne Zwischenebenen. Der Aufwand pro Projekt ist der gleiche, die Nebenkosten sind kleiner. Die Ersparnis geben wir weiter, weil wir Referenzen in der Region aufbauen."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Ist der Preis wirklich verhandelbar?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja — sobald wir genau wissen, was Sie brauchen, in welchem Zeitrahmen und mit welchem Umfang. Ein kleinerer Umfang, ein flexibler Zeitplan oder Vorarbeiten von Ihrer Seite senken den Preis. Was wir nicht tun: einen Preis nennen, bevor der Umfang klar ist."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Gibt es versteckte Kosten?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nein. Alles, was nicht im Festpreis enthalten ist, steht als eigene Zeile im Angebot oder unter „Nicht enthalten“ auf dieser Seite."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Kann ich in Raten zahlen?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Üblich ist eine Anzahlung bei Projektstart und der Rest nach Meilensteinen; auf Wunsch auch bis zu zehn Monatsraten."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was kostet ein Projekt, das hier nicht aufgeführt ist?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Wir kalkulieren es nach demselben Prinzip: marktüblicher Aufwand, rund 25 Prozent darunter, als Festpreis. Schreiben Sie uns kurz, worum es geht."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Sind die Preise inklusive Mehrwertsteuer?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Alle Preise verstehen sich netto zuzüglich der gesetzlichen Mehrwertsteuer."
                   }
                 }
               ]
