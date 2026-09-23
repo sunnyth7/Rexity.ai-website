@@ -17,10 +17,9 @@ Verwandte Dateien: `docs/NAP_DIRECTORIES.md` (kanonischer NAP-Block + Verzeichni
    NAP-Konsistenz überall **`29320 Südheide`** verwenden (wie im Impressum und Register);
    "Hermannsburg" nur im Fließtext der Beschreibung. Die Adresse wird im GBP ohnehin
    ausgeblendet (Abschnitt 4), Google braucht sie nur intern für die Bestätigung.
-2. **Telefonnummer auf der Website.** Die Startseite https://www.rexity.ai/ enthält keinen
-   `tel:`-Link und keine sichtbare Rufnummer; die Nummer steht nur im Impressum. Google
-   gleicht Profilangaben mit der Website ab. Empfehlung (separater Task, nicht Teil dieses
-   Packs): `+49 174 2471435` als `tel:+491742471435` in den Footer/Kontaktbereich aufnehmen.
+2. **Telefonnummer auf der Website.** Erledigt (23.09.2026): die Startseite enthält jetzt
+   `+49 174 2471435` als `tel:+491742471435` im deutschen Einleitungsblock; `/niedersachsen`
+   und das Impressum führen die Nummer ebenfalls.
 
 ---
 
