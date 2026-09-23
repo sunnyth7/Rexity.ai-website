@@ -3120,7 +3120,7 @@
         },
         {
           "slug": "chara",
-          "name": "Chara Fahrzeugaufbereitung",
+          "name": "Fahrzeugpflege Celle",
           "image": "/rexity-omi/assets/work/chara/01-start.webp",
           "audience": {
             "de": "Website & Online-Terminbuchung",
@@ -3131,8 +3131,8 @@
             "en": "A website with online appointment booking for a car detailer in Celle."
           },
           "body": {
-            "de": "Für die Fahrzeugaufbereitung Chara in Celle haben wir eine Website gebaut, auf der Kundinnen und Kunden ihren Termin direkt online buchen — mit einer eigenen Seite für jede Leistung und echten Vorher-nachher-Aufnahmen aus der Werkstatt.",
-            "en": "For Chara, a car detailing business in Celle, we built a website where customers book their appointment directly online — with a dedicated page for every service and real before-and-after footage from the workshop."
+            "de": "Für einen Fahrzeugpflege-Betrieb in Celle haben wir eine Website gebaut, auf der Kundinnen und Kunden ihren Termin direkt online buchen — mit einer eigenen Seite für jede Leistung und echten Vorher-nachher-Aufnahmen aus der Werkstatt.",
+            "en": "For a car detailing business in Celle, we built a website where customers book their appointment directly online — with a dedicated page for every service and real before-and-after footage from the workshop."
           },
           "duration": {
             "de": "ca. 5 Wochen",
@@ -3191,14 +3191,14 @@
             ]
           },
           "feedbackLabel": {
-            "de": "Kundenstimme: Chara Fahrzeugaufbereitung",
-            "en": "Client voice: Chara Fahrzeugaufbereitung"
+            "de": "Kundenstimme: Fahrzeugpflege Celle",
+            "en": "Client voice: Fahrzeugpflege Celle"
           },
           "video": null,
           "preview": {
             "host": {
-              "de": "Vorschau · Chara Fahrzeugaufbereitung",
-              "en": "Preview · Chara Fahrzeugaufbereitung"
+              "de": "Vorschau · Fahrzeugpflege Celle",
+              "en": "Preview · Fahrzeugpflege Celle"
             },
             "desktop": [
               {
