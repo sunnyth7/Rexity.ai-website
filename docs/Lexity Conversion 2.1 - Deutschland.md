@@ -111,7 +111,17 @@ Every case study: Problem, Nutzer, Rolle, Dauer, was gebaut wurde (no tool names
 ## 9. Distribution — no cold calling
 
 1. **Referrals** (Ring 1): Melanie/Body & Care and Aref/Chara each asked for one introduction and one Google review after delivery. A "Website: Rexity Labs" footer credit on both sites, with permission.
-2. **Google Business Profile**: create now (HRB 213911 exists). Category Softwareunternehmen; service area = Ring 1 + Ring 2 cities.
+2. **Google Business Profile** — exists and is verified; complete it (owner action, from `docs/GBP_SETUP.md`):
+   - Service area: add Celle, Bergen, Faßberg, Hannover, Braunschweig, Wolfsburg, Lüneburg, Göttingen, Osnabrück, Oldenburg (currently only Südheide-Hermannsburg).
+   - Website: change `https://rexity.ai/` → `https://www.rexity.ai` (the canonical host).
+   - Hours: Mo–Fr 09–18, Sa/So closed (currently 7 days 10–19 for a one-person business).
+   - Secondary categories: Webdesigner, Softwareberater, Online-Marketing-Unternehmen, Unternehmensberater, Designagentur.
+   - Description: replace with the 747-char version from the pack (drops "generative KI und Sprachmodelle", adds Online-Buchung/Terminbuchung and the region list).
+   - Services: replace the 3 generic ones with the priced offers from `/preise`.
+   - Photos: remove the pizza image; upload the 6 project/brand images (JPG, see pack §8).
+   - Social profiles: LinkedIn; opening date: 07/2026.
+   - Name: consider `Rexity Labs` (Google guideline: real-world name, no legal suffix) — optional, low risk either way.
+   - Then: first 3 posts and the review asks to Melanie/Aref (pack §9–10).
 3. **Local presence**: IHK Lüneburg-Wolfsburg directory; Das Örtliche, Gelbe Seiten, 11880, Bing Places, Apple Business Connect — identical NAP everywhere. Gründungsnetzwerk Celle, hannoverimpuls.
 4. **One press story**: Cellesche Zeitung — new Hermannsburg IT company, first client a local gym, live.
 5. **Content**: one substantial German article every two weeks, buyer-question-led ("Was kostet eine Website mit Kursbuchung?", "Terminbuchung online: worauf Werkstätten achten sollten"). One founder LinkedIn post per week reusing the same material. That is the whole cadence.
@@ -148,4 +158,4 @@ Weekly, 15 minutes: non-brand impressions/clicks (GSC), visits by source (Vercel
 2. ~~Written OK from Melanie and Aref~~ **Done 23 Sep** — reference use is contractual: Chara Vertrag 2026-005 § 8 (naming + linking on rexity.ai and in offers), Body & Care Vertrag 2026-004 § 10 (5) (reference + portfolio); both signed. Still open by choice: publishing Body & Care's booking numbers, and feedback videos.
 3. Chara own-domain go-live date (blocks "live" status and the visit link).
 4. Whether RexDesk ever gets an external user — otherwise it stays an internal tool, not a case study.
-5. GBP creation (needs your Google account; I can prepare every field).
+5. ~~GBP creation~~ **A profile already exists and is verified** (audited 23 Sep, Maps ID `/g/11ntdwv18h`, owner = `rexitylabs@gmail.com` account in Chrome). Filled: name "Rexity Labs UG", category Softwareentwickler/-hersteller, description (mentions Celle/Hermannsburg/Südheide, but also "generative KI und Sprachmodelle"), phone, SMS chat, website `https://rexity.ai/` (non-www), hours **Mo–So 10–19**, service area **only Südheide-Hermannsburg**, 3 services, 1 review (Joanna, 5★), photos last added 61 days ago (incl. an unrelated pizza image). Empty: secondary categories, social profiles, opening date, all attributes, posts, Q&A. Google itself flags "Profil vervollständigen". Fix list in §9.2.
