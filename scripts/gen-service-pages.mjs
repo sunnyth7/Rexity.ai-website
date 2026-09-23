@@ -26,17 +26,34 @@ const t = (bi, tag = "span", cls = "") =>
   `<${tag}${cls ? ` class="${cls}"` : ""} data-en="${esc(bi.en)}" data-de="${esc(bi.de)}">${esc(bi.de)}</${tag}>`;
 const tText = (bi) => `<span data-en="${esc(bi.en)}" data-de="${esc(bi.de)}">${esc(bi.de)}</span>`;
 
+// Optional JSON-LD: `schema` on a page is an array of objects (or one object);
+// each becomes its own <script type="application/ld+json">. Pages without a
+// `schema` field emit nothing, so their output is unchanged.
+function jsonLd(p) {
+  if (!p.schema) return "";
+  const items = Array.isArray(p.schema) ? p.schema : [p.schema];
+  return items
+    .map((s) => `<script type="application/ld+json">${JSON.stringify(s).replace(/</g, "\\u003c")}</script>\n`)
+    .join("");
+}
+
 function head(p) {
-  const title = `${p.title.de} — Rexity Labs`;
-  const desc = p.summary.de;
+  // Optional `seo: {title:{de,en}, description:{de,en}}` overrides the default
+  // "<title> — Rexity Labs" / summary pair (used by the regional hub).
+  const seo = p.seo || {};
+  const titleDe = seo.title ? seo.title.de : `${p.title.de} — Rexity Labs`;
+  const titleEn = seo.title ? seo.title.en : `${p.title.en} — Rexity Labs`;
+  const descBi = seo.description || p.summary;
+  const title = titleDe;
+  const desc = descBi.de;
   return `<!DOCTYPE html><html lang="de"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="${esc(p.title.en)} — Rexity Labs" data-de="${esc(title)}">${esc(title)}</title>
-<meta name="description" data-en="${esc(p.summary.en)}" data-de="${esc(desc)}" content="${esc(desc)}">
+<title data-en="${esc(titleEn)}" data-de="${esc(title)}">${esc(title)}</title>
+<meta name="description" data-en="${esc(descBi.en)}" data-de="${esc(desc)}" content="${esc(desc)}">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://www.rexity.ai${urlOf(p)}">
-<meta name="theme-color" content="#f5f5f3">
+${jsonLd(p)}<meta name="theme-color" content="#f5f5f3">
 <link rel="icon" href="/rexity-omi/assets/brand/final/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/rexity-omi/assets/brand/final/apple-touch-icon.png">
 <link rel="stylesheet" href="/rexity-omi/assets/vendor/css/inter.css">
@@ -78,16 +95,18 @@ function footer() {
 </footer>`;
 }
 
-function cta() {
+function cta(p) {
+  // Optional `phone` on a page adds a tel: button next to the mail button.
+  const phone = p && p.phone ? ` <a class="rx-btn rx-btn-ghost" href="tel:${esc(p.phone.replace(/\s+/g, ""))}">${esc(p.phone)}</a>` : "";
   return `<section class="rx-cta">
   ${t({ en: "Have a project in mind?", de: "Ein Projekt im Kopf?" }, "h2", "")}
   ${t({ en: "Tell us what you're building. We reply within a day.", de: "Erzählen Sie uns, was Sie bauen. Wir antworten innerhalb eines Tages." }, "p", "")}
-  <a class="rx-btn" href="mailto:${EMAIL}">${EMAIL}</a>
+  <a class="rx-btn" href="mailto:${EMAIL}">${EMAIL}</a>${phone}
 </section>`;
 }
 
-function tail() {
-  return `${cta()}${footer()}
+function tail(p) {
+  return `${cta(p)}${footer()}
 <script src="/rexity-omi/assets/chatbot/rexity-chatbot.js?v=${CHAT_V}" defer></script>
 <script>${LANG_JS}</script>
 </body></html>
@@ -181,10 +200,48 @@ function childCards(p) {
   return `<section class="rx-grid">${cards}</section>`;
 }
 
+// Optional free-form content blocks (`sections: [...]`) for pages that need
+// more than the fixed leaf layout (e.g. the regional hub). Each block has a
+// bilingual `heading`, optional `paras` (bilingual paragraphs) and optional
+// `items` [{title, body, href?}] rendered in one of three existing styles:
+//   "rows"  (default) → .rx-faq rows        "steps" → numbered .rx-step cards
+//   "cards"           → .rx-card grid (links when `href` is set)
+// `slot: "bottom"` places the block just before the FAQ instead of at the top.
+// Only reuses existing CSS classes, so no stylesheet change for other pages.
+function richSections(p, slot) {
+  return (p.sections || [])
+    .filter((s) => (s.slot || "top") === slot)
+    .map((s) => {
+      const paras = (s.paras || []).map((x) => t(x, "p", "rx-work-intro")).join("");
+      let items = "";
+      if (s.items && s.items.length) {
+        if (s.style === "steps") {
+          items = `<div class="rx-steps">${s.items
+            .map((it, i) => `<div class="rx-step"><span class="rx-step-n">${i + 1}</span><div>${t(it.title, "h3", "")}${t(it.body, "p", "")}</div></div>`)
+            .join("")}</div>`;
+        } else if (s.style === "cards") {
+          items = `<div class="rx-grid rx-grid-tight">${s.items
+            .map((it) => {
+              const code = it.code ? `<span class="rx-card-code">${esc(it.code)}</span>` : "";
+              const go = it.href ? `<span class="rx-card-go" data-en="View project →" data-de="Projekt ansehen →">Projekt ansehen →</span>` : "";
+              const inner = `${code}${t(it.title, "h3", "")}${t(it.body, "p", "")}${go}`;
+              return it.href ? `<a class="rx-card" href="${esc(it.href)}">${inner}</a>` : `<div class="rx-card">${inner}</div>`;
+            })
+            .join("")}</div>`;
+        } else {
+          items = s.items.map((it) => `<div class="rx-faq">${t(it.title, "h3", "")}${t(it.body, "p", "")}</div>`).join("");
+        }
+      }
+      return `<section class="rx-sec${s.alt ? " rx-alt" : ""}">${t(s.heading, "h2", "")}${paras}${items}</section>`;
+    })
+    .join("\n");
+}
+
 function leafBody(p) {
   const sections = [];
   // The real "How it works" workflow is the centerpiece — show it first.
   if (p.workflow) sections.push(workflowSection(p));
+  if (p.sections) sections.push(richSections(p, "top"));
   sections.push(`<section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks">${list(p.offerings)}</ul></section>`);
   sections.push(`<section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks">${list(p.outcomes)}</ul></section>`);
   // Generic 3-step process only when there's no richer workflow (avoids dupes).
@@ -202,6 +259,7 @@ function leafBody(p) {
     const chips = p.stack.map((s) => `<span class="rx-chip">${esc(s)}</span>`).join("");
     sections.push(`<section class="rx-sec"><h2 data-en="Stack" data-de="Technologie">Technologie</h2><div class="rx-chips">${chips}</div></section>`);
   }
+  if (p.sections) sections.push(richSections(p, "bottom"));
   if (p.faqs && p.faqs.length) {
     const fa = p.faqs
       .map((f) => `<div class="rx-faq">${t(f.q, "h3", "")}${t(f.a, "p", "")}</div>`)
@@ -349,7 +407,7 @@ function renderPage(p) {
   const crumb = p.parent
     ? `<nav class="rx-crumb"><a href="/">Home</a> / <a href="/${p.parent}">${tText(byslug[p.parent].title)}</a> / ${tText(p.title)}</nav>`
     : `<nav class="rx-crumb"><a href="/">Home</a> / ${tText(p.title)}</nav>`;
-  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub || isIndex || isWork)}${body}</main>${tail()}`;
+  return `${head(p)}${header()}<main>${crumb}${heroBlock(p, isHub || isIndex || isWork)}${body}</main>${tail(p)}`;
 }
 
 // ============================================================================

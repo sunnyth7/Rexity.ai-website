@@ -2943,6 +2943,651 @@
       }
     },
     {
+      "slug": "niedersachsen",
+      "type": "standalone",
+      "code": "NDS",
+      "title": {
+        "en": "IT services in Lower Saxony",
+        "de": "IT-Dienstleister in Niedersachsen"
+      },
+      "tagline": {
+        "en": "Websites, apps and automation — from Hermannsburg for businesses across Lower Saxony.",
+        "de": "Websites, Apps und Automatisierung — aus Hermannsburg für Betriebe in ganz Niedersachsen."
+      },
+      "summary": {
+        "en": "Rexity Labs is a small software studio in Hermannsburg near Celle. We build websites with online booking, apps and automation for service businesses in Lower Saxony — remote-first, with on-site meetings around Celle, Hanover and Brunswick.",
+        "de": "Rexity Labs ist ein kleines Software-Studio in Hermannsburg bei Celle. Wir bauen Websites mit Online-Buchung, Apps und Automatisierung für Dienstleistungsbetriebe in Niedersachsen — remote-first, mit Vor-Ort-Terminen im Raum Celle, Hannover und Braunschweig."
+      },
+      "seo": {
+        "title": {
+          "de": "IT-Dienstleister in Niedersachsen — Websites, Apps & Automatisierung | Rexity Labs",
+          "en": "IT Services in Lower Saxony — Websites, Apps & Automation | Rexity Labs"
+        },
+        "description": {
+          "de": "Rexity Labs aus Hermannsburg bei Celle baut Websites mit Online-Buchung, Apps und Automatisierung für Betriebe in Niedersachsen — von Celle bis Hannover.",
+          "en": "Rexity Labs from Hermannsburg near Celle builds websites with online booking, apps and automation for businesses in Lower Saxony — from Celle to Hanover."
+        }
+      },
+      "phone": "+49 174 2471435",
+      "image": {
+        "src": "/rexity-omi/assets/work/body-and-care/01-start.webp",
+        "alt": {
+          "en": "Startpage of the website with online class booking we built for a gym in Hermannsburg",
+          "de": "Startseite der Website mit Online-Kursbuchung, die wir für ein Fitnessstudio in Hermannsburg gebaut haben"
+        }
+      },
+      "sections": [
+        {
+          "heading": {
+            "de": "Für wen wir arbeiten",
+            "en": "Who we work for"
+          },
+          "paras": [
+            {
+              "de": "Unsere Kunden sind Betriebe, die etwas Konkretes anbieten und deren Tag nicht am Schreibtisch stattfindet: im Studio, in der Werkstatt, in der Praxis, auf der Baustelle oder hinter dem Tresen. Meistens kommt die Anfrage, weil das Telefon zu oft klingelt, Termine per Zettel verwaltet werden oder die alte Website auf dem Handy nicht mehr richtig funktioniert. Genau dafür bauen wir Lösungen, die im Alltag funktionieren — ohne dass jemand aus dem Team Software-Erfahrung braucht.",
+              "en": "Our clients are businesses that offer something tangible and whose day does not happen at a desk: in the studio, in the workshop, in the practice, on the building site or behind the counter. Usually the enquiry comes because the phone rings too often, appointments are managed on paper or the old website no longer works properly on a phone. That is exactly what we build solutions for — ones that work in daily practice without anyone on the team needing software experience."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Fitnessstudios",
+                "en": "Gyms"
+              },
+              "body": {
+                "de": "Kursplan online, Plätze selbst buchen und wieder freigeben, Probetraining anfragen — damit die Theke nicht zur Telefonzentrale wird.",
+                "en": "Class schedule online, spots members book and release themselves, trial sessions on request — so the front desk does not turn into a call centre."
+              }
+            },
+            {
+              "title": {
+                "de": "Werkstätten & Fahrzeugpflege",
+                "en": "Workshops & car care"
+              },
+              "body": {
+                "de": "Leistungen mit Preisrahmen, freie Termine sichtbar, feste Buchung mit Bestätigung. Vorher-nachher-Bilder zeigen die Arbeit besser als jeder Text.",
+                "en": "Services with price ranges, visible free slots, firm booking with confirmation. Before-and-after photos show the work better than any text."
+              }
+            },
+            {
+              "title": {
+                "de": "Praxen",
+                "en": "Practices"
+              },
+              "body": {
+                "de": "Terminanfragen strukturiert statt per Anrufbeantworter, Formulare für Erstkontakt und Rezeptwünsche, Datenverarbeitung innerhalb der EU.",
+                "en": "Structured appointment requests instead of the answering machine, forms for first contact and prescription requests, data processing within the EU."
+              }
+            },
+            {
+              "title": {
+                "de": "Salons",
+                "en": "Salons"
+              },
+              "body": {
+                "de": "Online-Terminbuchung nach Mitarbeiter und Leistung, Erinnerungen per WhatsApp oder SMS, weniger Leerlauf durch vergessene Termine.",
+                "en": "Online booking by staff member and service, reminders via WhatsApp or SMS, less idle time from forgotten appointments."
+              }
+            },
+            {
+              "title": {
+                "de": "Handwerk",
+                "en": "Trades"
+              },
+              "body": {
+                "de": "Anfragen mit Fotos und Adresse direkt von der Website, automatische Eingangsbestätigung, Angebotsvorlagen, die sich nicht jedes Mal neu tippen lassen müssen.",
+                "en": "Enquiries with photos and address straight from the website, automatic acknowledgement, quote templates that do not have to be retyped every time."
+              }
+            },
+            {
+              "title": {
+                "de": "Gastronomie",
+                "en": "Hospitality"
+              },
+              "body": {
+                "de": "Reservierungen, Speisekarte, Öffnungszeiten und Feiertagsregelungen an einer Stelle gepflegt — und auf dem Handy in drei Sekunden gefunden.",
+                "en": "Reservations, menu, opening hours and holiday exceptions maintained in one place — and found on a phone in three seconds."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was wir bauen",
+            "en": "What we build"
+          },
+          "style": "steps",
+          "paras": [
+            {
+              "de": "Wir haben keinen Baukasten, in den wir Sie hineinpressen. Die vier Dinge, die wir am häufigsten für Betriebe in Niedersachsen umsetzen, sind aber immer wieder dieselben — und bei allen gilt: Automatisierung ist wichtiger als Schlagworte. Was funktioniert, ist das, was Ihr Team ohne Schulung benutzt.",
+              "en": "We do not have a kit we press you into. The four things we most often deliver for businesses in Lower Saxony are nevertheless the same again and again — and for all of them: automation matters more than buzzwords. What works is what your team uses without training."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Websites mit Online-Buchung",
+                "en": "Websites with online booking"
+              },
+              "body": {
+                "de": "Ein schneller, mobiler Auftritt, der Ihre Arbeit zeigt und Kunden direkt buchen lässt: Kursplätze, Termine, Reservierungen. Mit Bestätigung, Erinnerung und einer Verwaltung, die Sie selbst bedienen. Läuft auf Ihrer Domain und auf EU-Hosting.",
+                "en": "A fast, mobile presence that shows your work and lets customers book directly: class spots, appointments, reservations. With confirmation, reminders and an admin area you operate yourself. Runs on your domain and on EU hosting."
+              }
+            },
+            {
+              "title": {
+                "de": "Apps für iPhone, Android und Web",
+                "en": "Apps for iPhone, Android and web"
+              },
+              "body": {
+                "de": "Wenn eine Website nicht reicht — weil Mitarbeiter unterwegs Daten erfassen oder Kunden etwas regelmäßig nutzen sollen — bauen wir eine App, die auf beiden Plattformen und im Browser läuft. Aus einer Codebasis, damit Pflege bezahlbar bleibt.",
+                "en": "When a website is not enough — because staff capture data on the go or customers should use something regularly — we build an app that runs on both platforms and in the browser. From one code base, so maintenance stays affordable."
+              }
+            },
+            {
+              "title": {
+                "de": "Prozess- und WhatsApp-Automatisierung",
+                "en": "Process and WhatsApp automation"
+              },
+              "body": {
+                "de": "Terminerinnerungen, Auftragsbestätigungen, Statusmeldungen, Rechnungsversand: Abläufe, die heute jemand von Hand erledigt, laufen automatisch — per WhatsApp, E-Mail oder direkt in Ihre bestehenden Werkzeuge hinein.",
+                "en": "Appointment reminders, order confirmations, status updates, invoice dispatch: routines someone does by hand today run automatically — via WhatsApp, email or straight into the tools you already use."
+              }
+            },
+            {
+              "title": {
+                "de": "Chatbots für Website und WhatsApp",
+                "en": "Chatbots for website and WhatsApp"
+              },
+              "body": {
+                "de": "Ein Assistent, der die immer gleichen Fragen beantwortet — Öffnungszeiten, Preise, freie Termine — und alles andere sauber an Sie weitergibt. Auf Ihre Inhalte trainiert, nicht auf das Internet; er erfindet keine Angebote.",
+                "en": "An assistant that answers the same recurring questions — opening hours, prices, free slots — and hands everything else over to you cleanly. Trained on your content, not on the internet; it does not invent offers."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "So arbeiten wir in Niedersachsen",
+            "en": "How we work in Lower Saxony"
+          },
+          "paras": [
+            {
+              "de": "Rexity Labs sitzt in Hermannsburg, Willighäuser Weg 11, in der Südheide zwischen Celle und Soltau. Wir sind ein kleines Team und haben keine Büros in Hannover, Braunschweig oder anderen Städten — und wir tun auch nicht so. Der überwiegende Teil der Arbeit passiert remote: Entwurf, Entwicklung, Tests und Abstimmungen laufen über Videocalls, geteilte Vorschau-Links und kurze Nachrichten. Das ist für Sie schneller und günstiger, weil keine Fahrtzeit im Angebot steckt.",
+              "en": "Rexity Labs is based in Hermannsburg, Willighäuser Weg 11, in the Südheide between Celle and Soltau. We are a small team and have no offices in Hanover, Brunswick or other cities — and we do not pretend to. The vast majority of the work happens remotely: design, development, testing and reviews run over video calls, shared preview links and short messages. That is faster and cheaper for you because no travel time sits in the quote."
+            },
+            {
+              "de": "Trotzdem sehen wir uns gerne persönlich. Für das Erstgespräch, Fotos vor Ort oder die Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei — Lüneburg und Wolfsburg sind ebenfalls kurze Wege. Termine in Göttingen, Osnabrück oder Oldenburg planen wir vorher gemeinsam. Sie erreichen uns direkt per E-Mail oder unter der Nummer unten; es gibt keine Hotline und kein Ticketsystem zwischen Ihnen und der Person, die Ihre Seite gebaut hat.",
+              "en": "Still, we like to meet in person. For the first meeting, on-site photos or the hand-over we come by at no extra cost around Celle, Hanover and Brunswick — Lüneburg and Wolfsburg are short trips too. Appointments in Göttingen, Osnabrück or Oldenburg we plan together in advance. You reach us directly by email or on the number below; there is no hotline and no ticket system between you and the person who built your site."
+            },
+            {
+              "de": "Wir versprechen keine Rankings, keine Umsatzzahlen und keine Kundenmengen. Was wir versprechen: ein festes Angebot, regelmäßige Zwischenstände, eine Seite, die Ihnen gehört, und einen Ansprechpartner, der auch nach dem Go-live erreichbar ist.",
+              "en": "We do not promise rankings, revenue figures or customer volumes. What we do promise: a fixed quote, regular interim versions, a site that belongs to you, and a contact person who is still reachable after go-live."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Regionen in Niedersachsen",
+            "en": "Regions in Lower Saxony"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Wir arbeiten in ganz Niedersachsen. Die Anforderungen unterscheiden sich von Region zu Region etwas — hier ist, was Betriebe aus den jeweiligen Städten bei uns typischerweise anfragen.",
+              "en": "We work across Lower Saxony. Requirements differ a little from region to region — here is what businesses from each city typically ask us for."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Celle",
+                "en": "Celle"
+              },
+              "body": {
+                "de": "Handwerk und Gesundheit: Von der Dachdeckerei bis zur Physiotherapie brauchen Betriebe in Celle vor allem eine Website, über die Kunden Termine anfragen oder direkt buchen können.",
+                "en": "Trades and healthcare: from roofers to physiotherapists, businesses in Celle mainly need a website through which customers can request or directly book appointments."
+              }
+            },
+            {
+              "title": {
+                "de": "Hermannsburg / Südheide",
+                "en": "Hermannsburg / Südheide"
+              },
+              "body": {
+                "de": "Lokale Betriebe in der Südheide — Studios, Werkstätten, Läden — brauchen einen Auftritt, der auch auf dem Handy funktioniert und Anrufe durch Online-Buchung ersetzt. Hier sitzen wir selbst.",
+                "en": "Local businesses in the Südheide — studios, workshops, shops — need a presence that works on the phone too and replaces calls with online booking. This is where we are based."
+              }
+            },
+            {
+              "title": {
+                "de": "Hannover",
+                "en": "Hannover"
+              },
+              "body": {
+                "de": "Dienstleister und Messe-Umfeld: In Hannover geht es oft um Lead-Erfassung, Terminvereinbarung und Automatisierung von Anfragen, die rund um Messen und Events in Wellen kommen.",
+                "en": "Service providers and the trade-fair environment: in Hanover it is often about capturing leads, scheduling and automating enquiries that arrive in waves around fairs and events."
+              }
+            },
+            {
+              "title": {
+                "de": "Braunschweig",
+                "en": "Braunschweig"
+              },
+              "body": {
+                "de": "Forschung und Industrie: Hier entstehen eher interne Tools und Dashboards — kleine Anwendungen, die Daten aus Laboren oder Fertigung sauber erfassen und auswertbar machen.",
+                "en": "Research and industry: here we tend to build internal tools and dashboards — small applications that capture data from labs or production cleanly and make it analysable."
+              }
+            },
+            {
+              "title": {
+                "de": "Wolfsburg",
+                "en": "Wolfsburg"
+              },
+              "body": {
+                "de": "Zulieferer und Schichtbetrieb: Typisch sind Anwendungen für Schichtplanung, Werkzeug- und Materialverwaltung sowie Formulare, die Papierlisten in der Halle ablösen.",
+                "en": "Suppliers and shift operations: typical requests are applications for shift planning, tool and material management, and forms that replace paper lists on the shop floor."
+              }
+            },
+            {
+              "title": {
+                "de": "Lüneburg",
+                "en": "Lüneburg"
+              },
+              "body": {
+                "de": "Tourismus und Handel: Unterkünfte, Gastronomie und Geschäfte in Lüneburg brauchen Buchungs- und Reservierungsseiten, die in der Saison zuverlässig laufen.",
+                "en": "Tourism and retail: accommodation, restaurants and shops in Lüneburg need booking and reservation pages that run reliably in high season."
+              }
+            },
+            {
+              "title": {
+                "de": "Göttingen",
+                "en": "Göttingen"
+              },
+              "body": {
+                "de": "Uni-Spin-offs und Forschungstools: Für junge Unternehmen aus dem Universitätsumfeld bauen wir erste Produktversionen, Web-Apps und Auswertungswerkzeuge für Studien.",
+                "en": "University spin-offs and research tools: for young companies from the university environment we build first product versions, web apps and analysis tools for studies."
+              }
+            },
+            {
+              "title": {
+                "de": "Osnabrück",
+                "en": "Osnabrück"
+              },
+              "body": {
+                "de": "Logistik und Lebensmittel: Hier stehen Prozessautomatisierung, Lieferscheine, Bestell- und Statusbenachrichtigungen per WhatsApp und E-Mail im Vordergrund.",
+                "en": "Logistics and food: here the focus is on process automation, delivery notes, and order and status notifications via WhatsApp and email."
+              }
+            },
+            {
+              "title": {
+                "de": "Oldenburg",
+                "en": "Oldenburg"
+              },
+              "body": {
+                "de": "Energie und Gesundheit: Praxen, Pflegedienste und Energie-Dienstleister in Oldenburg fragen vor allem Terminverwaltung, Kundenportale und die Automatisierung wiederkehrender Abläufe an.",
+                "en": "Energy and healthcare: practices, care services and energy providers in Oldenburg mainly ask for appointment management, customer portals and the automation of recurring routines."
+              }
+            }
+          ]
+        },
+        {
+          "slot": "bottom",
+          "heading": {
+            "de": "Referenzen aus der Region",
+            "en": "References from the region"
+          },
+          "style": "cards",
+          "paras": [
+            {
+              "de": "Keine Logowand, sondern drei Projekte, die Sie sich mit echten Screens ansehen können. Zwei davon sind für Betriebe im Landkreis Celle entstanden, das dritte ist unser eigenes Produkt.",
+              "en": "Not a wall of logos, but three projects you can look at with real screens. Two were built for businesses in the district of Celle, the third is our own product."
+            }
+          ],
+          "items": [
+            {
+              "code": "HERMANNSBURG",
+              "href": "/work/body-and-care",
+              "title": {
+                "de": "Body & Care Hermannsburg",
+                "en": "Body & Care Hermannsburg"
+              },
+              "body": {
+                "de": "Website mit Online-Kursbuchung für ein Fitness- und Gesundheitszentrum. Mitglieder reservieren ihren Kursplatz selbst und geben ihn wieder frei. Live seit 14.09.2026.",
+                "en": "Website with online class booking for a fitness and health centre. Members reserve their class spot themselves and release it again. Live since 14 Sep 2026."
+              }
+            },
+            {
+              "code": "CELLE",
+              "href": "/work/chara",
+              "title": {
+                "de": "Fahrzeugpflege Celle",
+                "en": "Car care in Celle"
+              },
+              "body": {
+                "de": "Website mit Online-Terminbuchung für einen Fahrzeugpflege-Betrieb: eine Seite je Leistung, freie Termine sichtbar, feste Buchung mit Bestätigung, echte Vorher-nachher-Aufnahmen.",
+                "en": "Website with online appointment booking for a car-care business: one page per service, visible free slots, firm booking with confirmation, real before-and-after photos."
+              }
+            },
+            {
+              "code": "EIGENES PRODUKT",
+              "href": "/work/levelkraft",
+              "title": {
+                "de": "LevelKraft",
+                "en": "LevelKraft"
+              },
+              "body": {
+                "de": "Unser eigenes Produkt: eine Lern-App zur Vorbereitung auf die deutschen TELC- und Goethe-Prüfungen — für iPhone, Android und Web. Zeigt, dass wir auch langfristig betreiben, was wir bauen.",
+                "en": "Our own product: a learning app for preparing for the German TELC and Goethe exams — for iPhone, Android and web. Shows that we also run what we build, long term."
+              }
+            }
+          ]
+        }
+      ],
+      "offerings": {
+        "de": [
+          "Beratung und Angebot nach einem kurzen Gespräch",
+          "Design und Umsetzung für Handy und Desktop",
+          "Online-Buchung für Kurse, Termine oder Reservierungen",
+          "Texte und Fotos gemeinsam erarbeitet, wenn nötig vor Ort",
+          "EU-Hosting, Domain auf Ihren Namen, DSGVO-konform",
+          "Einweisung, damit Sie Inhalte selbst pflegen",
+          "Zwölf Monate Wartung im Paket enthalten"
+        ],
+        "en": [
+          "Consultation and quote after a short call",
+          "Design and build for phone and desktop",
+          "Online booking for classes, appointments or reservations",
+          "Texts and photos developed together, on site if needed",
+          "EU hosting, domain in your name, GDPR-compliant",
+          "Walkthrough so you can maintain content yourself",
+          "Twelve months of maintenance included in the package"
+        ]
+      },
+      "outcomes": {
+        "de": [
+          "Weniger Anrufe für Dinge, die Kunden selbst erledigen können",
+          "Eine Website, die auf dem Handy in Sekunden lädt",
+          "Termine und Buchungen an einem Ort statt auf Zetteln",
+          "Ein Ansprechpartner in Niedersachsen, der die Seite gebaut hat"
+        ],
+        "en": [
+          "Fewer calls for things customers can do themselves",
+          "A website that loads on a phone in seconds",
+          "Appointments and bookings in one place instead of on paper",
+          "A contact person in Lower Saxony who built the site"
+        ]
+      },
+      "process": [
+        {
+          "title": {
+            "de": "Gespräch",
+            "en": "Call"
+          },
+          "body": {
+            "de": "30 Minuten, per Video oder vor Ort: Wir verstehen Ihre Abläufe und was Sie wirklich brauchen.",
+            "en": "30 minutes, by video or on site: we understand your routines and what you really need."
+          }
+        },
+        {
+          "title": {
+            "de": "Angebot",
+            "en": "Quote"
+          },
+          "body": {
+            "de": "Ein festes Angebot mit klarem Umfang, Zeitplan und allem, was enthalten ist.",
+            "en": "A fixed quote with a clear scope, timeline and everything that is included."
+          }
+        },
+        {
+          "title": {
+            "de": "Umsetzung",
+            "en": "Build"
+          },
+          "body": {
+            "de": "Regelmäßige Vorschau-Links, Ihr Feedback fließt direkt ein. Typisch vier bis acht Wochen.",
+            "en": "Regular preview links, your feedback goes straight in. Typically four to eight weeks."
+          }
+        },
+        {
+          "title": {
+            "de": "Go-live & Wartung",
+            "en": "Go-live & maintenance"
+          },
+          "body": {
+            "de": "Abnahme, Start auf Ihrer Domain, Einweisung — und zwölf Monate Wartung inklusive.",
+            "en": "Hand-over, launch on your domain, walkthrough — and twelve months of maintenance included."
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "q": {
+            "de": "Arbeiten Sie remote oder vor Ort?",
+            "en": "Do you work remotely or on site?"
+          },
+          "a": {
+            "de": "Beides. Der größte Teil der Arbeit passiert remote von Hermannsburg aus — das ist schneller und günstiger für Sie. Für das Erstgespräch, die Abnahme oder Fotos vor Ort kommen wir gerne persönlich vorbei, im Raum Celle, Hannover und Braunschweig ohne Aufpreis. Weiter entfernte Termine, etwa in Osnabrück oder Oldenburg, stimmen wir vorher ab.",
+            "en": "Both. Most of the work happens remotely from Hermannsburg — that is faster and cheaper for you. For the first meeting, the hand-over or on-site photos we are happy to come by in person, at no extra cost around Celle, Hanover and Brunswick. Trips further away, e.g. Osnabrück or Oldenburg, we agree in advance."
+          }
+        },
+        {
+          "q": {
+            "de": "Wie läuft ein Projekt ab?",
+            "en": "How does a project run?"
+          },
+          "a": {
+            "de": "Es beginnt mit einem kurzen Gespräch, in dem wir Ihre Abläufe verstehen wollen: Wie kommen heute Termine oder Anfragen rein, was kostet Sie am meisten Zeit? Danach bekommen Sie ein schriftliches Angebot mit klarem Umfang. In der Umsetzung sehen Sie regelmäßig Zwischenstände und geben Feedback. Zum Schluss folgen Abnahme, Go-live auf Ihrer Domain und eine kurze Einweisung, damit Sie Inhalte selbst pflegen können.",
+            "en": "It starts with a short call in which we want to understand your routines: how do appointments or enquiries come in today, what costs you the most time? You then receive a written quote with a clear scope. During the build you see regular interim versions and give feedback. At the end come the hand-over, go-live on your domain and a short walkthrough so you can maintain content yourself."
+          }
+        },
+        {
+          "q": {
+            "de": "Was kostet eine Website mit Online-Buchung?",
+            "en": "What does a website with online booking cost?"
+          },
+          "a": {
+            "de": "Das hängt vom Umfang ab: Anzahl der Seiten, ob es eine Kurs- oder Terminbuchung braucht, ob Fotos entstehen müssen und wie viel bestehender Inhalt übernommen werden kann. Deshalb nennen wir keinen Pauschalpreis, sondern machen nach einem kurzen Gespräch ein festes Angebot, das den gesamten Umfang abdeckt — ohne versteckte Posten.",
+            "en": "It depends on the scope: number of pages, whether class or appointment booking is needed, whether photos have to be taken and how much existing content can be reused. That is why we do not quote a flat price but make a fixed offer after a short call that covers the whole scope — with no hidden items."
+          }
+        },
+        {
+          "q": {
+            "de": "Wer hostet die Website und wo liegen die Daten?",
+            "en": "Who hosts the website and where is the data stored?"
+          },
+          "a": {
+            "de": "Die Website läuft auf EU-Hosting, so dass Kundendaten und Buchungen innerhalb der EU verarbeitet werden und die DSGVO eingehalten wird. Die Domain gehört Ihnen und bleibt auf Ihren Namen registriert. Sie bekommen alle Zugänge; wir sind kein Vermieter Ihrer eigenen Website.",
+            "en": "The website runs on EU hosting, so customer data and bookings are processed within the EU and the GDPR is respected. The domain belongs to you and stays registered in your name. You receive all credentials; we are not a landlord of your own website."
+          }
+        },
+        {
+          "q": {
+            "de": "Wie lange dauert ein Projekt?",
+            "en": "How long does a project take?"
+          },
+          "a": {
+            "de": "Typische Projekte dauern vier bis acht Wochen. Die Website mit Online-Kursbuchung für ein Fitnessstudio in Hermannsburg hat rund sechs Wochen gebraucht, die Website mit Online-Terminbuchung für einen Fahrzeugpflege-Betrieb in Celle rund fünf. Entscheidend ist meist, wie schnell Texte, Fotos und Rückmeldungen von Ihrer Seite kommen.",
+            "en": "Typical projects take four to eight weeks. The website with online class booking for a gym in Hermannsburg took about six weeks, the website with online appointment booking for a car-care business in Celle about five. What usually decides the pace is how quickly texts, photos and feedback arrive from your side."
+          }
+        },
+        {
+          "q": {
+            "de": "Bieten Sie Wartung an?",
+            "en": "Do you offer maintenance?"
+          },
+          "a": {
+            "de": "Ja. In unseren Website-Projekten sind zwölf Monate Wartung im Paket enthalten: Updates, Sicherheits-Patches, kleine Textänderungen und ein Ansprechpartner, wenn etwas nicht funktioniert. Danach können Sie die Wartung verlängern oder die Seite komplett selbst betreiben — die Zugänge haben Sie ohnehin.",
+            "en": "Yes. Our website projects include twelve months of maintenance in the package: updates, security patches, small text changes and a contact person if something does not work. After that you can extend the maintenance or run the site entirely yourself — you already have all the credentials."
+          }
+        }
+      ],
+      "related": [
+        "web-design",
+        "web-development",
+        "mobile-apps",
+        "whatsapp",
+        "chatbots"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "@id": "https://www.rexity.ai/#organization",
+              "name": "Rexity Labs UG (haftungsbeschränkt)",
+              "alternateName": "Rexity Labs",
+              "url": "https://www.rexity.ai",
+              "email": "info@rexity.ai",
+              "telephone": "+49 174 2471435",
+              "logo": "https://www.rexity.ai/rexity-omi/assets/brand/final/rexity-logo-horizontal.svg",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Willighäuser Weg 11",
+                "postalCode": "29320",
+                "addressLocality": "Hermannsburg",
+                "addressRegion": "Niedersachsen",
+                "addressCountry": "DE"
+              }
+            },
+            {
+              "@type": "LocalBusiness",
+              "@id": "https://www.rexity.ai/niedersachsen#localbusiness",
+              "name": "Rexity Labs UG (haftungsbeschränkt)",
+              "parentOrganization": {
+                "@id": "https://www.rexity.ai/#organization"
+              },
+              "url": "https://www.rexity.ai/niedersachsen",
+              "email": "info@rexity.ai",
+              "telephone": "+49 174 2471435",
+              "image": "https://www.rexity.ai/rexity-omi/assets/work/body-and-care/01-start.webp",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Willighäuser Weg 11",
+                "postalCode": "29320",
+                "addressLocality": "Hermannsburg",
+                "addressRegion": "Niedersachsen",
+                "addressCountry": "DE"
+              },
+              "areaServed": [
+                {
+                  "@type": "City",
+                  "name": "Celle"
+                },
+                {
+                  "@type": "City",
+                  "name": "Hermannsburg"
+                },
+                {
+                  "@type": "City",
+                  "name": "Hannover"
+                },
+                {
+                  "@type": "City",
+                  "name": "Braunschweig"
+                },
+                {
+                  "@type": "City",
+                  "name": "Wolfsburg"
+                },
+                {
+                  "@type": "City",
+                  "name": "Lüneburg"
+                },
+                {
+                  "@type": "City",
+                  "name": "Göttingen"
+                },
+                {
+                  "@type": "City",
+                  "name": "Osnabrück"
+                },
+                {
+                  "@type": "City",
+                  "name": "Oldenburg"
+                },
+                {
+                  "@type": "State",
+                  "name": "Niedersachsen"
+                }
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.rexity.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Niedersachsen",
+                  "item": "https://www.rexity.ai/niedersachsen"
+                }
+              ]
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Arbeiten Sie remote oder vor Ort?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Beides. Der größte Teil der Arbeit passiert remote von Hermannsburg aus — das ist schneller und günstiger für Sie. Für das Erstgespräch, die Abnahme oder Fotos vor Ort kommen wir gerne persönlich vorbei, im Raum Celle, Hannover und Braunschweig ohne Aufpreis. Weiter entfernte Termine, etwa in Osnabrück oder Oldenburg, stimmen wir vorher ab."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wie läuft ein Projekt ab?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Es beginnt mit einem kurzen Gespräch, in dem wir Ihre Abläufe verstehen wollen: Wie kommen heute Termine oder Anfragen rein, was kostet Sie am meisten Zeit? Danach bekommen Sie ein schriftliches Angebot mit klarem Umfang. In der Umsetzung sehen Sie regelmäßig Zwischenstände und geben Feedback. Zum Schluss folgen Abnahme, Go-live auf Ihrer Domain und eine kurze Einweisung, damit Sie Inhalte selbst pflegen können."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was kostet eine Website mit Online-Buchung?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Das hängt vom Umfang ab: Anzahl der Seiten, ob es eine Kurs- oder Terminbuchung braucht, ob Fotos entstehen müssen und wie viel bestehender Inhalt übernommen werden kann. Deshalb nennen wir keinen Pauschalpreis, sondern machen nach einem kurzen Gespräch ein festes Angebot, das den gesamten Umfang abdeckt — ohne versteckte Posten."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wer hostet die Website und wo liegen die Daten?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Die Website läuft auf EU-Hosting, so dass Kundendaten und Buchungen innerhalb der EU verarbeitet werden und die DSGVO eingehalten wird. Die Domain gehört Ihnen und bleibt auf Ihren Namen registriert. Sie bekommen alle Zugänge; wir sind kein Vermieter Ihrer eigenen Website."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wie lange dauert ein Projekt?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Typische Projekte dauern vier bis acht Wochen. Die Website mit Online-Kursbuchung für ein Fitnessstudio in Hermannsburg hat rund sechs Wochen gebraucht, die Website mit Online-Terminbuchung für einen Fahrzeugpflege-Betrieb in Celle rund fünf. Entscheidend ist meist, wie schnell Texte, Fotos und Rückmeldungen von Ihrer Seite kommen."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Bieten Sie Wartung an?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. In unseren Website-Projekten sind zwölf Monate Wartung im Paket enthalten: Updates, Sicherheits-Patches, kleine Textänderungen und ein Ansprechpartner, wenn etwas nicht funktioniert. Danach können Sie die Wartung verlängern oder die Seite komplett selbst betreiben — die Zugänge haben Sie ohnehin."
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "work",
       "type": "work",
       "code": "06",
