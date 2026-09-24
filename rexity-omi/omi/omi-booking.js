@@ -22,6 +22,7 @@
       sending: "Wird gesendet…",
       ok: "Danke! Ihre Terminanfrage ist eingegangen — wir bestätigen in Kürze per E-Mail.",
       invalid: "Bitte Name, gültige E-Mail und Wunschtermin angeben.",
+      past: "Bitte wählen Sie einen Termin in der Zukunft.",
       err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an info@rexity.ai.",
       close: "Schließen",
       privacy: "Ihre Daten werden DSGVO-konform in der EU gespeichert und nur zur Terminabstimmung verwendet."
@@ -38,6 +39,7 @@
       sending: "Sending…",
       ok: "Thanks! Your request is in — we will confirm by email shortly.",
       invalid: "Please provide your name, a valid email and a preferred time.",
+      past: "Please pick a date and time in the future.",
       err: "Something went wrong. Please email info@rexity.ai.",
       close: "Close",
       privacy: "Your data is stored GDPR-compliant in the EU and only used to arrange the appointment."
@@ -102,6 +104,10 @@
         setStatus(t("invalid"), "#b42318");
         return;
       }
+      if (new Date(start).getTime() < Date.now()) {
+        setStatus(t("past"), "#b42318");
+        return;
+      }
       var btn = modal.querySelector("[data-book-submit]");
       btn.disabled = true;
       btn.textContent = t("sending");
@@ -155,7 +161,8 @@
     render();
     var min = new Date(Date.now() + 60 * 60 * 1000);
     min.setMinutes(0, 0, 0);
-    fields.start.min = min.toISOString().slice(0, 16);
+    // datetime-local wants local time, not UTC
+    fields.start.min = new Date(min.getTime() - min.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
     modal.style.display = "flex";
     setTimeout(function () { fields.name.focus(); }, 60);
   }
