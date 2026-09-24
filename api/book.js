@@ -4,6 +4,7 @@
 // key over the REST API (RLS deny-by-default); key lives in Vercel env.
 
 const crypto = require("crypto");
+const { notifyLead } = require("./_notify");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -39,6 +40,15 @@ function globalCeilingExceeded() {
   if (globalHits.length >= GLOBAL_BOOK_CEILING) return true;
   globalHits.push(now);
   return false;
+}
+
+function refererPath(req) {
+  try {
+    const ref = req.headers["referer"] || req.headers["referrer"];
+    return typeof ref === "string" && ref ? new URL(ref).pathname : "";
+  } catch (_e) {
+    return "";
+  }
 }
 
 async function insertRow(table, row) {
@@ -163,6 +173,20 @@ module.exports = async function handler(req, res) {
   try {
     await insertRow("Lead", lead);
     await insertRow("Appointment", appointment);
+    // Email notification must never affect the client response.
+    try {
+      await notifyLead({
+        kind: "termin",
+        name: name,
+        email: email,
+        phone: phone,
+        message: message,
+        service: "Terminanfrage",
+        start: new Intl.DateTimeFormat("de-DE", { timeZone: "Europe/Berlin", dateStyle: "full", timeStyle: "short" }).format(start),
+        source: refererPath(req),
+        lang: clip(data.lang, 10)
+      });
+    } catch (_e) { /* notifyLead never throws; belt and braces */ }
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));
   } catch (error) {

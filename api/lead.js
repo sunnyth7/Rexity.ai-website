@@ -5,6 +5,7 @@
 // a no-build static site. The key lives in Vercel env, never client-side.
 
 const crypto = require("crypto");
+const { notifyLead } = require("./_notify");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -42,6 +43,15 @@ function globalCeilingExceeded() {
   if (globalHits.length >= GLOBAL_LEAD_CEILING) return true;
   globalHits.push(now);
   return false;
+}
+
+function refererPath(req) {
+  try {
+    const ref = req.headers["referer"] || req.headers["referrer"];
+    return typeof ref === "string" && ref ? new URL(ref).pathname : "";
+  } catch (_e) {
+    return "";
+  }
 }
 
 async function insertLead(lead) {
@@ -148,6 +158,20 @@ module.exports = async function handler(req, res) {
 
   try {
     await insertLead(lead);
+    // Email notification must never affect the client response.
+    try {
+      await notifyLead({
+        kind: phone && !email ? "chatbot" : "kontakt",
+        name: name,
+        email: email,
+        phone: phone,
+        company: company,
+        message: message,
+        service: service || subject,
+        source: refererPath(req),
+        lang: clip(data.lang, 10)
+      });
+    } catch (_e) { /* notifyLead never throws; belt and braces */ }
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));
   } catch (error) {
