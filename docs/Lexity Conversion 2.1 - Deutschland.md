@@ -159,3 +159,11 @@ Weekly, 15 minutes: non-brand impressions/clicks (GSC), visits by source (Vercel
 3. Chara own-domain go-live date (blocks "live" status and the visit link).
 4. Whether RexDesk ever gets an external user — otherwise it stays an internal tool, not a case study.
 5. ~~GBP~~ **Done 23 Sep.** Categories (6), services (5 × Ab-Preis + 2 standard), description, website www, service area (14, Ring 1+2), hours Mo–Fr. Open: Eröffnungsdatum, LinkedIn link, photos (pizza image), first 3 posts, review asks.
+
+## Sprint 2 log (24 Sep 2026)
+
+- **Indexing:** `/preise`, `/fitnessstudio-website`, `/kfz-aufbereitung-website` requested (all 13 business URLs now submitted).
+- **EU hosting:** Vercel functions moved `iad1` (USA) → `fra1` (Frankfurt), verified `x-vercel-id: fra1::fra1`. Supabase confirmed `eu-west-1`. Open: mailbox `info@rexity.ai` is on Spacemail (Spaceship Inc., USA); chatbot LLM runs on Azure OpenAI (region to verify).
+- **Lead notification:** code live (`api/_notify.js`, Brevo — France/EU), **inactive until `BREVO_API_KEY` is set on Vercel** and `rexity.ai` is verified in Brevo (SPF include + DKIM).
+- **GBP posts:** 3 published (launch, Body & Care, Werkstatt-Terminbuchung), each with photo + link. Texts corrected to delivered functionality only.
+- **Review link:** `https://g.page/r/CdC2R6jI0hKLEAE/review` (place ID `ChIJaQCOtB35NwQR0LZHqMjSEos`). WhatsApp asks to Melanie and Aref: founder sends.
