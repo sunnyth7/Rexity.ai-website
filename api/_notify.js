@@ -177,7 +177,7 @@ async function notifyLead(input) {
 
   const fromEmail = str(process.env.LEAD_NOTIFY_FROM) || "info@rexity.ai";
   const toEmail = str(process.env.LEAD_NOTIFY_TO) || "info@rexity.ai";
-  const sender = { name: "Rexity Website", email: fromEmail };
+  const sender = { name: "Rexity Labs UG", email: fromEmail };
 
   const result = { sent: false, internal: null, confirmation: null };
   try {
@@ -186,7 +186,7 @@ async function notifyLead(input) {
     console.log("[notify] kind=" + f.kind + " mail=internal sent=" + r1.ok + " status=" + r1.status + (r1.ok ? "" : " key=" + keyShape + " detail=" + r1.detail));
 
     if (f.email && EMAIL_RE.test(f.email)) {
-      const r2 = await brevoSend(apiKey, confirmationMail(f, { name: "Rexity Labs", email: fromEmail }, { email: toEmail }));
+      const r2 = await brevoSend(apiKey, confirmationMail(f, { name: "Rexity Labs UG", email: fromEmail }, { email: toEmail }));
       result.confirmation = r2.status;
       console.log("[notify] kind=" + f.kind + " mail=confirmation sent=" + r2.ok + " status=" + r2.status + (r2.ok ? "" : " detail=" + r2.detail));
     }
