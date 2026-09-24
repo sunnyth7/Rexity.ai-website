@@ -27,14 +27,14 @@
       "en",
       "de"
     ],
-    "pricingPolicy": "Never quote prices, ranges, or ballparks. Always route to info@rexity.ai.",
+    "pricingPolicy": "Quote only the published starting prices from https://www.rexity.ai/preise (Website-Check 249 €; Website mit Online-Buchung ab 2.900 €; Website mit Online-Checkout ab 5.999 €; Mobile App ab 4.900 €; Automatisierung & Chat-Assistent ab 1.490 €; Wartung 12 Monate inklusive, danach ab 49 €/Monat; Stundensatz 89 €). Always add that it is a fixed price after a quote and negotiable once scope and timeframe are known, and ask what the project is for. Never invent other numbers, discounts or totals.",
     "timelinePolicy": "Only when the user asks about duration: an optimal scoped implementation is usually around 14-21 days depending on scope, never binding, never for SAP/enterprise as a committed window. Route to info@rexity.ai for a confirmed estimate.",
     "promoteProducts": false,
     "neverSay": [
-      "Never quote prices, price ranges, discounts, or hourly rates.",
+      "Never invent prices, discounts or totals. Only the published starting prices from https://www.rexity.ai/preise may be quoted, always as 'ab' prices with 'Festpreis nach Angebot, verhandelbar'.",
       "Never promise fixed delivery dates or binding timelines; the only allowed duration statement is the approved 14-21 day scoped-implementation range, and only when asked.",
-      "Never name clients or invent case studies, references, testimonials, packages, or integrations.",
-      "Never mention or invent a phone number; Rexity currently routes all contact through email only.",
+      "Never invent case studies, references, testimonials, packages or integrations. The only references you may name are the published ones on https://www.rexity.ai/work: Body & Care Hermannsburg, Fahrzeugpflege Celle and LevelKraft.",
+      "The only phone number you may give is the published one: +49 174 2471435. Never invent another.",
       "Never give legal, tax, medical, or financial advice — including definitive DSGVO/GDPR legal assessments; describe Rexity's compliance approach only.",
       "Never make refund, billing, contract, warranty, or policy decisions.",
       "Never discuss internal tooling, infrastructure, credentials, or security details.",
@@ -79,10 +79,6 @@
       "de": "Sehr gerne! Melden Sie sich jederzeit.",
       "en": "Anytime — just ask if anything else comes up."
     },
-    "costRefusal": {
-      "de": "Es tut mir leid, zu Kosten oder Preisen kann ich keine Auskunft geben. Für Business-Anfragen schreiben Sie bitte direkt an info@rexity.ai.",
-      "en": "Sorry, I cannot give information on costs or pricing. For business enquiries, please write directly to info@rexity.ai."
-    },
     "refusal": {
       "de": "Es tut mir leid, dazu kann ich keine verbindliche Auskunft geben. Bitte schreiben Sie uns eine E-Mail an info@rexity.ai.",
       "en": "Sorry, I cannot provide a binding answer on that. Please email info@rexity.ai."
@@ -106,6 +102,40 @@
     "injection": {
       "de": "Ich kann nur mit freigegebenen Rexity-Informationen helfen. Gerne erkläre ich Ihnen unsere Services, oder Sie schreiben an info@rexity.ai.",
       "en": "I can only help with approved Rexity information. I am happy to explain our services, or you can write to info@rexity.ai."
+    },
+    "pricing": {
+      "general": {
+        "de": "Gern, unsere Preise sind öffentlich: Website mit Online-Buchung ab 2.900 €, Website mit Online-Checkout ab 5.999 €, Mobile App ab 4.900 €, Automatisierung oder Chat-Assistent ab 1.490 € — jeweils Festpreis nach Angebot, zwölf Monate Wartung inklusive und verhandelbar, sobald Umfang und Zeitrahmen feststehen. Alle Details: https://www.rexity.ai/preise. Worum geht es bei Ihnen — Studio, Werkstatt, Praxis, Shop oder etwas anderes? Dann sage ich Ihnen, was ungefähr passt. Als unverbindlicher Einstieg eignet sich der Website-Check für 249 €. Preise netto.",
+        "en": "Happy to help, our prices are public: website with online booking from €2,900, website with online checkout from €5,999, mobile app from €4,900, automation or chat assistant from €1,490 — each a fixed price after a quote, twelve months of maintenance included, negotiable once scope and timeframe are clear. All details: https://www.rexity.ai/preise. What is it for — a studio, workshop, practice, shop or something else? Then I can tell you roughly what fits. A low-risk first step is the website check for €249. Prices net."
+      },
+      "booking": {
+        "de": "Eine Website mit Online-Buchung beginnt bei 2.900 € — Festpreis nach Angebot, zwölf Monate Wartung inklusive. Marktüblich sind für vergleichbare Projekte etwa 3.900 bis 8.000 €. Der genaue Preis hängt vom Umfang ab und ist verhandelbar, sobald wir wissen, was Sie brauchen und bis wann. Worum geht es bei Ihnen — Kurse, Termine oder Reservierungen? Details: https://www.rexity.ai/preise — oder schreiben Sie direkt an info@rexity.ai.",
+        "en": "A website with online booking starts at €2,900 — fixed price after a quote, twelve months of maintenance included. Comparable projects typically cost €3,900 to €8,000 in Germany. The exact price depends on scope and is negotiable once we know what you need and by when. What is it for — classes, appointments or reservations? Details: https://www.rexity.ai/preise — or write directly to info@rexity.ai."
+      },
+      "checkout": {
+        "de": "Eine Website mit Online-Checkout — Shop, Hotel- oder Kursplattform mit Bezahlung per Karte, PayPal oder Klarna — beginnt bei 5.999 €, Festpreis nach Angebot, zwölf Monate Wartung inklusive. Marktüblich sind etwa 8.000 bis 20.000 €. Der Preis ist verhandelbar, sobald Umfang und Zeitrahmen feststehen. Was möchten Sie online verkaufen oder buchen lassen? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
+        "en": "A website with online checkout — shop, hotel or course platform with payment by card, PayPal or Klarna — starts at €5,999, fixed price after a quote, twelve months of maintenance included. Typical market: €8,000 to €20,000. Negotiable once scope and timeframe are clear. What do you want to sell or take bookings for online? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+      },
+      "app": {
+        "de": "Eine App für iPhone und Android beginnt bei 4.900 € — eine gemeinsame Codebasis für beide Plattformen, Veröffentlichung in den Stores inklusive, Festpreis nach Angebot. Marktüblich sind für eine einfache App etwa 5.000 bis 15.000 €. Verhandelbar, sobald Umfang und Zeitrahmen klar sind. Was soll die App können? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
+        "en": "An app for iPhone and Android starts at €4,900 — one codebase for both platforms, store publication included, fixed price after a quote. A simple app typically costs €5,000 to €15,000 in Germany. Negotiable once scope and timeframe are clear. What should the app do? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+      },
+      "automation": {
+        "de": "Eine Automatisierung oder ein Chat-Assistent mit Ihren eigenen Inhalten beginnt bei 1.490 € Einrichtung, Festpreis nach Angebot. Marktüblich sind etwa 2.000 bis 8.000 €. Verhandelbar, sobald wir den Ablauf kennen, der automatisiert werden soll. Welcher Vorgang kostet Sie heute am meisten Zeit? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
+        "en": "An automation or a chat assistant with your own content starts at €1,490 setup, fixed price after a quote. Typical market: €2,000 to €8,000. Negotiable once we know the process to automate. Which task costs you the most time today? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+      },
+      "check": {
+        "de": "Der Website-Check kostet 249 €: eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Ein guter erster Schritt, wenn Sie noch nicht sicher sind, was Sie brauchen. Buchen können Sie ihn per E-Mail an info@rexity.ai — oder ich beantworte vorher gern Ihre Fragen.",
+        "en": "The website check costs €249: one hour reviewing your existing website and your booking or enquiry path, followed by written findings with concrete recommendations. A good first step if you are not yet sure what you need. Book it by email to info@rexity.ai — or ask me anything first."
+      },
+      "maintenance": {
+        "de": "Die Wartung ist im ersten Jahr im Projektpreis enthalten — Sicherheitsupdates, Sicherungen, kleine Änderungen. Danach ab 49 € im Monat, monatlich kündbar. Marktüblich sind 50 bis 500 € im Monat. Details: https://www.rexity.ai/preise.",
+        "en": "Maintenance is included in the project price for the first year — security updates, backups, small changes. After that from €49 a month, cancellable monthly. Typical market: €50 to €500 a month. Details: https://www.rexity.ai/preise."
+      },
+      "hourly": {
+        "de": "Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises berechnen wir 89 € pro Stunde, marktüblich sind 100 bis 180 €. Die meisten Projekte laufen aber zum Festpreis — der ist verhandelbar, sobald Umfang und Zeitrahmen feststehen. Details: https://www.rexity.ai/preise.",
+        "en": "For extensions, consulting or work outside a fixed price we charge €89 per hour; the market rate is €100 to €180. Most projects run on a fixed price though — negotiable once scope and timeframe are clear. Details: https://www.rexity.ai/preise."
+      }
     }
   },
   "entries": [
@@ -670,6 +700,31 @@
       ],
       "en": "Rexity provides testing and ongoing support: issues are triaged and reproduced, the root cause is found (not just the symptom), fixed or escalated with context, verified with a regression test, and prevented with monitoring and checks.",
       "de": "Rexity bietet Testing und laufenden Support: Probleme werden triagiert und reproduziert, die Ursache wird gefunden (nicht nur das Symptom), behoben oder mit Kontext eskaliert, mit einem Regressionstest verifiziert und durch Monitoring und Checks vorgebeugt."
+    },
+    {
+      "id": "pricing",
+      "code": "P.01",
+      "title": "Preise / Pricing",
+      "keywords": [
+        "preis",
+        "preise",
+        "kosten",
+        "kostet",
+        "price",
+        "pricing",
+        "cost",
+        "budget",
+        "teuer",
+        "günstig",
+        "stundensatz",
+        "festpreis",
+        "angebot",
+        "ab 2.900",
+        "wartung"
+      ],
+      "en": "Happy to help, our prices are public: website with online booking from €2,900, website with online checkout from €5,999, mobile app from €4,900, automation or chat assistant from €1,490 — each a fixed price after a quote, twelve months of maintenance included, negotiable once scope and timeframe are clear. All details: https://www.rexity.ai/preise. What is it for — a studio, workshop, practice, shop or something else? Then I can tell you roughly what fits. A low-risk first step is the website check for €249. Prices net.",
+      "de": "Gern, unsere Preise sind öffentlich: Website mit Online-Buchung ab 2.900 €, Website mit Online-Checkout ab 5.999 €, Mobile App ab 4.900 €, Automatisierung oder Chat-Assistent ab 1.490 € — jeweils Festpreis nach Angebot, zwölf Monate Wartung inklusive und verhandelbar, sobald Umfang und Zeitrahmen feststehen. Alle Details: https://www.rexity.ai/preise. Worum geht es bei Ihnen — Studio, Werkstatt, Praxis, Shop oder etwas anderes? Dann sage ich Ihnen, was ungefähr passt. Als unverbindlicher Einstieg eignet sich der Website-Check für 249 €. Preise netto.",
+      "url": "/preise"
     }
   ],
   "faqs": [

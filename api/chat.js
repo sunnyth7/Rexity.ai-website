@@ -233,6 +233,30 @@ const SMALLTALK_RE = new RegExp(
 // as a service question instead.
 const AUTOMATION_RE = /(automat|rpa|workflow|prozess|streamline|integrat)/i;
 
+// ---- Pricing: approved, offer-aware copy (never LLM-improvised) -----------
+// Prices are public on /preise, so the assistant states the published "ab"
+// price for the offer the visitor asks about, with the market range, the
+// "verhandelbar" line and a question that keeps the conversation going.
+// Detection order matters: "checkout" must win over "check", and the
+// specific offers over the generic website match.
+const PRICE_OFFER_RES = [
+  ["checkout",    /(checkout|\bshop\b|onlineshop|e-?commerce|hotel|bezahl|zahlung|payment|verkauf|\bsell|klarna|paypal|kursplattform|mitgliedschaft|membership)/i],
+  ["check",       /(website-?check|site-?check|\bcheck\b|prüfung|pruefung|audit|analyse)/i],
+  ["maintenance", /(wartung|maintenance|monatlich|laufende kosten|hosting|monthly)/i],
+  ["hourly",      /(stundensatz|hourly|pro stunde|per hour|\bstunde\b)/i],
+  ["app",         /(\bapps?\b|\bios\b|android|iphone|smartphone)/i],
+  ["automation",  /(automat|chatbot|chat-?assist|whatsapp|\bbot\b|prozess|process|voice|telefonassist)/i],
+  ["booking",     /(website|webseite|homepage|\bseite\b|buchung|booking|termin|kurs|reservier|\bsite\b)/i]
+];
+function pricingAnswer(message, lang) {
+  const raw = String(message || "");
+  const copy = COPY.pricing || {};
+  let key = "general";
+  for (const [k, re] of PRICE_OFFER_RES) { if (re.test(raw)) { key = k; break; } }
+  const c = copy[key] || copy.general;
+  return c ? (c[lang] || c.en) : null;
+}
+
 function classifyIntent(message) {
   const raw = String(message || "");
   if (INJECTION_RE.test(raw)) return "prompt_injection";
@@ -544,7 +568,7 @@ module.exports = async function handler(req, res) {
   const intent = classifyIntent(message);
   const deterministic = {
     prompt_injection: approvedCopy("injection", lang),
-    cost_pricing: approvedCopy("costRefusal", lang),
+    cost_pricing: pricingAnswer(message, lang),
     refund_billing_legal: approvedCopy("refusal", lang),
     timeline_request: approvedCopy("timeline", lang),
     human_request: approvedCopy("humanRequest", lang),
