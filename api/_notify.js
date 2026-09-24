@@ -63,7 +63,15 @@ async function brevoSend(apiKey, payload) {
       body: JSON.stringify(payload),
       signal: ctrl.signal
     });
-    return { ok: resp.ok, status: resp.status };
+    let detail = "";
+    if (!resp.ok) {
+      // Brevo returns {code, message}; neither contains the key.
+      try {
+        const j = await resp.json();
+        detail = String((j && j.code) || "") + ": " + String((j && j.message) || "").slice(0, 200);
+      } catch (_e) { /* ignore */ }
+    }
+    return { ok: resp.ok, status: resp.status, detail: detail };
   } finally {
     clearTimeout(timer);
   }
@@ -151,6 +159,8 @@ function confirmationMail(f, sender, replyTo) {
 async function notifyLead(input) {
   const apiKey = str(process.env.BREVO_API_KEY);
   if (!apiKey) return { sent: false, reason: "not_configured" };
+  // Key shape only (never the value), to tell an API key from an SMTP/MCP key.
+  const keyShape = /^xkeysib-/.test(apiKey) ? "api" : /^xsmtpsib-/.test(apiKey) ? "smtp" : "other";
 
   const i = input || {};
   const f = {
@@ -175,12 +185,12 @@ async function notifyLead(input) {
   try {
     const r1 = await brevoSend(apiKey, internalMail(f, sender, toEmail));
     result.internal = r1.status;
-    console.log("[notify] kind=" + f.kind + " mail=internal sent=" + r1.ok + " status=" + r1.status);
+    console.log("[notify] kind=" + f.kind + " mail=internal sent=" + r1.ok + " status=" + r1.status + (r1.ok ? "" : " key=" + keyShape + " detail=" + r1.detail));
 
     if (f.email && EMAIL_RE.test(f.email)) {
       const r2 = await brevoSend(apiKey, confirmationMail(f, { name: "Rexity Labs", email: fromEmail }, { email: toEmail }));
       result.confirmation = r2.status;
-      console.log("[notify] kind=" + f.kind + " mail=confirmation sent=" + r2.ok + " status=" + r2.status);
+      console.log("[notify] kind=" + f.kind + " mail=confirmation sent=" + r2.ok + " status=" + r2.status + (r2.ok ? "" : " detail=" + r2.detail));
     }
 
     result.sent = r1.ok;
