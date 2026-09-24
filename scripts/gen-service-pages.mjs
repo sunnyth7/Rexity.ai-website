@@ -223,7 +223,8 @@ function richSections(p, slot) {
           items = `<div class="rx-grid rx-grid-tight">${s.items
             .map((it) => {
               const code = it.code ? `<span class="rx-card-code">${esc(it.code)}</span>` : "";
-              const go = it.href ? `<span class="rx-card-go" data-en="View project →" data-de="Projekt ansehen →">Projekt ansehen →</span>` : "";
+              const goBi = it.go || { en: "View project →", de: "Projekt ansehen →" };
+              const go = it.href ? t(goBi, "span", "rx-card-go") : "";
               const inner = `${code}${t(it.title, "h3", "")}${t(it.body, "p", "")}${go}`;
               return it.href ? `<a class="rx-card" href="${esc(it.href)}">${inner}</a>` : `<div class="rx-card">${inner}</div>`;
             })
@@ -242,10 +243,11 @@ function leafBody(p) {
   // The real "How it works" workflow is the centerpiece — show it first.
   if (p.workflow) sections.push(workflowSection(p));
   if (p.sections) sections.push(richSections(p, "top"));
-  sections.push(`<section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks">${list(p.offerings)}</ul></section>`);
-  sections.push(`<section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks">${list(p.outcomes)}</ul></section>`);
+  // offerings/outcomes/process are optional so article-style pages can omit them.
+  if (p.offerings) sections.push(`<section class="rx-sec"><h2 data-en="What's included" data-de="Was dazugehört">Was dazugehört</h2><ul class="rx-ticks">${list(p.offerings)}</ul></section>`);
+  if (p.outcomes) sections.push(`<section class="rx-sec rx-alt"><h2 data-en="What you get" data-de="Was Sie bekommen">Was Sie bekommen</h2><ul class="rx-ticks">${list(p.outcomes)}</ul></section>`);
   // Generic 3-step process only when there's no richer workflow (avoids dupes).
-  if (!p.workflow) {
+  if (!p.workflow && p.process) {
     const steps = p.process
       .map(
         (s, i) => `<div class="rx-step"><span class="rx-step-n">${i + 1}</span><div>${t(s.title, "h3", "")}${t(s.body, "p", "")}</div></div>`

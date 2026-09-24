@@ -3923,6 +3923,7 @@
         }
       ],
       "related": [
+        "website-mit-kursbuchung-kosten",
         "fitnessstudio-website",
         "kfz-aufbereitung-website",
         "web-development",
@@ -4585,6 +4586,483 @@
       ]
     },
     {
+      "slug": "website-mit-kursbuchung-kosten",
+      "type": "standalone",
+      "code": "RATGEBER",
+      "title": {
+        "de": "Was kostet eine Website mit Kursbuchung?",
+        "en": "What does a website with class booking cost?"
+      },
+      "tagline": {
+        "de": "Ehrliche Zahlen für Fitnessstudios, Yoga- und Tanzschulen und alle, die Kurse vergeben. Stand September 2026.",
+        "en": "Honest numbers for gyms, yoga and dance schools and anyone who runs classes. As of September 2026."
+      },
+      "summary": {
+        "de": "Bei Rexity Labs ab 2.900 € netto als Festpreis, zwölf Monate Wartung inklusive. Deutsche Agenturen nehmen für vergleichbare Projekte meist etwa 3.900 bis 8.000 €. Hier steht, wovon der Preis abhängt, was laufend dazukommt und wann ein fertiges Buchungstool die bessere Wahl ist.",
+        "en": "At Rexity Labs from €2,900 net as a fixed price, twelve months of maintenance included. German agencies usually charge around €3,900 to €8,000 for comparable projects. This page covers what drives the price, what the running costs are and when an off-the-shelf booking tool is the better choice."
+      },
+      "seo": {
+        "title": {
+          "de": "Was kostet eine Website mit Kursbuchung? Preise 2026 | Rexity Labs",
+          "en": "What does a website with class booking cost? Prices 2026 | Rexity Labs"
+        },
+        "description": {
+          "de": "Website mit Online-Kursbuchung ab 2.900 € Festpreis inkl. 12 Monate Wartung. Wovon der Preis abhängt, laufende Kosten und Abo-Tool oder eigene Website, ehrlich erklärt.",
+          "en": "Website with online class booking from €2,900 fixed price incl. 12 months maintenance. What drives the price, running costs, and subscription tool vs. own website, explained honestly."
+        }
+      },
+      "phone": "+49 174 2471435",
+      "image": {
+        "src": "/rexity-omi/assets/work/body-and-care/02-kurse.webp",
+        "alt": {
+          "de": "Kursplan mit Online-Buchung auf der Website von Body & Care Hermannsburg",
+          "en": "Class schedule with online booking on the Body & Care Hermannsburg website"
+        }
+      },
+      "sections": [
+        {
+          "heading": {
+            "de": "Die kurze Antwort",
+            "en": "The short answer"
+          },
+          "paras": [
+            {
+              "de": "Eine Website mit Kursplan, bei dem Ihre Kunden Plätze selbst buchen und stornieren, kostet bei uns ab 2.900 € netto. Darin stecken Design und Umsetzung, die Buchung, der Start auf Ihrer Domain, die abgestimmten Datenschutztexte und zwölf Monate Wartung. Den genauen Betrag vereinbaren wir nach einem kurzen Gespräch als Festpreis.",
+              "en": "A website with a class schedule where your customers book and cancel spots themselves costs from €2,900 net with us. That covers design and build, the booking, going live on your domain, the agreed privacy texts and twelve months of maintenance. We agree the exact amount as a fixed price after a short conversation."
+            },
+            {
+              "de": "Zum Vergleich: Für eine kleine Unternehmenswebsite mit Buchung nennen deutsche Agenturen in ihren öffentlichen Preisübersichten meist etwa 3.900 bis 8.000 €. Das ist eine Orientierung, kein Versprechen anderer Anbieter. Wer online bezahlen lassen will, etwa für Zehnerkarten oder Mitgliedschaften, landet in einer anderen Klasse: bei uns ab 5.999 €, am Markt eher 8.000 bis 20.000 €.",
+              "en": "For comparison: for a small business website with booking, German agencies usually list around €3,900 to €8,000 in their public price overviews. That is a guide, not a promise from other providers. If you want customers to pay online, for example for ten-class passes or memberships, you are in a different class: from €5,999 with us, more like €8,000 to €20,000 on the market."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Wovon der Preis abhängt",
+            "en": "What drives the price"
+          },
+          "paras": [
+            {
+              "de": "Die Technik hinter einem Kursplan ist nicht das Teure. Teuer wird es durch Sonderfälle. Diese sechs Punkte entscheiden, ob Sie am unteren oder oberen Ende landen.",
+              "en": "The technology behind a class schedule is not what makes it expensive. Special cases are. These six points decide whether you end up at the lower or upper end."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Wie viele Kurse, Räume und Trainer",
+                "en": "How many classes, rooms and trainers"
+              },
+              "body": {
+                "de": "Ein Raum mit festem Wochenplan ist schnell gebaut. Mehrere Räume, wechselnde Trainer oder Kurse mit unterschiedlicher Platzzahl brauchen mehr Logik und mehr Tests.",
+                "en": "One room with a fixed weekly schedule is quick to build. Several rooms, changing trainers or classes with different capacities need more logic and more testing."
+              }
+            },
+            {
+              "title": {
+                "de": "Buchen mit oder ohne Kundenkonto",
+                "en": "Booking with or without an account"
+              },
+              "body": {
+                "de": "Buchen mit Name und Kontaktdaten ist günstiger und für Kunden einfacher. Ein Mitgliederbereich mit Login, Buchungsübersicht und Passwort-Zurücksetzen ist deutlich mehr Arbeit.",
+                "en": "Booking with name and contact details is cheaper and easier for customers. A member area with login, booking overview and password reset is considerably more work."
+              }
+            },
+            {
+              "title": {
+                "de": "Warteliste und Stornofristen",
+                "en": "Waiting list and cancellation deadlines"
+              },
+              "body": {
+                "de": "Eine Frist wie „stornieren bis zwei Stunden vor Kursbeginn“ ist Standard. Eine Warteliste, die automatisch nachrückt und Bescheid gibt, kostet zusätzlich.",
+                "en": "A deadline such as \"cancel up to two hours before class\" is standard. A waiting list that moves people up automatically and notifies them costs extra."
+              }
+            },
+            {
+              "title": {
+                "de": "Online bezahlen oder vor Ort",
+                "en": "Pay online or on site"
+              },
+              "body": {
+                "de": "Sobald Kunden beim Buchen bezahlen, kommen Zahlungsanbieter, Rechnungsmails und Erstattungen dazu. Das ist der Sprung von ab 2.900 € auf ab 5.999 €.",
+                "en": "As soon as customers pay when booking, payment providers, invoice emails and refunds come in. That is the jump from €2,900 to €5,999."
+              }
+            },
+            {
+              "title": {
+                "de": "Vorhandene Software",
+                "en": "Existing software"
+              },
+              "body": {
+                "de": "Soll die Buchung mit Ihrer Mitgliederverwaltung oder einem Kalender zusammenarbeiten, prüfen wir vorher, ob das technisch sauber geht. Den Aufwand nennen wir im Angebot als eigene Zeile.",
+                "en": "If the booking needs to work with your membership software or a calendar, we check beforehand whether that works cleanly. We list the effort as a separate line in the quote."
+              }
+            },
+            {
+              "title": {
+                "de": "Texte und Fotos",
+                "en": "Texts and photos"
+              },
+              "body": {
+                "de": "Wenn Sie Texte und Fotos mitbringen, bleibt der Preis unten. Fotografie vor Ort ist nicht im Festpreis enthalten und steht bei Bedarf einzeln im Angebot.",
+                "en": "If you bring texts and photos, the price stays low. On-site photography is not included in the fixed price and is listed separately if needed."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Drei typische Fälle",
+            "en": "Three typical cases"
+          },
+          "style": "cards",
+          "items": [
+            {
+              "code": "AB 2.900 €",
+              "title": {
+                "de": "Kursplan mit Online-Buchung",
+                "en": "Class schedule with online booking"
+              },
+              "body": {
+                "de": "Kunden sehen freie Plätze, buchen und stornieren selbst. Ihr Team pflegt Kurse in einem einfachen Verwaltungsbereich. Bezahlt wird wie bisher im Studio.",
+                "en": "Customers see free spots and book and cancel themselves. Your team maintains classes in a simple admin area. Payment stays in the studio as before."
+              },
+              "href": "/fitnessstudio-website",
+              "go": {
+                "de": "Zur Fitnessstudio-Website →",
+                "en": "Gym website →"
+              }
+            },
+            {
+              "code": "AB 5.999 €",
+              "title": {
+                "de": "Buchung mit Online-Bezahlung",
+                "en": "Booking with online payment"
+              },
+              "body": {
+                "de": "Für Zehnerkarten, Workshops oder Mitgliedschaften: Bezahlung per Karte, PayPal, Klarna, Apple Pay oder Google Pay, mit Rechnungsmail und Verwaltungsbereich.",
+                "en": "For class passes, workshops or memberships: payment by card, PayPal, Klarna, Apple Pay or Google Pay, with invoice email and admin area."
+              },
+              "href": "/preise",
+              "go": {
+                "de": "Zu den Preisen →",
+                "en": "See prices →"
+              }
+            },
+            {
+              "code": "AB 249 €",
+              "title": {
+                "de": "Erst prüfen lassen",
+                "en": "Get it checked first"
+              },
+              "body": {
+                "de": "Sie haben schon eine Website und wollen wissen, ob sich eine Buchung lohnt? Eine Stunde Website-Check, danach ein schriftlicher Befund.",
+                "en": "You already have a website and want to know whether booking is worth it? A one-hour website check, followed by a written report."
+              },
+              "href": "/preise",
+              "go": {
+                "de": "Zu den Preisen →",
+                "en": "See prices →"
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Was laufend dazukommt",
+            "en": "Running costs"
+          },
+          "paras": [
+            {
+              "de": "Die ersten zwölf Monate Wartung sind im Preis enthalten: Sicherheitsupdates, Sicherungen und kleine Änderungen. Danach kostet die Wartung ab 49 € im Monat, ohne Vertragslaufzeit. Sie können auch kündigen und die Seite selbst betreuen. Die Domain läuft auf Ihren Namen, und Sie bekommen alle Zugänge.",
+              "en": "The first twelve months of maintenance are included: security updates, backups and small changes. After that, maintenance costs from €49 a month, with no minimum term. You can also cancel and look after the site yourself. The domain is registered in your name, and you get all the access details."
+            },
+            {
+              "de": "Pro Buchung zahlen Sie uns nichts, egal ob im Monat zehn oder tausend Plätze gebucht werden. Kosten Dritter, etwa für die Domain oder bei Online-Bezahlung die Gebühr des Zahlungsanbieters, stehen einzeln im Angebot.",
+              "en": "You pay us nothing per booking, whether ten or a thousand spots are booked a month. Third-party costs, for example for the domain or, with online payment, the payment provider fee, are listed separately in the quote."
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Eigene Website oder fertiges Buchungstool im Abo?",
+            "en": "Own website or an off-the-shelf booking tool on subscription?"
+          },
+          "paras": [
+            {
+              "de": "Es gibt fertige Buchungsprogramme für Studios, die Sie im Monatsabo mieten. Für manche Betriebe ist das die richtige Wahl. Wir sagen Ihnen im Gespräch ehrlich, welcher Weg zu Ihnen passt.",
+              "en": "There are ready-made booking programs for studios that you rent on a monthly subscription. For some businesses that is the right choice. We will tell you honestly in the conversation which way suits you."
+            }
+          ],
+          "items": [
+            {
+              "title": {
+                "de": "Ein Abo-Tool passt, wenn …",
+                "en": "A subscription tool fits if …"
+              },
+              "body": {
+                "de": "Sie nächste Woche starten müssen, Ihr Ablauf dem Standard des Programms entspricht und Sie mit dessen Aussehen und der monatlichen Gebühr gut leben können.",
+                "en": "you need to start next week, your process matches the program's standard, and you are fine with its look and the monthly fee."
+              }
+            },
+            {
+              "title": {
+                "de": "Eine eigene Website passt, wenn …",
+                "en": "Your own website fits if …"
+              },
+              "body": {
+                "de": "Buchung und Auftritt nach Ihrem Studio aussehen sollen, Sie keine laufende Gebühr pro Standort oder Buchung wollen, Daten und Domain bei Ihnen bleiben sollen oder Sie Sonderfälle haben. Zum Beispiel Kurse, die bewusst telefonisch vergeben werden.",
+                "en": "booking and presence should look like your studio, you do not want an ongoing fee per location or booking, data and domain should stay with you, or you have special cases. For example classes that are deliberately allocated by phone."
+              }
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "Ein Beispiel aus der Region",
+            "en": "An example from the region"
+          },
+          "paras": [
+            {
+              "de": "Body & Care in Hermannsburg hat seit dem 14. September 2026 eine Website mit Online-Kursbuchung von uns. Mitglieder buchen und stornieren freie Kurse ohne Kundenkonto, und das Team pflegt den Kursplan selbst. Rehasport wird bewusst weiter persönlich abgestimmt und erscheint im Plan mit Telefonhinweis.",
+              "en": "Since 14 September 2026, Body & Care in Hermannsburg has had a website with online class booking built by us. Members book and cancel open classes without an account, and the team maintains the schedule itself. Rehab sport is deliberately still arranged in person and appears in the schedule with a phone note."
+            },
+            {
+              "de": "Wie die Seite aussieht und was genau gebaut wurde, steht in der Projektbeschreibung unter „Unsere Arbeit“.",
+              "en": "What the site looks like and what exactly was built is described in the project write-up under \"Our work\"."
+            }
+          ],
+          "style": "cards",
+          "items": [
+            {
+              "title": {
+                "de": "Body & Care Hermannsburg",
+                "en": "Body & Care Hermannsburg"
+              },
+              "body": {
+                "de": "Fitnessstudio mit Online-Kursbuchung",
+                "en": "Gym with online class booking"
+              },
+              "href": "/work/body-and-care"
+            }
+          ]
+        },
+        {
+          "heading": {
+            "de": "So kommen Sie zu einem festen Preis",
+            "en": "How you get to a fixed price"
+          },
+          "slot": "bottom",
+          "style": "steps",
+          "items": [
+            {
+              "title": {
+                "de": "Gespräch",
+                "en": "Conversation"
+              },
+              "body": {
+                "de": "30 Minuten, kostenlos, per Video oder vor Ort: Welche Kurse gibt es, wie werden sie heute vergeben, bis wann soll es fertig sein?",
+                "en": "30 minutes, free, by video or on site: which classes are there, how are they allocated today, when should it be ready?"
+              }
+            },
+            {
+              "title": {
+                "de": "Angebot",
+                "en": "Quote"
+              },
+              "body": {
+                "de": "Ein schriftlicher Festpreis mit Umfang, Zeitplan und allem, was nicht enthalten ist. Hier verhandeln wir, wenn nötig.",
+                "en": "A written fixed price with scope, timeline and everything that is not included. This is where we negotiate if needed."
+              }
+            },
+            {
+              "title": {
+                "de": "Umsetzung",
+                "en": "Build"
+              },
+              "body": {
+                "de": "Typisch vier bis acht Wochen, mit Vorschau-Links und Ihrem echten Kursplan.",
+                "en": "Typically four to eight weeks, with preview links and your real class schedule."
+              }
+            },
+            {
+              "title": {
+                "de": "Start und Wartung",
+                "en": "Launch and maintenance"
+              },
+              "body": {
+                "de": "Start auf Ihrer Domain, Einweisung für das Team und zwölf Monate Wartung inklusive.",
+                "en": "Launch on your domain, onboarding for the team and twelve months of maintenance included."
+              }
+            }
+          ]
+        }
+      ],
+      "faqs": [
+        {
+          "q": {
+            "de": "Sind die Preise netto?",
+            "en": "Are the prices net?"
+          },
+          "a": {
+            "de": "Ja. Alle Preise verstehen sich netto zuzüglich der gesetzlichen Mehrwertsteuer.",
+            "en": "Yes. All prices are net, plus statutory VAT."
+          }
+        },
+        {
+          "q": {
+            "de": "Kann ich in Raten zahlen?",
+            "en": "Can I pay in instalments?"
+          },
+          "a": {
+            "de": "Ja. Üblich ist eine Anzahlung bei Projektstart und der Rest nach Meilensteinen. Auf Wunsch geht es auch in bis zu zehn Monatsraten.",
+            "en": "Yes. Usually a deposit at the start and the rest by milestones. On request, up to ten monthly instalments."
+          }
+        },
+        {
+          "q": {
+            "de": "Wie lange dauert es, bis die Kursbuchung live ist?",
+            "en": "How long until the class booking is live?"
+          },
+          "a": {
+            "de": "Typisch vier bis acht Wochen, je nach Umfang und wie schnell Kursplan, Texte und Fotos vorliegen. Unterwegs bekommen Sie Vorschau-Links mit Ihren echten Kursen.",
+            "en": "Typically four to eight weeks, depending on scope and how quickly the class schedule, texts and photos are ready. Along the way you get preview links with your real classes."
+          }
+        },
+        {
+          "q": {
+            "de": "Fallen Gebühren pro Buchung an?",
+            "en": "Are there fees per booking?"
+          },
+          "a": {
+            "de": "Von uns nicht. Sie zahlen den Festpreis und nach dem ersten Jahr die Wartung, egal wie viele Plätze gebucht werden. Nur wenn Kunden online bezahlen, berechnet der Zahlungsanbieter eine Gebühr pro Zahlung.",
+            "en": "Not from us. You pay the fixed price and, after the first year, maintenance, no matter how many spots are booked. Only when customers pay online does the payment provider charge a fee per payment."
+          }
+        },
+        {
+          "q": {
+            "de": "Brauchen meine Mitglieder ein Kundenkonto?",
+            "en": "Do my members need an account?"
+          },
+          "a": {
+            "de": "Nein, nicht zwingend. Buchen und Stornieren geht mit Name und Kontaktdaten. Ein Mitgliederbereich mit Login ist möglich, macht das Projekt aber größer und damit teurer.",
+            "en": "Not necessarily. Booking and cancelling work with name and contact details. A member area with login is possible, but it makes the project larger and therefore more expensive."
+          }
+        },
+        {
+          "q": {
+            "de": "Was ist, wenn ich nur wissen will, ob sich das für mich lohnt?",
+            "en": "What if I only want to know whether it is worth it for me?"
+          },
+          "a": {
+            "de": "Dafür gibt es den Website-Check ab 249 €: eine Stunde Prüfung Ihrer Website und Ihres Buchungswegs, danach ein schriftlicher Befund mit Empfehlungen. Wenn Sie danach nicht mit uns bauen, ist das auch in Ordnung.",
+            "en": "That is what the website check from €249 is for: one hour reviewing your website and booking path, then a written report with recommendations. If you do not build with us afterwards, that is fine too."
+          }
+        }
+      ],
+      "related": [
+        "fitnessstudio-website",
+        "preise",
+        "kfz-aufbereitung-website",
+        "work"
+      ],
+      "schema": [
+        {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Article",
+              "@id": "https://www.rexity.ai/website-mit-kursbuchung-kosten#article",
+              "headline": "Was kostet eine Website mit Kursbuchung?",
+              "description": "Website mit Online-Kursbuchung ab 2.900 € Festpreis inkl. 12 Monate Wartung. Wovon der Preis abhängt, laufende Kosten und Abo-Tool oder eigene Website, ehrlich erklärt.",
+              "inLanguage": "de-DE",
+              "datePublished": "2026-09-24",
+              "dateModified": "2026-09-24",
+              "image": "https://www.rexity.ai/rexity-omi/assets/work/body-and-care/02-kurse.webp",
+              "mainEntityOfPage": "https://www.rexity.ai/website-mit-kursbuchung-kosten",
+              "author": {
+                "@id": "https://www.rexity.ai/#organization"
+              },
+              "publisher": {
+                "@id": "https://www.rexity.ai/#organization"
+              }
+            },
+            {
+              "@type": "FAQPage",
+              "@id": "https://www.rexity.ai/website-mit-kursbuchung-kosten#faq",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "Sind die Preise netto?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Alle Preise verstehen sich netto zuzüglich der gesetzlichen Mehrwertsteuer."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Kann ich in Raten zahlen?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Ja. Üblich ist eine Anzahlung bei Projektstart und der Rest nach Meilensteinen. Auf Wunsch geht es auch in bis zu zehn Monatsraten."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Wie lange dauert es, bis die Kursbuchung live ist?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Typisch vier bis acht Wochen, je nach Umfang und wie schnell Kursplan, Texte und Fotos vorliegen. Unterwegs bekommen Sie Vorschau-Links mit Ihren echten Kursen."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Fallen Gebühren pro Buchung an?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Von uns nicht. Sie zahlen den Festpreis und nach dem ersten Jahr die Wartung, egal wie viele Plätze gebucht werden. Nur wenn Kunden online bezahlen, berechnet der Zahlungsanbieter eine Gebühr pro Zahlung."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Brauchen meine Mitglieder ein Kundenkonto?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Nein, nicht zwingend. Buchen und Stornieren geht mit Name und Kontaktdaten. Ein Mitgliederbereich mit Login ist möglich, macht das Projekt aber größer und damit teurer."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Was ist, wenn ich nur wissen will, ob sich das für mich lohnt?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Dafür gibt es den Website-Check ab 249 €: eine Stunde Prüfung Ihrer Website und Ihres Buchungswegs, danach ein schriftlicher Befund mit Empfehlungen. Wenn Sie danach nicht mit uns bauen, ist das auch in Ordnung."
+                  }
+                }
+              ]
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.rexity.ai/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Was kostet eine Website mit Kursbuchung?",
+                  "item": "https://www.rexity.ai/website-mit-kursbuchung-kosten"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
       "slug": "fitnessstudio-website",
       "type": "standalone",
       "code": "B1",
@@ -4929,6 +5407,7 @@
         }
       ],
       "related": [
+        "website-mit-kursbuchung-kosten",
         "web-development",
         "whatsapp",
         "niedersachsen",
