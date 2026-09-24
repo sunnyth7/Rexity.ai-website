@@ -10,7 +10,7 @@
 //
 // IMPORTANT (Brevo account settings): link tracking and open tracking MUST be
 // disabled in Brevo (Transactional > Settings > Tracking). This code adds no
-// tracking pixels and sends empty custom headers, but Brevo applies account-
+// tracking pixels, but Brevo applies account-
 // level tracking to transactional mail unless it is turned off there.
 
 const BREVO_URL = "https://api.brevo.com/v3/smtp/email";
@@ -108,8 +108,7 @@ function internalMail(f, sender, to) {
     to: [{ email: to }],
     subject: "Neue Anfrage: " + (f.name || "Unbekannt") + " (" + (f.kind || "lead") + ")",
     textContent: text,
-    htmlContent: html,
-    headers: {}
+    htmlContent: html
   };
   if (f.email && EMAIL_RE.test(f.email)) payload.replyTo = { email: f.email, name: f.name || undefined };
   return payload;
@@ -151,8 +150,7 @@ function confirmationMail(f, sender, replyTo) {
     replyTo: replyTo,
     subject: subject,
     textContent: textParts.join("\n"),
-    htmlContent: html,
-    headers: {}
+    htmlContent: html
   };
 }
 
