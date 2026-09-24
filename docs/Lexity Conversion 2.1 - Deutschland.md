@@ -134,7 +134,7 @@ Buyer path: referral / Google / GBP → case study or industry page → offer �
 | Sprint | Work | Gate |
 |---|---|---|
 | **1** (wk 1–2) — **DONE 23 Sep** | ~~Indexing requested (9 URLs + /niedersachsen)~~ · ~~Offers priced → /preise live~~ · ~~Permissions (contractual)~~ · ~~GBP completed (categories, services, description, service area, hours, website)~~ · ~~Homepage German-first section~~ | Offers priced; GBP submitted; permissions in writing; homepage main-document German text live |
-| **2** (wk 3–4) | Enquiry form live → inbox + RexDesk. Add feedback videos / quotes where permission exists. Footer credits on client sites. | Form tested end-to-end incl. failure path; at least one client credit live |
+| **2** (wk 3–4) | ~~Enquiry form + booking live → inbox~~ (done 24 Sep, tested end-to-end incl. failure path) · RexDesk import (open) · feedback videos / quotes (open: no permission yet) · footer credits on client sites (open) | Form tested end-to-end incl. failure path ✅; at least one client credit live ⏳ |
 | **3** (wk 5–6) | ~~`/niedersachsen` hub + schema~~ (done 23 Sep, ahead of plan) · IHK + directory listings (open) · nav entry done | Hub live and indexed-requested; NAP identical on all listings |
 | **4** (wk 7–8) | ~~Industry page 1 (Fitness)~~ (done 23 Sep) · article 1 · referral asks · press pitch | Page + article live; two referral asks sent |
 | **5** (wk 9–10) | ~~Industry page 2 (Kfz)~~ (done 23 Sep) · article 2 · GSC review | Page + article live; GSC reviewed with dated notes |
@@ -164,6 +164,12 @@ Weekly, 15 minutes: non-brand impressions/clicks (GSC), visits by source (Vercel
 
 - **Indexing:** `/preise`, `/fitnessstudio-website`, `/kfz-aufbereitung-website` requested (all 13 business URLs now submitted).
 - **EU hosting:** Vercel functions moved `iad1` (USA) → `fra1` (Frankfurt), verified `x-vercel-id: fra1::fra1`. Supabase confirmed `eu-west-1`. Open: mailbox `info@rexity.ai` is on Spacemail (Spaceship Inc., USA); chatbot LLM runs on Azure OpenAI (region to verify).
-- **Lead notification:** code live (`api/_notify.js`, Brevo — France/EU), **inactive until `BREVO_API_KEY` is set on Vercel** and `rexity.ai` is verified in Brevo (SPF include + DKIM).
+- **Lead notification: LIVE and tested 24 Sep.** Brevo (France/EU). Domain `rexity.ai` is authenticated with DKIM and DMARC; sender "Rexity Labs UG <info@rexity.ai>"; tracking anonymised; IP allow-list off for API keys, because Vercel IPs change. Every contact-form enquiry and every booking sends two emails. The founder gets a notice at info@rexity.ai, with reply-to set to the customer. The customer gets a German or English confirmation, which states the requested slot for bookings.
+- **Enquiry + booking end-to-end test (24 Sep), passed:**
+  - Browser test of the "Termin buchen" modal on the live homepage. The row was saved to Supabase `Lead` + `Appointment`.
+  - Both emails returned HTTP 201. The customer confirmation reached the Gmail inbox, not spam, with no Brevo branding. Brevo reports the founder notice as delivered to info@rexity.ai.
+  - Failure paths: an empty form, an invalid email and a past date each show a German error. A past date now has its own message, and the picker minimum uses local time.
+  - If Brevo is down or rejects a send, the lead is still saved and the visitor still sees success. The function logs Brevo's reason; see `vercel logs -q notify`.
+  - All test rows were deleted afterwards.
 - **GBP posts:** 3 published (launch, Body & Care, Werkstatt-Terminbuchung), each with photo + link. Texts corrected to delivered functionality only.
 - **Review link:** `https://g.page/r/CdC2R6jI0hKLEAE/review` (place ID `ChIJaQCOtB35NwQR0LZHqMjSEos`). WhatsApp asks to Melanie and Aref: founder sends.
