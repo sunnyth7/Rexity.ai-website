@@ -135,7 +135,7 @@ Buyer path: referral / Google / GBP → case study or industry page → offer �
 |---|---|---|
 | **1** (wk 1–2) — **DONE 23 Sep** | ~~Indexing requested (9 URLs + /niedersachsen)~~ · ~~Offers priced → /preise live~~ · ~~Permissions (contractual)~~ · ~~GBP completed (categories, services, description, service area, hours, website)~~ · ~~Homepage German-first section~~ | Offers priced; GBP submitted; permissions in writing; homepage main-document German text live |
 | **2** (wk 3–4) | ~~Enquiry form + booking live → inbox~~ (done 24 Sep, tested end-to-end incl. failure path) · RexDesk import (open) · feedback videos / quotes (open: no permission yet) · footer credits on client sites (open) | Form tested end-to-end incl. failure path ✅; at least one client credit live ⏳ |
-| **3** (wk 5–6) | ~~`/niedersachsen` hub + schema~~ (done 23 Sep, ahead of plan) · IHK + directory listings (open) · nav entry done | Hub live and indexed-requested; NAP identical on all listings |
+| **3** (wk 5–6) — **in progress 24 Sep** | ~~`/niedersachsen` hub + schema~~ (done 23 Sep) · ~~hub indexed~~ · ~~site-wide schema/NAP consistency~~ (24 Sep) · duplicate GBP cleanup (founder) · IHK query (draft ready) · directory listings (founder logins) · nav entry done | Hub live and indexed ✅; NAP identical on all listings ⏳ |
 | **4** (wk 7–8) | ~~Industry page 1 (Fitness)~~ (done 23 Sep) · article 1 · referral asks · press pitch | Page + article live; two referral asks sent |
 | **5** (wk 9–10) | ~~Industry page 2 (Kfz)~~ (done 23 Sep) · article 2 · GSC review | Page + article live; GSC reviewed with dated notes |
 | **6** (wk 11–12) | Review: leads by source, qualified vs. not, proposals. Decide per channel: keep / deepen / drop. Decide whether Ring 3 industry pages start. | Written review; next-quarter decision |
@@ -173,3 +173,14 @@ Weekly, 15 minutes: non-brand impressions/clicks (GSC), visits by source (Vercel
   - All test rows were deleted afterwards.
 - **GBP posts:** 3 published (launch, Body & Care, Werkstatt-Terminbuchung), each with photo + link. Texts corrected to delivered functionality only.
 - **Review link:** `https://g.page/r/CdC2R6jI0hKLEAE/review` (place ID `ChIJaQCOtB35NwQR0LZHqMjSEos`). WhatsApp asks to Melanie and Aref: founder sends.
+
+## Sprint 3 log (24 Sep 2026)
+
+- Sprint 2 leftovers were parked by the founder: footer credit, review asks, feedback quotes and the RexDesk import.
+- **Hub indexed.** `/niedersachsen` shows "URL is on Google" with valid breadcrumbs. The homepage is indexed; a recrawl was requested after the schema change.
+- **NAP on the website is consistent.** Every page shows the same phone and email, and the same address as the Impressum.
+- **Schema cleaned up.** One business entity, `https://www.rexity.ai/#organization`, named "Rexity Labs UG" (the Google profile name), with the legal name, phone, address, service area and opening hours. It replaced the stale English homepage JSON-LD, which had relative URLs, the old service names and no phone or address.
+- **Duplicate Google profile found.** An older profile, "Rexity Tech-Labs" (business ID 12142606431947245644, 73 views in August), still points to rexity.ai. The founder decides whether to remove it or mark it closed. This must happen before the directory listings go out.
+- **IHK.** A query to service@ihklw.de about the member directory is saved as a Gmail draft, not sent.
+- **Directory listings:** each needs the founder's own login or account, and a go per submission. Data comes from `docs/NAP_DIRECTORIES.md` §1.
+
