@@ -3452,7 +3452,7 @@
             {
               "@type": "Organization",
               "@id": "https://www.rexity.ai/#organization",
-              "name": "Rexity Labs UG (haftungsbeschränkt)",
+              "name": "Rexity Labs UG",
               "alternateName": "Rexity Labs",
               "url": "https://www.rexity.ai",
               "email": "info@rexity.ai",
@@ -3465,12 +3465,13 @@
                 "addressLocality": "Südheide",
                 "addressRegion": "Niedersachsen",
                 "addressCountry": "DE"
-              }
+              },
+              "legalName": "Rexity Labs UG (haftungsbeschränkt)"
             },
             {
               "@type": "LocalBusiness",
               "@id": "https://www.rexity.ai/niedersachsen#localbusiness",
-              "name": "Rexity Labs UG (haftungsbeschränkt)",
+              "name": "Rexity Labs UG",
               "parentOrganization": {
                 "@id": "https://www.rexity.ai/#organization"
               },
@@ -3527,7 +3528,9 @@
                   "@type": "State",
                   "name": "Niedersachsen"
                 }
-              ]
+              ],
+              "legalName": "Rexity Labs UG (haftungsbeschränkt)",
+              "alternateName": "Rexity Labs"
             },
             {
               "@type": "BreadcrumbList",
@@ -4471,11 +4474,20 @@
               "provider": {
                 "@type": "Organization",
                 "@id": "https://www.rexity.ai/#organization",
-                "name": "Rexity Labs UG (haftungsbeschränkt)",
+                "name": "Rexity Labs UG",
                 "alternateName": "Rexity Labs",
                 "url": "https://www.rexity.ai",
                 "email": "info@rexity.ai",
-                "telephone": "+49 174 2471435"
+                "telephone": "+49 174 2471435",
+                "legalName": "Rexity Labs UG (haftungsbeschränkt)",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Willighäuser Weg 11",
+                  "postalCode": "29320",
+                  "addressLocality": "Südheide",
+                  "addressRegion": "Niedersachsen",
+                  "addressCountry": "DE"
+                }
               },
               "areaServed": {
                 "@type": "Country",
@@ -4936,8 +4948,20 @@
               "provider": {
                 "@type": "Organization",
                 "@id": "https://www.rexity.ai/#organization",
-                "name": "Rexity Labs UG (haftungsbeschränkt)",
-                "url": "https://www.rexity.ai"
+                "name": "Rexity Labs UG",
+                "url": "https://www.rexity.ai",
+                "legalName": "Rexity Labs UG (haftungsbeschränkt)",
+                "alternateName": "Rexity Labs",
+                "telephone": "+49 174 2471435",
+                "address": {
+                  "@type": "PostalAddress",
+                  "streetAddress": "Willighäuser Weg 11",
+                  "postalCode": "29320",
+                  "addressLocality": "Südheide",
+                  "addressRegion": "Niedersachsen",
+                  "addressCountry": "DE"
+                },
+                "email": "info@rexity.ai"
               },
               "areaServed": {
                 "@type": "Country",

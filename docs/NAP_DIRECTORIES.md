@@ -1,6 +1,6 @@
 # NAP-Block und Verzeichnis-Liste
 
-Stand: 2026-09-23. NAP = Name, Address, Phone. Diese Strings müssen in **jedem** Verzeichnis
+Stand: 2026-09-24 (Anzeigename an Google-Profil angeglichen). NAP = Name, Address, Phone. Diese Strings müssen in **jedem** Verzeichnis
 zeichengleich verwendet werden (gleiche Schreibweise, gleiche Leerzeichen, gleiche Ortsbezeichnung).
 Abweichungen zwischen Google, Bing, Branchenbüchern und Impressum sind das häufigste Local-SEO-Problem
 und lassen sich später nur mühsam korrigieren.
@@ -14,7 +14,7 @@ möglich war (Bot-Sperre, Geo-Sperre, DNS), steht **unverified** mit dem Grund.
 
 | Feld | Wert |
 |---|---|
-| Name (Anzeigename) | `Rexity Labs` |
+| Name (Anzeigename, = Google-Profil) | `Rexity Labs UG` |
 | Name (juristisch, nur wo Rechtsform verlangt wird) | `Rexity Labs UG (haftungsbeschränkt)` |
 | Straße | `Willighäuser Weg 11` |
 | PLZ | `29320` |
@@ -59,8 +59,9 @@ Rexity Labs ist eine Software- und Digitalagentur aus Hermannsburg (Gemeinde Sü
 
 | Feld | Wert |
 |---|---|
-| Google-Profil-URL | _(offen)_ |
-| Google Place ID | _(offen)_ |
+| Google-Profil (Bewertungslink) | `https://g.page/r/CdC2R6jI0hKLEAE/review` |
+| Google Place ID | `ChIJaQCOtB35NwQR0LZHqMjSEos` |
+| Duplikat | Zweites, älteres Profil "Rexity Tech-Labs" (Business-ID 12142606431947245644) existiert noch — entfernen oder als geschlossen markieren, bevor weitere Verzeichnisse angelegt werden |
 | Bing Places ID | _(offen)_ |
 
 ---
