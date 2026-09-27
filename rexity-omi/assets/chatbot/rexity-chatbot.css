@@ -315,3 +315,4 @@ html.rx-modal-open .rexity-chatbot { opacity: 0; visibility: hidden; pointer-eve
 @media (prefers-reduced-motion: reduce) {
   .rexity-chatbot, .rexity-chatbot * { transition: none !important; animation: none !important; }
 }
+.rexity-chatbot__menu-item[hidden] { display: none; }

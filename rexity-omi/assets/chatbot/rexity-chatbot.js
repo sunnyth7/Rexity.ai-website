@@ -7,6 +7,9 @@
   var STORAGE_KEY = "rexity_lang";
   var INTRO_SEEN_KEY = "rexity_intro_seen";
   var LEAD_KEY = "rexity_chat_lead";
+  // Founder 27.09.: chatbot hidden for now. The Kontakt pill stays (WhatsApp + E-Mail); the
+  // "Chatbot" entry, the greeting bubble and the chat panel are off. Set true to bring it back.
+  var CHAT_ENABLED = false;
   var CONTACT = {
     email: "info@rexity.ai",
     whatsapp: "491742471435"
@@ -67,7 +70,7 @@
       loadingThink: "Rexity is thinking …",
       loadingWrite: "Rexity is writing …",
       contactTitle: "Contact us",
-      contactSubtitle: "Chat · WhatsApp · Email",
+      contactSubtitle: CHAT_ENABLED ? "Chat · WhatsApp · Email" : "WhatsApp · Email",
       contactChat: "Chatbot",
       contactWhatsApp: "WhatsApp",
       contactEmail: "Email",
@@ -108,7 +111,7 @@
       loadingThink: "Rexity denkt …",
       loadingWrite: "Rexity schreibt …",
       contactTitle: "Kontakt",
-      contactSubtitle: "Chat · WhatsApp · E-Mail",
+      contactSubtitle: CHAT_ENABLED ? "Chat · WhatsApp · E-Mail" : "WhatsApp · E-Mail",
       contactChat: "Chatbot",
       contactWhatsApp: "WhatsApp",
       contactEmail: "E-Mail",
@@ -707,7 +710,9 @@
     function hideNudge() {
       nudge.setAttribute("hidden", "");
     }
+    if (!CHAT_ENABLED) menuChatBtn.setAttribute("hidden", "");
     function openChat() {
+      if (!CHAT_ENABLED) return;
       markIntroSeen();
       hideMenu();
       hideNudge();
@@ -806,7 +811,7 @@
     // small greeting bubble appears next to the launcher, once per browser session,
     // not on phones (< 768 px), not while the menu, the booking modal or the
     // contact cluster is open. The width is checked when the timer fires.
-    if (!introSeen()) {
+    if (CHAT_ENABLED && !introSeen()) {
       window.setTimeout(function () {
         var html = document.documentElement;
         var busy = html.classList.contains("rx-menu-open") || html.classList.contains("rx-modal-open") || !menu.hasAttribute("hidden");
