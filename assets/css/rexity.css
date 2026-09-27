@@ -588,3 +588,16 @@ html:not([data-palette]) .rexity-chatbot__pill{background:rgba(27,20,51,.9)}
 html:not([data-palette]) .rexity-chatbot__pill:hover{background:var(--rx-base-lift)}
 html:not([data-palette]) :is(.rexity-chatbot__menu-item,.rexity-chatbot__mailmenu-btn){background:var(--rx-base-lift)}
 html:not([data-palette]) .rexity-chatbot__menu-item:hover{background:#261d45}
+
+/* ---- phones + tablets (< 992 px), founder 27.09.: "Web & Apps, Unsere Arbeit, Preise in the top navigation".
+   A compact link row between the logo mark and the menu button; the full menu stays behind the burger. The desktop
+   bar keeps Leistungen / Unsere Arbeit / Preise / Artikel / Kontakt. 44 px tap height; the current page is underlined. */
+.rx-quicknav{display:none}
+@media (max-width:991px){
+  .nav-wrapper{gap:6px}
+  .rx-quicknav{display:flex;flex:1 1 auto;justify-content:center;align-items:center;gap:clamp(6px,2.4vw,20px);min-width:0;margin-right:6px}
+  .rx-quicknav__link{display:inline-flex;align-items:center;min-height:44px;padding-inline:2px;color:inherit;font-size:clamp(.78rem,3.4vw,1rem);font-weight:500;line-height:1;white-space:nowrap;text-decoration:none;opacity:.88;transition:opacity .2s}
+  .rx-quicknav__link:hover,.rx-quicknav__link:focus-visible{opacity:1}
+  .rx-quicknav__link[aria-current="page"]{opacity:1;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:7px}
+}
+@media (max-width:339px){.rx-quicknav__link:first-child{display:none}}
