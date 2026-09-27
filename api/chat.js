@@ -130,6 +130,10 @@ const ANTHROPIC_KEY = ANTHROPIC_KEY_VAR ? String(process.env[ANTHROPIC_KEY_VAR])
 const ANTHROPIC_MODEL = String(process.env.ANTHROPIC_MODEL || "claude-haiku-4-5").trim();
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
 const ANTHROPIC_READY = Boolean(ANTHROPIC_KEY);
+// An organisation-level key (not scoped to a workspace) must name the workspace in the
+// anthropic-workspace-id header; set ANTHROPIC_WORKSPACE_ID (the ID, not a secret) or use a
+// workspace-scoped key.
+const ANTHROPIC_WORKSPACE_ID = String(process.env.ANTHROPIC_WORKSPACE_ID || "").trim();
 
 // ---- Provider selection ---------------------------------------------------------
 // Default order: Bedrock (key set and EU guard passed) -> Anthropic API (key set) ->
@@ -672,6 +676,15 @@ async function callBedrock(lang, name, history, message, timeoutMs) {
       delete body.output_config;
       body.max_tokens = MAX_COMPLETION_TOKENS;
       resp = await postBedrock(body, left(), auth);
+    } else if (/operation not allowed|not authorized|access/i.test(detail)) {
+      // Model access not granted yet (Anthropic use-case form / allowlisting pending): same
+      // 10-minute cool-down as a 401/403, so each message doesn't pay the round trip.
+      bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
+      console.error("[chat] Bedrock HTTP 400 (model access not granted): skipping Bedrock on this instance for 10 minutes. " + detail.slice(0, 200));
+      const err = new Error("bedrock http 400, cooling down");
+      err.status = 400;
+      err.logged = true;
+      throw err;
     } else {
       console.error("[chat] Bedrock HTTP 400 " + detail.slice(0, 300));
       const err = new Error("bedrock http 400");
@@ -726,7 +739,8 @@ async function callAnthropic(lang, name, history, message, timeoutMs) {
   try {
     const resp = await fetch(ANTHROPIC_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_KEY, "anthropic-version": ANTHROPIC_VERSION },
+      headers: Object.assign({ "Content-Type": "application/json", "x-api-key": ANTHROPIC_KEY, "anthropic-version": ANTHROPIC_VERSION },
+        ANTHROPIC_WORKSPACE_ID ? { "anthropic-workspace-id": ANTHROPIC_WORKSPACE_ID } : {}),
       body: JSON.stringify(buildAnthropicBody(lang, name, history, message)),
       signal: controller.signal
     });
