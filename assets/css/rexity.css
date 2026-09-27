@@ -1,0 +1,590 @@
+/* ==========================================================================
+   rexity.css — Rexity token layer on top of the untouched Vaxel CSS
+   (assets/vaxel.webflow.shared.*.css). Loaded after it on every page.
+
+   Rules (docs/SPRINT_PLAN.md §0.1, docs/DESIGN_TOKENS.md):
+   - Colour and font changes go through the template's own CSS variables
+     (--colors--*, --_theme---*, --font-families--*).
+   - Selectors are only added where the template hard-codes a colour or font
+     instead of using a variable; each one is listed in DESIGN_TOKENS.md.
+   - Sprint 12 (founder 2026-09-26, "elegant sitewide") adds §10–§12: the
+     shared rx-* component layer, global fixes and the shell (menu, footer,
+     booking modal). Docs + markup: docs/DESIGN_SYSTEM.md, demo /styleguide.
+
+   Palettes: <html> without data-palette = "dark" (default, Vaxel's dark
+   ground with the Rexity accent). data-palette="light" | "contrast" are the
+   alternatives offered on /styleguide for the founder to choose from.
+   Fonts:    data-fontset="rexity" maps primary/tertiary to Inter (compare on
+   /styleguide); default = the template's DM Sans / Geist Mono / Inter Tight.
+
+      ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Inter (self-hosted, same files as assets/vendor/inter/inter.css).
+   Declared here so the font toggle needs no extra stylesheet; a @font-face
+   only downloads when a rule actually uses the family.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/vendor/inter/inter_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url(/assets/vendor/inter/inter_UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --------------------------------------------------------------------------
+   1. Rexity tokens + default palette "dark"
+   Only the template's orange brand colour changes; ground, ink, greys and
+   cards stay exactly Vaxel's.
+   -------------------------------------------------------------------------- */
+:root {
+  /* Accent. Rexity brand violet is #7c3aed (production rx-vibe.css --rxv-accent).
+     On the dark ground the template puts DARK text on its accent fill (orange),
+     so the dark palette uses a light tint of the brand violet that works both
+     as text on the ground and as a fill under dark text. */
+  --rx-violet: #7c3aed;        /* brand violet (used as-is in the light palettes) */
+  --rx-violet-deep: #4c1d95;   /* production --rxv-accent-deep */
+  --rx-accent: #b197fc;        /* dark palette accent: 6.99:1 on #1d1d1d, 4.71:1 on #3a3a3a cards, #1d1d1d text on it 6.99:1 */
+  --rx-accent-ink: var(--rx-accent);
+  --rx-on-accent: #1d1d1d;
+  --rx-navy: #10233f;          /* production ink navy */
+  --rx-ground-light: #f7f7f4;  /* production ground */
+  --rx-danger: #b42318;        /* error surface; white text 6.57:1 (template #ff4649 was 3.37:1) */
+  --rx-focus: var(--rx-accent-ink);
+  --rx-placeholder: #e0dcdc;   /* 4.62:1 on the glass field inside a card (#606060) */
+  --rx-menu-ink: #fdfdfd;      /* the template's menu overlay text */
+
+  /* the template's brand colour ("butternut squash" #f87400) -> Rexity accent */
+  --colors--butternut-squash: var(--rx-accent);
+}
+
+/* --------------------------------------------------------------------------
+   2. Palette "light" — production colours: ground #f7f7f4, ink #10233F.
+   Setting the base --colors--* on <html> is enough: Vaxel derives every
+   --_theme---* variable from them on :root and again on body (≤991px).
+   -------------------------------------------------------------------------- */
+html[data-palette="light"],
+html[data-palette="contrast"] {
+  --colors--primary-background: #f7f7f4; /* ground */
+  --colors--primary-text: #10233f;       /* ink, 14.66:1 on ground */
+  --colors--secondary-text: #4a5a70;     /* muted ink, 6.55:1 on ground */
+  --colors--namara-grey: #5b6b80;        /* quaternary text / secondary border, 5.07:1 */
+  --colors--cold-grey: #6b7a8f;          /* primary border (inputs, rules), 4.07:1 */
+  --colors--white-edgar: #1e3354;        /* "inverse surface" (arrow chips, pagination); was #ededed on dark */
+  --rx-accent: #7c3aed;                  /* brand violet: 5.31:1 as text on ground, 5.70:1 on white; ground-coloured text on it 5.31:1 */
+  --rx-accent-ink: #7c3aed;
+  --rx-on-accent: #f7f7f4;
+  --rx-focus: #7c3aed;
+  --colors--butternut-squash: #7c3aed;
+  --rx-card: #ffffff;
+  --rx-placeholder: #4a5a70;
+  --rx-glass: rgba(16, 35, 63, 0.06);    /* replaces the template's white-on-dark glass (#ffffff1a) */
+  --rx-nav-glass: rgba(247, 247, 244, 0.78);
+  --rx-menu-bg: #f7f7f4;
+  --rx-menu-ink: #10233f;
+  --rx-menu-muted: #4a5a70;
+  --rx-strong-bg: #10233f;               /* the template's pure-black pill (.black-bg) */
+  --rx-strong-ink: #f7f7f4;
+  --rx-msg-bg: #10233f;                  /* success message surface (was #343434) */
+  --rx-msg-ink: #f7f7f4;
+}
+html[data-palette="contrast"] {
+  /* light ground, but the template's dark surfaces (cards, menu, footer cards,
+     pill) become navy panels with light type */
+  --rx-card: #10233f;
+  --rx-menu-bg: #10233f;
+  --rx-menu-ink: #f7f7f4;
+  --rx-menu-muted: #b8c4d6;
+}
+
+/* --------------------------------------------------------------------------
+   3. "On-dark" islands inside the light palettes.
+   (a) Sections whose text sits on photos/video (hero, story, work, CTA,
+       menu CTA) keep light type in every palette — otherwise ink would land
+       on dark imagery.
+   (b) In "contrast", the template's dark surfaces are navy panels.
+   Vaxel resolves --_theme---* from --colors--* on :root, so an island has to
+   set its own --colors--* AND re-derive the --_theme---* chain (the mapping
+   below is copied 1:1 from the Vaxel :root block).
+   -------------------------------------------------------------------------- */
+html:is([data-palette="light"], [data-palette="contrast"]) :is(
+    .section.home-hero, .section.hero, .section.contact-hero, .section.full-height,
+    .section:has(.dark-layer), .section:has(video), .section:has(> .for-animation),
+    .section:has(> .for-cta), .story-section-wrapper, .menu-cta-row, .team-card
+  ),
+html[data-palette="contrast"] :is(.card-frame, .pricing-card, .comment-card-frame, .menu, .black-bg) {
+  --colors--primary-background: #1d1d1d;
+  --colors--primary-text: #fffdfd;
+  --colors--secondary-text: #d0d6df;
+  --colors--namara-grey: #b0abab;
+  --colors--cold-grey: #9f9e9e;
+  --colors--white-edgar: #ededed;
+  --rx-accent: #b197fc;
+  --rx-accent-ink: #b197fc;
+  --rx-on-accent: #1d1d1d;
+  --rx-focus: #b197fc;
+  --rx-placeholder: #e0dcdc;
+  --rx-glass: #ffffff1a;
+  --colors--butternut-squash: #b197fc;
+  --_theme---background-color--brand: var(--colors--butternut-squash);
+  --_theme---text-color--brand: var(--colors--butternut-squash);
+  /* Vaxel mapping, re-derived locally */
+  --_theme---background-color--primary: var(--colors--primary-background);
+  --_theme---background-color--secondary: var(--colors--white-edgar);
+  --_theme---background-color--tertiary: var(--colors--primary-text);
+  --_theme---border-color--primary: var(--colors--cold-grey);
+  --_theme---border-color--secondary: var(--colors--namara-grey);
+  --_theme---text-color--primary: var(--colors--primary-text);
+  --_theme---text-color--secondary: var(--colors--secondary-text);
+  --_theme---text-color--tertiary: var(--colors--primary-background);
+  --_theme---text-color--text-quaternary: var(--colors--namara-grey);
+  --_theme---section--background-primary: var(--_theme---background-color--primary);
+  --_theme---section--background-secondary: var(--_theme---background-color--tertiary);
+  --_theme---section--text-primary: var(--_theme---text-color--primary);
+  --_theme---section--text-secondary: var(--_theme---text-color--secondary);
+  --_theme---section--text-tertiary: var(--_theme---text-color--tertiary);
+  --_theme---section--text-quaternary: var(--_theme---text-color--text-quaternary);
+  --_theme---button--background-primary: var(--_theme---background-color--tertiary);
+  --_theme---button--background-primary-hove: var(--_theme---background-color--primary);
+  --_theme---button--background-secondary: var(--_theme---background-color--secondary);
+  --_theme---button--text-primary: var(--_theme---text-color--tertiary);
+  --_theme---button--text-secondary: var(--_theme---text-color--primary);
+  color: var(--_theme---section--text-primary); /* inherited text inside the island */
+}
+/* navy panels: form fields inside them sit on a deeper navy, not #1d1d1d */
+html[data-palette="contrast"] :is(.card-frame, .pricing-card, .comment-card-frame, .menu) {
+  --colors--primary-background: #0b1930;
+  --colors--secondary-text: #c3cddb;
+  --colors--cold-grey: #8e9bb0;
+}
+
+/* --------------------------------------------------------------------------
+   4. Hard-coded template colours (the template writes a literal colour
+   instead of a variable). Each selector is listed in DESIGN_TOKENS.md §4.
+   -------------------------------------------------------------------------- */
+/* all palettes: orange literal in the menu tag dot -> accent */
+.simple-dot-2 { background-color: var(--colors--butternut-squash); }
+/* all palettes: error surfaces #ff4649 (white text 3.37:1) -> 6.57:1 */
+.form-message-error, .form-message-error-3 { background-color: var(--rx-danger); color: #ffffff; }
+
+/* all palettes: the template sets typed text in .secondary fields to the
+   secondary grey (#b0abab), which sits at 2.77:1 on the glass field inside a
+   card; typed text uses the primary ink and placeholders a lighter grey. */
+.form-input.secondary, .form-input-textarea.secondary { color: var(--_theme---text-color--primary); }
+.form-input.secondary::placeholder, .form-input-textarea.secondary::placeholder { color: var(--rx-placeholder); }
+
+/* light + contrast */
+html:is([data-palette="light"], [data-palette="contrast"]) .card-frame,
+html:is([data-palette="light"], [data-palette="contrast"]) .pricing-card,
+html:is([data-palette="light"], [data-palette="contrast"]) .comment-card-frame { background-color: var(--rx-card); }
+html[data-palette="light"] .card-frame,
+html[data-palette="light"] .pricing-card,
+html[data-palette="light"] .comment-card-frame { box-shadow: 0 0 0 1px rgba(16, 35, 63, 0.08); }
+html:is([data-palette="light"], [data-palette="contrast"]) .primary-button:not(.black):not(.popular),
+html:is([data-palette="light"], [data-palette="contrast"]) .form-input.secondary,
+html:is([data-palette="light"], [data-palette="contrast"]) .form-input-textarea.secondary,
+html:is([data-palette="light"], [data-palette="contrast"]) .contact-form-inputs-box,
+html:is([data-palette="light"], [data-palette="contrast"]) .contact-map-image-box { background-color: var(--rx-glass); }
+html:is([data-palette="light"], [data-palette="contrast"]) .secondary-button:not(.w--current) { background-color: var(--rx-glass); }
+html:is([data-palette="light"], [data-palette="contrast"]) .nav-content-wrapper { background-color: var(--rx-nav-glass); }
+@media screen and (max-width: 991px) {
+  html:is([data-palette="light"], [data-palette="contrast"]) .nav-wrapper { background-color: var(--rx-nav-glass); }
+}
+html:is([data-palette="light"], [data-palette="contrast"]) .black-bg { background-color: var(--rx-strong-bg); }
+html:is([data-palette="light"], [data-palette="contrast"]) .black-bg .nav-link { color: var(--rx-strong-ink); }
+html:is([data-palette="light"], [data-palette="contrast"]) .menu { background-color: var(--rx-menu-bg); color: var(--rx-menu-ink); }
+@media screen and (max-width: 991px) {
+  html:is([data-palette="light"], [data-palette="contrast"]) .menu { background-color: var(--rx-menu-bg); }
+}
+html:is([data-palette="light"], [data-palette="contrast"]) :is(.menu-link-second, .menu-close-button-2) { color: var(--rx-menu-ink); }
+html:is([data-palette="light"], [data-palette="contrast"]) .menu-content { color: var(--rx-menu-muted); }
+html:is([data-palette="light"], [data-palette="contrast"]) .menu-header-box { border-bottom-color: var(--rx-menu-muted); }
+html:is([data-palette="light"], [data-palette="contrast"]) .menu .footer-link { color: var(--rx-menu-ink); }
+/* icons: the template's burger is drawn in #080808 on the dark glass bar
+   (≈1.3:1); on the dark palette it is shown light, on light grounds dark */
+html:not([data-palette="light"]):not([data-palette="contrast"]) .open-menu-button-image { filter: invert(1); }
+html[data-palette="light"] .menu-close-icon { filter: brightness(0) saturate(100%); }
+html:is([data-palette="light"], [data-palette="contrast"]) .form-message-success-2 { background-color: var(--rx-msg-bg); color: var(--rx-msg-ink); }
+
+/* --------------------------------------------------------------------------
+   5. Logo: white variant on dark grounds (default), dark variant on the
+   light palettes. Both images sit in the template's logo slot; the slot
+   keeps its size, the SVG is contained.
+   -------------------------------------------------------------------------- */
+.main-logo, .nav-brand-logo { object-fit: contain; }
+.main-logo[data-rx-logo="on-light"] { display: none; }
+html:is([data-palette="light"], [data-palette="contrast"]) .nav-logo-link .main-logo[data-rx-logo="on-dark"] { display: none; }
+html:is([data-palette="light"], [data-palette="contrast"]) .nav-logo-link .main-logo[data-rx-logo="on-light"] { display: block; }
+
+/* --------------------------------------------------------------------------
+   6. Font sets. Default = the template's families. data-fontset="rexity"
+   maps primary + tertiary to Inter (secondary Geist Mono stays for labels).
+   -------------------------------------------------------------------------- */
+html[data-fontset="rexity"] {
+  --font-families--primary: "Inter", sans-serif;
+  --font-families--tertiary: "Inter", sans-serif;
+}
+/* the template hard-codes "Inter Tight" on these four instead of a variable */
+html[data-fontset="rexity"] :is(.menu-link-second, .menu-cta-email, .footer-link-second) { font-family: "Inter", sans-serif; }
+
+/* --------------------------------------------------------------------------
+   7. Language pill (DE/EN). Lives inside the template's nav markup and uses
+   .nav-link; only the active-language state is new.
+   -------------------------------------------------------------------------- */
+:where([data-rx-lang-toggle]) { cursor: pointer; border: 0; background: none; font: inherit; color: inherit; padding: 0; }
+[data-rx-lang-toggle] [data-lang] { opacity: 0.72; } /* ≥4.5:1 on every ground the pill sits on */
+[data-rx-lang-toggle] [data-lang].on { opacity: 1; font-weight: var(--font-weight--bold); }
+.black-bg [data-rx-lang-toggle] { color: inherit; }
+/* the menu overlay sets #4d4d4d on .menu-content; the pill must read like the close button (#fdfdfd) */
+.menu-header-box [data-rx-lang-toggle] { color: var(--rx-menu-ink, #fdfdfd); }
+
+/* --------------------------------------------------------------------------
+   8. Accessibility: visible focus (≥3:1 against every ground used).
+   -------------------------------------------------------------------------- */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--rx-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:where(.form-input, .form-input-textarea):focus-visible { outline-offset: 1px; }
+/* The Webflow base rule `.w-input:focus, .w-select:focus { outline: 0 }` outranks the :where() rule
+   above, so form fields had no keyboard focus ring (Sprint 6B QA). Same ring, enough specificity. */
+.w-input:focus-visible, .w-select:focus-visible { outline: 2px solid var(--rx-focus); outline-offset: 1px; }
+.rx-visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* invalid fields (set by rexity.js next to the inline error message): ≥3:1 on the field */
+[aria-invalid="true"] { border-color: #ffb3a8 !important; }
+html:is([data-palette="light"], [data-palette="contrast"]) [aria-invalid="true"] { border-color: var(--rx-danger) !important; }
+
+/* Reduced motion: the template's motion is JS-driven (Webflow IX + GSAP) and
+   is left untouched here so the default experience is identical; only the
+   booking modal's own fade is dropped (see §12). The Webflow runtime already
+   pauses background videos for users who ask for reduced motion. */
+
+/* Links inside long-form text (legal pages, articles). The template shows links in plain text colour,
+   and its blue link colour is only 3.45:1 on the dark ground, so underline instead. Requested by Sprint 5. */
+.rich-text a { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Homepage contact section and inline links (moved from index.html, Sprint 2). */
+a.rx-inline-link{font-family:inherit;color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}#kontakt .contact-form-inputs-box{grid-template-columns:1fr;padding:1em}#kontakt .contact-form-input-cell>:is(input,select,textarea){width:100%}#kontakt .contact-form{grid-row-gap:1rem}
+
+/* German typography: the template forces text-transform:capitalize on buttons, tags, nav and menu links,
+   which turns German labels into "Gespräch Starten", "Wie Wir Arbeiten" and "Info@Rexity.Ai".
+   Labels are written in correct German case in the copy instead. Remove this block to restore the template look. */
+.cart-nav-link, .cms-detail-title, .contact-option-title, .footer-link, .footer-link-second, .global-link, .menu-close-button, .menu-close-button-2, .menu-link, .menu-link-second, .nav-link, .nav-link-2, .pagination-link, .primary-button, .primary-button-2, .secondary-button, .section-header-tag, .story-title, .tertiary-button { text-transform: none; }
+
+/* Homepage about grid: the centred headline sits over photos and the video tile (founder 2026-09-25:
+   brighter Pexels video). A soft shadow keeps it readable over light footage; the template's scroll
+   reveal (faint -> white) is unchanged. */
+.about-center-text { text-shadow: 0 2px 28px rgba(0, 0, 0, 0.65), 0 0 2px rgba(0, 0, 0, 0.45); }
+
+
+/* Homepage hero: the sub-line ("Für Betriebe in Celle, Hannover …") sat on the brightest part of the
+   background glow. Lift it a little at every breakpoint and give it the same soft shadow as other text
+   over imagery (founder 2026-09-25). The template's bottom offsets stay; this only adds to them. */
+.section.home-hero .absolute-p { margin-bottom: 2.25rem; text-shadow: 0 1px 18px rgba(0, 0, 0, 0.7); }
+@media screen and (max-width: 479px) { .section.home-hero .absolute-p { margin-bottom: 1.5rem; } }
+
+/* ==========================================================================
+   10. Sprint 12 component layer (rx-*). Reference and markup: docs/DESIGN_SYSTEM.md,
+   live demo /styleguide#komponenten. Colours follow the palette variables, so the
+   light/contrast palettes and dark islands work unchanged. `.rx-card` belongs to
+   devices.css (showcase card): the surface here is `.rx-panel`.
+   ========================================================================== */
+:root{--rx-space-section:72px;--rx-space-head:32px;--rx-space-footer:96px;--rx-footer-top:32px;--rx-gutter:16px;--rx-max:80rem;--rx-radius:24px;--rx-radius-s:12px;--rx-pad:24px;--rx-measure:65ch;--rx-pill-size:56px;--rx-pill-edge:16px;--rx-pill-safe-bottom:calc(var(--rx-pill-size) + 2*var(--rx-pill-edge));--rx-pill-safe-right:72px;--rx-pill-safe-b:var(--rx-pill-safe-bottom);--rx-pill-safe-r:var(--rx-pill-safe-right);--rx-space-prefooter:var(--rx-space-footer);--rx-ease:cubic-bezier(.165,.84,.44,1);--rx-fs-h2:clamp(1.875rem,1.3rem + 1.9vw,3rem);--rx-fs-h3:clamp(1.5rem,1.2rem + .9vw,2rem);--rx-fs-card:clamp(1.125rem,.95rem + .45vw,1.375rem);--rx-fs-cta:clamp(1.75rem,1.2rem + 1.9vw,2.5rem);--rx-fs-lead:clamp(1.0625rem,1rem + .3vw,1.25rem)}
+@media (min-width:768px){:root{--rx-space-section:96px;--rx-space-head:40px;--rx-space-footer:120px;--rx-gutter:2.5rem;--rx-pad:32px;--rx-pill-edge:24px;--rx-pill-safe-bottom:104px;--rx-pill-safe-right:240px}}
+@media (min-width:992px){:root{--rx-space-section:120px;--rx-space-head:48px;--rx-space-footer:160px;--rx-footer-top:48px}}
+@media (min-width:1280px){:root{--rx-gutter:5rem}}
+:where(.rx-section,.rx-panel,.rx-cta,.rx-faq,.rx-btn,.rx-chip,.rx-link,.rx-sechead,.rx-media,.rx-field,.rx-modal,.footer){--rx-ink:var(--_theme---text-color--primary,#fffdfd);--rx-muted:var(--_theme---text-color--secondary,#b0abab);--rx-line:color-mix(in srgb,var(--rx-ink) 13%,transparent);--rx-line-strong:color-mix(in srgb,var(--rx-ink) 24%,transparent);--rx-surface:var(--rx-card,#262626)}
+/* one text family (N-7/N-18): the template puts every <a> (cards, tiles, step panels) in Inter Tight */
+:where(main,.main-wrapper,.footer) a,.footer .nav-link-text{font-family:var(--font-families--primary)}
+/* headings: balanced, never auto-hyphenated (beats page rules of one class) */
+.main-wrapper :is(h1,h2,h3,h4,h5,h6),.rx-cta__title,.rx-sechead__title{text-wrap:balance;hyphens:manual;-webkit-hyphens:manual;overflow-wrap:break-word}
+.rx-measure{max-width:var(--rx-measure)}
+.rx-h2,.rx-h3{margin:0;color:var(--_theme---text-color--primary);font-family:var(--font-families--primary);font-weight:500;letter-spacing:-.02em}.rx-h2{font-size:var(--rx-fs-h2);line-height:1.1}.rx-h3{font-size:var(--rx-fs-h3);line-height:1.2}
+
+/* section + container + section header */
+.rx-section{padding-block:calc(var(--rx-space-section)/2);color:var(--rx-ink)}
+.rx-section--first{padding-top:var(--rx-space-section)}
+.rx-section--last{padding-bottom:calc(var(--rx-space-footer) - var(--rx-footer-top))}
+.rx-section--last:has(.rx-cta){padding-bottom:calc(var(--rx-space-section) - var(--rx-footer-top))}
+.rx-container{width:100%;max-width:var(--rx-max);margin-inline:auto;padding-inline:var(--rx-gutter)}
+.rx-sechead{display:flex;flex-direction:column;align-items:flex-start;gap:12px;max-width:60rem;margin:0 0 var(--rx-space-head)}
+.rx-sechead--center{align-items:center;text-align:center;margin-inline:auto}
+.rx-sechead__tag{display:inline-flex;align-items:center;gap:8px;margin:0;color:var(--rx-muted);font:500 .875rem/1.3 var(--font-families--primary)}
+.rx-sechead__tag::before,.rx-sechead:not(:has(.rx-sechead__tag)) .rx-sechead__title::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--rx-accent)}
+.rx-sechead__title{display:flex;align-items:baseline;gap:.6rem;margin:0;color:var(--rx-ink);font:500 var(--rx-fs-h2)/1.1 var(--font-families--primary);letter-spacing:-.02em}
+.rx-sechead:not(:has(.rx-sechead__tag)) .rx-sechead__title::before{transform:translateY(-.2em)}
+.rx-sechead--sub{margin-bottom:24px}.rx-sechead--sub .rx-sechead__title{font-size:var(--rx-fs-h3)}
+.rx-sechead__intro{margin:0;max-width:60ch;color:var(--rx-muted);font-size:var(--rx-fs-lead);line-height:1.55}
+
+/* panel (card surface), nested, highlight */
+.rx-panel{display:flex;flex-direction:column;gap:16px;min-width:0;padding:var(--rx-pad);border:1px solid var(--rx-line);border-radius:var(--rx-radius);background:var(--rx-surface);color:var(--rx-ink)}
+.rx-panel--nested,.rx-panel .rx-panel{padding:16px 20px;border-radius:var(--rx-radius-s);background:color-mix(in srgb,var(--rx-ink) 4%,var(--rx-surface))}
+.rx-panel--highlight{border-color:color-mix(in srgb,var(--rx-accent) 55%,transparent);background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--rx-accent) 16%,transparent),transparent 60%),var(--rx-surface)}
+a.rx-panel{text-decoration:none;transition:border-color .4s var(--rx-ease),transform .4s var(--rx-ease)}
+a.rx-panel:hover{border-color:var(--rx-line-strong);transform:translateY(-2px)}
+.rx-panel__title{margin:0;color:var(--rx-ink);font:500 var(--rx-fs-card)/1.25 var(--font-families--primary);letter-spacing:-.01em}
+.rx-panel__text{margin:0;max-width:var(--rx-measure);color:var(--rx-muted);font-size:1rem;line-height:1.55}
+.rx-panel__foot{margin-top:auto}
+
+/* grid: 1 col; --2 / --3 = 2 cols from 768, --3 = 3 cols from 1100; a lone last item spans the row */
+.rx-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin:0;padding:0;list-style:none}
+.rx-grid>li{display:flex;flex-direction:column}.rx-grid>li>*{flex:1}
+@media (min-width:768px){.rx-grid{gap:20px}.rx-grid:is(.rx-grid--2,.rx-grid--3,.rx-grid--4){grid-template-columns:repeat(2,minmax(0,1fr))}.rx-grid--2>:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:768px) and (max-width:1099px){.rx-grid--3>:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:768px) and (max-width:1279px){.rx-grid--4>:last-child:nth-child(odd){grid-column:1/-1}}
+@media (min-width:1280px){.rx-grid.rx-grid--4{grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}}
+@media (min-width:1100px){.rx-grid.rx-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.rx-grid--3>:last-child:nth-child(3n+1){grid-column:1/-1}.rx-grid--3>:last-child:nth-child(3n+2){grid-column:span 2}}
+
+/* buttons: primary (glass pill + arrow badge), primary--solid (form submits), secondary (outline), text link */
+.rx-btn{position:relative;display:inline-flex;align-items:center;gap:12px;min-height:48px;max-width:100%;padding:10px 22px;border:1px solid transparent;border-radius:999px;background:none;color:var(--rx-ink);font:500 1rem/1.25 var(--font-families--primary);text-align:left;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .4s var(--rx-ease),border-color .4s var(--rx-ease),transform .4s var(--rx-ease)}
+.rx-btn:active{transform:scale(.97)}
+.rx-btn__label{min-width:0;overflow-wrap:break-word}
+.rx-btn--primary{border-color:color-mix(in srgb,var(--rx-ink) 12%,transparent);background-color:var(--rx-glass,#ffffff1a);-webkit-backdrop-filter:blur(10px) saturate(150%);backdrop-filter:blur(10px) saturate(150%)}
+.rx-btn--primary:has(.rx-btn__icon){padding-block:5px;padding-left:6px}
+.rx-btn--primary:hover{background-color:color-mix(in srgb,var(--rx-ink) 18%,transparent)}
+.rx-btn--solid{border-color:transparent;background:var(--rx-ink);color:var(--_theme---text-color--tertiary,#1d1d1d);-webkit-backdrop-filter:none;backdrop-filter:none}
+.rx-btn--solid:hover{background:color-mix(in srgb,var(--rx-ink) 86%,transparent)}
+.rx-btn--solid .rx-btn__icon{background:var(--_theme---text-color--tertiary,#1d1d1d);color:var(--rx-ink)}
+.rx-btn--secondary{border-color:var(--rx-line-strong)}
+.rx-btn--secondary:hover{border-color:color-mix(in srgb,var(--rx-ink) 50%,transparent);background:color-mix(in srgb,var(--rx-ink) 6%,transparent)}
+.rx-btn--block{width:100%}
+.rx-btn__icon{flex:none;display:inline-grid;place-items:center;width:44px;height:36px;border-radius:999px;background:var(--_theme---background-color--secondary,#ededed);color:var(--_theme---text-color--tertiary,#1d1d1d);overflow:hidden}
+.rx-btn__icon svg{display:block;width:16px;height:16px}
+.rx-btn[aria-busy=true]{cursor:progress}
+.rx-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.rx-link{display:inline-flex;align-items:center;gap:.4em;min-height:44px;color:var(--rx-accent-ink,#b197fc);font:500 1rem/1.35 var(--font-families--primary);text-decoration:none}
+.rx-link::after{content:"→";content:"→"/"";transition:transform .4s var(--rx-ease)}
+.rx-link:hover{text-decoration:underline;text-underline-offset:.2em}.rx-link:hover::after{transform:translateX(3px)}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){.rx-btn:hover .rx-btn__icon svg{animation:rx-arrow .6s var(--rx-ease)}}
+@keyframes rx-arrow{45%{transform:translate(150%,-150%)}46%{transform:translate(-150%,150%)}}
+
+/* chips: outline, wrap safely; links/buttons get 44 px; active = filled; --scroll = one swipeable row */
+.rx-chips{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.rx-chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;max-width:100%;padding:6px 14px;border:1px solid var(--rx-line-strong);border-radius:999px;background:none;color:var(--rx-ink);font:500 .875rem/1.3 var(--font-families--primary);text-align:left;text-decoration:none;overflow-wrap:break-word}
+:is(a,button).rx-chip{min-height:44px;padding:10px 16px;cursor:pointer;transition:border-color .4s var(--rx-ease),background-color .4s var(--rx-ease)}
+:is(a,button).rx-chip:hover{border-color:color-mix(in srgb,var(--rx-ink) 50%,transparent);background:color-mix(in srgb,var(--rx-ink) 6%,transparent)}
+.rx-chip:is([aria-current],[aria-pressed=true],[aria-selected=true],.is-active){border-color:transparent;background:var(--rx-ink);color:var(--_theme---text-color--tertiary,#1d1d1d)}
+@media (max-width:767px){.rx-chips--scroll{flex-wrap:nowrap;overflow-x:auto;margin-inline:calc(-1*var(--rx-gutter));padding:0 var(--rx-gutter) 4px;scroll-snap-type:x proximity;scrollbar-width:none;-webkit-mask:linear-gradient(90deg,#000 85%,transparent)}.rx-chips--scroll>*{flex:none;scroll-snap-align:start;white-space:nowrap}}
+
+/* FAQ: <details> accordion (generalised sv-faq) */
+.rx-faq{display:flex;flex-direction:column;gap:10px;max-width:60rem;interpolate-size:allow-keywords}
+.rx-faq__item{border:1px solid var(--rx-line);border-radius:var(--rx-radius-s);background:var(--rx-surface);transition:border-color .4s var(--rx-ease)}
+.rx-faq__item[open],.rx-faq__item:hover{border-color:var(--rx-line-strong)}
+.rx-faq__q{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:14px 16px;border-radius:inherit;list-style:none;cursor:pointer;transition:background-color .4s var(--rx-ease)}
+.rx-faq__q:hover{background:color-mix(in srgb,var(--rx-ink) 3%,transparent)}.rx-faq__q:hover .rx-faq__title{color:var(--rx-accent-ink,#b197fc)}
+@media (max-width:767px){.rx-faq__q{min-height:48px;padding:10px 14px}}
+.rx-faq__q::-webkit-details-marker{display:none}
+.rx-faq__title{margin:0;color:var(--rx-ink);font:600 1rem/1.4 var(--font-families--primary);transition:color .4s var(--rx-ease)}
+@media (min-width:992px){.rx-faq__title{font-size:1.125rem}}
+.rx-faq__icon{position:relative;flex:none;width:28px;height:28px;border-radius:8px;background:color-mix(in srgb,var(--rx-ink) 8%,transparent)}
+.rx-faq__icon::before,.rx-faq__icon::after{content:"";position:absolute;left:8px;top:13px;width:12px;height:2px;background:var(--rx-accent);transition:transform .4s var(--rx-ease)}
+.rx-faq__icon::after{transform:rotate(90deg)}.rx-faq__item[open] .rx-faq__icon::after{transform:none}
+.rx-faq__a{max-width:var(--rx-measure);padding:0 16px 16px;color:var(--rx-muted);font-size:1rem;line-height:1.6}.rx-faq__a>*{margin:0;color:inherit;font-size:inherit;line-height:inherit}.rx-faq__a>*+*{margin-top:.75em}
+.rx-faq__item::details-content{block-size:0;overflow:hidden;transition:block-size .4s var(--rx-ease),content-visibility .4s allow-discrete}
+.rx-faq__item[open]::details-content{block-size:auto}
+@media (min-width:768px){.rx-faq__q{padding:16px 24px}.rx-faq__a{padding:0 24px 20px}}
+
+/* closing CTA: title, one line, primary + secondary */
+.rx-cta{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding:32px 24px;border:1px solid var(--rx-line-strong);border-radius:var(--rx-radius);background:radial-gradient(110% 120% at 0% 0%,color-mix(in srgb,var(--rx-accent) 20%,transparent),transparent 55%),var(--rx-surface);color:var(--rx-ink)}
+.rx-cta__title{max-width:24ch;margin:0;color:var(--rx-ink);font:500 var(--rx-fs-cta)/1.1 var(--font-families--primary);letter-spacing:-.02em}
+.rx-cta__intro{max-width:62ch;margin:0 0 8px;color:var(--rx-muted);font-size:1rem;line-height:1.55}
+.rx-cta__text{max-width:52ch;margin:0;color:var(--rx-muted);font-size:var(--rx-fs-lead);line-height:1.5}
+.rx-cta .rx-actions{margin-top:12px}
+@media (min-width:768px){.rx-cta{padding:48px}}
+
+/* media: frame + caption below on a solid surface; never text over a screenshot */
+.rx-media{display:flex;flex-direction:column;margin:0;overflow:hidden;border:1px solid var(--rx-line);border-radius:var(--rx-radius);background:var(--rx-surface)}
+.rx-media__frame{position:relative;overflow:hidden;aspect-ratio:var(--rx-media-ratio,16/10);background:#0c0c0d}
+.rx-media__frame>:is(img,video,picture){display:block;width:100%;height:100%;object-fit:var(--rx-media-fit,cover);object-position:top}
+.rx-media--contain{--rx-media-fit:contain}
+.rx-media--device .rx-media__frame{display:grid;place-items:center;aspect-ratio:auto;padding:clamp(16px,4vw,40px);background:radial-gradient(100% 90% at 50% 0%,color-mix(in srgb,var(--rx-accent) 14%,transparent),transparent 70%),#161616}
+.rx-media__caption{padding:14px 20px;border-top:1px solid var(--rx-line);color:var(--rx-muted);font-size:.9375rem;line-height:1.5}
+
+/* forms: 16 px text (no iOS zoom), 48 px fields */
+.rx-form{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:480px){.rx-form--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.rx-field{display:flex;flex-direction:column;gap:6px;min-width:0}.rx-field--full,.rx-form>:is(button,p,.rx-actions){grid-column:1/-1}
+.rx-field__label{color:var(--rx-ink);font:500 .875rem/1.3 var(--font-families--primary)}
+.rx-input{width:100%;min-height:48px;margin:0;padding:12px 14px;border:1px solid var(--rx-line-strong);border-radius:var(--rx-radius-s);background:color-mix(in srgb,var(--rx-ink) 6%,transparent);color:var(--rx-ink);font:400 16px/1.4 var(--font-families--primary);color-scheme:dark;appearance:none;transition:border-color .4s var(--rx-ease)}
+html:is([data-palette=light],[data-palette=contrast]) .rx-input{color-scheme:light}
+.rx-input::placeholder{color:var(--rx-placeholder);opacity:1}
+.rx-input:hover{border-color:color-mix(in srgb,var(--rx-ink) 45%,transparent)}.rx-input:focus{border-color:var(--rx-focus);outline:0}
+.rx-input:focus-visible{outline:2px solid var(--rx-focus);outline-offset:1px}
+textarea.rx-input{min-height:120px;resize:vertical}
+select.rx-input{padding-right:40px;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:right 20px center,right 15px center;background-size:5px 5px;background-repeat:no-repeat}
+select.rx-input option{background:var(--rx-card,#262626);color:var(--rx-ink)}
+.rx-form__note{margin:0;color:var(--rx-muted);font-size:.8125rem;line-height:1.5}
+.rx-iconbtn{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--rx-line,#ffffff21);border-radius:50%;background:none;color:inherit;cursor:pointer;transition:background-color .4s var(--rx-ease)}
+.rx-iconbtn:hover{background:color-mix(in srgb,currentColor 10%,transparent)}.rx-iconbtn svg{width:18px;height:18px}
+
+/* ==========================================================================
+   11. Global fixes (Sprint 12)
+   ========================================================================== */
+/* Template hover-roll (.button-text-col: fixed one-line box, duplicate label row). A wrapping
+   label garbled both rows; rexity.js marks such buttons [data-rx-wrap]: one row, no roll. */
+[data-rx-wrap]{height:auto!important;min-height:44px;padding-top:.55rem;padding-bottom:.55rem}
+[data-rx-wrap] .button-text-col{height:auto;overflow:visible}
+[data-rx-wrap] .button-text-col>:not(:first-child){display:none}
+[data-rx-wrap] .button-text-row{min-height:0;transform:none!important}
+[data-rx-wrap] .button-text{line-height:1.3}
+/* B-5: a paragraph box beside a heading (flex row ≥ 768) took its flex-basis from its content, and
+   IX3's SplitText line split changes that content: split at 400 px, the box then shrank (283 px at
+   768) and every line wrapped again (1–3 words per line). A content-independent basis keeps the
+   width identical before and after the split, so the measured lines stay true. */
+@media (min-width:768px){.section-header-content-normal:not(.vertical,.align-x-center,.for-hero)>.section-header-paragraph-box:not(.auto-width){flex:0 1 25rem;min-width:0}}
+/* B-7: on "/" the header's loader wrapper (opacity → stacking context) sat under .main-wrapper (z 2) */
+.home-nav-loader{position:relative;z-index:1000}
+/* B-8: fixed header below 992 px too; hidden while scrolling down (rexity.js), back on scroll up */
+@media (max-width:991px){.header{position:fixed;transition:transform .45s var(--rx-ease)}html.rx-nav-hidden:not(.rx-menu-open) .header{transform:translateY(-120%)}.menu-open-button{min-width:44px;min-height:44px;align-items:center}}
+/* tap targets ≥ 44 px without moving the nav bar */
+.nav-menu :is(.nav-link,.nav-logo-link),[data-rx-lang-toggle]{position:relative}
+.nav-menu :is(.nav-link,.nav-logo-link)::after,[data-rx-lang-toggle]::after{content:"";position:absolute;inset:-11px -6px}
+.nav-brand{display:flex;align-items:center;min-width:44px;min-height:44px}.menu-nav-col{gap:0}.menu-link-second{display:flex;align-items:center;min-height:44px}
+.menu-close-button-2{min-height:44px}.footer-link{min-height:44px;min-width:44px;padding-block:0}
+/* template fields: 16 px text on phones (iOS zoom), 44 px height */
+@media (max-width:767px){:is(input:not([type=checkbox],[type=radio],[type=range],[type=submit],[type=button],[type=hidden]),select,textarea){font-size:16px}}
+.form-input{min-height:44px}
+/* C N-15: a keyboard-focused element's reveal wrappers snap to their end state (rexity.js §5d);
+   on "/" the first Tab ends the intro (nav, H1, sub-line and ring visible at once) */
+.rx-shown{opacity:1!important;visibility:visible!important}.rx-shown-t{transform:none!important}
+html.rx-intro-done :is(.home-nav-loader,.home-main-section-wrap,.home-hero .first-line,.home-hero .second-line,.home-hero .paragraph-first-line,.home-hero .paragraph-second-line){opacity:1!important}
+html.rx-intro-done .home-hero :is(.first-line,.second-line,.paragraph-first-line,.paragraph-second-line){transform:none!important}
+@media (prefers-reduced-motion:reduce){.header,.rx-btn,.rx-faq__item::details-content,.rx-faq__icon::after,.rx-link::after{transition:none!important}}
+
+/* ==========================================================================
+   12. Shell: menu (≤ 991 px), footer, booking modal
+   ========================================================================== */
+@media (max-width:991px){.menu-content{overflow:auto}.menu-body-box{display:flex;flex-direction:column;align-items:flex-start;gap:28px}.menu .footer-sitemap-col{flex-direction:row;flex-wrap:wrap;gap:0 24px}.rx-menu-cta{display:flex;flex-direction:column;align-items:flex-start;gap:10px}.rx-menu-cta p{margin:0;color:#9f9e9e;font-size:.875rem}}
+html:is([data-palette=light],[data-palette=contrast]) .rx-menu-cta p{color:var(--rx-menu-muted)}
+.footer{padding-top:0;padding-bottom:0}
+.footer .padding-section-large.for-footer{padding-top:var(--rx-footer-top);padding-bottom:0}
+.footer .footer-content{gap:8px}
+.footer .card-frame{height:100%;border:1px solid var(--rx-line);border-radius:var(--rx-radius);background:var(--rx-surface)}
+/* N-19: footer cards on the page container (same edges as every section: --rx-max, --rx-gutter) */
+.footer .padding-global{padding-inline:0}.footer .container-large{width:100%;max-width:var(--rx-max);margin-inline:auto;padding-inline:var(--rx-gutter)}
+/* N-3: a page that ends in the closing CTA (or the homepage contact section) does not repeat it in the
+   footer: the "Projekt anfragen" card goes, links, NAP and socials stay (the NAP card takes its place) */
+body:has(.rx-section--last .rx-cta,#kontakt) .footer-main-box>.footer-item:first-child{display:none}
+@media (min-width:992px){body:has(.rx-section--last .rx-cta,#kontakt) #w-node-_14e40a02-5b02-f7cf-1b6e-42b37491df57-2777d1dd{grid-row:1/3}}
+@media (min-width:480px) and (max-width:991px){body:has(.rx-section--last .rx-cta,#kontakt) #w-node-_14e40a02-5b02-f7cf-1b6e-42b37491df57-2777d1dd{grid-column:1/-1}}
+.footer .footer-item-content{display:flex;flex-direction:column;gap:16px;padding:var(--rx-pad)}
+.rx-footer__title{margin:0;color:var(--rx-ink);font:500 var(--rx-fs-card)/1.25 var(--font-families--primary)}
+.rx-footer__text{margin:0;color:var(--rx-muted);line-height:1.5}
+.rx-footer__label{margin:0 0 4px;color:var(--rx-muted);font:500 .875rem/1.3 var(--font-families--primary)}
+.rx-footer__nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
+.rx-footer__nav .footer-sitemap-col{gap:0}
+.rx-footer__nav>:last-child{grid-column:1/-1}.rx-footer__nav>:last-child .footer-sitemap-col{flex-flow:row wrap;column-gap:24px}
+.rx-footer__nap{margin:0;color:var(--rx-muted);font-size:.9375rem;line-height:1.6}
+.footer .heading-style-h3{margin:0;font-size:var(--rx-fs-h3);line-height:1.1}
+@media (max-width:767px){.footer .rx-actions{gap:8px}.footer .rx-btn--secondary{padding-inline:14px;font-size:.9375rem}.footer .footer-item-content{gap:12px}.footer .footer-sitemap-col.horizontal{margin-top:-8px}}
+.footer .footer-sitemap-col.horizontal{flex-wrap:wrap;gap:0 24px}
+.rx-footer__bar{margin:0;padding:16px 0 var(--rx-pill-safe-bottom);color:var(--rx-muted);font-size:.8125rem;line-height:1.5}
+@media (min-width:768px){.rx-footer__bar{padding:20px var(--rx-pill-safe-right) 32px 0}}
+@media (min-width:992px){.rx-footer__nav{grid-template-columns:repeat(3,minmax(0,1fr))}.rx-footer__nav>:last-child{grid-column:auto}.rx-footer__nav>:last-child .footer-sitemap-col{flex-flow:column}}
+.rx-modal{position:fixed;inset:0;z-index:1000001;display:none;align-items:center;justify-content:center;padding:16px}
+.rx-modal.is-open{display:flex}
+.rx-modal__backdrop{position:absolute;inset:0;background-color:var(--colors--black-60);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.rx-modal__dialog.card-frame{position:relative;width:100%;max-width:40rem;max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain;border:1px solid var(--rx-line-strong);border-radius:var(--rx-radius);background:var(--rx-card,#262626);color:var(--rx-ink)}
+.rx-modal__head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 12px 12px var(--rx-pad);border-bottom:1px solid var(--rx-line);background:inherit}
+.rx-modal__title{margin:0;color:var(--rx-ink);font:500 var(--rx-fs-card)/1.25 var(--font-families--primary)}
+.rx-modal__body{display:flex;flex-direction:column;gap:20px;padding:20px var(--rx-pad) var(--rx-pad)}
+.rx-modal__body>p{margin:0;color:var(--rx-muted);line-height:1.5}
+@media (max-width:479px){.rx-modal{align-items:flex-end;padding:8px}.rx-modal__dialog.card-frame{max-height:calc(100dvh - 16px)}}
+.rx-modal.is-open .rx-modal__dialog{animation:rx-modal-in .25s ease-out}
+@keyframes rx-modal-in{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.rx-modal.is-open .rx-modal__dialog{animation:none}}
+html.rx-modal-open{overflow:hidden}
+
+/* ==========================================================================
+   13. Colour backgrounds (Sprint 15, founder 2026-09-27: "implement the background theme
+   for the other pages, wherever the theme is black"). The homepage look, sitewide.
+   Default dark palette only (html without data-palette): "light" / "contrast" keep their grounds.
+   - Base: deep indigo --rx-base instead of the template's #1d1d1d (body, html, template ground).
+   - Sections: every top-level section (.main-wrapper > section) and the footer paint two soft
+     radial glows over the base. Colour and position come from --g1/--g2 and --g1-at/--g2-at; a
+     six-step cycle gives consecutive sections different hue pairs on every page, and a page may
+     set the variables per section (home.css). The glows are faded back to the base over the
+     top and bottom band of each section (--g-fade), so neighbours meet on the same colour: no
+     seams. The rule has zero specificity, so any section that paints its own background (the
+     homepage hero, a pinned stage) keeps it.
+   - Panels: --rx-card becomes translucent white (4.5 %), so every surface built on it (rx-panel,
+     FAQ, CTA, media, footer cards, the services/work/pricing tints) lets the glow through;
+     panel borders 10 %. Opaque surfaces (booking modal, select options) use --rx-base-lift.
+   - Photo heroes: the black scrims become violet-indigo at the alpha that gives the same
+     luminance over a white photo pixel, so white text keeps its contrast (log 15-A).
+   - Contrast: glow alphas are capped per hue so --rx-muted (#b0abab) stays >= 4.5:1 at a glow's
+     centre even inside a nested panel on a card (teal <= .23, cyan <= .19; log 15-A).
+   No animation: the backgrounds are static (prefers-reduced-motion needs nothing).
+   ========================================================================== */
+html:not([data-palette]){--rx-base:#120d1f;--rx-base-lift:#1b1433;--colors--primary-background:var(--rx-base);--rx-card:rgba(255,255,255,.045);background:var(--rx-base)}
+:where(html:not([data-palette])) :where(.main-wrapper>section,.footer){--g-fade:min(12%,120px);background:linear-gradient(var(--rx-base),transparent var(--g-fade),transparent calc(100% - var(--g-fade)),var(--rx-base)),radial-gradient(55% 45% at var(--g1-at,12% 18%),var(--g1,rgba(124,58,237,.28)),transparent 72%),radial-gradient(50% 42% at var(--g2-at,88% 82%),var(--g2,rgba(236,72,153,.22)),transparent 72%),var(--rx-base)}
+/* the cycle (the homepage's pairs): violet/pink, teal/violet, blue/violet, pink/amber, cyan/violet, amber/pink.
+   Glow centres sit >= 76 % apart horizontally, so the two glows of a section never overlap */
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+1)){--g1:rgba(124,58,237,.28);--g1-at:12% 18%;--g2:rgba(236,72,153,.22);--g2-at:88% 82%}
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+2)){--g1:rgba(20,184,166,.22);--g1-at:88% 16%;--g2:rgba(124,58,237,.26);--g2-at:10% 84%}
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+3)){--g1:rgba(59,130,246,.26);--g1-at:10% 20%;--g2:rgba(124,58,237,.24);--g2-at:90% 80%}
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+4)){--g1:rgba(236,72,153,.24);--g1-at:88% 18%;--g2:rgba(249,115,22,.20);--g2-at:12% 82%}
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+5)){--g1:rgba(34,211,238,.19);--g1-at:12% 16%;--g2:rgba(124,58,237,.26);--g2-at:88% 84%}
+:where(html:not([data-palette])) :where(.main-wrapper>section:nth-of-type(6n+6)){--g1:rgba(249,115,22,.22);--g1-at:88% 18%;--g2:rgba(236,72,153,.22);--g2-at:12% 82%}
+:where(html:not([data-palette])) :where(.footer){--g1:rgba(124,58,237,.18);--g1-at:20% 0%;--g2:rgba(20,184,166,.12);--g2-at:85% 100%}
+
+/* panels: translucent (via --rx-card), 10 % border, nested a shade lighter */
+html:not([data-palette]) .rx-panel{--rx-line:rgba(255,255,255,.1)}
+html:not([data-palette]) :is(.rx-panel--nested,.rx-panel .rx-panel):not(.rx-panel--highlight){background:rgba(255,255,255,.035)}
+html:not([data-palette]) .card-frame:not(.rx-modal__dialog){background-color:var(--rx-card)}
+/* accent-tinted surfaces (CTA, highlight/promo panels, pricing and services tints) add violet on top of the glow;
+   their surface damps the glow underneath (white 4.5 % over the base at 35-65 %, pre-composited), so --rx-muted
+   keeps >= 4.5:1 at a glow's centre under the accent's brightest corner (log 15-A) */
+html:not([data-palette]) .rx-cta{--rx-surface:rgba(34,29,46,.666)}
+html:not([data-palette]) :is(.rx-panel--highlight,.rx-page-pricing .pr-card--promo){--rx-surface:rgba(40,36,52,.475)}
+html:not([data-palette]) .rx-page-pricing{--pr-tint:color-mix(in srgb,var(--rx-accent,#b197fc) 14%,rgba(46,42,58,.379))}
+html:not([data-palette]) .sv-main{--sv-tint:color-mix(in srgb,var(--rx-accent) 12%,rgba(56,51,67,.284))}
+html:not([data-palette]) .form-message-success-2{background-color:var(--rx-base-lift)}
+html:not([data-palette]) select.rx-input option{background:var(--rx-base-lift)}
+/* article timeline dots sit on the line: opaque */
+html:not([data-palette]) .rx-page-artikel .ax-timeline__item::before{background:var(--rx-base)}
+/* media wells behind screenshots and device renders: indigo instead of grey-black */
+html:not([data-palette]) :is(.rx-media__frame,.sv-media){background-color:#0e0a1a}
+html:not([data-palette]) :is(.rx-media--device .rx-media__frame,.sv-device__stage,.sv-card--media .sv-card__media){background:radial-gradient(100% 90% at 50% 0%,color-mix(in srgb,var(--rx-accent) 14%,transparent),transparent 70%),#171129}
+html:not([data-palette]) :is(.sv-card__media .sv-device__stage,.sv-device--hero .sv-device__stage){background:none}
+html:not([data-palette]) .sv-main .sv-rc .sv-rc__screen{background:radial-gradient(90% 80% at 80% 0%,color-mix(in srgb,var(--rx-accent) 22%,transparent),transparent 70%),#151027}
+html:not([data-palette]) .sv-rc__card{background:#211a38}
+html:not([data-palette]) .rx-page-article :is(.ar-feature,.ar-case) .ar-media,html:not([data-palette]) .rx-page-artikel .ax-card__media{background:#171129}
+html:not([data-palette]) .rx-wcase__media{background:#120e20}
+html:not([data-palette]) .rx-wcase__media.has-render{background:radial-gradient(120% 90% at 50% 0%,#2e2548,#16112a)}
+
+/* photo heroes: violet-indigo scrims, luminance-matched to the black ones they replace
+   (black a -> rgb(30,14,64) a': .2->.22, .4->.44, .5->.55, .62->.68, .72->.79; #111 .35/.55/.6/.92 -> .36/.56/.62/.95).
+   Every hero scrim ends in the opaque base over its bottom 28 %, so the photo meets the next section without a seam */
+:where(html:not([data-palette]) .main-wrapper>.section.hero) .dark-layer{background-color:rgba(30,14,64,.44);background-image:linear-gradient(180deg,transparent 72%,var(--rx-base))}
+:where(html:not([data-palette]) .main-wrapper>.section.hero) .dark-layer.high-dark{background-color:rgba(30,14,64,.55)}
+:where(html:not([data-palette]) .main-wrapper>.section.hero) .dark-layer.low-dark{background-color:rgba(30,14,64,.22)}
+html:not([data-palette]) .sv-main .sv-hero .dark-layer{background:linear-gradient(180deg,rgba(30,14,64,.68),rgba(30,14,64,.77) 72%,var(--rx-base))}
+html:not([data-palette]) .rx-page-article .section.hero .dark-layer.high-dark{background-color:rgba(30,14,64,.79)}
+html:not([data-palette]) .rx-page-artikel .section.hero.ax-hero--cover .dark-layer.high-dark{background:linear-gradient(180deg,rgba(30,14,64,.56) 0%,rgba(30,14,64,.36) 38%,rgba(30,14,64,.62) 70%,var(--rx-base) 100%)}
+
+/* shell: header pill, Kontakt button, mobile menu, booking modal, chat pill */
+html:not([data-palette]) .nav-content-wrapper{background-color:rgba(160,130,255,.14)}
+@media screen and (max-width:991px){html:not([data-palette]) .nav-wrapper{background-color:rgba(160,130,255,.14)}}
+html:not([data-palette]) .black-bg{background-color:var(--rx-violet-deep)}
+html:not([data-palette]) .menu{background:radial-gradient(70% 40% at 10% 8%,rgba(124,58,237,.30),transparent 72%),radial-gradient(60% 40% at 92% 92%,rgba(236,72,153,.20),transparent 72%),var(--rx-base)}
+html:not([data-palette]) .rx-modal__backdrop{background-color:rgba(30,14,64,.55)}
+html:not([data-palette]) .rx-modal__dialog.card-frame{background:var(--rx-base-lift)}
+html:not([data-palette]) .rexity-chatbot{--rc-panel:var(--rx-base-lift);--rc-deep:#150f28}
+html:not([data-palette]) .rexity-chatbot__pill{background:rgba(27,20,51,.9)}
+html:not([data-palette]) .rexity-chatbot__pill:hover{background:var(--rx-base-lift)}
+html:not([data-palette]) :is(.rexity-chatbot__menu-item,.rexity-chatbot__mailmenu-btn){background:var(--rx-base-lift)}
+html:not([data-palette]) .rexity-chatbot__menu-item:hover{background:#261d45}

@@ -1,0 +1,453 @@
+/* ==========================================================================
+   Rexity device mockups (Sprint 7A) — assets/css/devices.css
+   Pure-CSS laptop / browser / phone frames, screen cycler, in-frame auto-scroll,
+   chat thread, draggable marquee, showcase card and the laptop+phone stack.
+   Markup and JS API: src/layouts/README.md → "Devices", assets/js/devices.js.
+
+   Rules
+   - Frames scale with their container (container query units), so bezels,
+     radii and the notch stay proportional and crisp at any width.
+   - Every screen reserves its aspect ratio: no layout shift while images load.
+   - Without JS (or with prefers-reduced-motion) every component shows its
+     first frame; the marquee is a normal horizontally scrollable row.
+   - Colours come from the Rexity/Vaxel tokens; the light and contrast
+     palettes get light hardware and chrome.
+   - All classes are prefixed rx-; no template selector is touched (§0.1).
+   ========================================================================== */
+
+:root {
+  --rxd-bezel: #0c0c0e;
+  --rxd-edge: rgba(255, 255, 255, 0.14);
+  --rxd-lid: #26262a;
+  --rxd-base-top: #4a4a50;
+  --rxd-base-bottom: #232327;
+  --rxd-chrome: #2b2b2e;
+  --rxd-chrome-ink: #b0abab;
+  --rxd-url-bg: rgba(255, 255, 255, 0.08);
+  --rxd-screen: #111113;
+  --rxd-shadow: 0 2.2em 4.4em -1.6em rgba(0, 0, 0, 0.65), 0 0.6em 1.4em -0.6em rgba(0, 0, 0, 0.45);
+  --rxd-card-ink: var(--_theme---text-color--primary, #fffdfd);
+  --rxd-card-muted: var(--_theme---text-color--secondary, #b0abab);
+  --rxd-ease: cubic-bezier(0.22, 0.7, 0.18, 1);
+}
+html:is([data-palette="light"], [data-palette="contrast"]) {
+  --rxd-edge: rgba(16, 35, 63, 0.22);
+  --rxd-lid: #c9ccd3;
+  --rxd-base-top: #e2e4e9;
+  --rxd-base-bottom: #aeb2bb;
+  --rxd-chrome: #e9e8e3;
+  --rxd-chrome-ink: #4a5a70;
+  --rxd-url-bg: rgba(16, 35, 63, 0.07);
+  --rxd-shadow: 0 2.2em 4.4em -1.8em rgba(16, 35, 63, 0.38), 0 0.6em 1.4em -0.6em rgba(16, 35, 63, 0.22);
+}
+
+/* -------------------------------------------------------------- base frame */
+.rx-device {
+  container-type: inline-size;
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  font-size: 16px; /* em-based shadow scale */
+  -webkit-user-select: none;
+  user-select: none;
+}
+.rx-device__frame {
+  position: relative;
+  background: var(--rxd-bezel);
+  box-shadow: var(--rxd-shadow), inset 0 0 0 1px var(--rxd-edge);
+}
+.rx-device__screen {
+  position: relative;
+  overflow: hidden;
+  background: var(--rxd-screen);
+  isolation: isolate;
+  transform: translateZ(0); /* clip children on Safari while they animate */
+}
+.rx-device__screen > img,
+.rx-device__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  -webkit-user-drag: none;
+}
+
+/* laptop: lid with bezel + camera, base with the finger notch */
+.rx-device--laptop .rx-device__frame {
+  width: 84%;
+  margin: 0 auto;
+  padding: 2.1cqw 2.1cqw 2.6cqw;
+  border-radius: 3.2cqw 3.2cqw 0.6cqw 0.6cqw;
+  background: linear-gradient(var(--rxd-bezel), var(--rxd-bezel)) padding-box;
+}
+.rx-device--laptop .rx-device__frame::before {
+  content: "";
+  position: absolute;
+  top: 0.8cqw;
+  left: 50%;
+  width: 0.6cqw;
+  height: 0.6cqw;
+  margin-left: -0.3cqw;
+  border-radius: 50%;
+  background: #1f2a33;
+  box-shadow: inset 0 0 0 0.12cqw #34414d;
+}
+.rx-device--laptop .rx-device__screen {
+  aspect-ratio: 16 / 10;
+  border-radius: 0.5cqw;
+}
+.rx-device__base {
+  position: relative;
+  height: 2.6cqw;
+  margin-top: -0.1cqw;
+  border-radius: 0.3cqw 0.3cqw 45% 45% / 0.3cqw 0.3cqw 100% 100%;
+  background: linear-gradient(var(--rxd-base-top), var(--rxd-base-bottom));
+  box-shadow: 0 1.6cqw 2.6cqw -1.4cqw rgba(0, 0, 0, 0.55), inset 0 0.12cqw 0 rgba(255, 255, 255, 0.18);
+}
+.rx-device__base::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 15%;
+  height: 0.9cqw;
+  transform: translateX(-50%);
+  border-radius: 0 0 1cqw 1cqw;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* browser window: title bar with the three dots and an optional URL pill */
+.rx-device--browser .rx-device__frame {
+  border-radius: clamp(8px, 1.4cqw, 16px);
+  overflow: hidden;
+  background: var(--rxd-chrome);
+}
+.rx-device__bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 0.7cqw, 8px);
+  height: clamp(20px, 3.6cqw, 40px);
+  padding: 0 clamp(8px, 1.6cqw, 18px);
+  color: var(--rxd-chrome-ink);
+  font: 500 clamp(12px, 1.25cqw, 13px) / 1 var(--font-families--primary, system-ui, sans-serif);
+}
+.rx-device__bar > i {
+  flex: none;
+  width: clamp(6px, 1cqw, 12px);
+  height: clamp(6px, 1cqw, 12px);
+  border-radius: 50%;
+  background: #ff5f57;
+}
+.rx-device__bar > i:nth-child(2) { background: #febc2e; }
+.rx-device__bar > i:nth-child(3) { background: #28c840; }
+.rx-device__url {
+  flex: 0 1 48%;
+  margin: 0 auto;
+  padding: 0.2em 1em;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--rxd-url-bg);
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.rx-device--browser .rx-device__screen { aspect-ratio: 16 / 10; }
+.rx-device--browser.rx-device--wide .rx-device__screen { aspect-ratio: 16 / 9; }
+
+/* phone: rounded bezel, dynamic-island notch, side buttons */
+.rx-device--phone .rx-device__frame {
+  padding: 3.4cqw;
+  border-radius: 15.5cqw;
+  box-shadow: var(--rxd-shadow), inset 0 0 0 1px var(--rxd-edge), inset 0 0 0 0.9cqw #1b1b1f;
+}
+.rx-device--phone .rx-device__frame::before,
+.rx-device--phone .rx-device__frame::after {
+  content: "";
+  position: absolute;
+  width: 1cqw;
+  border-radius: 1cqw;
+  background: var(--rxd-lid);
+}
+.rx-device--phone .rx-device__frame::before { left: -0.7cqw; top: 22%; height: 11%; box-shadow: 0 -15cqw 0 -0.05cqw var(--rxd-lid); }
+.rx-device--phone .rx-device__frame::after { right: -0.7cqw; top: 27%; height: 16%; }
+.rx-device--phone .rx-device__screen {
+  aspect-ratio: 390 / 844;
+  border-radius: 12.4cqw;
+}
+.rx-device--phone .rx-device__screen::after {
+  content: "";
+  position: absolute;
+  z-index: 5;
+  top: 2.6cqw;
+  left: 50%;
+  width: 29cqw;
+  height: 8.2cqw;
+  transform: translateX(-50%);
+  border-radius: 99px;
+  background: #000;
+  pointer-events: none;
+}
+.rx-device--phone.rx-device--no-notch .rx-device__screen::after { display: none; }
+
+/* ------------------------------------------------ composition: laptop + phone */
+.rx-stack {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-right: 7%;
+}
+.rx-stack > .rx-device--laptop,
+.rx-stack > .rx-device--browser { width: 100%; }
+.rx-stack > .rx-device--phone {
+  position: absolute;
+  right: 0;
+  bottom: -2%;
+  width: 23%;
+  z-index: 2;
+}
+.rx-stack--left { padding-right: 0; padding-left: 7%; }
+.rx-stack--left > .rx-device--phone { right: auto; left: 0; }
+
+/* ------------------------------------------------------------ screen cycler */
+/* [data-rx-cycle] holds .rx-slide children. Inside a device screen the slides
+   fill the screen; elsewhere (a stage of whole devices) they stack in a grid
+   cell, so the container is as tall as its tallest slide. */
+[data-rx-cycle] { position: relative; }
+[data-rx-cycle]:not(.rx-device__screen) { display: grid; }
+[data-rx-cycle]:not(.rx-device__screen) > .rx-slide { grid-area: 1 / 1; min-width: 0; }
+.rx-device__screen[data-rx-cycle] > .rx-slide { position: absolute; inset: 0; }
+.rx-device__screen[data-rx-cycle] > .rx-slide > img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+[data-rx-cycle] > .rx-slide:not(:first-child) { visibility: hidden; opacity: 0; }
+[data-rx-cycle].is-live > .rx-slide {
+  --rx-shift: 0;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(0, var(--rx-in-y, 0), 0) scale(var(--rx-in-scale, 1));
+  transition: opacity var(--rx-cycle-ms, 700ms) var(--rxd-ease), transform var(--rx-cycle-ms, 700ms) var(--rxd-ease), visibility 0s linear var(--rx-cycle-ms, 700ms);
+}
+[data-rx-cycle].is-live > .rx-slide.is-active {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition: opacity var(--rx-cycle-ms, 700ms) var(--rxd-ease), transform var(--rx-cycle-ms, 700ms) var(--rxd-ease), visibility 0s;
+  z-index: 2;
+}
+[data-rx-cycle].is-live > .rx-slide.is-leaving {
+  visibility: visible;
+  opacity: 0;
+  transform: translate3d(0, var(--rx-out-y, 0), 0) scale(var(--rx-out-scale, 1));
+  z-index: 1;
+}
+[data-rx-cycle].is-instant > .rx-slide { transition: none !important; }
+[data-rx-cycle="slide-up"] { --rx-in-y: 14%; --rx-out-y: -10%; }
+.rx-device__screen[data-rx-cycle="slide-up"] { --rx-in-y: 100%; --rx-out-y: -28%; }
+.rx-device__screen[data-rx-cycle="slide-up"].is-live > .rx-slide.is-leaving { opacity: 0.35; }
+[data-rx-cycle="zoom"] { --rx-in-scale: 0.94; --rx-out-scale: 1.04; }
+[data-rx-cycle="fade"] { --rx-in-y: 0; --rx-out-y: 0; }
+
+/* optional progress dots: <div class="rx-dots" data-rx-dots-for="id"></div> (filled by JS) */
+.rx-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.rx-dots button {
+  width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; cursor: pointer;
+  background: var(--_theme---border-color--primary, #7b7b7b);
+  transition: width 0.3s var(--rxd-ease), background-color 0.3s;
+}
+.rx-dots button[aria-current="true"] { width: 22px; background: var(--rx-accent-ink, #b197fc); }
+
+/* --------------------------------------------------------- in-frame autoscroll */
+/* <div class="rx-device__screen" data-rx-autoscroll><img class="rx-long" …></div>
+   The long capture sits at the top (first frame); JS moves it with a transform. */
+[data-rx-autoscroll] > .rx-long,
+[data-rx-autoscroll] > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: initial;
+  will-change: transform;
+}
+
+/* ------------------------------------------------------------- chat thread */
+.rx-chat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: #efeae2;
+  color: #111b21;
+  font: 400 clamp(9px, 3.9cqw, 15px) / 1.35 var(--font-families--primary, system-ui, sans-serif);
+  text-align: left;
+}
+.rx-chat__head {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  padding: 3.4em 1em 0.8em; /* clears the notch */
+  background: #0b5c4f;
+  color: #fff;
+}
+.rx-chat__avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.4em;
+  height: 2.4em;
+  border-radius: 50%;
+  background: #b197fc;
+  color: #1d1d1d;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+.rx-chat__who { display: flex; flex-direction: column; min-width: 0; }
+.rx-chat__name { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rx-chat__status { font-size: 0.78em; opacity: 0.8; }
+.rx-chat__thread {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.45em;
+  margin: 0;
+  padding: 0.9em 0.8em 1.2em;
+  overflow: hidden;
+  list-style: none;
+}
+.rx-chat__msg {
+  position: relative;
+  max-width: 82%;
+  padding: 0.5em 0.75em 0.55em;
+  border-radius: 0.9em;
+  box-shadow: 0 1px 0.5px rgba(11, 20, 26, 0.13);
+  word-wrap: break-word;
+  transform-origin: bottom left;
+}
+.rx-chat__msg--them { align-self: flex-start; background: #fff; border-top-left-radius: 0.25em; }
+.rx-chat__msg--me { align-self: flex-end; background: #d9fdd3; border-top-right-radius: 0.25em; transform-origin: bottom right; }
+.rx-chat__time { display: block; margin-top: 0.15em; font-size: 0.7em; color: #667781; text-align: right; }
+.rx-chat__msg--me .rx-chat__time::after { content: " ✓✓"; color: #53bdeb; }
+.rx-chat__typing {
+  display: none;
+  align-self: flex-start;
+  gap: 0.3em;
+  padding: 0.75em 0.9em;
+  border-radius: 0.9em;
+  border-top-left-radius: 0.25em;
+  background: #fff;
+}
+.rx-chat__typing.is-me { align-self: flex-end; background: #d9fdd3; border-radius: 0.9em; border-top-right-radius: 0.25em; }
+.rx-chat__typing i { width: 0.45em; height: 0.45em; border-radius: 50%; background: #8696a0; animation: rx-typing 1.1s infinite ease-in-out; }
+.rx-chat__typing i:nth-child(2) { animation-delay: 0.15s; }
+.rx-chat__typing i:nth-child(3) { animation-delay: 0.3s; }
+.rx-chat.is-live .rx-chat__typing.is-on { display: flex; }
+.rx-chat.is-live .rx-chat__msg { transition: opacity 0.35s var(--rxd-ease), transform 0.35s var(--rxd-ease); }
+.rx-chat.is-live .rx-chat__msg.is-pending { display: none; }
+.rx-chat.is-live .rx-chat__msg.is-entering { opacity: 0; transform: translateY(0.6em) scale(0.96); }
+.rx-chat.is-live.is-fading .rx-chat__thread { opacity: 0; transition: opacity 0.5s; }
+@keyframes rx-typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.55; }
+  30% { transform: translateY(-0.3em); opacity: 1; }
+}
+
+/* ------------------------------------------------------------------ marquee */
+/* Default (no JS, reduced motion): a scrollable row. JS adds .is-live. */
+.rx-marquee {
+  --rx-marquee-gap: clamp(16px, 2vw, 28px);
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  contain: inline-size; /* the row never widens its parent (grid/flex items) */
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  outline-offset: 4px;
+}
+.rx-marquee__track {
+  display: flex;
+  gap: var(--rx-marquee-gap);
+  width: max-content;
+  padding: 12px clamp(16px, 4vw, 48px) 28px;
+}
+.rx-marquee__track > * { flex: none; scroll-snap-align: start; }
+.rx-marquee.is-live {
+  overflow: hidden;
+  scroll-snap-type: none;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.rx-marquee.is-live .rx-marquee__track { will-change: transform; }
+.rx-marquee.is-dragging { cursor: grabbing; }
+.rx-marquee.is-dragging a { pointer-events: none; }
+.rx-marquee:focus-visible { outline: 2px solid var(--rx-focus, #b197fc); }
+
+/* touch mode (opt-in, data-rx-marquee-touch="snap", JS adds .is-snap below 768 px): a native
+   scroll-snap row — 84 % cards, the next one peeks, passive position dots, nothing moves by itself */
+.rx-marquee.is-snap {
+  container-type: inline-size;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 16px;
+  scrollbar-width: none;
+}
+.rx-marquee.is-snap::-webkit-scrollbar { display: none; }
+.rx-marquee.is-snap .rx-marquee__track { gap: 12px; padding: 8px 16px 12px; }
+.rx-marquee.is-snap .rx-marquee__track > * { scroll-snap-align: start; scroll-snap-stop: always; }
+.rx-marquee.is-snap .rx-card { width: 84cqw; }
+.rx-marquee__dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 8px 16px 0; }
+.rx-marquee__dots[hidden] { display: none; }
+.rx-marquee__dots > span { width: 6px; height: 6px; border-radius: 99px; background: var(--_theme---border-color--primary, #7b7b7b); transition: width 0.3s var(--rxd-ease), background-color 0.3s; }
+.rx-marquee__dots > span.is-on { width: 18px; background: var(--rx-accent-ink, #b197fc); }
+
+/* ----------------------------------------------------------- showcase card */
+/* A design in a browser frame + phone on its own accent colour. */
+.rx-card {
+  --rx-card-accent: #3a3a3a;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: var(--rx-card-w, clamp(280px, 34vw, 520px));
+  color: var(--rxd-card-ink);
+  text-decoration: none;
+}
+.rx-card__stage {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  padding: 9% 12% 0 7%;
+  overflow: hidden;
+  border-radius: clamp(14px, 1.6vw, 22px);
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.28), transparent 60%),
+    linear-gradient(160deg, var(--rx-card-accent), color-mix(in srgb, var(--rx-card-accent) 62%, #000));
+}
+.rx-card__stage > .rx-device--browser { width: 100%; }
+.rx-card__stage > .rx-device--phone { position: absolute; right: 5%; bottom: -14%; width: 23%; }
+.rx-card__stage .rx-device { font-size: 11px; }
+.rx-card__meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.rx-card__name { font-weight: 600; font-size: 1.125rem; }
+.rx-card__sector { color: var(--rxd-card-muted); font-size: 0.9375rem; }
+.rx-card__kind {
+  margin-left: auto;
+  color: var(--rxd-card-muted);
+  font: 600 0.75rem / 1.25 var(--font-families--primary, system-ui, sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+a.rx-card:focus-visible { outline: 2px solid var(--rx-focus, #b197fc); outline-offset: 4px; border-radius: 16px; }
+@media (hover: hover) {
+  .rx-card .rx-card__stage > .rx-device { transition: transform 0.6s var(--rxd-ease); }
+  .rx-card:hover .rx-card__stage > .rx-device--browser { transform: translateY(-2%); }
+  .rx-card:hover .rx-card__stage > .rx-device--phone { transform: translateY(-5%); }
+}
+
+/* ------------------------------------------------------------ reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-rx-cycle].is-live > .rx-slide,
+  .rx-chat.is-live .rx-chat__msg,
+  .rx-card .rx-card__stage > .rx-device { transition: none !important; }
+  .rx-chat__typing i { animation: none; }
+  .rx-marquee.is-live { overflow-x: auto; cursor: auto; }
+}

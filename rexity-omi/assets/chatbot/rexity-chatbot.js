@@ -1,4 +1,9 @@
 (function () {
+  // Sprint 12: the widget loads its own stylesheet (same folder, same ?v=) so the
+  // CSS no longer blocks the first paint of every page; the panel is built once
+  // it has arrived. No auto-open: a small greeting bubble instead (desktop/tablet,
+  // once per session). Hidden while the menu or the booking modal is open (CSS).
+  var SELF = document.currentScript && document.currentScript.src;
   var STORAGE_KEY = "rexity_lang";
   var INTRO_SEEN_KEY = "rexity_intro_seen";
   var LEAD_KEY = "rexity_chat_lead";
@@ -31,9 +36,9 @@
   }
   function greetingText(lang) {
     if (lang === "de") {
-      return tagesgruss("de") + ", ich bin Rexity, Ihr virtueller Assistent. Ich helfe Ihnen gerne bei unseren Services: Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitale Automatisierungen und Dashboards. Wie kann ich Ihnen weiterhelfen?";
+      return tagesgruss("de") + ", ich bin Rexity, der KI-Assistent von Rexity Labs. Ich beantworte Ihre Fragen zu Websites, Apps, Automatisierung, Preisen und Ablauf und verlinke Ihnen die passende Seite. Wie kann ich Ihnen weiterhelfen?";
     }
-    return tagesgruss("en") + ", I am Rexity, your virtual assistant. I can help you with our services: Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. How can I help?";
+    return tagesgruss("en") + ", I am Rexity, the AI assistant of Rexity Labs. I answer your questions about websites, apps, automation, prices and how a project works, and link you to the right page. How can I help?";
   }
 
   var copy = {
@@ -73,13 +78,16 @@
       gateName: "Your name",
       gatePhone: "Phone number",
       gateSubmit: "Start chat",
-      gateError: "Please enter a valid name and phone number."
+      gateError: "Please enter a valid name and phone number.",
+      nudgeTitle: "Questions about your project?",
+      nudgeText: "Our assistant Rexity answers right away.",
+      nudgeClose: "Dismiss"
     },
     de: {
       quickQuestions: [
         "Was macht Rexity?",
         "Web- & App-Entwicklung",
-        "AI Agents",
+        "KI-Agenten",
         "Digitale Automatisierungen",
         "Dashboards",
         "Demo buchen"
@@ -94,7 +102,7 @@
       pillTitle: "Rexity fragen",
       pillSubtitle: "Ihr virtueller Assistent",
       introTitle: "Wie können wir helfen?",
-      introCopy: "Fragen Sie zu Web- & App-Entwicklung, Digital Marketing, AI Agents, Automatisierungen oder Dashboards.",
+      introCopy: "Fragen Sie zu Web- & App-Entwicklung, digitalem Marketing, KI-Agenten, Automatisierungen oder Dashboards.",
       placeholder: "Fragen Sie Rexity...",
       footnote: "Unser Rexity-Chatbot basiert auf einem modernen KI-Agenten und kann Fehler machen. Bitte kontaktieren Sie uns, bevor Sie Entscheidungen daraus ableiten — wir helfen Ihnen gerne besser weiter: info@rexity.ai.",
       loadingThink: "Rexity denkt …",
@@ -111,36 +119,77 @@
       gateName: "Ihr Name",
       gatePhone: "Telefonnummer",
       gateSubmit: "Chat starten",
-      gateError: "Bitte geben Sie einen gültigen Namen und eine Telefonnummer ein."
+      gateError: "Bitte geben Sie einen gültigen Namen und eine Telefonnummer ein.",
+      nudgeTitle: "Fragen zu Ihrem Projekt?",
+      nudgeText: "Unser Assistent Rexity antwortet sofort.",
+      nudgeClose: "Hinweis schließen"
     }
   };
 
+  // Offline answers: used only when /api/chat cannot be reached (network down, local static preview). Facts and
+  // links as on the site (data/site-knowledge.json); no prices beyond a link to /preise. Keys are matched as
+  // word stems; the most specific entry (most matching keys) wins, the overview only when nothing matches.
   var fallbackKnowledge = [
-    {
-      id: "overview",
-      keys: ["rexity", "company", "what", "do", "was"],
-      en: "Rexity helps teams design, develop, automate, and scale digital systems: websites, apps, SaaS interfaces, AI workflows, and growth infrastructure.",
-      de: "Rexity hilft Teams dabei, digitale Systeme zu designen, zu entwickeln, zu automatisieren und zu skalieren: Websites, Apps, SaaS-Oberflächen, AI-Workflows und Wachstumsinfrastruktur."
-    },
-    {
-      id: "design",
-      keys: ["design", "website", "app", "saas", "ui", "ux"],
-      en: "Design Studio covers high-end website design, app design, SaaS UI, visual systems, landing pages, and product interfaces.",
-      de: "Design Studio umfasst hochwertiges Website-Design, App-Design, SaaS-UI, visuelle Systeme, Landingpages und Produktoberflächen."
-    },
-    {
-      id: "development",
-      keys: ["development", "coding", "code", "api", "backend", "frontend"],
-      en: "Development Studio turns designs and ideas into production-ready websites, apps, SaaS platforms, APIs, integrations, and backend systems.",
-      de: "Development Studio verwandelt Designs und Ideen in produktionsreife Websites, Apps, SaaS-Plattformen, APIs, Integrationen und Backend-Systeme."
-    },
-    {
-      id: "automation",
-      keys: ["automation", "rpa", "workflow", "crm", "process"],
-      en: "Business Automation connects tools, data, messages, and decisions into reliable workflows for repeatable operations.",
-      de: "Business Automation verbindet Tools, Daten, Nachrichten und Entscheidungen zu verlässlichen Workflows für wiederholbare Abläufe."
-    }
+    { keys: ["saas", "plattform", "platform", "abo", "subscription", "multi-tenant", "mandant"],
+      de: "Ja, wir entwickeln SaaS-Plattformen: Multi-Tenant mit Login, Abrechnung, Dashboards und dem Backend dahinter. Mehr dazu: [SaaS-Plattformen](/web/saas). Ein Beispiel ist unser eigenes Produkt [LevelKraft](/work/levelkraft).",
+      en: "Yes, we build SaaS platforms: multi-tenant, with login, billing, dashboards and the backend behind them. More: [SaaS platforms](/web/saas). One example is our own product [LevelKraft](/work/levelkraft)." },
+    { keys: ["app", "ios", "android", "iphone", "mobile", "smartphone"],
+      de: "Ja, wir entwickeln Android- und iOS-Apps, nativ (Kotlin, Swift) oder plattformübergreifend (React Native). Mehr dazu: [Mobile Apps](/web/mobile-apps).",
+      en: "Yes, we build Android and iOS apps, native (Kotlin, Swift) or cross-platform (React Native). More: [Mobile apps](/web/mobile-apps)." },
+    { keys: ["dashboard", "reporting", "kpi", "kennzahl", "auswertung"],
+      de: "Wir bauen KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen übersichtlich zeigen. Mehr dazu: [Dashboards & Reporting](/web/dashboards).",
+      en: "We build KPI, operations and reporting dashboards that show your key figures at a glance. More: [Dashboards & reporting](/web/dashboards)." },
+    { keys: ["website", "webseite", "homepage", "webdesign", "web design", "landing", "online-shop", "internetseite"],
+      de: "Wir gestalten und entwickeln Websites aus einer Hand: Design, Technik und SEO-Grundlagen, auf Wunsch mit Online-Buchung. Mehr dazu: [Webdesign & Web-Entwicklung](/web/web-design) und unsere [Projekte](/work).",
+      en: "We design and build websites end to end: design, engineering and SEO basics, with online booking if you need it. More: [Web design & development](/web/web-design) and our [projects](/work)." },
+    { keys: ["whatsapp"],
+      de: "Wir richten WhatsApp-Business-Abläufe ein, die Fragen beantworten, Anfragen vorqualifizieren und Termine buchen, über die offizielle API mit Opt-in. Mehr dazu: [WhatsApp-Agenten](/automation/whatsapp).",
+      en: "We set up WhatsApp Business flows that answer questions, qualify leads and book appointments, via the official API with opt-in. More: [WhatsApp agents](/automation/whatsapp)." },
+    { keys: ["buchung", "termin", "kurs", "booking", "appointment", "reservier"],
+      de: "Wir bauen Websites mit Online-Termin- oder Kursbuchung, die auch nachts und am Wochenende Anfragen annehmen. Beispiele: [Fitnessstudio-Website](/fitnessstudio-website) und [Online-Terminbuchung für Kfz-Betriebe](/kfz-aufbereitung-website). Ein Gespräch mit uns: [Termin buchen](/#kontakt).",
+      en: "We build websites with online appointment or class booking that take requests at night and on weekends too. Examples: [gym website](/fitnessstudio-website) and [online booking for car care](/kfz-aufbereitung-website). Talk to us: [book a call](/#kontakt)." },
+    { keys: ["chatbot", "chat bot", "assistent", "assistant"],
+      de: "Wir bauen Website-Chatbots wie diesen: Sie beantworten Fragen aus Ihrer eigenen Wissensbasis und übergeben komplexe Fälle an einen Menschen. Mehr dazu: [Website-Chatbots](/automation/chatbots).",
+      en: "We build website chatbots like this one: they answer questions from your own knowledge base and hand complex cases to a person. More: [Website chatbots](/automation/chatbots)." },
+    { keys: ["voice", "telefon", "anruf", "phone", "call", "rexfangs"],
+      de: "Wir entwickeln Telefonassistenten, die Anrufe rund um die Uhr annehmen, weiterleiten und Details erfassen. Mehr dazu: [Voice-Agenten](/automation/voice). Unser eigenes Produkt RexFangs ist in der Testphase.",
+      en: "We build phone assistants that answer calls around the clock, route them and capture the details. More: [Voice agents](/automation/voice). Our own product RexFangs is in testing." },
+    { keys: ["automat", "rpa", "workflow", "prozess", "process", "crm", " ki", "ai "],
+      de: "Wir automatisieren wiederkehrende Handarbeit, etwa über CRM, Postfach und interne Tools hinweg. Mehr dazu: [Automatisierung](/automation) und [RPA & Prozessautomatisierung](/automation/rpa).",
+      en: "We automate repetitive manual work, for example across CRM, inbox and internal tools. More: [Automation](/automation) and [RPA & process automation](/automation/rpa)." },
+    { keys: ["seo", "google", "ranking", "suchmaschine", "sichtbar", "visib"],
+      de: "Wir kümmern uns um technisches SEO, Inhalte und Link-Strategie, damit Sie bei relevanten Suchanfragen gefunden werden. Mehr dazu: [SEO](/marketing/seo) und die [SEO-Fallstudie LevelKraft](/work/levelkraft#seo-fallstudie).",
+      en: "We handle technical SEO, content and link strategy so you are found for relevant searches. More: [SEO](/marketing/seo) and the [LevelKraft SEO case study](/work/levelkraft#seo-fallstudie)." },
+    { keys: ["marketing", "social", "content", "video", "instagram", "kunden gewinn", "mehr kunden"],
+      de: "Wir unterstützen Sie mit SEO, Content & Social und KI-Videomarketing. Mehr dazu: [Digitales Marketing](/marketing).",
+      en: "We help with SEO, content & social and AI video marketing. More: [Digital marketing](/marketing)." },
+    { keys: ["test", "support", "wartung", "betreuung", "maintenance"],
+      de: "Wir testen vor dem Launch über Geräte und Browser hinweg und betreuen Websites und Apps danach weiter. Mehr dazu: [Testing & Support](/testing-support) und [Betreuung](/preise#betreuung).",
+      en: "We test across devices and browsers before launch and look after websites and apps afterwards. More: [Testing & support](/testing-support) and [maintenance](/preise#betreuung)." },
+    { weight: 2, keys: ["preis", "kost", "price", "cost", "budget", "teuer", "euro", "€", "angebot", "quote"],
+      de: "Unsere Einstiegspreise (netto zzgl. MwSt.) stehen auf der Seite [Preise](/preise). Den Festpreis für Ihr Projekt nennen wir nach einem kostenlosen Erstgespräch: [Termin buchen](/#kontakt).",
+      en: "Our starting prices (net, plus VAT) are on the [pricing page](/preise). We give a fixed price for your project after a free first call: [book a call](/#kontakt)." },
+    { weight: 2, keys: ["dauer", "lange", "wochen", "zeitraum", "timeline", "how long", "weeks"],
+      de: "Nach dem kostenlosen Erstgespräch erhalten Sie innerhalb einer Woche Blueprint, Dokumentation und Demo. Die Umsetzung dauert für eine Website mit Buchung typisch vier bis acht Wochen.",
+      en: "After the free first call you get a blueprint, documentation and a demo within one week. Building a website with booking typically takes four to eight weeks." },
+    { keys: ["kontakt", "contact", "erreich", "email", "e-mail", "anruf", "gespräch", "beratung", "demo", "meeting"],
+      de: "Sie erreichen uns unter info@rexity.ai oder +49 174 2471435. Ein kostenloses Erstgespräch (30 Minuten) können Sie direkt hier buchen: [Termin buchen](/#kontakt).",
+      en: "You can reach us at info@rexity.ai or +49 174 2471435. Book a free 30-minute first call here: [book a call](/#kontakt)." },
+    { keys: ["wo ", "standort", "region", "celle", "hannover", "niedersachsen", "hermannsburg", "location", "where"],
+      de: "Wir sitzen in Hermannsburg (Südheide, Landkreis Celle) und arbeiten für Betriebe in ganz Niedersachsen und remote in ganz Deutschland. Mehr dazu: [IT-Dienstleister in Niedersachsen](/niedersachsen).",
+      en: "We are based in Hermannsburg (Südheide, near Celle) and work for businesses across Lower Saxony and remotely across Germany. More: [Lower Saxony](/niedersachsen)." },
+    { keys: ["projekt", "referenz", "beispiel", "portfolio", "work", "kunden", "example"],
+      de: "Abgeschlossene Projekte sind z. B. [Body & Care Hermannsburg](/work/body-and-care), [Fahrzeugpflege Celle](/work/chara) und [LevelKraft](/work/levelkraft). Alle Arbeiten: [Projekte](/work).",
+      en: "Completed projects include [Body & Care Hermannsburg](/work/body-and-care), [Fahrzeugpflege Celle](/work/chara) and [LevelKraft](/work/levelkraft). All work: [projects](/work)." }
   ];
+  var fallbackOverview = {
+    de: "Rexity Labs aus Hermannsburg entwickelt Websites, Apps, SaaS-Plattformen, Automatisierung und KI-Assistenten und hilft bei SEO und Marketing. Überblick: [Leistungen](/services), [Preise](/preise), [Termin buchen](/#kontakt).",
+    en: "Rexity Labs from Hermannsburg builds websites, apps, SaaS platforms, automation and AI assistants, and helps with SEO and marketing. Overview: [services](/services), [pricing](/preise), [book a call](/#kontakt)."
+  };
+  var fallbackNote = {
+    de: "Der KI-Assistent ist gerade nicht erreichbar, hier eine kurze Antwort: ",
+    en: "The AI assistant is unavailable right now, here is a short answer: "
+  };
 
   function svgIcon(name) {
     if (name === "wa") {
@@ -178,21 +227,19 @@
         ? "Dazu kann ich keine Entscheidung treffen. Für Erstattungen, Richtlinien, Rechnungen oder Admin-Themen schreiben Sie bitte an info@rexity.ai."
         : "I can’t make decisions on that. For refunds, policies, billing, or admin matters, please email info@rexity.ai.";
     }
-    if (/demo|meeting|call|requirement|requirements|termin|beratung|project|quote|proposal/i.test(text)) {
-      return lang === "de"
-        ? "Für Anforderungen, Demos oder ein Projektgespräch schreiben Sie bitte an info@rexity.ai."
-        : "For requirements, demos, or a project discussion, please email info@rexity.ai.";
-    }
-    var scored = fallbackKnowledge.map(function (entry) {
+    var padded = " " + text + " ";
+    var best = null, bestScore = 0;
+    fallbackKnowledge.forEach(function (entry) {
+      // a key counts only at the start of a word ("app" must not match "WhatsApp"); price and timeline
+      // questions weigh double so "Was kostet eine Website?" gets the price answer.
       var score = entry.keys.reduce(function (sum, key) {
-        return sum + (text.indexOf(key) > -1 ? 1 : 0);
+        var at = padded.indexOf(key), hit = false;
+        while (at > -1 && !hit) { hit = !/[a-zäöüß]/.test(padded.charAt(at - 1)); at = padded.indexOf(key, at + 1); }
+        return sum + (hit ? (entry.weight || 1) : 0);
       }, 0);
-      return { entry: entry, score: score };
-    }).sort(function (a, b) { return b.score - a.score; });
-    if (scored[0] && scored[0].score > 0) return scored[0].entry[lang] || scored[0].entry.en;
-    return lang === "de"
-      ? "Ich kann bei Rexity Services, Produkten, Design, Entwicklung, Automatisierung, AI-Systemen, Skalierung und Demo-Anfragen helfen."
-      : "I can help with Rexity services, products, design, development, automation, AI systems, scaling, and demo requests.";
+      if (score > bestScore) { best = entry; bestScore = score; }
+    });
+    return fallbackNote[lang] + ((best ? best[lang] : fallbackOverview[lang]) || fallbackOverview.de);
   }
 
   // ---- info@rexity.ai → clickable, pre-filled email -----------------------
@@ -259,12 +306,26 @@
     anchor.insertAdjacentElement("afterend", menu);
   }
 
+  // The contact address as a link that opens the Gmail / Outlook / mail-app chooser.
+  function mailLink(label) {
+    var a = document.createElement("a");
+    a.className = "rexity-chatbot__maillink";
+    a.textContent = label || CONTACT_EMAIL;
+    a.href = "mailto:" + CONTACT_EMAIL;
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      openMailMenu(a);
+    });
+    return a;
+  }
+
   function linkifyEmail(el) {
     if (!el) return;
     var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
     var hits = [];
     var node;
     while ((node = walker.nextNode())) {
+      if (node.parentNode && node.parentNode.closest && node.parentNode.closest("a")) continue;
       if (node.nodeValue && node.nodeValue.indexOf(CONTACT_EMAIL) > -1) hits.push(node);
     }
     hits.forEach(function (textNode) {
@@ -272,17 +333,7 @@
       var frag = document.createDocumentFragment();
       parts.forEach(function (part, i) {
         if (part) frag.appendChild(document.createTextNode(part));
-        if (i < parts.length - 1) {
-          var a = document.createElement("a");
-          a.className = "rexity-chatbot__maillink";
-          a.textContent = CONTACT_EMAIL;
-          a.href = "mailto:" + CONTACT_EMAIL;
-          a.addEventListener("click", function (e) {
-            e.preventDefault();
-            openMailMenu(a);
-          });
-          frag.appendChild(a);
-        }
+        if (i < parts.length - 1) frag.appendChild(mailLink());
       });
       textNode.parentNode.replaceChild(frag, textNode);
     });
@@ -327,6 +378,104 @@
   // Apply both linkifiers to a finished bot bubble.
   function linkifyBot(el) { linkifyEmail(el); linkifyUrls(el); }
 
+  // ---- Bot answers (Sprint 15-C): plain text, "- " list lines, [label](target) links.
+  // Built with DOM nodes only (createElement / textContent), never innerHTML on model
+  // output. Same-site paths open in the same tab; https links open in a new tab with
+  // rel="noopener"; mailto:info@rexity.ai opens the mail chooser; tel: stays a plain
+  // link; any other scheme is shown as text. /api/chat already validates every target.
+  var MD_LINK_RE = /\[([^\]\n]{1,160})\]\(([^()\s]{1,300})\)/g;
+
+  function linkTarget(target) {
+    var t = String(target || "").trim();
+    if (/^\/(?!\/)/.test(t) || /^#[\w-]+$/.test(t)) return { href: t, kind: "site" };
+    if (/^mailto:/i.test(t)) return { href: t, kind: "mail" };
+    if (/^tel:\+?[\d\s-]+$/i.test(t)) return { href: t.replace(/\s/g, ""), kind: "tel" };
+    if (/^https:\/\/[^\s]+$/i.test(t)) return { href: t, kind: "external" };
+    return null;
+  }
+
+  function appendInline(parent, line) {
+    var last = 0;
+    var m;
+    MD_LINK_RE.lastIndex = 0;
+    while ((m = MD_LINK_RE.exec(line))) {
+      if (m.index > last) parent.appendChild(document.createTextNode(line.slice(last, m.index)));
+      var label = m[1];
+      var target = linkTarget(m[2]);
+      if (!target) {
+        parent.appendChild(document.createTextNode(label));
+      } else if (target.kind === "mail" && target.href.toLowerCase().split("?")[0] === "mailto:" + CONTACT_EMAIL) {
+        parent.appendChild(mailLink(label));
+      } else {
+        var a = document.createElement("a");
+        a.className = "rexity-chatbot__link rexity-chatbot__mdlink";
+        a.href = target.href;
+        a.textContent = label;
+        if (target.kind === "external") { a.target = "_blank"; a.rel = "noopener"; }
+        if (target.kind === "site") a.setAttribute("data-rexity-chat-nav", "");
+        // "Termin buchen" opens the booking modal where the page has one (rexity.js), else it scrolls to #kontakt
+        if (target.href === "/#kontakt") a.setAttribute("data-rx-open", "booking");
+        parent.appendChild(a);
+      }
+      last = m.index + m[0].length;
+    }
+    if (last < line.length) parent.appendChild(document.createTextNode(line.slice(last)));
+  }
+
+  // Paragraphs (lines joined with <br>, a blank line starts a new one) and "- " lists.
+  function renderBotText(el, text) {
+    el.textContent = "";
+    var para = null;
+    var list = null;
+    String(text || "").replace(/\r\n?/g, "\n").split("\n").forEach(function (raw) {
+      var line = raw.replace(/\s+$/, "");
+      var item = /^\s*[-•]\s+(.+)$/.exec(line);
+      if (item) {
+        para = null;
+        if (!list) {
+          list = document.createElement("ul");
+          list.className = "rexity-chatbot__list";
+          el.appendChild(list);
+        }
+        var li = document.createElement("li");
+        appendInline(li, item[1]);
+        list.appendChild(li);
+        return;
+      }
+      list = null;
+      if (!line.trim()) { para = null; return; }
+      if (!para) {
+        para = document.createElement("p");
+        para.className = "rexity-chatbot__p";
+        el.appendChild(para);
+      } else {
+        para.appendChild(document.createElement("br"));
+      }
+      appendInline(para, line);
+    });
+    linkifyBot(el);
+  }
+
+  // ---- The conversation survives a click on a chat link (same browser tab) ------
+  var LOG_KEY = "rexity_chat_log";
+  var REOPEN_KEY = "rexity_chat_reopen";
+  function readLog() {
+    try {
+      var log = JSON.parse(window.sessionStorage.getItem(LOG_KEY) || "[]");
+      return Array.isArray(log) ? log.filter(function (m) { return m && (m.t === "bot" || m.t === "user") && typeof m.x === "string"; }) : [];
+    } catch (e) { return []; }
+  }
+  function writeLog(container) {
+    try {
+      var log = [];
+      container.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
+        if (el.classList.contains("rexity-chatbot__message--loading")) return;
+        log.push({ t: el.classList.contains("rexity-chatbot__message--user") ? "user" : "bot", x: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 2000) });
+      });
+      window.sessionStorage.setItem(LOG_KEY, JSON.stringify(log.slice(-30)));
+    } catch (e) {}
+  }
+
   // A "thinking" bubble: three bouncing dots (animated), shown while the
   // model works. Static markup only — never model output.
   function addThinking(container) {
@@ -346,9 +495,12 @@
   function setBotAnswer(el, text) {
     el.classList.remove("rexity-chatbot__message--loading");
     el.removeAttribute("aria-label");
-    el.textContent = text;
-    linkifyBot(el);
-    if (el.parentNode) el.parentNode.scrollTop = el.parentNode.scrollHeight;
+    el.setAttribute("data-raw", String(text || ""));
+    renderBotText(el, text);
+    if (el.parentNode) {
+      el.parentNode.scrollTop = el.parentNode.scrollHeight;
+      writeLog(el.parentNode);
+    }
   }
 
   // Close any open chooser when clicking elsewhere.
@@ -360,10 +512,12 @@
   function addMessage(container, text, type) {
     var item = document.createElement("div");
     item.className = "rexity-chatbot__message rexity-chatbot__message--" + type;
-    item.textContent = text;
-    if (type.indexOf("bot") > -1) linkifyBot(item);
+    item.setAttribute("data-raw", String(text || ""));
+    if (type.indexOf("bot") > -1) renderBotText(item, text);
+    else item.textContent = text;
     container.appendChild(item);
     container.scrollTop = container.scrollHeight;
+    writeLog(container);
     return item;
   }
 
@@ -388,12 +542,16 @@
     root.setAttribute("aria-label", activeCopy.rootLabel);
     root.innerHTML = [
       '<div class="rexity-chatbot__menu" hidden>',
-        '<button class="rexity-chatbot__menu-item rexity-chatbot__menu-chat" type="button">' + svgIcon("mark") + '<span></span></button>',
+        '<button class="rexity-chatbot__menu-item rexity-chatbot__menu-chat" type="button"><img class="rexity-chatbot__menu-mark" src="/assets/brand/final/rexity-mark-white.svg" alt="" width="20" height="20"><span></span></button>',
         '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-wa" target="_blank" rel="noopener">' + svgIcon("wa") + '<span></span></a>',
         '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-mail">' + svgIcon("mail") + '<span></span></a>',
       '</div>',
+      '<div class="rexity-chatbot__nudge" role="status" hidden>',
+        '<button class="rexity-chatbot__nudge-text" type="button"><strong></strong><span></span></button>',
+        '<button class="rexity-chatbot__close rexity-chatbot__nudge-close" type="button">' + svgIcon("close") + '</button>',
+      '</div>',
       '<button class="rexity-chatbot__pill" type="button" aria-label="' + activeCopy.openLabel + '">',
-        '<span class="rexity-chatbot__mark">' + svgIcon("mark") + '</span>',
+        '<span class="rexity-chatbot__mark rexity-chatbot__mark--nav"><img src="/assets/brand/final/rexity-mark-white.svg" alt="" width="22" height="22"></span>',
         '<span class="rexity-chatbot__pill-text">',
           '<span class="rexity-chatbot__pill-title">' + activeCopy.pillTitle + '</span>',
           '<span class="rexity-chatbot__pill-subtitle">' + activeCopy.pillSubtitle + '</span>',
@@ -402,7 +560,7 @@
       '<div class="rexity-chatbot__panel" role="dialog" aria-modal="false" aria-label="' + activeCopy.panelLabel + '">',
         '<div class="rexity-chatbot__hero">',
           '<div class="rexity-chatbot__top">',
-            '<div class="rexity-chatbot__brand"><img src="/rexity-omi/assets/brand/rexity-labs-logo-white-160.png" alt="Rexity Labs UG"></div>',
+            '<div class="rexity-chatbot__brand"><img src="/assets/brand/web/rexity-logo-horizontal-white.svg" alt="Rexity Labs" width="112" height="29"></div>',
             '<button class="rexity-chatbot__close" type="button" aria-label="' + activeCopy.closeLabel + '">' + svgIcon("close") + '</button>',
           '</div>',
           '<div class="rexity-chatbot__intro">',
@@ -415,7 +573,7 @@
           '<p class="rexity-chatbot__gate-copy"></p>',
           '<input class="rexity-chatbot__gate-name" type="text" maxlength="80" autocomplete="name">',
           '<input class="rexity-chatbot__gate-phone" type="tel" maxlength="24" autocomplete="tel">',
-          '<button class="rexity-chatbot__gate-submit" type="submit"></button>',
+          '<button class="rexity-chatbot__gate-submit rx-btn rx-btn--primary rx-btn--solid" type="submit"></button>',
           '<p class="rexity-chatbot__gate-error" hidden></p>',
         '</form>',
         '<div class="rexity-chatbot__quick" aria-label="' + activeCopy.quickLabel + '"></div>',
@@ -448,6 +606,9 @@
     var gatePhoneEl = root.querySelector(".rexity-chatbot__gate-phone");
     var gateSubmitEl = root.querySelector(".rexity-chatbot__gate-submit");
     var gateErrorEl = root.querySelector(".rexity-chatbot__gate-error");
+    var nudge = root.querySelector(".rexity-chatbot__nudge");
+    var nudgeText = root.querySelector(".rexity-chatbot__nudge-text");
+    var nudgeClose = root.querySelector(".rexity-chatbot__nudge-close");
 
     // Chat is gated behind name + phone so the assistant (and its API budget)
     // is reserved for real enquiries rather than anonymous drive-by use.
@@ -487,6 +648,9 @@
       gatePhoneEl.setAttribute("placeholder", activeCopy.gatePhone);
       gateSubmitEl.textContent = activeCopy.gateSubmit;
       gateErrorEl.textContent = activeCopy.gateError;
+      nudgeText.querySelector("strong").textContent = activeCopy.nudgeTitle;
+      nudgeText.querySelector("span").textContent = activeCopy.nudgeText;
+      nudgeClose.setAttribute("aria-label", activeCopy.nudgeClose);
       root.querySelector(".rexity-chatbot__intro-title").textContent = activeCopy.introTitle;
       root.querySelector(".rexity-chatbot__intro-copy").textContent = activeCopy.introCopy;
       root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
@@ -503,6 +667,7 @@
         });
         quick.appendChild(chip);
       });
+      updateQuickCue();
     }
 
     activeCopy.quickQuestions.forEach(function (question) {
@@ -518,7 +683,10 @@
     });
 
     renderChatLanguage(lang);
-    addMessage(messages, greetingText(lang), "bot");
+    // Sprint 15-C: continue the conversation of this tab (sessionStorage) after a chat link
+    var restored = readLog();
+    if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t); });
+    else addMessage(messages, greetingText(lang), "bot");
     window.addEventListener("rexity:languagechange", function (event) {
       renderChatLanguage(event.detail && event.detail.lang);
     });
@@ -530,19 +698,49 @@
       try { return window.sessionStorage.getItem(INTRO_SEEN_KEY) === "true"; } catch (e) { return true; }
     }
 
+    // Suggestions scroll sideways: a fade on the right edge shows there is more (B-30).
+    function updateQuickCue() {
+      quick.classList.toggle("is-end", quick.scrollLeft + quick.clientWidth >= quick.scrollWidth - 4);
+    }
+    quick.addEventListener("scroll", updateQuickCue, { passive: true });
+
+    function hideNudge() {
+      nudge.setAttribute("hidden", "");
+    }
+    function openChat() {
+      markIntroSeen();
+      hideMenu();
+      hideNudge();
+      applyGateState();
+      root.classList.add("is-open");
+      updateQuickCue();
+      window.setTimeout(function () {
+        updateQuickCue();
+        (getLead() ? input : gateNameEl).focus();
+      }, 180);
+    }
+    function closeChat() {
+      markIntroSeen();
+      root.classList.remove("is-open");
+      pill.focus();
+    }
+
     pill.addEventListener("click", function () {
+      hideNudge();
       if (menu.hasAttribute("hidden")) menu.removeAttribute("hidden");
       else hideMenu();
     });
 
-    menuChatBtn.addEventListener("click", function () {
+    menuChatBtn.addEventListener("click", openChat);
+    nudgeText.addEventListener("click", openChat);
+    nudgeClose.addEventListener("click", function () {
       markIntroSeen();
-      hideMenu();
-      applyGateState();
-      root.classList.add("is-open");
-      window.setTimeout(function () {
-        (getLead() ? input : gateNameEl).focus();
-      }, 180);
+      hideNudge();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" && event.key !== "Esc") return;
+      if (root.classList.contains("is-open")) closeChat();
+      else { hideMenu(); hideNudge(); }
     });
 
     menuWa.addEventListener("click", hideMenu);
@@ -582,29 +780,40 @@
 
     applyGateState();
 
-    close.addEventListener("click", function () {
-      markIntroSeen();
-      root.classList.remove("is-open");
-      pill.focus();
-    });
+    close.addEventListener("click", closeChat);
 
-    // PRD launch behavior: expand once, 8-10 s after load, with the greeting
-    // already in place. Once per browser session; never again after the
-    // visitor closes or opens it themselves. Desktop only — auto-opening a
-    // near-fullscreen panel on mobile is intrusive. Viewport is checked when
-    // the timer FIRES (prerendered/background tabs report width 0 at init;
-    // unknown width counts as desktop).
-    function isMobileViewport() {
-      var w = window.innerWidth || (window.screen && window.screen.width) || 0;
-      return w > 0 && w < 640;
-    }
+    // A chat link to another page reopens the chat there (desktop and tablet only: on a
+    // phone the panel would cover the page the visitor asked for). A link to an anchor
+    // on this page closes the panel so the target is visible.
+    messages.addEventListener("click", function (event) {
+      var a = event.target && event.target.closest && event.target.closest("a[data-rexity-chat-nav]");
+      if (!a) return;
+      var url;
+      try { url = new URL(a.getAttribute("href"), window.location.href); } catch (e) { return; }
+      var here = window.location.pathname.replace(/\/+$/, "") || "/";
+      var there = url.pathname.replace(/\/+$/, "") || "/";
+      if (there === here) { closeChat(); return; }
+      try { window.sessionStorage.setItem(REOPEN_KEY, "1"); } catch (e) {}
+    });
+    try {
+      if (window.sessionStorage.getItem(REOPEN_KEY) === "1") {
+        window.sessionStorage.removeItem(REOPEN_KEY);
+        if ((window.innerWidth || 0) >= 768 && getLead()) openChat();
+      }
+    } catch (e) {}
+
+    // Launch behaviour (Sprint 12): never open the panel by itself. After ~12 s a
+    // small greeting bubble appears next to the launcher, once per browser session,
+    // not on phones (< 768 px), not while the menu, the booking modal or the
+    // contact cluster is open. The width is checked when the timer fires.
     if (!introSeen()) {
       window.setTimeout(function () {
-        if (introSeen() || root.classList.contains("is-open") || isMobileViewport()) return;
+        var html = document.documentElement;
+        var busy = html.classList.contains("rx-menu-open") || html.classList.contains("rx-modal-open") || !menu.hasAttribute("hidden");
+        if (introSeen() || root.classList.contains("is-open") || busy || (window.innerWidth || 0) < 768) return;
         markIntroSeen();
-        applyGateState();
-        root.classList.add("is-open");
-      }, 9000);
+        nudge.removeAttribute("hidden");
+      }, 12000);
     }
 
     input.addEventListener("keydown", function (event) {
@@ -628,7 +837,8 @@
         if (el.classList.contains("rexity-chatbot__message--loading")) return;
         history.push({
           role: el.classList.contains("rexity-chatbot__message--user") ? "user" : "assistant",
-          content: (el.textContent || "").slice(0, 800)
+          // the raw answer, links included, so the model sees what it linked before
+          content: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 1500)
         });
       });
       var curLang = (window.rexityGetLang && window.rexityGetLang()) || lang;
@@ -640,7 +850,7 @@
       var minWait = new Promise(function (resolve) { window.setTimeout(resolve, 850); });
       var answer;
       try {
-        answer = await askApi(message, curLang, history.slice(-12));
+        answer = await askApi(message, curLang, history.slice(-16));
       } catch (_error) {
         answer = localReply(message);
       }
@@ -649,6 +859,19 @@
       send.disabled = false;
       input.focus();
     });
+  }
+
+  function withStyles(done) {
+    var ready = false;
+    function go() { if (!ready) { ready = true; done(); } }
+    if (document.querySelector('link[href*="rexity-chatbot.css"]') || !SELF) return go();
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = SELF.replace(/rexity-chatbot\.js/, "rexity-chatbot.css");
+    link.onload = go;
+    link.onerror = go;
+    document.head.appendChild(link);
+    window.setTimeout(go, 4000);
   }
 
   function loaderIsComplete() {
@@ -680,9 +903,21 @@
     }, 3600);
   }
 
+  function start() { withStyles(waitForMainPage); }
+  // Sprint 14-G: where the template boots after the first paint and asks for it (<script id="rx-boot"
+  // data-rx-chat="after">, /preise), the chat starts once the template has booted, as it did when the
+  // template scripts were parser-blocking; its stylesheet then stays out of the first paint.
+  function begin() {
+    var boot = document.getElementById("rx-boot");
+    if (boot && boot.getAttribute("data-rx-chat") === "after" && !window.RxBooted) {
+      document.addEventListener("rx:booted", start, { once: true });
+      return;
+    }
+    start();
+  }
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", waitForMainPage);
+    document.addEventListener("DOMContentLoaded", begin);
   } else {
-    waitForMainPage();
+    begin();
   }
 })();

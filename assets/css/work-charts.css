@@ -1,0 +1,136 @@
+/* /work/levelkraft only (Sprint 11): the interactive bar charts and the revenue / forecast block of the
+   LevelKraft case study (#seo-fallstudie). Markup: scripts/pages/lib-work/charts.mjs, revenue.mjs; behaviour:
+   assets/js/charts.js. Inlined at build time as <style id="rx-charts"> at the start of the section (lib-work/seo.mjs
+   chartsCss), so it adds no render-blocking request. Builds on
+   work-seo.css (rx-seo-chart, rx-seo-bar*) and the work.css tokens (--rxw-*). */
+
+/* Sprint 11: one colour per month (data-m), shared by both bar charts and their legends. Muted tones before
+   the SEO start (Mar–Jun), the violet / green / blue family from July. All >= 3:1 on the chart surface
+   (#282828) and on the page ground; adjacent months validated for colour-vision deficiency (see the Sprint 11 log). */
+.rx-seo-chart [data-m="03"] { --c: #527599; }
+.rx-seo-chart [data-m="04"] { --c: #b18e66; }
+.rx-seo-chart [data-m="05"] { --c: #3a7d75; }
+.rx-seo-chart [data-m="06"] { --c: #a09d65; }
+.rx-seo-chart [data-m="07"] { --c: #8968d4; }
+.rx-seo-chart [data-m="08"] { --c: #39ad79; }
+.rx-seo-chart [data-m="09"] { --c: #1a7acb; }
+.rx-seo-bar .rx-seo-bar__fill { background: var(--c, rgba(255, 255, 255, 0.32)); }
+/* bars no wider than 5.5 rem, so five bars on a wide screen do not read as blocks */
+.rx-seo-bar__fill { max-width: 5.5rem; }
+
+/* Sprint 11: every bar is a button (the whole column + its month label); its popover is the next sibling */
+.rx-seo-bar__btn {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.rx-seo-chart.is-interactive .rx-seo-bar__btn { cursor: pointer; }
+.rx-seo-chart.is-interactive .rx-seo-bar__btn:hover .rx-seo-bar__fill,
+.rx-seo-bar.is-open .rx-seo-bar__fill { filter: brightness(1.15); }
+.rx-seo-bar.is-open .rx-seo-bar__fill { box-shadow: 0 0 0 2px var(--rxw-ink); }
+.rx-seo-bar.is-open .rx-seo-bar__lbl { color: var(--rxw-ink); font-weight: 600; }
+.rx-chart-pop {
+  position: absolute;
+  z-index: 5;
+  bottom: calc(1.75rem + (100% - 3.25rem) * var(--f, 0) + 1.3rem);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  width: max-content;
+  max-width: 12rem;
+  padding: 0.5rem 0.7rem 0.55rem;
+  border-top: 3px solid var(--c, var(--rxw-accent));
+  border-radius: 0.5rem;
+  background: #10141b;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16), 0 8px 24px rgba(0, 0, 0, 0.45);
+  color: var(--rxw-ink);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  text-align: left;
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: rx-pop-in 0.16s ease-out;
+}
+.rx-seo-bar.is-start .rx-chart-pop { left: 0; transform: none; }
+.rx-seo-bar.is-end .rx-chart-pop { right: 0; left: auto; transform: none; }
+.rx-chart-pop[hidden] { display: none; }
+.rx-chart-pop__val { font-size: 0.9375rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.rx-chart-pop__when { color: var(--rxw-muted); }
+.rx-chart-pop__delta { font-weight: 600; font-variant-numeric: tabular-nums; }
+@keyframes rx-pop-in { from { opacity: 0; translate: 0 4px; } to { opacity: 1; translate: 0 0; } }
+/* legend (colour groups) and the JS-only hint */
+.rx-chart-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 1.25rem; margin: -0.35rem 0 0.9rem; padding: 0; color: var(--rxw-muted); font-size: 0.8125rem; line-height: 1.4; list-style: none; }
+.rx-chart-legend li { display: inline-flex; align-items: center; gap: 0.5rem; }
+.rx-chart-legend__sw { display: inline-flex; gap: 2px; }
+.rx-chart-legend__sw i { display: block; width: 0.7rem; height: 0.7rem; border-radius: 2px; background: var(--c); }
+#main .rx-chart-hint { margin: -0.4rem 0 0.75rem; color: var(--rxw-muted); font-size: 0.75rem; line-height: 1.4; }
+.rx-chart-hint[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .rx-chart-pop { animation: none; } }
+
+/* ------------------------------------------------------------ Sprint 11: /work/levelkraft revenue + forecast */
+/* "Auch der Umsatz zieht mit" (scripts/pages/lib-work/revenue.mjs): the MRR bar chart reuses the chart above;
+   the forecast block has a dashed frame (it is not measured data), a line / area chart and three scenario cards. */
+.rx-rev { --rx-actual: #b197fc; --rx-cautious: #d49648; --rx-base: #3093db; --rx-optimistic: #3fbf86; }
+.rx-rev-forecast { display: flex; flex-direction: column; gap: 1.25rem; width: 100%; padding: 1.1rem 0.9rem; border: 1px dashed rgba(255, 255, 255, 0.28); border-radius: var(--_responsive---border-radius--medium, 0.75rem); }
+@media (min-width: 768px) { .rx-rev-forecast { padding: 1.5rem; } }
+.rx-rev-forecast__head { display: flex; flex-direction: column; gap: 0.75rem; }
+#main .rx-rev-flag { display: inline-flex; align-self: flex-start; margin: 0; padding: 0.3rem 0.65rem; border: 1px solid var(--rx-cautious); border-radius: 999px; color: var(--rxw-ink); font: 600 0.75rem / 1.3 var(--font-families--primary); letter-spacing: 0.04em; text-transform: uppercase; }
+#main .rx-rev-forecast__title { margin: 0; font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem); font-weight: 600; line-height: 1.25; }
+#main .rx-rev-range { margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.375rem); font-weight: 600; line-height: 1.3; font-variant-numeric: tabular-nums; }
+
+/* line / area chart */
+.rx-line .rx-line-key--actual, .rx-line-dot--actual, .rx-line-lbl--actual { --c: var(--rx-actual); }
+.rx-line-key--cautious, .rx-line-dot--cautious, .rx-line-lbl--cautious, .rx-rev-card--cautious { --c: var(--rx-cautious); }
+.rx-line-key--base, .rx-line-dot--base, .rx-line-lbl--base, .rx-rev-card--base { --c: var(--rx-base); }
+.rx-line-key--optimistic, .rx-line-dot--optimistic, .rx-line-lbl--optimistic, .rx-rev-card--optimistic { --c: var(--rx-optimistic); }
+.rx-line-key { display: inline-block; flex: none; width: 1.6rem; height: 3px; border-radius: 2px; background: var(--c); }
+.rx-line-key--cautious { background: radial-gradient(circle, var(--c) 1.4px, transparent 1.6px) 0 50% / 5px 3px repeat-x; }
+.rx-line-key--base { background: repeating-linear-gradient(90deg, var(--c) 0 6px, transparent 6px 10px); }
+.rx-line-key--optimistic { background: repeating-linear-gradient(90deg, var(--c) 0 12px, transparent 12px 15px); }
+.rx-line-plot { position: relative; height: 15rem; margin: 0 2.9rem 0 2.5rem; }
+@media (min-width: 768px) { .rx-line-plot { height: 20rem; margin: 0 3.5rem 0 3rem; } }
+.rx-line-plot .rx-seo-chart__grid, .rx-line-area-box { position: absolute; inset: 0.75rem 0 1.75rem; }
+.rx-line-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.rx-line-area { fill: rgba(177, 151, 252, 0.16); stroke: none; }
+.rx-line-path { fill: none; stroke: var(--c); stroke-width: 2px; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.rx-line-path--actual { stroke: var(--rx-actual); stroke-width: 2.5px; }
+.rx-line-path--cautious { stroke: var(--rx-cautious); stroke-dasharray: 0.5 5; stroke-width: 2.5px; }
+.rx-line-path--base { stroke: var(--rx-base); stroke-dasharray: 6 4; }
+.rx-line-path--optimistic { stroke: var(--rx-optimistic); stroke-dasharray: 12 4; }
+.rx-line-dot { position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px #282828; transform: translate(-50%, 50%); }
+.rx-line-lbl { position: absolute; color: var(--rxw-ink); font-size: 0.75rem; font-weight: 600; line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (min-width: 768px) { .rx-line-lbl { font-size: 0.8125rem; } }
+.rx-line-lbl--end { transform: translate(0.5rem, 50%); }
+.rx-line-lbl--actual { transform: translate(-85%, -0.55rem); }
+.rx-line-zone { position: absolute; top: -0.75rem; right: 0; bottom: 0; border-left: 1px dashed rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.035); }
+.rx-line-zone__lbl { position: absolute; top: 0.3rem; left: 0.45rem; color: var(--rxw-muted); font: 600 0.75rem / 1 var(--font-families--primary); letter-spacing: 0.04em; text-transform: uppercase; }
+.rx-line-axis { position: absolute; right: 0; bottom: 0; left: 0; height: 1.75rem; }
+.rx-line-axis span { position: absolute; bottom: 0; color: var(--rxw-muted); font-size: 0.75rem; line-height: 1.5rem; white-space: nowrap; transform: translateX(-50%); }
+@media (min-width: 768px) { .rx-line-axis span { font-size: 0.75rem; } }
+.rx-line-legend { margin-top: 0; }
+
+/* scenario cards */
+.rx-rev-scen { display: grid; gap: 0.75rem; width: 100%; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 992px) { .rx-rev-scen { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; } }
+.rx-rev-card { display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem; border-top: 3px solid var(--c); border-radius: 0.75rem; background: var(--rxw-surface); box-shadow: inset 0 0 0 1px var(--rxw-line); }
+.rx-rev-card__head { display: flex; align-items: center; gap: 0.6rem; }
+#main .rx-rev-card__name { margin: 0; font-size: 1.0625rem; font-weight: 600; line-height: 1.3; }
+#main .rx-rev-card__assume { margin: 0; color: var(--rxw-muted); font-size: 0.9375rem; line-height: 1.5; }
+.rx-rev-card__pts { display: flex; flex-direction: column; margin: 0; }
+.rx-rev-card__pts div { display: flex; justify-content: space-between; gap: 1rem; padding: 0.45rem 0; border-bottom: 1px solid var(--rxw-line); font-size: 0.9375rem; }
+.rx-rev-card__pts dt { color: var(--rxw-muted); }
+.rx-rev-card__pts dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#main .rx-rev-card__note { margin: 0; padding-left: 0.6rem; border-left: 2px solid var(--c); font-size: 0.8125rem; line-height: 1.5; }
+.rx-rev-foot { width: 100%; }
+#main .rx-rev-foot p { max-width: 46rem; margin: 0 0 0.35rem; color: var(--rxw-muted); font-size: 0.8125rem; line-height: 1.55; }

@@ -1,0 +1,38 @@
+# Files a Vercel deployment of this repo must not upload (Sprint 6B).
+# vercel.json serves the repo root as the site (outputDirectory "."), so
+# everything uploaded is public. Only the pages, assets, api/ and data/ ship.
+# Checked 2026-09-24: no public page, stylesheet or script references a path
+# below (docs/QA_REPORT.md, ".vercelignore").
+
+# reference checkout of production and local tooling
+_reference
+node_modules/
+.claude/
+.vercel/
+.env
+.env.*
+.DS_Store
+
+# generator inputs and helpers (the committed HTML is the build output)
+src/
+scripts/
+serve.json
+package.json
+package-lock.json
+
+# layout references and internal pages (noindex, never linked from public pages)
+template/
+styleguide/
+
+# documentation
+docs/
+README.md
+
+# asset pipeline inputs (Sprint 6A); assets/img/MANIFEST.json stays public as the licence register
+assets/slots.json
+assets/img/manifest.d/
+
+# Kept on purpose (do not add here):
+#   api/    serverless functions; they use only Node built-ins, no npm packages
+#   data/   read at runtime by api/chat.js (path.join(process.cwd(), "data", …))
+#   .well-known/, robots.txt, sitemap.xml, security.txt, googled143c8bf41723924.html

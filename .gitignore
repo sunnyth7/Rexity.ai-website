@@ -1,16 +1,16 @@
-.vercel
-node_modules
-*.log
-.DS_Store
-.claude/
+# reference checkout of production content (cloned by agents, never committed)
+_reference/
+# the worktree symlink form (a symlink is not matched by the trailing-slash pattern)
+_reference
+
+node_modules/
+.vercel/
 .env
 .env.local
 .env.*.local
 !.env.example
-
-# Build output and local scaffolding — never ship these.
-# They were committed by accident on the previous branch because they were untracked
-# when a broad `git add -A` ran.
-.next/
-tsconfig.tsbuildinfo
-next-env.d.ts
+*.log
+.DS_Store
+.claude/settings.local.json*
+.claude/worktrees/
+_intake/

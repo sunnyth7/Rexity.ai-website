@@ -1,0 +1,392 @@
+/* /work and the three case studies (/work/body-and-care, /work/chara, /work/levelkraft).
+   Included only by scripts/pages/40-work.mjs (renderHead extra, content-hash ?v=).
+   Sprint 12 (WP-3): the pages are built from the shared rx-* layer (assets/css/rexity.css §10,
+   docs/DESIGN_SYSTEM.md). This file only adds the work family's own pieces: hero with device
+   screens, case cards, facts, tick lists, device-framed previews, designs grid, product tiles and
+   covers, SEO teaser, pager, closing statement and the reveal. Markup: scripts/pages/lib-work/*.
+   The link sits before the Vaxel CSS in <head>: rules that meet a template selector use a class
+   (never a bare element), so they win on specificity. Micro labels are >= 12 px in the main font. */
+
+/* Metric-matched fallback for DM Sans: until the webfont arrives the text wraps as it will with DM Sans,
+   so the hero text does not reflow on font swap and the screens below it do not move (CLS). Widths
+   measured against the local Helvetica/Arial per weight (DM Sans is 3.3 % / 5.2 % / 0.4 % wider at
+   400 / 500 / 600); the line heights are explicit, so only the width matters. */
+@font-face { font-family: "DM Sans rxw"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 100 450; size-adjust: 103.3%; ascent-override: 96%; descent-override: 30%; line-gap-override: 0%; }
+@font-face { font-family: "DM Sans rxw"; src: local("Arial"), local("ArialMT"), local("Helvetica"); font-weight: 451 550; size-adjust: 105.2%; ascent-override: 94%; descent-override: 29.5%; line-gap-override: 0%; }
+@font-face { font-family: "DM Sans rxw"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Helvetica-Bold"); font-weight: 551 900; size-adjust: 100.4%; ascent-override: 99%; descent-override: 31%; line-gap-override: 0%; }
+#main.rx-wpage { --font-families--primary: "DM Sans", "DM Sans rxw", sans-serif; font-family: var(--font-families--primary); }
+
+#main {
+  --rxw-surface: var(--rx-card, #262626);
+  --rxw-line: rgba(255, 255, 255, 0.13);
+  --rxw-ink: var(--_theme---text-color--primary, #fffdfd);
+  --rxw-muted: var(--_theme---text-color--secondary, #b0abab);
+  --rxw-accent: var(--rx-accent, #b197fc);
+}
+html[data-palette="light"] #main,
+html[data-palette="contrast"] #main { --rxw-line: rgba(16, 35, 63, 0.14); }
+#fallstudien, #produkte, #designs, #seo-fallstudie, #ergebnis { scroll-margin-top: 6rem; }
+.rx-wpage p { margin: 0; }
+/* rexity.css's 2-column rule for rx-grid--3/--4 (768 px up) is written with :is() and so outranks the
+   3- and 4-column rules further up; these restore them on the work pages (reported to WP-0). */
+@media (min-width: 1100px) { #main .rx-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { #main .rx-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+/* ------------------------------------------------------------ hero: text beside (>= 992) or above the screens */
+.rx-whero { padding: 120px 0 0; color: var(--rxw-ink); }
+@media (min-width: 992px) { .rx-whero { padding-top: 160px; } }
+.rx-whero__grid { display: grid; gap: 40px; align-items: center; }
+@media (min-width: 992px) { .rx-whero__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; } }
+.rx-whero__text { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; max-width: 36rem; }
+.rx-whero__title {
+  margin: 0;
+  color: var(--rxw-ink);
+  font: 500 clamp(2.75rem, 1.9rem + 3.2vw, 4.5rem) / 1.02 var(--font-families--primary);
+  letter-spacing: -0.035em;
+}
+.rx-whero__tag { color: var(--rxw-ink); font-size: var(--rx-fs-lead); line-height: 1.45; }
+.rx-whero__lead { color: var(--rxw-muted); font-size: 1rem; line-height: 1.6; }
+@media (min-width: 768px) { .rx-whero__lead { font-size: 1.0625rem; } }
+.rx-whero__text .rx-actions { margin-top: 8px; }
+/* C N-21: the case hero's two buttons in one row at desktop widths (wider text column from 1200) */
+@media (min-width: 1200px) { .rx-whero--case .rx-whero__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); } }
+.rx-whero__visual { position: relative; min-width: 0; }
+.rx-whero__visual .rx-device { font-size: 12px; }
+
+/* /work: Body & Care in a browser, Fahrzeugpflege Celle and the LevelKraft app on phones */
+.rx-wtrio { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 4%; padding: 8px 0 4px; }
+.rx-wtrio__browser { display: none; }
+.rx-wtrio__phone { flex: 0 0 29%; max-width: 150px; }
+.rx-wtrio__phone--ch { flex-basis: 33%; max-width: 172px; margin-bottom: 16px; }
+.rx-wtrio__phone--ch { order: 2; }
+.rx-wtrio__phone--lk { order: 3; }
+@media (min-width: 768px) {
+  .rx-wtrio { display: block; aspect-ratio: 16 / 11; padding: 0; }
+  .rx-wtrio__browser { display: block; position: absolute; top: 0; left: 0; width: 80%; }
+  .rx-wtrio__phone--bc { display: none; }
+  .rx-wtrio__phone { position: absolute; max-width: none; margin: 0; }
+  .rx-wtrio__phone--ch { right: 0; bottom: 0; width: 23%; }
+  .rx-wtrio__phone--lk { right: 25%; bottom: -3%; width: 19%; z-index: 2; }
+}
+/* case studies: the client's own site, browser + phone; below 768 px the phone alone, whole and centred */
+.rx-wstack { position: relative; display: flex; justify-content: center; padding: 8px 0; }
+.rx-wstack::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--rx-card-accent, #b197fc) 45%, transparent), transparent);
+  filter: blur(24px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.rx-wstack__browser { display: none; }
+.rx-wstack__phone { position: relative; width: 240px; max-width: 64vw; }
+@media (min-width: 768px) {
+  .rx-wstack { display: block; padding: 0 11% 5% 0; }
+  .rx-wstack__browser { display: block; position: relative; }
+  .rx-wstack__phone { position: absolute; right: 0; bottom: 0; width: 24%; max-width: none; z-index: 2; }
+}
+
+/* ------------------------------------------------------------ category tags (Sprint 13, lib-work/tags.mjs) */
+/* A lighter rx-chip, 12 px main font, ink on a faint fill with a visible outline (AA on the dark and
+   the light palettes); wraps, never wider than its card. Every tag is a link to its service page
+   (showcase.json tagLinks): hover/focus fill, a visible focus ring, and on touch screens a 44 px tall
+   invisible hit area (::before) with a row gap wide enough that two wrapped rows' areas never overlap. */
+.rx-wpage .rx-wtags { gap: 6px; }
+.rx-wtags .rx-chip.rx-wtag {
+  position: relative;
+  min-height: 0;
+  padding: 3px 10px;
+  border-color: color-mix(in srgb, var(--rxw-ink) 30%, transparent);
+  background: color-mix(in srgb, var(--rxw-ink) 6%, transparent);
+  color: var(--rxw-ink);
+  font: 600 0.75rem / 1.35 var(--font-families--primary);
+  letter-spacing: 0.02em;
+  white-space: normal;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.3s var(--rx-ease, ease), background-color 0.3s var(--rx-ease, ease);
+}
+.rx-wtags a.rx-chip.rx-wtag:hover {
+  border-color: color-mix(in srgb, var(--rxw-ink) 65%, transparent);
+  background: color-mix(in srgb, var(--rxw-ink) 16%, transparent);
+}
+.rx-wtags a.rx-chip.rx-wtag:focus-visible { outline: 2px solid var(--rx-focus, #b197fc); outline-offset: 2px; }
+.rx-wtags a.rx-chip.rx-wtag::before { content: ""; position: absolute; top: 50%; right: -3px; left: -3px; height: 100%; transform: translateY(-50%); }
+@media (pointer: coarse), (max-width: 767px) {
+  .rx-wtags a.rx-chip.rx-wtag::before { height: 44px; }
+  .rx-wpage .rx-wtags { row-gap: 20px; } /* chip 24 px + 20 px = 44 px per row */
+}
+/* phones: the designs grid's 171 px columns fit two tags on one row (e.g. Website + App-Design) */
+@media (max-width: 767px) { .rx-wdesigns .rx-wtags .rx-chip.rx-wtag { padding-inline: 8px; } }
+@media (prefers-reduced-motion: reduce) { .rx-wtags .rx-chip.rx-wtag { transition: none; } }
+.rx-wdesigns .rx-wtags { flex-basis: 100%; margin-bottom: 2px; }
+.rx-whero__tags .rx-chip.rx-wtag { padding: 4px 12px; font-size: 0.8125rem; }
+
+/* a design card with a case study (lib-work/designs.mjs designCard): its name is the one card link and
+   stretches over the whole card; the tag links sit above that layer (no link inside a link). */
+.rx-card--linked { position: relative; }
+.rx-card__link { color: inherit; text-decoration: none; }
+.rx-card__link::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: 16px; }
+.rx-card__link:focus-visible { outline: 0; }
+.rx-card__link:focus-visible::after { outline: 2px solid var(--rx-focus, #b197fc); outline-offset: 4px; }
+.rx-card--linked .rx-wtags { position: relative; z-index: 2; }
+
+/* ------------------------------------------------------------ /work: chip row + case cards */
+.rx-wchips { margin: calc(var(--rx-space-head) * -0.5) 0 28px; }
+#main .rx-wcase { gap: 0; }
+.rx-wcase__media {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #121213;
+}
+.rx-wcase__media :is(img, picture) { display: block; width: 100%; height: 100%; }
+.rx-wcase__media img { object-fit: cover; object-position: top center; }
+.rx-wcase__media.has-render { background: radial-gradient(120% 90% at 50% 0%, #2c2c30, #151516); }
+.rx-wcase__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 20px; }
+.rx-wcase__name { margin: 0; color: var(--rxw-ink); font: 600 var(--rx-fs-card) / 1.25 var(--font-families--primary); letter-spacing: -0.01em; }
+.rx-wcase__tag { color: var(--rxw-ink); font-size: 1rem; line-height: 1.5; }
+.rx-wcase__text { max-width: var(--rx-measure); color: var(--rxw-muted); font-size: 0.9375rem; line-height: 1.6; }
+.rx-wcase__fine { color: var(--rxw-muted); font-size: 0.8125rem; line-height: 1.5; }
+.rx-wcase__chips { margin-top: 4px; }
+/* A N-9: "Dauer: …" is a label, not a control: no pill border */
+.rx-wcase__chips .rx-chip { min-height: 0; padding: 0; border: 0; color: var(--rxw-muted); font-size: 0.875rem; }
+.rx-wcase .rx-panel__foot { padding-top: 12px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .rx-wcase__media img { transition: transform 0.6s var(--rx-ease); }
+  .rx-wcase:hover .rx-wcase__media img { transform: scale(1.025); }
+}
+/* 768–1099 px: one column of horizontal cards, image left, text right (a text column of ~380 px,
+   no stretched 16:10 image and no orphan); three across from 1100 px */
+@media (min-width: 768px) and (max-width: 1099px) {
+  #main .rx-wcases { grid-template-columns: minmax(0, 1fr); }
+  #main .rx-wcase { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: auto 1fr; column-gap: 28px; }
+  .rx-wcase__media { grid-row: 1 / 3; align-self: start; }
+  .rx-wcase__body { padding-top: 0; }
+}
+@media (max-width: 479px) { #main .rx-wcase, #main .rx-prod { padding: 20px; } }
+
+/* ------------------------------------------------------------ /work: SEO teaser under the case cards */
+#main .rx-seo-teaser { display: grid; gap: 20px; margin-top: 24px; }
+@media (min-width: 768px) { #main .rx-seo-teaser { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); align-items: center; gap: 40px; } }
+.rx-seo-teaser__spark { display: flex; align-items: flex-end; gap: 6%; height: 7.5rem; padding: 0 4px; border-bottom: 1px solid var(--rxw-line); }
+@media (min-width: 768px) { .rx-seo-teaser__spark { height: 10rem; } }
+.rx-seo-teaser__bar { flex: 1; height: var(--h); min-height: 3px; border-radius: 4px 4px 0 0; background: rgba(255, 255, 255, 0.28); }
+.rx-seo-teaser__bar.is-mark { background: #4d8ef0; }
+.rx-seo-teaser__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rx-seo-teaser__tag { color: var(--rxw-muted); font-size: 0.8125rem; font-weight: 600; line-height: 1.3; letter-spacing: 0.04em; }
+.rx-seo-teaser__title { margin: 0; color: var(--rxw-ink); font: 500 var(--rx-fs-h3) / 1.2 var(--font-families--primary); letter-spacing: -0.015em; }
+.rx-seo-teaser__text { max-width: 40rem; font-size: 1rem; line-height: 1.55; }
+.rx-seo-teaser__fine { max-width: 44rem; color: var(--rxw-muted); font-size: 0.8125rem; line-height: 1.5; }
+
+/* ------------------------------------------------------------ case studies: facts, blocks, tick lists */
+.rx-wfacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 0; }
+@media (min-width: 992px) { .rx-wfacts { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
+.rx-wfacts > .rx-panel { gap: 4px; }
+.rx-wfacts dt { color: var(--rxw-muted); font-size: 0.8125rem; font-weight: 500; line-height: 1.35; }
+.rx-wfacts dd { margin: 0; color: var(--rxw-ink); font-size: 1rem; font-weight: 600; line-height: 1.35; overflow-wrap: break-word; }
+.rx-wblock { margin-top: var(--rx-space-section); }
+.rx-wticks { display: grid; gap: 12px 40px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 992px) { .rx-wticks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rx-wticks li { position: relative; max-width: var(--rx-measure); padding-left: 28px; color: var(--rxw-ink); font-size: 1rem; line-height: 1.55; }
+.rx-wticks li::before {
+  content: "";
+  position: absolute;
+  top: 0.3em;
+  left: 3px;
+  width: 0.4rem;
+  height: 0.75rem;
+  border-right: 2px solid var(--rxw-accent);
+  border-bottom: 2px solid var(--rxw-accent);
+  transform: rotate(45deg);
+}
+.rx-wlive { display: inline-flex; align-items: center; min-height: 44px; color: var(--rx-accent-ink, #b197fc); font-weight: 500; }
+
+/* ------------------------------------------------------------ device-framed previews ("Selbst ausprobieren") */
+/* desktop frames in one row, phones centred below; one per row on phones */
+.rx-work-proof-wrap { display: flex; flex-direction: column; gap: 40px; width: 100%; }
+.rx-work-proof { display: grid; gap: 40px 24px; width: 100%; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.rx-work-proof > div { min-width: 0; }
+.rx-work-proof--phones { grid-template-columns: repeat(auto-fit, minmax(150px, 260px)); justify-content: center; }
+.rx-work-proof .rx-card { --rx-card-w: 100%; }
+.rx-work-proof .rx-card__stage { padding: 8% 7% 0; }
+.rx-work-proof .rx-card--phone .rx-card__stage { aspect-ratio: auto; padding: 12% 22% 10%; }
+.rx-work-proof .rx-card--phone .rx-card__stage > .rx-device--phone { position: relative; right: auto; bottom: auto; width: 100%; }
+.rx-work-proof .rx-card__meta { align-items: center; }
+.rx-work-proof .rx-card__open { flex-basis: 100%; color: var(--rx-accent-ink, #b197fc); font: 500 1rem / 1.35 var(--font-families--primary); }
+/* B-13: no half-width lone card — 2 columns + an odd last card across (centred) at 768–991, 3 across from 992 */
+@media (min-width: 768px) {
+  .rx-work-proof:not(.rx-work-proof--phones) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rx-work-proof:not(.rx-work-proof--phones) > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: min(100%, 34rem); }
+}
+@media (min-width: 992px) {
+  .rx-work-proof:not(.rx-work-proof--phones):has(> :nth-child(3):last-child) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .rx-work-proof:not(.rx-work-proof--phones):has(> :nth-child(3):last-child) > :last-child { grid-column: auto; width: auto; }
+}
+@media (max-width: 767px) {
+  .rx-work-proof, .rx-work-proof--phones { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .rx-work-proof-wrap { gap: 32px; }
+  .rx-work-proof--phones { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .rx-work-proof .rx-card--phone .rx-card__stage { padding: 14% 14% 12%; }
+}
+/* kind labels of the showcase cards (devices.css): main font, 12 px (P-48, C-33) */
+.rx-wpage .rx-card__kind { font: 600 0.75rem / 1.25 var(--font-families--primary); letter-spacing: 0.04em; }
+.rx-wpage .rx-card__name { font-size: 1.125rem; }
+
+/* ------------------------------------------------------------ /work#designs */
+.rx-wdesigns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 768px) { .rx-wdesigns { gap: 44px 24px; } }
+@media (min-width: 1200px) { .rx-wdesigns { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.rx-wdesigns > li { min-width: 0; outline-offset: 6px; }
+/* cards far below the fold: skip their rendering until they come near (their stage has a fixed ratio) */
+.rx-wdesigns > li { content-visibility: auto; contain-intrinsic-size: auto 420px; }
+@media (min-width: 768px) { .rx-wdesigns > li { contain-intrinsic-size: auto 400px; } }
+.rx-wdesigns.is-collapsed > .rx-wdesigns__more { display: none; }
+.rx-wdesigns .rx-card { --rx-card-w: 100%; }
+.rx-wdesigns .rx-card__stage > .rx-device--phone { bottom: 6%; }
+.rx-wdesigns .rx-card__meta { align-items: center; }
+.rx-wdesigns .rx-card__name { flex-basis: 100%; margin: 0; font-size: 1.125rem; line-height: 1.3; letter-spacing: 0; }
+.rx-wdesigns .rx-card__sector { flex-basis: 100%; min-width: 0; }
+.rx-wdesigns .rx-card__kind { margin-left: 0; }
+.rx-work-blurb {
+  display: -webkit-box;
+  flex-basis: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: var(--rxd-card-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+/* phones: two compact columns, the design on a phone (its mobile capture, whole) */
+@media (max-width: 767px) {
+  .rx-wdesigns .rx-card { gap: 10px; }
+  .rx-wdesigns .rx-card__stage { display: flex; justify-content: center; aspect-ratio: auto; padding: 14% 0 12%; }
+  .rx-wdesigns .rx-card__stage > .rx-device--browser { display: none; }
+  .rx-wdesigns .rx-card__stage > .rx-device--phone { position: relative; right: auto; bottom: auto; width: 60%; }
+  .rx-wdesigns .rx-card__name { font-size: 1rem; }
+  .rx-wdesigns .rx-card__sector { font-size: 0.8125rem; }
+  .rx-wdesigns .rx-work-blurb { display: none; } /* 171 px columns: name, sector and kind only */
+}
+.rx-wdesigns__foot { display: flex; justify-content: center; margin-top: 40px; }
+.rx-wdesigns__foot [hidden] { display: none; }
+/* a long capture that is loaded on demand stays invisible until it has loaded (the poster shows) */
+.rx-work-late { opacity: 0; transition: opacity 0.45s; }
+.rx-work-late.is-ready { opacity: 1; }
+
+/* ------------------------------------------------------------ /work#produkte: tiles of equal weight */
+#main .rx-prod { gap: 20px; }
+.rx-prod__stage { --rx-card-w: 100%; aspect-ratio: 16 / 11; content-visibility: auto; }
+@media (min-width: 768px) { .rx-prod__stage { aspect-ratio: 16 / 10; } }
+.rx-prod__stage .rx-device { font-size: 11px; }
+.rx-prod__stage > .rx-device--phone { bottom: 6%; }
+.rx-prod__body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.rx-prod__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.rx-prod__kind { color: var(--rxw-muted); font-size: 0.875rem; line-height: 1.4; }
+.rx-prod__name { margin: 0; color: var(--rxw-ink); font: 600 var(--rx-fs-card) / 1.25 var(--font-families--primary); letter-spacing: -0.01em; }
+.rx-prod__text { max-width: var(--rx-measure); color: var(--rxw-ink); font-size: 1rem; line-height: 1.55; }
+.rx-prod__text + .rx-prod__text { color: var(--rxw-muted); font-size: 0.9375rem; }
+.rx-prod__highlight,
+.rx-prod__note { padding-left: 12px; border-left: 2px solid var(--rxw-accent); color: var(--rxw-ink); font-size: 0.9375rem; line-height: 1.5; }
+.rx-prod__note { border-left-color: #fbbf24; }
+.rx-prod__mods { margin-top: 2px; }
+/* phones: the four tiles as one swipeable row (the next tile peeks in), so the page stays short;
+   the row scrolls on its own, never the page (P-42 height, P-45 equal tiles) */
+@media (max-width: 767px) {
+  #main .rx-prod-grid {
+    display: flex;
+    gap: 12px;
+    margin-inline: calc(-1 * var(--rx-gutter));
+    padding: 0 var(--rx-gutter) 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--rx-gutter);
+    scrollbar-width: none;
+    align-items: flex-start; /* A N-5: each tile its own height, no empty bands under short tiles */
+  }
+  #main .rx-prod-grid::-webkit-scrollbar { display: none; }
+  #main .rx-prod-grid > li { flex: 0 0 90%; scroll-snap-align: start; }
+  #main .rx-prod-grid:focus-visible { outline: 2px solid var(--rx-focus, #b197fc); outline-offset: 4px; }
+}
+.rx-prod-hint { display: none; margin: -16px 0 16px; color: var(--rxw-muted); font-size: 0.875rem; }
+@media (max-width: 767px) { .rx-prod-hint { display: block; } }
+
+/* status chips (shared names with the homepage strip, assets/css/products.css) */
+.rx-prod__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  color: var(--rxw-ink);
+  font: 600 0.75rem / 1.3 var(--font-families--primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rx-prod__status::before { content: ""; width: 0.55em; height: 0.55em; border-radius: 50%; background: currentColor; }
+.rx-prod__status--live::before { background: #34d399; }
+.rx-prod__status--demo::before { background: #60a5fa; }
+.rx-prod__status--testing::before { background: #fbbf24; }
+
+/* designed product cover (RexFangs, RexDesk; FD-7): mark, name, status, claim on the accent stage */
+.rx-prod__stage--cover { display: grid; place-items: center; padding: 6%; }
+.rx-prod__stage--cover::before { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.rx-prod--rexfangs .rx-prod__stage--cover::before {
+  background: repeating-radial-gradient(circle at 50% 36%, transparent 0 34px, rgba(255, 255, 255, 0.07) 34px 35px);
+  -webkit-mask: radial-gradient(closest-side at 50% 36%, #000 30%, transparent);
+  mask: radial-gradient(closest-side at 50% 36%, #000 30%, transparent);
+}
+.rx-prod--rexdesk .rx-prod__stage--cover::before {
+  background: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.6px) 0 0 / 18px 18px;
+  -webkit-mask: linear-gradient(160deg, #000, transparent 75%);
+  mask: linear-gradient(160deg, #000, transparent 75%);
+}
+.rx-prod-cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; color: #fff; text-align: center; }
+.rx-prod-cover__mark {
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 13%, 76px);
+  aspect-ratio: 1;
+  margin-bottom: 4px;
+  border-radius: 24%;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+}
+.rx-prod-cover__mark svg { width: 58%; height: auto; color: #fff; }
+.rx-prod-cover__mark img { display: block; width: 100%; height: auto; border-radius: 24%; }
+.rx-prod-cover--rexdesk .rx-prod-cover__mark { background: none; box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6); }
+.rx-prod-cover__name { font: 600 clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem) / 1.05 var(--font-families--primary); letter-spacing: -0.025em; }
+.rx-prod-cover__claim { max-width: 24ch; color: rgba(255, 255, 255, 0.92); font-size: 1rem; line-height: 1.4; }
+.rx-prod-cover .rx-prod__status { background: rgba(0, 0, 0, 0.28); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24); color: #fff; }
+@media (max-width: 479px) { .rx-prod-cover { gap: 8px; } .rx-prod-cover__claim { font-size: 0.9375rem; } }
+
+/* ------------------------------------------------------------ pager, closing statement */
+.rx-wpager { margin-top: var(--rx-space-section); }
+.rx-wpager__grid { display: grid; gap: 16px; }
+@media (min-width: 600px) { .rx-wpager__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+#main .rx-wpager__item { gap: 6px; }
+.rx-wpager__item--next { align-items: flex-end; text-align: right; }
+.rx-wpager__label { display: inline-flex; align-items: center; gap: 8px; color: var(--rxw-muted); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.rx-wpager__item--prev .rx-wpager__label::before { content: "←"; content: "←" / ""; }
+.rx-wpager__item--next .rx-wpager__label::after { content: "→"; content: "→" / ""; }
+.rx-wpager__name { color: var(--rxw-ink); font-size: 1.25rem; font-weight: 600; line-height: 1.3; }
+.rx-wpager__all { display: flex; justify-content: center; margin-top: 12px; }
+
+/* ------------------------------------------------------------ reveal (lib-work/ui.mjs WORK_SCRIPT) */
+/* only when JS set html.rx-wrv (motion allowed); without JS everything is visible */
+.rx-wrv .rx-wrv-t { transition: opacity 0.6s var(--rx-ease), transform 0.6s var(--rx-ease); }
+.rx-wrv .rx-wrv-t:not(.is-in) { opacity: 0; transform: translateY(24px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-wrv .rx-wrv-t:not(.is-in) { opacity: 1; transform: none; }
+  .rx-work-late { transition: none; }
+}

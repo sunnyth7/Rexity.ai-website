@@ -1,0 +1,34 @@
+/* Legal pages (/impressum, /datenschutz, /agb, /aeb, /barrierefreiheit; scripts/pages/50-legal.mjs).
+   Sprint 12 WP-4 (P-59). Inlined into <head> as <style id="rx-legal"> (comments stripped), so the
+   pages get no extra request; production's assets/legal.css stays unlinked. The inline <style>
+   sits before the Vaxel stylesheet, so rules are scoped under main.rx-page-legal to win.
+   .rich-text     reading measure 72ch, H2 24 px, H3 20 px, 16 px paragraph spacing
+   .rx-legal-box  the address box, on the shared .rx-panel surface (no #3a3a3a Vaxel card)
+   .rx-legal-note FD-2 draft note: quiet 14 px meta note at the end
+   .hero          Sprint 12b (N-13): compact auto-height hero (H1 + date) instead of the template's 100vh one;
+                  the text box is in the flow, clear of the fixed nav
+   mail links     Sprint 12b (N-15): a mail link inside running text gets vertical padding, a >= 44 px tall hit
+                  area without moving the line (inline padding does not change the line box)
+   The © line and the legal-link row are not repeated above the footer (C-31, Sprint 12b N-9). */
+
+.rx-page-legal .section.hero { height: auto; max-height: none; }
+.rx-page-legal .section.hero .padding-section-large { padding-top: 128px; padding-bottom: 48px; }
+@media (min-width: 992px) { .rx-page-legal .section.hero .padding-section-large { padding-top: 168px; padding-bottom: 64px; } }
+.rx-page-legal .section-header-content-normal.for-hero { position: relative; inset: auto; width: auto; max-width: 72ch; margin-inline: auto; transform: none; }
+.rx-page-legal .rich-text { max-width: 72ch; margin-inline: auto; }
+.rx-page-legal .rich-text p,
+.rx-page-legal .rich-text ul { margin: 0 0 16px; }
+.rx-page-legal .rich-text h2 { margin: 16px 0 12px; font-size: 1.5rem; line-height: 1.3; font-weight: 500; }
+.rx-page-legal .rich-text h3 { margin: 8px 0 8px; font-size: 1.25rem; line-height: 1.35; font-weight: 500; }
+.rx-page-legal .rich-text .rx-legal-box { gap: 12px; margin: 24px 0; }
+.rx-page-legal .rich-text .rx-legal-box p { margin: 0; }
+.rx-page-legal .rich-text .rx-legal-note {
+  margin: 48px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--_theme---text-color--primary, #fffdfd) 13%, transparent);
+  color: var(--_theme---text-color--secondary, #b0abab);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.rx-page-legal .rich-text p:not(.rx-legal-solo) a[href^="mailto:"] { padding-block: max(12px, 0.75em); }
+.rx-page-legal .rich-text .rx-legal-solo a { display: inline-flex; align-items: center; min-height: 44px; }

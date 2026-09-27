@@ -1,0 +1,136 @@
+/* /preise page CSS (scripts/pages/41-pricing.mjs, data src/data/prices.json).
+   Page-scoped: only /preise uses it, inlined into <head> as <style id="rx-pricing"> (comments stripped),
+   so the page gets no extra render-blocking request.
+
+   Sprint 12 WP-4: the page is built from the shared rx-* layer (rexity.css §10: rx-section,
+   rx-sechead, rx-panel, rx-grid, rx-btn, rx-link, rx-chips, rx-faq, rx-cta). This file only adds
+   what is specific to prices:
+   .pr-hero       compact hero: H1, tag + lead under it (≤ 60ch), actions, note, jump chips
+   .pr-card       offer panel in four row groups (head | price | body | foot). At ≥ 768 px the cards of
+                  one row share a CSS subgrid, so titles, prices and links line up across the row.
+   .pr-card--wide the single offer of a category: one full-width horizontal panel
+   .pr-badge      status (In der Testphase) and offer (Aktion) badges
+   .pr-ticks      tick list inside a panel; .pr-check a checklist tile; .pr-step a numbered step
+   The inline <style> sits before the Vaxel and rexity stylesheets in <head>, so every rule is scoped
+   under main.rx-page-pricing (+1 class) to win over the one-class component rules it adjusts.
+   Colours come from the rx-* aliases, so the light and contrast palettes keep working. */
+
+.rx-page-pricing { --pr-tint: color-mix(in srgb, var(--rx-accent, #b197fc) 14%, var(--rx-card, #262626)); }
+.rx-page-pricing [id] { scroll-margin-top: 6rem; }
+
+/* ------------------------------------------------------------------ hero (P-50) */
+.rx-page-pricing .pr-hero { padding-top: calc(var(--rx-space-section) / 2 + 5.5rem); }
+.rx-page-pricing .pr-hero__h1 { margin: 0; }
+.rx-page-pricing .pr-hero__lead { margin-top: 24px; }
+.rx-page-pricing .pr-hero__lead p { max-width: 60ch; margin: 0; color: var(--rx-muted); font-size: var(--rx-fs-lead); line-height: 1.55; text-wrap: pretty; }
+.rx-page-pricing .pr-hero__lead p + p { margin-top: 16px; }
+.rx-page-pricing .pr-hero__lead .pr-hero__tag { color: var(--rx-ink); }
+.rx-page-pricing .pr-hero .rx-actions { margin-top: 32px; }
+.rx-page-pricing .pr-note { max-width: 65ch; margin: 32px 0 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
+.rx-page-pricing .pr-jump { margin-top: 16px; }
+
+/* ------------------------------------------------------------------ offers (P-53) */
+.rx-page-pricing .pr-offers { display: flex; flex-direction: column; gap: 56px; min-width: 0; }
+@media (min-width: 992px) { .rx-page-pricing .pr-offers { gap: 72px; } }
+.rx-page-pricing .pr-cat .rx-sechead { margin-bottom: 20px; }
+
+.rx-page-pricing .pr-card { gap: 16px; }
+.rx-page-pricing .pr-card__head,
+.rx-page-pricing .pr-card__body,
+.rx-page-pricing .pr-card__foot { display: flex; flex-direction: column; min-width: 0; }
+.rx-page-pricing .pr-card__head { gap: 8px; }
+.rx-page-pricing .pr-card__body { gap: 12px; }
+.rx-page-pricing .pr-card__foot { justify-content: flex-start; align-items: flex-start; gap: 4px; margin-top: auto; }
+.rx-page-pricing .pr-card__name { overflow-wrap: break-word; }
+.rx-page-pricing .pr-card__tagline { margin: 0; color: var(--rx-accent-ink, #b197fc); font-size: 0.875rem; font-weight: 500; line-height: 1.4; }
+.rx-page-pricing .pr-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem; margin: 0; color: var(--rx-ink); line-height: 1.1; }
+.rx-page-pricing .pr-price__pre { color: var(--rx-muted); font-size: 1rem; }
+.rx-page-pricing .pr-price__amt { white-space: nowrap; font-size: clamp(1.75rem, 1.5rem + 0.75vw, 2.25rem); font-weight: 500; letter-spacing: -0.02em; }
+.rx-page-pricing .pr-price--text .pr-price__amt { font-size: clamp(1.375rem, 1.25rem + 0.4vw, 1.625rem); letter-spacing: 0; }
+.rx-page-pricing .pr-card__desc { margin: 0; color: var(--rx-muted); font-size: 1rem; line-height: 1.55; }
+.rx-page-pricing .pr-card__ideal { margin: 0; }
+.rx-page-pricing .pr-card__market { margin: 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
+.rx-page-pricing .pr-card__promo { margin: 0; padding: 12px 16px; border-radius: var(--rx-radius-s); background: var(--pr-tint); color: var(--rx-ink); font-size: 0.875rem; line-height: 1.5; }
+.rx-page-pricing .pr-card__small { margin: 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.45; }
+.rx-page-pricing .pr-card--promo {
+  border-color: color-mix(in srgb, var(--rx-accent) 55%, transparent);
+  background: radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--rx-accent) 16%, transparent), transparent 60%), var(--rx-surface);
+}
+
+.rx-page-pricing .pr-card__rest { display: contents; }
+
+@media (min-width: 768px) {
+  /* one row of cards = one subgrid of three tracks: head and price line up across the row; the
+     rest (body + foot) ends with its content (C N-6: no empty band in a short card). The card's
+     frame is drawn by its three parts (the card box itself is display: contents), so a short card
+     ends right under its link while the prices of the row stay aligned. */
+  .rx-page-pricing .pr-grid { row-gap: 0; }
+  .rx-page-pricing .pr-grid > li { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+  .rx-page-pricing .pr-grid .pr-card { display: contents; }
+  .rx-page-pricing .pr-grid .pr-card > * { border: 1px solid var(--rx-line); background: var(--rx-surface); padding-inline: var(--rx-pad); }
+  .rx-page-pricing .pr-grid .pr-card__head { grid-row: 1; justify-content: flex-start; padding-top: var(--rx-pad); padding-bottom: 16px; border-bottom: 0; border-radius: var(--rx-radius) var(--rx-radius) 0 0; }
+  .rx-page-pricing .pr-grid .pr-card__price { grid-row: 2; padding-bottom: 16px; border-block: 0; }
+  .rx-page-pricing .pr-grid .pr-card__rest { grid-row: 3; align-self: start; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; padding-bottom: var(--rx-pad); border-top: 0; border-radius: 0 0 var(--rx-radius) var(--rx-radius); }
+  .rx-page-pricing .pr-grid .pr-card__foot { margin-top: 0; }
+  .rx-page-pricing .pr-grid .rx-panel--highlight > *,
+  .rx-page-pricing .pr-grid .pr-card--promo > * { border-color: color-mix(in srgb, var(--rx-accent) 55%, transparent); }
+  .rx-page-pricing .pr-grid :is(.rx-panel--highlight, .pr-card--promo) > .pr-card__head { background: radial-gradient(120% 140% at 100% 0%, color-mix(in srgb, var(--rx-accent) 16%, transparent), transparent 60%), var(--rx-surface); }
+  /* the single offer of a category: name, price and small print left, details right */
+  .rx-page-pricing .pr-card--wide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    grid-template-areas: "head body" "price body" "foot body";
+    grid-template-rows: auto auto 1fr;
+    column-gap: 48px;
+  }
+  .rx-page-pricing .pr-card--wide .pr-card__head { grid-area: head; }
+  .rx-page-pricing .pr-card--wide .pr-card__price { grid-area: price; }
+  .rx-page-pricing .pr-card--wide .pr-card__body { grid-area: body; }
+  .rx-page-pricing .pr-card--wide .pr-card__foot { grid-area: foot; }
+}
+
+/* badges (status chip pattern of work.css .rx-prod__status) */
+.rx-page-pricing .pr-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0 0 4px; }
+.rx-page-pricing .pr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--rx-ink) 6%, var(--rx-surface));
+  box-shadow: inset 0 0 0 1px var(--rx-line-strong);
+  color: var(--rx-ink);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+}
+.rx-page-pricing .pr-badge::before { content: ""; flex: none; width: 0.5em; height: 0.5em; border-radius: 50%; background: currentColor; }
+.rx-page-pricing .pr-badge--testing::before { background: #fbbf24; }
+.rx-page-pricing .pr-badge--offer { background: var(--pr-tint); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--rx-accent) 60%, transparent); }
+.rx-page-pricing .pr-badge--offer::before { background: var(--rx-accent); }
+
+/* quality promise (founder 2026-09-25) */
+.rx-page-pricing .pr-quality { gap: 8px; }
+
+/* ------------------------------------------------------------------ ticks, checklist, steps (P-51, P-52) */
+.rx-page-pricing .pr-ticks { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.rx-page-pricing .pr-ticks li { position: relative; padding-left: 30px; color: var(--rx-muted); font-size: 1rem; line-height: 1.5; }
+.rx-page-pricing .pr-ticks li::before,
+.rx-page-pricing .pr-check::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--pr-tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6 10.5l2.6 2.6L14.2 7' fill='none' stroke='%23b197fc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 100% no-repeat;
+}
+/* checklist tile: tick left of the title, text under the title */
+.rx-page-pricing .pr-check { display: grid; grid-template-columns: 28px minmax(0, 1fr); align-content: start; gap: 8px 14px; }
+.rx-page-pricing .pr-check::before { position: static; grid-row: 1; width: 28px; height: 28px; }
+.rx-page-pricing .pr-check > * { grid-column: 2; }
+.rx-page-pricing .pr-check .rx-panel__title { align-self: center; }
+.rx-page-pricing .pr-steps { margin-top: var(--rx-space-section); }
+.rx-page-pricing .pr-step__n { margin: 0; color: var(--rx-accent-ink, #b197fc); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; line-height: 1; }

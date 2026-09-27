@@ -1,0 +1,127 @@
+/* Homepage only (Sprint 9, Sprint 12): the "Eigene Produkte" strip and the services rail's SEO proof line.
+   Not linked: scripts/pages/17-products.mjs inlines this file into index.html as <style id="rx-products">
+   (last in <head>, after the Vaxel CSS), so it adds no render-blocking request.
+   Markup: scripts/pages/lib-work/products.mjs homeStrip(): rx-section + rx-sechead (assets/css/rexity.css),
+   four linked cards of equal weight (rx-hprod*). The status chips and the product cover (rx-prod-cover*)
+   share their names with /work's product tiles (assets/css/work.css). Micro labels >= 12 px, main font. */
+
+.rx-hprods { --rxh-line: rgba(255, 255, 255, 0.13); --rxh-surface: var(--rx-card, #262626); overflow: hidden; }
+html:is([data-palette="light"], [data-palette="contrast"]) .rx-hprods { --rxh-line: rgba(16, 35, 63, 0.14); }
+
+.rx-hprods__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.rx-hprods__item { min-width: 0; }
+@media (min-width: 768px) { .rx-hprods__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
+@media (min-width: 1200px) { .rx-hprods__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; } }
+
+/* one card = one link; phones: visual left (same size for all four), text right; from 768 px: visual on top */
+.rx-hprod {
+  --rx-card-accent: #3a3a3a;
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  height: 100%;
+  padding: 12px;
+  border: 1px solid var(--rxh-line);
+  border-radius: var(--rx-radius, 24px);
+  background: var(--rxh-surface);
+  color: var(--rx-ink, #fffdfd);
+  text-decoration: none;
+  transition: border-color 0.4s var(--rx-ease), transform 0.4s var(--rx-ease);
+}
+.rx-hprod:hover { border-color: color-mix(in srgb, var(--rx-ink, #fffdfd) 24%, transparent); transform: translateY(-2px); }
+.rx-hprod:focus-visible { outline: 2px solid var(--rx-focus, #b197fc); outline-offset: 3px; }
+@media (min-width: 768px) {
+  .rx-hprod { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; padding: 12px 12px 20px; }
+  .rx-hprod .rx-hprod__body { height: 100%; padding: 6px 8px 0; }
+  .rx-hprod .rx-hprod__go { margin-top: auto; padding-top: 8px; }
+}
+
+.rx-hprod__visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.24), transparent 60%),
+    linear-gradient(160deg, var(--rx-card-accent), color-mix(in srgb, var(--rx-card-accent) 62%, #000));
+}
+@media (min-width: 768px) { .rx-hprod__visual { aspect-ratio: 16 / 10; } }
+.rx-hprod__img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* the product cover (RexFangs, RexDesk; FD-7): mark + name, compact */
+.rx-prod-cover { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; color: #fff; text-align: center; }
+.rx-prod-cover__mark {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  aspect-ratio: 1;
+  border-radius: 24%;
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+}
+.rx-prod-cover__mark svg { width: 58%; height: auto; color: #fff; }
+.rx-prod-cover__mark img { display: block; width: 100%; height: auto; border-radius: 24%; }
+.rx-prod-cover--rexdesk .rx-prod-cover__mark { background: none; }
+.rx-prod-cover__name { display: none; font: 600 1.5rem / 1.05 var(--font-families--primary); letter-spacing: -0.02em; }
+@media (min-width: 768px) {
+  .rx-prod-cover__mark { width: 52px; }
+  .rx-prod-cover__name { display: block; }
+}
+.rx-hprod__visual--cover::before { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.rx-hprod__visual:has(.rx-prod-cover--rexfangs)::before {
+  background: repeating-radial-gradient(circle at 50% 42%, transparent 0 22px, rgba(255, 255, 255, 0.08) 22px 23px);
+  -webkit-mask: radial-gradient(closest-side at 50% 42%, #000 30%, transparent);
+  mask: radial-gradient(closest-side at 50% 42%, #000 30%, transparent);
+}
+.rx-hprod__visual:has(.rx-prod-cover--rexdesk)::before {
+  background: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.6px) 0 0 / 14px 14px;
+  -webkit-mask: linear-gradient(160deg, #000, transparent 75%);
+  mask: linear-gradient(160deg, #000, transparent 75%);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .rx-hprod__img, .rx-prod-cover { transition: transform 0.6s var(--rx-ease); }
+  .rx-hprod:hover .rx-hprod__img, .rx-hprod:hover .rx-prod-cover { transform: scale(1.04); }
+}
+
+.rx-hprod__body { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
+.rx-hprod__meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.rx-hprod__name { font-size: 1.125rem; font-weight: 600; line-height: 1.25; }
+.rx-hprod__line { color: var(--rx-ink, #fffdfd); font-size: 1rem; line-height: 1.45; }
+.rx-hprod__note { color: var(--rx-muted, #b0abab); font-size: 0.8125rem; line-height: 1.4; }
+.rx-hprod__go { display: inline-flex; align-items: center; gap: 0.4em; margin-top: 2px; color: var(--rx-accent-ink, #b197fc); font-size: 0.9375rem; font-weight: 500; }
+.rx-hprod__go::after { content: "→"; content: "→" / ""; transition: transform 0.4s var(--rx-ease); }
+.rx-hprod:hover .rx-hprod__go::after { transform: translateX(3px); }
+
+/* status chips (same look as /work#produkte) */
+.rx-hprods .rx-prod__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  color: var(--rx-ink, #fffdfd);
+  font: 600 0.75rem / 1.3 var(--font-families--primary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.rx-hprods .rx-prod__status::before { content: ""; width: 0.55em; height: 0.55em; border-radius: 50%; background: currentColor; }
+.rx-hprods .rx-prod__status--live::before { background: #34d399; }
+.rx-hprods .rx-prod__status--demo::before { background: #60a5fa; }
+.rx-hprods .rx-prod__status--testing::before { background: #fbbf24; }
+
+.rx-hprods__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; margin-top: 24px; }
+.rx-hprods__note { flex: 1 1 28rem; max-width: 46rem; margin: 0; color: var(--rx-muted, #b0abab); font-size: 0.8125rem; line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-hprod, .rx-hprod__img, .rx-prod-cover { transition: none; }
+  .rx-hprod:hover { transform: none; }
+}
+/* desktop rail: keep the glass panel about as tall as before (a compact line, devices lifted a little) */
+@media (min-width: 992px) {
+  .rx-svc-stage--mkt .rx-svc-set { top: max(3%, 20px); }
+}

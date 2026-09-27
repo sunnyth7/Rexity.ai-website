@@ -1,0 +1,99 @@
+/* /website-mit-kursbuchung-kosten page CSS (scripts/pages/42-article.mjs, Sprint 12 WP-4).
+   Page-scoped: inlined into <head> as <style id="rx-article"> (comments stripped), like rx-pricing,
+   so the article gets no extra render-blocking request. The page is built from the shared rx-*
+   layer (rexity.css §10); this file adds the reading layout:
+   .ar-col       reading column, max 720 px, centred at ≥ 768 px (B-19, P-57)
+   .ar-block     one H2 section of the article; .ar-h2 32 px, body 18/1.7 with 20 px paragraph spacing
+   .ar-case      "Drei typische Fälle" card: image on top, text below on the panel (A-5, B-6)
+   .ar-feature   the Body & Care example as one wide panel under the grid
+   .ar-steps     numbered steps
+   The inline <style> sits before the Vaxel and rexity stylesheets, so every rule is scoped under
+   main.rx-page-article (+1 class) to win over the one-class component rules it adjusts. */
+
+.rx-page-article .ar-col { max-width: 720px; margin-inline: auto; }
+.rx-page-article .ar-block + .ar-block { margin-top: 64px; }
+@media (min-width: 992px) { .rx-page-article .ar-block + .ar-block { margin-top: 88px; } }
+.rx-page-article .ar-head { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+.rx-page-article .ar-h2 { margin: 0; color: var(--rx-ink); font: 500 clamp(1.625rem, 1.4rem + 0.6vw, 2rem)/1.2 var(--font-families--primary); letter-spacing: -0.015em; }
+.rx-page-article .ar-body p,
+.rx-page-article .ar-step p {
+  margin: 0;
+  color: color-mix(in srgb, var(--rx-ink) 80%, transparent);
+  font-size: 1rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+@media (min-width: 768px) {
+  .rx-page-article .ar-body p,
+  .rx-page-article .ar-step p { font-size: 1.125rem; line-height: 1.7; }
+}
+.rx-page-article .ar-body p + p { margin-top: 20px; }
+.rx-page-article .ar-lead { margin: 0; color: var(--rx-ink); font-size: var(--rx-fs-lead); line-height: 1.55; text-wrap: pretty; }
+.rx-page-article .ar-intro .rx-actions { margin-top: 28px; }
+
+/* factor and "passt, wenn" panels inside the column */
+.rx-page-article .ar-grid { margin-top: 28px; }
+.rx-page-article .ar-item { gap: 10px; }
+.rx-page-article .ar-item .rx-panel__title { font-size: 1.125rem; font-weight: 600; line-height: 1.35; }
+@media (min-width: 768px) { .rx-page-article .ar-item .rx-panel__title { font-size: 1.25rem; } }
+
+/* ------------------------------------------------------------------ Drei typische Fälle (P-56) */
+.rx-page-article .ar-case,
+.rx-page-article .ar-feature { gap: 0; padding: 0; overflow: hidden; }
+.rx-page-article .ar-media { border: 0; border-radius: 0; border-bottom: 1px solid var(--rx-line); }
+.rx-page-article .ar-case__text,
+.rx-page-article .ar-feature__text { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 12px; padding: var(--rx-pad); }
+.rx-page-article .ar-case__price { margin: 0; color: var(--rx-ink); font-size: 1.5rem; font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+.rx-page-article .ar-case .rx-panel__foot { margin-top: auto; }
+.rx-page-article .ar-feature .rx-panel__foot { margin-top: 4px; }
+.rx-page-article .ar-cases__more { margin-top: 24px; }
+.rx-page-article .ar-feature { margin-top: 32px; }
+
+/* 768–1099: stacked horizontal panels, image 40 % left */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .rx-page-article .rx-grid.ar-cases { grid-template-columns: minmax(0, 1fr); }
+}
+@media (min-width: 768px) {
+  .rx-page-article .ar-feature { flex-direction: row; }
+  /* the screenshot stays whole (16:10) on a calm stage, never cropped to the panel height */
+  .rx-page-article .ar-feature .ar-media { flex: 0 0 48%; justify-content: center; border-bottom: 0; border-right: 1px solid var(--rx-line); background: #161616; }
+  .rx-page-article .ar-feature__text { justify-content: center; padding: 40px; }
+}
+@media (min-width: 768px) and (max-width: 1099px) {
+  .rx-page-article .ar-case { flex-direction: row; }
+  .rx-page-article .ar-case .ar-media { flex: 0 0 40%; justify-content: center; border-bottom: 0; border-right: 1px solid var(--rx-line); background: #161616; }
+  .rx-page-article .ar-case .ar-media--photo .rx-media__frame { flex: 1; aspect-ratio: auto; }
+}
+
+/* ------------------------------------------------------------------ steps */
+.rx-page-article .ar-steps { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.rx-page-article .ar-step { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-top: 1px solid var(--rx-line); }
+.rx-page-article .ar-step:last-child { border-bottom: 1px solid var(--rx-line); }
+.rx-page-article .ar-step__n {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--rx-line-strong);
+  border-radius: 50%;
+  color: var(--rx-accent-ink, #b197fc);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.rx-page-article .ar-step__title { margin: 4px 0 8px; color: var(--rx-ink); font: 500 clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem)/1.3 var(--font-families--primary); }
+
+/* Sprint 12b (verify-a N-12): the hero photo needs a darker scrim under the centred H1/standfirst */
+.rx-page-article .section.hero .dark-layer.high-dark { background-color: rgba(0, 0, 0, 0.72); }
+.rx-page-article .section.hero h1,
+.rx-page-article .section.hero .section-header-paragraph-box p { text-shadow: 0 1px 18px rgba(0, 0, 0, 0.6); }
+
+/* Sprint 12b (verify-b N-9): in the 768–1099 row layout the screenshot card fills its media column too
+   (cover from the top), so it no longer sits in dark bands next to the photo cards that fill theirs */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .rx-page-article .ar-case .ar-media:not(.ar-media--photo) .rx-media__frame { flex: 1; aspect-ratio: auto; padding: 0; }
+  .rx-page-article .ar-case .ar-media:not(.ar-media--photo) .rx-media__frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+}
+
+/* founder review 27.09.2026: the full-screen, 72 %-darkened hero read as an empty page; same height as the /artikel heroes */
+.rx-page-article:not(.rx-page-artikel) .section.hero { height: min(74svh, 720px); min-height: 440px; }
+@media (max-width: 767px) { .rx-page-article:not(.rx-page-artikel) .section.hero { height: min(66svh, 580px); min-height: 400px; } }

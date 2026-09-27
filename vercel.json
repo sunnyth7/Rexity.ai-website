@@ -22,6 +22,11 @@
       "source": "/LevelKraft-TELC Prep AI/Privacypolicy",
       "destination": "/levelkraft-telc-prep-ai/privacypolicy",
       "permanent": true
+    },
+    {
+      "source": "/web/web-development",
+      "destination": "/web/web-design",
+      "permanent": true
     }
   ],
   "headers": [
@@ -89,5 +94,8 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/chat.js": { "maxDuration": 60 }
+  }
 }

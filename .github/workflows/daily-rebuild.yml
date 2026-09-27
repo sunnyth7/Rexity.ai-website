@@ -1,0 +1,81 @@
+# Daily rebuild for scheduled articles (Sprint 13-B) — TEMPLATE, DISABLED.
+#
+# Why: articles appear one per day from the site's release (src/articles/*.md "publishDay",
+# scripts/articles.config.json "launchDate"). An article is published by the first build on or after
+# launchDate + publishDay (Europe/Berlin): it then shows on /artikel, in sitemap.xml, in
+# /artikel/feed.xml and on /services. Without a rebuild nothing changes, so the site needs one build
+# per day, early in the morning.
+#
+# Status: only a manual trigger (workflow_dispatch) is active and the job does not deploy. At go-live:
+#   1. set "launchDate" in scripts/articles.config.json (the release day, "YYYY-MM-DD");
+#   2. uncomment the "schedule" block below;
+#   3. make the production reference available to the build (it reads Rexity.ai-website@main through
+#      _reference/rexity-main or REXITY_REF, see scripts/lib/paths.mjs) — the checkout step is sketched;
+#   4. add the deploy step at the end (Vercel deploy hook or `vercel deploy --prod`). No secrets are
+#      stored here; add them as repository secrets at go-live.
+#
+# 06:00 Europe/Berlin is 04:00 UTC in summer (CEST) and 05:00 UTC in winter (CET). GitHub cron runs in
+# UTC, so the schedule fires at both hours and the first step skips the run that is not 06:xx in Berlin.
+
+name: Daily rebuild (articles)
+
+on:
+  workflow_dispatch: {}
+  # schedule:
+  #   - cron: "0 4 * * *"
+  #   - cron: "0 5 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only at 06:xx Europe/Berlin (cron fires at 04:00 and 05:00 UTC)
+        id: gate
+        run: |
+          hour=$(TZ=Europe/Berlin date +%H)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$hour" != "06" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.run == 'true'
+
+      # TODO at go-live: production reference for the parity-preserving generators
+      # - uses: actions/checkout@v4
+      #   if: steps.gate.outputs.run == 'true'
+      #   with:
+      #     repository: sunnyth7/Rexity.ai-website
+      #     ref: main
+      #     path: _reference/rexity-main
+
+      - uses: actions/setup-node@v4
+        if: steps.gate.outputs.run == 'true'
+        with:
+          node-version: "20"
+
+      - name: Build (publishes the articles that are due today)
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          npm run build
+          npm run check
+
+      - name: Commit the rebuilt pages
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          git config user.name "rexity-bot"
+          git config user.email "rexity-bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && echo "nothing to publish today" && exit 0
+          git commit -m "Daily rebuild: publish scheduled articles ($(TZ=Europe/Berlin date +%F))"
+          # git push   # enable at go-live together with the deploy step
+
+      # TODO at go-live: deploy step (not part of this template; no secrets here)
+      # - name: Deploy
+      #   run: curl -fsS -X POST "$VERCEL_DEPLOY_HOOK"
+      #   env:
+      #     VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}

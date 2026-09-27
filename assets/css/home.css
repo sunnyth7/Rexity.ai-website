@@ -1,0 +1,367 @@
+/* ==========================================================================
+   Homepage layer (Sprint 12 WP-1) — assets/css/home.css
+   Inlined into index.html as <style id="rx-home"> by scripts/pages/16-devices.mjs
+   (markers <!-- rx-home-css --> … <!-- /rx-home-css -->), so it adds no request.
+   Built on the rx-* component layer (docs/DESIGN_SYSTEM.md) and the device frames
+   (assets/css/devices.css). Every class here is homepage-only: rx-h* / rx-studio.
+   Rules: text never sits on a screenshot; nothing interactive enters the Kontakt
+   pill's bottom-right safe zone on full-viewport stages; without JS and with
+   prefers-reduced-motion every block is static and fully visible.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ reveal */
+/* html.rx-rv is set by a tiny head script only when JS runs and motion is allowed. */
+.rx-rv [data-rx-reveal]{opacity:0;transform:translate3d(0,24px,0);transition:opacity .6s var(--rx-ease),transform .6s var(--rx-ease);transition-delay:var(--rx-rv-delay,0ms)}
+.rx-rv [data-rx-reveal].is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rx-rv [data-rx-reveal]{opacity:1;transform:none;transition:none}}
+
+/* ------------------------------------------------ deferred media (14-G) */
+/* The about collage's photos and video load on the first scroll (home.js §6), not with the first screen.
+   Without JS (no html.w-mod-js) the placeholders hide and the <noscript> copies render instead. */
+html:not(.w-mod-js) img[data-rx-src],html:not(.w-mod-js) video[data-rx-defer]{display:none}
+.w-background-video>noscript>video{object-fit:cover;z-index:-100;background-position:50%;background-size:cover;width:100%;height:100%;margin:auto;position:absolute;inset:-100%}
+
+/* shared: section header with an action on the H2 baseline (≥ 768), under the intro below */
+.rx-hhead{display:flex;flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:var(--rx-space-head)}
+.rx-hhead>.rx-sechead{margin-bottom:0}
+@media (min-width:768px){.rx-hhead{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:32px}.rx-hhead>.rx-btn{flex:none;margin-bottom:4px}}
+
+/* ------------------------------------------------------------------- hero */
+/* P-23: CTAs under the sub-line; kept clear of the Kontakt pill; H1 ≥ 40 px on phones */
+/* the 3D ring's projected tiles must not reach (and swallow clicks on) the sections below */
+.section.home-hero{overflow:clip}
+.rx-hero-actions{justify-content:center;margin-top:20px}
+.rx-hero-actions .rx-btn{font-size:1rem}
+.home-hero .absolute-p{bottom:max(5.5%,calc(var(--rx-pill-safe-b) + 8px))}
+@media (max-width:767px){.home-hero .absolute-p{width:calc(100% - 32px);bottom:calc(var(--rx-pill-safe-b) + 4px)}.home-hero .absolute-p p{font-size:.9375rem;line-height:1.5}.rx-hero-actions{flex-wrap:nowrap;gap:8px;margin-top:14px}.rx-hero-actions .rx-btn{padding-inline:14px;font-size:.9375rem;white-space:nowrap}.rx-hero-actions .rx-btn--primary{gap:10px;padding-left:6px}}
+/* phones: a 42 px H1 (both lines), the ring nudged up so the sub-line and the buttons sit below the front tile */
+@media (max-width:479px){.home-hero .absolute-heading-block{top:17.5%;font-size:2.625rem;letter-spacing:-1.5px;line-height:1.08}.home-hero .absolute-heading-block h1{font-size:inherit;line-height:inherit;letter-spacing:inherit}.home-hero .home-main-section-wrap{padding-top:0;padding-bottom:4.5rem;transform:scale(1.12)}.home-hero .absolute-p{bottom:calc(var(--rx-pill-safe-b) - 12px)}
+  /* the ring turned 5deg (tiles are 15deg apart): one front tile fully in view instead of two tiles bleeding off both edges
+     (verify-a N-14; measured at 390 and 360); `rotate` composes with the template's inline transforms, around the ring's own axis.
+     The ring keeps turning (a tile passes every ~4.5 s), so no angle "centres" a tile for good (checked 27.09.) */
+  .home-hero .home-header-group{rotate:5deg}}
+
+/* short landscape screens (≥ 992 wide, ≤ 820 tall, e.g. 1024×768, 1180×820): the ring is scaled down and lifted so its
+   front tiles end above the sub-line and the buttons (verify-b N-1); individual `translate`/`scale` so the template's inline transform stays */
+@media (min-width:992px) and (max-height:820px){.home-hero .home-main-section-wrap{translate:0 -8vh;scale:.85}}
+
+/* hero sub-line + buttons: the template's IX fades `.paragraph-first-line` in 2–3 s after the loader (verify-c N-5); an
+   animation outranks the inline opacity/transform the IX sets, so the copy is readable ~1.2 s after load; the IX's own
+   end state (opacity 1, no transform) matches */
+.home-hero .paragraph-first-line{animation:rx-hero-sub .5s .7s var(--rx-ease,ease) both}
+@keyframes rx-hero-sub{from{opacity:0;transform:translate3d(0,1.5rem,0)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.home-hero .paragraph-first-line{animation-duration:.01s;animation-delay:0s}}
+
+/* hero copy (founder review 27.09.): larger, closer to the ring, revealed in step with the ring's intro. The wrapper keeps
+   an instant reveal (it has to beat the IX's inline opacity); the sub-line and then the buttons rise and sharpen in */
+.home-hero .paragraph-first-line{animation-duration:.01s;animation-delay:0s}
+.home-hero .absolute-p p{font-size:clamp(1.125rem,1rem + .45vw,1.375rem);line-height:1.4;font-weight:500;letter-spacing:-.01em;text-wrap:balance;animation:rx-hero-rise .9s .55s cubic-bezier(.2,.7,.2,1) both}
+.rx-hero-actions{margin-top:24px;gap:12px;animation:rx-hero-rise .9s .75s cubic-bezier(.2,.7,.2,1) both}
+.rx-hero-actions .rx-btn{min-height:54px;padding-inline:22px;font-size:1.0625rem}
+@keyframes rx-hero-rise{from{opacity:0;transform:translate3d(0,18px,0);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+/* phones: the copy is anchored under the ring (front tile ends at ~55 % of the hero on 667–932 px tall screens) instead of
+   the bottom edge, which left a ~200 px empty band between the tiles and the sub-line; the whole group (H1, ring, copy)
+   moves down 4vh on phones ≥ 760 px tall so the free space above and below is about even (shorter phones have no room) */
+@media (prefers-reduced-motion:reduce){.home-hero .absolute-p p,.rx-hero-actions{animation:none}}
+
+/* ---- phones, founder review 27.09. (three boxes): 1 a full-width landscape showcase card that crossfades through six
+   project renders (the 3D ring's tiles were cut at the screen edges; the ring stays from 768 px), 2 the sentence right
+   under it, 3 the two buttons filling the bottom band above the Kontakt pill. Positions follow the H1 via custom properties */
+@media (max-width:767px){
+  .home-hero{--hh-top:17.5%;--hh-h:118px;--hshow-h:calc((100vw - 32px) / 1.6)}
+  .home-hero .absolute-heading-block{top:var(--hh-top)}
+  /* founder, 27.09. evening: the full ring animation (swirl-in + turning ring) stays on phones; the band it uses is reserved
+     via --hshow-h so the copy sits under it */
+  .home-hero .absolute-p{top:calc(var(--hh-top) + var(--hh-h) + var(--hshow-h) + 20px);bottom:calc(var(--rx-pill-safe-b) + 8px);width:calc(100% - 32px)}
+  .home-hero .absolute-p .paragraph-first-line{height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+  .home-hero .absolute-p p{font-size:1.5rem;line-height:1.3;font-weight:600;letter-spacing:-.015em}
+  .rx-hero-actions{margin-top:0;gap:10px;flex-wrap:nowrap}
+  .rx-hero-actions .rx-btn{flex:1 1 0;justify-content:center;min-height:56px;padding-inline:12px;font-size:1rem}
+}
+@media (max-width:767px) and (max-height:700px){.home-hero{--hh-top:12%;--hh-h:102px}.home-hero .absolute-heading-block{font-size:2.375rem}.home-hero .absolute-p p{font-size:1.25rem}}
+@media (max-width:767px) and (min-height:760px){.home-hero{--hh-top:calc(15% + 2vh)}}
+
+
+
+/* ---- hero background, founder review 27.09.: "lively and colourful instead of grey". A slow aurora of the brand violet
+   with pink, amber and teal over near-black; the eclipse image stays as a soft luminosity layer on top of it */
+.section.home-hero{background:#0c0914}
+.section.home-hero::before{content:"";position:absolute;inset:-20%;z-index:0;pointer-events:none;background:radial-gradient(38% 34% at 22% 28%,rgba(124,58,237,.78),transparent 70%),radial-gradient(34% 30% at 82% 22%,rgba(236,72,153,.55),transparent 70%),radial-gradient(40% 36% at 64% 88%,rgba(249,115,22,.45),transparent 70%),radial-gradient(32% 30% at 12% 86%,rgba(20,184,166,.42),transparent 70%);filter:blur(24px);animation:rx-aurora 22s ease-in-out infinite alternate}
+.home-hero .hero-bg-image{mix-blend-mode:luminosity;opacity:.38}
+@keyframes rx-aurora{from{transform:translate3d(-3%,-2%,0) rotate(0) scale(1)}to{transform:translate3d(3%,2%,0) rotate(8deg) scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.section.home-hero::before{animation:none}}
+
+/* ----------------------------------------------------------------- about */
+/* the template's scrubbed collage is back (founder, 2026-09-27: "same design as before — the panels reveal while scrolling");
+   the first collage heading is the section's H2 */
+h2.about-center-text{margin:0}
+
+/* ----------------------------------------------------------------- story */
+/* P-24: no glass cards over the code photo; the photo sits beside the text; stats number first */
+.rx-hstory__top{display:grid;gap:32px;align-items:center}
+.rx-hstory__top .rx-sechead{margin-bottom:24px}
+.rx-hstory__media{margin:0;overflow:hidden;aspect-ratio:16/10;border:1px solid var(--rx-line);border-radius:var(--rx-radius);background:#161616}
+.rx-hstory__media img{display:block;width:100%;height:100%;object-fit:cover}
+@media (min-width:992px){.rx-hstory__top{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:64px}}
+.rx-stats{margin-top:var(--rx-space-head)}
+.rx-stats>.rx-stat{display:grid;grid-template-columns:minmax(7.5rem,auto) minmax(0,1fr);align-items:center;gap:6px 20px;text-align:left}
+.rx-stat__num{color:var(--rx-ink);font:500 2.25rem/1 var(--font-families--primary);letter-spacing:-.03em;white-space:nowrap}
+.rx-stat__label{color:var(--rx-muted);font-size:1rem;line-height:1.4}
+@media (min-width:768px){.rx-stats>.rx-stat{grid-template-columns:minmax(0,1fr);align-content:start;padding:24px 28px}.rx-stat__num{font-size:2.5rem}}
+@media (min-width:992px){.rx-stat__num{font-size:3rem}}
+@media (min-width:768px){.rx-stats.rx-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}.rx-stats.rx-grid--3>:last-child{grid-column:auto}}
+
+/* -------------------------------------------------------------- problems */
+/* 13-A "Kommt Ihnen das bekannt vor?": four groups (static chip label + stacked symptom cards), two group columns
+   from 768; each card has two separate links (service page, prefilled e-mail), both ≥ 44 px; closing line + buttons */
+.rx-hprob-grid>li>*{flex:none}
+.rx-hprob-group{gap:12px}
+.rx-hprob-group__label{margin:0}
+.rx-hprob-group__list{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.rx-hprob{gap:6px;padding:18px 20px 6px}
+.rx-hprob .rx-panel__title{font-size:1.125rem;font-weight:600;line-height:1.3}
+.rx-hprob .rx-panel__text{font-size:.9375rem;line-height:1.5}
+.rx-hprob__foot{display:flex;flex-wrap:wrap;align-items:center;gap:0 24px}
+.rx-hprob__foot .rx-link{font-size:.9375rem}
+.rx-hprob__mail{display:inline-flex;align-items:center;min-height:44px;color:var(--rx-muted);font:500 .9375rem/1.35 var(--font-families--primary);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--rx-muted) 45%,transparent);text-underline-offset:.2em;transition:color .3s var(--rx-ease)}
+.rx-hprob__mail:hover{color:var(--rx-ink);text-decoration-color:currentColor}
+.rx-hprob-close{display:flex;flex-direction:column;align-items:flex-start;gap:20px;margin-top:var(--rx-space-head);padding-top:var(--rx-space-head);border-top:1px solid var(--rx-line)}
+.rx-hprob-close__text{margin:0;max-width:60ch;color:var(--rx-muted);font-size:var(--rx-fs-lead);line-height:1.55}
+.rx-hprob-close__text strong{color:var(--rx-ink);font-weight:500}
+@media (max-width:767px){.rx-hprob-close .rx-actions{width:100%}.rx-hprob-close .rx-btn{width:100%}}
+/* phones: the group label is a toggle (home.js 5); chevron turns when the group is open */
+.rx-hprob-group__toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.rx-hprob-group__toggle::after{content:"";flex:none;width:9px;height:9px;margin-right:6px;border-right:2px solid var(--rx-muted);border-bottom:2px solid var(--rx-muted);transform:translateY(-2px) rotate(45deg);transition:transform .3s var(--rx-ease)}
+.rx-hprob-group__toggle[aria-expanded="true"]::after{transform:translateY(2px) rotate(-135deg)}
+.rx-hprob-group__toggle:focus-visible{outline:2px solid var(--rx-accent-ink,#b197fc);outline-offset:4px;border-radius:12px}
+.rx-hprob-group.is-folded{gap:0}.rx-hprob-group__list[hidden]{display:none}
+@media (max-width:767px){.rx-hprob-grid{row-gap:4px}.rx-hprob-group{padding-bottom:8px;border-bottom:1px solid var(--rx-line)}}
+@media (min-width:768px){.rx-hprob{padding:22px 24px 8px}.rx-hprob .rx-panel__title{font-size:1.25rem}.rx-hprob-grid{row-gap:32px}}
+@media (min-width:992px){.rx-hprob-close{flex-direction:row;align-items:center;justify-content:space-between;gap:48px}.rx-hprob-close .rx-actions{flex:none}}
+
+/* -------------------------------------------------------------- services */
+/* P-20: all four services as panels (2×2 from 768); visual, title, text, sub-service chips, "Mehr dazu" */
+.rx-hsvc-grid{align-items:stretch}
+.rx-hsvc{gap:18px}
+.rx-hsvc .rx-panel__title{font-size:var(--rx-fs-card);font-weight:600;line-height:1.3}
+.rx-hsvc .rx-panel__text a{padding-block:4px;color:var(--rx-ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--rx-ink) 45%,transparent);text-underline-offset:.2em}
+.rx-hsvc .rx-panel__text a:hover{color:var(--rx-accent-ink,#b197fc)}
+.rx-hsvc .rx-chips{margin-top:2px}
+.rx-hsvc .rx-panel__foot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding-top:4px}
+.rx-hsvc__proof{margin-top:-6px}
+.rx-hsvc__proof .rx-link{font-size:.9375rem;line-height:1.35}
+@media (max-width:767px){.rx-hsvc{gap:14px}.rx-hsvc .rx-chips{gap:6px}.rx-hsvc .rx-chip{padding:9px 13px}.rx-hsvc__proof{margin-top:-4px}}
+
+/* the visual: a calm stage on the service accent, 16:10, radius 16 */
+.rx-hsvc__stage{--rx-stage:#7c3aed;position:relative;margin:0;overflow:hidden;aspect-ratio:16/10;border-radius:16px;container-type:size;background:radial-gradient(85% 70% at 10% 0%,color-mix(in srgb,var(--rx-stage) 58%,transparent),transparent 66%),radial-gradient(70% 60% at 100% 100%,color-mix(in srgb,var(--rx-stage) 30%,transparent),transparent 72%),linear-gradient(165deg,#161c2b,#0a0d15)}
+.rx-hsvc__stage--web{--rx-stage:#1d64cd}.rx-hsvc__stage--auto{--rx-stage:#11806a}.rx-hsvc__stage--mkt{--rx-stage:#b0476a}.rx-hsvc__stage--test{--rx-stage:#7c3aed}
+/* chat thread and Release-Check list need height, not width: 4:5 in the two-column grid, square on phones (verify-a N-1, verify-b N-4) */
+@media (max-width:991px){.rx-hsvc__stage--auto,.rx-hsvc__stage--test{aspect-ratio:4/5}}
+@media (max-width:767px){.rx-hsvc__stage--auto,.rx-hsvc__stage--test{aspect-ratio:1/1;max-height:420px}}
+/* web: laptop + phone (Body & Care), nothing cropped */
+.rx-hsvc__stage .rx-device{position:absolute;font-size:12px}
+.rx-hsvc__laptop{left:19%;top:9%;width:74%}
+.rx-hsvc__phone{left:6%;bottom:6%;width:19%;z-index:2}
+/* automation: WhatsApp thread (legible, never one word per line) + the flow list */
+.rx-hsvc__chat{position:absolute;left:4%;top:7%;bottom:7%;width:54%;overflow:hidden;border-radius:14px;box-shadow:0 18px 40px -18px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.1)}
+.rx-hsvc__chat .rx-chat{font-size:14px;line-height:1.35}
+.rx-hsvc__chat .rx-chat__head{padding:10px 12px}
+.rx-hsvc__chat .rx-chat__thread{padding:10px 10px 12px;gap:6px;-webkit-mask:linear-gradient(transparent,#000 28px);mask:linear-gradient(transparent,#000 28px)}
+.rx-hsvc__chat .rx-chat__msg{min-width:60%;max-width:88%;padding:6px 10px 6px}
+.rx-hsvc__chat .rx-chat__time{font-size:11px}
+@container (max-width:419px){.rx-hsvc__chat{left:4%;width:92%}.rx-hsvc .rx-hflow{display:none}}
+/* small UI cards on the stages (flow list, release check, chart): solid, legible */
+.rx-hflow,.rx-hcheck,.rx-hchart{position:absolute;box-sizing:border-box;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(12,15,24,.9);box-shadow:0 18px 40px -18px rgba(0,0,0,.7);color:#fffdfd;font:500 14px/1.35 var(--font-families--primary,system-ui,sans-serif);text-align:left}
+.rx-hflow__head,.rx-hcheck__head,.rx-hchart__head{margin:0 0 10px;color:#b0abab;font:600 12px/1.3 var(--font-families--primary,system-ui,sans-serif);letter-spacing:.04em}
+.rx-hflow__list,.rx-hcheck__list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.rx-hflow{right:4%;top:50%;width:37%;padding:12px 12px 14px;transform:translateY(-50%)}
+.rx-hflow__list{gap:0}
+.rx-hflow__item{position:relative;display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;line-height:1.3}
+.rx-hflow__item::before{content:"";flex:none;width:8px;height:8px;margin-top:4px;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 3px rgba(47,191,113,.18)}
+.rx-hflow__item+.rx-hflow__item::after{content:"";position:absolute;left:3.5px;top:-6px;height:12px;border-left:1px dashed rgba(255,255,255,.3)}
+/* testing: the release check as a UI card */
+.rx-hcheck{left:50%;top:50%;width:min(76%,340px);padding:14px 16px 16px;transform:translate(-50%,-50%)}
+.rx-hcheck__head{display:flex;align-items:center;gap:8px}
+.rx-hcheck__head::before{content:"";width:8px;height:8px;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 3px rgba(47,191,113,.2)}
+.rx-hcheck__item{display:flex;align-items:center;gap:10px}
+.rx-hcheck__box{position:relative;flex:none;width:18px;height:18px;border-radius:50%;background:#2fbf71}
+.rx-hcheck__box::after{content:"";position:absolute;left:6px;top:3px;width:5px;height:9px;border:solid #0a0d15;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.rx-hsvc__stage.is-live .rx-hcheck__item,.rx-hsvc__stage.is-live .rx-hflow__item{animation:rx-hrow 7.5s calc(var(--i) * .9s + .4s) infinite backwards}
+.rx-hsvc__stage.is-live .rx-hcheck__box{animation:rx-hbox 7.5s calc(var(--i) * .9s + .4s) infinite backwards}
+@keyframes rx-hrow{0%{opacity:.4}6%,88%{opacity:1}100%{opacity:.4}}
+@keyframes rx-hbox{0%{background:rgba(255,255,255,.16);transform:scale(.8)}6%{background:#2fbf71;transform:scale(1.12)}9%,88%{background:#2fbf71;transform:none}100%{background:rgba(255,255,255,.16);transform:scale(.8)}}
+/* marketing: LevelKraft monthly page views (real values, src/data/levelkraft-seo.json) */
+.rx-hchart{inset:7% 6%;display:flex;flex-direction:column;padding:12px 14px 10px}
+.rx-hchart__head{margin-bottom:4px;text-align:left}
+.rx-hchart__bars{display:grid;flex:1;grid-template-columns:repeat(var(--n,7),minmax(0,1fr));align-items:end;gap:6px;min-height:0;margin:0;padding:0;list-style:none}
+.rx-hchart__col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.rx-hchart__val{margin-bottom:4px;color:#fffdfd;font-size:12px;font-weight:600;line-height:1;white-space:nowrap}
+.rx-hchart__col:not(.is-mark) .rx-hchart__val{color:#b0abab;font-weight:500}
+.rx-hchart__bar{width:100%;max-width:34px;height:var(--h);min-height:3px;border-radius:5px 5px 2px 2px;background:rgba(255,255,255,.2);transform-origin:bottom;transition:transform .9s var(--rx-ease) calc(var(--i) * 70ms)}
+.rx-hchart__col.is-mark .rx-hchart__bar{background:linear-gradient(180deg,#e58aa8,#b0476a)}
+.rx-hchart__mon{margin-top:6px;color:#b0abab;font-size:12px;line-height:1;white-space:nowrap}
+.rx-hchart__note{margin:6px 0 0;color:#b0abab;font-size:12px;line-height:1.3}
+.rx-rv .rx-hsvc__stage--mkt:not(.is-drawn) .rx-hchart__bar{transform:scaleY(.04)}
+@container (max-width:340px){.rx-hchart{inset:5% 4%;padding:10px 10px 8px}.rx-hchart__bars{gap:4px}.rx-hchart__val{font-size:11px}}
+@media (prefers-reduced-motion:reduce){.rx-hsvc__stage .rx-hcheck__item,.rx-hsvc__stage .rx-hcheck__box,.rx-hsvc__stage .rx-hflow__item{animation:none!important}.rx-hchart__bar{transition:none;transform:none!important}}
+
+/* ------------------------------------------------------------------ work */
+/* P-21: three projects. < 768: phone capture whole + caption below; 768–991: text then laptop + phone;
+   ≥ 992 (JS, motion allowed): pinned 100vh, text column left, device right, stepped swap.
+   Markup: .rx-hwork__grid > .rx-hwork__col (tag, count, .rx-hwork__texts > .rx-hwork__t ×3) + .rx-hwork__devices (.rx-hwork__d ×3).
+   Stacked, those wrappers are display:contents and each project's text and device take their own grid row. */
+/* the text column keeps the standard container's left edge (x = 160 at 1440, 400 at 1920) like every other
+   section; only the device column may run past the container's right edge into the outer margin (≤ 10rem) */
+.rx-hwork__tag{display:inline-flex;grid-row:1;justify-self:start;align-items:center;gap:8px;margin:0 0 var(--rx-space-head);color:var(--rx-muted);font:500 .875rem/1.3 var(--font-families--primary)}
+.rx-hwork__tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--rx-accent)}
+.rx-hwork__count{display:none}
+.rx-hwork__grid{display:grid;grid-template-columns:minmax(0,1fr)}
+.rx-hwork__col,.rx-hwork__texts,.rx-hwork__devices{display:contents}
+.rx-hwork__t{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-width:0}
+.rx-hwork__eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0;color:var(--rx-muted);font:500 .875rem/1.35 var(--font-families--primary)}
+.rx-hwork__title{margin:0;color:var(--rx-ink);font:500 var(--rx-fs-h3)/1.2 var(--font-families--primary);letter-spacing:-.02em}
+.rx-hwork__detail{margin:0;max-width:44ch;color:var(--rx-muted);font-size:1.0625rem;line-height:1.55}
+.rx-hwork__t .rx-actions{margin-top:8px;column-gap:20px}
+.rx-hwork__t .rx-link{font-size:1rem}
+.rx-hwork__all-inline{display:none}
+.rx-hwork__d{min-width:0;margin:28px 0 72px}
+.rx-hwork__d:nth-child(3){margin-bottom:0}
+/* laptop + phone: the phone sits beside the laptop's screen, not over it (verify-c N-13: it covered the left 50 px) */
+@media (min-width:768px){.rx-hwork .rx-stack--left{padding-left:11%}.rx-hwork .rx-stack--left>.rx-device--phone{width:20%}}
+.rx-hwork__more{margin-top:var(--rx-space-head)}
+/* phone captures start below the dynamic-island notch (a black status bar), so the notch never covers a header;
+   the LevelKraft app screens fade out, then the next fades in — never two screens visible at once (verify-a N-6) */
+.rx-hwork .rx-device--phone .rx-device__screen{box-sizing:border-box;padding-top:11.5cqw}
+.rx-hwork .rx-device--phone .rx-device__screen[data-rx-cycle]>.rx-slide{top:11.5cqw}
+.rx-hwork [data-rx-cycle="fade"].is-live>.rx-slide.is-leaving{transition:opacity .35s var(--rx-ease),visibility 0s}
+.rx-hwork [data-rx-cycle="fade"].is-live>.rx-slide.is-active{transition:opacity .35s var(--rx-ease) .35s,visibility 0s}
+/* caption on the ground under the device (never on the capture); on phones the eyebrow says the same, so it is kept for screen readers only */
+.rx-hwork__cap{margin-top:18px;color:var(--rx-muted);font:500 .875rem/1.4 var(--font-families--primary);text-align:center}
+@media (max-width:767px){.rx-hwork__cap{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
+.rx-hwork__t:nth-child(1){grid-row:2}.rx-hwork__d:nth-child(1){grid-row:3}
+.rx-hwork__t:nth-child(2){grid-row:4}.rx-hwork__d:nth-child(2){grid-row:5}
+.rx-hwork__t:nth-child(3){grid-row:6}.rx-hwork__d:nth-child(3){grid-row:7}
+@media (max-width:767px){
+  .rx-hwork__d:nth-child(1){grid-row:2}.rx-hwork__t:nth-child(1){grid-row:3}
+  .rx-hwork__d:nth-child(2){grid-row:4}.rx-hwork__t:nth-child(2){grid-row:5}
+  .rx-hwork__d:nth-child(3){grid-row:6}.rx-hwork__t:nth-child(3){grid-row:7}
+  .rx-hwork__d,.rx-hwork__d:nth-child(3){margin:0 0 20px}
+  .rx-hwork__t{margin-bottom:56px}.rx-hwork__t:nth-child(3){margin-bottom:0}
+  .rx-hwork__t{gap:10px}
+  .rx-hwork__title{font-size:1.3125rem;line-height:1.25}
+  .rx-hwork__detail{font-size:1rem;line-height:1.5}
+  .rx-hwork__d .rx-stack{padding:0}
+  .rx-hwork__d .rx-device--laptop{display:none}
+  .rx-hwork__d .rx-device--phone{position:relative;left:auto;bottom:auto;width:240px;margin:0 auto}
+}
+/* ≥ 992 without the pin (no JS, reduced motion): each project's text beside its device, three rows */
+@media (min-width:992px){
+  .rx-hwork__grid{grid-template-columns:minmax(0,min(440px,40%)) minmax(0,1fr);column-gap:clamp(40px,4.5vw,72px);row-gap:96px;align-items:center;margin-right:calc(-1 * clamp(0px,(100vw - 100% - 2 * var(--rx-gutter)) / 2,10rem))}
+  .rx-hwork__tag{grid-column:1/-1;margin-bottom:0}
+  .rx-hwork__t,.rx-hwork__d,.rx-hwork__d:nth-child(3){margin:0}
+  .rx-hwork__t{grid-column:1}.rx-hwork__d{grid-column:2;justify-self:center;width:100%;max-width:860px}
+  .rx-hwork__t:nth-child(1),.rx-hwork__d:nth-child(1){grid-row:2}
+  .rx-hwork__t:nth-child(2),.rx-hwork__d:nth-child(2){grid-row:3}
+  .rx-hwork__t:nth-child(3),.rx-hwork__d:nth-child(3){grid-row:4}
+  /* pinned stepped slider (home JS adds .is-pinned only when motion is allowed) */
+  /* the stage is centred in the viewport; the section overlaps its neighbours' padding (transparent), so the gaps into and out of the pin stay near the section gap */
+  /* the stage centres its content in 100vh, so the empty band above/below grows with the viewport height: the
+     negative margins grow with vh too (≈ 125–140 px content-to-content in and out from 768 to 1080 px tall; verify-c N-2) */
+  .rx-hwork.is-pinned{height:300vh;margin:min(100px - 33vh,248px - 49.4vh) 0 min(120px - 32vh,232px - 44.4vh);padding:0;background:none;pointer-events:none}
+  .rx-hwork.is-pinned .rx-hwork__pin>*{pointer-events:auto}
+  .rx-hwork.is-pinned .rx-hwork__pin{position:sticky;top:0;display:flex;align-items:center;height:100vh;padding:96px 0 var(--rx-pill-safe-b);box-sizing:border-box}
+  .rx-hwork.is-pinned .rx-hwork__pin>.rx-container{width:100%}
+  .rx-hwork.is-pinned .rx-hwork__grid{row-gap:0}
+  .rx-hwork.is-pinned .rx-hwork__col{display:flex;flex-direction:column;align-items:flex-start;grid-column:1;grid-row:1;align-self:center}
+  .rx-hwork.is-pinned .rx-hwork__texts{display:grid;width:100%}
+  .rx-hwork.is-pinned .rx-hwork__devices{display:grid;grid-column:2;grid-row:1;align-items:center;justify-items:center}
+  .rx-hwork.is-pinned .rx-hwork__t,.rx-hwork.is-pinned .rx-hwork__d{grid-area:1/1}
+  .rx-hwork.is-pinned .rx-hwork__d{max-width:min(860px,calc((100vh - 120px - var(--rx-pill-safe-b)) * 1.6))}
+  .rx-hwork.is-pinned .rx-hwork__count{display:flex;align-items:center;gap:16px;margin:16px 0 28px;color:var(--rx-ink);font:500 .9375rem/1 var(--font-families--primary);font-variant-numeric:tabular-nums}
+  .rx-hwork__dashes{display:flex;gap:6px}
+  .rx-hwork__dashes>span{width:22px;height:2px;border-radius:2px;background:var(--rx-line-strong);transition:background-color .3s,width .3s var(--rx-ease)}
+  .rx-hwork__dashes>span.is-on{width:40px;background:var(--rx-accent)}
+  .rx-hwork.is-pinned .rx-hwork__all-inline{display:inline-flex}
+  .rx-hwork.is-pinned .rx-hwork__more{display:none}
+  .rx-hwork.is-pinned .rx-hwork__title{font-size:2rem}
+  /* 992–1279: the text column is ~380 px wide; 26 px keeps the longest headline (LevelKraft) at 3–4 lines (verify-b N-3) */
+  @media (max-width:1279px){.rx-hwork.is-pinned .rx-hwork__title{font-size:1.625rem;line-height:1.22}}
+  .rx-hwork.is-pinned .rx-hwork__t,.rx-hwork.is-pinned .rx-hwork__d{visibility:hidden;opacity:0;transform:translate3d(0,16px,0);transition:opacity .3s var(--rx-ease),transform .3s var(--rx-ease),visibility 0s linear .3s}
+  .rx-hwork.is-pinned .rx-hwork__t.is-active,.rx-hwork.is-pinned .rx-hwork__d.is-active{visibility:visible;opacity:1;transform:none;transition:opacity .3s var(--rx-ease),transform .3s var(--rx-ease),visibility 0s}
+  .rx-hwork.is-pinned .rx-hwork__t.is-out,.rx-hwork.is-pinned .rx-hwork__d.is-out{visibility:visible;opacity:0;transform:none;transition:opacity .2s ease,visibility 0s}
+}
+
+/* ------------------------------------------------------------ studio (7B) */
+.rx-studio{overflow:hidden}
+.rx-studio .rx-sechead{margin-bottom:0}
+.rx-studio__marquee{--rx-card-w:clamp(270px,31vw,470px);margin-top:var(--rx-space-head)}
+.rx-studio__cta{display:flex;justify-content:center;padding-top:clamp(16px,2vw,24px)}
+
+/* -------------------------------------------------------------------- CTA */
+/* P-22: one screen, photo under a ≥ 60 % scrim, both lines 100 % white, primary + secondary */
+.rx-hcta{display:flex;align-items:center;min-height:min(84svh,760px);padding-block:var(--rx-space-section);overflow:hidden;isolation:isolate;color:#fffdfd}
+.rx-hcta__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover}
+.rx-hcta::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(90% 80% at 50% 50%,rgba(0,0,0,.62),rgba(0,0,0,.8))}
+.rx-hcta__inner{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.rx-hcta__title{max-width:18ch;margin:0;color:#fffdfd;font:500 clamp(1.75rem,1.2rem + 1.6vw,2.5rem)/1.1 var(--font-families--primary);letter-spacing:-.02em}
+.rx-hcta__q,.rx-hcta__line{display:block;text-wrap:balance}.rx-hcta__line{margin-top:.3em}
+/* a full-bleed band: the next section gets the whole section gap above its heading */
+.rx-hcta+.rx-section{padding-top:var(--rx-space-section)}
+.rx-section:has(+.rx-hcta){padding-bottom:var(--rx-space-section)}
+.rx-hcta .rx-actions{justify-content:center;margin-top:20px}
+.rx-hcta .rx-btn{--rx-ink:#fffdfd;color:#fffdfd}
+.rx-hcta .rx-btn--secondary{border-color:rgba(255,253,253,.4)}
+@media (max-width:767px){.rx-hcta{min-height:min(70svh,640px)}}
+
+/* ---------------------------------------------------------------- contact */
+/* P-22: heading → four expanded step cards → form panel */
+.rx-hsteps{margin-bottom:var(--rx-space-head)}
+.rx-hstep{position:relative;gap:12px;padding-right:56px}
+.rx-hstep__label{color:var(--rx-accent-ink,#b197fc);font:600 .875rem/1.3 var(--font-families--primary);letter-spacing:.02em}
+.rx-hstep .rx-panel__title{font-weight:600}
+.rx-hstep__go{position:absolute;top:20px;right:20px;display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--rx-line-strong);border-radius:50%;color:var(--rx-ink);transition:transform .4s var(--rx-ease),background-color .4s var(--rx-ease)}
+.rx-hstep__go svg{width:14px;height:14px}
+a.rx-hstep:hover .rx-hstep__go{background:color-mix(in srgb,var(--rx-ink) 10%,transparent);transform:rotate(45deg)}
+@media (min-width:768px){.rx-hstep{padding-right:var(--rx-pad)}.rx-hstep .rx-hstep__label{padding-right:40px}}
+.rx-hstep .rx-panel__text,.rx-hsvc .rx-panel__text{text-wrap:pretty}
+@media (min-width:1280px){.rx-hstep{padding:24px}.rx-hstep .rx-panel__text{font-size:1rem;line-height:1.55}}
+.rx-hcontact{display:grid;gap:32px}
+.rx-hcontact__title{margin:0;color:var(--rx-ink);font:500 var(--rx-fs-h3)/1.2 var(--font-families--primary);letter-spacing:-.02em}
+.rx-hcontact__intro{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.rx-hcontact__intro p{margin:0;max-width:44ch;color:var(--rx-muted);font-size:var(--rx-fs-lead);line-height:1.5}
+.rx-hcontact__intro .rx-hcontact__direct{margin-top:8px;color:var(--rx-ink);font-size:1rem;font-weight:600}
+.rx-hcontact .rx-form__note a{padding-block:4px;color:inherit;text-decoration:underline;text-underline-offset:.2em}
+.rx-hcontact .w-form-done,.rx-hcontact .w-form-fail{margin-top:16px;border-radius:var(--rx-radius-s);text-align:left}
+.rx-hcontact .w-form-done{border:1px solid var(--rx-line-strong);background:color-mix(in srgb,var(--rx-ink) 6%,transparent);color:var(--rx-ink)}
+@media (max-width:767px){.rx-hcontact .rx-btn--solid{width:100%;justify-content:center}.rx-hcontact__intro .rx-actions{gap:8px}.rx-hcontact__intro .rx-btn{padding-inline:15px;font-size:.9375rem}}
+@media (min-width:992px){.rx-hcontact{grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:56px;padding:40px}}
+
+/* ---- about/story: positioning (founder, 27.09.): intro + four points with a violet check */
+.rx-hstory__intro{margin-top:16px;max-width:52ch}
+.rx-hstory__points{display:grid;gap:14px;margin:24px 0 0;padding:0;list-style:none}
+.rx-hstory__point{position:relative;padding-left:34px;color:var(--rx-muted);font-size:1rem;line-height:1.55}
+.rx-hstory__point strong{display:block;margin-bottom:2px;color:var(--rx-ink);font-weight:600}
+.rx-hstory__point::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:color-mix(in srgb,var(--rx-accent,#7c3aed) 22%,transparent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23b197fc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+@media (min-width:768px){.rx-hstory__points{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px;margin-top:40px}}
+@media (min-width:1200px){.rx-hstory__points{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* ---- homepage colour, founder review 27.09.: "not grey/black overall: colourful like the hero, different shades".
+   The mechanism (indigo base, two glows per section from --g1/--g2 at --g1-at/--g2-at, edge fade, translucent cards)
+   is sitewide since Sprint 15: assets/css/rexity.css §13. Here only the homepage's own hue pair per section (they
+   replace the sitewide cycle). Sprint 15 caps: teal .24 -> .23 (story) and cyan .20 -> .19 (studio), so muted text
+   stays >= 4.5:1 inside a nested panel at a glow's centre (docs/logs/sprint-15.md) */
+.rx-hsec,.section.rx-habout,.rx-hprods{--g1-at:12% 18%;--g2-at:88% 82%}
+.section.rx-habout{--g1:rgba(124,58,237,.30);--g2:rgba(236,72,153,.24)}
+.rx-hstory{--g1:rgba(20,184,166,.23);--g1-at:8% 22%;--g2:rgba(124,58,237,.26)}
+.rx-hsvc-sec{--g1:rgba(59,130,246,.26);--g1-at:88% 10%;--g2:rgba(124,58,237,.24);--g2-at:8% 90%}
+.rx-hwork{--g1:rgba(236,72,153,.24);--g2:rgba(249,115,22,.20)}
+.rx-studio{--g1:rgba(34,211,238,.19);--g1-at:82% 18%;--g2:rgba(124,58,237,.26);--g2-at:14% 86%}
+.rx-hprods{--g1:rgba(249,115,22,.22);--g2:rgba(236,72,153,.22)}
+.rx-hprob-sec{--g1:rgba(20,184,166,.22);--g1-at:90% 14%;--g2:rgba(59,130,246,.24);--g2-at:10% 88%}
+.rx-hcontact-sec{--g1:rgba(124,58,237,.28);--g2:rgba(34,197,94,.16)}
+/* the pinned work stage has no section background (it overlaps its neighbours): the glow sits on the sticky stage */
+.rx-hwork.is-pinned .rx-hwork__pin{background:radial-gradient(50% 45% at 85% 25%,rgba(236,72,153,.20),transparent 72%),radial-gradient(45% 40% at 12% 80%,rgba(249,115,22,.16),transparent 72%)}
+.rx-hsec .rx-panel,.rx-hprods .rx-panel{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.1)}
+.rx-hsec .rx-panel--nested{background:rgba(255,255,255,.035)}
+/* closing CTA band: the photo scrim takes the violet too */
+.rx-hcta::before{background:radial-gradient(90% 80% at 50% 50%,rgba(38,14,76,.62),rgba(12,8,24,.86))}
