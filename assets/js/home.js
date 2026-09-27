@@ -3,6 +3,9 @@
    1. Reveal: [data-rx-reveal] fade up 24 px / 600 ms, 80 ms stagger (only when html.rx-rv is set).
    2. "Designs aus dem Studio": bind the marquee only near the viewport.
    3. Services: the UI cards on the stages animate only in view (CSS .is-live); the chart draws once.
+      3b. Web & Apps: the MacBook loop (video[data-rx-hsvc-video], preload="none") loads and plays only after the
+      load event while ≥ 25 % in view and the tab is visible; it pauses otherwise. Reduced motion, no JS or no
+      IntersectionObserver: the poster only.
    4. Work: ≥ 992 px with motion allowed, the section pins (sticky, 300vh) and steps between the three
       projects: out 200 ms, then in 300 ms, never two at once; hidden slides are inert + aria-hidden.
       Otherwise (phones, tablets, reduced motion, no JS) the three projects are stacked.
@@ -67,6 +70,29 @@
       });
     }, { threshold: 0.25 });
     list.forEach(function (s) { io.observe(s); });
+  }
+
+  /* 3b. Web & Apps MacBook loop: nothing is fetched but the poster until the stage is in view */
+  function stageVideo() {
+    var vids = arr(doc.querySelectorAll("video[data-rx-hsvc-video]"));
+    if (!vids.length || !IO) return;
+    var loaded = doc.readyState === "complete";
+    vids.forEach(function (v) {
+      var inView = false;
+      v.muted = true;
+      function sync() {
+        var on = loaded && inView && !doc.hidden && !reduce.matches;
+        if (on && v.paused) {
+          if (v.preload === "none") v.preload = "auto";
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        } else if (!on && !v.paused) v.pause();
+      }
+      new IntersectionObserver(function (es) { inView = es[es.length - 1].isIntersecting; sync(); }, { threshold: 0.25 }).observe(v);
+      doc.addEventListener("visibilitychange", sync);
+      onChange(reduce, sync);
+      if (!loaded) window.addEventListener("load", function () { loaded = true; sync(); });
+    });
   }
 
   /* 4. work: stepped, pinned slider at ≥ 992 */
@@ -227,7 +253,7 @@
   }
 
   var syncWork = work(); // sets the final section height before the template's scroll triggers measure
-  var ready = function () { problems(); reveal(); marquee(); stages(); aboutMedia(); if (syncWork) syncWork(); };
+  var ready = function () { problems(); reveal(); marquee(); stages(); stageVideo(); aboutMedia(); if (syncWork) syncWork(); };
   if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", ready); else ready();
   window.addEventListener("load", function () { if (window.ScrollTrigger && window.ScrollTrigger.refresh) window.ScrollTrigger.refresh(); });
 })();
