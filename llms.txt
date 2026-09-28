@@ -1,0 +1,91 @@
+# Rexity Labs UG
+
+> Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt Websites, Online-Shops, Web-Apps, SaaS und Apps für iOS und Android und automatisiert Abläufe mit KI-Chatbots, WhatsApp und RPA. Für kleine und mittlere Betriebe in Niedersachsen, remote in ganz Deutschland.
+
+Rexity Labs UG (haftungsbeschränkt) ist ein kleines Software-Studio aus Hermannsburg (Gemeinde Südheide, Landkreis Celle, Niedersachsen). Alle Preise sind Festpreise, netto zzgl. MwSt.; „ab“ nennt den Einstiegspreis, den genauen Festpreis vereinbaren wir nach einem kurzen Gespräch (Preisstand: 2026-09-25). Die Website ist deutsch, Englisch über den Sprachumschalter DE/EN auf denselben Adressen.
+
+## Unternehmen
+
+- Name: Rexity Labs UG (haftungsbeschränkt) (Anzeigename: Rexity Labs UG)
+- Adresse: Willighäuser Weg 11, 29320 Südheide (Ortsteil Hermannsburg), Niedersachsen, Deutschland
+- Telefon: +49 174 2471435
+- E-Mail: info@rexity.ai
+- Website: https://www.rexity.ai/
+- Handelsregister: Amtsgericht Lüneburg, HRB 213911
+- Geschäftsführer: Sunny Singh Thakur
+- Einzugsgebiet: Celle, Hannover, Braunschweig, Wolfsburg, Lüneburg, Niedersachsen, Deutschland. Remote in ganz Deutschland, vor Ort im Raum Celle, Hannover und Braunschweig ohne Aufpreis.
+- Sprachen: Deutsch, Englisch
+- Erreichbarkeit: Mo–Fr 09:00–18:00; Antwort in der Regel innerhalb eines Tages.
+- Profile: [Instagram](https://www.instagram.com/rexitylabs/), [LinkedIn](https://www.linkedin.com/company/rexity/)
+
+## Leistungen
+
+- [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Webdesign und Web-Entwicklung aus dem Landkreis Celle: individuelle Websites ab 999 €, mit Online-Buchung ab 1.999 €. Festpreis, DSGVO-konform. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Website-Migration / Relaunch ab 1.299 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
+- [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
+- [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
+- [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
+- [SaaS- und Web-App-Entwicklung](https://www.rexity.ai/web/saas): SaaS-Plattformen und Web-Apps mit Login, Rollen, Abrechnung und Admin-Bereich – von der ersten Version bis zum Betrieb. Festpreis nach kurzem Gespräch.
+- [Dashboards](https://www.rexity.ai/web/dashboards): KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen an einem Ort zeigen – statt Tabellen von Hand. Festpreis ab 1.599 €. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
+- [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
+- [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): WhatsApp-Business-Automatisierung über die offizielle API: Fragen beantworten, Termine buchen, an Ihr Team übergeben. Mit Opt-in, ab 1.299 € Festpreis. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 €; E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
+- [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
+- [SEO (Suchmaschinenoptimierung)](https://www.rexity.ai/marketing/seo): SEO für KMU: technische Optimierung, Inhalte nach echter Suchabsicht und ehrliches Reporting. Fallstudie: LevelKraft.de. Ohne Ranking-Versprechen. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
+- [Content-Marketing](https://www.rexity.ai/marketing/content): Content-Marketing für KMU: Artikel, Landingpage-Texte und Social-Media-Posts in Ihrer Tonalität, im festen Rhythmus geplant – auf Deutsch und Englisch.
+- [Videomarketing](https://www.rexity.ai/marketing/video): KI-Videomarketing: kurze Werbe- und Social-Media-Videos mit Avataren, KI-Aufnahmen und echtem Material – ohne Filmcrew, geschnitten für jede Plattform.
+- [Wartung, Tests und Betreuung](https://www.rexity.ai/testing-support): Tests und Betreuung für Websites und Apps: Funktions- und Regressionstests, Monitoring nach dem Launch, Updates. Jährliche Wartung ab 999 € pro Jahr. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
+- [Alle Leistungen](https://www.rexity.ai/services): Alle Leistungen von Rexity Labs: Webdesign, Apps, SaaS, Dashboards, Automatisierung und Marketing für KMU in Niedersachsen. Festpreise, Websites ab 999 €.
+
+## Preise
+
+- [Preisübersicht](https://www.rexity.ai/preise): Preise für Website, App und Automatisierung: Website ab 999 €, mit Buchung ab 1.999 €, App ab 4.900 €, KI-Chatbot ab 799 €. Festpreise, netto zzgl. MwSt.
+- [Website (individuell programmiert)](https://www.rexity.ai/preise#preis-website): ab 999 €
+- [Website mit Backend & Buchungsverwaltung](https://www.rexity.ai/preise#preis-booking): ab 1.999 €
+- [Website mit Online-Checkout](https://www.rexity.ai/preise#preis-checkout): ab 5.999 €
+- [Website-Migration / Relaunch](https://www.rexity.ai/preise#preis-migration): ab 1.299 €
+- [Mobile Optimierung einer bestehenden Website](https://www.rexity.ai/preise#preis-mobile): 699 €
+- [Mobile App (iPhone & Android)](https://www.rexity.ai/preise#preis-app): ab 4.900 €
+- [Dashboards](https://www.rexity.ai/preise#preis-dashboards): ab 1.599 €
+- [KI-Chatbot](https://www.rexity.ai/preise#preis-ai-chatbot): ab 799 €
+- [FAQ-Chatbot](https://www.rexity.ai/preise#preis-faq-chatbot): 499 €
+- [E-Mail- & SMS-Automatisierung](https://www.rexity.ai/preise#preis-notify): 299 €
+- [WhatsApp-Automatisierung](https://www.rexity.ai/preise#preis-whatsapp): ab 1.299 €
+- [KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server](https://www.rexity.ai/preise#preis-ai-server): ab 2.999 €
+- [Digitale Rezeption — RexFangs](https://www.rexity.ai/preise#preis-reception): Preis auf Anfrage (In der Testphase – bald verfügbar)
+- [Website-Check](https://www.rexity.ai/preise#preis-check): 249 €
+- [Stundensatz für alles andere](https://www.rexity.ai/preise#preis-hourly): 89 € pro Stunde
+- [Jährliche Wartung](https://www.rexity.ai/preise#preis-maintenance): ab 999 € pro Jahr
+
+## Referenzen (echte Projekte)
+
+- [Body & Care Hermannsburg](https://www.rexity.ai/work/body-and-care): Kundenprojekt. Fallstudie Body & Care Hermannsburg: neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung. Live seit 14.09.2026.
+- [Fahrzeugpflege Celle](https://www.rexity.ai/work/chara): Kundenprojekt. Fallstudie Fahrzeugpflege Celle: Website mit Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und Verwaltung für den Inhaber.
+- [LevelKraft](https://www.rexity.ai/work/levelkraft): Eigenes Produkt, kein Kundenprojekt. Fallstudie LevelKraft: unsere Lern-App für TELC- und Goethe-Prüfungen, für iPhone, Android und Web – mit Modelltests, Sofort-Feedback und SEO-Fallstudie.
+- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Die weiteren Designs dort sind eigene Produkte und Design-Konzepte, keine Kundenprojekte; jede Karte ist beschriftet.
+
+## Region und Branchen
+
+- [IT-Dienstleister in Niedersachsen](https://www.rexity.ai/niedersachsen): Rexity Labs aus Hermannsburg bei Celle baut Websites mit Online-Buchung, Apps und Automatisierung für Betriebe in Niedersachsen — von Celle bis Hannover.
+- [Website mit Online-Kursbuchung für Fitnessstudios](https://www.rexity.ai/fitnessstudio-website): Website für Ihr Fitnessstudio mit Online-Kursbuchung: Mitglieder buchen und stornieren Kursplätze selbst, ohne Kundenkonto. Festpreis ab 1.999 €.
+- [Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten](https://www.rexity.ai/kfz-aufbereitung-website): Werkstatt-Website mit Online-Terminbuchung für Kfz-Aufbereiter: nur freie Zeiten, keine Doppelbuchung, Verwaltung am Handy. Ab 1.999 € Festpreis.
+- [Was kostet eine Website mit Kursbuchung?](https://www.rexity.ai/website-mit-kursbuchung-kosten): Was kostet eine Website mit Online-Kursbuchung? Ab 1.999 € Festpreis, Wartung optional ab 999 € im Jahr. Preisfaktoren und laufende Kosten erklärt.
+
+## Was wir nicht tun
+
+- Kein Website-Baukasten: Websites werden von Hand programmiert, kein Wix.
+- Keine Versprechen zu Rankings, Umsatzzahlen oder Kundenmengen.
+- Keine Büros in Hannover, Braunschweig oder anderen Städten; ein Sitz in Hermannsburg.
+- Keine Hotline und kein Ticketsystem: Kunden sprechen direkt mit der Person, die ihre Seite baut.
+- Keine Rechtsberatung: Rechtstexte und ihre Prüfung übernimmt die Rechtsberatung des Kunden.
+- Chatbots antworten nur aus freigegebenen Inhalten des Kunden und erfinden keine Angebote.
+- Laufende Kosten Dritter (etwa Nachrichtengebühren oder Zahlungsgebühren) sind nicht im Festpreis enthalten.
+
+## In English
+
+- Rexity Labs UG (haftungsbeschränkt) is a small software studio in Hermannsburg (Südheide, Celle district, Lower Saxony, Germany). It designs and builds websites, online shops with Stripe checkout, web apps and SaaS, iOS and Android apps, and automation with AI chatbots, WhatsApp and RPA for small and mid-sized businesses in Lower Saxony and remotely across Germany. Fixed prices, net plus VAT. Every page has an English version via the DE/EN switch on the same URL. Contact: info@rexity.ai, +49 174 2471435.
+
+## Optional
+
+- [Ausführliche Fassung mit allen Leistungstexten](https://www.rexity.ai/llms-full.txt): die Texte der Leistungsseiten, Preise und häufigen Fragen als Klartext
+- [Impressum](https://www.rexity.ai/impressum): Anbieterkennzeichnung
+- [Datenschutz](https://www.rexity.ai/datenschutz): Datenschutzerklärung

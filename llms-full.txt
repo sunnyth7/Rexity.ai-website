@@ -1,0 +1,949 @@
+# Rexity Labs UG
+
+> Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt Websites, Online-Shops, Web-Apps, SaaS und Apps für iOS und Android und automatisiert Abläufe mit KI-Chatbots, WhatsApp und RPA. Für kleine und mittlere Betriebe in Niedersachsen, remote in ganz Deutschland.
+
+Rexity Labs UG (haftungsbeschränkt) ist ein kleines Software-Studio aus Hermannsburg (Gemeinde Südheide, Landkreis Celle, Niedersachsen). Alle Preise sind Festpreise, netto zzgl. MwSt.; „ab“ nennt den Einstiegspreis, den genauen Festpreis vereinbaren wir nach einem kurzen Gespräch (Preisstand: 2026-09-25). Die Website ist deutsch, Englisch über den Sprachumschalter DE/EN auf denselben Adressen.
+
+## Unternehmen
+
+- Name: Rexity Labs UG (haftungsbeschränkt) (Anzeigename: Rexity Labs UG)
+- Adresse: Willighäuser Weg 11, 29320 Südheide (Ortsteil Hermannsburg), Niedersachsen, Deutschland
+- Telefon: +49 174 2471435
+- E-Mail: info@rexity.ai
+- Website: https://www.rexity.ai/
+- Handelsregister: Amtsgericht Lüneburg, HRB 213911
+- Geschäftsführer: Sunny Singh Thakur
+- Einzugsgebiet: Celle, Hannover, Braunschweig, Wolfsburg, Lüneburg, Niedersachsen, Deutschland. Remote in ganz Deutschland, vor Ort im Raum Celle, Hannover und Braunschweig ohne Aufpreis.
+- Sprachen: Deutsch, Englisch
+- Erreichbarkeit: Mo–Fr 09:00–18:00; Antwort in der Regel innerhalb eines Tages.
+- Profile: [Instagram](https://www.instagram.com/rexitylabs/), [LinkedIn](https://www.linkedin.com/company/rexity/)
+
+Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ als Klartext (Stand der Preise: 2026-09-25). Die Kurzfassung steht unter https://www.rexity.ai/llms.txt.
+
+## Leistungen
+
+- [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Webdesign und Web-Entwicklung aus dem Landkreis Celle: individuelle Websites ab 999 €, mit Online-Buchung ab 1.999 €. Festpreis, DSGVO-konform. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Website-Migration / Relaunch ab 1.299 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
+- [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
+- [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
+- [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
+- [SaaS- und Web-App-Entwicklung](https://www.rexity.ai/web/saas): SaaS-Plattformen und Web-Apps mit Login, Rollen, Abrechnung und Admin-Bereich – von der ersten Version bis zum Betrieb. Festpreis nach kurzem Gespräch.
+- [Dashboards](https://www.rexity.ai/web/dashboards): KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen an einem Ort zeigen – statt Tabellen von Hand. Festpreis ab 1.599 €. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
+- [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
+- [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): WhatsApp-Business-Automatisierung über die offizielle API: Fragen beantworten, Termine buchen, an Ihr Team übergeben. Mit Opt-in, ab 1.299 € Festpreis. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 €; E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
+- [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
+- [SEO (Suchmaschinenoptimierung)](https://www.rexity.ai/marketing/seo): SEO für KMU: technische Optimierung, Inhalte nach echter Suchabsicht und ehrliches Reporting. Fallstudie: LevelKraft.de. Ohne Ranking-Versprechen. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
+- [Content-Marketing](https://www.rexity.ai/marketing/content): Content-Marketing für KMU: Artikel, Landingpage-Texte und Social-Media-Posts in Ihrer Tonalität, im festen Rhythmus geplant – auf Deutsch und Englisch.
+- [Videomarketing](https://www.rexity.ai/marketing/video): KI-Videomarketing: kurze Werbe- und Social-Media-Videos mit Avataren, KI-Aufnahmen und echtem Material – ohne Filmcrew, geschnitten für jede Plattform.
+- [Wartung, Tests und Betreuung](https://www.rexity.ai/testing-support): Tests und Betreuung für Websites und Apps: Funktions- und Regressionstests, Monitoring nach dem Launch, Updates. Jährliche Wartung ab 999 € pro Jahr. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
+- [Alle Leistungen](https://www.rexity.ai/services): Alle Leistungen von Rexity Labs: Webdesign, Apps, SaaS, Dashboards, Automatisierung und Marketing für KMU in Niedersachsen. Festpreise, Websites ab 999 €.
+
+## Preise
+
+- [Preisübersicht](https://www.rexity.ai/preise): Preise für Website, App und Automatisierung: Website ab 999 €, mit Buchung ab 1.999 €, App ab 4.900 €, KI-Chatbot ab 799 €. Festpreise, netto zzgl. MwSt.
+- [Website (individuell programmiert)](https://www.rexity.ai/preise#preis-website): ab 999 €
+- [Website mit Backend & Buchungsverwaltung](https://www.rexity.ai/preise#preis-booking): ab 1.999 €
+- [Website mit Online-Checkout](https://www.rexity.ai/preise#preis-checkout): ab 5.999 €
+- [Website-Migration / Relaunch](https://www.rexity.ai/preise#preis-migration): ab 1.299 €
+- [Mobile Optimierung einer bestehenden Website](https://www.rexity.ai/preise#preis-mobile): 699 €
+- [Mobile App (iPhone & Android)](https://www.rexity.ai/preise#preis-app): ab 4.900 €
+- [Dashboards](https://www.rexity.ai/preise#preis-dashboards): ab 1.599 €
+- [KI-Chatbot](https://www.rexity.ai/preise#preis-ai-chatbot): ab 799 €
+- [FAQ-Chatbot](https://www.rexity.ai/preise#preis-faq-chatbot): 499 €
+- [E-Mail- & SMS-Automatisierung](https://www.rexity.ai/preise#preis-notify): 299 €
+- [WhatsApp-Automatisierung](https://www.rexity.ai/preise#preis-whatsapp): ab 1.299 €
+- [KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server](https://www.rexity.ai/preise#preis-ai-server): ab 2.999 €
+- [Digitale Rezeption — RexFangs](https://www.rexity.ai/preise#preis-reception): Preis auf Anfrage (In der Testphase – bald verfügbar)
+- [Website-Check](https://www.rexity.ai/preise#preis-check): 249 €
+- [Stundensatz für alles andere](https://www.rexity.ai/preise#preis-hourly): 89 € pro Stunde
+- [Jährliche Wartung](https://www.rexity.ai/preise#preis-maintenance): ab 999 € pro Jahr
+
+## Referenzen (echte Projekte)
+
+- [Body & Care Hermannsburg](https://www.rexity.ai/work/body-and-care): Kundenprojekt. Fallstudie Body & Care Hermannsburg: neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung. Live seit 14.09.2026.
+- [Fahrzeugpflege Celle](https://www.rexity.ai/work/chara): Kundenprojekt. Fallstudie Fahrzeugpflege Celle: Website mit Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und Verwaltung für den Inhaber.
+- [LevelKraft](https://www.rexity.ai/work/levelkraft): Eigenes Produkt, kein Kundenprojekt. Fallstudie LevelKraft: unsere Lern-App für TELC- und Goethe-Prüfungen, für iPhone, Android und Web – mit Modelltests, Sofort-Feedback und SEO-Fallstudie.
+- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Die weiteren Designs dort sind eigene Produkte und Design-Konzepte, keine Kundenprojekte; jede Karte ist beschriftet.
+
+## Was wir nicht tun
+
+- Kein Website-Baukasten: Websites werden von Hand programmiert, kein Wix.
+- Keine Versprechen zu Rankings, Umsatzzahlen oder Kundenmengen.
+- Keine Büros in Hannover, Braunschweig oder anderen Städten; ein Sitz in Hermannsburg.
+- Keine Hotline und kein Ticketsystem: Kunden sprechen direkt mit der Person, die ihre Seite baut.
+- Keine Rechtsberatung: Rechtstexte und ihre Prüfung übernimmt die Rechtsberatung des Kunden.
+- Chatbots antworten nur aus freigegebenen Inhalten des Kunden und erfinden keine Angebote.
+- Laufende Kosten Dritter (etwa Nachrichtengebühren oder Zahlungsgebühren) sind nicht im Festpreis enthalten.
+
+# Leistungsseiten im Wortlaut
+
+## Web & Apps
+
+Adresse: https://www.rexity.ai/web
+
+Websites, Web-Apps, SaaS, Mobile Apps und Dashboards aus einer Hand – gestaltet und programmiert in Niedersachsen. Websites ab 999 €, Apps ab 4.900 €.
+
+Digitale Produkte, denen man beim ersten Klick vertraut.
+
+Von der Marketing-Site bis zur kompletten SaaS-Plattform oder nativen App — wir gestalten, bauen und liefern die digitalen Produkte, die Ihr Geschäft tragen.
+
+### Websites und Apps für kleine und mittlere Betriebe
+
+Unter Web & Apps fassen wir alles zusammen, was Ihre Kunden auf dem Bildschirm sehen: die Website, die Online-Buchung, die App fürs Handy und das Dashboard, auf dem Sie Ihre Zahlen im Blick behalten. Wir gestalten und programmieren alles selbst, in einem Team.
+
+Unsere Kunden sind vor allem Dienstleistungsbetriebe in Niedersachsen – Studios, Werkstätten, Praxen, Salons, Handwerk – und Gründer, die aus einer Idee ein Produkt machen wollen. Gemeinsam ist ihnen: Die Lösung muss im Alltag funktionieren, ohne dass jemand im Team Software-Erfahrung braucht.
+
+Oft reicht eine gute Website mit Online-Buchung. Eine App lohnt sich, wenn Mitarbeitende unterwegs Daten erfassen oder Kunden etwas regelmäßig nutzen sollen. Was zu Ihnen passt, klären wir im ersten Gespräch.
+
+### Welche Lösung passt zu welchem Problem?
+
+Fünf typische Ausgangslagen und die Lösung, die wir dafür meist bauen:
+
+- Kunden finden Sie nicht oder rufen nur an: Eine schnelle, mobile Website mit klaren Leistungen und Preisen, auf Wunsch mit Online-Buchung. (https://www.rexity.ai/web/web-design)
+- Sie möchten online verkaufen: Ein Online-Shop oder eine Website mit Online-Checkout, bezahlt über Stripe: für Produkte, Gutscheine, Kurse oder Termine. (https://www.rexity.ai/web/online-shop)
+- Mitarbeitende erfassen unterwegs Daten: Eine App für iPhone und Android aus einer gemeinsamen Codebasis, damit die Pflege bezahlbar bleibt. (https://www.rexity.ai/web/mobile-apps)
+- Aus einem Ablauf soll ein Produkt werden: Eine Web-App mit Login, Rollen und Abrechnung, die mit Ihren Nutzern wachsen kann. (https://www.rexity.ai/web/saas)
+- Die Zahlen stehen in vielen Tabellen: Ein Dashboard, das die wichtigen Kennzahlen an einem Ort zeigt. (https://www.rexity.ai/web/dashboards)
+
+### So läuft ein Projekt ab
+
+1. Gespräch: 30 Minuten, kostenlos: Was brauchen Sie, bis wann, in welchem Umfang?
+2. Bauplan und Angebot: Innerhalb einer Woche: Umfang, Bauplan und eine Demo – mit Zeitplan und Festpreis-Angebot, ohne versteckte Kosten.
+3. Umsetzung: Typisch vier bis acht Wochen für eine Website mit Buchung, mit regelmäßigen Zwischenständen.
+4. Test und Freigabe: Die Produktivversion geht erst live, wenn alles gründlich getestet ist und Sie zufrieden sind.
+5. Go-live und Betreuung: Start auf Ihrer Domain, Einweisung, Wartung auf Wunsch als Jahrespaket.
+
+### Was bei jedem Projekt dazugehört
+
+- Ein schriftliches Angebot mit Umfang, Zeitplan und Zahlungsplan
+- Design und Umsetzung für Handy und Desktop
+- Die Domain auf Ihren Namen, Daten in der EU, alle Zugänge für Sie
+- Eine DSGVO-konforme Umsetzung
+- Eine Einweisung, damit Sie Inhalte selbst pflegen können
+- Ratenzahlung möglich, auf Wunsch bis zu zehn Monatsraten
+
+### Preise für Websites und Apps
+
+Festpreise, netto zzgl. MwSt.; die vollständige Liste steht auf der Preisseite.
+
+- Website (individuell programmiert): Komplett von Hand programmiert mit Node.js oder Next.js – kein Wix, kein Website-Baukasten. Die Seite wird statisch ausgeliefert. Festpreis ab 999 €, netto zzgl. MwSt.
+- Website mit Backend & Buchungsverwaltung: Ihre Kunden buchen ihre Termine selbst. Mit Design und Umsetzung, Termin- oder Kursbuchung, Einrichtung auf Ihrer Domain und Abstimmung der DSGVO-Texte. Festpreis ab 1.999 €, netto zzgl. MwSt.
+- Website mit Online-Checkout: Online-Shop, Kursplattform oder Mitgliedschaften, mit Bezahlung über Stripe, Bestellmails und einem Verwaltungsbereich. Festpreis ab 5.999 €, netto zzgl. MwSt.
+- Mobile App (iPhone & Android): Eine App aus einer gemeinsamen Codebasis für beide Plattformen, Veröffentlichung in den Stores inklusive. Festpreis ab 4.900 €, netto zzgl. MwSt.
+- Dashboards: KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen. Festpreis ab 1.599 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Website oder App – was brauche ich?
+  Antwort: Für viele Betriebe reicht eine gute Website, gern mit Online-Buchung. Eine App lohnt sich, wenn Mitarbeitende unterwegs Daten erfassen oder Kunden etwas regelmäßig nutzen sollen. Im Gespräch empfehlen wir, was zu Ihrem Fall passt.
+- Frage: Wie lange dauert ein Projekt?
+  Antwort: Typisch vier bis acht Wochen für eine Website mit Buchung. Die Website für ein Fitnessstudio in Hermannsburg hat rund sechs Wochen gebraucht, die für einen Fahrzeugpflege-Betrieb in Celle rund fünf.
+- Frage: Gehört mir die Website am Ende?
+  Antwort: Ja. Die Domain läuft auf Ihren Namen, die Daten liegen in der EU, und Sie bekommen alle Zugänge übergeben.
+- Frage: Übernehmen Sie auch das Hosting?
+  Antwort: Ja. Wir stellen die Website online und können das Hosting komplett betreuen; die Daten liegen in der EU.
+- Frage: Muss ich eine Wartung buchen?
+  Antwort: Nein. Wartung gibt es optional als Jahrespaket ab 999 €; Sie können die Seite auch selbst betreuen.
+- Frage: Arbeiten Sie nur in Niedersachsen?
+  Antwort: Nein. Wir arbeiten remote in ganz Deutschland und vor Ort im Raum Celle und Hannover.
+
+## Webdesign & Web-Entwicklung
+
+Adresse: https://www.rexity.ai/web/web-design
+
+Webdesign und Web-Entwicklung aus dem Landkreis Celle: individuelle Websites ab 999 €, mit Online-Buchung ab 1.999 €. Festpreis, DSGVO-konform.
+
+Oberflächen, die sich selbst erklären. Websites, die liefern, skalieren und verkaufen.
+
+Markentreues, responsives Design und produktionsreife Technik aus einer Hand: von Wireframes und Designsystem bis zu Frontend, Backend und sauberen APIs. Schnell, SEO-fertig und langlebig gebaut.
+
+### Webdesign aus dem Landkreis Celle
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) gestaltet und programmiert Websites für kleine und mittlere Betriebe: individuell programmierte Websites ab 999 €, mit Online-Buchung ab 1.999 €, als Festpreis netto zzgl. MwSt. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
+
+Unsere Kunden sind Studios, Werkstätten, Praxen, Salons und Handwerksbetriebe. Gestaltung und Umsetzung liegen bei uns in einem Team, und jede Seite wird von Hand programmiert – ohne Website-Baukasten.
+
+Wir sitzen in Hermannsburg im Landkreis Celle und arbeiten überwiegend remote. Für das Erstgespräch, Fotos vor Ort oder die Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei.
+
+Viele Betriebe kommen zu uns, weil die alte Website auf dem Handy nicht mehr richtig funktioniert, weil Termine noch per Telefon und Zettel laufen oder weil die Seite zwar existiert, aber kaum Anfragen bringt.
+
+### Typische Ausgangslagen
+
+- Die Seite ist auf dem Handy kaum bedienbar: Wir bauen jede Seite für Handy und Desktop. Für eine bestehende Website gibt es die mobile Optimierung zum Festpreis.
+- Termine laufen über Telefon und Zettel: Mit einer Website mit Online-Buchung buchen Kunden ihre Termine selbst, und Sie verwalten alles an einem Ort.
+- Der Auftritt ist in die Jahre gekommen: Beim Relaunch überführen wir den alten Auftritt in eine neue Website, auf Wunsch mit Umzug auf Ihre eigene Domain und Weiterleitung der alten Adresse.
+
+### UX/UI- und App-Design
+
+Wir gestalten Websites und Apps, bevor wir sie bauen – im selben Team, das sie danach programmiert. Dazu gehören:
+
+- Wireframes: Die Struktur jedes wichtigen Screens: was wo steht und wie Besucher zu Buchung oder Anfrage kommen, noch ohne Farben und Bilder.
+- Klick-Prototyp: Ein klickbarer Prototyp zeigt den Ablauf, bevor programmiert wird. So prüfen Sie den Weg durch Ihre Website oder App, bevor wir bauen.
+- Designsystem: Farben, Schriften und Bausteine Ihrer Marke als Designsystem, aus dem wir direkt entwickeln. Neue Seiten und Screens sehen dadurch einheitlich aus.
+- Mobile-first, auch für Apps: Wir gestalten zuerst für das Handy, dann für den Desktop. Apps gestalten wir für iPhone und Android, damit sie sich auf beiden Plattformen vertraut anfühlen. (https://www.rexity.ai/web/mobile-apps)
+
+### Häufige Fragen
+
+- Frage: Sind Webdesign und Web-Entwicklung bei Ihnen getrennte Leistungen?
+  Antwort: Nein. Gestaltung und Umsetzung kommen aus einem Team: Wir entwerfen Ihre Website und programmieren sie selbst, ohne Übergabe an einen zweiten Dienstleister.
+- Frage: Gestalten Sie bestehende Sites neu?
+  Antwort: Ja. Wir starten mit einem kurzen Audit, dann ein Redesign, das Sie in Stufen ausliefern können.
+- Frage: Wie lange dauert eine typische Website?
+  Antwort: Marketing-Sites: 2–4 Wochen. Größere Builds werden individuell geplant.
+- Frage: Übernehmen Sie das Hosting?
+  Antwort: Ja. Wir deployen und können das Hosting komplett betreuen.
+- Frage: Was kostet eine Website bei Ihnen?
+  Antwort: Eine individuell programmierte Website gibt es ab 999 €, eine Website mit Backend und Buchungsverwaltung ab 1.999 €, einen Relaunch ab 1.299 €. Alle Preise sind Festpreise, netto zzgl. MwSt.
+- Frage: Kommen Sie auch vor Ort vorbei?
+  Antwort: Ja. Die meiste Arbeit passiert remote von Hermannsburg aus. Für Erstgespräch, Fotos oder Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei; weiter entfernte Termine stimmen wir vorher ab.
+
+## Online-Shop & Stripe-Checkout
+
+Adresse: https://www.rexity.ai/web/online-shop
+
+Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €.
+
+Online verkaufen, buchen und bezahlen lassen – auf Ihrer eigenen Website.
+
+Online-Shops und Websites mit Online-Checkout für kleine und mittlere Betriebe: Produkte, Gutscheine, Kurse oder Termine, bezahlt über Stripe. Gestaltung, Programmierung und Einrichtung aus einer Hand, zum Festpreis.
+
+### Online-Shop oder Website mit Bezahlung
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) baut Online-Shops und Websites mit Online-Checkout für kleine und mittlere Betriebe; bezahlt wird über Stripe. Eine Website mit Online-Checkout gibt es ab 5.999 € als Festpreis, netto zzgl. MwSt. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
+
+Gedacht ist das für Betriebe, die etwas Konkretes verkaufen: den Laden vor Ort mit einem überschaubaren Sortiment, das Studio mit Gutscheinen, Kursen oder Mitgliedschaften, die Werkstatt oder Manufaktur mit eigenen Produkten. Sie brauchen dafür kein großes Shopsystem, sondern einen klaren Weg vom Angebot bis zur bezahlten Bestellung.
+
+Wir gestalten und programmieren den Shop selbst, auf Ihrer Domain und mit Hosting in der EU. Bestellungen, Rechnungs- und Bestellmails und die Verfügbarkeit Ihrer Produkte verwalten Sie in einem eigenen Verwaltungsbereich.
+
+### Shop, Online-Checkout oder Buchung mit Bezahlung?
+
+Nicht jeder Betrieb braucht einen klassischen Shop. Welche Variante passt, hängt davon ab, was Sie verkaufen:
+
+- Online-Shop: Mehrere Produkte mit Bildern, Varianten und Warenkorb, dazu Lager- oder Verfügbarkeitslogik. Sinnvoll, wenn Sie ein festes Sortiment haben, in dem Kunden stöbern und sich etwas zusammenstellen.
+- Website mit Online-Checkout: Ihre Website bekommt an den richtigen Stellen einen Bezahlen-Knopf: für einen Gutschein, ein Kurspaket, eine Mitgliedschaft oder ein einzelnes Produkt. Das ist oft einfacher als ein ganzer Shop.
+- Buchung mit Bezahlung: Kunden buchen einen Termin, einen Kursplatz oder eine Übernachtung und bezahlen direkt dabei, ganz oder als Anzahlung. Das erweitert eine Website mit Online-Buchung um die Bezahlung.
+
+### Bezahlung über Stripe
+
+Für die Bezahlung binden wir Stripe an, einen Zahlungsanbieter, bei dem Ihr Betrieb ein eigenes Konto hat. Welche Zahlungsarten Ihre Kunden sehen, legen Sie in diesem Konto fest. Möglich über Stripe sind unter anderem:
+
+- Kartenzahlung mit Kredit- und Debitkarten
+- SEPA-Lastschrift
+- Apple Pay und Google Pay
+- Rechnungen, die Stripe erstellt und verschickt
+- Abos und wiederkehrende Zahlungen, etwa für Mitgliedschaften
+
+### Rechtliches, an das Sie denken sollten
+
+Ein Online-Shop hat in Deutschland Pflichten, die eine normale Website nicht hat. Wir setzen die technischen Punkte um; die Rechtstexte und ihre Prüfung liegen bei Ihnen oder Ihrer Rechtsberatung. Eine Rechtsberatung leisten wir nicht.
+
+- Impressum und Datenschutz: Beides braucht jeder Shop. Die Datenschutzerklärung nennt auch den Zahlungsanbieter, der die Zahlungsdaten verarbeitet.
+- AGB und Widerrufsbelehrung: Verbraucher haben beim Online-Kauf in der Regel ein Widerrufsrecht von 14 Tagen. Darüber und über Ihre AGB informiert der Shop vor der Bestellung.
+- Button-Lösung: Der Bestellknopf muss klar sagen, dass die Bestellung etwas kostet, zum Beispiel „zahlungspflichtig bestellen“. Direkt davor stehen Preis, Versandkosten und die wesentlichen Merkmale.
+- Zahlungsdaten: Kartendaten gibt Ihr Kunde in der Bezahlmaske von Stripe ein. Sie werden nicht auf dem Server Ihrer Website gespeichert.
+
+### So läuft ein Shop-Projekt ab
+
+1. Gespräch: 30 Minuten, kostenlos: Was verkaufen Sie, an wen, und wie soll bezahlt werden? Danach ist klar, ob ein Shop, ein Online-Checkout oder eine Buchung mit Bezahlung passt.
+2. Umfang und Festpreis: Innerhalb einer Woche bekommen Sie Umfang, Zeitplan und ein Festpreis-Angebot ohne versteckte Kosten.
+3. Design und Umsetzung: Wir gestalten Shop und Bestellweg für Handy und Desktop, legen die Produkte an und verbinden Stripe mit Ihrem Konto. Sie sehen regelmäßig Zwischenstände.
+4. Testen: Bestellungen und Zahlungen testen wir im Testmodus von Stripe, bevor echtes Geld fließt – auch abgebrochene Zahlungen und Erstattungen.
+5. Freigabe und Start: Der Shop geht erst live, wenn alles getestet ist und Sie zufrieden sind. Wartung gibt es danach optional als Jahrespaket ab 999 €.
+
+### Was ein Online-Shop kostet
+
+Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch. Die Gebühren von Stripe pro Zahlung sind nicht enthalten; sie gehen direkt an Stripe.
+
+- Website mit Online-Checkout: Für Betriebe, die online verkaufen oder buchen und bezahlen lassen: Online-Shop, Kursplattform oder Mitgliedschaften, mit Rechnungs- und Bestellmails, Lager- oder Verfügbarkeitslogik und einem Verwaltungsbereich. Festpreis ab 5.999 €, netto zzgl. MwSt.
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Online-Buchung, auf der die Bezahlung aufsetzt
+
+Aus unserer Arbeit.
+
+Für Fahrzeugpflege Celle haben wir eine Website mit Online-Terminbuchung gebaut: Leistung wählen, freien Termin aussuchen, Kontaktdaten eintragen, in vier Schritten, nur mit freien Zeiten und ohne Doppelbuchungen. Bei Body & Care Hermannsburg buchen Mitglieder Kursplätze online und stornieren selbst, ohne Kundenkonto.
+
+Beide Buchungen laufen ohne Online-Bezahlung. Die Bezahlung bei der Buchung, etwa als Anzahlung, ist genau die Erweiterung, um die es auf dieser Seite geht.
+
+Einen Online-Shop für einen Kunden zeigen wir hier, sobald einer live ist. Das Shop-Design für Barfußschuhe unter „Unsere Arbeit“ ist ein Design-Konzept, kein Kundenprojekt.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Häufige Fragen
+
+- Frage: Was kostet ein Online-Shop bei Rexity Labs?
+  Antwort: Eine Website mit Online-Checkout, zum Beispiel ein Online-Shop, eine Kursplattform oder Mitgliedschaften, gibt es ab 5.999 € als Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch. Die Gebühren von Stripe pro Zahlung sind nicht enthalten und gehen direkt an Stripe.
+- Frage: Welche Zahlungsarten sind über Stripe möglich?
+  Antwort: Über Stripe sind unter anderem Kartenzahlung, SEPA-Lastschrift, Apple Pay und Google Pay, Rechnungen sowie Abos und wiederkehrende Zahlungen möglich. Welche davon Ihre Kunden sehen, legen Sie in Ihrem Stripe-Konto fest.
+- Frage: Brauche ich einen ganzen Shop oder reicht ein Bezahlen-Knopf?
+  Antwort: Wer nur wenige Dinge verkauft, etwa Gutscheine, Kurspakete oder Mitgliedschaften, kommt oft mit einer Website mit Online-Checkout aus. Ein Online-Shop mit Warenkorb lohnt sich bei einem festen Sortiment mit mehreren Produkten. Welche Variante passt, klären wir im kostenlosen Erstgespräch.
+- Frage: Kümmern Sie sich um AGB, Widerruf und Datenschutz?
+  Antwort: Wir setzen die technischen Pflichten eines Online-Shops um, etwa den Bestellknopf „zahlungspflichtig bestellen“, Preis und Versandkosten vor der Bestellung und die Einbindung Ihrer Rechtstexte. Die Texte selbst und ihre rechtliche Prüfung übernimmt Ihre Rechtsberatung; eine Rechtsberatung leisten wir nicht.
+- Frage: Kann ich eine Online-Buchung mit Bezahlung verbinden?
+  Antwort: Ja. Kunden buchen einen Termin, einen Kursplatz oder eine Übernachtung und bezahlen dabei direkt, ganz oder als Anzahlung. Eine Website mit Online-Buchung ohne Bezahlung gibt es ab 1.999 €; mit Online-Bezahlung gilt der Preis einer Website mit Online-Checkout, ab 5.999 €.
+- Frage: Wo liegen die Daten meines Shops?
+  Antwort: Die Website läuft auf EU-Hosting, die Domain läuft auf Ihren Namen, und Sie bekommen alle Zugänge übergeben. Kartendaten gibt Ihr Kunde in der Bezahlmaske von Stripe ein; sie werden nicht auf dem Server Ihrer Website gespeichert.
+
+## SaaS-Plattformen
+
+Adresse: https://www.rexity.ai/web/saas
+
+SaaS-Plattformen und Web-Apps mit Login, Rollen, Abrechnung und Admin-Bereich – von der ersten Version bis zum Betrieb. Festpreis nach kurzem Gespräch.
+
+Aus einer Idee ein Produkt machen, für das Menschen zahlen.
+
+Multi-Tenant-SaaS-Plattformen mit Auth, Billing, Dashboards und dem Backend dahinter — entwickelt, um mit Ihrer Nutzerbasis zu wachsen.
+
+### SaaS- und Web-App-Entwicklung
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt SaaS-Plattformen und Web-Apps für Gründer und Teams in Niedersachsen: mit Login, Rollen, Abrechnung und Admin-Bereich, von der ersten Version bis zum Betrieb. Für SaaS gibt es keinen Listenpreis; nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version.
+
+Für die Abrechnung setzen wir auf Stripe. Wie ein eigenes Produkt über Jahre läuft, zeigt LevelKraft: unsere Lern-App für iPhone, Android und Web, mit Abonnements direkt in der App.
+
+### Was eine SaaS-Plattform kostet
+
+Für SaaS-Plattformen gibt es keinen Listenpreis: Nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version. Die Preise unserer Standardleistungen stehen auf der Preisseite.
+
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Können Sie ein bestehendes SaaS übernehmen?
+  Antwort: Ja — wir starten mit einem kurzen Code- und Architektur-Audit.
+
+## Mobile Apps
+
+Adresse: https://www.rexity.ai/web/mobile-apps
+
+App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €.
+
+Nativ und plattformübergreifend, gebaut für die Dauer.
+
+Android- und iOS-Apps in jeder Domäne — in Figma designt, in Kotlin, Swift und React Native entwickelt, wo es passt.
+
+### App-Entwicklung für iPhone und Android
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt Apps für iPhone (iOS) und Android – vom Klick-Prototyp bis zur Veröffentlichung im App Store und bei Google Play. Eine App für beide Plattformen gibt es ab 4.900 € als Festpreis, netto zzgl. MwSt. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
+
+Eine App lohnt sich, wenn Mitarbeitende unterwegs Daten erfassen oder Kunden etwas regelmäßig nutzen sollen. Für viele Betriebe reicht dagegen eine gute Website mit Online-Buchung; was zu Ihnen passt, sagen wir Ihnen im ersten Gespräch.
+
+Die meiste Arbeit passiert remote von Hermannsburg aus. Für das Erstgespräch oder die Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei.
+
+### Nativ oder plattformübergreifend?
+
+Es gibt zwei Wege, eine App für iPhone und Android zu bauen. Beide haben ihre Berechtigung; welcher passt, hängt vom Produkt ab.
+
+- Nativ: Swift und Kotlin: Je eine eigene App für iOS in Swift und für Android in Kotlin. Sie nutzt jede Funktion des Geräts direkt und fühlt sich auf ihrer Plattform ganz zu Hause an. Dafür gibt es zwei Codebasen, die gepflegt werden.
+- Plattformübergreifend: React Native und Expo: Eine gemeinsame Codebasis für iPhone und Android. Das hält Entwicklung und Pflege bezahlbar; unser Festpreis ab 4.900 € geht von diesem Weg aus.
+- Dazu eine Web-App: Aus derselben Grundlage kann auch eine Web-App im Browser entstehen, so wie bei LevelKraft: eine App für iPhone und Android plus Web-App.
+
+### So kommt Ihre App in den App Store und zu Google Play
+
+Die Veröffentlichung in beiden Stores übernehmen wir. So läuft sie ab:
+
+1. Entwicklerkonten: Für den App Store braucht es ein Konto im Apple Developer Program, für Google Play ein Konto in der Google Play Console. Wir empfehlen, beide auf Ihren Betrieb anzulegen; die Gebühren dafür zahlen Sie direkt an Apple und Google.
+2. Testversion: Vor dem Start probieren Sie die App auf Ihrem eigenen Handy aus: auf dem iPhone über TestFlight, bei Android über einen internen Test in der Play Console.
+3. Store-Eintrag: Name, Beschreibung, Screenshots, App-Symbol und die Angaben zum Datenschutz, die Apple und Google verlangen, bereiten wir vor.
+4. Prüfung: Apple und Google prüfen eine App, bevor sie erscheint. Kommen Rückfragen, beantworten wir sie und reichen die App erneut ein.
+5. Start und Updates: Nach der Freigabe steht die App in beiden Stores. Jedes Update läuft wieder durch die Prüfung; Updates für neue iOS- und Android-Versionen planen wir mit Ihnen ein.
+
+### Was eine App kostet
+
+Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch.
+
+- Mobile App (iPhone & Android): Eine App aus einer gemeinsamen Codebasis für beide Plattformen, Veröffentlichung in den Stores inklusive. Festpreis ab 4.900 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### LevelKraft: App für iPhone, Android und Web
+
+Aus unserer Arbeit.
+
+LevelKraft ist unsere Lern-App für die TELC- und Goethe-Prüfungen, live im App Store, bei Google Play und im Web. Eine App für iPhone und Android plus Web-App, alles aus einer gemeinsamen Grundlage: mit vollständigen Modelltests, sofortigem Feedback zu Sprechen und Schreiben und Abonnements direkt in der App.
+
+LevelKraft ist unser eigenes Produkt, kein Kundenprojekt. Wir entwickeln und betreiben es seit November 2025.
+
+Fallstudie: https://www.rexity.ai/work/levelkraft
+
+### Häufige Fragen
+
+- Frage: Nativ oder Cross-Platform?
+  Antwort: Hängt vom Produkt ab. Wir empfehlen basierend auf Performance und Team.
+- Frage: Was kostet eine App bei Ihnen?
+  Antwort: Eine App für iPhone und Android aus einer gemeinsamen Codebasis gibt es ab 4.900 € als Festpreis, netto zzgl. MwSt., die Veröffentlichung im App Store und bei Google Play inklusive. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch.
+- Frage: Entwickeln Sie für iOS und Android gleichzeitig?
+  Antwort: Ja. Mit einer gemeinsamen Codebasis erscheint die App zugleich im App Store für das iPhone und bei Google Play für Android. Wo ein Produkt es verlangt, entwickeln wir nativ in Swift und Kotlin.
+- Frage: Wem gehört die App am Ende?
+  Antwort: Ihnen. Wir empfehlen, die Entwicklerkonten bei Apple und Google auf Ihren Betrieb anzulegen, und übergeben Ihnen alle Zugänge.
+- Frage: Kann eine App auch Zahlungen annehmen?
+  Antwort: Ja. Für digitale Inhalte und Abos, die in der App genutzt werden, verlangen Apple und Google in der Regel ihre eigenen Bezahlsysteme. Waren und Dienstleistungen, die außerhalb der App genutzt werden, laufen über einen Zahlungsanbieter wie Stripe.
+- Frage: Wer pflegt die App nach dem Start?
+  Antwort: Auf Wunsch wir. Die jährliche Wartung ab 999 € umfasst Sicherheitsupdates, Sicherungen und kleine Änderungen und ist optional. Anpassungen an neue iOS- und Android-Versionen planen wir im Angebot mit ein.
+
+## Dashboards & Reporting
+
+Adresse: https://www.rexity.ai/web/dashboards
+
+KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen an einem Ort zeigen – statt Tabellen von Hand. Festpreis ab 1.599 €.
+
+Das Geschäft auf einen Blick.
+
+KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.
+
+### Was ein Dashboard kostet
+
+Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch.
+
+- Dashboards: KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen. Festpreis ab 1.599 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Fahrzeugpflege Celle: alle Termine auf einen Blick
+
+Verwandtes Projekt.
+
+Für einen Fahrzeugpflege-Betrieb in Celle haben wir einen Verwaltungsbereich gebaut, in dem der Inhaber alle Termine nach Tag sieht – gesammelt an einem Ort statt verteilt auf Telefon und Chats.
+
+Ein Dashboard-Projekt mit Kennzahlen zeigen wir hier, sobald eines live ist.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Häufige Fragen
+
+- Frage: Kann es aus unseren bestehenden Tools ziehen?
+  Antwort: Ja — wir führen CRM, Ads und Datenbank an einem Ort zusammen.
+
+## Automatisierung
+
+Adresse: https://www.rexity.ai/automation
+
+Automatisierung für KMU in Niedersachsen: KI-Chatbot ab 799 €, WhatsApp-Automatisierung ab 1.299 €, RPA und Dokumenten-Chatbot ab 2.999 €. Festpreise.
+
+Keine Menschen mehr für Roboter-Arbeit bezahlen.
+
+Automatisieren Sie Anrufe, Nachrichten und Workflows, die Ihrem Team den Tag fressen — von Prozessautomatisierung bis WhatsApp-, Voice- und Website-Assistenten.
+
+### Automatisierung für kleine und mittlere Betriebe
+
+Automatisierung heißt bei uns: Software erledigt die wiederkehrende Arbeit, die heute jemand von Hand macht – Termine bestätigen, immer gleiche Fragen beantworten, Daten von einem Programm ins nächste übertragen. Ihr Team gewinnt Zeit für die Arbeit, die wirklich Menschen braucht.
+
+Wir arbeiten vor allem für Dienstleistungsbetriebe, deren Tag nicht am Schreibtisch stattfindet: im Studio, in der Werkstatt, in der Praxis, im Salon oder im Handwerk. Dort klingelt das Telefon oft genau dann, wenn niemand Zeit hat, und Anfragen kommen über mehrere Kanäle gleichzeitig herein.
+
+Wir fangen klein an: mit dem Ablauf, bei dem die Zeitersparnis am größten und das Risiko am geringsten ist. Erst wenn er zuverlässig läuft, kommt der nächste dazu. So bleibt jede Automatisierung überschaubar, und Sie sehen früh, ob sie sich für Sie lohnt.
+
+### Typische Aufgaben, die wir automatisieren
+
+Diese Abläufe gibt es in fast jedem Betrieb – und meist laufen sie noch von Hand.
+
+- Bestätigungen und Erinnerungen: Nach jeder Buchung geht automatisch eine E-Mail oder SMS hinaus, vor dem Termin eine Erinnerung. Weniger vergessene Termine, keine Nachrichten von Hand.
+- Immer gleiche Fragen: Öffnungszeiten, Preise, freie Termine: Ein Chat-Assistent auf Ihrer Website beantwortet sie aus Ihren eigenen Inhalten und gibt alles andere an Sie weiter.
+- Anfragen per WhatsApp: Viele Kunden schreiben lieber, als anzurufen. Ein WhatsApp-Assistent antwortet über die offizielle Schnittstelle, bucht Termine und übergibt schwierige Fälle an Ihr Team.
+- Daten abtippen und übertragen: Rechnungen, Lieferscheine, Formulare, Listen: Regelbasierte Schritte übernimmt ein Programm, das Daten zuverlässig zwischen Ihren Systemen bewegt.
+- Anrufe, die niemand annimmt: Unser Telefonassistent RexFangs nimmt Anrufe an und ruft zurück. Er ist noch in der Testphase; wir sagen Ihnen ehrlich, wann er für Ihren Betrieb bereit ist.
+
+### Was wir konkret bauen
+
+Keine Plattform, die Sie selbst einrichten müssen, sondern fertige Abläufe, die zu Ihrem Betrieb passen:
+
+- Chat-Assistenten für Website und WhatsApp, die aus Ihren freigegebenen Inhalten antworten
+- Automatische E-Mails und SMS bei Buchung, Stornierung und vor dem Termin
+- Verbindungen zwischen Buchung, Postfach, Kundenliste und Ihren bestehenden Programmen
+- Wiederkehrende Abläufe wie Dateneingabe, Rechnungsverarbeitung und Berichte
+- Einen Chatbot über Ihre eigenen Dokumente, installiert auf einem lokalen Server in Ihrem Betrieb
+- Übergaberegeln, damit jeder schwierige Fall bei einem Menschen landet – mit dem ganzen Verlauf
+- Protokolle, mit denen Sie nachvollziehen, was automatisch passiert ist
+
+### So läuft ein Automatisierungsprojekt ab
+
+1. Kostenloses Gespräch: 30 Minuten: Welche Aufgabe kostet Sie am meisten Zeit, welche Programme nutzen Sie heute, und was darf auf keinen Fall schiefgehen?
+2. Ablauf aufnehmen: Wir schreiben den heutigen Ablauf Schritt für Schritt auf und markieren, was sich automatisieren lässt und wo ein Mensch entscheiden muss.
+3. Bauplan und Festpreis: Innerhalb einer Woche bekommen Sie Bauplan, Demo und ein Festpreis-Angebot – ohne versteckte Kosten.
+4. Bauen und testen: Wir bauen den Ablauf und prüfen Normalfälle und Ausnahmen mit echten Beispielen aus Ihrem Alltag, bevor etwas live geht.
+5. Live und begleitet: Nach Ihrer Freigabe geht die Automatisierung live. Anhand echter Fälle verfeinern wir sie in den ersten Wochen.
+
+### Preise für Automatisierung
+
+Alle Preise sind Festpreise, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
+
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- FAQ-Chatbot: Beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Festpreis 499 €, netto zzgl. MwSt.
+- KI-Chatbot: Ein KI-gestützter Chat-Assistent, der mit Ihren eigenen Inhalten antwortet. Festpreis ab 799 €, netto zzgl. MwSt.
+- WhatsApp-Automatisierung: Automatisierte WhatsApp-Business-Flows, die häufige Fragen beantworten und Termine buchen – über die offizielle API, mit Opt-in. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server: Dokumentenverwaltung mit KI: ein Chatbot über Ihre Dokumente und automatisierte Abläufe, installiert auf einem lokalen Server bei Ihnen. Festpreis ab 2.999 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Fahrzeugpflege Celle: Termine ohne Telefon-Pingpong
+
+Aus der Praxis.
+
+Bei einem Fahrzeugpflege-Betrieb in Celle liefen Termine bisher über Telefon und Nachrichten. Heute buchen Kunden online in vier Schritten, angezeigt werden nur wirklich freie Zeiten, und Doppelbuchungen sind technisch ausgeschlossen. Der Inhaber sieht alle Termine gesammelt an einem Ort.
+
+Eine reine Automatisierungs-Fallstudie, etwa für WhatsApp, zeigen wir hier, sobald ein solches Kundenprojekt live ist.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Häufige Fragen
+
+- Frage: Brauche ich dafür neue Software?
+  Antwort: Meistens nicht. Wir verbinden die Werkzeuge, die Sie schon nutzen – etwa Postfach, Kalender, Buchung und Kundenliste – und ergänzen nur, was fehlt.
+- Frage: Ist das DSGVO-konform?
+  Antwort: Wir bauen Automatisierungen DSGVO-konform und hosten in der EU: Assistenten geben sich als KI zu erkennen, Einwilligungen werden vor der Verarbeitung eingeholt, und automatische Aktionen werden protokolliert. Die rechtliche Bewertung Ihres konkreten Falls übernimmt Ihre Rechtsberatung.
+- Frage: Was passiert, wenn die Automatisierung etwas nicht weiß?
+  Antwort: Dann übergibt sie an einen Menschen, zusammen mit dem bisherigen Verlauf. Diese Übergaberegeln legen wir vor dem Start gemeinsam mit Ihnen fest.
+- Frage: Womit sollten wir anfangen?
+  Antwort: Mit dem Ablauf, bei dem die Zeitersparnis am größten und das Risiko am geringsten ist. Oft sind das Terminbestätigungen oder die immer gleichen Fragen Ihrer Kunden.
+- Frage: Was kostet eine Automatisierung?
+  Antwort: Die E-Mail- und SMS-Automatisierung kostet 299 €, ein FAQ-Chatbot 499 €. Einen KI-Chatbot gibt es ab 799 €, die WhatsApp-Automatisierung ab 1.299 €. Alle Preise sind Festpreise, netto zzgl. MwSt.; die vollständige Übersicht steht auf unserer Preisseite.
+
+## RPA & Prozessautomatisierung
+
+Adresse: https://www.rexity.ai/automation/rpa
+
+Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis.
+
+Auditierbar, wiederholbar, ohne Handarbeit.
+
+Wir kartieren die wiederkehrende Handarbeit Ihres Teams und verwandeln sie in zuverlässige automatisierte Workflows — über CRM, Postfach und interne Tools hinweg.
+
+### Was Prozessautomatisierung (RPA) ist
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) automatisiert wiederkehrende Büroarbeit für kleine und mittlere Betriebe in Niedersachsen: Dateneingabe, Rechnungen, Berichte und den Abgleich zwischen Programmen. Prozessautomatisierung mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt.
+
+RPA steht für Robotic Process Automation: Ein Software-Roboter übernimmt regelbasierte Arbeitsschritte, die heute jemand am Bildschirm von Hand erledigt – Daten aus einer E-Mail in eine Liste übertragen, Rechnungen erfassen, Berichte zusammenstellen. Die Arbeit bleibt dieselbe, nur erledigt sie jetzt ein Programm, zuverlässig und zu festen Zeiten.
+
+Das lohnt sich für kleine und mittlere Betriebe, in denen jede Woche Stunden mit Abtippen und Kopieren vergehen: im Handwerk mit Angeboten und Lieferscheinen, in der Praxis mit Formularen, im Büro eines Studios oder einer Werkstatt mit Listen und Rechnungen.
+
+Wichtig ist uns: Der Roboter übernimmt die Normalfälle, Menschen behalten die Ausnahmen. Jeder Lauf wird protokolliert, sodass Sie jederzeit nachvollziehen können, was automatisch passiert ist.
+
+### Typische Abläufe für RPA
+
+- Rechnungen und Belege: Eingehende Rechnungen werden erfasst, geprüft und dorthin übertragen, wo Sie sie brauchen – statt jede Zeile von Hand abzutippen.
+- Dateneingabe zwischen Programmen: Kundendaten aus Formularen, E-Mails oder Buchungen landen automatisch in Kundenliste und Kalender.
+- Berichte und Auswertungen: Zahlen, die jede Woche aus mehreren Quellen zusammengesucht werden, stellt der Roboter zu festen Zeiten zusammen.
+- Fragen an Ihre Dokumente: Ein Chatbot über Ihre eigenen Dokumente beantwortet Fragen zu Verträgen, Anleitungen oder internen Regeln – installiert auf einem lokalen Server bei Ihnen.
+
+### Was wir konkret bauen
+
+- Eine schriftliche Aufnahme Ihres heutigen Ablaufs, Schritt für Schritt
+- Software-Roboter, die Daten zwischen Postfach, Kundenverwaltung und internen Programmen bewegen
+- Regeln für Ausnahmen, die an einen Menschen gehen
+- Geplante Läufe mit Überwachung und einer Benachrichtigung, wenn etwas hakt
+- Ein vollständiges Protokoll jedes Laufs
+- Auf Wunsch KI-Lösungen auf einem lokalen Server in Ihrem Betrieb
+
+### So läuft ein RPA-Projekt ab
+
+1. Gespräch: 30 Minuten, kostenlos: Welche Arbeit wiederholt sich jede Woche, und wie viel Zeit kostet sie?
+2. Prozess kartieren: Wir dokumentieren den Ablauf von A bis Z und wählen die häufigen, regelbasierten Schritte aus, die sich lohnen.
+3. Bauplan und Festpreis: Innerhalb einer Woche: Bauplan, Demo und ein Festpreis-Angebot ohne versteckte Kosten.
+4. Bauen und prüfen: Wir bauen den Roboter und testen Normalfälle und Ausnahmen; Sonderfälle übernehmen Menschen.
+5. Betrieb: Geplante Läufe mit Überwachung und vollständigem Protokoll. Dann messen wir die Zeitersparnis und bauen aus, was funktioniert.
+
+### Was Prozessautomatisierung kostet
+
+Festpreise, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
+
+- KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server: Dokumentenverwaltung mit KI: ein Chatbot über Ihre Dokumente und automatisierte Abläufe, installiert auf einem lokalen Server bei Ihnen. Festpreis ab 2.999 €, netto zzgl. MwSt.
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Fahrzeugpflege Celle: feste Regeln statt Handarbeit
+
+Aus der Praxis.
+
+Bei diesem Fahrzeugpflege-Betrieb in Celle liefen Termine über Telefon und Nachrichten. Heute ist der Ablauf fest geregelt: Kunden buchen in vier Schritten, nur freie Zeiten werden angezeigt, Doppelbuchungen sind technisch ausgeschlossen, und Buchungsdaten werden 30 Tage nach dem Termin vollständig gelöscht.
+
+Kein klassisches RPA-Projekt, aber dasselbe Prinzip: Regeln statt Handarbeit. Eine RPA-Fallstudie zeigen wir, sobald ein solches Kundenprojekt live ist.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Häufige Fragen
+
+- Frage: Wie entscheiden Sie, was zuerst automatisiert wird?
+  Antwort: Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist.
+- Frage: Welche Abläufe eignen sich für RPA?
+  Antwort: Abläufe, die häufig vorkommen, klaren Regeln folgen und am Bildschirm stattfinden: Rechnungsverarbeitung, Dateneingabe, Berichte und der Abgleich zwischen Programmen. Weniger geeignet ist alles, was jedes Mal eine neue Entscheidung braucht.
+- Frage: Was passiert bei Fehlern oder Sonderfällen?
+  Antwort: Der Roboter übernimmt nur die Normalfälle. Sonderfälle gehen an einen Menschen, und wenn ein Lauf hakt, bekommen Sie eine Benachrichtigung.
+- Frage: Müssen wir dafür unsere Programme wechseln?
+  Antwort: In der Regel nicht. Wir automatisieren zwischen den Programmen, die Sie heute nutzen, etwa Postfach, Kundenverwaltung und internen Werkzeugen.
+- Frage: Was kostet RPA bei Ihnen?
+  Antwort: KI-Lösungen mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
+
+## WhatsApp-Agenten
+
+Adresse: https://www.rexity.ai/automation/whatsapp
+
+WhatsApp-Business-Automatisierung über die offizielle API: Fragen beantworten, Termine buchen, an Ihr Team übergeben. Mit Opt-in, ab 1.299 € Festpreis.
+
+Jeden Chat beantworten, Tag und Nacht.
+
+Automatisierte WhatsApp-Business-Flows, die Leads qualifizieren, häufige Fragen beantworten und Termine buchen — über die offizielle API, mit Opt-in.
+
+### WhatsApp-Automatisierung für Betriebe
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) automatisiert WhatsApp Business für kleine und mittlere Betriebe in Niedersachsen: häufige Fragen beantworten, Termine buchen und an Ihr Team übergeben – über die offizielle WhatsApp Business API und nur mit Opt-in. WhatsApp-Automatisierung gibt es ab 1.299 € als Festpreis, netto zzgl. MwSt.
+
+Viele Kunden schreiben lieber eine WhatsApp, als anzurufen – auch abends und am Wochenende. Mit einer WhatsApp-Business-Automatisierung bekommen sie sofort eine Antwort: auf häufige Fragen, mit freien Terminen oder mit dem Hinweis, dass sich Ihr Team meldet.
+
+Wir bauen das über die offizielle WhatsApp Business API. Kunden schreiben Ihnen nur, wenn sie das wollen (Opt-in), der Assistent gibt sich als Assistent zu erkennen, und ein Mensch ist immer nur einen Schritt entfernt.
+
+Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: Salons und Studios mit vielen Terminfragen, Werkstätten mit Rückfragen zu Preisen und Abholung, Praxen mit organisatorischen Fragen.
+
+### Typische Situationen
+
+- Nachrichten bleiben liegen: Während der Arbeit kann niemand antworten. Der Assistent antwortet sofort und sammelt, was Ihr Team später braucht.
+- Jeden Tag die gleichen Fragen: Öffnungszeiten, Preise, Anfahrt: Häufige Fragen beantwortet der Assistent aus Ihren freigegebenen Inhalten.
+- Termine per Chat: Wer einen Termin möchte, bekommt echte freie Zeitfenster angeboten, statt Nachrichten hin und her.
+- Wichtige Anfragen gehen unter: Der Assistent erkennt, was jemand will, und gibt Anfragen, die nur ein Mensch klären kann, mit dem ganzen Verlauf an Ihr Team weiter.
+
+### Was wir konkret bauen
+
+- Die Einrichtung der offiziellen WhatsApp Business API
+- Gesprächsabläufe für Fragen, Terminbuchungen und Anfragen
+- Antworten aus Ihren freigegebenen Inhalten
+- Regeln für die Übergabe an Ihr Team, mit dem ganzen Gesprächsverlauf
+- Opt-in und Abmeldung, damit die Kommunikation sauber bleibt
+- Ein Protokoll jedes Gesprächs mit Ergebnis in Ihrer Kundenverwaltung
+
+### So läuft das Projekt ab
+
+1. Gespräch: 30 Minuten, kostenlos: Worüber schreiben Ihre Kunden heute, und was soll automatisch passieren?
+2. Gespräche kartieren: Wir schreiben die Abläufe auf, die Ihre Kunden wirklich starten – Fragen, Buchungen, Rückfragen.
+3. Bauplan und Festpreis: Innerhalb einer Woche: Bauplan, Demo und ein Festpreis-Angebot ohne versteckte Kosten.
+4. Bauen und verbinden: Offizielle Schnittstelle, Ihre Kundenverwaltung, klare Übergaberegeln – getestet mit echten Beispielen.
+5. Start und Verfeinerung: Nach Ihrer Freigabe geht der Assistent live; anhand echter Gespräche verbessern wir die Abläufe.
+
+### Was WhatsApp-Automatisierung kostet
+
+Festpreis, netto zzgl. MwSt. Laufende Kosten Dritter, etwa Nachrichtengebühren, stehen einzeln im Angebot.
+
+- WhatsApp-Automatisierung: Automatisierte WhatsApp-Business-Flows, die häufige Fragen beantworten und Termine buchen – über die offizielle API, mit Opt-in. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Fahrzeugpflege Celle: vom Nachrichten-Pingpong zur festen Buchung
+
+Aus der Praxis.
+
+Bei einem Fahrzeugpflege-Betrieb in Celle liefen Termine über Telefon und Nachrichten. Heute buchen Kunden online, und im Verwaltungsbereich erreicht der Inhaber jeden Kunden mit einem Tipp per Anruf oder WhatsApp.
+
+Eine WhatsApp-Automatisierung für einen Kunden zeigen wir hier, sobald sie live ist.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Häufige Fragen
+
+- Frage: Ist WhatsApp-Automatisierung konform?
+  Antwort: Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in.
+- Frage: Merken Kunden, dass es automatisiert ist?
+  Antwort: Wir sind transparent über den Assistenten, und ein Mensch ist immer nur einen Schritt entfernt.
+- Frage: Was kostet die WhatsApp-Automatisierung?
+  Antwort: Die WhatsApp-Automatisierung gibt es ab 1.299 € als Festpreis, netto zzgl. MwSt. Laufende Kosten Dritter wie Nachrichtengebühren sind nicht enthalten und stehen einzeln im Angebot.
+- Frage: Kann der Assistent Termine buchen?
+  Antwort: Ja. Bei Buchungsanfragen bietet er echte freie Zeitfenster an. Sensible oder unklare Anfragen gibt er mit dem Gesprächsverlauf an Ihr Team weiter.
+- Frage: Wo sehe ich die Gespräche?
+  Antwort: Jedes Gespräch wird mit Ergebnis protokolliert und landet in Ihrer Kundenverwaltung, damit Sie zum richtigen Zeitpunkt nachfassen können.
+
+## Voice-Agenten
+
+Adresse: https://www.rexity.ai/automation/voice
+
+KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
+
+Ein Empfang, der nie schläft.
+
+Ein Cloud-Telefonassistent, der Anrufe rund um die Uhr annimmt, weiterleitet und Details erfasst — damit keine Anfrage in der Mailbox landet.
+
+### Was der Telefonassistent kostet
+
+RexFangs ist noch in der Testphase; den Preis nennen wir auf Anfrage.
+
+- Digitale Rezeption — RexFangs: Nimmt Anrufe an, ruft zurück und übernimmt Ihre Kommunikations-Workflows – von Terminbuchung und Erinnerung bis Rückruf, Beschwerde und Recall. Gesteuert über programmierbare Anweisungen. Preis auf Anfrage, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Kann es an einen Menschen übergeben?
+  Antwort: Ja — komplexe oder sensible Anrufe gehen direkt an Ihr Team.
+
+## Website-Chatbots
+
+Adresse: https://www.rexity.ai/automation/chatbots
+
+KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €.
+
+Der Assistent auf genau dieser Seite.
+
+Ein Website-Assistent, der freigegebene Fragen aus Ihrer eigenen Wissensbasis beantwortet, Besucher führt und komplexe Fälle an einen Menschen übergibt — genau wie der hier.
+
+### Was ein KI-Chatbot für Ihre Website leistet
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) baut KI-Chatbots für die Websites kleiner und mittlerer Betriebe in Niedersachsen. Der Chatbot antwortet aus Ihren freigegebenen Inhalten und gibt weiter, was er nicht sicher weiß. Ein FAQ-Chatbot kostet 499 €, ein KI-Chatbot gibt es ab 799 €, jeweils als Festpreis netto zzgl. MwSt.
+
+Ein KI-Chatbot ist ein Chat-Fenster auf Ihrer Website, in dem Besucher in normaler Sprache fragen und sofort eine Antwort bekommen. Er antwortet aus Inhalten, die Sie freigegeben haben: Leistungen, Preise, Öffnungszeiten, Abläufe. Was er nicht sicher weiß, gibt er an Sie weiter, statt zu raten.
+
+Sinnvoll ist das für Betriebe, die immer wieder dieselben Fragen bekommen: das Studio nach Kurszeiten, die Werkstatt nach Preisen und freien Terminen, die Praxis nach Unterlagen, der Salon nach Leistungen. Jede Frage, die der Chatbot beantwortet, ist ein Anruf weniger während der Arbeit.
+
+Es gibt ihn in zwei Stufen. Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mehrsprachig mit Ihren eigenen Inhalten und nimmt Anfragen für Sie auf.
+
+### Typische Probleme, die ein Chatbot löst
+
+- Das Telefon klingelt während der Arbeit: Fragen zu Öffnungszeiten, Preisen und Terminen beantwortet der Chatbot, während Sie mit Kunden beschäftigt sind.
+- Anfragen am Abend und am Wochenende: Viele Besucher schauen abends auf Ihre Website. Der Chatbot antwortet sofort und nimmt Anfragen auf, die Sie am nächsten Morgen bearbeiten.
+- Informationen sind schwer zu finden: Statt sich durch Unterseiten zu klicken, fragen Besucher direkt und werden zur passenden Seite geführt.
+- Kunden schreiben in anderen Sprachen: Der KI-Chatbot antwortet mehrsprachig, auf Grundlage derselben freigegebenen Inhalte.
+
+### Was wir für Sie bauen
+
+- Eine Wissensbasis aus Ihren eigenen, freigegebenen Inhalten
+- Einen Assistenten, der sich klar als KI zu erkennen gibt
+- Regeln, welche Fragen er beantworten darf und welche an Sie gehen
+- Die Übergabe an Ihr Team mit dem ganzen Gesprächsverlauf
+- Schutz vor Versuchen, den Assistenten zu manipulieren
+- Ein Protokoll der Gespräche und der aufgenommenen Anfragen
+- Ein Chat-Fenster, das zu Ihrer Marke passt, am Handy wie am Rechner
+
+### So läuft ein Chatbot-Projekt ab
+
+1. Gespräch: 30 Minuten, kostenlos: Welche Fragen kommen immer wieder, welche Inhalte gibt es schon, und was soll der Chatbot auf keinen Fall beantworten?
+2. Inhalte sammeln: Aus Website, Preislisten und Ihren Antworten stellen wir die Wissensbasis zusammen. Sie geben jede Quelle frei.
+3. Bauen und testen: Wir richten Assistent, Regeln und Übergabe ein und testen mit echten Fragen – auch mit solchen, auf die er nicht antworten soll.
+4. Freigabe und Start: Der Chatbot geht erst live, wenn Sie mit seinen Antworten zufrieden sind.
+5. Verfeinern: In den ersten Wochen verbessern wir die Antworten anhand echter Gespräche.
+
+### Was ein Chatbot kostet
+
+Festpreise, netto zzgl. MwSt. Welche Stufe zu Ihnen passt, klären wir im kostenlosen Gespräch.
+
+- FAQ-Chatbot: Beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Festpreis 499 €, netto zzgl. MwSt.
+- KI-Chatbot: Ein KI-gestützter Chat-Assistent, der mit Ihren eigenen Inhalten antwortet. Festpreis ab 799 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### LevelKraft: Feedback im Gespräch
+
+Aus unserer Arbeit.
+
+In LevelKraft, unserer eigenen Lern-App für die TELC- und Goethe-Prüfungen, simuliert ein Sprach-Tutor die mündliche Prüfung im Gespräch, und Lernende bekommen sofortiges Feedback zu Sprechen und Schreiben.
+
+LevelKraft ist unser eigenes Produkt, kein Kundenprojekt. Einen Website-Chatbot für einen Kunden zeigen wir hier, sobald einer live ist.
+
+Fallstudie: https://www.rexity.ai/work/levelkraft
+
+### Häufige Fragen
+
+- Frage: Erfindet es Dinge?
+  Antwort: Es antwortet aus Ihren freigegebenen Inhalten und verweist bei Unsicherheit weiter.
+- Frage: Was ist der Unterschied zwischen FAQ-Chatbot und KI-Chatbot?
+  Antwort: Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden und kostet 499 €. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mit Ihren eigenen Inhalten und kostet ab 799 €. Beides sind Festpreise, netto zzgl. MwSt.
+- Frage: Merken Besucher, dass sie mit einer KI schreiben?
+  Antwort: Ja. Der Assistent gibt sich klar als KI zu erkennen, und bei schwierigen Fragen übernimmt ein Mensch aus Ihrem Team.
+- Frage: Wo werden die Gesprächsdaten verarbeitet?
+  Antwort: Wir bauen DSGVO-konform und hosten in der EU; personenbezogene Daten werden so sparsam wie möglich erfasst und sind zugriffsgeschützt. Die rechtliche Bewertung Ihres konkreten Falls übernimmt Ihre Rechtsberatung.
+- Frage: Funktioniert der Chatbot auch auf WhatsApp?
+  Antwort: Ja, derselbe Ansatz funktioniert auf WhatsApp – über die offizielle WhatsApp Business API und nur mit Einwilligung Ihrer Kunden.
+
+## Digitales Marketing
+
+Adresse: https://www.rexity.ai/marketing
+
+Online-Marketing für KMU: SEO, Inhalte und Video, damit Kunden Sie bei Google finden. Mit echter SEO-Fallstudie, ohne Ranking-Versprechen.
+
+Gefunden werden, im Kopf bleiben, gewählt werden.
+
+Suche, Content und Video, die Aufmerksamkeit in Kunden verwandeln — als dauerhafter Akquise-Kanal, nicht als Einmal-Kampagne.
+
+### Online-Marketing, das zu einem kleinen Betrieb passt
+
+Eine gute Website nützt wenig, wenn niemand sie findet. Unter Digitales Marketing bündeln wir drei Wege, auf denen Kunden zu Ihnen kommen: die Suche bei Google (SEO), Inhalte wie Artikel und Social-Media-Posts sowie kurze Videos.
+
+Wir versprechen keine Rankings, keine Anfragezahlen und keinen Umsatz. Was wir zusagen: saubere Technik, Inhalte, die echte Fragen Ihrer Kunden beantworten, und regelmäßiges Reporting, das zeigt, was wirkt und was nicht.
+
+Wir empfehlen, mit einem Kanal zu beginnen und ihn sauber aufzubauen, bevor der nächste dazukommt. Für viele lokale Betriebe ist das die Auffindbarkeit der eigenen Website.
+
+Wir sind ein kleines Team in Hermannsburg bei Celle und arbeiten remote für Betriebe in ganz Deutschland. Sie sprechen direkt mit der Person, die an Ihrer Website arbeitet – ohne Hotline und ohne Ticketsystem.
+
+### Typische Ausgangslagen
+
+Drei häufige Ausgangslagen und der Kanal, der dafür passt:
+
+- Die Website wird kaum gefunden: Wir prüfen Technik und Inhalte und beheben, was Rankings bremst – Tempo, Struktur, strukturierte Daten. (https://www.rexity.ai/marketing/seo)
+- Für regelmäßige Inhalte fehlt die Zeit: Ein Themenplan und ein fester Rhythmus für Artikel und Posts – in Ihrer Tonalität, auf Deutsch und Englisch. (https://www.rexity.ai/marketing/content)
+- Video wäre gut, Drehtage sind zu teuer: Kurze Videos aus Skript, Avataren, KI-Aufnahmen und – wo es hilft – echtem Material. (https://www.rexity.ai/marketing/video)
+
+### Wie SEO, Inhalte und Video zusammenspielen
+
+Die drei Kanäle hängen zusammen. Technisches SEO sorgt dafür, dass Google Ihre Seiten lesen und einordnen kann. Inhalte beantworten die Fragen, nach denen Ihre Kunden suchen, und geben Google einen Grund, Sie anzuzeigen. Videos und Social-Media-Posts bringen dieselben Themen dorthin, wo Ihre Kunden scrollen.
+
+Deshalb planen wir Themen einmal und verwerten sie mehrfach: Aus einem Artikel werden ein Social-Media-Post und ein kurzes Video. Das spart Zeit und hält Ihre Botschaft auf allen Kanälen einheitlich.
+
+### LevelKraft.de: Wachstum ohne bezahlte Kampagnen
+
+SEO-Fallstudie.
+
+Für unser eigenes Produkt LevelKraft haben wir die Website auf die Suchanfragen von Deutschlernenden ausgerichtet. Im August gab es 2.736 Seitenaufrufe nach 624 im Juli – ohne bezahlte Kampagnen (Stand: September 2026).
+
+LevelKraft ist unser eigenes Produkt. Ergebnisse hängen von Markt, Ausgangslage und Umsetzung ab; sie sind keine Zusage für Ihr Projekt.
+
+Fallstudie: https://www.rexity.ai/work/levelkraft#seo-fallstudie
+
+### So arbeiten wir im Marketing
+
+1. Gespräch: 30 Minuten, kostenlos: Wer sind Ihre Kunden, wonach suchen sie, und was gibt es schon?
+2. Prüfen: Wir sehen uns Technik, Inhalte und Suchanfragen an und finden, was Sie heute bremst.
+3. Planen: Themen und Suchbegriffe nach echter Suchabsicht, dazu ein Kalender, der sich halten lässt.
+4. Umsetzen: Technische Verbesserungen, neue Seiten, Artikel, Posts oder Videos – im festen Rhythmus.
+5. Messen: Wir verfolgen Rankings und Besuche, berichten Ihnen regelmäßig und setzen auf das, was wirkt.
+
+### Was Sie erwarten können
+
+- Technische Verbesserungen wirken oft innerhalb von Wochen
+- Besuche über neue Inhalte brauchen meist drei bis sechs Monate
+- Keine Versprechen zu Rankings, Anfragen oder Umsatz
+- Regelmäßiges Reporting zu Rankings und Besuchen
+- Inhalte auf Deutsch und Englisch
+
+### Was Marketing bei uns kostet
+
+Für Marketing gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Zum Einstieg eignet sich der Website-Check.
+
+- Website-Check: Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Festpreis 249 €, netto zzgl. MwSt.
+- Stundensatz für alles andere: Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. 89 € pro Stunde, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Wann sehe ich Ergebnisse?
+  Antwort: Technische Verbesserungen wirken oft innerhalb von Wochen, Besuche über neue Inhalte meist nach drei bis sechs Monaten. Garantieren kann das niemand; wir zeigen Ihnen regelmäßig, was sich tut.
+- Frage: Versprechen Sie Platz 1 bei Google?
+  Antwort: Nein. Rankings hängen von Markt, Wettbewerb und Ausgangslage ab. Wir versprechen saubere Arbeit und ehrliches Reporting, keine Positionen.
+- Frage: Brauche ich SEO, Inhalte und Video gleichzeitig?
+  Antwort: Nein. Wir empfehlen, mit einem Kanal zu beginnen und ihn sauber aufzubauen, bevor der nächste dazukommt.
+- Frage: Können Sie unsere bestehende Website verbessern, statt eine neue zu bauen?
+  Antwort: Ja. Wir prüfen zuerst Technik und Inhalte und empfehlen dann, ob Verbesserungen reichen oder ein Relaunch sinnvoller ist. Der Website-Check liefert dafür einen schriftlichen Befund.
+- Frage: Was kostet Marketing bei Ihnen?
+  Antwort: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Einen Einstieg bietet der Website-Check für 249 €: eine Stunde Prüfung Ihrer Website und Ihres Anfragewegs mit schriftlichem Befund.
+- Frage: Schreiben Sie auch auf Englisch?
+  Antwort: Ja – Inhalte auf Deutsch und Englisch, abgestimmt auf Plattform und Zielgruppe.
+
+## SEO
+
+Adresse: https://www.rexity.ai/marketing/seo
+
+SEO für KMU: technische Optimierung, Inhalte nach echter Suchabsicht und ehrliches Reporting. Fallstudie: LevelKraft.de. Ohne Ranking-Versprechen.
+
+Traffic, der sich aufbaut.
+
+Technisches SEO, Content und Link-Strategie, die Ihre Site zu einem dauerhaften Akquise-Kanal machen — bessere Rankings bei relevanten Suchanfragen.
+
+### SEO für kleine und mittlere Betriebe
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) macht die Websites kleiner und mittlerer Betriebe in Niedersachsen bei Google auffindbar: mit technischer Optimierung, Inhalten nach echter Suchabsicht und ehrlichem Reporting. Pauschalpakete gibt es nicht; den Festpreis nennen wir nach einem kurzen Gespräch, und zum Einstieg eignet sich der Website-Check für 249 €.
+
+Rankings versprechen wir nicht. Was wir zeigen können, ist unsere eigene SEO-Fallstudie zu LevelKraft.de, mit Zahlen, Quellen und Stand.
+
+### Was SEO bei uns kostet
+
+Für SEO gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Zum Einstieg eignet sich der Website-Check.
+
+- Website-Check: Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Festpreis 249 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Wann sehe ich Ergebnisse?
+  Antwort: Technische Gewinne in Wochen. Content-Traffic in 3–6 Monaten.
+
+## Content & Social
+
+Adresse: https://www.rexity.ai/marketing/content
+
+Content-Marketing für KMU: Artikel, Landingpage-Texte und Social-Media-Posts in Ihrer Tonalität, im festen Rhythmus geplant – auf Deutsch und Englisch.
+
+Dort auftauchen, wo Ihre Kunden scrollen.
+
+Eine Content-Maschine — Artikel, Social Posts und Creatives — die Ihre Marke sichtbar und Ihre Pipeline warm hält, geplant und produziert im festen Rhythmus.
+
+### Was Content-Marketing kostet
+
+Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Für Aufgaben außerhalb eines Festpreises gilt unser Stundensatz.
+
+- Stundensatz für alles andere: Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. 89 € pro Stunde, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### LevelKraft: über 30 Prüfungs- und Übungsseiten
+
+Aus unserer Arbeit.
+
+Für unsere eigene Lern-App LevelKraft haben wir eine Website mit über 30 Prüfungs- und Übungsseiten gebaut, die Suchende direkt in einen kostenlosen Test führt.
+
+LevelKraft ist unser eigenes Produkt, kein Kundenprojekt.
+
+Fallstudie: https://www.rexity.ai/work/levelkraft
+
+### Häufige Fragen
+
+- Frage: Schreiben Sie auf Deutsch und Englisch?
+  Antwort: Ja — beides, abgestimmt auf Plattform und Zielgruppe.
+
+## KI-Videomarketing
+
+Adresse: https://www.rexity.ai/marketing/video
+
+KI-Videomarketing: kurze Werbe- und Social-Media-Videos mit Avataren, KI-Aufnahmen und echtem Material – ohne Filmcrew, geschnitten für jede Plattform.
+
+Kampagnenreifes Video ohne Filmcrew.
+
+Marketingvideo im großen Maßstab produzieren — Avatare, realistische KI-Shots und Short-Form-Edits — für mehr markenkonforme Creatives bei gleichem Budget.
+
+### Was Videomarketing kostet
+
+Für Videomarketing gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Die Preise unserer Standardleistungen stehen auf der Preisseite.
+
+- Alle Preise: https://www.rexity.ai/preise
+
+### Unsere Projekte
+
+Referenzen.
+
+Eine Fallstudie zu Videomarketing haben wir noch nicht veröffentlicht. Unsere abgeschlossenen Projekte – Websites mit Online-Buchung und eine eigene App – finden Sie unter Arbeiten.
+
+Fallstudie: https://www.rexity.ai/work
+
+### Häufige Fragen
+
+- Frage: Sieht es künstlich aus?
+  Antwort: Moderne KI-Videos sind stark. Wir mischen sie mit echtem Material, wenn nötig.
+
+## Testing & Support
+
+Adresse: https://www.rexity.ai/testing-support
+
+Tests und Betreuung für Websites und Apps: Funktions- und Regressionstests, Monitoring nach dem Launch, Updates. Jährliche Wartung ab 999 € pro Jahr.
+
+Ausliefern, ohne die Luft anzuhalten.
+
+End-to-End-Testing und Post-Launch-Support — damit Releases sauber landen und gesund bleiben, über Geräte, Browser und OS-Versionen hinweg.
+
+### Was Wartung und Betreuung kosten
+
+Wartung ist optional und gilt für jedes Projekt; sie läuft als Jahrespaket.
+
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Body & Care: ein ruhiger Start
+
+Aus der Praxis.
+
+Die neue Website mit Online-Kursbuchung für Body & Care in Hermannsburg ist seit dem 14.09.2026 live. Die ersten Buchungstage liefen ohne einen einzigen Serverfehler.
+
+Fallstudie: https://www.rexity.ai/work/body-and-care
+
+### Häufige Fragen
+
+- Frage: Können Sie eine bestehende App übernehmen?
+  Antwort: Ja. Wir starten mit einem 1-wöchigen Audit, bevor wir nächste Schritte empfehlen.
+
+## In English
+
+- Rexity Labs UG (haftungsbeschränkt) is a small software studio in Hermannsburg (Südheide, Celle district, Lower Saxony, Germany). It designs and builds websites, online shops with Stripe checkout, web apps and SaaS, iOS and Android apps, and automation with AI chatbots, WhatsApp and RPA for small and mid-sized businesses in Lower Saxony and remotely across Germany. Fixed prices, net plus VAT. Every page has an English version via the DE/EN switch on the same URL. Contact: info@rexity.ai, +49 174 2471435.
