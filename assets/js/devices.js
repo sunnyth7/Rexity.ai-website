@@ -306,6 +306,21 @@
     el.addEventListener("touchstart", function () { clearTimeout(touchTimer); inst.holds.hover = true; update(inst); }, { passive: true });
     el.addEventListener("touchend", function () { clearTimeout(touchTimer); touchTimer = setTimeout(function () { inst.holds.hover = false; update(inst); }, 3000); }, { passive: true });
 
+    // Sprint 16 A2.2: the loop clones keep loading="lazy" until the row is within one viewport height, then switch
+    // to eager, so a clone that drifts in from the clipped overflow is already there (no blank tile). They reuse the
+    // originals' URLs, so by then it is a cache hit; off-screen rows fetch nothing early.
+    var near = !io;
+    function eager(c) { c.querySelectorAll("img[loading=lazy]").forEach(function (i) { i.loading = "eager"; }); }
+    if (!near) {
+      var nearIo = new IntersectionObserver(function (es) {
+        if (!es[es.length - 1].isIntersecting) return;
+        near = true;
+        nearIo.disconnect();
+        clones.forEach(eager);
+      }, { rootMargin: "100% 0px" });
+      nearIo.observe(el);
+    }
+
     function measure() {
       var gapPx = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 0;
       var first = originals[0], lastEl = originals[originals.length - 1];
@@ -323,7 +338,7 @@
         if ("inert" in c) c.inert = true;
         c.querySelectorAll("a,button,input,[tabindex]").forEach(function (f) { f.setAttribute("tabindex", "-1"); });
         if (c.matches("a,button,[tabindex]")) c.setAttribute("tabindex", "-1");
-        c.querySelectorAll("img[loading=lazy]").forEach(function (i) { i.loading = "eager"; });
+        if (near) eager(c);
         track.appendChild(c);
         clones.push(c);
       });

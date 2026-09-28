@@ -12,7 +12,8 @@
    5. "Kommt Ihnen das bekannt vor?": below 768 px each group's label becomes a toggle and groups 2–4
       start folded (founder review 2026-09-27: 3,000 px → about 1,400 px at 390). All text stays in the
       HTML; without JS and from 768 px every group is open.
-   6. About collage media: photos and video load on the first scroll/interaction or 1.2 s after load (14-G). */
+   6. About collage media: photos and video load after the load event, once the page has been scrolled and the
+      about section is within one viewport height (14-G, Sprint 16 A2.1). */
 (function () {
   "use strict";
   var doc = document, root = doc.documentElement;
@@ -214,23 +215,24 @@
 
   /* 6. about collage media (14-G): the six photos (img[data-rx-src]) and the video (video[data-rx-defer]) sit
      under the hero, but the collage's transforms put them inside the viewport, so native lazy loading fetched
-     all of them (~1.3 MB) with the first screen. They now load on the first scroll/touch/key, or 1.2 s after
-     the load event, whichever comes first. The <img>/<video> elements stay in the DOM for the template's
-     scroll animation; only their sources are late. The video keeps `autoplay` (so the template's play/pause
-     control starts in the "pause" state as before); under reduced motion it loads without autoplay (paused). */
+     all of them (~1.3 MB) with the first screen. Sprint 16 A2.1: they load only after the load event, while the
+     about section is within one viewport height (IntersectionObserver, like the MacBook loop in 3b). The
+     section starts right at the fold, so it counts as near only once the page is scrolled (or the section is
+     already on screen); a visitor who never scrolls downloads none of it. The <img>/<video> elements stay in
+     the DOM for the template's scroll animation; only their sources are late. The video keeps `autoplay` (so
+     the template's play/pause control starts in the "pause" state as before); under reduced motion it loads
+     without autoplay (paused). No IntersectionObserver: they load on the load event. */
   function aboutMedia() {
     var imgs = arr(doc.querySelectorAll("img[data-rx-src]"));
     var vids = arr(doc.querySelectorAll("video[data-rx-defer]"));
     if (!imgs.length && !vids.length) return;
-    var done = false, timer = 0;
-    // page scroll only: a capturing "scroll" listener would also fire for element scrolls (e.g. a snap row)
-    var EV = ["wheel", "touchstart", "pointerdown", "keydown"];
+    var sec = (imgs[0] || vids[0]).closest(".rx-habout") || (imgs[0] || vids[0]).parentNode;
+    var done = false, loaded = doc.readyState === "complete", near = false, io = null;
     function go() {
       if (done) return;
       done = true;
-      clearTimeout(timer);
-      window.removeEventListener("scroll", go);
-      EV.forEach(function (t) { window.removeEventListener(t, go, true); });
+      if (io) io.disconnect();
+      window.removeEventListener("scroll", check);
       imgs.forEach(function (img) { img.src = img.getAttribute("data-rx-src"); img.removeAttribute("data-rx-src"); });
       vids.forEach(function (v) {
         var p = v.getAttribute("data-rx-poster");
@@ -245,11 +247,16 @@
         v.load();
       });
     }
-    if ((window.pageYOffset || root.scrollTop) > 0) return go();
-    window.addEventListener("scroll", go, { passive: true });
-    EV.forEach(function (t) { window.addEventListener(t, go, { capture: true, passive: true }); });
-    var later = function () { timer = setTimeout(go, 1200); };
-    if (doc.readyState === "complete") later(); else window.addEventListener("load", later);
+    // page scroll only: a capturing "scroll" listener would also fire for element scrolls (e.g. a snap row)
+    function check() {
+      if (!loaded || !near) return;
+      if ((window.pageYOffset || root.scrollTop) > 0 || sec.getBoundingClientRect().top < window.innerHeight - 1) go();
+    }
+    if (!loaded) window.addEventListener("load", function () { loaded = true; if (IO) check(); else go(); });
+    if (!IO) { if (loaded) go(); return; }
+    io = new IntersectionObserver(function (es) { near = es[es.length - 1].isIntersecting; check(); }, { rootMargin: "100% 0px 100% 0px" });
+    io.observe(sec);
+    window.addEventListener("scroll", check, { passive: true });
   }
 
   var syncWork = work(); // sets the final section height before the template's scroll triggers measure

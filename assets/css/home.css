@@ -61,9 +61,11 @@ html:not(.w-mod-js) img[data-rx-src],html:not(.w-mod-js) video[data-rx-defer]{di
 @media (prefers-reduced-motion:reduce){.home-hero .paragraph-first-line{animation-duration:.01s;animation-delay:0s}}
 
 /* hero copy (founder review 27.09.): larger, closer to the ring, revealed in step with the ring's intro. The wrapper keeps
-   an instant reveal (it has to beat the IX's inline opacity); the sub-line and then the buttons rise and sharpen in */
-.home-hero .paragraph-first-line{animation-duration:.01s;animation-delay:0s}
-.home-hero .absolute-p p{font-size:clamp(1.125rem,1rem + .45vw,1.375rem);line-height:1.4;font-weight:500;letter-spacing:-.01em;text-wrap:balance;animation:rx-hero-rise .9s .55s cubic-bezier(.2,.7,.2,1) both}
+   an instant reveal (it has to beat the IX's inline opacity; 0 s, because a .01 s run still painted its 0 % keyframe,
+   opacity 0, in the first frame); the sub-line paints with the first frame (Sprint 16 A1: it was the LCP element and
+   waited 0.55 s + 0.9 s), then the buttons rise and sharpen in */
+.home-hero .paragraph-first-line{animation-duration:0s;animation-delay:0s}
+.home-hero .absolute-p p{font-size:clamp(1.125rem,1rem + .45vw,1.375rem);line-height:1.4;font-weight:500;letter-spacing:-.01em;text-wrap:balance}
 .rx-hero-actions{margin-top:24px;gap:12px;animation:rx-hero-rise .9s .75s cubic-bezier(.2,.7,.2,1) both}
 .rx-hero-actions .rx-btn{min-height:54px;padding-inline:22px;font-size:1.0625rem}
 @keyframes rx-hero-rise{from{opacity:0;transform:translate3d(0,18px,0);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
