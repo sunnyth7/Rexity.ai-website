@@ -1,0 +1,79 @@
+/* Website demo pages /work/demo/<slug> (Sprint 17, WP-17E). Included only by scripts/pages/44-demos.mjs, after
+   assets/css/work.css (hero, pager and closing are the work family's). This file adds the demo's own pieces:
+   hero chips, the preview stage (browser + phone on the demo's accent colour), the pause button, the components
+   checklist and the add-on price line. Markup: scripts/pages/44-demos.mjs. */
+
+#vorschau, #komponenten, #erweiterungen { scroll-margin-top: 6rem; }
+
+/* ------------------------------------------------------------ hero: text only (the preview follows) */
+.rx-whero--demo .rx-dhero { max-width: 46rem; }
+.rx-dhero .rx-chips { margin: 0; }
+.rx-dhero .rx-whero__lead { font-size: var(--rx-fs-lead, 1.125rem); color: var(--rxw-ink); }
+
+/* ------------------------------------------------------------ preview stage */
+.rx-dstage {
+  display: grid;
+  gap: 28px;
+  align-items: end;
+  padding: clamp(20px, 4vw, 56px);
+  border-radius: clamp(16px, 2vw, 24px);
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.22), transparent 60%),
+    linear-gradient(160deg, var(--rx-card-accent), color-mix(in srgb, var(--rx-card-accent) 62%, #000));
+}
+.rx-dstage .rx-device { font-size: 12px; }
+.rx-dstage__browser { min-width: 0; }
+.rx-dstage__phone { width: min(260px, 64%); margin: 0 auto; min-width: 0; }
+@media (min-width: 768px) {
+  .rx-dstage { grid-template-columns: minmax(0, 1fr) minmax(0, 0.27fr); gap: clamp(24px, 3vw, 48px); }
+  .rx-dstage__phone { width: 100%; margin: 0; }
+}
+.rx-dlong { opacity: 0; transition: opacity 0.45s; }
+.rx-dlong.is-ready { opacity: 1; }
+.rx-dstage__controls { display: flex; justify-content: flex-end; margin-top: 16px; }
+.rx-dtoggle[hidden] { display: none; }
+
+/* ------------------------------------------------------------ components checklist */
+.rx-dchecks { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+@media (min-width: 768px) { .rx-dchecks { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.rx-dchecks li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--rxw-line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--rxw-ink) 4%, transparent);
+  color: var(--rxw-ink);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+.rx-dchecks li::before {
+  content: "✓";
+  content: "✓" / "";
+  flex: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--rxw-accent) 22%, transparent);
+  color: var(--rxw-accent);
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1.5em;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ add-ons */
+.rx-dprice { margin-top: 12px; color: var(--rxw-ink); font-weight: 600; font-size: 1rem; }
+
+/* ------------------------------------------------------------ pager: its own section here */
+.rx-dpage .rx-wpager { margin-top: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rx-dlong { transition: none; }
+}
+
+/* ------------------------------------------------------------ demo disclaimer (founder, 2026-09-29) */
+.rx-ddisclaimer { margin-top: 20px; max-width: 52rem; gap: 6px; }
+.rx-ddisclaimer__title { color: var(--rx-ink); font-weight: 600; }
+.rx-ddisclaimer__text { color: var(--rx-muted); font-size: 0.9375rem; line-height: 1.55; }

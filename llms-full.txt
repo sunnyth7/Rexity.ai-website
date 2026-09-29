@@ -62,8 +62,26 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 
 - [Body & Care Hermannsburg](https://www.rexity.ai/work/body-and-care): Kundenprojekt. Fallstudie Body & Care Hermannsburg: neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung. Live seit 14.09.2026.
 - [Fahrzeugpflege Celle](https://www.rexity.ai/work/chara): Kundenprojekt. Fallstudie Fahrzeugpflege Celle: Website mit Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und Verwaltung für den Inhaber.
-- [LevelKraft](https://www.rexity.ai/work/levelkraft): Eigenes Produkt, kein Kundenprojekt. Fallstudie LevelKraft: unsere Lern-App für TELC- und Goethe-Prüfungen, für iPhone, Android und Web – mit Modelltests, Sofort-Feedback und SEO-Fallstudie.
-- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Die weiteren Designs dort sind eigene Produkte und Design-Konzepte, keine Kundenprojekte; jede Karte ist beschriftet.
+- [LevelKraft](https://www.rexity.ai/work/levelkraft): Von Rexity entwickelt und gestartet. Fallstudie LevelKraft: Lern-App für TELC und Goethe, von Rexity entwickelt – iPhone, Android, Web, Stripe-Checkout und SEO.
+- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Weitere Projekte dort: von uns entwickelte Apps und Plattformen sowie Design-Konzepte; jede Karte ist beschriftet.
+
+## Website-Demos
+
+Beispiel-Websites, die Rexity für einzelne Branchen gestaltet und gebaut hat; keine Kundenprojekte. Name, Texte und Bilder sind Platzhalter. Jede Seite zeigt die Demo, ihre Komponenten und passende Erweiterungen.
+
+- [Personal-Training-Website-Demo](https://www.rexity.ai/work/demo/personal-training): Personal-Training-Website-Demo von Rexity: mehrere Seiten mit Programmen, Preisen, Trainern, Bewertungen und Anfrageformularen mit Backend.
+- [Kosmetikstudio-Website-Demo](https://www.rexity.ai/work/demo/kosmetikstudio): Kosmetikstudio-Website-Demo von Rexity: Behandlungen mit Preisen, Angebote, Team, Kundenstimmen und Terminanfrage. Erweiterbar mit Online-Buchung.
+- [Möbelwerkstatt-Website-Demo](https://www.rexity.ai/work/demo/moebelwerkstatt): Möbelwerkstatt-Website-Demo von Rexity: Produktkatalog mit Varianten, Beratung, Team, Galerie und Bewertungen. Erweiterbar mit Stripe-Checkout.
+- [Salon-Website-Demo](https://www.rexity.ai/work/demo/salon): Salon-Website-Demo von Rexity: Leistungen, Preisliste, Team, Galerie, Vorher-Nachher-Regler und Buchungsoberfläche. Mit Online-Terminbuchung erweiterbar.
+- [Pub-Website-Demo](https://www.rexity.ai/work/demo/pub): Pub-Website-Demo von Rexity: Getränke- und Speisekarte, Wochenprogramm, Konzertkalender, Reservierungsanfrage und Inhaber-Bereich als Oberfläche.
+- [Software-Studio-Website-Demo](https://www.rexity.ai/work/demo/software-studio): Software-Studio-Website-Demo von Rexity: animierte 3D-Form mit WebGL, Scroll-Szenen, Leistungen, Referenzen und Kontaktformular.
+- [Fitnessstudio-Website-Demo](https://www.rexity.ai/work/demo/fitnessstudio): Fitnessstudio-Website-Demo von Rexity: Kurse, Kursplan, Mitgliedschaften, Trainer und Standortkarte. Erweiterbar mit Online-Kursbuchung ab 1.999 €.
+- [Berghotel-Website-Demo](https://www.rexity.ai/work/demo/berghotel): Berghotel-Website-Demo von Rexity: Zimmer, Restaurant, Wellness, Sommer- und Winterangebote, Galerie und FAQ. Erweiterbar mit Online-Buchung.
+- [Hotel-&-Restaurant-Website-Demo](https://www.rexity.ai/work/demo/hotel-restaurant): Hotel-&-Restaurant-Website-Demo von Rexity: Zimmer und Suiten, Restaurant und Bar, Galerie, Spa und Kontakt. Erweiterbar mit Online-Buchung.
+- [Industrie-Website-Demo](https://www.rexity.ai/work/demo/industrie): Industrie-Website-Demo von Rexity: Kennzahlen, Lösungen, Branchen, Software, Ablauf und Fallbeispiel. Erweiterbar mit Dashboards und RPA.
+- [Pizzeria-Website-Demo](https://www.rexity.ai/work/demo/pizzeria): Pizzeria-Website-Demo von Rexity: Hero-Video, Slice des Tages, Speisekarte mit Preisen, Ambiente und Öffnungszeiten. Mit KI-Chatbot erweiterbar.
+- [Immobilienmakler-Website-Demo](https://www.rexity.ai/work/demo/immobilienmakler): Immobilienmakler-Website-Demo von Rexity: Scroll-Animation, Objektangebote mit Filter, Merkliste, Kundenstimmen und Anfrageformular.
+- [Schuh-Onlineshop-Demo](https://www.rexity.ai/work/demo/schuh-onlineshop): Schuh-Onlineshop-Demo von Rexity: Kategorien, Bestseller-Raster, Markengeschichte, Bewertungen und Filialkarte. Mit Stripe-Checkout erweiterbar.
 
 ## Was wir nicht tun
 
@@ -234,6 +252,16 @@ Für die Bezahlung binden wir Stripe an, einen Zahlungsanbieter, bei dem Ihr Bet
 - Rechnungen, die Stripe erstellt und verschickt
 - Abos und wiederkehrende Zahlungen, etwa für Mitgliedschaften
 
+### Stripe-Checkout in Produktion: app.levelkraft.de
+
+Von uns entwickelt.
+
+In der Web-App von LevelKraft (app.levelkraft.de) läuft der Checkout über Stripe. LevelKraft ist eine Lern-App für die TELC- und Goethe-Prüfungen, die wir entwickelt und gestartet haben: als Web-App, für iPhone und für Android.
+
+Im Bild: der Checkout für das Jahresabo LevelKraft Premium. Bezahlt wird per Karte, Klarna, Amazon Pay oder Satispay.
+
+Fallstudie: https://www.rexity.ai/work/levelkraft
+
 ### Rechtliches, an das Sie denken sollten
 
 Ein Online-Shop hat in Deutschland Pflichten, die eine normale Website nicht hat. Wir setzen die technischen Punkte um; die Rechtstexte und ihre Prüfung liegen bei Ihnen oder Ihrer Rechtsberatung. Eine Rechtsberatung leisten wir nicht.
@@ -300,7 +328,7 @@ Multi-Tenant-SaaS-Plattformen mit Auth, Billing, Dashboards und dem Backend dahi
 
 Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt SaaS-Plattformen und Web-Apps für Gründer und Teams in Niedersachsen: mit Login, Rollen, Abrechnung und Admin-Bereich, von der ersten Version bis zum Betrieb. Für SaaS gibt es keinen Listenpreis; nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version.
 
-Für die Abrechnung setzen wir auf Stripe. Wie ein eigenes Produkt über Jahre läuft, zeigt LevelKraft: unsere Lern-App für iPhone, Android und Web, mit Abonnements direkt in der App.
+Für die Abrechnung setzen wir auf Stripe. Wie das in einem laufenden Produkt aussieht, zeigt LevelKraft: eine Lern-App für iPhone, Android und Web, die wir entwickelt haben, mit Abonnements direkt in der App und Stripe-Checkout in der Web-App.
 
 ### Was eine SaaS-Plattform kostet
 
@@ -360,11 +388,18 @@ Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen
 
 Aus unserer Arbeit.
 
-LevelKraft ist unsere Lern-App für die TELC- und Goethe-Prüfungen, live im App Store, bei Google Play und im Web. Eine App für iPhone und Android plus Web-App, alles aus einer gemeinsamen Grundlage: mit vollständigen Modelltests, sofortigem Feedback zu Sprechen und Schreiben und Abonnements direkt in der App.
+LevelKraft ist eine Lern-App für die TELC- und Goethe-Prüfungen, die wir entwickelt haben, live im App Store, bei Google Play und im Web. Eine App für iPhone und Android plus Web-App, alles aus einer gemeinsamen Grundlage: mit vollständigen Modelltests, sofortigem Feedback zu Sprechen und Schreiben und Abonnements direkt in der App.
 
-LevelKraft ist unser eigenes Produkt, kein Kundenprojekt. Wir entwickeln und betreiben es seit November 2025.
+Wir entwickeln und betreiben LevelKraft seit November 2025.
 
 Fallstudie: https://www.rexity.ai/work/levelkraft
+
+### Von uns entwickelt: im App Store und bei Google Play
+
+Zwei Apps, die wir gebaut und gestartet haben, jeweils für iPhone und Android.
+
+- CLEVR (Von Rexity entwickelt und gestartet): Von uns entwickelt: App zur Partyplanung – Gäste treten mit einem 8-stelligen Code bei. Von Tag eins bis zum Go-live begleitet: Website, iOS- und Android-App. Über 15.000 Nutzer seit dem Start (Stand September 2026). Links: clevr.social: https://clevr.social; App Store: https://apps.apple.com/app/id6761129912; Google Play: https://play.google.com/store/apps/details?id=com.clevr.app.
+- LevelKraft (Von Rexity entwickelt und gestartet): Von uns entwickelt: Prüfungsvorbereitung für TELC und Goethe – als App und im Browser. Web-App, iOS- und Android-App für die TELC- und Goethe-Prüfungen. Stripe-Checkout in der Web-App (app.levelkraft.de). SEO-Fallstudie: ca. 24× mehr Besuche pro Tag (Stand September 2026). Links: levelkraft.de: https://levelkraft.de; app.levelkraft.de: https://app.levelkraft.de; App Store: https://apps.apple.com/us/app/telc-goethe-b1-b2-german/id6761135303; Google Play: https://play.google.com/store/apps/details?id=ai.rexity.telc.
 
 ### Häufige Fragen
 
@@ -723,9 +758,9 @@ Festpreise, netto zzgl. MwSt. Welche Stufe zu Ihnen passt, klären wir im kosten
 
 Aus unserer Arbeit.
 
-In LevelKraft, unserer eigenen Lern-App für die TELC- und Goethe-Prüfungen, simuliert ein Sprach-Tutor die mündliche Prüfung im Gespräch, und Lernende bekommen sofortiges Feedback zu Sprechen und Schreiben.
+In LevelKraft, einer Lern-App für die TELC- und Goethe-Prüfungen, die wir entwickelt haben, simuliert ein Sprach-Tutor die mündliche Prüfung im Gespräch, und Lernende bekommen sofortiges Feedback zu Sprechen und Schreiben.
 
-LevelKraft ist unser eigenes Produkt, kein Kundenprojekt. Einen Website-Chatbot für einen Kunden zeigen wir hier, sobald einer live ist.
+Einen Website-Chatbot für einen Kunden zeigen wir hier, sobald einer live ist.
 
 Fallstudie: https://www.rexity.ai/work/levelkraft
 
@@ -780,9 +815,9 @@ Deshalb planen wir Themen einmal und verwerten sie mehrfach: Aus einem Artikel w
 
 SEO-Fallstudie.
 
-Für unser eigenes Produkt LevelKraft haben wir die Website auf die Suchanfragen von Deutschlernenden ausgerichtet. Im August gab es 2.736 Seitenaufrufe nach 624 im Juli – ohne bezahlte Kampagnen (Stand: September 2026).
+Für LevelKraft, eine Lern-App, die wir entwickelt haben, haben wir die Website auf die Suchanfragen von Deutschlernenden ausgerichtet. Im August gab es 2.736 Seitenaufrufe nach 624 im Juli – ohne bezahlte Kampagnen (Stand: September 2026).
 
-LevelKraft ist unser eigenes Produkt. Ergebnisse hängen von Markt, Ausgangslage und Umsetzung ab; sie sind keine Zusage für Ihr Projekt.
+Ergebnisse hängen von Markt, Ausgangslage und Umsetzung ab; sie sind keine Zusage für Ihr Projekt.
 
 Fallstudie: https://www.rexity.ai/work/levelkraft#seo-fallstudie
 
@@ -874,9 +909,7 @@ Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Für Aufgaben außerha
 
 Aus unserer Arbeit.
 
-Für unsere eigene Lern-App LevelKraft haben wir eine Website mit über 30 Prüfungs- und Übungsseiten gebaut, die Suchende direkt in einen kostenlosen Test führt.
-
-LevelKraft ist unser eigenes Produkt, kein Kundenprojekt.
+Für LevelKraft, eine Lern-App, die wir entwickelt haben, haben wir eine Website mit über 30 Prüfungs- und Übungsseiten gebaut, die Suchende direkt in einen kostenlosen Test führt.
 
 Fallstudie: https://www.rexity.ai/work/levelkraft
 

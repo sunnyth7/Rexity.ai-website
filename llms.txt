@@ -60,8 +60,26 @@ Rexity Labs UG (haftungsbeschränkt) ist ein kleines Software-Studio aus Hermann
 
 - [Body & Care Hermannsburg](https://www.rexity.ai/work/body-and-care): Kundenprojekt. Fallstudie Body & Care Hermannsburg: neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung. Live seit 14.09.2026.
 - [Fahrzeugpflege Celle](https://www.rexity.ai/work/chara): Kundenprojekt. Fallstudie Fahrzeugpflege Celle: Website mit Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und Verwaltung für den Inhaber.
-- [LevelKraft](https://www.rexity.ai/work/levelkraft): Eigenes Produkt, kein Kundenprojekt. Fallstudie LevelKraft: unsere Lern-App für TELC- und Goethe-Prüfungen, für iPhone, Android und Web – mit Modelltests, Sofort-Feedback und SEO-Fallstudie.
-- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Die weiteren Designs dort sind eigene Produkte und Design-Konzepte, keine Kundenprojekte; jede Karte ist beschriftet.
+- [LevelKraft](https://www.rexity.ai/work/levelkraft): Von Rexity entwickelt und gestartet. Fallstudie LevelKraft: Lern-App für TELC und Goethe, von Rexity entwickelt – iPhone, Android, Web, Stripe-Checkout und SEO.
+- [Alle Referenzen](https://www.rexity.ai/work): Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft. Weitere Projekte dort: von uns entwickelte Apps und Plattformen sowie Design-Konzepte; jede Karte ist beschriftet.
+
+## Website-Demos
+
+Beispiel-Websites, die Rexity für einzelne Branchen gestaltet und gebaut hat; keine Kundenprojekte. Name, Texte und Bilder sind Platzhalter. Jede Seite zeigt die Demo, ihre Komponenten und passende Erweiterungen.
+
+- [Personal-Training-Website-Demo](https://www.rexity.ai/work/demo/personal-training): Personal-Training-Website-Demo von Rexity: mehrere Seiten mit Programmen, Preisen, Trainern, Bewertungen und Anfrageformularen mit Backend.
+- [Kosmetikstudio-Website-Demo](https://www.rexity.ai/work/demo/kosmetikstudio): Kosmetikstudio-Website-Demo von Rexity: Behandlungen mit Preisen, Angebote, Team, Kundenstimmen und Terminanfrage. Erweiterbar mit Online-Buchung.
+- [Möbelwerkstatt-Website-Demo](https://www.rexity.ai/work/demo/moebelwerkstatt): Möbelwerkstatt-Website-Demo von Rexity: Produktkatalog mit Varianten, Beratung, Team, Galerie und Bewertungen. Erweiterbar mit Stripe-Checkout.
+- [Salon-Website-Demo](https://www.rexity.ai/work/demo/salon): Salon-Website-Demo von Rexity: Leistungen, Preisliste, Team, Galerie, Vorher-Nachher-Regler und Buchungsoberfläche. Mit Online-Terminbuchung erweiterbar.
+- [Pub-Website-Demo](https://www.rexity.ai/work/demo/pub): Pub-Website-Demo von Rexity: Getränke- und Speisekarte, Wochenprogramm, Konzertkalender, Reservierungsanfrage und Inhaber-Bereich als Oberfläche.
+- [Software-Studio-Website-Demo](https://www.rexity.ai/work/demo/software-studio): Software-Studio-Website-Demo von Rexity: animierte 3D-Form mit WebGL, Scroll-Szenen, Leistungen, Referenzen und Kontaktformular.
+- [Fitnessstudio-Website-Demo](https://www.rexity.ai/work/demo/fitnessstudio): Fitnessstudio-Website-Demo von Rexity: Kurse, Kursplan, Mitgliedschaften, Trainer und Standortkarte. Erweiterbar mit Online-Kursbuchung ab 1.999 €.
+- [Berghotel-Website-Demo](https://www.rexity.ai/work/demo/berghotel): Berghotel-Website-Demo von Rexity: Zimmer, Restaurant, Wellness, Sommer- und Winterangebote, Galerie und FAQ. Erweiterbar mit Online-Buchung.
+- [Hotel-&-Restaurant-Website-Demo](https://www.rexity.ai/work/demo/hotel-restaurant): Hotel-&-Restaurant-Website-Demo von Rexity: Zimmer und Suiten, Restaurant und Bar, Galerie, Spa und Kontakt. Erweiterbar mit Online-Buchung.
+- [Industrie-Website-Demo](https://www.rexity.ai/work/demo/industrie): Industrie-Website-Demo von Rexity: Kennzahlen, Lösungen, Branchen, Software, Ablauf und Fallbeispiel. Erweiterbar mit Dashboards und RPA.
+- [Pizzeria-Website-Demo](https://www.rexity.ai/work/demo/pizzeria): Pizzeria-Website-Demo von Rexity: Hero-Video, Slice des Tages, Speisekarte mit Preisen, Ambiente und Öffnungszeiten. Mit KI-Chatbot erweiterbar.
+- [Immobilienmakler-Website-Demo](https://www.rexity.ai/work/demo/immobilienmakler): Immobilienmakler-Website-Demo von Rexity: Scroll-Animation, Objektangebote mit Filter, Merkliste, Kundenstimmen und Anfrageformular.
+- [Schuh-Onlineshop-Demo](https://www.rexity.ai/work/demo/schuh-onlineshop): Schuh-Onlineshop-Demo von Rexity: Kategorien, Bestseller-Raster, Markengeschichte, Bewertungen und Filialkarte. Mit Stripe-Checkout erweiterbar.
 
 ## Region und Branchen
 

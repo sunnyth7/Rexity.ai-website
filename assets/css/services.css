@@ -159,6 +159,9 @@
   margin-left: 3px;
 }
 .sv-media-device { max-width: 40rem; margin-inline: auto; }
+/* Sprint 17 (17B): a real screenshot beside a proof panel shows whole, at its own aspect ratio */
+.sv-media--shot { aspect-ratio: auto; height: auto; }
+.sv-media--shot .sv-media__img { height: auto; object-fit: contain; }
 /* browser-frame URL pill: main font, never below 12 px (P-38) */
 .sv-main .rx-device__url { font: 500 12px/1 var(--font-families--primary); }
 
@@ -600,3 +603,16 @@ a.sv-card:hover .sv-card__go { text-decoration: underline; text-underline-offset
 .sv-proj__tags a.rx-chip.rx-wtag::before{content:"";position:absolute;top:50%;right:-3px;left:-3px;height:100%;transform:translateY(-50%)}
 @media (pointer:coarse),(max-width:767px){.sv-proj__tags a.rx-chip.rx-wtag::before{height:44px}.sv-proj__tags{row-gap:20px}}
 @media (prefers-reduced-motion:reduce){.sv-proj__media img,.sv-proj__tags .rx-chip.rx-wtag{transition:none}.sv-proj:hover .sv-proj__media img{transform:none}}
+
+/* Sprint 17 (17B): "Von uns entwickelt" proof row (/web/mobile-apps), markup: scripts/pages/lib-work/built.mjs builtProofRow() */
+.sv-built { list-style: none; margin: 0; padding: 0; }
+.sv-built > li { display: flex; }
+.sv-built__card { flex: 1; align-items: flex-start; gap: 12px; border-left: 3px solid var(--rx-card-accent, var(--rx-accent)); }
+.sv-built__card .rx-panel__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; }
+.rx-built__facts { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.rx-built__facts li { position: relative; padding-left: 22px; color: var(--rx-ink); font-size: 0.9375rem; line-height: 1.5; }
+.rx-built__facts li::before { content: ""; position: absolute; left: 2px; top: 0.45em; width: 7px; height: 11px; border-right: 2px solid var(--rx-accent); border-bottom: 2px solid var(--rx-accent); transform: rotate(45deg); }
+.rx-built__shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 4px 0 0; padding: 0; list-style: none; }
+.rx-built__shots img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.rx-built__links { display: flex; flex-wrap: wrap; gap: 0 20px; margin: 0; padding: 0; list-style: none; }
+.rx-built__links .rx-wlive { display: inline-flex; align-items: center; min-height: 44px; color: var(--rx-accent-ink, #b197fc); font-size: 1rem; font-weight: 500; }

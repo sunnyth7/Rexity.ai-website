@@ -1,4 +1,4 @@
-/* Homepage only (Sprint 9, Sprint 12): the "Eigene Produkte" strip and the services rail's SEO proof line.
+/* Homepage only (Sprint 9, Sprint 12): the "Eigene Produkte" strip (Sprint 17: "Von uns entwickelt") and the services rail's SEO proof line.
    Not linked: scripts/pages/17-products.mjs inlines this file into index.html as <style id="rx-products">
    (last in <head>, after the Vaxel CSS), so it adds no render-blocking request.
    Markup: scripts/pages/lib-work/products.mjs homeStrip(): rx-section + rx-sechead (assets/css/rexity.css),
@@ -12,6 +12,8 @@ html:is([data-palette="light"], [data-palette="contrast"]) .rx-hprods { --rxh-li
 .rx-hprods__item { min-width: 0; }
 @media (min-width: 768px) { .rx-hprods__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; } }
 @media (min-width: 1200px) { .rx-hprods__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; } }
+/* Sprint 17: the "Von uns entwickelt" strip has two tiles; they stay two columns on wide screens */
+@media (min-width: 1200px) { .rx-hprods__list--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* one card = one link; phones: visual left (same size for all four), text right; from 768 px: visual on top */
 .rx-hprod {

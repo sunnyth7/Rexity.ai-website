@@ -251,6 +251,9 @@ html[data-palette="contrast"] #main { --rxw-line: rgba(16, 35, 63, 0.14); }
 .rx-wdesigns .rx-card__name { flex-basis: 100%; margin: 0; font-size: 1.125rem; line-height: 1.3; letter-spacing: 0; }
 .rx-wdesigns .rx-card__sector { flex-basis: 100%; min-width: 0; }
 .rx-wdesigns .rx-card__kind { margin-left: 0; }
+/* Sprint 17 (17E): where a website-demo card goes (the whole card is its name link) */
+.rx-wdesigns .rx-card__demo { flex-basis: 100%; min-height: 0; margin-top: 2px; font-size: 0.9375rem; }
+.rx-wdesigns .rx-card--linked:hover .rx-card__demo { text-decoration: underline; text-underline-offset: 0.2em; }
 .rx-work-blurb {
   display: -webkit-box;
   flex-basis: 100%;
@@ -390,3 +393,26 @@ html[data-palette="contrast"] #main { --rxw-line: rgba(16, 35, 63, 0.14); }
   .rx-wrv .rx-wrv-t:not(.is-in) { opacity: 1; transform: none; }
   .rx-work-late { transition: none; }
 }
+
+/* ------------------------------------------------------------ Sprint 17: /work#entwickelt ("Von uns entwickelt & gestartet")
+   Markup: scripts/pages/lib-work/built.mjs. The cards reuse the product tiles (rx-prod*) above; only the label dot,
+   the facts and the link row are new. */
+.rx-prod__status--built::before { background: var(--rxw-accent); }
+.rx-built__facts { display: grid; gap: 8px; margin: 2px 0 0; padding: 0; list-style: none; }
+.rx-built__facts li { position: relative; padding-left: 22px; color: var(--rxw-ink); font-size: 0.9375rem; line-height: 1.5; }
+.rx-built__facts li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.45em;
+  width: 7px;
+  height: 11px;
+  border-right: 2px solid var(--rxw-accent);
+  border-bottom: 2px solid var(--rxw-accent);
+  transform: rotate(45deg);
+}
+.rx-built__links { display: flex; flex-wrap: wrap; gap: 0 20px; margin: 0; padding: 0; list-style: none; }
+/* CLEVR's App Store screens: flat images (they carry their own phone mockup), one row of up to four */
+.rx-built__shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 4px 0 0; padding: 0; list-style: none; }
+.rx-built__shots img { display: block; width: 100%; height: auto; border-radius: 10px; }
+.rx-built__links .rx-wlive { font-size: 1rem; }
