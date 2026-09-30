@@ -22,20 +22,18 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 
 ## Leistungen
 
-- [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Webdesign und Web-Entwicklung aus dem Landkreis Celle: individuelle Websites ab 999 €, mit Online-Buchung ab 1.999 €. Festpreis, DSGVO-konform. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Website-Migration / Relaunch ab 1.299 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
+- [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
+- [Website-Umzug und Relaunch (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Wir ziehen Website, Domain und E-Mail-Postfächer um – mit Weiterleitungen, DNS und SEO-Schutz. Festpreis ab 1.299 €, aus Niedersachsen, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
-- [SaaS- und Web-App-Entwicklung](https://www.rexity.ai/web/saas): SaaS-Plattformen und Web-Apps mit Login, Rollen, Abrechnung und Admin-Bereich – von der ersten Version bis zum Betrieb. Festpreis nach kurzem Gespräch.
-- [Dashboards](https://www.rexity.ai/web/dashboards): KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen an einem Ort zeigen – statt Tabellen von Hand. Festpreis ab 1.599 €. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
+- [Web-Apps, SaaS-Plattformen und Dashboards](https://www.rexity.ai/web/saas): Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
-- [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): WhatsApp-Business-Automatisierung über die offizielle API: Fragen beantworten, Termine buchen, an Ihr Team übergeben. Mit Opt-in, ab 1.299 € Festpreis. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 €; E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
-- [SEO (Suchmaschinenoptimierung)](https://www.rexity.ai/marketing/seo): SEO für KMU: technische Optimierung, Inhalte nach echter Suchabsicht und ehrliches Reporting. Fallstudie: LevelKraft.de. Ohne Ranking-Versprechen. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
-- [Content-Marketing](https://www.rexity.ai/marketing/content): Content-Marketing für KMU: Artikel, Landingpage-Texte und Social-Media-Posts in Ihrer Tonalität, im festen Rhythmus geplant – auf Deutsch und Englisch.
-- [Videomarketing](https://www.rexity.ai/marketing/video): KI-Videomarketing: kurze Werbe- und Social-Media-Videos mit Avataren, KI-Aufnahmen und echtem Material – ohne Filmcrew, geschnitten für jede Plattform.
-- [Wartung, Tests und Betreuung](https://www.rexity.ai/testing-support): Tests und Betreuung für Websites und Apps: Funktions- und Regressionstests, Monitoring nach dem Launch, Updates. Jährliche Wartung ab 999 € pro Jahr. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
+- [SEO (Suchmaschinenoptimierung) und Google Unternehmensprofil](https://www.rexity.ai/marketing/seo): SEO für kleine Betriebe: Seiten, die für echte Suchanfragen ranken, Google Unternehmensprofil, Bewertungen und Inhalte. Ehrliche Ziele, keine Garantien. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
+- [Website-Wartung und Betreuung](https://www.rexity.ai/website-wartung): Wartung und Betreuung Ihrer Website: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen – als Jahrespaket oder monatlich. Was drin ist. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
 - [Alle Leistungen](https://www.rexity.ai/services): Alle Leistungen von Rexity Labs: Webdesign, Apps, SaaS, Dashboards, Automatisierung und Marketing für KMU in Niedersachsen. Festpreise, Websites ab 999 €.
 
 ## Preise
@@ -121,7 +119,7 @@ Fünf typische Ausgangslagen und die Lösung, die wir dafür meist bauen:
 - Sie möchten online verkaufen: Ein Online-Shop oder eine Website mit Online-Checkout, bezahlt über Stripe: für Produkte, Gutscheine, Kurse oder Termine. (https://www.rexity.ai/web/online-shop)
 - Mitarbeitende erfassen unterwegs Daten: Eine App für iPhone und Android aus einer gemeinsamen Codebasis, damit die Pflege bezahlbar bleibt. (https://www.rexity.ai/web/mobile-apps)
 - Aus einem Ablauf soll ein Produkt werden: Eine Web-App mit Login, Rollen und Abrechnung, die mit Ihren Nutzern wachsen kann. (https://www.rexity.ai/web/saas)
-- Die Zahlen stehen in vielen Tabellen: Ein Dashboard, das die wichtigen Kennzahlen an einem Ort zeigt. (https://www.rexity.ai/web/dashboards)
+- Die Zahlen stehen in vielen Tabellen: Ein Dashboard, das die wichtigen Kennzahlen an einem Ort zeigt. (https://www.rexity.ai/web/saas#dashboards)
 
 ### So läuft ein Projekt ab
 
@@ -166,15 +164,15 @@ Festpreise, netto zzgl. MwSt.; die vollständige Liste steht auf der Preisseite.
 - Frage: Arbeiten Sie nur in Niedersachsen?
   Antwort: Nein. Wir arbeiten remote in ganz Deutschland und vor Ort im Raum Celle und Hannover.
 
-## Webdesign & Web-Entwicklung
+## Webdesign Celle: Websites mit Online-Buchung
 
 Adresse: https://www.rexity.ai/web/web-design
 
-Webdesign und Web-Entwicklung aus dem Landkreis Celle: individuelle Websites ab 999 €, mit Online-Buchung ab 1.999 €. Festpreis, DSGVO-konform.
+Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €.
 
-Oberflächen, die sich selbst erklären. Websites, die liefern, skalieren und verkaufen.
+Websites, die Anfragen und Buchungen bringen – individuell programmiert, aus Hermannsburg bei Celle.
 
-Markentreues, responsives Design und produktionsreife Technik aus einer Hand: von Wireframes und Designsystem bis zu Frontend, Backend und sauberen APIs. Schnell, SEO-fertig und langlebig gebaut.
+Wir gestalten und programmieren Websites für Betriebe, die nicht am Schreibtisch sitzen: mit Anfragestrecke, Termin- oder Kursbuchung, Erinnerungen und einem Verwaltungsbereich, den Ihr Team wirklich nutzt. Festpreis ab 999 €, mit Buchung ab 1.999 €, netto zzgl. MwSt.
 
 ### Webdesign aus dem Landkreis Celle
 
@@ -186,11 +184,30 @@ Wir sitzen in Hermannsburg im Landkreis Celle und arbeiten überwiegend remote. 
 
 Viele Betriebe kommen zu uns, weil die alte Website auf dem Handy nicht mehr richtig funktioniert, weil Termine noch per Telefon und Zettel laufen oder weil die Seite zwar existiert, aber kaum Anfragen bringt.
 
+### Website mit Online-Buchung: drei Wege zur Anfrage
+
+Welche Strecke Ihre Kunden gehen, hängt vom Betrieb ab. Wir bauen alle drei – und kombinieren sie, wenn es passt:
+
+- Anfrage ohne Umwege: Ein Formular, das nur fragt, was Sie wirklich brauchen, und die Anfrage als E-Mail mit allen Angaben bei Ihnen ablegt. Für Handwerk, Beratung und alles, was ein Angebot braucht.
+- Terminbuchung: Kunden sehen nur freie Zeiten und buchen in vier Schritten; der Termin ist sofort verbindlich und lässt sich mit einem Klick in den eigenen Kalender übernehmen. Keine Doppelbuchung, kein Zettel – wie bei der Fahrzeugpflege Celle. (https://www.rexity.ai/kfz-aufbereitung-website)
+- Kursbuchung: Kurse mit Live-Anzeige der freien Plätze, Stornierung ohne Kundenkonto und einer Kursverwaltung fürs Team – wie bei Body & Care Hermannsburg, live seit dem 14.09.2026. (https://www.rexity.ai/fitnessstudio-website)
+
+### Preise für Websites
+
+Festpreise, netto zzgl. MwSt. „ab“ nennt den Einstiegspreis; den genauen Festpreis vereinbaren wir nach einem kurzen Gespräch.
+
+- Website (individuell programmiert): Komplett von Hand programmiert mit Node.js oder Next.js – kein Wix, kein Website-Baukasten. Die Seite wird statisch ausgeliefert. Festpreis ab 999 €, netto zzgl. MwSt.
+- Website mit Backend & Buchungsverwaltung: Ihre Kunden buchen ihre Termine selbst. Mit Design und Umsetzung, Termin- oder Kursbuchung, Einrichtung auf Ihrer Domain und Abstimmung der DSGVO-Texte. Festpreis ab 1.999 €, netto zzgl. MwSt.
+- Website-Migration / Relaunch: Der Umzug Ihrer bestehenden Website: Wir überführen den alten Auftritt in eine neue Website. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- Mobile Optimierung einer bestehenden Website: Ihre vorhandene Website wird für Smartphones optimiert. Festpreis 699 €, netto zzgl. MwSt.
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
 ### Typische Ausgangslagen
 
 - Die Seite ist auf dem Handy kaum bedienbar: Wir bauen jede Seite für Handy und Desktop. Für eine bestehende Website gibt es die mobile Optimierung zum Festpreis.
 - Termine laufen über Telefon und Zettel: Mit einer Website mit Online-Buchung buchen Kunden ihre Termine selbst, und Sie verwalten alles an einem Ort.
-- Der Auftritt ist in die Jahre gekommen: Beim Relaunch überführen wir den alten Auftritt in eine neue Website, auf Wunsch mit Umzug auf Ihre eigene Domain und Weiterleitung der alten Adresse.
+- Der Auftritt ist in die Jahre gekommen: Beim Relaunch überführen wir den alten Auftritt in eine neue Website, auf Wunsch mit Umzug auf Ihre eigene Domain und Weiterleitung der alten Adresse. (https://www.rexity.ai/web/website-umzug)
 
 ### UX/UI- und App-Design
 
@@ -200,6 +217,24 @@ Wir gestalten Websites und Apps, bevor wir sie bauen – im selben Team, das sie
 - Klick-Prototyp: Ein klickbarer Prototyp zeigt den Ablauf, bevor programmiert wird. So prüfen Sie den Weg durch Ihre Website oder App, bevor wir bauen.
 - Designsystem: Farben, Schriften und Bausteine Ihrer Marke als Designsystem, aus dem wir direkt entwickeln. Neue Seiten und Screens sehen dadurch einheitlich aus.
 - Mobile-first, auch für Apps: Wir gestalten zuerst für das Handy, dann für den Desktop. Apps gestalten wir für iPhone und Android, damit sie sich auf beiden Plattformen vertraut anfühlen. (https://www.rexity.ai/web/mobile-apps)
+
+### Vor Ort im Landkreis Celle, remote in ganz Deutschland
+
+Wir sitzen in Hermannsburg in der Südheide. Betriebe in Celle, Bergen, Faßberg, Munster, Soltau und Uelzen besuchen wir für das erste Gespräch und die Abnahme vor Ort; alles andere läuft per Video und Telefon. Für Betriebe außerhalb Niedersachsens arbeiten wir komplett remote – der Ablauf ist derselbe.
+
+Beide bisher veröffentlichten Kundenprojekte liegen im Landkreis Celle: das Fitnessstudio Body & Care in Hermannsburg, seit dem 14.09.2026 mit Online-Kursbuchung live, und die Fahrzeugpflege in Celle, deren Website mit Online-Terminbuchung fertig gebaut ist; ihr Umzug auf die eigene Domain folgt.
+
+### Weiterlesen: Umzug, Wartung und Branchenlösungen
+
+Die Seiten zu den Fragen, die in Gesprächen am häufigsten kommen:
+
+- Website-Umzug ohne Ranking-Verlust: Domain, E-Mail und Inhalte umziehen – mit Weiterleitungs-Tabelle, DNS-Plan und Nachlauf in der Search Console, ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
+- Website-Wartung und Betreuung: Sicherheitsupdates, Sicherungen und kleine Änderungen als Jahrespaket ab 999 € pro Jahr. (https://www.rexity.ai/website-wartung)
+- Fitnessstudio-Website mit Kursbuchung: Kursplan, freie Plätze, Buchung und Stornierung ohne Kundenkonto – für Studios und Kursanbieter. (https://www.rexity.ai/fitnessstudio-website)
+- Website mit Terminbuchung für Werkstätten: Eine Seite pro Leistung, nur freie Zeiten, keine Doppelbuchung – für Kfz-Aufbereiter und Werkstätten. (https://www.rexity.ai/kfz-aufbereitung-website)
+- Was eine Website mit Kursbuchung kostet: Wovon der Preis abhängt und was im Festpreis enthalten ist – mit unseren Preisen im Vergleich. (https://www.rexity.ai/website-mit-kursbuchung-kosten)
+- Fallstudie Body & Care: Kursbuchung in Hermannsburg: Neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung, live seit dem 14.09.2026. (https://www.rexity.ai/work/body-and-care)
+- Fallstudie Fahrzeugpflege Celle: Terminbuchung online: Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und ein Verwaltungsbereich für den Inhaber. (https://www.rexity.ai/work/chara)
 
 ### Häufige Fragen
 
@@ -211,10 +246,102 @@ Wir gestalten Websites und Apps, bevor wir sie bauen – im selben Team, das sie
   Antwort: Marketing-Sites: 2–4 Wochen. Größere Builds werden individuell geplant.
 - Frage: Übernehmen Sie das Hosting?
   Antwort: Ja. Wir deployen und können das Hosting komplett betreuen.
-- Frage: Was kostet eine Website bei Ihnen?
-  Antwort: Eine individuell programmierte Website gibt es ab 999 €, eine Website mit Backend und Buchungsverwaltung ab 1.999 €, einen Relaunch ab 1.299 €. Alle Preise sind Festpreise, netto zzgl. MwSt.
+- Frage: Was kostet eine Website mit Online-Buchung?
+  Antwort: Eine individuell programmierte Website gibt es ab 999 €, eine Website mit Backend und Buchungsverwaltung ab 1.999 €, einen Relaunch oder Umzug ab 1.299 € – Festpreise, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch, wenn Umfang und Buchungslogik klar sind.
 - Frage: Kommen Sie auch vor Ort vorbei?
   Antwort: Ja. Die meiste Arbeit passiert remote von Hermannsburg aus. Für Erstgespräch, Fotos oder Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei; weiter entfernte Termine stimmen wir vorher ab.
+- Frage: Können Kunden ihre Buchung selbst stornieren?
+  Antwort: Ja. Bei Body & Care Hermannsburg buchen und stornieren Mitglieder ihre Kursplätze selbst, ohne Kundenkonto; der Platz wird sofort wieder frei. Von der Buchung bis zur Bestätigung läuft der Ablauf ohne manuelle Zwischenschritte. Welche Fristen und Regeln gelten, legen Sie fest; der Verwaltungsbereich zeigt Ihrem Team jede Buchung.
+- Frage: Ist die Website barrierefrei?
+  Antwort: Wir bauen nach den gängigen Regeln für Zugänglichkeit: klare Kontraste, Tastaturbedienung, beschriftete Formulare, Alternativtexte. Kleinstunternehmen, die nur Dienstleistungen anbieten, sind vom Barrierefreiheitsstärkungsgesetz ausgenommen (§ 3 Abs. 3 BFSG); wer darunter fällt, bekommt von uns eine Prüfung nach WCAG 2.1 AA als Zusatz.
+
+## Website-Umzug & Relaunch
+
+Adresse: https://www.rexity.ai/web/website-umzug
+
+Wir ziehen Website, Domain und E-Mail-Postfächer um – mit Weiterleitungen, DNS und SEO-Schutz. Festpreis ab 1.299 €, aus Niedersachsen, remote bundesweit.
+
+Domain, E-Mail und Inhalte umziehen – ohne Ausfall und ohne Ranking-Verlust.
+
+Wir ziehen Ihre bestehende Website, Ihre Domain und Ihre E-Mail-Postfächer um oder überführen den alten Auftritt in eine neue Website: mit Weiterleitungen, DNS-Umstellung und SEO-Schutz. Festpreis, aus Niedersachsen, remote in ganz Deutschland.
+
+### Website-Umzug ohne Ranking-Verlust
+
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) zieht Websites, Domains und E-Mail-Postfächer um: zu einem neuen Hoster, auf eine neue Domain oder in eine neue Website. Eine Website-Migration oder ein Relaunch gibt es ab 1.299 € als Festpreis, netto zzgl. MwSt.; der E-Mail-Umzug kommt als Baustein dazu. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
+
+Ein Umzug ist mehr als Dateien kopieren. Wer die alte Adresse aufruft, muss auf der richtigen neuen Seite landen; Google muss die neue Adresse als Nachfolger erkennen; E-Mails dürfen keine Stunde ausfallen; Formulare, Buchungen und Bilder müssen weiter funktionieren. Genau diese Punkte gehen bei Umzügen am häufigsten schief – und genau dafür haben wir einen festen Ablauf.
+
+Viele Hoster bieten den reinen Dateiumzug kostenlos oder günstig an. Das ist in Ordnung, wenn nur der Server wechselt. Sobald Domain, E-Mail, Weiterleitungen oder ein neues Design im Spiel sind, brauchen Sie jemanden, der den ganzen Weg verantwortet – vom alten Vertrag bis zur Kontrolle in der Google Search Console.
+
+### Wann ein Umzug ansteht
+
+Vier typische Anlässe – der Ablauf ist bei allen derselbe, der Umfang unterscheidet sich:
+
+- Hoster- oder Baukasten-Wechsel: Die Website liegt bei einem Anbieter, den Sie verlassen wollen – wegen Preis, Tempo oder Support. Inhalte, Domain und Postfächer ziehen mit; die Adressen bleiben oder werden weitergeleitet.
+- Neue Domain: Der Betrieb heißt anders oder die alte Adresse passt nicht mehr. Jede alte Seite bekommt eine dauerhafte Weiterleitung auf ihre neue Adresse, Google wird über den Adresswechsel informiert.
+- Relaunch mit neuem Design: Die Website wird neu gebaut. Wir übernehmen die Inhalte, die ranken, ordnen sie der neuen Struktur zu und sichern jede alte Adresse ab, bevor die neue Seite live geht.
+- E-Mail-Umzug: Postfächer wechseln den Anbieter – etwa vom alten Hoster zu einem eigenen Mail-Dienst. Alte Mails, Ordner und Kontakte kommen mit; die Umstellung passiert so, dass keine Mail verloren geht.
+
+### Was bei einem Umzug schiefgehen kann – und was wir dagegen tun
+
+Das sind die typischen Fehlerquellen. Jeder Punkt hat bei uns einen festen Platz im Ablauf:
+
+- Rankings gehen verloren, weil alte Adressen ins Leere laufen → vollständige Weiterleitungs-Tabelle (alte Adresse → neue Adresse), Statuscode 301/308, keine Ketten
+- E-Mails fallen aus, weil der MX-Eintrag zu früh oder zu spät umgestellt wird → Postfächer zuerst anlegen und befüllen, dann DNS mit kurzer TTL umschalten
+- Mails landen im Spam, weil SPF, DKIM und DMARC fehlen → die drei Einträge werden vor der Umschaltung gesetzt und geprüft
+- Formulare und Buchungen senden nichts mehr → jedes Formular wird nach dem Umzug einmal echt getestet
+- Bilder, PDFs und Downloads fehlen → Inventar aller Dateien vor dem Umzug, Abgleich danach
+- Google findet die neue Seite nicht → Sitemap, Search Console und (bei neuer Domain) die Adressänderung werden eingereicht; 404-Meldungen werden in den ersten Wochen kontrolliert
+- Die alte Domain läuft unbeaufsichtigt aus → Kündigungs- und Laufzeit-Termine des alten Vertrags stehen im Umzugsplan
+
+### So läuft der Umzug ab
+
+1. Bestandsaufnahme: Wir erfassen alle Seiten, Dateien, Formulare, Postfächer, DNS-Einträge und die Adressen, die heute bei Google ranken. Sie bekommen den Umzugsplan mit Terminen.
+2. Weiterleitungs-Tabelle: Jede alte Adresse bekommt ihr neues Ziel. Seiten, die es nicht mehr gibt, leiten auf die passende Nachfolgerseite – nie pauschal auf die Startseite.
+3. Aufbau parallel: Die neue Website und die neuen Postfächer entstehen neben der alten. Nichts wird abgeschaltet, bevor das Neue geprüft ist.
+4. Testlauf: Wir testen Weiterleitungen, Formulare, Buchungen, Mailversand und -empfang auf einer Testadresse – mit Ihnen zusammen.
+5. Umschaltung: DNS wird zu einer ruhigen Zeit umgestellt, mit kurzer TTL. Die alte Seite bleibt noch erreichbar, bis alles verifiziert ist.
+6. Nachlauf: Sitemap und Search Console werden aktualisiert, 404-Meldungen und Rankings in den ersten vier Wochen beobachtet. Danach kündigen Sie den alten Vertrag mit gutem Gewissen.
+
+### Body & Care Hermannsburg: Relaunch auf eine eigene Domain
+
+Aus der Praxis.
+
+Beim Relaunch des Fitness- und Gesundheitszentrums Body & Care in Hermannsburg ging die neue Website auf eine eigene Domain: Seit dem 14.09.2026 ist sie mit Online-Kursbuchung auf bodycare-fitness.de live, die ersten Buchungstage liefen ohne einen einzigen Serverfehler. Die Weiterleitung der bisherigen Adresse folgt, sobald der alte Domain-Anbieter den Zugang freigegeben hat.
+
+Fallstudie: https://www.rexity.ai/work/body-and-care
+
+### Preise für Umzug und Relaunch
+
+Festpreise, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach der Bestandsaufnahme. Der E-Mail-Umzug wird nach Anzahl der Postfächer berechnet – Preis auf Anfrage.
+
+- Website-Migration / Relaunch: Der Umzug Ihrer bestehenden Website: Wir überführen den alten Auftritt in eine neue Website. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- Website (individuell programmiert): Komplett von Hand programmiert mit Node.js oder Next.js – kein Wix, kein Website-Baukasten. Die Seite wird statisch ausgeliefert. Festpreis ab 999 €, netto zzgl. MwSt.
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Nach dem Umzug
+
+Was nach der Umschaltung wichtig bleibt – und wo Sie mehr dazu lesen:
+
+- Website-Wartung und Betreuung: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen nach dem Umzug – als Jahrespaket ab 999 € pro Jahr. (https://www.rexity.ai/website-wartung)
+- Relaunch als Website mit Online-Buchung: Wenn beim Umzug auch das Design neu wird: Websites mit Termin- oder Kursbuchung aus Hermannsburg bei Celle. (https://www.rexity.ai/web/web-design)
+- SEO und Google Unternehmensprofil: Rankings nach dem Umzug halten und ausbauen: Seiten für echte Suchanfragen, dazu ein gepflegtes Unternehmensprofil. (https://www.rexity.ai/marketing/seo)
+
+### Häufige Fragen
+
+- Frage: Was kostet ein Website-Umzug?
+  Antwort: Eine Website-Migration oder ein Relaunch gibt es bei uns ab 1.299 € als Festpreis, netto zzgl. MwSt. Darin sind Bestandsaufnahme, Weiterleitungs-Tabelle, DNS-Umstellung, Tests und der Nachlauf in der Search Console enthalten. Ein reiner Dateiumzug ohne Domain- oder E-Mail-Wechsel ist oft günstiger – das sagen wir Ihnen nach der Bestandsaufnahme.
+- Frage: Was kostet ein Domain-Umzug?
+  Antwort: Die Übertragung einer Domain selbst kostet beim neuen Anbieter meist nur die reguläre Jahresgebühr; manche Anbieter berechnen eine Transfergebühr. Unsere Arbeit dabei – Auth-Code, DNS-Einträge, Weiterleitungen und die Adressänderung bei Google – ist Teil des Umzugs-Festpreises.
+- Frage: Wie lange dauert ein Umzug?
+  Antwort: Ein Umzug ohne neues Design dauert in der Regel ein bis zwei Wochen, davon ist die eigentliche Umschaltung ein Termin von wenigen Stunden. Ein Relaunch mit neuem Design richtet sich nach dem Umfang der neuen Website; den Zeitplan bekommen Sie mit dem Angebot.
+- Frage: Gehen beim E-Mail-Umzug Mails verloren?
+  Antwort: Nein, wenn die Reihenfolge stimmt: Die neuen Postfächer werden zuerst angelegt und die alten Mails, Ordner und Kontakte hinüberkopiert. Erst dann wird der MX-Eintrag umgestellt. In der Übergangszeit werden beide Postfächer abgerufen, damit nichts durchrutscht.
+- Frage: Verliert meine Website beim Umzug Rankings?
+  Antwort: Kurzfristige Schwankungen sind normal, dauerhafte Verluste nicht – wenn jede alte Adresse dauerhaft auf die richtige neue Adresse weiterleitet, die Inhalte erhalten bleiben und Google über die Änderung informiert wird. Genau das ist der Kern unseres Ablaufs. Garantieren kann Rankings niemand.
+- Frage: Kann ich beim alten Hoster bleiben und nur die Website erneuern?
+  Antwort: Ja. Ein Relaunch braucht keinen Hoster-Wechsel. Wir prüfen, ob der bestehende Anbieter die neue Website sinnvoll ausliefern kann; falls nicht, empfehlen wir einen Wechsel und übernehmen ihn im selben Projekt.
 
 ## Online-Shop & Stripe-Checkout
 
@@ -314,32 +441,69 @@ Fallstudie: https://www.rexity.ai/work/chara
 - Frage: Wo liegen die Daten meines Shops?
   Antwort: Die Website läuft auf EU-Hosting, die Domain läuft auf Ihren Namen, und Sie bekommen alle Zugänge übergeben. Kartendaten gibt Ihr Kunde in der Bezahlmaske von Stripe ein; sie werden nicht auf dem Server Ihrer Website gespeichert.
 
-## SaaS-Plattformen
+## Web-Apps, SaaS & Dashboards
 
 Adresse: https://www.rexity.ai/web/saas
 
-SaaS-Plattformen und Web-Apps mit Login, Rollen, Abrechnung und Admin-Bereich – von der ersten Version bis zum Betrieb. Festpreis nach kurzem Gespräch.
+Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU.
 
-Aus einer Idee ein Produkt machen, für das Menschen zahlen.
+Aus einer Idee ein Produkt machen – und das Geschäft auf einen Blick sehen.
 
-Multi-Tenant-SaaS-Plattformen mit Auth, Billing, Dashboards und dem Backend dahinter — entwickelt, um mit Ihrer Nutzerbasis zu wachsen.
+Web-Apps, Multi-Tenant-SaaS-Plattformen und KPI-Dashboards mit Auth, Billing und dem Backend dahinter — entwickelt, um mit Ihrer Nutzerbasis zu wachsen, und so gebaut, dass Teams auf Basis sauberer Zahlen entscheiden statt aus dem Bauch.
 
-### SaaS- und Web-App-Entwicklung
+### Web-Apps, SaaS und Dashboards
 
-Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt SaaS-Plattformen und Web-Apps für Gründer und Teams in Niedersachsen: mit Login, Rollen, Abrechnung und Admin-Bereich, von der ersten Version bis zum Betrieb. Für SaaS gibt es keinen Listenpreis; nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version.
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) entwickelt Web-Apps, SaaS-Plattformen und Dashboards für Betriebe, Gründer und Teams in Niedersachsen: mit Login, Rollen, Abrechnung und Admin-Bereich, von der ersten Version bis zum Betrieb. Dashboards gibt es ab 1.599 €; für SaaS gibt es keinen Listenpreis, nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version.
 
 Für die Abrechnung setzen wir auf Stripe. Wie das in einem laufenden Produkt aussieht, zeigt LevelKraft: eine Lern-App für iPhone, Android und Web, die wir entwickelt haben, mit Abonnements direkt in der App und Stripe-Checkout in der Web-App.
 
-### Was eine SaaS-Plattform kostet
+Web-App, SaaS oder Dashboard? Eine Web-App ist ein Werkzeug im Browser für einen bestimmten Ablauf, etwa Terminverwaltung, Angebote oder Auftragsannahme. Eine SaaS-Plattform ist eine Web-App, die Sie an viele Kunden verkaufen – mit getrennten Mandanten und Abonnements. Ein Dashboard zeigt die Kennzahlen, die schon irgendwo liegen, an einem Ort. Oft beginnt ein Projekt mit einem davon und wächst in das nächste.
 
-Für SaaS-Plattformen gibt es keinen Listenpreis: Nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version. Die Preise unserer Standardleistungen stehen auf der Preisseite.
+### Typische Projekte
 
+- Interne Web-App: Ein Werkzeug für einen Ablauf, der heute in Tabellen, E-Mails und Zetteln steckt – mit Login und Rollen für Ihr Team.
+- SaaS-Plattform: Ihr Ablauf als Produkt für viele Kunden: Mandantenfähigkeit, Abonnements über Stripe und ein Admin-Bereich.
+- KPI-Dashboard: Die Zahlen aus CRM, Werbekonten, Datenbank und Tabellen an einem Ort, automatisch aktualisiert.
+
+### Dashboards: das Geschäft auf einen Blick
+
+Ein Dashboard ist nur nützlich, wenn die Zahlen vertrauenswürdig sind und die Ansicht eine echte Frage beantwortet. Deshalb beginnen wir nicht mit Diagrammen, sondern mit Ihren Fragen: Wie viele Anfragen kamen diese Woche, woher, und wie viele wurden zu Aufträgen? Welche Termine stehen morgen an?
+
+Dann binden wir Ihre Datenquellen an – Datenbanken, Tabellen und die Schnittstellen Ihrer Tools –, bereinigen und strukturieren die Daten und bauen wenige, schnelle Ansichten mit Rollen: Die Inhaberin sieht alles, das Team nur, was es braucht. Aktualisierung und Hinweise bei Schwellenwerten laufen automatisch.
+
+Ein Dashboard bauen wir als Teil einer Web-App oder für sich, zum Festpreis ab 1.599 €, netto zzgl. MwSt.
+
+### Fahrzeugpflege Celle: alle Termine auf einen Blick
+
+Verwandtes Projekt.
+
+Für einen Fahrzeugpflege-Betrieb in Celle haben wir einen Verwaltungsbereich gebaut, in dem der Inhaber alle Termine nach Tag sieht – gesammelt an einem Ort statt verteilt auf Telefon und Chats.
+
+Ein Dashboard-Projekt mit Kennzahlen zeigen wir hier, sobald eines live ist.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Was Web-Apps, SaaS und Dashboards kosten
+
+Dashboards haben einen Festpreis, netto zzgl. MwSt.; den genauen Preis vereinbaren wir nach einem kurzen Gespräch. Für SaaS-Plattformen und Web-Apps gibt es keinen Listenpreis: Sie bekommen einen Festpreis für die erste Version.
+
+- Dashboards: KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen. Festpreis ab 1.599 €, netto zzgl. MwSt.
 - Alle Preise: https://www.rexity.ai/preise
 
 ### Häufige Fragen
 
 - Frage: Können Sie ein bestehendes SaaS übernehmen?
   Antwort: Ja — wir starten mit einem kurzen Code- und Architektur-Audit.
+- Frage: Kann ein Dashboard aus unseren bestehenden Tools ziehen?
+  Antwort: Ja — wir führen CRM, Ads und Datenbank an einem Ort zusammen.
+- Frage: Was kostet ein Dashboard?
+  Antwort: Ein Dashboard kostet bei uns ab 1.599 €, netto zzgl. MwSt. Der genaue Festpreis hängt davon ab, wie viele Datenquellen angebunden werden, wie sauber die Daten schon sind und wie viele Ansichten und Rollen Sie brauchen. Wir nennen ihn nach einem kurzen Gespräch.
+- Frage: Was kostet eine SaaS-Plattform?
+  Antwort: Dafür gibt es keinen Listenpreis, weil Umfang und Risiko stark schwanken. Nach einem kurzen Gespräch bekommen Sie einen Festpreis für die erste Version – das kleinste Produkt, das echten Nutzern Mehrwert liefert. Erweiterungen danach planen wir Schritt für Schritt.
+- Frage: Wem gehört der Code?
+  Antwort: Nach vollständiger Zahlung erhalten Sie laut unseren AGB (§ 6) ein räumlich und zeitlich unbeschränktes Nutzungsrecht an allem, was wir in Ihrem Auftrag entwickeln. An vorbestehenden Bausteinen und eigenen Werkzeugen bekommen Sie ein Nutzungsrecht im Rahmen des Projekts. Weitergehende Rechte können im Angebot gesondert vereinbart werden.
+- Frage: Wo werden die Daten gehostet?
+  Antwort: Die Anwendung und ihre Datenbank hosten wir in der EU, und personenbezogene Daten erfassen wir so sparsam wie möglich. Externe Dienste wie ein Zahlungsanbieter kommen nur dazu, wenn Sie sie brauchen; welche das sind, legen wir im Projekt gemeinsam fest.
 
 ## Mobile Apps
 
@@ -415,38 +579,6 @@ Zwei Apps, die wir gebaut und gestartet haben, jeweils für iPhone und Android.
   Antwort: Ja. Für digitale Inhalte und Abos, die in der App genutzt werden, verlangen Apple und Google in der Regel ihre eigenen Bezahlsysteme. Waren und Dienstleistungen, die außerhalb der App genutzt werden, laufen über einen Zahlungsanbieter wie Stripe.
 - Frage: Wer pflegt die App nach dem Start?
   Antwort: Auf Wunsch wir. Die jährliche Wartung ab 999 € umfasst Sicherheitsupdates, Sicherungen und kleine Änderungen und ist optional. Anpassungen an neue iOS- und Android-Versionen planen wir im Angebot mit ein.
-
-## Dashboards & Reporting
-
-Adresse: https://www.rexity.ai/web/dashboards
-
-KPI-, Operations- und Reporting-Dashboards, die Ihre wichtigsten Kennzahlen an einem Ort zeigen – statt Tabellen von Hand. Festpreis ab 1.599 €.
-
-Das Geschäft auf einen Blick.
-
-KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen — damit Teams auf Basis von Evidenz entscheiden, nicht aus dem Bauch.
-
-### Was ein Dashboard kostet
-
-Festpreis, netto zzgl. MwSt. Den genauen Preis vereinbaren wir nach einem kurzen Gespräch.
-
-- Dashboards: KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich darstellen. Festpreis ab 1.599 €, netto zzgl. MwSt.
-- Alle Preise: https://www.rexity.ai/preise
-
-### Fahrzeugpflege Celle: alle Termine auf einen Blick
-
-Verwandtes Projekt.
-
-Für einen Fahrzeugpflege-Betrieb in Celle haben wir einen Verwaltungsbereich gebaut, in dem der Inhaber alle Termine nach Tag sieht – gesammelt an einem Ort statt verteilt auf Telefon und Chats.
-
-Ein Dashboard-Projekt mit Kennzahlen zeigen wir hier, sobald eines live ist.
-
-Fallstudie: https://www.rexity.ai/work/chara
-
-### Häufige Fragen
-
-- Frage: Kann es aus unseren bestehenden Tools ziehen?
-  Antwort: Ja — wir führen CRM, Ads und Datenbank an einem Ort zusammen.
 
 ## Automatisierung
 
@@ -605,11 +737,11 @@ Fallstudie: https://www.rexity.ai/work/chara
 - Frage: Was kostet RPA bei Ihnen?
   Antwort: KI-Lösungen mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
 
-## WhatsApp-Agenten
+## WhatsApp-Automatisierung & Erinnerungen
 
 Adresse: https://www.rexity.ai/automation/whatsapp
 
-WhatsApp-Business-Automatisierung über die offizielle API: Fragen beantworten, Termine buchen, an Ihr Team übergeben. Mit Opt-in, ab 1.299 € Festpreis.
+Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €.
 
 Jeden Chat beantworten, Tag und Nacht.
 
@@ -632,6 +764,14 @@ Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: S
 - Termine per Chat: Wer einen Termin möchte, bekommt echte freie Zeitfenster angeboten, statt Nachrichten hin und her.
 - Wichtige Anfragen gehen unter: Der Assistent erkennt, was jemand will, und gibt Anfragen, die nur ein Mensch klären kann, mit dem ganzen Verlauf an Ihr Team weiter.
 
+### Erinnerungen zuerst, WhatsApp danach
+
+Die meisten Betriebe fangen nicht mit WhatsApp an, sondern mit automatischen Erinnerungen. Beides baut aufeinander auf:
+
+- E-Mail- und SMS-Erinnerungen: Bestätigung bei der Buchung, Erinnerung am Vortag, Nachricht bei Stornierung – automatisch aus Ihrem Buchungssystem. Als Baustein 299 €, netto zzgl. MwSt.
+- WhatsApp-Flows: Häufige Fragen beantworten, Termine anbieten und buchen, an einen Menschen übergeben – über die offizielle WhatsApp Business Platform, mit Opt-in. ab 1.299 €.
+- Beides zusammen: Erinnerung per WhatsApp statt SMS, Antwort auf „Kann ich verschieben?“ direkt im Chat, Bestätigung per E-Mail. Der Kunde wählt den Kanal, Ihr Team sieht alles an einer Stelle.
+
 ### Was wir konkret bauen
 
 - Die Einrichtung der offiziellen WhatsApp Business API
@@ -640,6 +780,14 @@ Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: S
 - Regeln für die Übergabe an Ihr Team, mit dem ganzen Gesprächsverlauf
 - Opt-in und Abmeldung, damit die Kommunikation sauber bleibt
 - Ein Protokoll jedes Gesprächs mit Ergebnis in Ihrer Kundenverwaltung
+
+### Opt-in und Datenschutz: was erlaubt ist
+
+Wir setzen ausschließlich die offizielle WhatsApp Business Platform ein, nicht die private App und keine inoffiziellen Werkzeuge. Nachrichten an Kunden setzen deren Einwilligung voraus: Der Kunde gibt seine Nummer selbst an und stimmt zu, über WhatsApp kontaktiert zu werden – zum Beispiel mit einem Häkchen bei der Buchung. Diese Zustimmung wird gespeichert und kann jederzeit widerrufen werden.
+
+Mit dem Anbieter der Plattform schließen Sie einen Vertrag zur Auftragsverarbeitung; die Datenschutzerklärung Ihrer Website bekommt einen Abschnitt zu WhatsApp. Wir bereiten beides vor und stimmen die Texte mit Ihnen ab – eine Rechtsberatung ersetzen wir nicht.
+
+Jeder Flow hat einen Ausgang zum Menschen: Wer „Mitarbeiter“ schreibt oder eine Frage stellt, die der Assistent nicht kennt, landet bei Ihrem Team – mit dem bisherigen Gesprächsverlauf.
 
 ### So läuft das Projekt ab
 
@@ -651,9 +799,11 @@ Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: S
 
 ### Was WhatsApp-Automatisierung kostet
 
-Festpreis, netto zzgl. MwSt. Laufende Kosten Dritter, etwa Nachrichtengebühren, stehen einzeln im Angebot.
+Festpreise, netto zzgl. MwSt. Die Erinnerungen per E-Mail oder SMS sind der Einstieg; WhatsApp-Flows und ein FAQ-Chatbot bauen darauf auf. Laufende Kosten Dritter, etwa Nachrichtengebühren, stehen einzeln im Angebot.
 
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
 - WhatsApp-Automatisierung: Automatisierte WhatsApp-Business-Flows, die häufige Fragen beantworten und Termine buchen – über die offizielle API, mit Opt-in. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- FAQ-Chatbot: Beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Festpreis 499 €, netto zzgl. MwSt.
 - Alle Preise: https://www.rexity.ai/preise
 
 ### Fahrzeugpflege Celle: vom Nachrichten-Pingpong zur festen Buchung
@@ -668,8 +818,6 @@ Fallstudie: https://www.rexity.ai/work/chara
 
 ### Häufige Fragen
 
-- Frage: Ist WhatsApp-Automatisierung konform?
-  Antwort: Ja — wir nutzen die offizielle WhatsApp Business API mit Opt-in.
 - Frage: Merken Kunden, dass es automatisiert ist?
   Antwort: Wir sind transparent über den Assistenten, und ein Mensch ist immer nur einen Schritt entfernt.
 - Frage: Was kostet die WhatsApp-Automatisierung?
@@ -678,6 +826,14 @@ Fallstudie: https://www.rexity.ai/work/chara
   Antwort: Ja. Bei Buchungsanfragen bietet er echte freie Zeitfenster an. Sensible oder unklare Anfragen gibt er mit dem Gesprächsverlauf an Ihr Team weiter.
 - Frage: Wo sehe ich die Gespräche?
   Antwort: Jedes Gespräch wird mit Ergebnis protokolliert und landet in Ihrer Kundenverwaltung, damit Sie zum richtigen Zeitpunkt nachfassen können.
+- Frage: Ist WhatsApp-Automatisierung DSGVO-konform?
+  Antwort: Sie kann es sein, wenn drei Dinge stimmen: die offizielle WhatsApp Business Platform statt der privaten App, eine dokumentierte Einwilligung jedes Kunden (Opt-in) und ein Vertrag zur Auftragsverarbeitung mit dem Plattform-Anbieter. Genau so setzen wir jeden Flow auf. Eine Rechtsberatung ersetzen wir nicht.
+- Frage: Brauchen meine Kunden ein Opt-in?
+  Antwort: Ja. Ohne Einwilligung darf ein Betrieb keine WhatsApp-Nachrichten schicken. Das Opt-in holen wir dort ein, wo der Kunde ohnehin seine Nummer angibt: bei der Buchung, im Formular oder im ersten Chat, den der Kunde selbst beginnt.
+- Frage: Was kostet die WhatsApp Business Platform selbst?
+  Antwort: Der Betreiber der Plattform berechnet Gebühren pro Gespräch beziehungsweise pro Nachricht, abhängig von Land und Nachrichtentyp; diese Kosten gehen direkt an den Anbieter und sind in unserem Festpreis nicht enthalten. Die aktuellen Sätze stehen in der Preisliste des Anbieters; wir rechnen sie im Gespräch für Ihren Fall durch.
+- Frage: Kann ein Mensch das Gespräch übernehmen?
+  Antwort: Immer. Jeder Flow hat eine Übergabe an Ihr Team, und Sie sehen alle Gespräche in einer Übersicht. Der Assistent beantwortet Routinefragen und bucht Termine; alles andere bleibt bei Menschen.
 
 ## Voice-Agenten
 
@@ -777,39 +933,39 @@ Fallstudie: https://www.rexity.ai/work/levelkraft
 - Frage: Funktioniert der Chatbot auch auf WhatsApp?
   Antwort: Ja, derselbe Ansatz funktioniert auf WhatsApp – über die offizielle WhatsApp Business API und nur mit Einwilligung Ihrer Kunden.
 
-## Digitales Marketing
+## Sichtbarkeit: SEO & Google Unternehmensprofil
 
 Adresse: https://www.rexity.ai/marketing
 
-Online-Marketing für KMU: SEO, Inhalte und Video, damit Kunden Sie bei Google finden. Mit echter SEO-Fallstudie, ohne Ranking-Versprechen.
+Sichtbarkeit für Betriebe: SEO und Google Unternehmensprofil, damit Kunden Sie bei Google finden. Mit echter SEO-Fallstudie, ohne Ranking-Versprechen.
 
 Gefunden werden, im Kopf bleiben, gewählt werden.
 
-Suche, Content und Video, die Aufmerksamkeit in Kunden verwandeln — als dauerhafter Akquise-Kanal, nicht als Einmal-Kampagne.
+Suche und Google Unternehmensprofil, die Aufmerksamkeit in Anfragen verwandeln — als dauerhafter Akquise-Kanal, nicht als Einmal-Kampagne.
 
 ### Online-Marketing, das zu einem kleinen Betrieb passt
 
-Eine gute Website nützt wenig, wenn niemand sie findet. Unter Digitales Marketing bündeln wir drei Wege, auf denen Kunden zu Ihnen kommen: die Suche bei Google (SEO), Inhalte wie Artikel und Social-Media-Posts sowie kurze Videos.
+Eine gute Website nützt wenig, wenn niemand sie findet. Unter Sichtbarkeit bündeln wir, was lokale Betriebe bei Google auffindbar macht: Suchmaschinenoptimierung (SEO) für die eigene Website, ein gepflegtes Google Unternehmensprofil und Inhalte, die die Fragen Ihrer Kunden beantworten.
 
 Wir versprechen keine Rankings, keine Anfragezahlen und keinen Umsatz. Was wir zusagen: saubere Technik, Inhalte, die echte Fragen Ihrer Kunden beantworten, und regelmäßiges Reporting, das zeigt, was wirkt und was nicht.
 
-Wir empfehlen, mit einem Kanal zu beginnen und ihn sauber aufzubauen, bevor der nächste dazukommt. Für viele lokale Betriebe ist das die Auffindbarkeit der eigenen Website.
+Wir empfehlen, mit dem Wichtigsten zu beginnen und es sauber aufzubauen, bevor mehr dazukommt. Für viele lokale Betriebe sind das eine auffindbare Website und ein vollständiges Unternehmensprofil.
 
 Wir sind ein kleines Team in Hermannsburg bei Celle und arbeiten remote für Betriebe in ganz Deutschland. Sie sprechen direkt mit der Person, die an Ihrer Website arbeitet – ohne Hotline und ohne Ticketsystem.
 
 ### Typische Ausgangslagen
 
-Drei häufige Ausgangslagen und der Kanal, der dafür passt:
+Drei häufige Ausgangslagen und was dafür hilft:
 
 - Die Website wird kaum gefunden: Wir prüfen Technik und Inhalte und beheben, was Rankings bremst – Tempo, Struktur, strukturierte Daten. (https://www.rexity.ai/marketing/seo)
-- Für regelmäßige Inhalte fehlt die Zeit: Ein Themenplan und ein fester Rhythmus für Artikel und Posts – in Ihrer Tonalität, auf Deutsch und Englisch. (https://www.rexity.ai/marketing/content)
-- Video wäre gut, Drehtage sind zu teuer: Kurze Videos aus Skript, Avataren, KI-Aufnahmen und – wo es hilft – echtem Material. (https://www.rexity.ai/marketing/video)
+- In Google Maps taucht der Betrieb kaum auf: Wir richten das Google Unternehmensprofil vollständig ein: Kategorien, Öffnungszeiten, Fotos und Antworten auf Bewertungen. (https://www.rexity.ai/marketing/seo)
+- Für regelmäßige Inhalte fehlt die Zeit: Ein kleiner Themenplan nach echten Suchanfragen, umgesetzt in Ihrer Tonalität – auf Deutsch und Englisch. (https://www.rexity.ai/marketing/seo)
 
-### Wie SEO, Inhalte und Video zusammenspielen
+### Wie SEO, Unternehmensprofil und Inhalte zusammenspielen
 
-Die drei Kanäle hängen zusammen. Technisches SEO sorgt dafür, dass Google Ihre Seiten lesen und einordnen kann. Inhalte beantworten die Fragen, nach denen Ihre Kunden suchen, und geben Google einen Grund, Sie anzuzeigen. Videos und Social-Media-Posts bringen dieselben Themen dorthin, wo Ihre Kunden scrollen.
+Die drei Teile hängen zusammen. Technisches SEO sorgt dafür, dass Google Ihre Seiten lesen und einordnen kann. Das Google Unternehmensprofil bringt Sie in die Kartenansicht, wenn jemand in Ihrer Nähe sucht, und verweist auf Ihre Website. Inhalte beantworten die Fragen, nach denen Ihre Kunden suchen, und geben Google einen Grund, Sie anzuzeigen.
 
-Deshalb planen wir Themen einmal und verwerten sie mehrfach: Aus einem Artikel werden ein Social-Media-Post und ein kurzes Video. Das spart Zeit und hält Ihre Botschaft auf allen Kanälen einheitlich.
+Deshalb planen wir Themen einmal und verwerten sie mehrfach: Aus einem Artikel werden ein Beitrag im Unternehmensprofil und ein Social-Media-Post. Das spart Zeit und hält Ihre Botschaft auf allen Kanälen einheitlich.
 
 ### LevelKraft.de: Wachstum ohne bezahlte Kampagnen
 
@@ -826,7 +982,7 @@ Fallstudie: https://www.rexity.ai/work/levelkraft#seo-fallstudie
 1. Gespräch: 30 Minuten, kostenlos: Wer sind Ihre Kunden, wonach suchen sie, und was gibt es schon?
 2. Prüfen: Wir sehen uns Technik, Inhalte und Suchanfragen an und finden, was Sie heute bremst.
 3. Planen: Themen und Suchbegriffe nach echter Suchabsicht, dazu ein Kalender, der sich halten lässt.
-4. Umsetzen: Technische Verbesserungen, neue Seiten, Artikel, Posts oder Videos – im festen Rhythmus.
+4. Umsetzen: Technische Verbesserungen, neue Seiten und Artikel, Pflege des Unternehmensprofils – im festen Rhythmus.
 5. Messen: Wir verfolgen Rankings und Besuche, berichten Ihnen regelmäßig und setzen auf das, was wirkt.
 
 ### Was Sie erwarten können
@@ -851,8 +1007,8 @@ Für Marketing gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekomme
   Antwort: Technische Verbesserungen wirken oft innerhalb von Wochen, Besuche über neue Inhalte meist nach drei bis sechs Monaten. Garantieren kann das niemand; wir zeigen Ihnen regelmäßig, was sich tut.
 - Frage: Versprechen Sie Platz 1 bei Google?
   Antwort: Nein. Rankings hängen von Markt, Wettbewerb und Ausgangslage ab. Wir versprechen saubere Arbeit und ehrliches Reporting, keine Positionen.
-- Frage: Brauche ich SEO, Inhalte und Video gleichzeitig?
-  Antwort: Nein. Wir empfehlen, mit einem Kanal zu beginnen und ihn sauber aufzubauen, bevor der nächste dazukommt.
+- Frage: Brauche ich SEO und ein Google Unternehmensprofil gleichzeitig?
+  Antwort: Für einen lokalen Betrieb ergänzen sich beide: Das Profil bringt Sie in die Kartenansicht, die Website überzeugt danach. Wir empfehlen, mit dem zu beginnen, was bei Ihnen am meisten fehlt, und es sauber aufzubauen, bevor der nächste Schritt dazukommt.
 - Frage: Können Sie unsere bestehende Website verbessern, statt eine neue zu bauen?
   Antwort: Ja. Wir prüfen zuerst Technik und Inhalte und empfehlen dann, ob Verbesserungen reichen oder ein Relaunch sinnvoller ist. Der Website-Check liefert dafür einen schriftlichen Befund.
 - Frage: Was kostet Marketing bei Ihnen?
@@ -860,50 +1016,41 @@ Für Marketing gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekomme
 - Frage: Schreiben Sie auch auf Englisch?
   Antwort: Ja – Inhalte auf Deutsch und Englisch, abgestimmt auf Plattform und Zielgruppe.
 
-## SEO
+## SEO & Google Unternehmensprofil
 
 Adresse: https://www.rexity.ai/marketing/seo
 
-SEO für KMU: technische Optimierung, Inhalte nach echter Suchabsicht und ehrliches Reporting. Fallstudie: LevelKraft.de. Ohne Ranking-Versprechen.
+SEO für kleine Betriebe: Seiten, die für echte Suchanfragen ranken, Google Unternehmensprofil, Bewertungen und Inhalte. Ehrliche Ziele, keine Garantien.
 
-Traffic, der sich aufbaut.
+Gefunden werden, wenn Kunden in Ihrer Nähe suchen.
 
-Technisches SEO, Content und Link-Strategie, die Ihre Site zu einem dauerhaften Akquise-Kanal machen — bessere Rankings bei relevanten Suchanfragen.
+Suchmaschinenoptimierung für kleine und mittlere Betriebe: eine technisch saubere Website, Seiten und Artikel, die echte Suchanfragen beantworten, und ein gepflegtes Google Unternehmensprofil – mit ehrlichem Reporting statt Ranking-Versprechen.
 
-### SEO für kleine und mittlere Betriebe
+### SEO und Google Unternehmensprofil für kleine Betriebe
 
-Rexity Labs UG aus Hermannsburg (Landkreis Celle) macht die Websites kleiner und mittlerer Betriebe in Niedersachsen bei Google auffindbar: mit technischer Optimierung, Inhalten nach echter Suchabsicht und ehrlichem Reporting. Pauschalpakete gibt es nicht; den Festpreis nennen wir nach einem kurzen Gespräch, und zum Einstieg eignet sich der Website-Check für 249 €.
+Rexity Labs UG aus Hermannsburg (Landkreis Celle) macht die Websites kleiner und mittlerer Betriebe in Niedersachsen bei Google auffindbar: mit technischer Optimierung, Inhalten nach echter Suchabsicht, einem gepflegten Google Unternehmensprofil und ehrlichem Reporting. Pauschalpakete gibt es nicht; den Festpreis nennen wir nach einem kurzen Gespräch, und zum Einstieg eignet sich der Website-Check für 249 €.
+
+SEO heißt für einen Betrieb nicht, für möglichst viele Begriffe weit oben zu stehen, sondern bei den Suchanfragen sichtbar zu sein, hinter denen eine echte Absicht steht – etwa „Kosmetikstudio Celle“ oder „Website mit Online-Terminbuchung“. Dafür braucht es drei Dinge: eine Website, die Google lesen kann, Seiten, die genau diese Fragen beantworten, und ein Unternehmensprofil, das in der Kartenansicht überzeugt.
 
 Rankings versprechen wir nicht. Was wir zeigen können, ist unsere eigene SEO-Fallstudie zu LevelKraft.de, mit Zahlen, Quellen und Stand.
 
-### Was SEO bei uns kostet
+### Google Unternehmensprofil: was wir einrichten und pflegen
 
-Für SEO gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Zum Einstieg eignet sich der Website-Check.
+Wer nach einem Betrieb in der Nähe sucht, sieht oft zuerst die Kartenansicht mit einigen Einträgen – noch vor der ersten Website. Diese Einträge kommen aus dem Google Unternehmensprofil. Für einen lokalen Betrieb ist es deshalb häufig der schnellste Hebel, und das Profil selbst ist kostenlos.
 
-- Website-Check: Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Festpreis 249 €, netto zzgl. MwSt.
-- Alle Preise: https://www.rexity.ai/preise
+Wir prüfen und ergänzen, was Google anzeigt: die passende Hauptkategorie und sinnvolle weitere Kategorien, Name, Adresse und Telefonnummer genau wie auf Ihrer Website, Öffnungszeiten einschließlich Feiertagen, Ihre Leistungen und eine Beschreibung in Ihren Worten. Dazu kommen echte Fotos von Räumen, Team und Arbeit statt Stockbildern.
 
-### Häufige Fragen
+Im laufenden Betrieb beantworten wir Bewertungen – freundlich, zeitnah und ohne Textbausteine –, veröffentlichen gelegentlich Beiträge zu Angeboten oder Terminen und verknüpfen das Profil mit Ihrer Buchungs- oder Anfrageseite. Gibt es doppelte Einträge Ihres Betriebs, helfen wir, sie bei Google zusammenführen zu lassen.
 
-- Frage: Wann sehe ich Ergebnisse?
-  Antwort: Technische Gewinne in Wochen. Content-Traffic in 3–6 Monaten.
+Was wir nicht tun: Bewertungen kaufen, Adressen erfinden oder Suchbegriffe in den Firmennamen schreiben. Das verstößt gegen die Richtlinien von Google und kann dazu führen, dass das Profil gesperrt wird.
 
-## Content & Social
+### Inhalte, die ranken
 
-Adresse: https://www.rexity.ai/marketing/content
+Inhalte sind der Teil von SEO, den Ihre Kunden tatsächlich lesen. Wir planen sie nach Suchanfragen, nicht nach Bauchgefühl: Welche Fragen stellen Ihre Kunden, bevor sie anrufen oder buchen? Daraus entsteht ein kleiner Themenplan mit Leistungsseiten, Antworten auf häufige Fragen und – wo es sich lohnt – Artikeln.
 
-Content-Marketing für KMU: Artikel, Landingpage-Texte und Social-Media-Posts in Ihrer Tonalität, im festen Rhythmus geplant – auf Deutsch und Englisch.
+Wir schreiben in Ihrer Tonalität, auf Deutsch und Englisch, und verwerten Themen mehrfach: Aus einem Artikel werden ein Beitrag im Unternehmensprofil und ein Social-Media-Post. So bleibt der Aufwand überschaubar, und Ihre Botschaft ist überall gleich.
 
-Dort auftauchen, wo Ihre Kunden scrollen.
-
-Eine Content-Maschine — Artikel, Social Posts und Creatives — die Ihre Marke sichtbar und Ihre Pipeline warm hält, geplant und produziert im festen Rhythmus.
-
-### Was Content-Marketing kostet
-
-Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Für Aufgaben außerhalb eines Festpreises gilt unser Stundensatz.
-
-- Stundensatz für alles andere: Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. 89 € pro Stunde, netto zzgl. MwSt.
-- Alle Preise: https://www.rexity.ai/preise
+Jede Seite bekommt einen klaren Titel, eine Beschreibung für die Trefferliste, sinnvolle Zwischenüberschriften und Links zu den passenden Leistungen. Das hilft Google beim Einordnen und Besuchern beim Weiterlesen.
 
 ### LevelKraft: über 30 Prüfungs- und Übungsseiten
 
@@ -913,56 +1060,85 @@ Für LevelKraft, eine Lern-App, die wir entwickelt haben, haben wir eine Website
 
 Fallstudie: https://www.rexity.ai/work/levelkraft
 
+### Ehrliche Ziele statt Garantien
+
+- Technische Verbesserungen wirken oft innerhalb von Wochen
+- Besuche über neue Inhalte brauchen meist drei bis sechs Monate
+- Keine Versprechen zu Rankings, Anfragen oder Umsatz
+- Regelmäßiges Reporting zu Rankings, Besuchen und dem Unternehmensprofil
+- Sie sprechen direkt mit der Person, die an Ihrer Website arbeitet
+
+### Was SEO bei uns kostet
+
+Für SEO und die Pflege des Unternehmensprofils gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Zum Einstieg eignet sich der Website-Check; für Aufgaben außerhalb eines Festpreises gilt unser Stundensatz.
+
+- Website-Check: Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Festpreis 249 €, netto zzgl. MwSt.
+- Stundensatz für alles andere: Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. 89 € pro Stunde, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
 ### Häufige Fragen
 
+- Frage: Wann sehe ich Ergebnisse?
+  Antwort: Technische Gewinne in Wochen. Content-Traffic in 3–6 Monaten.
 - Frage: Schreiben Sie auf Deutsch und Englisch?
   Antwort: Ja — beides, abgestimmt auf Plattform und Zielgruppe.
+- Frage: Was kostet SEO für ein kleines Unternehmen?
+  Antwort: Das hängt von Ausgangslage und Umfang ab, deshalb gibt es bei uns keine Pauschalpakete. Nach einem kurzen Gespräch nennen wir einen Festpreis. Zum Einstieg eignet sich der Website-Check für 249 € mit schriftlichem Befund; Aufgaben außerhalb eines Festpreises rechnen wir mit 89 € pro Stunde ab, netto zzgl. MwSt.
+- Frage: Kann man ein Google Unternehmensprofil selbst optimieren?
+  Antwort: Ja. Das Profil ist kostenlos, und vieles können Sie selbst pflegen: die passende Hauptkategorie, vollständige Öffnungszeiten, aktuelle Fotos, Antworten auf Bewertungen und gelegentliche Beiträge. Wir übernehmen das, wenn die Zeit fehlt, oder richten es einmal sauber ein und zeigen Ihnen, was Sie danach selbst tun können.
+- Frage: Was bringen Bewertungen fürs Ranking?
+  Antwort: Google schreibt selbst, dass Anzahl und Bewertung der Rezensionen in das lokale Ranking einfließen; wie stark, legt Google nicht offen. Sicher ist: Viele aktuelle Bewertungen helfen Suchenden bei der Entscheidung. Wir empfehlen, zufriedene Kunden aktiv zu fragen und jede Bewertung zu beantworten. Gekaufte oder gefälschte Bewertungen verstoßen gegen die Google-Richtlinien.
+- Frage: Brauche ich einen Blog?
+  Antwort: Nicht unbedingt. Für viele lokale Betriebe bringen gute Leistungsseiten und ein gepflegtes Unternehmensprofil mehr als ein Blog, der nach drei Beiträgen einschläft. Artikel lohnen sich, wenn Ihre Kunden vorab Fragen stellen, etwa zu Kosten, Ablauf oder Vergleichen. Dann planen wir wenige Themen, die genau solche Fragen beantworten.
 
-## KI-Videomarketing
+## Wartung & Betreuung
 
-Adresse: https://www.rexity.ai/marketing/video
+Adresse: https://www.rexity.ai/website-wartung
 
-KI-Videomarketing: kurze Werbe- und Social-Media-Videos mit Avataren, KI-Aufnahmen und echtem Material – ohne Filmcrew, geschnitten für jede Plattform.
+Wartung und Betreuung Ihrer Website: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen – als Jahrespaket oder monatlich. Was drin ist.
 
-Kampagnenreifes Video ohne Filmcrew.
+Ihre Website bleibt sicher, erreichbar und aktuell – ohne dass Sie daran denken müssen.
 
-Marketingvideo im großen Maßstab produzieren — Avatare, realistische KI-Shots und Short-Form-Edits — für mehr markenkonforme Creatives bei gleichem Budget.
+Wartung und Betreuung für Websites, Online-Buchung und Web-Apps: Sicherheitsupdates, regelmäßige Sicherungen, Monitoring und kleine Änderungen, damit nach dem Start alles sauber weiterläuft. Als Jahrespaket, monatlich auf Anfrage.
 
-### Was Videomarketing kostet
+### Wartung und Betreuung kurz erklärt
 
-Für Videomarketing gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Die Preise unserer Standardleistungen stehen auf der Preisseite.
+Wartung heißt: Ihre Website bleibt nach dem Start sicher, erreichbar und aktuell. Wir spielen Sicherheitsupdates ein, sichern Website und Daten regelmäßig, behalten Erreichbarkeit und Fehler im Blick und erledigen kleine Änderungen, wenn sich bei Ihnen etwas ändert. Das Jahrespaket kostet ab 999 € pro Jahr, netto zzgl. MwSt.; eine monatliche Zahlung ist auf Anfrage möglich.
 
-- Alle Preise: https://www.rexity.ai/preise
+Wartung ist bei uns optional. Sie gilt für jede Website, Buchung oder App, die wir gebaut haben, und auf Anfrage auch für bestehende Websites – nach einem kurzen Audit. Sie sprechen dabei direkt mit der Person, die Ihre Website kennt, ohne Hotline und ohne Ticketsystem.
 
-### Unsere Projekte
+### Was drin ist
 
-Referenzen.
+Das gehört zum Jahrespaket; den genauen Umfang halten wir in Ihrem Angebot fest.
 
-Eine Fallstudie zu Videomarketing haben wir noch nicht veröffentlicht. Unsere abgeschlossenen Projekte – Websites mit Online-Buchung und eine eigene App – finden Sie unter Arbeiten.
+- Sicherheitsupdates für die eingesetzte Software und ihre Abhängigkeiten
+- Regelmäßige Sicherungen, aus denen wir die Website wiederherstellen können
+- Monitoring von Erreichbarkeit und Fehlern
+- Kleine Änderungen an Texten, Bildern, Preisen und Öffnungszeiten
+- Tests von Buchung und Formularen nach jedem Update
+- Ein fester Ansprechpartner, ohne Hotline und Ticketsystem
 
-Fallstudie: https://www.rexity.ai/work
+### Was nicht drin ist
 
-### Häufige Fragen
+Damit es keine Überraschungen gibt:
 
-- Frage: Sieht es künstlich aus?
-  Antwort: Moderne KI-Videos sind stark. Wir mischen sie mit echtem Material, wenn nötig.
+- Neue Seiten und größere Umbauten: Das ist ein eigenes kleines Projekt, mit Festpreis oder nach Stundensatz (89 € pro Stunde, netto zzgl. MwSt.).
+- Neue Inhalte und Sichtbarkeit: Neue Texte, Artikel oder die Pflege Ihres Google Unternehmensprofils gehören zu SEO & Google Unternehmensprofil, nicht zur Wartung. (https://www.rexity.ai/marketing/seo)
+- Gebühren Dritter: Domain, E-Mail-Postfächer, Zahlungsanbieter oder bezahlte Programme sind eigene Verträge. Die Wartung umfasst die Arbeit an Ihrer Website, nicht diese Gebühren.
 
-## Testing & Support
+### Statische Website oder CMS: warum Wartung bei uns anders aussieht
 
-Adresse: https://www.rexity.ai/testing-support
+Viele Wartungsverträge sind für WordPress und ähnliche Content-Management-Systeme geschrieben. Dort läuft auf dem Server ständig Software: das CMS selbst, ein Theme und oft viele Plugins, jedes mit eigenen Updates und eigenen Sicherheitslücken. Wartung heißt dann vor allem, Updates einzuspielen und zu prüfen, ob danach noch alles zusammenpasst.
 
-Tests und Betreuung für Websites und Apps: Funktions- und Regressionstests, Monitoring nach dem Launch, Updates. Jährliche Wartung ab 999 € pro Jahr.
+Unsere Websites programmieren wir selbst, ohne Website-Baukasten, und liefern die Seiten statisch aus: Besucher bekommen fertige Seiten, ohne CMS und Plugin-Sammlung dahinter. Buchung und Verwaltung laufen als eigener, schlanker Teil daneben. Das hat weniger bewegliche Teile, lädt schnell und bietet Angreifern weniger Fläche.
 
-Ausliefern, ohne die Luft anzuhalten.
+Wartung bedeutet bei uns deshalb weniger Update-Routine und mehr Kontrolle: Laufen Buchung, Formulare und Bezahlung? Sind die eingesetzten Bausteine aktuell? Gibt es eine frische Sicherung? Und wenn sich bei Ihnen etwas ändert – Preise, Kurse, Öffnungszeiten –, ist die Änderung schnell erledigt.
 
-End-to-End-Testing und Post-Launch-Support — damit Releases sauber landen und gesund bleiben, über Geräte, Browser und OS-Versionen hinweg.
+### Für wen sich Wartung lohnt
 
-### Was Wartung und Betreuung kosten
-
-Wartung ist optional und gilt für jedes Projekt; sie läuft als Jahrespaket.
-
-- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
-- Alle Preise: https://www.rexity.ai/preise
+- Websites mit Online-Buchung: Wenn Kunden online buchen, kostet ein Ausfall Termine. Nach Updates prüfen wir die Buchung jedes Mal. (https://www.rexity.ai/web/web-design)
+- Online-Shops und Bezahlung: Checkout und Bestellmails müssen laufen; wir testen sie nach Änderungen. (https://www.rexity.ai/web/online-shop)
+- Betriebe ohne eigene IT: Niemand im Team muss sich um Technik kümmern: Sie schreiben uns, was sich ändern soll.
 
 ### Body & Care: ein ruhiger Start
 
@@ -972,10 +1148,30 @@ Die neue Website mit Online-Kursbuchung für Body & Care in Hermannsburg ist sei
 
 Fallstudie: https://www.rexity.ai/work/body-and-care
 
+### Was Wartung und Betreuung kosten
+
+Wartung ist optional und gilt für jedes Projekt; sie läuft als Jahrespaket. Eine monatliche Zahlung ist auf Anfrage möglich – den Preis nennen wir nach einem kurzen Gespräch.
+
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Stundensatz für alles andere: Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises. 89 € pro Stunde, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
 ### Häufige Fragen
 
-- Frage: Können Sie eine bestehende App übernehmen?
-  Antwort: Ja. Wir starten mit einem 1-wöchigen Audit, bevor wir nächste Schritte empfehlen.
+- Frage: Können Sie eine bestehende Website oder App übernehmen?
+  Antwort: Ja. Wir starten mit einem kurzen Audit, bevor wir nächste Schritte empfehlen.
+- Frage: Was kostet Website-Wartung?
+  Antwort: Die Wartung kostet bei uns ab 999 € pro Jahr, netto zzgl. MwSt. Der genaue Preis hängt davon ab, was betreut wird – eine Website ohne Buchung macht weniger Arbeit als eine mit Buchungssystem oder Shop. Sie bekommen ihn nach einem kurzen Gespräch als Festpreis.
+- Frage: Brauche ich einen Wartungsvertrag?
+  Antwort: Nein, Wartung ist bei uns optional. Sie können die Website nach der Übergabe auch selbst betreuen oder betreuen lassen, von wem Sie möchten. Sinnvoll ist ein Wartungspaket, wenn die Website Anfragen oder Buchungen bringt und im Team niemand Zeit für Updates, Sicherungen und Kontrolle hat.
+- Frage: Was passiert bei einem Ausfall?
+  Antwort: Wir suchen die Ursache, beheben sie oder stellen die letzte funktionierende Version aus der Sicherung wieder her und prüfen danach, ob Buchung und Formulare wieder laufen. Liegt der Fehler bei einem externen Dienst, etwa beim Hoster oder Zahlungsanbieter, melden wir ihn dort mit allen Details und halten Sie auf dem Laufenden.
+- Frage: Sind Textänderungen enthalten?
+  Antwort: Kleine Änderungen ja – etwa neue Öffnungszeiten, Preise, ein ausgetauschtes Bild oder ein korrigierter Absatz. Den Umfang halten wir im Angebot fest. Neue Seiten oder größere Umbauten rechnen wir getrennt ab, mit Festpreis oder nach Stundensatz (89 € pro Stunde, netto zzgl. MwSt.).
+- Frage: Kann ich monatlich zahlen?
+  Antwort: Ja, auf Anfrage. Den Preis für die monatliche Betreuung nennen wir nach einem kurzen Gespräch; das Jahrespaket kostet ab 999 € pro Jahr, netto zzgl. MwSt.
+- Frage: Kann ich kündigen?
+  Antwort: Ja. Die Wartung läuft als Jahrespaket; die Kündigungsfrist steht in Ihrem Angebot. Die Website gehört Ihnen, und Sie haben alle Zugänge, sodass Sie danach selbst oder mit einem anderen Dienstleister weitermachen können.
 
 ## In English
 

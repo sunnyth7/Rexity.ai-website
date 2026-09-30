@@ -21,10 +21,16 @@
       if (w.ScrollTrigger && w.ScrollTrigger.refresh) w.ScrollTrigger.refresh();
     }, 0);
   }
+  /* Slow or failed boot (Sprint 18, founder's iPhone report): the template's IX states keep the nav, the hero
+     lines and the ring invisible until Webflow runs. If the boot has not finished 2.5 s after it started, or a
+     script fails to load, html.rx-reveal shows them in their final state (index.html: the rule next to the
+     no-JS fallback). The animation is skipped, the page is usable. */
+  function reveal() { d.documentElement.classList.add("rx-reveal"); mark("rx-reveal"); }
   function boot() {
     if (started) return;
     started = true;
     mark("rx-boot");
+    setTimeout(function () { if (!w.RxBooted) reveal(); }, 2500);
     var late = d.readyState === "complete";
     var list = [].slice.call(d.querySelectorAll('script[type="text/x-rx-boot"]')), i = 0;
     list.forEach(function (o) {
@@ -47,7 +53,8 @@
           if (g) s.integrity = g;
           s.src = src;
           s.async = false;
-          s.onload = s.onerror = next;
+          s.onload = next;
+          s.onerror = function () { reveal(); next(); };
           o.parentNode.replaceChild(s, o);
           return;
         }
@@ -61,6 +68,14 @@
     })();
   }
   function later() {
+    /* iOS Safari fires window load late (3 s+ on the founder's iPhone 16 and in the iOS 26 simulator) and
+       Webflow's page-load intro waits for it: nav and headline stayed invisible for 6 s. If the nav has not
+       started to appear 3.5 s after the DOM is ready, show nav, headline and subtitle; an intro that already
+       runs (opacity > 0) is left alone. */
+    setTimeout(function () {
+      var n = d.querySelector(".home-nav-loader");
+      if (n && getComputedStyle(n).opacity === "0") reveal();
+    }, 3500);
     setTimeout(boot, 1000);
     var P = w.PerformanceObserver, T = (P && P.supportedEntryTypes) || [];
     if (T.indexOf("largest-contentful-paint") > -1) {

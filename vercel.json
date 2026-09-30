@@ -29,6 +29,26 @@
       "permanent": true
     },
     {
+      "source": "/marketing/video",
+      "destination": "/marketing",
+      "permanent": true
+    },
+    {
+      "source": "/marketing/content",
+      "destination": "/marketing/seo",
+      "permanent": true
+    },
+    {
+      "source": "/web/dashboards",
+      "destination": "/web/saas",
+      "permanent": true
+    },
+    {
+      "source": "/testing-support",
+      "destination": "/website-wartung",
+      "permanent": true
+    },
+    {
       "source": "/systems/automation",
       "destination": "/automation",
       "permanent": true

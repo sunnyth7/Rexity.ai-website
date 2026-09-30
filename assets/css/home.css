@@ -376,3 +376,10 @@ a.rx-hstep:hover .rx-hstep__go{background:color-mix(in srgb,var(--rx-ink) 10%,tr
 .rx-hsec .rx-panel--nested{background:rgba(255,255,255,.035)}
 /* closing CTA band: the photo scrim takes the violet too */
 .rx-hcta::before{background:radial-gradient(90% 80% at 50% 50%,rgba(38,14,76,.62),rgba(12,8,24,.86))}
+
+/* Sprint 18 — slow or failed template boot (assets/js/boot.js adds html.rx-reveal 2.5 s after the boot started
+   or when a script fails): show the nav, the hero lines and the ring in their final state, same as the no-JS
+   fallback in index.html, so the page is usable on slow phones while the animation is skipped. */
+html.rx-reveal .home-nav-loader,html.rx-reveal .first-line,html.rx-reveal .second-line,html.rx-reveal .paragraph-first-line,html.rx-reveal .home-main-section-wrap{opacity:1!important}
+html.rx-reveal .first-line,html.rx-reveal .second-line,html.rx-reveal .paragraph-first-line{transform:none!important;filter:none!important}
+/* the ring stays with the boot (its layout is JS); the nav, headline and subtitle are what a visitor needs first */

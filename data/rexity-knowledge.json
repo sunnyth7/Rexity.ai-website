@@ -182,8 +182,6 @@
         "seo",
         "content",
         "performance marketing",
-        "ai video",
-        "ki-video",
         "kampagne",
         "campaign",
         "marketing automation",
@@ -191,12 +189,13 @@
         "google",
         "ranking",
         "sichtbarkeit",
-        "avatar",
-        "shorts",
-        "video"
+        "google unternehmensprofil",
+        "google business profile",
+        "google maps",
+        "bewertungen"
       ],
-      "en": "Rexity supports digital marketing through SEO, content structure, campaign ideas, AI-supported videos, and measurable digital growth workflows. This includes technical SEO audits, content and keyword strategy, website acquisition improvements, AI video marketing, avatar and short-form video concepts, campaign-grade creative workflows, reporting recommendations, and growth experiments. Typical deliverables: an SEO or marketing audit, a keyword and content map, a campaign concept, a creative brief, AI video and script direction, and publishing plus measurement recommendations. Rexity does not promise specific rankings.",
-      "de": "Rexity unterstützt Digital Marketing mit SEO, Content-Struktur, Kampagnenideen, KI-gestützten Videos und messbaren digitalen Wachstumsprozessen. Dazu gehören technische SEO-Audits, Content- und Keyword-Strategie, Verbesserungen der Website-Akquise, KI-Videomarketing, Avatar- und Kurzvideo-Konzepte, kampagnenreife Kreativ-Workflows, Reporting-Empfehlungen und Growth-Experimente. Typische Leistungen: SEO- oder Marketing-Audit, Keyword- und Content-Map, Kampagnenkonzept, Creative Brief, KI-Video- und Skript-Richtung sowie Empfehlungen für Veröffentlichung und Messung. Konkrete Rankings verspricht Rexity nicht.",
+      "en": "Rexity supports visibility on Google through SEO and the Google Business Profile: technical SEO audits, content and keyword strategy based on real searches, service pages and articles, setting up and maintaining the Google Business Profile (categories, opening hours, photos, replies to reviews), website acquisition improvements and reporting. Typical deliverables: an SEO audit, a keyword and content map, a complete business profile, and publishing plus measurement recommendations. Rexity does not promise specific rankings. AI video marketing is no longer offered.",
+      "de": "Rexity unterstützt die Sichtbarkeit bei Google mit SEO und dem Google Unternehmensprofil: technische SEO-Audits, Content- und Keyword-Strategie nach echten Suchanfragen, Leistungsseiten und Artikel, Einrichtung und Pflege des Google Unternehmensprofils (Kategorien, Öffnungszeiten, Fotos, Antworten auf Bewertungen), Verbesserungen der Website-Akquise und Reporting. Typische Leistungen: SEO-Audit, Keyword- und Content-Map, ein vollständiges Unternehmensprofil sowie Empfehlungen für Veröffentlichung und Messung. Konkrete Rankings verspricht Rexity nicht. KI-Videomarketing bieten wir nicht mehr an.",
       "url": "/marketing"
     },
     {
@@ -276,7 +275,7 @@
       ],
       "en": "Rexity designs dashboards that present key metrics, processes, and outcomes clearly so teams can make better decisions. This covers KPI dashboards, marketing dashboards, operations dashboards, automation monitoring dashboards, lead and conversion reporting, data source mapping, decision-support views, and admin or operations views for automations. Typical deliverables: KPI definition, a data source map, a dashboard wireframe, a dashboard implementation plan, access and role recommendations, and monitoring and reporting notes.",
       "de": "Rexity konzipiert Dashboards, die wichtige Kennzahlen, Prozesse und Ergebnisse übersichtlich darstellen und Teams bei Entscheidungen unterstützen. Dazu gehören KPI-Dashboards, Marketing-Dashboards, Operations-Dashboards, Monitoring-Dashboards für Automatisierungen, Lead- und Conversion-Reporting, Datenquellen-Mapping, Entscheidungs-Views sowie Admin- und Ops-Ansichten für Automatisierungen. Typische Leistungen: KPI-Definition, Datenquellen-Map, Dashboard-Wireframe, Implementierungsplan, Zugriffs- und Rollenempfehlung sowie Monitoring- und Reporting-Hinweise.",
-      "url": "/web/dashboards"
+      "url": "/web/saas"
     },
     {
       "id": "rexity-overview",
@@ -654,8 +653,8 @@
     {
       "id": "svc-content",
       "code": "03.2",
-      "title": "Content & Social",
-      "url": "/marketing/content",
+      "title": "Content (part of SEO & Google Business Profile)",
+      "url": "/marketing/seo",
       "keywords": [
         "content",
         "social media",
@@ -669,27 +668,10 @@
       "de": "Rexity plant und produziert konsistenten, markentreuen Content und Social-Posts: Strategie und Kalender für stetigen Output, Erstellung in Ihrer Tonalität, Veröffentlichung über die richtigen Kanäle, dann messen, was ankommt, und Gewinner wiederverwerten."
     },
     {
-      "id": "svc-video",
-      "code": "03.3",
-      "title": "Video Marketing",
-      "url": "/marketing/video",
-      "keywords": [
-        "video",
-        "video marketing",
-        "reels",
-        "ads",
-        "short video",
-        "videomarketing",
-        "clip"
-      ],
-      "en": "Rexity produces short, watchable marketing videos: concept and script, production (footage or generated visuals), editing, captioning and branding per platform, distribution in the right formats and aspect ratios, then measuring views and engagement.",
-      "de": "Rexity produziert kurze, sehenswerte Marketing-Videos: Konzept und Skript, Produktion (Aufnahmen oder generierte Visuals), Schnitt, Untertitel und Branding je Plattform, Verteilung in den richtigen Formaten und Seitenverhältnissen, dann Views und Engagement messen."
-    },
-    {
       "id": "svc-testing-support",
       "code": "05",
-      "title": "Testing & Support",
-      "url": "/testing-support",
+      "title": "Wartung & Betreuung",
+      "url": "/website-wartung",
       "keywords": [
         "testing",
         "support",
@@ -698,10 +680,16 @@
         "qa",
         "wartung",
         "fehler",
-        "hilfe"
+        "hilfe",
+        "website-wartung",
+        "wartungsvertrag",
+        "betreuung",
+        "updates",
+        "sicherung",
+        "backup"
       ],
-      "en": "Rexity provides testing and ongoing support: issues are triaged and reproduced, the root cause is found (not just the symptom), fixed or escalated with context, verified with a regression test, and prevented with monitoring and checks.",
-      "de": "Rexity bietet Testing und laufenden Support: Probleme werden triagiert und reproduziert, die Ursache wird gefunden (nicht nur das Symptom), behoben oder mit Kontext eskaliert, mit einem Regressionstest verifiziert und durch Monitoring und Checks vorgebeugt."
+      "en": "Rexity maintains and looks after websites, online booking and web apps after launch: security updates, regular backups, monitoring of availability and errors, small changes to text and images, and testing booking and forms after updates. It runs as an annual package from €999 a year (net plus VAT); monthly payment is possible on request, the price is named after a short call. Maintenance is optional.",
+      "de": "Rexity wartet und betreut Websites, Online-Buchung und Web-Apps nach dem Start: Sicherheitsupdates, regelmäßige Sicherungen, Monitoring von Erreichbarkeit und Fehlern, kleine Änderungen an Texten und Bildern und Tests von Buchung und Formularen nach Updates. Das läuft als Jahrespaket ab 999 € pro Jahr (netto zzgl. MwSt.); eine monatliche Zahlung ist auf Anfrage möglich, den Preis nennen wir nach einem kurzen Gespräch. Wartung ist optional."
     },
     {
       "id": "pricing",
