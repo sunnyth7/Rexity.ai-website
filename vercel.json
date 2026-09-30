@@ -27,6 +27,26 @@
       "source": "/web/web-development",
       "destination": "/web/web-design",
       "permanent": true
+    },
+    {
+      "source": "/systems/automation",
+      "destination": "/automation",
+      "permanent": true
+    },
+    {
+      "source": "/systems/design",
+      "destination": "/web/web-design",
+      "permanent": true
+    },
+    {
+      "source": "/systems/development",
+      "destination": "/web",
+      "permanent": true
+    },
+    {
+      "source": "/systems/scale",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "headers": [
@@ -64,6 +84,15 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "https://www.rexity.ai"
+        }
+      ]
+    },
+    {
+      "source": "/(privacy|clevr/.*|save-and-fresh/.*|levelkraft-telc-prep-ai/.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
         }
       ]
     },

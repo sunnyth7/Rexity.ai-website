@@ -3127,7 +3127,7 @@
       "source": "own",
       "prompt_or_url": "own-screenshot: Stripe checkout of app.levelkraft.de (LevelKraft Premium, 12 Monate), sent by the founder 2026-09-29; customer e-mail painted out, cropped, resized to 1200 px wide, WebP",
       "author": "Rexity Labs (founder screenshot)",
-      "alt_de": "Stripe-Checkout von LevelKraft: Jahresabo LevelKraft Premium für 68,99 € mit den Zahlarten Karte, Klarna, Amazon Pay und Satispay",
+      "alt_de": "Stripe-Checkout von LevelKraft: Jahresabo LevelKraft Premium für 68,99 € mit Karte, Klarna, Amazon Pay und Satispay",
       "alt_en": "LevelKraft's Stripe checkout: LevelKraft Premium annual subscription for €68.99 with card, Klarna, Amazon Pay and Satispay",
       "notes": "Sprint 17 (17B, D17-8): proof beside the 'Stripe-Checkout in Produktion' panel on /web/online-shop",
       "batch": "sprint-17"
@@ -3137,7 +3137,7 @@
       "source": "own",
       "prompt_or_url": "own-screenshot: Stripe checkout of app.levelkraft.de (LevelKraft Premium, 12 Monate), sent by the founder 2026-09-29; customer e-mail painted out, cropped, resized to 800 px wide, WebP",
       "author": "Rexity Labs (founder screenshot)",
-      "alt_de": "Stripe-Checkout von LevelKraft: Jahresabo LevelKraft Premium für 68,99 € mit den Zahlarten Karte, Klarna, Amazon Pay und Satispay",
+      "alt_de": "Stripe-Checkout von LevelKraft: Jahresabo LevelKraft Premium für 68,99 € mit Karte, Klarna, Amazon Pay und Satispay",
       "alt_en": "LevelKraft's Stripe checkout: LevelKraft Premium annual subscription for €68.99 with card, Klarna, Amazon Pay and Satispay",
       "notes": "Sprint 17 (17B, D17-8): proof beside the 'Stripe-Checkout in Produktion' panel on /web/online-shop",
       "batch": "sprint-17"
