@@ -383,3 +383,13 @@ a.rx-hstep:hover .rx-hstep__go{background:color-mix(in srgb,var(--rx-ink) 10%,tr
 html.rx-reveal .home-nav-loader,html.rx-reveal .first-line,html.rx-reveal .second-line,html.rx-reveal .paragraph-first-line,html.rx-reveal .home-main-section-wrap{opacity:1!important}
 html.rx-reveal .first-line,html.rx-reveal .second-line,html.rx-reveal .paragraph-first-line{transform:none!important;filter:none!important}
 /* the ring stays with the boot (its layout is JS); the nav, headline and subtitle are what a visitor needs first */
+
+/* Sprint 18 follow-up (founder, 1 Oct 2026): on iPhone skip the intro — nav and headline are shown at once
+   (html.rx-reveal, set by the head script) and the ring stands still in its end state: the wrapper at the end of
+   the fly-in and the three groups at their end rotations (-375/-390/-360 deg as GSAP leaves them). The inline
+   transforms the template animates are overridden with !important, so the intro and the continuous spin do nothing. */
+html.rx-iphone .home-hero .home-hero-wrapper{transform:translate3d(0,0,100rem) scale3d(1,1,1) rotateX(90deg) rotateY(0) rotateZ(-30deg) skew(0,0)!important;will-change:auto!important}
+html.rx-iphone .home-hero .home-header-group.first{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(-15deg) skew(0,0)!important}
+html.rx-iphone .home-hero .home-header-group.second{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(-30deg) skew(0,0)!important}
+html.rx-iphone .home-hero .home-header-group.third{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(0) skew(0,0)!important}
+html.rx-iphone .home-hero .home-header-group,html.rx-iphone .home-hero .home-header-img-wrap,html.rx-iphone .home-hero .home-header-img{opacity:1!important;visibility:visible!important}
