@@ -6,7 +6,7 @@ Rexity Labs UG (haftungsbeschränkt) ist ein kleines Software-Studio aus Hermann
 
 ## Unternehmen
 
-- Name: Rexity Labs UG (haftungsbeschränkt) (Anzeigename: Rexity Labs UG)
+- Name: Rexity Labs UG (haftungsbeschränkt) (Anzeigename: Rexity Labs)
 - Adresse: Willighäuser Weg 11, 29320 Südheide (Ortsteil Hermannsburg), Niedersachsen, Deutschland
 - Telefon: +49 174 2471435
 - E-Mail: info@rexity.ai
