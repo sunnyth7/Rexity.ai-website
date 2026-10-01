@@ -23,14 +23,16 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 ## Leistungen
 
 - [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
-- [Website-Umzug und Relaunch (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Wir ziehen Website, Domain und E-Mail-Postfächer um – mit Weiterleitungen, DNS und SEO-Schutz. Festpreis ab 1.299 €, aus Niedersachsen, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [Website-Relaunch und Umzug (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [Website für Handwerker (Anfrageformular, Leistungsseiten, Terminbuchung)](https://www.rexity.ai/website-f%C3%BCr-handwerker): Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 € (Festpreise, netto zzgl. MwSt.).
 - [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
 - [Web-Apps, SaaS-Plattformen und Dashboards](https://www.rexity.ai/web/saas): Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
 - [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
-- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 €; E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
+- [Terminerinnerung per SMS, E-Mail und WhatsApp](https://www.rexity.ai/automation/terminerinnerung): Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit. Preise: E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
+- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
 - [SEO (Suchmaschinenoptimierung) und Google Unternehmensprofil](https://www.rexity.ai/marketing/seo): SEO für kleine Betriebe: Seiten, die für echte Suchanfragen ranken, Google Unternehmensprofil, Bewertungen und Inhalte. Ehrliche Ziele, keine Garantien. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
 - [Website-Wartung und Betreuung](https://www.rexity.ai/website-wartung): Wartung und Betreuung Ihrer Website: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen – als Jahrespaket oder monatlich. Was drin ist. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
@@ -186,9 +188,9 @@ Viele Betriebe kommen zu uns, weil die alte Website auf dem Handy nicht mehr ric
 
 ### Website mit Online-Buchung: drei Wege zur Anfrage
 
-Welche Strecke Ihre Kunden gehen, hängt vom Betrieb ab. Wir bauen alle drei – und kombinieren sie, wenn es passt:
+Welche Strecke Ihre Kunden gehen, hängt vom Betrieb ab. Wir bauen alle drei – und kombinieren sie, wenn es passt; eine Terminerinnerung per SMS oder E-Mail kommt bei Bedarf dazu:
 
-- Anfrage ohne Umwege: Ein Formular, das nur fragt, was Sie wirklich brauchen, und die Anfrage als E-Mail mit allen Angaben bei Ihnen ablegt. Für Handwerk, Beratung und alles, was ein Angebot braucht.
+- Anfrage ohne Umwege: Ein Formular, das nur fragt, was Sie wirklich brauchen, und die Anfrage als E-Mail mit allen Angaben bei Ihnen ablegt. Für Handwerk, Beratung und alles, was ein Angebot braucht. (https://www.rexity.ai/website-f%C3%BCr-handwerker)
 - Terminbuchung: Kunden sehen nur freie Zeiten und buchen in vier Schritten; der Termin ist sofort verbindlich und lässt sich mit einem Klick in den eigenen Kalender übernehmen. Keine Doppelbuchung, kein Zettel – wie bei der Fahrzeugpflege Celle. (https://www.rexity.ai/kfz-aufbereitung-website)
 - Kursbuchung: Kurse mit Live-Anzeige der freien Plätze, Stornierung ohne Kundenkonto und einer Kursverwaltung fürs Team – wie bei Body & Care Hermannsburg, live seit dem 14.09.2026. (https://www.rexity.ai/fitnessstudio-website)
 
@@ -224,12 +226,14 @@ Wir sitzen in Hermannsburg in der Südheide. Betriebe in Celle, Bergen, Faßberg
 
 Beide bisher veröffentlichten Kundenprojekte liegen im Landkreis Celle: das Fitnessstudio Body & Care in Hermannsburg, seit dem 14.09.2026 mit Online-Kursbuchung live, und die Fahrzeugpflege in Celle, deren Website mit Online-Terminbuchung fertig gebaut ist; ihr Umzug auf die eigene Domain folgt.
 
-### Weiterlesen: Umzug, Wartung und Branchenlösungen
+### Weiterlesen: Relaunch, Wartung und Branchenlösungen
 
 Die Seiten zu den Fragen, die in Gesprächen am häufigsten kommen:
 
-- Website-Umzug ohne Ranking-Verlust: Domain, E-Mail und Inhalte umziehen – mit Weiterleitungs-Tabelle, DNS-Plan und Nachlauf in der Search Console, ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
+- Website-Relaunch und Umzug ohne Ranking-Verlust: Domain, E-Mail und Inhalte umziehen – mit Weiterleitungs-Tabelle, DNS-Plan und Nachlauf in der Search Console, ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
 - Website-Wartung und Betreuung: Sicherheitsupdates, Sicherungen und kleine Änderungen als Jahrespaket ab 999 € pro Jahr. (https://www.rexity.ai/website-wartung)
+- Website für Handwerker: Anfrageformular mit allen Angaben fürs Angebot, Leistungsseiten je Gewerk und auf Wunsch Terminbuchung – für Handwerksbetriebe. (https://www.rexity.ai/website-f%C3%BCr-handwerker)
+- Terminerinnerung per SMS & WhatsApp: Bestätigung und Erinnerung vor dem Termin, automatisch aus Ihrem Buchungssystem – für 299 €. (https://www.rexity.ai/automation/terminerinnerung)
 - Fitnessstudio-Website mit Kursbuchung: Kursplan, freie Plätze, Buchung und Stornierung ohne Kundenkonto – für Studios und Kursanbieter. (https://www.rexity.ai/fitnessstudio-website)
 - Website mit Terminbuchung für Werkstätten: Eine Seite pro Leistung, nur freie Zeiten, keine Doppelbuchung – für Kfz-Aufbereiter und Werkstätten. (https://www.rexity.ai/kfz-aufbereitung-website)
 - Was eine Website mit Kursbuchung kostet: Wovon der Preis abhängt und was im Festpreis enthalten ist – mit unseren Preisen im Vergleich. (https://www.rexity.ai/website-mit-kursbuchung-kosten)
@@ -255,19 +259,19 @@ Die Seiten zu den Fragen, die in Gesprächen am häufigsten kommen:
 - Frage: Ist die Website barrierefrei?
   Antwort: Wir bauen nach den gängigen Regeln für Zugänglichkeit: klare Kontraste, Tastaturbedienung, beschriftete Formulare, Alternativtexte. Kleinstunternehmen, die nur Dienstleistungen anbieten, sind vom Barrierefreiheitsstärkungsgesetz ausgenommen (§ 3 Abs. 3 BFSG); wer darunter fällt, bekommt von uns eine Prüfung nach WCAG 2.1 AA als Zusatz.
 
-## Website-Umzug & Relaunch
+## Website-Relaunch & Umzug
 
 Adresse: https://www.rexity.ai/web/website-umzug
 
-Wir ziehen Website, Domain und E-Mail-Postfächer um – mit Weiterleitungen, DNS und SEO-Schutz. Festpreis ab 1.299 €, aus Niedersachsen, remote bundesweit.
+Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit.
 
 Domain, E-Mail und Inhalte umziehen – ohne Ausfall und ohne Ranking-Verlust.
 
 Wir ziehen Ihre bestehende Website, Ihre Domain und Ihre E-Mail-Postfächer um oder überführen den alten Auftritt in eine neue Website: mit Weiterleitungen, DNS-Umstellung und SEO-Schutz. Festpreis, aus Niedersachsen, remote in ganz Deutschland.
 
-### Website-Umzug ohne Ranking-Verlust
+### Website-Relaunch und Umzug ohne Ranking-Verlust
 
-Rexity Labs UG aus Hermannsburg (Landkreis Celle) zieht Websites, Domains und E-Mail-Postfächer um: zu einem neuen Hoster, auf eine neue Domain oder in eine neue Website. Eine Website-Migration oder ein Relaunch gibt es ab 1.299 € als Festpreis, netto zzgl. MwSt.; der E-Mail-Umzug kommt als Baustein dazu. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
+Beim Website-Relaunch oder Umzug zieht Rexity Labs UG aus Hermannsburg (Landkreis Celle) Websites, Domains und E-Mail-Postfächer um: in eine neue Website, zu einem neuen Hoster oder auf eine neue Domain. Eine Website-Migration oder ein Relaunch gibt es ab 1.299 € als Festpreis, netto zzgl. MwSt.; der E-Mail-Umzug kommt als Baustein dazu. Wir arbeiten für Betriebe in Niedersachsen und remote in ganz Deutschland.
 
 Ein Umzug ist mehr als Dateien kopieren. Wer die alte Adresse aufruft, muss auf der richtigen neuen Seite landen; Google muss die neue Adresse als Nachfolger erkennen; E-Mails dürfen keine Stunde ausfallen; Formulare, Buchungen und Bilder müssen weiter funktionieren. Genau diese Punkte gehen bei Umzügen am häufigsten schief – und genau dafür haben wir einen festen Ablauf.
 
@@ -293,6 +297,21 @@ Das sind die typischen Fehlerquellen. Jeder Punkt hat bei uns einen festen Platz
 - Bilder, PDFs und Downloads fehlen → Inventar aller Dateien vor dem Umzug, Abgleich danach
 - Google findet die neue Seite nicht → Sitemap, Search Console und (bei neuer Domain) die Adressänderung werden eingereicht; 404-Meldungen werden in den ersten Wochen kontrolliert
 - Die alte Domain läuft unbeaufsichtigt aus → Kündigungs- und Laufzeit-Termine des alten Vertrags stehen im Umzugsplan
+
+### Relaunch-Checkliste: 10 Punkte vor dem Go-live
+
+Ob wir den Relaunch machen oder jemand anderes – diese zehn Punkte sollten vor der Umschaltung erledigt sein:
+
+- Inventar aller URLs: jede Seite, jede Datei und jedes Formular der alten Website erfassen
+- Rankings sichern: notieren, welche Seiten und Suchbegriffe heute Besucher bringen
+- Weiterleitungs-Tabelle: jede alte Adresse dauerhaft (301/308) auf ihr neues Ziel, ohne Ketten
+- Titel und Descriptions übernehmen oder bewusst verbessern – nie leer lassen
+- Interne Links auf die neuen Adressen umstellen
+- Formulare und Buchungen einmal echt testen, einschließlich Mail-Empfang
+- Tracking und Consent prüfen: misst die neue Seite, und nur mit Einwilligung?
+- Sitemap mit den neuen Adressen erzeugen
+- Search Console: Sitemap einreichen, bei neuer Domain die Adressänderung melden
+- 404-Kontrolle: in den ersten Wochen nach dem Go-live Fehlerseiten prüfen und nachleiten
 
 ### So läuft der Umzug ab
 
@@ -332,6 +351,10 @@ Was nach der Umschaltung wichtig bleibt – und wo Sie mehr dazu lesen:
 
 - Frage: Was kostet ein Website-Umzug?
   Antwort: Eine Website-Migration oder ein Relaunch gibt es bei uns ab 1.299 € als Festpreis, netto zzgl. MwSt. Darin sind Bestandsaufnahme, Weiterleitungs-Tabelle, DNS-Umstellung, Tests und der Nachlauf in der Search Console enthalten. Ein reiner Dateiumzug ohne Domain- oder E-Mail-Wechsel ist oft günstiger – das sagen wir Ihnen nach der Bestandsaufnahme.
+- Frage: Was kostet ein Website-Relaunch?
+  Antwort: Ein Relaunch, bei dem wir den alten Auftritt in eine neue Website überführen, kostet bei uns ab 1.299 € als Festpreis, netto zzgl. MwSt. Was ein neues Design dazu kostet, hängt vom Umfang ab – Zahl der Seiten, Buchung oder Shop, neue Inhalte; den Festpreis nennen wir nach der Bestandsaufnahme.
+- Frage: Was ist der Unterschied zwischen Relaunch und Umzug?
+  Antwort: Beim Umzug wechseln Technik oder Adresse: Die Website zieht zu einem neuen Hoster oder auf eine neue Domain, die Postfächer zu einem neuen Anbieter – Inhalte und Aussehen bleiben weitgehend gleich. Beim Relaunch wird die Website neu gebaut, mit neuer Struktur und neuem Design. Beide bergen dieselben Risiken für Rankings und E-Mail, deshalb folgen beide demselben Ablauf; oft fallen sie zusammen.
 - Frage: Was kostet ein Domain-Umzug?
   Antwort: Die Übertragung einer Domain selbst kostet beim neuen Anbieter meist nur die reguläre Jahresgebühr; manche Anbieter berechnen eine Transfergebühr. Unsere Arbeit dabei – Auth-Code, DNS-Einträge, Weiterleitungen und die Adressänderung bei Google – ist Teil des Umzugs-Festpreises.
 - Frage: Wie lange dauert ein Umzug?
@@ -342,6 +365,104 @@ Was nach der Umschaltung wichtig bleibt – und wo Sie mehr dazu lesen:
   Antwort: Kurzfristige Schwankungen sind normal, dauerhafte Verluste nicht – wenn jede alte Adresse dauerhaft auf die richtige neue Adresse weiterleitet, die Inhalte erhalten bleiben und Google über die Änderung informiert wird. Genau das ist der Kern unseres Ablaufs. Garantieren kann Rankings niemand.
 - Frage: Kann ich beim alten Hoster bleiben und nur die Website erneuern?
   Antwort: Ja. Ein Relaunch braucht keinen Hoster-Wechsel. Wir prüfen, ob der bestehende Anbieter die neue Website sinnvoll ausliefern kann; falls nicht, empfehlen wir einen Wechsel und übernehmen ihn im selben Projekt.
+
+## Website für Handwerker
+
+Adresse: https://www.rexity.ai/website-f%C3%BCr-handwerker
+
+Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit.
+
+Anfragen mit allen Angaben und feste Termine – auch während Sie auf der Baustelle sind.
+
+Websites für Handwerksbetriebe: eine Seite pro Leistung, ein Anfrageformular, das die Angaben für Ihr Angebot gleich mitliefert, und auf Wunsch eine Terminbuchung für Besichtigung oder Rückruf. Von Hand programmiert, zum Festpreis, aus Hermannsburg im Landkreis Celle.
+
+### Website für Handwerker
+
+Eine Website für Handwerker bringt Anfragen, die Sie direkt beantworten können: mit einer Seite pro Leistung, einem Anfrageformular mit allen Angaben für Ihr Angebot und auf Wunsch einer Terminbuchung. Für Handwerksbetriebe in Hermannsburg, im Landkreis Celle, in Niedersachsen und remote deutschlandweit – individuell programmiert ab 999 €, mit Anfrage- und Terminstrecke ab 1.999 €, Festpreis netto zzgl. MwSt.
+
+Gebaut wird sie von Rexity Labs UG aus Hermannsburg: Gestaltung und Programmierung in einem Team, von Hand programmiert, ohne Website-Baukasten. Sie sprechen direkt mit der Person, die Ihre Website baut – ohne Hotline und ohne Ticketsystem.
+
+Für einen Handwerksbetrieb zählt weniger die Optik als der Weg zur Anfrage. Wer Ihre Seite auf dem Handy öffnet, soll in wenigen Sekunden sehen, was Sie machen, in welchem Umkreis Sie arbeiten und wie er Sie erreicht – und eine Anfrage schicken können, mit der Sie ein Angebot schreiben, ohne erst zurückrufen zu müssen.
+
+### Typische Ausgangslagen im Handwerk
+
+Vier Situationen, von denen Betriebe im ersten Gespräch erzählen:
+
+- Das Telefon klingelt auf der Baustelle: Anrufe kommen, während Sie auf dem Dach, im Keller oder beim Kunden sind. Wer nicht durchkommt, versucht es vielleicht beim nächsten Betrieb. Eine Website nimmt die Anfrage auch dann an, wenn gerade niemand ans Telefon kann.
+- Anfragen ohne die nötigen Angaben: „Was kostet ein neues Bad?“ – ohne Maße, ohne Ort, ohne Zeitraum. Jede dieser Anfragen braucht erst einen Rückruf, bevor Sie einschätzen können, ob der Auftrag passt.
+- Die alte Seite zeigt auf dem Handy nichts: Die Website stammt aus einer Zeit vor dem Smartphone: winzige Schrift, die Telefonnummer als Bild, kein Formular. Wer Sie unterwegs sucht, findet nicht, was er braucht.
+- Kein Überblick, woher die Anfrage kam: Anfragen kommen per Telefon, E-Mail, Messenger und Zettel. Ob jemand über Google, Ihr Unternehmensprofil oder eine Empfehlung kam, weiß hinterher niemand.
+
+### Was die Website für Sie erledigt
+
+Die Bausteine einer Website für Handwerksbetriebe – welche Sie brauchen, klären wir im Gespräch:
+
+- Anfrageformular mit den Angaben fürs Angebot: Das Formular fragt nur, was Sie für ein Angebot wirklich brauchen – Leistung, Ort, Umfang und gewünschten Zeitraum – und legt die Anfrage als E-Mail mit allen Angaben bei Ihnen ab.
+- Terminwunsch oder Rückruf-Slot: Kunden wählen selbst eine freie Zeit für Besichtigung oder Rückruf, statt auf Ihren Anruf zu warten. Angezeigt werden nur Zeiten, die wirklich frei sind – wie bei der Online-Terminbuchung der Fahrzeugpflege Celle. Als Website mit Buchung ab 1.999 €.
+- Leistungsseiten je Gewerk: Jede Leistung bekommt eine eigene Seite: was Sie machen, wo, für wen und wie ein Auftrag abläuft. So landen Kunden über Google direkt bei der passenden Leistung. Bei der Fahrzeugpflege Celle hat jede der acht Leistungen ihre eigene Seite.
+- Referenz-Galerie mit Ihren eigenen Fotos: Ihre Arbeit zeigt am besten, was Sie können: eine Galerie mit Fotos aus echten Aufträgen, auf Wunsch als Vorher-nachher. Persönliche Angaben machen wir unkenntlich – wie die Kennzeichen in den Vorher-nachher-Videos der Fahrzeugpflege Celle.
+- Verknüpfung mit dem Google-Unternehmensprofil: Website und Google-Unternehmensprofil zeigen dieselben Leistungen, Öffnungszeiten und Kontaktdaten und verweisen aufeinander. Einrichtung und Pflege des Profils gehören zu SEO & Google Unternehmensprofil. (https://www.rexity.ai/marketing/seo)
+- Optionale Erinnerungen: Bestätigung bei der Buchung und Erinnerung vor dem Termin per E-Mail oder SMS, damit Ihr Kunde den Besichtigungstermin nicht vergisst – als Baustein für 299 €. (https://www.rexity.ai/automation/terminerinnerung)
+
+### So läuft das Projekt
+
+1. Kostenloses Gespräch: 30 Minuten: Welche Leistungen bieten Sie an, in welchem Umkreis arbeiten Sie, und wie kommen Anfragen heute bei Ihnen an?
+2. Bauplan, Demo und Festpreis: Innerhalb einer Woche bekommen Sie Bauplan, Demo und ein Festpreis-Angebot – ohne versteckte Kosten.
+3. Bauen und testen: Wir gestalten und programmieren die Website und testen Formular, Buchung und Darstellung auf Handy und Desktop, bevor etwas live geht.
+4. Go-live: Nach Ihrer Freigabe geht die Website auf Ihrer Domain live. Ersetzt sie eine alte Seite, leiten wir jede alte Adresse auf ihr neues Ziel weiter.
+5. Betreuung: Auf Wunsch übernehmen wir danach Wartung und Betreuung: Sicherheitsupdates, Sicherungen und kleine Änderungen, als Jahrespaket ab 999 € pro Jahr.
+
+### Was eine Website für Handwerker kostet
+
+Festpreise, netto zzgl. MwSt. „ab“ nennt den Einstiegspreis; den genauen Festpreis vereinbaren wir nach dem kostenlosen Gespräch, wenn Leistungen, Formular und Buchung klar sind.
+
+- Website (individuell programmiert): Komplett von Hand programmiert mit Node.js oder Next.js – kein Wix, kein Website-Baukasten. Die Seite wird statisch ausgeliefert. Festpreis ab 999 €, netto zzgl. MwSt.
+- Website mit Backend & Buchungsverwaltung: Ihre Kunden buchen ihre Termine selbst. Mit Design und Umsetzung, Termin- oder Kursbuchung, Einrichtung auf Ihrer Domain und Abstimmung der DSGVO-Texte. Festpreis ab 1.999 €, netto zzgl. MwSt.
+- Website-Migration / Relaunch: Der Umzug Ihrer bestehenden Website: Wir überführen den alten Auftritt in eine neue Website. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- Jährliche Wartung: Sicherheitsupdates, Sicherungen und kleine Änderungen – als Jahrespaket, optional zu jedem Projekt. Festpreis ab 999 € pro Jahr, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Fahrzeugpflege Celle: Online-Terminbuchung für einen Werkstattbetrieb
+
+Aus der Praxis: ein Werkstattbetrieb.
+
+Für einen Fahrzeugpflege-Betrieb in Celle haben wir eine Website mit Online-Terminbuchung gebaut: acht Leistungen mit eigener Seite, Buchung in vier Schritten, nur freie Zeiten, keine Doppelbuchungen und ein Verwaltungsbereich, aus dem der Inhaber jeden Kunden mit einem Tipp per Anruf oder WhatsApp erreicht. Die Website ist fertig gebaut; der Umzug auf die eigene Domain ist in Vorbereitung.
+
+Das ist unser Projekt, das einem Handwerksbetrieb am nächsten kommt: ein Werkstattbetrieb mit festen Leistungen und Terminen.
+
+Fallstudie: https://www.rexity.ai/work/chara
+
+### Für welche Gewerke
+
+Die Bausteine passen zu jedem Betrieb, der Aufträge über Anfragen und Termine bekommt – zum Beispiel Elektro, Sanitär, Heizung und Klima (SHK), Maler, Tischler, Dachdecker, Kfz-Werkstätten sowie Garten- und Landschaftsbau. Das sind Beispiele, für wen sich eine solche Website eignet, keine Liste bisheriger Kunden.
+
+Was sich je Gewerk unterscheidet, ist die Anfrage: Ein Elektro- oder SHK-Betrieb braucht für ein Angebot andere Angaben als ein Maler oder ein Garten- und Landschaftsbauer. Deshalb legen wir die Fragen im Formular mit Ihnen fest, statt ein Standardformular zu verwenden.
+
+Bei einer Kfz-Werkstatt steht dagegen oft die feste Terminbuchung im Vordergrund: Der Kunde wählt Leistung, Tag und Uhrzeit, und der Termin ist sofort verbindlich. Ein Dachdecker oder Tischler braucht eher die Besichtigung vor Ort und ein gut vorbereitetes Angebot. Beides lässt sich auf einer Website verbinden.
+
+### Weiterlesen: Webdesign, Terminbuchung und Relaunch
+
+Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
+
+- Webdesign Celle: Websites mit Online-Buchung: Wie wir Websites gestalten und programmieren – mit Anfrage-, Termin- oder Kursbuchung, aus Hermannsburg im Landkreis Celle. (https://www.rexity.ai/web/web-design)
+- Website mit Terminbuchung für Werkstätten: Eine Seite pro Leistung, nur freie Zeiten, keine Doppelbuchung – für Kfz-Aufbereiter und Werkstätten. (https://www.rexity.ai/kfz-aufbereitung-website)
+- Website-Relaunch ohne Ranking-Verlust: Die alte Seite durch eine neue ersetzen, mit Weiterleitungen, Domain und E-Mail – ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
+
+### Häufige Fragen
+
+- Frage: Was kostet eine Website für Handwerker?
+  Antwort: Eine individuell programmierte Website gibt es bei uns ab 999 €, mit Anfrage- und Terminstrecke und Verwaltungsbereich ab 1.999 € – Festpreise, netto zzgl. MwSt. Ersetzt die neue Website eine bestehende, kommt der Relaunch ab 1.299 € in Frage. Erinnerungen per E-Mail oder SMS kosten 299 €, die Wartung ab 999 € pro Jahr. Den genauen Festpreis bekommen Sie nach dem kostenlosen Gespräch.
+- Frage: Brauche ich als Handwerker überhaupt eine Website?
+  Antwort: Ein Eintrag in einem Verzeichnis oder ein Google-Unternehmensprofil zeigt, dass es Ihren Betrieb gibt. Eine eigene Website zeigt, was Sie machen und wie: mit einer Seite pro Leistung, Fotos Ihrer Arbeit und einem Formular, das genau die Angaben abfragt, die Sie für ein Angebot brauchen. Sie gehört Ihnen, Sie bestimmen Inhalt und Reihenfolge, und Anfragen kommen direkt bei Ihnen an statt über ein Portal.
+- Frage: Wie kommen die Anfragen bei mir an?
+  Antwort: Als E-Mail mit allen Angaben aus dem Formular. Mit Terminbuchung sehen Sie gebuchte Besichtigungs- oder Rückruftermine zusätzlich im Verwaltungsbereich nach Tag; von dort erreichen Sie jeden Kunden mit einem Tipp per Anruf oder WhatsApp – so wie bei der Fahrzeugpflege Celle. Eine automatische Bestätigung an den Kunden per E-Mail oder SMS gibt es als Baustein für 299 €.
+- Frage: Kann ich Texte und Bilder später selbst ändern?
+  Antwort: Unsere Websites sind von Hand programmiert und werden statisch ausgeliefert, ohne Baukasten und ohne Content-Management-System dahinter. Kleine Änderungen an Texten, Bildern, Preisen und Öffnungszeiten erledigen wir deshalb für Sie – im Rahmen der Wartung, die es als Jahrespaket ab 999 € pro Jahr gibt; Sie schreiben uns, was sich ändern soll. Neue Seiten oder größere Umbauten rechnen wir getrennt ab, mit Festpreis oder nach Stundensatz (89 € pro Stunde, netto zzgl. MwSt.).
+- Frage: Wie lange dauert es?
+  Antwort: Eine Website ohne Buchung dauert in der Regel zwei bis vier Wochen. Mit Online-Terminbuchung rechnen Sie mit etwas mehr: Die Website der Fahrzeugpflege Celle entstand in rund fünf Wochen. Bauplan, Demo und Festpreis-Angebot bekommen Sie innerhalb einer Woche nach dem Gespräch.
+- Frage: Kommen Sie zu mir in den Betrieb?
+  Antwort: Ja. Die meiste Arbeit passiert remote von Hermannsburg aus. Für Erstgespräch, Fotos oder Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei; weiter entfernte Termine stimmen wir vorher ab.
 
 ## Online-Shop & Stripe-Checkout
 
@@ -768,7 +889,7 @@ Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: S
 
 Die meisten Betriebe fangen nicht mit WhatsApp an, sondern mit automatischen Erinnerungen. Beides baut aufeinander auf:
 
-- E-Mail- und SMS-Erinnerungen: Bestätigung bei der Buchung, Erinnerung am Vortag, Nachricht bei Stornierung – automatisch aus Ihrem Buchungssystem. Als Baustein 299 €, netto zzgl. MwSt.
+- Terminerinnerung per E-Mail und SMS: Bestätigung bei der Buchung, Erinnerung am Vortag, Nachricht bei Stornierung – automatisch aus Ihrem Buchungssystem. Als Baustein 299 €, netto zzgl. MwSt. (https://www.rexity.ai/automation/terminerinnerung)
 - WhatsApp-Flows: Häufige Fragen beantworten, Termine anbieten und buchen, an einen Menschen übergeben – über die offizielle WhatsApp Business Platform, mit Opt-in. ab 1.299 €.
 - Beides zusammen: Erinnerung per WhatsApp statt SMS, Antwort auf „Kann ich verschieben?“ direkt im Chat, Bestätigung per E-Mail. Der Kunde wählt den Kanal, Ihr Team sieht alles an einer Stelle.
 
@@ -834,6 +955,103 @@ Fallstudie: https://www.rexity.ai/work/chara
   Antwort: Der Betreiber der Plattform berechnet Gebühren pro Gespräch beziehungsweise pro Nachricht, abhängig von Land und Nachrichtentyp; diese Kosten gehen direkt an den Anbieter und sind in unserem Festpreis nicht enthalten. Die aktuellen Sätze stehen in der Preisliste des Anbieters; wir rechnen sie im Gespräch für Ihren Fall durch.
 - Frage: Kann ein Mensch das Gespräch übernehmen?
   Antwort: Immer. Jeder Flow hat eine Übergabe an Ihr Team, und Sie sehen alle Gespräche in einer Übersicht. Der Assistent beantwortet Routinefragen und bucht Termine; alles andere bleibt bei Menschen.
+
+## Terminerinnerung per SMS & WhatsApp
+
+Adresse: https://www.rexity.ai/automation/terminerinnerung
+
+Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit.
+
+Automatische Erinnerungen vor jedem Termin – per E-Mail, SMS oder WhatsApp, für Sie eingerichtet.
+
+Wir richten automatische Bestätigungen und Erinnerungen für Ihre Termine ein: per E-Mail, per SMS über einen SMS-Dienst oder per WhatsApp über die offizielle Business Platform. Für Betriebe mit Terminen – Praxen, Studios, Salons, Werkstätten und Handwerk. E-Mail und SMS zum Festpreis von 299 €, netto zzgl. MwSt.
+
+### Terminerinnerung per SMS & WhatsApp: kurz erklärt
+
+Eine Terminerinnerung ist eine automatische Nachricht vor dem Termin – per E-Mail, per SMS oder per WhatsApp. Rexity Labs UG aus Hermannsburg (Landkreis Celle) richtet sie für Sie ein: angebunden an Ihr Buchungssystem, mit Ihren Texten und zu dem Zeitpunkt, den Sie festlegen. Erinnerungen per E-Mail oder SMS gibt es als Festpreis für 299 €, netto zzgl. MwSt.; für WhatsApp kommt die Anbindung der offiziellen WhatsApp Business Platform dazu.
+
+Gedacht ist das für Betriebe, die von Terminen leben: Praxen, Studios, Salons, Werkstätten und Handwerksbetriebe mit Besichtigungs- oder Montageterminen. Sie müssen nichts programmieren und keine SMS-Software bedienen; wir richten alles ein, testen es mit Ihnen und schalten es nach Ihrer Freigabe live.
+
+Die Erinnerung gehört zum selben Baustein wie die Bestätigung bei der Buchung und die Nachricht bei einer Stornierung: Ein Termin wird angelegt, und alle Nachrichten dazu laufen automatisch – ohne dass jemand im Team daran denken muss.
+
+### Wann Erinnerungen helfen
+
+- Termine werden vergessen: Der Termin wurde vor Wochen vereinbart, und im Alltag geht er unter. Eine Nachricht vorher holt ihn zurück ins Gedächtnis – mit Uhrzeit, Adresse und dem, was mitzubringen ist.
+- Absagen kommen zu spät: Wer nicht kann, merkt es manchmal erst kurz vorher – zu spät, um den Termin neu zu vergeben. Eine Erinnerung mit Vorlauf gibt Kunden die Gelegenheit, rechtzeitig abzusagen.
+- Das Team telefoniert Terminen hinterher: Statt am Vortag die Terminliste abzutelefonieren, verschickt das System die Erinnerungen selbst. Ihr Team ruft nur noch dort an, wo wirklich etwas zu klären ist.
+
+### Drei Kanäle
+
+Welcher Kanal passt, hängt von Ihren Kunden ab; die Kanäle lassen sich kombinieren:
+
+- E-Mail: Geeignet für Bestätigungen mit allen Details – Adresse, Anfahrt, was mitzubringen ist. Erreicht jeden Kunden, der bei der Buchung seine E-Mail-Adresse angibt.
+- SMS über einen SMS-Dienst: Kurz und auf jedem Handy lesbar, auch ohne mobiles Internet. Der Versand läuft über einen SMS-Dienst, der pro Nachricht abrechnet; die Gebühren gehen direkt an den Anbieter.
+- WhatsApp über die offizielle Business Platform: Für Kunden, die ohnehin per WhatsApp schreiben. Nur mit Einwilligung (Opt-in) und nur über die offizielle WhatsApp Business Platform, nicht über die private App. (https://www.rexity.ai/automation/whatsapp)
+
+### So funktioniert die Erinnerung
+
+1. Termin im System: Ein Kunde bucht online, oder Ihr Team trägt den Termin im Buchungssystem ein.
+2. Bestätigung sofort: Der Kunde bekommt direkt eine Bestätigung mit Tag, Uhrzeit und Ort.
+3. Erinnerung vorher: Am Vortag oder eine festgelegte Zahl von Stunden vor dem Termin geht die Erinnerung hinaus – den Zeitpunkt bestimmen Sie.
+4. Absagen oder verschieben: Kann Ihr Buchungssystem Absagen oder Verschieben per Link, steht dieser Link in der Nachricht.
+5. Absage im System: Sagt jemand ab, wird das im System vermerkt, und der Termin ist wieder frei für andere Kunden.
+
+### Was wir einrichten
+
+Zum Festpreis gehört die komplette Einrichtung; den genauen Umfang halten wir im Angebot fest:
+
+- Bestätigung bei der Buchung, Erinnerung vor dem Termin und Nachricht bei einer Stornierung
+- Die Texte der Nachrichten, abgestimmt mit Ihnen
+- Der Zeitpunkt der Erinnerung, zum Beispiel am Vortag
+- Die Anbindung des SMS-Dienstes oder der WhatsApp Business Platform
+- Einwilligung und Abmeldung, damit nur Kunden Nachrichten bekommen, die zugestimmt haben
+- Ein Testlauf mit Beispielterminen vor dem Start
+
+### Datenschutz und Einwilligung
+
+Für Erinnerungen per SMS oder WhatsApp braucht es die Einwilligung des Kunden: Er gibt seine Nummer selbst an und stimmt den Nachrichten zu, zum Beispiel mit einem Häkchen bei der Buchung. Diese Zustimmung wird gespeichert und kann jederzeit widerrufen werden.
+
+Mit dem Versanddienst – dem SMS-Anbieter oder dem Anbieter der WhatsApp Business Platform – schließen Sie einen Vertrag zur Auftragsverarbeitung, und die Datenschutzerklärung Ihrer Website bekommt einen Abschnitt zu den Erinnerungen. Wir bereiten beides vor und stimmen die Texte mit Ihnen ab – eine Rechtsberatung ersetzen wir nicht.
+
+Wir empfehlen, in Erinnerungen nur zu nennen, was für den Termin nötig ist: Tag, Uhrzeit und Ort. Gerade bei Praxen kann schon der Grund eines Termins sensibel sein.
+
+### Laufende Kosten
+
+Unser Festpreis deckt die Einrichtung. Die Versandgebühren pro SMS beziehungsweise die Gebühren der WhatsApp Business Platform gehen direkt an den jeweiligen Anbieter und sind nicht im Festpreis enthalten. Die aktuellen Sätze stehen in der Preisliste des Anbieters; wir rechnen sie im Gespräch für Ihre Zahl an Terminen durch.
+
+### Was Terminerinnerungen kosten
+
+Festpreise, netto zzgl. MwSt. Erinnerungen per E-Mail oder SMS sind der Einstieg; die WhatsApp-Anbindung und eine Online-Buchung kommen bei Bedarf dazu.
+
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- WhatsApp-Automatisierung: Automatisierte WhatsApp-Business-Flows, die häufige Fragen beantworten und Termine buchen – über die offizielle API, mit Opt-in. Festpreis ab 1.299 €, netto zzgl. MwSt.
+- Website mit Backend & Buchungsverwaltung: Ihre Kunden buchen ihre Termine selbst. Mit Design und Umsetzung, Termin- oder Kursbuchung, Einrichtung auf Ihrer Domain und Abstimmung der DSGVO-Texte. Festpreis ab 1.999 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Body & Care Hermannsburg: buchen und stornieren ohne Anruf
+
+Aus der Praxis.
+
+Bei Body & Care Hermannsburg, live seit dem 14.09.2026, buchen Mitglieder ihre Kursplätze online und stornieren selbst, ohne Kundenkonto; der Platz wird sofort wieder frei. Von der Buchung bis zur Bestätigung läuft der Ablauf ohne manuelle Zwischenschritte.
+
+Erinnerungen per SMS oder WhatsApp für einen Kunden zeigen wir hier, sobald sie live sind.
+
+Fallstudie: https://www.rexity.ai/work/body-and-care
+
+### Häufige Fragen
+
+- Frage: Was kostet eine Terminerinnerung per SMS?
+  Antwort: Die Einrichtung von Erinnerungen per E-Mail oder SMS kostet bei uns 299 € als Festpreis, netto zzgl. MwSt. Dazu kommen die Versandgebühren des SMS-Dienstes pro Nachricht; sie gehen direkt an den Anbieter. Für Erinnerungen per WhatsApp kommt die Anbindung der WhatsApp Business Platform dazu, die zur WhatsApp-Automatisierung gehört (ab 1.299 €).
+- Frage: Brauche ich dafür ein neues Buchungssystem?
+  Antwort: Nicht unbedingt. Am einfachsten ist es mit einer Buchung, die wir selbst bauen, etwa als Teil einer Website mit Online-Buchung (ab 1.999 €). Nutzen Sie schon ein anderes System, prüfen wir zuerst, ob es eine Schnittstelle für neue, geänderte und abgesagte Termine hat; davon hängt ab, ob wir die Erinnerung daran anschließen können.
+- Frage: Darf ich Kunden per SMS oder WhatsApp erinnern?
+  Antwort: Ja, wenn der Kunde eingewilligt hat: Er gibt seine Nummer selbst an und stimmt den Nachrichten zu, etwa mit einem Häkchen bei der Buchung. Dazu kommen ein Vertrag zur Auftragsverarbeitung mit dem Versanddienst und ein Abschnitt in Ihrer Datenschutzerklärung. Beides bereiten wir vor; eine Rechtsberatung ersetzen wir nicht.
+- Frage: Können Kunden über die Erinnerung absagen?
+  Antwort: Wenn Ihr Buchungssystem Absagen per Link unterstützt, ja: Der Link steht in der Erinnerung, und die Absage wird im System vermerkt. In der Kursbuchung von Body & Care Hermannsburg zum Beispiel stornieren Mitglieder ihre Plätze selbst, ohne Kundenkonto, und der Platz wird sofort wieder frei.
+- Frage: Welche Systeme lassen sich anbinden?
+  Antwort: Die Buchungssysteme, die wir selbst bauen, binden wir direkt an. Bei Systemen anderer Anbieter prüfen wir zuerst die Schnittstelle: ob neue, geänderte und abgesagte Termine abgefragt werden können. Erst danach sagen wir Ihnen, ob und zu welchem Festpreis die Anbindung möglich ist.
+- Frage: Wann wird die Erinnerung verschickt?
+  Antwort: Den Zeitpunkt legen Sie fest, zum Beispiel am Vortag oder eine bestimmte Zahl von Stunden vor dem Termin. Für Termine, die lange im Voraus gebucht werden, besprechen wir im Gespräch, ob eine zusätzliche Erinnerung einige Tage vorher sinnvoll ist.
 
 ## Voice-Agenten
 
@@ -1091,7 +1309,7 @@ Für SEO und die Pflege des Unternehmensprofils gibt es keine Pauschalpakete: Na
 - Frage: Brauche ich einen Blog?
   Antwort: Nicht unbedingt. Für viele lokale Betriebe bringen gute Leistungsseiten und ein gepflegtes Unternehmensprofil mehr als ein Blog, der nach drei Beiträgen einschläft. Artikel lohnen sich, wenn Ihre Kunden vorab Fragen stellen, etwa zu Kosten, Ablauf oder Vergleichen. Dann planen wir wenige Themen, die genau solche Fragen beantworten.
 
-## Wartung & Betreuung
+## Website-Wartung & Betreuung
 
 Adresse: https://www.rexity.ai/website-wartung
 
@@ -1101,11 +1319,11 @@ Ihre Website bleibt sicher, erreichbar und aktuell – ohne dass Sie daran denke
 
 Wartung und Betreuung für Websites, Online-Buchung und Web-Apps: Sicherheitsupdates, regelmäßige Sicherungen, Monitoring und kleine Änderungen, damit nach dem Start alles sauber weiterläuft. Als Jahrespaket, monatlich auf Anfrage.
 
-### Wartung und Betreuung kurz erklärt
+### Website-Wartung und Betreuung kurz erklärt
 
 Wartung heißt: Ihre Website bleibt nach dem Start sicher, erreichbar und aktuell. Wir spielen Sicherheitsupdates ein, sichern Website und Daten regelmäßig, behalten Erreichbarkeit und Fehler im Blick und erledigen kleine Änderungen, wenn sich bei Ihnen etwas ändert. Das Jahrespaket kostet ab 999 € pro Jahr, netto zzgl. MwSt.; eine monatliche Zahlung ist auf Anfrage möglich.
 
-Wartung ist bei uns optional. Sie gilt für jede Website, Buchung oder App, die wir gebaut haben, und auf Anfrage auch für bestehende Websites – nach einem kurzen Audit. Sie sprechen dabei direkt mit der Person, die Ihre Website kennt, ohne Hotline und ohne Ticketsystem.
+Wartung ist bei uns optional: Einen Wartungsvertrag schließen Sie nur, wenn Sie ihn wollen. Die Website-Betreuung gilt für jede Website, Buchung oder App, die wir gebaut haben, und auf Anfrage auch für bestehende Websites – nach einem kurzen Audit. Sie sprechen dabei direkt mit der Person, die Ihre Website kennt, ohne Hotline und ohne Ticketsystem.
 
 ### Was drin ist
 
@@ -1125,6 +1343,21 @@ Damit es keine Überraschungen gibt:
 - Neue Seiten und größere Umbauten: Das ist ein eigenes kleines Projekt, mit Festpreis oder nach Stundensatz (89 € pro Stunde, netto zzgl. MwSt.).
 - Neue Inhalte und Sichtbarkeit: Neue Texte, Artikel oder die Pflege Ihres Google Unternehmensprofils gehören zu SEO & Google Unternehmensprofil, nicht zur Wartung. (https://www.rexity.ai/marketing/seo)
 - Gebühren Dritter: Domain, E-Mail-Postfächer, Zahlungsanbieter oder bezahlte Programme sind eigene Verträge. Die Wartung umfasst die Arbeit an Ihrer Website, nicht diese Gebühren.
+
+### Wartungsvertrag: was drin sein muss
+
+Egal, bei wem Sie einen Wartungsvertrag abschließen – diese zehn Punkte sollten darin geregelt sein:
+
+- Leistungsumfang schriftlich: welche Arbeiten enthalten sind und wie oft
+- Reaktionszeit: wie schnell sich jemand meldet, wenn die Website ausfällt
+- Sicherungen und Wiederherstellung: wie oft gesichert wird und wie eine Sicherung zurückgespielt wird
+- Updates und Tests danach: wer Updates einspielt und ob Formulare und Buchung danach geprüft werden
+- Monitoring: ob Erreichbarkeit und Fehler überwacht werden und wer benachrichtigt wird
+- Kleine Änderungen: welche Änderungen enthalten sind und in welchem Umfang
+- Laufzeit und Kündigung: wie lange der Vertrag läuft und mit welcher Frist er endet
+- Was nicht enthalten ist: etwa neue Seiten, größere Umbauten und Gebühren Dritter
+- Ansprechpartner: wer Ihre Website kennt und wie Sie ihn erreichen
+- Übergabe bei Vertragsende: Zugänge, Code und Daten gehen vollständig an Sie
 
 ### Statische Website oder CMS: warum Wartung bei uns anders aussieht
 

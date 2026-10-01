@@ -49,6 +49,11 @@
       "permanent": true
     },
     {
+      "source": "/website-fuer-handwerker",
+      "destination": "/website-f%C3%BCr-handwerker",
+      "permanent": true
+    },
+    {
       "source": "/systems/automation",
       "destination": "/automation",
       "permanent": true
