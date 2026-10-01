@@ -386,9 +386,10 @@ html.rx-reveal .first-line,html.rx-reveal .second-line,html.rx-reveal .paragraph
 
 /* Sprint 18 follow-up (founder, 1 Oct 2026): on iPhone skip the intro — nav and headline are shown at once
    (html.rx-reveal, set by the head script) and the ring stands still in its end state: the wrapper at the end of
-   the fly-in and the three groups at their end rotations (-375/-390/-360 deg as GSAP leaves them). The inline
-   transforms the template animates are overridden with !important, so the intro and the continuous spin do nothing. */
-html.rx-iphone .home-hero .home-hero-wrapper{transform:translate3d(0,0,100rem) scale3d(1,1,1) rotateX(90deg) rotateY(0) rotateZ(-30deg) skew(0,0)!important;will-change:auto!important}
+   the fly-in and the three groups at their end rotations (-375/-390/-360 deg as the template leaves them). The head script
+   removes html.rx-iphone as soon as the template's intro has reached its end state (wrapper at rotateX(90deg)),
+   so the slow ring rotation and every later effect run as on other devices; only the fly-in is never seen. */
+html.rx-iphone .home-hero .home-hero-wrapper{transform:translate3d(0,0,100rem) scale3d(1,1,1) rotateX(90deg) rotateY(0) rotateZ(-25deg) skew(0,0)!important}
 html.rx-iphone .home-hero .home-header-group.first{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(-15deg) skew(0,0)!important}
 html.rx-iphone .home-hero .home-header-group.second{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(-30deg) skew(0,0)!important}
 html.rx-iphone .home-hero .home-header-group.third{transform:translate3d(0,0,0) scale3d(1,1,1) rotateX(0) rotateY(0) rotateZ(0) skew(0,0)!important}
