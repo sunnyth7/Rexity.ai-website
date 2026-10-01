@@ -841,9 +841,9 @@ Adresse: https://www.rexity.ai/automation/voice
 
 KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
 
-Ein Empfang, der nie schläft.
+Ein Telefonassistent, der Anrufe annimmt – derzeit in der Testphase.
 
-Ein Cloud-Telefonassistent, der Anrufe rund um die Uhr annimmt, weiterleitet und Details erfasst — damit keine Anfrage in der Mailbox landet.
+Wir testen RexFangs, unseren eigenen KI-Telefonassistenten: Er nimmt Anrufe an, bucht Termine, ruft zurück und übergibt an Menschen. Noch kein Angebot – sobald er reif ist, steht es hier.
 
 ### Was der Telefonassistent kostet
 
