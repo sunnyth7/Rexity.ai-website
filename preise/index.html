@@ -98,12 +98,12 @@ if (late) { if (w.Webflow && w.Webflow.push) w.Webflow.push(replayLoad); else re
 function later() {
 /* iOS Safari fires window load late (3 s+ on the founder's iPhone 16 and in the iOS 26 simulator) and
 Webflow's page-load intro waits for it: nav and headline stayed invisible for 6 s. If the nav has not
-started to appear 3.5 s after the DOM is ready, show nav, headline and subtitle; an intro that already
+started to appear 2.5 s after the DOM is ready, show nav, headline and subtitle; an intro that already
 runs (opacity > 0) is left alone. */
 setTimeout(function () {
 var n = d.querySelector(".home-nav-loader");
 if (n && getComputedStyle(n).opacity === "0") reveal();
-}, 3500);
+}, 2500);
 setTimeout(boot, 1000);
 var P = w.PerformanceObserver, T = (P && P.supportedEntryTypes) || [];
 if (T.indexOf("largest-contentful-paint") > -1) {
