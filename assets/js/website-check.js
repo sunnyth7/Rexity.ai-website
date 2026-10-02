@@ -2,12 +2,15 @@
    Drives the tool rendered by scripts/pages/lib-services/check-tool.mjs: the address form in the hero, the report
    card below it. Contract: docs/CHECK_API.md. No data is stored in the browser.
 
-   What the page shows (Sprint 31): the PUBLIC tier only. An overall ring with its band word and the Kurzfazit, four
-   area cards (small ring, verdict line, how many checks ended in which state), the speed card's method and, when
-   Lighthouse ran, its four category scores and LCP/CLS/TBT, and the pages read. The single checks and their
-   measured values go to the visitor's e-mail address after it was confirmed (report box). No advice anywhere.
+   What the page shows (Sprint 36, founder: "show everything in Ergebnis"): the whole result. An overall ring with its
+   band word and the Kurzfazit, six area cards (small ring, verdict line, how many checks ended in which state and
+   the full list of checks, open by default: state with its word, label, measured value, points), the speed card's
+   method and, when Lighthouse ran, its four category scores and LCP/CLS/TBT, the disclaimer under the two
+   security-related areas, and the pages read. The report by e-mail (confirmed address) is a copy of the same
+   content. No advice anywhere.
 
-   Bot check (Cloudflare Turnstile): the widget is rendered explicitly into [data-wc-ts], the script from
+   Bot check (Cloudflare Turnstile): the widget is always visible (founder, 2 Oct 2026; its place under the address
+   field is reserved by the stylesheet, so nothing moves when it appears). It is rendered explicitly into [data-wc-ts], the script from
    challenges.cloudflare.com is loaded only when the visitor touches the form, and never on localhost / 127.0.0.1
    (the widget's host name is rexity.ai; a local run sends no token and works when the server has no secret).
    A token is single-use and sent as `turnstileToken`; a verified answer carries a `pass` (30 minutes) that the
@@ -20,8 +23,8 @@
    Accessibility: one polite live region announces the step that is running and the finished result; errors are
    announced (role="alert") and focus goes to the field; when a result arrives, focus moves to the report heading.
    Every state carries a word (never colour alone). Reduced motion: no pulse, no ring draw-in, no counting up, no
-   smooth scroll. The score card cannot be selected with the pointer and has no context menu; that changes nothing
-   for the keyboard, for focus, for screen readers or for the form fields (they are outside the card).
+   smooth scroll. The lists of checks are native disclosures (details/summary): keyboard and screen readers get them
+   for free, and a list a visitor closed stays closed when the language is switched.
 
    The steps follow the clock, not the server (the function answers once, at the end): they say what is being
    done, in the order the parts usually finish. */
@@ -67,7 +70,7 @@
 
   var S = {
     de: {
-      steps: ["Die Seite wird abgerufen.", "Die Kontaktwege werden geprüft, auch auf verlinkten Kontakt- und Buchungsseiten.", "Auffindbarkeit und Pflichtseiten werden geprüft.", "Das Tempo wird gemessen. Das dauert am längsten, bis zu etwa einer Minute.", "Das Ergebnis wird zusammengestellt."],
+      steps: ["Die Seite wird abgerufen.", "Die Kontaktwege werden geprüft, auch auf verlinkten Kontakt- und Buchungsseiten.", "Auffindbarkeit und Pflichtseiten werden geprüft.", "Schutzeinstellungen und E-Mail-Domain werden von außen gelesen.", "Das Tempo wird gemessen. Das dauert am längsten, bis zu etwa einer Minute.", "Das Ergebnis wird zusammengestellt."],
       running: "Die Prüfung läuft",
       resultFor: "Ihr Ergebnis",
       done: function (host, score) { return "Prüfung abgeschlossen: " + host + (score === null ? " – kein Gesamtwert, weil kein Bereich geprüft werden konnte." : " erreicht insgesamt " + score + " von 100 Punkten."); },
@@ -80,7 +83,9 @@
       wait: "Bitte einen Moment Geduld",
       band: { good: "gut", mid: "mittel", low: "schwach" },
       of100: function (n) { return n + " von 100"; },
-      overallOf: function (n) { return n === 4 ? "aus allen vier Bereichen" : "aus " + n + " von vier Bereichen"; },
+      overallOf: function (n) { return n === 6 ? "aus allen sechs Bereichen" : "aus " + n + " von sechs Bereichen"; },
+      checks: function (n) { return n === 1 ? "1 Prüfpunkt" : n + " Prüfpunkte"; },
+      noPoints: "ohne Punkte",
       overallNone: "Kein Gesamtwert: Kein Bereich ließ sich prüfen.",
       status: { ok: "erfüllt", partial: "teilweise", fail: "offen", info: "Hinweis", unknown: "nicht prüfbar", na: "entfällt" },
       pages: function (list) { return "Mitgelesene Seiten: " + list.join(", ") + "."; },
@@ -91,9 +96,9 @@
       mailBad: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
       mailFail: "Die E-Mail konnte gerade nicht versendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns an info@rexity.ai.",
       confirmH: "Bestätigungs-Mail unterwegs",
-      confirmP: function (email, hours) { return "Wir haben eine E-Mail an " + email + " geschickt. Öffnen Sie den Link darin und bestätigen Sie dort den Versand; dann senden wir Ihnen den Bericht mit allen Messwerten. Der Link gilt " + hours + " Stunden. Nichts angekommen? Bitte sehen Sie auch im Spam-Ordner nach."; },
+      confirmP: function (email, hours) { return "Wir haben eine E-Mail an " + email + " geschickt. Öffnen Sie den Link darin und bestätigen Sie dort den Versand; dann senden wir Ihnen den Bericht als Kopie dieses Ergebnisses. Der Link gilt " + hours + " Stunden. Nichts angekommen? Bitte sehen Sie auch im Spam-Ordner nach."; },
       sentH: "Bericht unterwegs",
-      sentP: function (email) { return "Der Bericht mit allen Messwerten ist unterwegs an " + email + "."; },
+      sentP: function (email) { return "Der Bericht, eine Kopie dieses Ergebnisses, ist unterwegs an " + email + "."; },
       botWait: "Kurze Sicherheitsprüfung …",
       botAsk: "Bitte bestätigen Sie kurz im Feld unter der Adresse, dass Sie kein automatisches Programm sind.",
       botFail: "Die Sicherheitsprüfung (Schutz vor automatischen Anfragen) ist nicht durchgelaufen. Bitte versuchen Sie es noch einmal. Hilft das nicht, laden Sie die Seite neu; ein Inhaltsblocker kann die Prüfung verhindern.",
@@ -104,7 +109,7 @@
       }
     },
     en: {
-      steps: ["Fetching the page.", "Checking the ways to get in touch, also on linked contact and booking pages.", "Checking findability and mandatory pages.", "Measuring speed. This takes longest, up to about a minute.", "Putting the result together."],
+      steps: ["Fetching the page.", "Checking the ways to get in touch, also on linked contact and booking pages.", "Checking findability and mandatory pages.", "Reading protection settings and the e-mail domain from outside.", "Measuring speed. This takes longest, up to about a minute.", "Putting the result together."],
       running: "The check is running",
       resultFor: "Your result",
       done: function (host, score) { return "Check finished: " + host + (score === null ? " – no overall value because no area could be checked." : " reaches " + score + " out of 100 points overall."); },
@@ -117,7 +122,9 @@
       wait: "One moment, please",
       band: { good: "good", mid: "medium", low: "weak" },
       of100: function (n) { return n + " out of 100"; },
-      overallOf: function (n) { return n === 4 ? "from all four areas" : "from " + n + " of four areas"; },
+      overallOf: function (n) { return n === 6 ? "from all six areas" : "from " + n + " of six areas"; },
+      checks: function (n) { return n === 1 ? "1 check" : n + " checks"; },
+      noPoints: "no points",
       overallNone: "No overall value: no area could be checked.",
       status: { ok: "met", partial: "partly", fail: "open", info: "note", unknown: "could not be checked", na: "does not apply" },
       pages: function (list) { return "Pages read as well: " + list.join(", ") + "."; },
@@ -128,9 +135,9 @@
       mailBad: "Please enter a valid e-mail address.",
       mailFail: "The e-mail could not be sent just now. Please try again later or write to info@rexity.ai.",
       confirmH: "Confirmation e-mail on its way",
-      confirmP: function (email, hours) { return "We have sent an e-mail to " + email + ". Open the link in it and confirm the dispatch there; then we send you the report with all measured values. The link is valid for " + hours + " hours. Nothing arrived? Please look in your spam folder as well."; },
+      confirmP: function (email, hours) { return "We have sent an e-mail to " + email + ". Open the link in it and confirm the dispatch there; then we send you the report as a copy of this result. The link is valid for " + hours + " hours. Nothing arrived? Please look in your spam folder as well."; },
       sentH: "Report on its way",
-      sentP: function (email) { return "The report with all measured values is on its way to " + email + "."; },
+      sentP: function (email) { return "The report, a copy of this result, is on its way to " + email + "."; },
       botWait: "A short security check …",
       botAsk: "Please confirm briefly in the box under the address that you are not an automated program.",
       botFail: "The security check (protection against automated requests) did not complete. Please try once more. If that does not help, reload the page; a content blocker can prevent the check.",
@@ -141,9 +148,10 @@
       }
     }
   };
-  var BLOCKS = ["tempo", "find", "contact", "trust"];
+  var BLOCKS = ["tempo", "find", "contact", "trust", "security", "mail"];
   var ORDER = ["ok", "partial", "fail", "info", "unknown", "na"];
-  var STEP_AT = [0, 1.2, 2.6, 4.2, 48]; // seconds at which each step becomes the active one
+  var MARK = { ok: "✓", partial: "~", fail: "✗", info: "i", unknown: "?", na: "–" }; // the same marks as in the report e-mail
+  var STEP_AT = [0, 1.2, 2.6, 3.8, 5.2, 48]; // seconds at which each step becomes the active one
 
   function lang() {
     try { return localStorage.getItem("rexity_lang") === "en" ? "en" : "de"; } catch (e) { return doc.documentElement.lang === "en" ? "en" : "de"; }
@@ -168,6 +176,7 @@
   var LOCAL = host === "localhost" || host === "127.0.0.1";
   var siteKey = form.getAttribute("data-wc-sitekey") || "";
   var bot = { on: !!(siteKey && tsBox) && !LOCAL, id: null, token: null, stale: false, loading: false, waiters: [], asking: false };
+  if (tsBox && !bot.on) tsBox.hidden = true; // no widget here (localhost): do not keep its reserved place
   var TS_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 
   function botSettle(token) {
@@ -194,15 +203,16 @@
         theme: "light",
         language: lang(),
         size: "flexible",
-        appearance: "interaction-only", // the box shows itself only when Cloudflare wants an interaction
+        appearance: "always", // founder, 2 Oct 2026: the widget is visible everywhere (flexible: 100 % wide, 65 px high)
         "refresh-expired": "manual",
         callback: function (token) { bot.stale = false; botSettle(token); },
         "expired-callback": function () { botReset(); }, // a token lives five minutes: get a fresh one
         "timeout-callback": function () { botReset(); },
         "error-callback": function () { bot.token = null; botSettle(null); return true; },
-        "before-interactive-callback": function () { bot.asking = true; tsBox.setAttribute("data-on", ""); if (bot.waiters.length) statusText.textContent = L().botAsk; },
-        "after-interactive-callback": function () { bot.asking = false; tsBox.removeAttribute("data-on"); }
+        "before-interactive-callback": function () { bot.asking = true; if (bot.waiters.length) statusText.textContent = L().botAsk; },
+        "after-interactive-callback": function () { bot.asking = false; }
       });
+      tsBox.setAttribute("data-on", "");
     } catch (e) { bot.id = null; botSettle(null); }
   }
   function botLoad() {
@@ -380,12 +390,13 @@
       var id = BLOCKS[i];
       var b = data.blocks[id];
       var card = q('[data-wc-block="' + id + '"]');
+      if (!b || !card) continue;
       var scored = b.checked && b.score !== null && b.score !== undefined;
       setRing(card, scored ? b.score : null, animate);
-      q("[data-wc-bandword]", card).textContent = scored ? (b.bandLabel || t.band[band(b.score)]) : t.notChecked;
+      q("[data-wc-bandword]", card).textContent = scored ? (b.bandLabel || t.band[band(b.score)]) : b.notApplicable ? ((data.statusLabels && data.statusLabels.na) || t.status.na) : t.notChecked;
       q("[data-wc-sr]", card).textContent = scored ? ", " + t.of100(b.score) + "." : ".";
       q("[data-wc-verdict]", card).textContent = b.checked ? (b.verdict || "") : (b.reason || t.notChecked);
-      // how many checks ended in which state (the checks themselves are in the report e-mail)
+      // how many checks ended in which state
       var chips = [];
       var counts = b.counts || {};
       for (var k = 0; k < ORDER.length; k++) {
@@ -403,6 +414,41 @@
       var list = q("[data-wc-chips]", card);
       fill(list, chips);
       show(list, chips.length > 0);
+      // every check: state (mark and word), label, measured value, points
+      var rows = [];
+      var items = b.items || [];
+      for (var n = 0; n < items.length; n++) {
+        var it = items[n];
+        var row = el("li", "wc-item");
+        row.setAttribute("data-status", it.status);
+        var mark = el("span", "wc-item__mark");
+        var sym = el("span", "wc-item__sym", MARK[it.status] || "");
+        sym.setAttribute("aria-hidden", "true");
+        mark.appendChild(sym);
+        mark.appendChild(doc.createTextNode(it.statusLabel || t.status[it.status] || ""));
+        row.appendChild(mark);
+        var body = el("div", "wc-item__body");
+        body.appendChild(el("p", "wc-item__label", it.label));
+        body.appendChild(el("p", "wc-item__detail", it.detail));
+        row.appendChild(body);
+        var counted = it.max > 0 && it.status !== "unknown" && it.status !== "na";
+        var pts = el("span", "wc-item__pts");
+        var short = el("span", "", counted ? String(it.points).replace(".", lg === "en" ? "." : ",") + " / " + it.max : it.max > 0 ? "– / " + it.max : "–");
+        short.setAttribute("aria-hidden", "true");
+        pts.appendChild(short);
+        pts.appendChild(el("span", "rx-visually-hidden", it.pointsLabel || t.noPoints));
+        row.appendChild(pts);
+        rows.push(row);
+      }
+      var box = q("[data-wc-checks]", card);
+      fill(q("[data-wc-items]", box), rows);
+      q("[data-wc-checks-label]", box).textContent = t.checks(rows.length);
+      show(box, rows.length > 0);
+      var blockNote = q("[data-wc-blocknote]", card);
+      if (blockNote) { if (b.note) blockNote.textContent = b.note; show(blockNote, !!b.checked); }
+      var rank = q("[data-wc-ranking]", card);
+      if (rank) { rank.textContent = (b.ranking && b.ranking.text) || ""; show(rank, !!(b.ranking && b.ranking.text)); }
+      show(q("[data-wc-main]", card), rows.length > 0 || (id === "tempo" && !!b.methodLabel));
       if (id !== "tempo") continue;
       // the speed card: the method, Lighthouse's four category scores and lab values (only when Lighthouse ran), the note
       var speed = q("[data-wc-speed]", card);
@@ -606,13 +652,6 @@
     try { urlInput.focus({ preventScroll: true }); urlInput.select(); } catch (e) { urlInput.focus(); }
   });
 
-  // ---------------------------------------------------------------- the score card: light deterrents only
-  // No context menu on the card (pointer only; the keyboard's menu key on a focused control is untouched because the
-  // card holds no focusable control). Selection is switched off in the stylesheet (user-select). Nothing here stops
-  // a screen reader, the keyboard, or a determined visitor, and it is not meant to.
-  var scoreCard = q("[data-wc-scorecard]");
-  if (scoreCard) scoreCard.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-
   // ---------------------------------------------------------------- report by e-mail (double opt-in)
   mail.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -656,7 +695,6 @@
       bot.id = null;
       bot.token = null;
       bot.stale = false;
-      tsBox.removeAttribute("data-on");
       botRender();
     }
     if (state.busy) {

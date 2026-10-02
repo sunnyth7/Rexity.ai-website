@@ -25,6 +25,17 @@
 //     numbers exist and the denominator is not zero. A counter without any entry is "kein Eintrag", never a zero.
 //   - by hand, with the same secret: GET /api/digest?weekly=1 sends the weekly summary on any day, and
 //     &days=28 (7 to 35) widens it, for the review 28 days after the release.
+//
+// Sprint 35 (docs/CHECK_QUOTA.md, docs/RETENTION.md):
+//   - quota hits by kind (quotaip, quotahour, quotaday; docs/sql/check_quota.sql)
+//   - Claude on Amazon Bedrock: yesterday's estimated spend, the number of calls, the ceiling and whether it was
+//     reached (chat_usage buckets claude:<day> and claudestop:<day>; docs/sql/claude_budget.sql)
+//   - "Geprüfte Adressen gestern": the addresses checked yesterday, from public.check_runs (docs/sql/check_runs.sql).
+//     These are addresses of websites, without anything about who asked: no IP address, no e-mail address.
+//   - the daily retention purge (six months): the one place where this function WRITES. It calls
+//     public.site_retention_purge (docs/sql/retention.sql) with a cutoff 183 days back. Unless RETENTION_PURGE is
+//     exactly "1" it is a dry run that only counts; the mail reports the numbers either way. Only the daily cron
+//     run does this, never ?weekly=1.
 
 const deps = {
   fetch: (...a) => fetch(...a),
@@ -32,7 +43,19 @@ const deps = {
   notify: null // default: api/_notify.js (tests replace it)
 };
 
-const CHECK_KINDS = ["checks", "apichecks", "mails", "reports", "summaries", "botfail", "cached", "cards", "apiget", "mcpcalls", "ratehits", "usdmicro", "followups", "optouts"];
+const CHECK_KINDS = ["checks", "apichecks", "mails", "reports", "summaries", "botfail", "cached", "cards", "apiget", "mcpcalls", "ratehits", "usdmicro", "followups", "optouts", "quotaip", "quotahour", "quotaday"];
+const RETENTION_DAYS = 183; // six months (founder, 2 Oct 2026)
+const RUN_LIST_MAX = 50; // lines of "Geprüfte Adressen gestern" in the mail
+// The Claude ceiling as api/chat.js computes it (same variables, same defaults and ranges)
+const numEnv = (name, def, min, max) => {
+  const v = parseFloat(String(process.env[name] || "").trim().replace(",", "."));
+  return Number.isFinite(v) && v >= min && v <= max ? v : def;
+};
+const claudeBudget = () => {
+  const eur = numEnv("CLAUDE_DAILY_EUR_CEILING", 3, 0, 1000);
+  const rate = numEnv("EUR_USD_RATE", 1, 0.5, 2);
+  return { eur, rate, usd: Math.round(eur * rate * 1e6) / 1e6 };
+};
 
 function berlinDay(ms) {
   try { return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(ms)); }
@@ -65,12 +88,48 @@ async function readRows(table, query) {
   }
 }
 
-// -> { day, check: { kind: number|null }, checkReadable, chat: { answers, usd } | null, chatReadable }
+// The six-months purge (docs/sql/retention.sql). -> { dryRun, leads, appointments, addressLog, kept, cutoff } or
+// { error } when the function is not installed or did not answer. With dryRun nothing is deleted.
+async function retentionPurge(nowMs) {
+  const base = String(process.env.SUPABASE_URL || "").replace(/\/+$/, "");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  const dryRun = String(process.env.RETENTION_PURGE || "").trim() !== "1";
+  const cutoff = new Date(nowMs - RETENTION_DAYS * 86400000).toISOString();
+  if (!base || !key) return { dryRun, cutoff, error: "not_configured" };
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 5000); // the function has Vercel's default duration; reads (4 s) + this + two mails must fit
+  try {
+    const resp = await deps.fetch(`${base}/rest/v1/rpc/site_retention_purge`, {
+      method: "POST",
+      headers: { apikey: key, Authorization: "Bearer " + key, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_cutoff: cutoff, p_dry_run: dryRun }),
+      signal: ctrl.signal
+    });
+    if (!resp.ok) { await resp.text().catch(() => ""); console.error("[digest] retention purge HTTP " + resp.status); return { dryRun, cutoff, error: "http_" + resp.status }; }
+    const data = await resp.json();
+    const row = Array.isArray(data) ? data[0] : data;
+    const out = row && typeof row === "object" && row.site_retention_purge && typeof row.site_retention_purge === "object" ? row.site_retention_purge : row;
+    if (!out || typeof out !== "object" || typeof out.dry_run !== "boolean") return { dryRun, cutoff, error: "unexpected" };
+    const n = (v) => (Number.isFinite(Number(v)) ? Number(v) : 0);
+    const r = { dryRun: out.dry_run, cutoff, leads: n(out.leads), appointments: n(out.appointments), addressLog: n(out.address_log), kept: n(out.leads_kept_for_appointment) };
+    console.log(`[digest] retention purge dry_run=${r.dryRun} leads=${r.leads} appointments=${r.appointments} address_log=${r.addressLog} kept=${r.kept} cutoff=${cutoff.slice(0, 10)}`);
+    return r;
+  } catch (e) {
+    console.error("[digest] retention purge " + (e && e.name === "AbortError" ? "timeout" : "network"));
+    return { dryRun, cutoff, error: e && e.name === "AbortError" ? "timeout" : "network" };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+// -> { day, check: { kind: number|null }, checkReadable, chat: { answers, usd } | null, chatReadable,
+//      claude: { usd, calls, refused } | null, runs: [{ url, runs, cached, door, score, status }] | null }
 async function collect(day) {
   const keys = CHECK_KINDS.map((k) => `${k}:${day}`);
-  const [checkRows, chatRows] = await Promise.all([
+  const [checkRows, chatRows, runRows] = await Promise.all([
     readRows("check_usage", "select=bucket,count&bucket=in.(" + keys.map((k) => `"${k}"`).join(",") + ")"),
-    readRows("chat_usage", "select=bucket,count,usd&bucket=eq." + encodeURIComponent("day:" + day))
+    readRows("chat_usage", "select=bucket,count,usd&bucket=in.(" + [`"day:${day}"`, `"claude:${day}"`, `"claudestop:${day}"`].join(",") + ")"),
+    readRows("check_runs", `select=url,runs,cached,door,score,status&day=eq.${day}&order=runs.desc,url.asc&limit=2000`)
   ]);
   const check = {};
   for (const k of CHECK_KINDS) {
@@ -78,7 +137,11 @@ async function collect(day) {
     check[k] = row && Number.isFinite(Number(row.count)) ? Number(row.count) : null;
   }
   const c = (chatRows || []).find((r) => r && r.bucket === "day:" + day);
-  return { day, check, checkReadable: checkRows !== null, chat: c ? { answers: Number(c.count) || 0, usd: Number(c.usd) || 0 } : null, chatReadable: chatRows !== null };
+  const cl = (chatRows || []).find((r) => r && r.bucket === "claude:" + day);
+  const stop = (chatRows || []).find((r) => r && r.bucket === "claudestop:" + day);
+  const claude = cl || stop ? { usd: cl ? Number(cl.usd) || 0 : 0, calls: cl ? Number(cl.count) || 0 : 0, refused: stop ? Number(stop.count) || 0 : 0 } : null;
+  const runs = runRows === null ? null : runRows.filter((r) => r && typeof r.url === "string").map((r) => ({ url: r.url, runs: Number(r.runs) || 0, cached: Number(r.cached) || 0, door: String(r.door || ""), score: r.score === null || r.score === undefined ? null : Number(r.score), status: String(r.status || "") }));
+  return { day, check, checkReadable: checkRows !== null, chat: c ? { answers: Number(c.count) || 0, usd: Number(c.usd) || 0 } : null, chatReadable: chatRows !== null, claude, runs };
 }
 
 const esc = (v) => String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -165,6 +228,9 @@ function weeklyMail(w) {
     lines.push(`  Aufrufe des MCP-Werkzeugs: ${n(c.mcpcalls)}`);
     lines.push(`  Von der Bot-Prüfung abgewiesen: ${n(c.botfail)}`);
     lines.push(`  Treffer der Limits (Antwort 429 der Funktion): ${n(c.ratehits)}`);
+    lines.push(`  davon Kontingent je IP-Adresse erreicht: ${n(c.quotaip)}`);
+    lines.push(`  davon Kontingent je Stunde erreicht: ${n(c.quotahour)}`);
+    lines.push(`  davon Kontingent je Tag erreicht: ${n(c.quotaday)}`);
     lines.push(`  Aufrufe des Sprachmodells für das Kurzfazit: ${n(c.summaries)}`);
     lines.push(`  Geschätzte Kosten des Kurzfazits: ${c.usdmicro ? usdOf(c.usdmicro.sum) + `, Einträge an ${c.usdmicro.days} von ${total} Tagen` : "kein Eintrag"}`);
     lines.push(`  Nachfass-E-Mails versendet: ${n(c.followups)}`);
@@ -217,6 +283,7 @@ function digestMail(d) {
     lines.push(`  Geschätzte Kosten des Kurzfazits: ${usdOf(d.check.usdmicro)}`);
     lines.push(`  Von der Bot-Prüfung abgewiesen: ${n(d.check.botfail)}`);
     lines.push(`  Treffer der Limits (Antwort 429 der Funktion): ${n(d.check.ratehits)}`);
+    lines.push(`  davon Kontingent erreicht: je IP-Adresse ${n(d.check.quotaip)}, je Stunde ${n(d.check.quotahour)}, je Tag ${n(d.check.quotaday)}`);
     lines.push(`  Nachfass-E-Mails versendet: ${n(d.check.followups)}`);
     lines.push(`  Abmeldungen über den Link der Nachfass-E-Mail: ${n(d.check.optouts)}`);
   }
@@ -230,9 +297,50 @@ function digestMail(d) {
   }
   const ceiling = parseFloat(String(process.env.CHAT_DAILY_USD_CEILING || "").trim());
   lines.push(`  Tagesobergrenze: ${(Number.isFinite(ceiling) && ceiling >= 0 ? ceiling : 2).toString().replace(".", ",")} USD (CHAT_DAILY_USD_CEILING)`);
+  // Sprint 35: Claude on Amazon Bedrock has a ceiling of its own
+  const budget = claudeBudget();
+  const eurOf = (usd) => deNum(usd / budget.rate, 2);
+  lines.push("", "Claude über Amazon Bedrock (eigene Tagesobergrenze)");
+  lines.push(`  Tagesobergrenze: ${String(budget.eur).replace(".", ",")} EUR = ${deNum(budget.usd, 2)} USD (CLAUDE_DAILY_EUR_CEILING × EUR_USD_RATE ${String(budget.rate).replace(".", ",")})`);
+  if (!d.chatReadable) lines.push("  Die Zähler waren nicht lesbar.");
+  else if (!d.claude) lines.push("  Geschätzte Kosten: kein Eintrag (kein Aufruf; oder docs/sql/claude_budget.sql ist nicht eingespielt, dann wird Bedrock nicht aufgerufen)");
+  else {
+    lines.push(`  Geschätzte Kosten: ${deNum(d.claude.usd, 4)} USD (etwa ${eurOf(d.claude.usd)} EUR zum festen Kurs) für ${d.claude.calls} ${d.claude.calls === 1 ? "Aufruf" : "Aufrufe"}; Schätzung aus Token-Zahlen und dem hinterlegten Preis, keine Rechnung`);
+    lines.push(d.claude.refused > 0
+      ? `  Obergrenze erreicht: ja (${d.claude.refused} ${d.claude.refused === 1 ? "Aufruf ging" : "Aufrufe gingen"} an den nächsten Anbieter oder bekamen den festen Text)`
+      : "  Obergrenze erreicht: nein");
+  }
+  // Sprint 35: the addresses checked yesterday (websites, not visitors)
+  lines.push("", "Geprüfte Adressen gestern");
+  if (!d.runs) lines.push("  Das Protokoll war nicht lesbar (docs/sql/check_runs.sql nicht eingespielt, Supabase nicht eingerichtet oder keine Antwort).");
+  else {
+    const fresh = d.runs.filter((r) => r.runs > 0);
+    lines.push(`  Neue Prüfungen: ${fresh.reduce((a, r) => a + r.runs, 0)}, verschiedene Adressen: ${fresh.length}`);
+    const door = { form: "Formular", get: "GET", mcp: "MCP" };
+    for (const r of fresh.slice(0, RUN_LIST_MAX)) {
+      const result = r.status && r.status !== "ok" ? r.status : r.score === null ? "kein Gesamtwert" : `${r.score} Punkte`;
+      lines.push(`  ${r.url} | ${r.runs} ${r.runs === 1 ? "Prüfung" : "Prüfungen"} | ${result} | ${door[r.door] || r.door}${r.cached > 0 ? ` | ${r.cached}-mal aus dem Zwischenspeicher` : ""}`);
+    }
+    if (fresh.length > RUN_LIST_MAX) lines.push(`  und ${fresh.length - RUN_LIST_MAX} weitere`);
+    const onlyCached = d.runs.filter((r) => r.runs === 0 && r.cached > 0).length;
+    if (onlyCached) lines.push(`  Dazu ${onlyCached} ${onlyCached === 1 ? "Adresse" : "Adressen"}, deren Ergebnis nur aus dem Zwischenspeicher angesehen wurde.`);
+    lines.push("  Gespeichert werden Adresse, Tag und Ergebnis, 183 Tage lang; keine IP-Adresse, keine E-Mail-Adresse.");
+  }
+  // Sprint 35: six months retention
+  if (d.retention) {
+    const r = d.retention;
+    const cut = deDate(r.cutoff.slice(0, 10));
+    lines.push("", "Aufbewahrung (6 Monate)");
+    if (r.error) lines.push(`  Nicht verfügbar (docs/sql/retention.sql nicht eingespielt, Supabase nicht eingerichtet oder keine Antwort): Es wurde nichts gelöscht und nichts gezählt.`);
+    else {
+      const what = `${r.leads} ${r.leads === 1 ? "Anfrage" : "Anfragen"} der Website (Tabelle Lead)${r.appointments ? ` mit ${r.appointments} ${r.appointments === 1 ? "Terminanfrage" : "Terminanfragen"}` : ""} und ${r.addressLog} ${r.addressLog === 1 ? "Zeile" : "Zeilen"} des Adress-Protokolls, älter als ${cut}`;
+      lines.push(r.dryRun ? `  Probelauf, nichts gelöscht (RETENTION_PURGE ist nicht 1). Gelöscht würden: ${what}.` : `  Gelöscht: ${what}.`);
+      if (r.kept) lines.push(`  Behalten trotz Alter: ${r.kept} ${r.kept === 1 ? "Anfrage" : "Anfragen"} mit einem Termin, der nicht vom Buchungsformular stammt oder jünger ist.`);
+    }
+  }
   lines.push("", NO_ENTRY_NOTE);
   lines.push(NOT_STORED_NOTE);
-  lines.push("Diese E-Mail enthält keine Besucherdaten.");
+  lines.push("Diese E-Mail enthält keine Besucherdaten: keine IP-Adresse, keine E-Mail-Adresse, keinen Chat-Text. Die geprüften Adressen sind Adressen von Websites.");
   const text = lines.join("\n");
   return { subject: `Website-Check und Assistent: Zahlen vom ${date}`, textContent: text, htmlContent: mailBody(text) };
 }
@@ -262,6 +370,7 @@ async function handler(req, res) {
   if (!byHand) {
     day = berlinDay(deps.now() - 24 * 60 * 60 * 1000);
     data = await collect(day);
+    data.retention = await retentionPurge(deps.now()); // Sprint 35: a dry run unless RETENTION_PURGE=1
     const mail = digestMail(data);
     sent = await notify.sendMail({ to, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
     console.log("[digest] day=" + day + " sent=" + Boolean(sent && sent.sent) + (sent && !sent.sent ? " reason=" + (sent.reason || "unknown") : ""));
@@ -279,10 +388,10 @@ async function handler(req, res) {
   }
   const ok = (byHand || Boolean(sent && sent.sent)) && (!weekly || weekly.sent);
   res.statusCode = ok ? 200 : 502;
-  const out = byHand ? { ok, weekly } : { ok, day, check: data.check, chat: data.chat, readable: { check: data.checkReadable, chat: data.chatReadable } };
+  const out = byHand ? { ok, weekly } : { ok, day, check: data.check, chat: data.chat, claude: data.claude, addresses: data.runs ? { checks: data.runs.reduce((a, r) => a + r.runs, 0), different: data.runs.filter((r) => r.runs > 0).length } : null, retention: data.retention, readable: { check: data.checkReadable, chat: data.chatReadable, addresses: data.runs !== null } };
   if (!byHand && weekly) out.weekly = weekly;
   return res.end(JSON.stringify(out));
 }
 
 module.exports = handler;
-module.exports._test = { deps, collect, digestMail, berlinDay, CHECK_KINDS, collectRange, weeklyMail, lastDays, isBerlinMonday, shareLine };
+module.exports._test = { deps, collect, digestMail, berlinDay, CHECK_KINDS, collectRange, weeklyMail, lastDays, isBerlinMonday, shareLine, retentionPurge, claudeBudget, RETENTION_DAYS, RUN_LIST_MAX };

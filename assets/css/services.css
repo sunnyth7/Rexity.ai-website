@@ -642,6 +642,13 @@ a.sv-card:hover .sv-card__go { text-decoration: underline; text-underline-offset
 .sv-figure__caption { display: block; padding: 10px 2px 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
 .sv-figure__text { display: block; }
 .sv-main .ax-ai-note { display: block; margin-top: 4px; font-size: 0.625rem; line-height: 1.4; letter-spacing: 0.01em; color: var(--rx-muted); }
+/* Sprint 35: the same note under a hero media card (image or loop) and under a tile group with AI thumbnails.
+   --rx-muted is the secondary text colour of the dark theme (contrast on the hero and on the page ground is the
+   one of every other muted line). */
+.sv-media__note,
+.sv-tiles__note { margin: 6px 2px 0; }
+.sv-media__note .ax-ai-note,
+.sv-tiles__note .ax-ai-note { margin-top: 0; }
 .sv-scene { margin-bottom: 24px; }
 .sv-sources { max-width: var(--rx-measure); margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--rx-line); color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
 .sv-sources__label { margin: 0 0 6px; }

@@ -17,8 +17,9 @@
 // Not implemented because a single-response, stateless server does not need it: SSE streams, subscriptions/listen,
 // sessions, resumability, authorization, structuredContent, pagination (one tool).
 //
-// The tool runs the same code as GET /api/check (api/check.js assistantCheck): the public tier as Markdown, the
-// assistant limits (3 fresh checks per IP and hour, cached results free, a daily cap), no bot check.
+// The tool runs the same code as GET /api/check (api/check.js assistantCheck): the result with every check as Markdown, the
+// quotas for fresh checks as every other door (Sprint 35: per IP address and day, per hour, per day; cached results
+// free), no bot check.
 // Origin: a request with an Origin header is accepted only from our own site, from the deployment's own host or
 // from an origin listed in MCP_ALLOWED_ORIGINS (comma separated; "*" allows every origin). Assistants call from
 // servers and send no Origin header.
@@ -37,20 +38,22 @@ const MAX_BODY = 20000;
 
 const L = check.LIMITS;
 const INSTRUCTIONS =
-  "Website-Check by Rexity Labs: checks one publicly reachable website in four areas (speed & technology, findability, readiness for enquiries, trust & legal) and returns scores from 0 to 100. " +
-  "Use the tool website_check when a user asks how well a public website works for visitors and enquiries. It returns scores and one verdict line per area, not the single findings and no recommendations; " +
-  "the full report is sent by e-mail to an address the user confirms on " + check.LINKS.page + ". A check can take up to about a minute.";
+  "Website-Check by Rexity Labs: checks one publicly reachable website in six areas (speed & technology, findability, readiness for enquiries, trust & legal, website security settings, e-mail domain protection) and returns scores from 0 to 100. " +
+  "Use the tool website_check when a user asks how well a public website works for visitors and enquiries. It returns the scores, one verdict line per area and every single check with its state, measured value and points. It states what was measured and gives no recommendations. " +
+  "The two security-related areas are built only from settings visible from outside (response headers, one TLS handshake, public DNS): not a security audit and no warranty. " +
+  "The same result can be requested as a copy by e-mail on " + check.LINKS.page + " (confirmed address). A check can take up to about a minute.";
 
 const TOOL = {
   name: "website_check",
   title: "Website-Check (Rexity Labs)",
   description:
-    "Checks one public website and returns a Markdown summary: an overall score (0–100) with a band (good / medium / weak), the scores of four areas " +
-    "(speed & technology, findability, readiness for enquiries, trust & legal), one verdict line per area, how many checks per area were met, partly met, open, notes or not checkable, " +
-    "how speed was measured (with Lighthouse's four category scores and LCP, CLS, TBT when Lighthouse ran), the address and time of the check and the labels of the pages read. " +
-    "It does not return the single findings and gives no advice; the full report with every check is sent by e-mail to an address the user confirms on " + check.LINKS.page + ". " +
+    "Checks one public website and returns the result as Markdown: an overall score (0–100) with a band (good / medium / weak), the scores of six areas " +
+    "(speed & technology, findability, readiness for enquiries, trust & legal, website security settings, e-mail domain protection), one verdict line per area, how many checks per area were met, partly met, open, notes or not checkable, " +
+    "and every single check with its state, its measured value and its points; how speed was measured (with Lighthouse's four category scores and LCP, CLS, TBT when Lighthouse ran), the address and time of the check and the labels of the pages read. " +
+    "It states what was measured and gives no advice. The areas on security settings and e-mail domain protection use only what is visible from outside (response headers, one TLS handshake, public DNS, security.txt): not a security audit, no warranty. " +
+    "A copy of the result by e-mail is available on " + check.LINKS.page + " (to an address the user confirms there). " +
     "Only public http/https websites on standard ports; IP addresses, internal hosts and sites whose owners opted out are refused. A fresh check takes up to about a minute; " +
-    `results are cached for ${L.cacheHours} hours. Limits: ${L.api.freshPerIpPerHour} fresh checks per caller and hour and a daily cap for all callers; when a limit is reached the result says when to try again. ` +
+    `results are cached for ${L.cacheHours} hours. Quotas for fresh checks, currently: ${L.quota.perIpPerDay} per IP address and day, ${L.quota.perHour} per hour and ${L.quota.perDay} per day for all callers together; when a quota is reached the result says when it is restored. ` +
     "The checker identifies itself as " + check.UA + ".",
   inputSchema: {
     type: "object",
@@ -109,7 +112,8 @@ async function callTool(params, req, modern) {
   const r = await check.assistantCheck({ url: args.url, lang, ip: check.clientIp(req), via: "mcp" }); // via: counted as an MCP call (Sprint 34)
   if (r.status === 200) return done(check.publicMarkdown(r.body), false);
   const retry = r.headers && r.headers["Retry-After"];
-  const wait = retry ? (lang === "en" ? ` Try again in about ${Math.ceil(Number(retry) / 60)} minutes.` : ` Bitte in etwa ${Math.ceil(Number(retry) / 60)} Minuten erneut versuchen.`) : "";
+  // a quota's own sentence already says when it is restored (tomorrow, or at the next full hour)
+  const wait = retry && !/^quota_/.test(String(r.body.error)) ? (lang === "en" ? ` Try again in about ${Math.ceil(Number(retry) / 60)} minutes.` : ` Bitte in etwa ${Math.ceil(Number(retry) / 60)} Minuten erneut versuchen.`) : "";
   return done(`${r.body.message}${wait} (${r.body.error})`, true);
 }
 

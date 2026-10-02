@@ -2,10 +2,10 @@
 // The leading underscore keeps Vercel from exposing this file as a function; api/check.js renders it for
 // GET /api/check?card=<host>[&p=<path>][&lang=en], reached as /website-check/ergebnis/<host> (vercel.json rewrite).
 //
-// What the page shows — and nothing else: the checked host, the overall score with its band, the four area scores
-// with their bands, the date of the check and until when the result can be opened, the line "Geprüft mit dem
+// What the page shows — and nothing else: the checked host, the overall score with its band, the six area scores
+// with their bands (Sprint 36: also "Sicherheit der Website" and "Schutz Ihrer E-Mail-Domain"), the date of the check and until when the result can be opened, the line "Geprüft mit dem
 // Website-Check von Rexity Labs" and one button back to the tool. No verdict line, no Kurzfazit, no number of
-// checks, no Lighthouse value, no finding, no advice: a subset of the public tier (docs/CHECK_API.md §1).
+// checks, no Lighthouse value, no single check, no advice: the scores of the result only (docs/CHECK_API.md §13).
 //
 // Rules the page keeps:
 //   - It never starts a check. api/check.js hands it a result only when one is stored and not older than 24 hours.
@@ -20,7 +20,7 @@ const SITE_ORIGIN = "https://www.rexity.ai";
 const TOOL_PATH = "/website-check";
 const CARD_PATH = "/website-check/ergebnis";
 const OG_IMAGE = SITE_ORIGIN + "/assets/img/og/website-check.jpg";
-const BLOCK_ORDER = ["tempo", "find", "contact", "trust"];
+const BLOCK_ORDER = ["tempo", "find", "contact", "trust", "security", "mail"];
 
 const esc = (v) => String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 const T = (de, en) => ({ de, en });
@@ -29,20 +29,21 @@ const TEXT = {
   title: T("Website-Check: Ergebnis", "Website check: result"),
   ogTitle: T("Ergebnis im Website-Check von Rexity Labs", "Result in the website check by Rexity Labs"),
   ogDescription: T(
-    "Gesamtwert und vier Bereiche von 0 bis 100: Tempo & Technik, Auffindbarkeit, Anfrage-Tauglichkeit, Vertrauen & Recht. Kostenlos die eigene Website prüfen.",
-    "Overall value and four areas from 0 to 100: speed & technology, findability, readiness for enquiries, trust & legal. Check your own website for free."),
+    "Gesamtwert und sechs Bereiche von 0 bis 100: Tempo & Technik, Auffindbarkeit, Anfrage-Tauglichkeit, Vertrauen & Recht, Sicherheit der Website, Schutz der E-Mail-Domain. Kostenlos die eigene Website prüfen.",
+    "Overall value and six areas from 0 to 100: speed & technology, findability, readiness for enquiries, trust & legal, website security settings, e-mail domain protection. Check your own website for free."),
   eyebrow: T("Website-Check · Ergebnis", "Website check · result"),
   overall: T("Gesamt", "Overall"),
   of100: T("von 100 Punkten", "out of 100 points"),
   noOverall: T("kein Gesamtwert", "no overall value"),
-  areas: T("Die vier Bereiche", "The four areas"),
+  areas: T("Die sechs Bereiche", "The six areas"),
   unchecked: T("nicht prüfbar", "could not be checked"),
+  notApplicable: T("entfällt", "does not apply"),
   by: T("Geprüft mit dem Website-Check von Rexity Labs", "Checked with the website check by Rexity Labs"),
   cta: T("Eigene Website prüfen", "Check your own website"),
   ctaNow: T("Jetzt prüfen", "Check now"),
   how: T(
-    "Die Werte stammen aus einer automatischen Prüfung der öffentlich erreichbaren Seite. Wie bewertet wird, steht auf der Seite des Website-Checks.",
-    "The values come from an automatic check of the publicly reachable page. How it is scored is described on the website check's page."),
+    "Die Werte stammen aus einer automatischen Prüfung der öffentlich erreichbaren Seite, von außen und ohne Eingriff in die Website; kein Sicherheitsaudit und keine Gewähr. Wie bewertet wird, steht auf der Seite des Website-Checks.",
+    "The values come from an automatic check of the publicly reachable page, from outside and without interfering with the website; not a security audit and no warranty. How it is scored is described on the website check's page."),
   owner: T(
     "Sie betreiben diese Website und möchten sie vom Website-Check ausnehmen?",
     "You run this website and want to exclude it from the website check?"),
@@ -149,7 +150,7 @@ function resultHtml(view, L, ttlMs) {
     return "<li><span>" + esc(b.name) + "</span>" +
       (scored
         ? '<span class="v">' + b.score + " <span>· " + esc(b.bandLabel || "") + "</span></span>" + '<span class="bar" aria-hidden="true"><i style="width:' + Math.max(0, Math.min(100, b.score)) + '%"></i></span>'
-        : '<span class="v"><span>' + esc(TEXT.unchecked[L]) + "</span></span>" + '<span class="bar" aria-hidden="true"></span>') +
+        : '<span class="v"><span>' + esc((b.notApplicable ? TEXT.notApplicable : TEXT.unchecked)[L]) + "</span></span>" + '<span class="bar" aria-hidden="true"></span>') +
       "</li>";
   }).join("");
   return '<article class="card" aria-labelledby="wc-card-title">' +

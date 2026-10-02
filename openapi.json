@@ -3,8 +3,8 @@
   "info": {
     "title": "Rexity Website-Check",
     "version": "1.0.0",
-    "summary": "Checks one public website and returns scores for speed, findability, readiness for enquiries and trust.",
-    "description": "Free check of a publicly reachable website by Rexity Labs. One GET request runs the check (up to about a minute) or returns the result of the last 24 hours. The answer is the public tier: an overall score (0–100) with a band, the scores of four areas, one verdict line per area, the number of checks per state, how speed was measured and the labels of the pages read. It contains no single finding and no recommendations. The full report with every check is sent by e-mail to an address the visitor confirms on https://www.rexity.ai/website-check. No key is needed. Limits: 3 fresh checks per IP address and hour, 30 requests per IP address in 10 minutes (cached results included), and a daily cap for all callers; a reached limit answers 429 with Retry-After. The same check is available as an MCP tool at https://www.rexity.ai/mcp. The checker identifies itself as RexityWebsiteCheck/1.0 (+https://www.rexity.ai/website-check/bot).",
+    "summary": "Checks one public website and returns scores and every single check for six areas: speed, findability, readiness for enquiries, trust, security settings and e-mail domain protection.",
+    "description": "Free check of a publicly reachable website by Rexity Labs. One GET request runs the check (up to about a minute) or returns the result of the last 24 hours. The answer is the whole result: an overall score (0–100) with a band, the scores of six areas (Speed & technology, Findability, Readiness for enquiries, Trust & legal, Website security settings, E-mail domain protection), one verdict line per area, the number of checks per state, every single check with its state, measured value and points, how speed was measured and the labels of the pages read. It states what was measured and what that means, and contains no recommendations. The areas on security settings and e-mail domain protection are built only from what every browser and public DNS receive anyway (response headers, cookies and HTML of the page, the http address of the same host, one TLS handshake on port 443, the file security.txt, the DNS records MX, SPF, DMARC and CAA): Settings visible from outside, checked without interfering with the website; not a security audit and no warranty. The same result can be requested as a copy by e-mail on https://www.rexity.ai/website-check (confirmed address). No key is needed. Quotas for fresh checks, currently: 5 per IP address and day, 200 per hour and 1000 per day for all callers together; in addition 30 requests per IP address in 10 minutes (cached results included). A reached quota answers 429 with Retry-After and says when it is restored. The same check is available as an MCP tool at https://www.rexity.ai/mcp. The checker identifies itself as RexityWebsiteCheck/1.0 (+https://www.rexity.ai/website-check/bot).",
     "contact": {
       "name": "Rexity Labs UG (haftungsbeschränkt)",
       "email": "info@rexity.ai",
@@ -24,7 +24,7 @@
     "/api/check": {
       "get": {
         "operationId": "checkWebsite",
-        "summary": "Check a website (public tier)",
+        "summary": "Check a website (scores and every check)",
         "description": "Runs the check for one address or returns the cached result. JSON by default; Markdown with format=md or the header Accept: text/markdown. Errors are always JSON.",
         "parameters": [
           {
@@ -69,7 +69,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The result (public tier)",
+            "description": "The result",
             "content": {
               "application/json": {
                 "schema": {
@@ -105,7 +105,7 @@
             }
           },
           "429": {
-            "description": "A limit is reached: rate (per IP address) or cap (daily cap)",
+            "description": "A limit is reached: rate (too many requests in a short time), quota_ip (fresh checks of this IP address today), quota_hour (fresh checks of all callers this hour) or quota_day (fresh checks of all callers today). With format=md a quota is answered as Markdown.",
             "headers": {
               "Retry-After": {
                 "description": "Seconds until a new attempt makes sense",
@@ -161,8 +161,8 @@
           },
           "tier": {
             "type": "string",
-            "const": "public",
-            "description": "This interface returns the public tier only"
+            "const": "full",
+            "description": "The whole result: scores and every check. (Until report format 4 this interface returned scores and counts only, marked \"public\".)"
           },
           "v": {
             "type": "integer",
@@ -240,7 +240,9 @@
                     "tempo",
                     "find",
                     "contact",
-                    "trust"
+                    "trust",
+                    "security",
+                    "mail"
                   ]
                 },
                 "description": "The areas that went into the overall score"
@@ -253,7 +255,9 @@
               "tempo",
               "find",
               "contact",
-              "trust"
+              "trust",
+              "security",
+              "mail"
             ],
             "properties": {
               "tempo": {
@@ -266,6 +270,12 @@
                 "$ref": "#/components/schemas/Block"
               },
               "trust": {
+                "$ref": "#/components/schemas/Block"
+              },
+              "security": {
+                "$ref": "#/components/schemas/Block"
+              },
+              "mail": {
                 "$ref": "#/components/schemas/Block"
               }
             }
@@ -282,7 +292,7 @@
               "object",
               "null"
             ],
-            "description": "Short verdict: overall score, strongest and weakest area, how speed was measured. No single finding, no advice.",
+            "description": "Short verdict: overall score, strongest and weakest area, the open check with the most weight (named by its label, as a plain statement), how speed was measured. No advice.",
             "properties": {
               "sentences": {
                 "type": "array",
@@ -296,7 +306,7 @@
                   "rules",
                   "model"
                 ],
-                "description": "rules: fixed text; model: worded by an AI from the scores"
+                "description": "rules: fixed text; model: worded by an AI from the scores and the open checks"
               }
             }
           },
@@ -324,9 +334,9 @@
             },
             "description": "The words for the states of counts in the requested language"
           },
-          "fullReport": {
+          "mailCopy": {
             "type": "object",
-            "description": "Where the full report (every check with its measured value) can be had: by e-mail only, after the address was confirmed on the page",
+            "description": "The same result can be requested as a copy by e-mail on the page (address confirmed through a link); not through this interface",
             "properties": {
               "by": {
                 "type": "string",
@@ -367,7 +377,8 @@
           "checked",
           "score",
           "weight",
-          "counts"
+          "counts",
+          "items"
         ],
         "properties": {
           "name": {
@@ -414,11 +425,26 @@
           },
           "reason": {
             "type": "string",
-            "description": "Why the area could not be checked (only when checked is false)"
+            "description": "Why the area could not be checked or does not apply (only when checked is false)"
+          },
+          "notApplicable": {
+            "type": "boolean",
+            "description": "true: the area does not apply to this site (e-mail domain protection for a site under a provider's shared address)"
+          },
+          "note": {
+            "type": "string",
+            "description": "A note on the area. For security and mail: settings visible from outside, checked without interfering with the website; not a security audit and no warranty."
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "contact only: labels of the pages read in addition to the entered one"
           },
           "counts": {
             "type": "object",
-            "description": "How many checks of the area ended in which state. The checks themselves are not part of this result.",
+            "description": "How many checks of the area ended in which state. The checks themselves are in items.",
             "required": [
               "ok",
               "partial",
@@ -458,6 +484,13 @@
                 "description": "all checks of the area"
               }
             }
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Check"
+            },
+            "description": "Every check of the area; empty when the area could not be checked"
           }
         }
       },
@@ -541,6 +574,62 @@
           }
         ]
       },
+      "Check": {
+        "type": "object",
+        "description": "One check: what was looked at, what was measured and what that means. A statement, never advice.",
+        "required": [
+          "id",
+          "label",
+          "status",
+          "statusLabel",
+          "detail",
+          "points",
+          "max",
+          "pointsLabel"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the check"
+          },
+          "label": {
+            "type": "string",
+            "description": "Name of the check in the requested language"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok",
+              "partial",
+              "fail",
+              "info",
+              "unknown",
+              "na"
+            ],
+            "description": "met, partly met, open, note (shown, never scored), could not be checked, does not apply"
+          },
+          "statusLabel": {
+            "type": "string",
+            "description": "The state in the requested language"
+          },
+          "detail": {
+            "type": "string",
+            "description": "The measured value or finding, as plain text in the requested language"
+          },
+          "points": {
+            "type": "number",
+            "description": "Points reached"
+          },
+          "max": {
+            "type": "number",
+            "description": "Points possible; 0 for a note"
+          },
+          "pointsLabel": {
+            "type": "string",
+            "description": "The points as text, e.g. \"12,5 von 25 Punkten\", \"nicht gewertet\", \"ohne Punkte\""
+          }
+        }
+      },
       "Error": {
         "type": "object",
         "required": [
@@ -564,7 +653,9 @@
               "optout",
               "dns",
               "rate",
-              "cap",
+              "quota_ip",
+              "quota_hour",
+              "quota_day",
               "server"
             ]
           },

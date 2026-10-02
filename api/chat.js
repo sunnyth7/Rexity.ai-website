@@ -21,8 +21,11 @@
 // Limits: 20 visitor messages per conversation, 20 messages per 5 minutes per IP
 // (in memory, plus an optional persistent counter in Supabase, see "Persistent
 // limiter"), 120 model calls per minute per instance, and a daily cost ceiling
-// (CHAT_DAILY_USD_CEILING, default 2 USD) computed from the usage numbers; over a limit
+// (CHAT_DAILY_USD_CEILING, default 3 USD) computed from the usage numbers; over a limit
 // the deterministic FAQ answers.
+// Sprint 35: Claude on Amazon Bedrock has a daily ceiling of its own (CLAUDE_DAILY_EUR_CEILING, default
+// 3 EUR, see "Daily ceiling for Claude on Amazon Bedrock"): past it Bedrock is skipped and the next
+// provider answers, inside the overall ceiling above.
 //
 // Model providers (see "Provider selection" below). Each feature names its own order (Sprint 30):
 //   - the chat: CHAT_PROVIDER, default Azure OpenAI in the EU data zone first (what answers in
@@ -670,13 +673,13 @@ function recordGlobalHit() { globalHits.push(Date.now()); }
 // ---- Daily cost ceiling (Sprint 25) ---------------------------------------------------
 // Every model answer's usage is priced with list prices (USD per million tokens; EU
 // routing, docs/seo/data/ai-offers-fact-check-2026-10-01.md §11) and added to today's
-// total (Europe/Berlin day). At or above CHAT_DAILY_USD_CEILING (default 2) the
+// total (Europe/Berlin day). At or above CHAT_DAILY_USD_CEILING (default 3) the
 // deterministic FAQ answers until midnight. Per instance in memory; with the persistent
 // limiter the total is shared across instances. Override a price with
 // CHAT_PRICE_<PROVIDER>="input,cached_input,output" (e.g. CHAT_PRICE_AZURE="0.825,0.0825,4.95").
 const DAILY_USD_CEILING = (() => {
   const v = parseFloat(String(process.env.CHAT_DAILY_USD_CEILING || "").trim());
-  return Number.isFinite(v) && v >= 0 ? v : 2;
+  return Number.isFinite(v) && v >= 0 ? v : 3; // founder, 2 Oct 2026: 3 USD per day for all AI calls together
 })();
 const PRICE_DEFAULTS = {
   azure: [0.825, 0.0825, 4.95], // GPT-5.4-mini, Azure Data Zone EU
@@ -743,9 +746,10 @@ const SUPABASE_URL = String(process.env.SUPABASE_URL || "").replace(/\/+$/, "");
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const PERSIST_CONFIGURED = Boolean(SUPABASE_URL && SUPABASE_KEY) && String(process.env.CHAT_PERSISTENT_LIMIT || "").trim() !== "0";
 const PERSIST_TIMEOUT_MS = 1200;
-// Sprint 34: a day's row (model answers and their estimated USD; no visitor data) is kept 40 days instead of 3, so
-// that the weekly summary (api/digest.js) and the first review can read it. The ceiling logic only reads today's row.
-const DAY_ROW_TTL_S = 40 * 86400;
+// A day's row (model answers and their estimated USD; no visitor data) is kept 183 days (Sprint 35: six months for
+// every record; 40 days in Sprint 34, 3 before), so that the weekly summary (api/digest.js) and the reviews can read
+// it. The ceiling logic only reads today's row. The per-IP rows of a 5-minute window keep their 15 minutes.
+const DAY_ROW_TTL_S = 183 * 86400;
 const PERSIST_RETRY_MS = 10 * 60 * 1000;
 let persistOffUntil = 0;
 const IP_SALT = String(process.env.CHAT_IP_SALT || "") || crypto.createHash("sha256").update("rexity-chat|" + SUPABASE_KEY).digest("hex").slice(0, 32);
@@ -786,6 +790,148 @@ async function persistBump(key, count, usd, ttlSeconds) {
   } finally {
     clearTimeout(timer);
   }
+}
+
+// ---- Daily ceiling for Claude on Amazon Bedrock (Sprint 35) ---------------------------
+// Founder, 2 Oct 2026: "the daily burn for Claude shall not be over 3 euros". Every call to Bedrock, from
+// whichever feature (today: the Website-Check's Kurzfazit; the chat when CHAT_PROVIDER puts Bedrock in its
+// order), first reserves its worst-case cost in a per-day counter of its own and is made only when the
+// reservation fits into the day's budget. After the call the reservation is replaced by the estimate from the
+// real token counts. When it does not fit, the call is not made and the caller's next provider answers.
+//
+//   budget (USD) = CLAUDE_DAILY_EUR_CEILING (default 3) x EUR_USD_RATE (default 1.00, US dollars per euro)
+//   EUR_USD_RATE is a fixed number, never fetched. 1.00 counts a dollar as a whole euro; as long as one euro
+//   buys more than one dollar (every month since December 2022, and all but about three of the last twenty
+//   years), 3.00 USD are less than 3 EUR. Set it lower should the euro fall below parity.
+//   worst case of one call = (UTF-8 bytes of system + messages + 100) x the dearer input price (cache write)
+//                            + max_tokens x output price      (a token is at least one byte)
+//   estimate after the call = estimateUsd(): tokens x CHECK_PRICE_BEDROCK / CHAT_PRICE_BEDROCK / the list table
+// The ceiling is exactly as accurate as that price (docs/CHECK_QUOTA.md).
+//
+// Counter: Supabase, table chat_usage, bucket claude:YYYY-MM-DD (Europe/Berlin), through the function
+// public.claude_budget_take (docs/sql/claude_budget.sql), which adds and compares in one statement: parallel
+// calls on any number of instances cannot take more than the budget. claudestop:YYYY-MM-DD counts the calls
+// that were refused (the digest reads it).
+// Store configured but not usable (SQL not applied, error, no answer): Bedrock is NOT called (fail closed) -
+// "shall not be over 3 euros" cannot be kept by counters that each instance holds for itself.
+// No store configured at all (local runs, tests): the counter lives in this instance's memory.
+const numEnv = (name, def, min, max) => {
+  const raw = String(process.env[name] || "").trim();
+  if (!raw) return def;
+  const v = parseFloat(raw.replace(",", "."));
+  if (Number.isFinite(v) && v >= min && v <= max) return v;
+  console.error("[claude] " + name + " is not a number between " + min + " and " + max + ": the default " + def + " applies");
+  return def;
+};
+const CLAUDE_DAILY_EUR_CEILING = numEnv("CLAUDE_DAILY_EUR_CEILING", 3, 0, 1000);
+const EUR_USD_RATE = numEnv("EUR_USD_RATE", 1, 0.5, 2);
+const CLAUDE_DAILY_USD_BUDGET = Math.round(CLAUDE_DAILY_EUR_CEILING * EUR_USD_RATE * 1e6) / 1e6;
+const CLAUDE_OFF_MS = 10 * 60 * 1000;
+let claudeOffUntil = 0; // the ceiling's store answered with an error: no Bedrock call on this instance until then
+const claudeMem = { day: "", usd: 0, calls: 0, refused: 0, logged: false };
+function claudeToday() {
+  const d = berlinDay();
+  if (claudeMem.day !== d) { claudeMem.day = d; claudeMem.usd = 0; claudeMem.calls = 0; claudeMem.refused = 0; claudeMem.logged = false; }
+  return claudeMem;
+}
+// The dearest a Bedrock call with this body can get by the price in force.
+function bedrockWorstUsd(model, body, pricePrefix) {
+  const p = priceOf("bedrock", model, pricePrefix);
+  const bytes = Buffer.byteLength(JSON.stringify([body && body.system, body && body.messages]) || "", "utf8");
+  const out = Math.max(0, parseInt(body && body.max_tokens, 10) || 0);
+  return ((bytes + 100) * Math.max(p.inp, p.write) + out * p.out) / 1e6;
+}
+// -> row { granted, usd, calls, refused } of public.claude_budget_take, or null (not usable)
+async function claudeRpc(day, usd, limit) {
+  const off = (reason, all) => {
+    if (all) persistOff(reason);
+    if (Date.now() >= claudeOffUntil) {
+      claudeOffUntil = Date.now() + CLAUDE_OFF_MS;
+      console.error("[claude] ceiling counter unavailable (" + reason + "): Bedrock is not called on this instance for 10 minutes, the next provider answers (docs/sql/claude_budget.sql applied?)");
+    }
+    return null;
+  };
+  if (Date.now() < claudeOffUntil || typeof fetch !== "function") return null;
+  if (!persistActive()) return off("shared store unavailable", false);
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), PERSIST_TIMEOUT_MS);
+  try {
+    const resp = await fetch(SUPABASE_URL + "/rest/v1/rpc/claude_budget_take", {
+      method: "POST",
+      headers: { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_day: day, p_usd: Math.round(usd * 1e6) / 1e6, p_limit: limit }),
+      signal: controller.signal
+    });
+    if (!resp.ok) {
+      await resp.text().catch(() => "");
+      return off("HTTP " + resp.status, false); // e.g. 404: the function is not installed; the chat's own counters are not affected
+    }
+    const data = await resp.json();
+    const row = Array.isArray(data) ? data[0] : data;
+    if (!row || typeof row !== "object" || typeof row.granted !== "boolean") return off("unexpected response", false);
+    return { granted: row.granted, usd: Number(row.usd) || 0, calls: Number(row.calls) || 0, refused: Number(row.refused) || 0 };
+  } catch (error) {
+    return off(error && error.name === "AbortError" ? "timeout" : "network", true);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+function claudeCeilingLog(m, spent) {
+  if (m.logged) return;
+  m.logged = true;
+  console.error("[claude] daily ceiling reached (" + CLAUDE_DAILY_EUR_CEILING + " EUR = " + CLAUDE_DAILY_USD_BUDGET.toFixed(2) + " USD at EUR_USD_RATE " + EUR_USD_RATE + "; estimated spend " + spent.toFixed(4) + " USD): no Bedrock call until midnight Europe/Berlin, the next provider answers");
+}
+// -> { ok: true, day, usd (reserved), shared } or { ok: false, reason: "ceiling" | "store" }
+async function claudeReserve(worstUsd) {
+  const m = claudeToday();
+  const worst = Math.max(0, Number(worstUsd) || 0);
+  if (!PERSIST_CONFIGURED) {
+    if (m.usd + worst > CLAUDE_DAILY_USD_BUDGET + 1e-9) { m.refused++; claudeCeilingLog(m, m.usd); return { ok: false, reason: "ceiling" }; }
+    m.usd += worst; // synchronous: calls running in parallel on this instance see each other's reservation
+    m.calls++;
+    return { ok: true, day: m.day, usd: worst, shared: false };
+  }
+  const row = await claudeRpc(m.day, worst, CLAUDE_DAILY_USD_BUDGET);
+  if (!row) return { ok: false, reason: "store" };
+  m.usd = row.usd; m.calls = row.calls; m.refused = row.refused;
+  if (!row.granted) {
+    if (row.refused <= 1) claudeCeilingLog(m, row.usd); // the first refusal of the day, on whichever instance
+    return { ok: false, reason: "ceiling" };
+  }
+  return { ok: true, day: m.day, usd: worst, shared: true };
+}
+// Replaces a reservation by what the call cost (actualUsd), or keeps it (actualUsd null: unknown, e.g. a timeout).
+async function claudeSettle(reservation, actualUsd) {
+  if (!reservation || !reservation.ok || actualUsd === null || actualUsd === undefined) return;
+  const delta = Math.max(0, Number(actualUsd) || 0) - reservation.usd;
+  if (!delta) return;
+  if (!reservation.shared) {
+    const m = claudeToday();
+    if (m.day === reservation.day) m.usd = Math.max(0, m.usd + delta);
+    return;
+  }
+  const row = await claudeRpc(reservation.day, delta, null);
+  const m = claudeToday();
+  if (row && m.day === reservation.day) m.usd = row.usd;
+}
+// One Bedrock call under the ceiling. Throws { ceiling: true, logged: true } without calling when the
+// reservation is refused; the callers' provider loops then go on to the next provider.
+async function bedrockBudgeted(model, body, timeoutMs, pricePrefix) {
+  const reservation = await claudeReserve(bedrockWorstUsd(model, body, pricePrefix));
+  if (!reservation.ok) throw Object.assign(new Error("claude daily ceiling (" + reservation.reason + ")"), { ceiling: reservation.reason, logged: true });
+  let data;
+  try {
+    data = await bedrockMessages(model, body, timeoutMs);
+  } catch (error) {
+    // An HTTP error answer is not billed: the reservation is given back. A timeout or a broken connection may
+    // have been billed: the reservation stays.
+    if (error && error.status) await claudeSettle(reservation, 0);
+    throw error;
+  }
+  const u = (data && data.usage) || {};
+  const counted = [u.input_tokens, u.cache_read_input_tokens, u.cache_creation_input_tokens, u.output_tokens].some((x) => typeof x === "number" && x > 0);
+  await claudeSettle(reservation, counted ? estimateUsd("bedrock", u, model, pricePrefix) : null);
+  return data;
 }
 
 // ---- Deterministic intents ------------------------------------------------------
@@ -1256,7 +1402,7 @@ async function bedrockMessages(model, body, timeoutMs) {
 
 async function callBedrock(turnPrompt, history, message, timeoutMs) {
   const t0 = Date.now();
-  const data = await bedrockMessages(BEDROCK_MODEL, buildBedrockBody(turnPrompt, history, message), timeoutMs);
+  const data = await bedrockBudgeted(BEDROCK_MODEL, buildBedrockBody(turnPrompt, history, message), timeoutMs); // Sprint 35: under the Claude ceiling
   return readMessagesResponse(data, "bedrock", BEDROCK_MODEL, t0);
 }
 
@@ -1358,7 +1504,8 @@ async function completeText({ system, user, timeoutMs, tag, order, model, maxTok
         const t0 = Date.now();
         const body = Object.assign({ model: bedrockModel, max_tokens: cap, system: [{ type: "text", text: String(system) }], messages: [{ role: "user", content: String(user) }] },
           bedrockThinking(bedrockModel, "off", cap));
-        result = readMessagesResponse(await bedrockMessages(bedrockModel, body, ms), "bedrock", bedrockModel, t0, pricePrefix);
+        // Sprint 35: under the Claude ceiling (CLAUDE_DAILY_EUR_CEILING). Refused: the loop goes on to the next provider.
+        result = readMessagesResponse(await bedrockBudgeted(bedrockModel, body, ms, pricePrefix), "bedrock", bedrockModel, t0, pricePrefix);
       } else {
         result = await callModel([{ role: "system", content: String(system) }, { role: "user", content: String(user) }], ms, { prefix: pricePrefix });
       }
@@ -1374,6 +1521,8 @@ async function completeText({ system, user, timeoutMs, tag, order, model, maxTok
       console.error("[" + label + "] " + provider + " failed" + (error && error.name === "AbortError" ? " (timeout)" : error && error.status ? " (status " + error.status + ")" : "") + ": " + (error && error.message));
     }
   }
+  // Only the Claude ceiling stood in the way and no other provider is configured: like "no provider" (fixed text).
+  if (lastError && lastError.ceiling) return null;
   throw lastError || new Error("no provider answered");
 }
 
@@ -1628,5 +1777,9 @@ module.exports._test = {
   estimateUsd, priceOf, DAILY_USD_CEILING, spentToday, PERSIST_CONFIGURED, persistActive, ipKey, MAX_VISITOR_MESSAGES,
   // Sprint 30: the Bedrock transport
   sigv4, bedrockPath, bedrockHost, bedrockPayload, fromConverse, bedrockThinking, bedrockAuthModes, bedrockMessages,
-  BEDROCK_CONFIGURED, BEDROCK_OPERATION, BEDROCK_MODEL, BEDROCK_IAM_SOURCE: BEDROCK_IAM ? BEDROCK_IAM.source : null, PROVIDER_ORDER
+  BEDROCK_CONFIGURED, BEDROCK_OPERATION, BEDROCK_MODEL, BEDROCK_IAM_SOURCE: BEDROCK_IAM ? BEDROCK_IAM.source : null, PROVIDER_ORDER,
+  // Sprint 35: the daily ceiling for Claude on Bedrock
+  CLAUDE_DAILY_EUR_CEILING, EUR_USD_RATE, CLAUDE_DAILY_USD_BUDGET, bedrockWorstUsd, claudeReserve, claudeSettle, claudeMem, claudeToday, bedrockBudgeted
 };
+// Sprint 35: api/check.js (admin view) and api/digest.js name the same budget
+module.exports.CLAUDE = { eurCeiling: CLAUDE_DAILY_EUR_CEILING, eurUsdRate: EUR_USD_RATE, usdBudget: CLAUDE_DAILY_USD_BUDGET };

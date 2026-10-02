@@ -2,7 +2,7 @@
   // Sprint 12: the widget loads its own stylesheet (same folder, same ?v=) so the
   // CSS no longer blocks the first paint of every page; the panel is built once
   // it has arrived. No auto-open: a small greeting bubble instead (desktop/tablet,
-  // once per session). Hidden while the menu or the booking modal is open (CSS).
+  // once per session). Hidden while the site menu or the booking modal is open (CSS).
   //
   // Sprint 25 (docs/seo/AI_OFFERS_PLAN.md §6.1): no name-and-phone gate any more, the
   // visitor writes at once; contact details are asked only when /api/chat answers with
@@ -17,10 +17,12 @@
   var TEST_KEY = "rexity_chat_test"; // localStorage: "1" = tester override (?chat=1)
 
   // ---- THE SWITCH -----------------------------------------------------------
-  // Founder 27.09.: chatbot hidden for now. With CHAT_ENABLED = false the Kontakt pill
-  // stays exactly as before (WhatsApp + E-Mail); the "Chatbot" entry, the greeting bubble
-  // and the chat panel are off. GO-LIVE = set CHAT_ENABLED to true on the next line and
-  // bump CHATBOT_VERSION in scripts/lib/shell.mjs, then npm run build (docs/CHATBOT.md).
+  // Sprint 35 (founder, 2 Oct 2026: "remove WhatsApp and email from the Contact button"): the floating
+  // button is the chat launcher and nothing else. It opens the chat panel directly; there is no contact
+  // menu any more (WhatsApp and e-mail stay in the footer and the contact section of the page).
+  // With CHAT_ENABLED = false the widget is not built at all (no floating button), unless a tester
+  // opened a page with ?chat=1. To change the switch: edit the next line, bump CHATBOT_VERSION in
+  // scripts/lib/shell.mjs, then npm run build (docs/CHATBOT.md).
   // Founder, 2 Oct 2026: "go, switch the chat on" (eval 78/80 on production, docs/logs/sprint-25.md).
   var CHAT_ENABLED = true;
   // Tester override (Sprint 25): opening any page with ?chat=1 enables the chat in this
@@ -55,17 +57,26 @@
     openChatHook();
   }, true);
 
-  var CONTACT = {
-    email: "info@rexity.ai",
-    whatsapp: "491742471435"
-  };
   // The visitor's name after the hand-over form (the phone number / e-mail is never kept
   // here and never sent to /api/chat).
-  function getLead() {
+  // Sprint 35 (privacy audit): the stored contact (name / e-mail address / marketing opt-out) lives 30 days like
+  // the chat history; an older entry, or one without a date, is removed when it is read. "Verlauf löschen" removes
+  // it together with the history (clearContact), so the visitor sees the entry form again.
+  var LEAD_TTL = 30 * 24 * 3600 * 1000;
+  function readContact() {
     try {
       var l = JSON.parse(window.localStorage.getItem(LEAD_KEY) || "null");
-      return l && typeof l.name === "string" ? { name: l.name } : null;
+      if (!l) return null;
+      if (typeof l.ts !== "number" || new Date().getTime() - l.ts >= LEAD_TTL) { window.localStorage.removeItem(LEAD_KEY); return null; }
+      return l;
     } catch (e) { return null; }
+  }
+  function clearContact() {
+    try { window.localStorage.removeItem(LEAD_KEY); } catch (e) {}
+  }
+  function getLead() {
+    var l = readContact();
+    return l && typeof l.name === "string" ? { name: l.name } : null;
   }
   function saveLead(name, email, noMarketing) {
     try { window.localStorage.setItem(LEAD_KEY, JSON.stringify({ name: name, email: email || undefined, noMarketing: !!noMarketing, ts: new Date().getTime() })); } catch (e) {}
@@ -73,11 +84,12 @@
   // The e-mail address from the entry form (founder, 2 Oct 2026): kept in this browser so the chat history can
   // be sent to Rexity Labs with it (/api/lead, kind "chat-transcript"). It is never sent to /api/chat.
   function getContact() {
-    try {
-      var l = JSON.parse(window.localStorage.getItem(LEAD_KEY) || "null");
-      return l && typeof l.email === "string" && l.email ? { email: l.email, noMarketing: !!l.noMarketing } : null;
-    } catch (e) { return null; }
+    var l = readContact();
+    return l && typeof l.email === "string" && l.email ? { email: l.email, noMarketing: !!l.noMarketing } : null;
   }
+  // The e-mail address is optional (founder, 2 Oct 2026): the chat counts as started once the entry form was
+  // passed, with or without an address.
+  function chatStarted() { return !!readContact(); }
   // Cloudflare Turnstile (bot protection of the entry form and the hand-over form). Empty = off. The PUBLIC site key
   // is here, TURNSTILE_SECRET_KEY is in Vercel. Sprint 31: the script from challenges.cloudflare.com loads only when
   // the chat panel is open and shows one of the two forms (before, it loaded with every page for a new visitor).
@@ -93,9 +105,14 @@
     function render() {
       if (w.dead || w.id !== null || !window.turnstile) return;
       box.setAttribute("data-on", "1");
+      // always visible (founder, 2 Oct 2026). "flexible" = as wide as the form (at least 300 px), 65 px high; where
+      // the form is narrower than 300 px (phones under about 360 px) the compact widget (150 x 140 px) is used.
+      var compact = box.clientWidth > 0 && box.clientWidth < 300;
+      box.classList.toggle("rexity-chatbot__gate-bot--compact", compact);
       try {
         w.id = window.turnstile.render(box, {
           sitekey: TURNSTILE_SITE_KEY, language: language, theme: "light",
+          appearance: "always", size: compact ? "compact" : "flexible",
           callback: function (tk) { w.token = tk; },
           "expired-callback": function () { w.token = ""; },
           "timeout-callback": function () { w.token = ""; },
@@ -145,7 +162,7 @@
         "What does an AI chatbot cost?"
       ],
       rootLabel: "Rexity chat assistant",
-      openLabel: "Open contact options",
+      openLabel: "Chat: Questions about your project",
       closeLabel: "Minimise chat",
       panelLabel: "Chat with the AI assistant of Rexity Labs",
       quickLabel: "Suggested questions",
@@ -164,21 +181,16 @@
       // Entry form before the first message (founder, 2 Oct 2026); the notice follows docs/seo/AI_CLAIMS.md §5
       gateTitle: "Before we start",
       gateDisclaimer: "You are about to interact with our intelligent chatbot, powered by a modern AI engine. So you are chatting with an AI, not a person (notice under Art. 50 of the EU AI Act).",
-      gateEmail: "E-mail address",
+      gateEmail: "E-mail address (optional)",
       gateNoMarketing: "I do not want to be contacted for marketing purposes in future.",
       gateSubmit: "Start chat",
-      gatePrivacy: "We receive your e-mail address and the chat history to handle your enquiry. Your e-mail address is not sent to the AI.",
+      gatePrivacy: "The e-mail address is optional. We receive the chat history to handle your enquiry, together with your address if you give one. Your e-mail address is not sent to the AI.",
       gateError: "Please enter a valid e-mail address.",
       gateBot: "Please confirm the security check.",
-      gatePlaceholder: "Please enter your e-mail address first",
+      gatePlaceholder: "Please start the chat first",
       thinking: "Rexity is writing …",
-      contactTitle: "Contact us",
-      contactSubtitle: CHAT_ON ? "Chat · WhatsApp · Email" : "WhatsApp · Email",
-      contactChat: "Chat",
-      contactWhatsApp: "WhatsApp",
-      contactEmail: "Email",
-      waText: "Hi Rexity Labs, I have a question",
-      mailSubject: "Enquiry via rexity.ai",
+      contactTitle: "Chat",
+      contactSubtitle: "Questions about your project",
       formTitle: "Shall we get in touch?",
       formCopy: "Leave your name and a phone number or e-mail address; we usually reply within a day.",
       formName: "Your name",
@@ -202,7 +214,7 @@
         "Was kostet ein KI-Chatbot?"
       ],
       rootLabel: "Rexity Chat-Assistent",
-      openLabel: "Kontaktmöglichkeiten öffnen",
+      openLabel: "Chat: Fragen zu Ihrem Projekt",
       closeLabel: "Chat minimieren",
       panelLabel: "Chat mit dem KI-Assistenten von Rexity Labs",
       quickLabel: "Vorgeschlagene Fragen",
@@ -219,21 +231,16 @@
       resetLabel: "Verlauf löschen",
       gateTitle: "Bevor wir starten",
       gateDisclaimer: "Sie chatten gleich mit unserem intelligenten Chatbot, betrieben mit moderner KI-Technologie. Sie schreiben also mit einer KI, nicht mit einem Menschen (Hinweis nach Art. 50 der EU-KI-Verordnung).",
-      gateEmail: "E-Mail-Adresse",
+      gateEmail: "E-Mail-Adresse (optional)",
       gateNoMarketing: "Ich möchte künftig nicht zu Marketingzwecken kontaktiert werden.",
       gateSubmit: "Chat starten",
-      gatePrivacy: "Wir erhalten Ihre E-Mail-Adresse und den Chat-Verlauf, um Ihre Anfrage zu bearbeiten. Die E-Mail-Adresse wird nicht an die KI gesendet.",
+      gatePrivacy: "Die E-Mail-Adresse ist freiwillig. Wir erhalten den Chat-Verlauf, um Ihre Anfrage zu bearbeiten, und Ihre Adresse nur, wenn Sie eine angeben. Die E-Mail-Adresse wird nicht an die KI gesendet.",
       gateError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
       gateBot: "Bitte bestätigen Sie die Sicherheitsprüfung.",
-      gatePlaceholder: "Bitte zuerst E-Mail-Adresse angeben",
+      gatePlaceholder: "Bitte zuerst den Chat starten",
       thinking: "Rexity schreibt …",
-      contactTitle: "Kontakt",
-      contactSubtitle: CHAT_ON ? "Chat · WhatsApp · E-Mail" : "WhatsApp · E-Mail",
-      contactChat: "Chat",
-      contactWhatsApp: "WhatsApp",
-      contactEmail: "E-Mail",
-      waText: "Hallo Rexity Labs, ich habe eine Frage",
-      mailSubject: "Anfrage über rexity.ai",
+      contactTitle: "Chat",
+      contactSubtitle: "Fragen zu Ihrem Projekt",
       formTitle: "Sollen wir uns melden?",
       formCopy: "Hinterlassen Sie Ihren Namen und eine Telefonnummer oder E-Mail-Adresse; wir melden uns in der Regel innerhalb eines Tages.",
       formName: "Ihr Name",
@@ -572,9 +579,16 @@
       var raw = window.localStorage.getItem(LOG_KEY) || window.sessionStorage.getItem(LOG_KEY); // sessionStorage: versions before 2 Oct 2026
       var log = JSON.parse(raw || "[]");
       var now = new Date().getTime();
-      return Array.isArray(log) ? log.filter(function (m) {
+      var kept = Array.isArray(log) ? log.filter(function (m) {
         return m && (m.t === "bot" || m.t === "user") && typeof m.x === "string" && (!m.ts || now - m.ts < LOG_TTL);
       }) : [];
+      // Sprint 35: expired entries are removed from the browser as well, not only left out
+      if (raw && (!Array.isArray(log) || kept.length !== log.length)) {
+        if (kept.length) window.localStorage.setItem(LOG_KEY, JSON.stringify(kept));
+        else { window.localStorage.removeItem(LOG_KEY); window.localStorage.removeItem("rexity_chat_sent"); }
+        window.sessionStorage.removeItem(LOG_KEY);
+      }
+      return kept;
     } catch (e) { return []; }
   }
   function writeLog(container) {
@@ -749,28 +763,19 @@
     root.className = "rexity-chatbot";
     root.setAttribute("aria-label", activeCopy.rootLabel);
     var html = [
-      '<div class="rexity-chatbot__menu" hidden>',
-        CHAT_ON ? '<button class="rexity-chatbot__menu-item rexity-chatbot__menu-chat" type="button"><img class="rexity-chatbot__menu-mark" src="/assets/brand/final/rexity-mark-white.svg" alt="" width="20" height="20"><span></span></button>' : '',
-        '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-wa" target="_blank" rel="noopener">' + svgIcon("wa") + '<span></span></a>',
-        '<a class="rexity-chatbot__menu-item rexity-chatbot__menu-mail">' + svgIcon("mail") + '<span></span></a>',
+      '<div class="rexity-chatbot__nudge" role="status" hidden>',
+        '<button class="rexity-chatbot__nudge-text" type="button"><strong></strong><span></span></button>',
+        '<button class="rexity-chatbot__close rexity-chatbot__nudge-close" type="button">' + svgIcon("close") + '</button>',
       '</div>',
-      CHAT_ON ? [
-        '<div class="rexity-chatbot__nudge" role="status" hidden>',
-          '<button class="rexity-chatbot__nudge-text" type="button"><strong></strong><span></span></button>',
-          '<button class="rexity-chatbot__close rexity-chatbot__nudge-close" type="button">' + svgIcon("close") + '</button>',
-        '</div>'
-      ].join("") : '',
-      '<button class="rexity-chatbot__pill" type="button" aria-haspopup="true" aria-expanded="false">',
+      // the launcher: opens the chat panel directly (Sprint 35: no contact menu)
+      '<button class="rexity-chatbot__pill" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="rexity-chatbot-panel">',
         '<span class="rexity-chatbot__mark rexity-chatbot__mark--nav"><img src="/assets/brand/final/rexity-mark-white.svg" alt="" width="22" height="22"></span>',
         '<span class="rexity-chatbot__pill-text">',
           '<span class="rexity-chatbot__pill-title"></span>',
           '<span class="rexity-chatbot__pill-subtitle"></span>',
         '</span>',
-      '</button>'
-    ];
-    if (CHAT_ON) {
-      html.push(
-        '<div class="rexity-chatbot__panel" role="dialog" aria-modal="false">',
+      '</button>',
+        '<div class="rexity-chatbot__panel" id="rexity-chatbot-panel" role="dialog" aria-modal="false">',
           '<div class="rexity-chatbot__hero">',
             '<div class="rexity-chatbot__top">',
               // loading="lazy": the logo is fetched only when the panel is shown (no request while closed)
@@ -790,16 +795,11 @@
           '</form>',
           '<div class="rexity-chatbot__foot"><span class="rexity-chatbot__footnote"></span> <button class="rexity-chatbot__reset" type="button"></button></div>',
         '</div>'
-      );
-    }
+    ];
     root.innerHTML = html.join("");
     document.body.appendChild(root);
 
     var pill = root.querySelector(".rexity-chatbot__pill");
-    var menu = root.querySelector(".rexity-chatbot__menu");
-    var menuWa = root.querySelector(".rexity-chatbot__menu-wa");
-    var menuMail = root.querySelector(".rexity-chatbot__menu-mail");
-    var menuChatBtn = root.querySelector(".rexity-chatbot__menu-chat");
     var panel = root.querySelector(".rexity-chatbot__panel");
     var close = root.querySelector(".rexity-chatbot__panel-close");
     var quick = root.querySelector(".rexity-chatbot__quick");
@@ -815,11 +815,6 @@
     var gateOpen = false; // entry form shown: no message can be sent yet
     var gateBot = null; // the entry form's Turnstile widget (botWidget), once the panel was opened
     var gateBotMount = null;
-
-    function hideMenu() {
-      menu.setAttribute("hidden", "");
-      pill.setAttribute("aria-expanded", "false");
-    }
 
     function renderChips() {
       if (!quick) return;
@@ -847,12 +842,6 @@
       pill.setAttribute("aria-label", activeCopy.openLabel);
       root.querySelector(".rexity-chatbot__pill-title").textContent = activeCopy.contactTitle;
       root.querySelector(".rexity-chatbot__pill-subtitle").textContent = activeCopy.contactSubtitle;
-      menuWa.querySelector("span").textContent = activeCopy.contactWhatsApp;
-      menuWa.href = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent(activeCopy.waText);
-      menuMail.querySelector("span").textContent = activeCopy.contactEmail;
-      menuMail.href = "mailto:" + CONTACT.email + "?subject=" + encodeURIComponent(activeCopy.mailSubject);
-      if (!CHAT_ON) return;
-      menuChatBtn.querySelector("span").textContent = activeCopy.contactChat;
       panel.setAttribute("aria-label", activeCopy.panelLabel);
       close.setAttribute("aria-label", activeCopy.closeLabel);
       input.setAttribute("placeholder", gateOpen ? activeCopy.gatePlaceholder : limitReached ? activeCopy.limitPlaceholder : activeCopy.placeholder);
@@ -882,42 +871,63 @@
       renderChatLanguage(event.detail && event.detail.lang);
     });
 
-    pill.addEventListener("click", function () {
-      if (nudge) nudge.setAttribute("hidden", "");
-      if (menu.hasAttribute("hidden")) {
-        menu.removeAttribute("hidden");
-        pill.setAttribute("aria-expanded", "true");
-      } else hideMenu();
-    });
-    menuWa.addEventListener("click", hideMenu);
-    menuMail.addEventListener("click", hideMenu);
-    document.addEventListener("click", function (event) {
-      if (!root.contains(event.target)) hideMenu();
-    });
-
-    if (!CHAT_ON) {
-      // Chat switched off: the Kontakt pill with WhatsApp + E-Mail only.
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape" || event.key === "Esc") hideMenu();
-      });
-      return;
+    // ---- scrolling stays inside the panel (Sprint 35) ------------------------------
+    // Cause of "the page scrolls behind the chat": the template's smooth-scroll library (Lenis) takes every
+    // wheel event on the document, cancels it and scrolls the page itself; it leaves elements with
+    // data-lenis-prevent alone. On top of that, a wheel or finger movement over a part of the panel that cannot
+    // scroll (header, input row, a list at its end) is handed on to the page by the browser. So: the panel opts
+    // out of Lenis, and a movement that nothing inside the panel can take is cancelled. The message list also
+    // has overscroll-behavior: contain (CSS), which covers a gesture that reaches the end while it is running.
+    panel.setAttribute("data-lenis-prevent", "");
+    function panelCanScroll(node, dx, dy) {
+      var vertical = Math.abs(dy) >= Math.abs(dx);
+      for (var el = node; el && el !== root; el = el.parentNode) {
+        if (el.nodeType !== 1) continue;
+        var st = window.getComputedStyle(el);
+        if (vertical) {
+          if (!/auto|scroll/.test(st.overflowY) || el.scrollHeight <= el.clientHeight + 1) continue;
+          if (dy < 0 ? el.scrollTop > 0 : el.scrollTop + el.clientHeight < el.scrollHeight - 1) return true;
+        } else {
+          if (!/auto|scroll/.test(st.overflowX) || el.scrollWidth <= el.clientWidth + 1) continue;
+          if (dx < 0 ? el.scrollLeft > 0 : el.scrollLeft + el.clientWidth < el.scrollWidth - 1) return true;
+        }
+      }
+      return false;
     }
+    panel.addEventListener("wheel", function (event) {
+      if (event.ctrlKey || !event.cancelable) return; // ctrlKey: pinch zoom on a trackpad
+      if (!panelCanScroll(event.target, event.deltaX, event.deltaY)) event.preventDefault();
+    }, { passive: false });
+    var touchAt = null;
+    panel.addEventListener("touchstart", function (event) {
+      touchAt = event.touches.length === 1 ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+    }, { passive: true });
+    panel.addEventListener("touchmove", function (event) {
+      if (!touchAt || event.touches.length !== 1) return; // two fingers: zoom
+      var t = event.touches[0];
+      var dx = touchAt.x - t.clientX;
+      var dy = touchAt.y - t.clientY;
+      touchAt = { x: t.clientX, y: t.clientY };
+      if ((dx || dy) && event.cancelable && !panelCanScroll(event.target, dx, dy)) event.preventDefault();
+    }, { passive: false });
 
     // ---- the chat (switch on, or ?chat=1) ---------------------------------------
     var restored = readLog();
     if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t, { ts: m.ts, cards: m.c }); });
-    else if (getContact()) addMessage(messages, activeCopy.firstMessage, "bot"); // the entry form carries the AI notice; the greeting does not repeat it
+    else if (chatStarted()) addMessage(messages, activeCopy.firstMessage, "bot"); // the entry form carries the AI notice; the greeting does not repeat it
     renderChips();
-    // "Verlauf löschen": removes the saved conversation from this browser and starts again
+    // "Verlauf löschen": removes the saved conversation, the stored contact (name / e-mail address / opt-out) and
+    // the sent-counter from this browser and starts again with the entry form
     resetBtn.addEventListener("click", function () {
       clearLog();
+      clearContact();
       messages.textContent = "";
       limitReached = false;
       input.disabled = false;
       send.disabled = false;
       input.setAttribute("placeholder", activeCopy.placeholder);
       try { window.localStorage.removeItem("rexity_chat_sent"); } catch (e) {}
-      if (!getContact()) { showGate(); return; }
+      if (!chatStarted()) { showGate(); return; }
       addMessage(messages, activeCopy.firstMessage, "bot");
       renderChips();
       input.focus();
@@ -949,7 +959,7 @@
         el.type = type;
         el.className = "rexity-chatbot__field";
         el.maxLength = max;
-        el.required = true;
+        el.required = false; // the address is optional (founder, 2 Oct 2026)
         el.setAttribute("autocomplete", auto);
         el.setAttribute("inputmode", mode);
         lab.appendChild(span);
@@ -966,8 +976,13 @@
       optTxt.textContent = c.gateNoMarketing;
       optLab.appendChild(optBox);
       optLab.appendChild(optTxt);
+      // the opt-out only matters when an address is given
+      var syncOpt = function () { var has = !!emailF.input.value.trim(); optBox.disabled = !has; optLab.hidden = !has; if (!has) optBox.checked = false; };
+      emailF.input.addEventListener("input", syncOpt);
+      syncOpt();
       var botBox = document.createElement("div");
       botBox.className = "rexity-chatbot__gate-bot";
+      botBox.hidden = BOT_OFF; // no widget here (localhost): do not keep its reserved place
       // the bot check is mounted when the panel is open (openChat calls gateBotMount), not with the page
       if (gateBot) gateBot.remove();
       gateBot = null;
@@ -1001,7 +1016,7 @@
         event.preventDefault();
         var email = emailF.input.value.trim();
         var noMarketing = optBox.checked;
-        var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        var mailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         if (!mailOk) {
           err.textContent = c.gateError;
           err.hidden = false;
@@ -1020,11 +1035,14 @@
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: "Chat-Besucher", email: email, service: "Chatbot", message: "Chat gestartet. Kein Marketing-Kontakt gewünscht: " + (noMarketing ? "ja" : "nein"), lang: lang, turnstileToken: botToken || undefined, company_website: trap.value })
+          // with an address: a lead as before; without one: only the bot check (kind "chat-start" stores and mails nothing)
+          body: JSON.stringify(email
+            ? { name: "Chat-Besucher", email: email, service: "Chatbot", message: "Chat gestartet. Kein Marketing-Kontakt gewünscht: " + (noMarketing ? "ja" : "nein"), lang: lang, turnstileToken: botToken || undefined, company_website: trap.value }
+            : { kind: "chat-start", service: "Chatbot", lang: lang, turnstileToken: botToken || undefined, company_website: trap.value })
         }).then(function (r) {
           if (!r.ok) throw new Error("lead " + r.status);
           saveLead("", email, noMarketing);
-          setHandoverState("sent");
+          if (email) setHandoverState("sent"); // without an address the hand-over form can still ask for a contact later
           gateOpen = false;
           if (gateBot) gateBot.remove();
           gateBot = null;
@@ -1045,15 +1063,15 @@
         });
       });
     }
-    if (!getContact()) showGate();
+    if (!chatStarted()) showGate();
 
     // ---- chat history to Rexity Labs (founder, 2 Oct 2026): when the visitor leaves the page or hides the tab,
     // the conversation so far goes to /api/lead (one internal e-mail, nothing to the visitor), but only if the
     // visitor wrote something new since the last send.
     var TRANSCRIPT_SENT_KEY = "rexity_chat_sent";
     function sendTranscript() {
-      var contact = getContact();
-      if (!contact) return;
+      if (!chatStarted()) return;
+      var contact = getContact() || { email: "", noMarketing: false };
       var turns = [];
       messages.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
         if (el.classList.contains("rexity-chatbot__message--loading") || el.classList.contains("rexity-chatbot__handover-done")) return;
@@ -1064,7 +1082,7 @@
       try { sent = Number(window.localStorage.getItem(TRANSCRIPT_SENT_KEY)) || 0; } catch (e) {}
       if (users < sent) sent = 0; // history was cleared
       if (!users || users <= sent) return;
-      var payload = JSON.stringify({ kind: "chat-transcript", email: contact.email, noMarketing: contact.noMarketing, transcript: turns.slice(-60), lang: lang });
+      var payload = JSON.stringify({ kind: "chat-transcript", email: contact.email || undefined, noMarketing: contact.noMarketing, transcript: turns.slice(-60), lang: lang });
       var ok = false;
       try { ok = navigator.sendBeacon && navigator.sendBeacon("/api/lead", new Blob([payload], { type: "application/json" })); } catch (e) {}
       if (!ok) { try { fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }); } catch (e) {} }
@@ -1085,10 +1103,10 @@
     var lastFocus = null;
     function openChat() {
       markIntroSeen();
-      hideMenu();
       hideNudge();
       lastFocus = document.activeElement;
       root.classList.add("is-open");
+      pill.setAttribute("aria-expanded", "true");
       if (gateOpen && gateBotMount) gateBotMount();
       updateQuickCue();
       window.setTimeout(function () {
@@ -1100,10 +1118,11 @@
     function closeChat() {
       markIntroSeen();
       root.classList.remove("is-open");
+      pill.setAttribute("aria-expanded", "false");
       (lastFocus && document.contains(lastFocus) && lastFocus !== document.body ? lastFocus : pill).focus();
     }
 
-    menuChatBtn.addEventListener("click", openChat);
+    pill.addEventListener("click", openChat); // the launcher opens the chat directly
     openChatHook = openChat; // data-rexity-open-chat (see the hook at the top)
     document.documentElement.classList.add("rexity-chat-ready");
     nudgeText.addEventListener("click", openChat);
@@ -1115,7 +1134,7 @@
     document.addEventListener("keydown", function (event) {
       if (event.key === "Escape" || event.key === "Esc") {
         if (root.classList.contains("is-open")) { event.preventDefault(); closeChat(); }
-        else { hideMenu(); hideNudge(); }
+        else hideNudge();
         return;
       }
       // focus stays in the open panel (Tab / Shift+Tab cycle through its controls)
@@ -1154,12 +1173,12 @@
 
     // Launch behaviour (Sprint 12): never open the panel by itself. After ~12 s a
     // small greeting bubble appears next to the launcher, once per browser session,
-    // not on phones (< 768 px), not while the menu, the booking modal or the
-    // contact cluster is open. The width is checked when the timer fires.
+    // not on phones (< 768 px), not while the site menu or the booking modal is
+    // open. The width is checked when the timer fires.
     if (!introSeen()) {
       window.setTimeout(function () {
         var docEl = document.documentElement;
-        var busy = docEl.classList.contains("rx-menu-open") || docEl.classList.contains("rx-modal-open") || !menu.hasAttribute("hidden");
+        var busy = docEl.classList.contains("rx-menu-open") || docEl.classList.contains("rx-modal-open");
         if (introSeen() || root.classList.contains("is-open") || busy || (window.innerWidth || 0) < 768) return;
         markIntroSeen();
         nudge.removeAttribute("hidden");
@@ -1234,6 +1253,7 @@
       priv.appendChild(pl);
       var hoBox = document.createElement("div");
       hoBox.className = "rexity-chatbot__gate-bot";
+      hoBox.hidden = BOT_OFF;
       [title, intro, nameF.label, contactF.label, noteF.label, hoBox, trap, err, actions, priv].forEach(function (n) { f.appendChild(n); });
       messages.appendChild(f);
       messages.scrollTop = messages.scrollHeight;
@@ -1397,7 +1417,8 @@
     }, 3600);
   }
 
-  function start() { withStyles(waitForMainPage); }
+  // Chat switched off and no tester override: nothing is built (no floating button, no stylesheet).
+  function start() { if (CHAT_ON) withStyles(waitForMainPage); }
   // Sprint 14-G: where the template boots after the first paint and asks for it (<script id="rx-boot"
   // data-rx-chat="after">, /preise), the chat starts once the template has booted, as it did when the
   // template scripts were parser-blocking; its stylesheet then stays out of the first paint.

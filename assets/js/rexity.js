@@ -390,8 +390,9 @@
 
   // ---- bot check for the lead form (Cloudflare Turnstile; public site key, the secret is in Vercel) ----
   // Explicit rendering: the script from challenges.cloudflare.com is loaded when the visitor first touches the
-  // form, the widget sits above the button and shows itself only when Cloudflare wants an interaction. A token is
-  // single-use and lives five minutes: after a submit or on expiry the widget is reset.
+  // form, the widget sits above the button and is always visible (founder, 2 Oct 2026; its place is the form's
+  // <div class="rx-form__bot" data-rx-bot>, 65 px reserved in rexity.css, so nothing moves when it appears). A token
+  // is single-use and lives five minutes: after a submit or on expiry the widget is reset.
   var TS_KEY = "0x4AAAAAAFMB5KSMA-E1D8vB";
   var TS_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
   var TS_OFF = !TS_KEY || location.hostname === "localhost" || location.hostname === "127.0.0.1";
@@ -411,13 +412,14 @@
   }
   function botRender(b) {
     if (b.id !== null || !window.turnstile) return;
+    var compact = b.box.clientWidth > 0 && b.box.clientWidth < 300; // "flexible" needs 300 px
     try {
       b.id = window.turnstile.render(b.box, {
         sitekey: TS_KEY,
         theme: doc.documentElement.hasAttribute("data-palette") ? "light" : "dark",
         language: get(),
-        size: "flexible",
-        appearance: "interaction-only",
+        size: compact ? "compact" : "flexible",
+        appearance: "always",
         "refresh-expired": "manual",
         callback: function (token) { b.stale = false; botSettle(b, token); },
         "expired-callback": function () { botReset(b); },
@@ -430,12 +432,14 @@
   function botFor(form) {
     if (TS_OFF) return null;
     if (form.__rxBot) return form.__rxBot;
-    var holder = doc.createElement("div");
-    holder.className = "rx-form__bot";
-    holder.style.gridColumn = "1 / -1";
-    var actions = form.querySelector(".rx-actions");
-    if (actions && actions.parentNode === form) form.insertBefore(holder, actions);
-    else form.appendChild(holder);
+    var holder = form.querySelector("[data-rx-bot]"); // the reserved place in the markup
+    if (!holder) {
+      holder = doc.createElement("div");
+      holder.className = "rx-form__bot";
+      var actions = form.querySelector(".rx-actions");
+      if (actions && actions.parentNode === form) form.insertBefore(holder, actions);
+      else form.appendChild(holder);
+    }
     var b = (form.__rxBot = { box: holder, id: null, token: "", stale: false, waiters: [], loading: false });
     if (window.turnstile) { botRender(b); return b; }
     b.loading = true;
@@ -463,6 +467,8 @@
     b.waiters.push(function (token) { if (done) return; done = true; clearTimeout(timer); cb(token); });
     if (b.id !== null && b.stale) botReset(b);
   }
+  // no widget here (localhost): do not keep its reserved place
+  if (TS_OFF) Array.prototype.forEach.call(doc.querySelectorAll("[data-rx-bot]"), function (el) { el.hidden = true; });
   doc.addEventListener("focusin", function (e) {
     var f = e.target && e.target.closest ? e.target.closest('form[data-rx-form="lead"]') : null;
     if (f) botFor(f);

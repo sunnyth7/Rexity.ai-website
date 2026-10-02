@@ -127,17 +127,18 @@ module.exports = async function handler(req, res) {
     const turns = (Array.isArray(data.transcript) ? data.transcript : []).slice(-60)
       .map((m) => (m && typeof m.content === "string" ? { who: m.role === "user" ? "Besucher" : "Assistent", text: m.content.slice(0, 1500) } : null))
       .filter(Boolean);
-    if (!EMAIL_RE.test(tEmail) || !turns.some((m) => m.who === "Besucher")) {
+    // the address is optional since 2 Oct 2026 (founder): an empty one is fine, a malformed one is not
+    if ((tEmail && !EMAIL_RE.test(tEmail)) || !turns.some((m) => m.who === "Besucher")) {
       res.statusCode = 422;
       res.end(JSON.stringify({ ok: false, error: "Nothing to send." }));
       return;
     }
     const noMk = data.noMarketing === true;
-    const head = ["Chat-Verlauf von der Website", "E-Mail des Besuchers: " + tEmail, "Kein Marketing-Kontakt gewünscht: " + (noMk ? "ja" : "nein"), "Seite: " + (refererPath(req) || "-"), ""];
+    const head = ["Chat-Verlauf von der Website", "E-Mail des Besuchers: " + (tEmail || "nicht angegeben"), "Kein Marketing-Kontakt gewünscht: " + (noMk ? "ja" : "nein"), "Seite: " + (refererPath(req) || "-"), ""];
     const text = head.concat(turns.map((m) => m.who + ": " + m.text)).join("\n");
     const html = "<p>" + head.slice(0, 4).map(escapeHtml).join("<br>") + "</p>" + turns.map((m) => "<p><strong>" + m.who + ":</strong> " + escapeHtml(m.text).replace(/\n/g, "<br>") + "</p>").join("");
     const to = String(process.env.LEAD_NOTIFY_TO || "info@rexity.ai").trim();
-    const r = await sendMail({ to: to, subject: "Chat-Verlauf: " + tEmail, textContent: text, htmlContent: html });
+    const r = await sendMail({ to: to, subject: "Chat-Verlauf: " + (tEmail || "ohne E-Mail-Adresse"), textContent: text, htmlContent: html });
     res.statusCode = r.sent || r.reason === "not_configured" ? 200 : 502;
     res.end(JSON.stringify({ ok: r.sent === true }));
     return;
@@ -167,6 +168,14 @@ module.exports = async function handler(req, res) {
       res.end(JSON.stringify({ ok: false, code: "bot_check", error: "Bot check failed. Please try again." }));
       return;
     }
+  }
+
+  // Chat started without an e-mail address (founder, 2 Oct 2026): the bot check above has passed; nothing is
+  // stored and nothing is mailed.
+  if (data.kind === "chat-start") {
+    res.statusCode = 200;
+    res.end(JSON.stringify({ ok: true }));
+    return;
   }
 
   // Contact-form leads carry an email; chatbot-gate leads carry a phone.

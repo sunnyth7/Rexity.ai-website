@@ -53,42 +53,6 @@ html.rx-modal-open .rexity-chatbot { opacity: 0; visibility: hidden; pointer-eve
 .rexity-chatbot__pill-title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
 .rexity-chatbot__pill-subtitle { margin-top: 3px; color: var(--rc-quiet); font-size: 11px; font-weight: 500; }
 
-/* contact cluster (chat / WhatsApp / e-mail) above the launcher */
-.rexity-chatbot__menu {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 12px);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 208px;
-}
-.rexity-chatbot__menu[hidden] { display: none; }
-.rexity-chatbot__menu-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 48px;
-  padding: 12px 18px;
-  border: 1px solid var(--rc-line);
-  border-radius: 16px;
-  background: #141414;
-  color: var(--rc-ink);
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.2;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  transition: transform 0.3s var(--rc-ease), background-color 0.3s var(--rc-ease);
-}
-.rexity-chatbot__menu-item:hover { transform: translateY(-1px); background: #222; }
-.rexity-chatbot__menu-item svg { width: 20px; height: 20px; flex: 0 0 auto; }
-.rexity-chatbot__menu-mark { display: block; width: 20px; height: 20px; flex: 0 0 20px; }
-.rexity-chatbot__menu-wa svg { color: #25d366; }
-.rexity-chatbot__menu-mail svg { color: #9db9e8; }
-
 /* greeting bubble (desktop/tablet only, once per session) */
 .rexity-chatbot__nudge {
   position: absolute;
@@ -134,6 +98,7 @@ html.rx-modal-open .rexity-chatbot { opacity: 0; visibility: hidden; pointer-eve
   background: var(--rc-panel);
   color: var(--rc-ink);
   box-shadow: 0 32px 100px rgba(0, 0, 0, 0.5);
+  overscroll-behavior: contain; /* Sprint 35: nothing scrolled in the panel is handed on to the page (see rexity-chatbot.js) */
 }
 .rexity-chatbot.is-open .rexity-chatbot__pill,
 .rexity-chatbot.is-open .rexity-chatbot__nudge { display: none; }
@@ -331,7 +296,7 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 
 /* ---------------------------------------------------------------- light panel (founder, 2 Oct 2026)
    The open chat is white with a dark brand header that carries the white "Rexity Labs" logo.
-   The launcher, the contact menu and the greeting bubble keep the dark site look. */
+   The launcher and the greeting bubble keep the dark site look. */
 .rexity-chatbot__panel {
   --rc-panel: #ffffff;
   --rc-deep: #f6f5fb;
@@ -376,7 +341,12 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 
 .rexity-chatbot__gate-check { display: flex; align-items: flex-start; gap: 10px; color: var(--rc-muted); font-size: 13px; line-height: 1.4; cursor: pointer; }
 .rexity-chatbot__gate-check input { flex: none; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--rc-accent); }
-.rexity-chatbot__gate-bot:empty { display: none; }
+/* bot check (Cloudflare Turnstile), always visible: its place is reserved before the widget is there
+   (flexible: form width x 65 px; compact, forms under 300 px: 150 x 140 px) */
+.rexity-chatbot__gate-bot { min-height: 65px; }
+.rexity-chatbot__gate-bot--compact { min-height: 140px; }
+@media (max-width: 357px) { .rexity-chatbot__gate-bot { min-height: 140px; } } /* there the form is under 300 px wide: compact */
+.rexity-chatbot__gate-bot[hidden] { display: none; }
 
 /* link cards: picture left, title, one or two lines, address (founder, 2 Oct 2026) */
 .rexity-chatbot__panel .rexity-chatbot__message--links { max-width: 100%; padding: 0; background: none; }
@@ -420,6 +390,7 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
   .rexity-chatbot__intro, .rexity-chatbot__messages, .rexity-chatbot__foot { padding-left: 18px; padding-right: 18px; }
   .rexity-chatbot__quick { padding-left: 18px; padding-right: 18px; }
   .rexity-chatbot__chip { font-size: 14px; }
+  .rexity-chatbot__gate-bot { margin-inline: -13px; } /* into the form's padding: 300 px fit from a 360 px screen */
   /* links in answers: a 44 px tall tap area without changing the line layout */
   .rexity-chatbot__mdlink { display: inline; padding: 13px 2px; margin: -13px -2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 }
@@ -427,4 +398,3 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   .rexity-chatbot, .rexity-chatbot * { transition: none !important; animation: none !important; }
 }
-.rexity-chatbot__menu-item[hidden] { display: none; }

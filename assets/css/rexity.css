@@ -427,6 +427,13 @@ textarea.rx-input{min-height:120px;resize:vertical}
 select.rx-input{padding-right:40px;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:right 20px center,right 15px center;background-size:5px 5px;background-repeat:no-repeat}
 select.rx-input option{background:var(--rx-card,#262626);color:var(--rx-ink)}
 .rx-form__note{margin:0;color:var(--rx-muted);font-size:.8125rem;line-height:1.5}
+/* bot check of the lead form (Cloudflare Turnstile, always visible; founder 2 Oct 2026): "flexible" = form width x 65 px.
+   The place is in the markup and reserved here, so nothing moves when the widget is rendered (first touch of the form). */
+.rx-form__bot{grid-column:1/-1;min-height:65px}
+/* the widget needs 300 px: on phones it reaches into the card's padding; under 358 px the compact widget (150 x 140 px) is used (rexity.js) */
+@media (max-width:381px){.rx-form__bot{margin-inline:-12px}}
+@media (max-width:357px){.rx-form__bot{min-height:140px}}
+.rx-form__bot[hidden],html:not(.w-mod-js) .rx-form__bot{display:none}
 .rx-iconbtn{display:inline-grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid var(--rx-line,#ffffff21);border-radius:50%;background:none;color:inherit;cursor:pointer;transition:background-color .4s var(--rx-ease)}
 .rx-iconbtn:hover{background:color-mix(in srgb,currentColor 10%,transparent)}.rx-iconbtn svg{width:18px;height:18px}
 
@@ -586,8 +593,7 @@ html:not([data-palette]) .rx-modal__dialog.card-frame{background:var(--rx-base-l
 html:not([data-palette]) .rexity-chatbot{--rc-panel:var(--rx-base-lift);--rc-deep:#150f28}
 html:not([data-palette]) .rexity-chatbot__pill{background:rgba(27,20,51,.9)}
 html:not([data-palette]) .rexity-chatbot__pill:hover{background:var(--rx-base-lift)}
-html:not([data-palette]) :is(.rexity-chatbot__menu-item,.rexity-chatbot__mailmenu-btn){background:var(--rx-base-lift)}
-html:not([data-palette]) .rexity-chatbot__menu-item:hover{background:#261d45}
+html:not([data-palette]) .rexity-chatbot__mailmenu-btn{background:var(--rx-base-lift)}
 
 /* ---- phones + tablets (< 992 px), founder 27.09.: "Web & Apps, Unsere Arbeit, Preise in the top navigation".
    A compact link row between the logo mark and the menu button; the full menu stays behind the burger. The desktop
