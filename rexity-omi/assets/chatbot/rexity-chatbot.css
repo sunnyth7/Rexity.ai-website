@@ -375,20 +375,22 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 .rexity-chatbot__panel .rexity-chatbot__input:disabled { background: var(--rc-deep); cursor: not-allowed; }
 
 /* link cards: picture left, title, one or two lines, address (founder, 2 Oct 2026) */
-.rexity-chatbot__cards { display: grid; gap: 8px; margin-top: 10px; }
+.rexity-chatbot__panel .rexity-chatbot__message--links { max-width: 100%; padding: 0; background: none; }
+.rexity-chatbot__message--links .rexity-chatbot__text { max-width: 88%; padding: 11px 14px; border-radius: 16px; border-top-left-radius: 6px; background: #f1f0f7; }
+.rexity-chatbot__cards { display: grid; gap: 8px; margin-top: 8px; }
 .rexity-chatbot__card {
   display: grid;
   grid-template-columns: 132px minmax(0, 1fr);
   min-height: 84px;
   overflow: hidden;
-  border: 1px solid var(--rc-line-strong);
+  border: 1px solid #c3c6d1;
   border-radius: 12px;
-  background: #ffffff;
+  background: #dfe2e9; /* a neutral, darker grey than the text bubble: a link message reads as its own kind */
   color: var(--rc-ink);
   text-decoration: none;
-  transition: border-color 0.3s var(--rc-ease), box-shadow 0.3s var(--rc-ease);
+  transition: border-color 0.3s var(--rc-ease), background-color 0.3s var(--rc-ease), box-shadow 0.3s var(--rc-ease);
 }
-.rexity-chatbot__card:hover { border-color: var(--rc-accent); box-shadow: 0 6px 18px rgba(23, 21, 43, 0.12); }
+.rexity-chatbot__card:hover { border-color: var(--rc-accent); background: #d5d9e2; box-shadow: 0 6px 18px rgba(23, 21, 43, 0.14); }
 .rexity-chatbot__card-pic { display: block; background: #17152b; }
 .rexity-chatbot__card-pic { display: grid; align-items: center; }
 .rexity-chatbot__card-pic img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
@@ -396,9 +398,8 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 .rexity-chatbot__card-pic--mark img { width: 34px; height: 34px; object-fit: contain; }
 .rexity-chatbot__card-body { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; padding: 9px 12px; }
 .rexity-chatbot__card-title { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px; font-weight: 600; line-height: 1.25; }
-.rexity-chatbot__card-desc { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--rc-muted); font-size: 12px; line-height: 1.35; }
+.rexity-chatbot__card-desc { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: #45475a; font-size: 12px; line-height: 1.35; }
 .rexity-chatbot__card-host { overflow: hidden; color: var(--rc-accent); font-size: 12px; font-weight: 500; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
-.rexity-chatbot__message--bot:has(.rexity-chatbot__cards) { max-width: 100%; }
 
 /* ---------------------------------------------------------------- phones */
 @media (max-width: 767px) {

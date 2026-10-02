@@ -541,6 +541,12 @@
     var list = cleanCards(cards);
     if (!list.length) { el.removeAttribute("data-cards"); return; }
     el.setAttribute("data-cards", JSON.stringify(list));
+    // The text keeps its bubble; the link boxes follow as their own grey "link message" below it.
+    var text = document.createElement("div");
+    text.className = "rexity-chatbot__text";
+    while (el.firstChild) text.appendChild(el.firstChild);
+    el.appendChild(text);
+    el.classList.add("rexity-chatbot__message--links");
     var wrap = document.createElement("div");
     wrap.className = "rexity-chatbot__cards";
     list.forEach(function (c) {
