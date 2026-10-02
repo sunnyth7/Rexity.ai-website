@@ -873,7 +873,7 @@ function buildStaticPrompt() {
     `END OF SITE KNOWLEDGE. Before every answer, check:`,
     `1. The first sentence answers the question; at most 60 words; nothing that was not asked; at most one question back.`,
     `2. Every fact, name, price and number is taken from the SITE KNOWLEDGE, exactly as written. If the answer is not there, say honestly that you have no confirmed information on it and offer the free 30-minute call ([Termin buchen](/#kontakt)) or ${CONTACT_EMAIL}. Never guess.`,
-    `3. Prices only as published ("ab …", a fixed amount or a published range), "netto zzgl. MwSt." / "net plus VAT", with a link to /preise or the matching page. No totals, no estimate for the visitor's project.`,
+    `3. Prices only as published ("ab …" for starting prices, always with the word "ab" / "from", never "startet bei"; a fixed amount; or a published range), "netto zzgl. MwSt." / "net plus VAT", with a link to /preise or the matching page. No totals, no estimate for the visitor's project.`,
     `4. At most 2 links (usually one), only targets from the Seitenverzeichnis (or the contact links above).`,
     `5. Reply language as given in the next block (German always "Sie"); own case, timing, call or offer -> contact sentence and [[handover]].`
   ].join("\n");
@@ -899,7 +899,7 @@ function buildTurnPrompt(lang, name, provider, flags) {
     const tech = techBasis(provider, lang === "de" ? "de" : "en");
     if (tech) lines.push(`TECHNICAL BASIS of this answer (name only this route, only when asked about the technology, the model or where the AI runs): "${tech}"`);
   }
-  if (f.process) lines.push(`THIS MESSAGE asks about a process: if one page of the Seitenverzeichnis covers the topic, name and link it in the first sentence; then three or four "- " steps, no internal detail; then one sentence that the details are settled in a short call with [Termin buchen](/#kontakt).`);
+  if (f.process) lines.push(`THIS MESSAGE asks about a process: the FIRST sentence must name and link the one page of the Seitenverzeichnis that covers the topic (an industry page, a service page or an article; never only /#kontakt); then three or four "- " steps, no internal detail; then one sentence that the details are settled in a short call with [Termin buchen](/#kontakt).`);
   else if (f.list) lines.push(`THIS MESSAGE asks for steps, options or a list: a short "- " list is fine (at most 5 lines).`);
   if (f.handover) lines.push(`THIS MESSAGE is about the visitor's own case, timing, a call or an offer: answer briefly, offer contact in one sentence and end with [[handover]].`);
   if (f.hosting) lines.push(`THIS MESSAGE asks about hosting, data or the AI: use the claim-sheet sentences above, and the technical basis only as given here.`);
@@ -1188,6 +1188,8 @@ function applyContract(raw, ctx) {
   let out = sanitizeAnswer(text);
   // the client's name is "Fahrzeugpflege Celle" (founder decision), never the old brand
   out.text = out.text.replace(/\bChara\b(?!\])/g, "Fahrzeugpflege Celle");
+  // Starting prices read "ab … €" as published (eval 2 Oct 2026: "startet bei 1.999 €").
+  out.text = out.text.replace(/\b(?:startet|starten|beginnt|beginnen|los geht es|geht es los)\s+(?:schon\s+|bereits\s+)?(?:bei|ab)\s+(?=\d[\d.]*\s?€)/gi, "gibt es ab ");
   let guard = null;
   if (CLAIM_GUARD.some((re) => re.test(out.text))) {
     guard = "ai-claim";
