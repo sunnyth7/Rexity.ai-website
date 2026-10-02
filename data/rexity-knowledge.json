@@ -152,8 +152,8 @@
       "en": "AI assistant by Rexity Labs. You are chatting with an AI, not a person."
     },
     "hosting": {
-      "de": "Die KI-Verarbeitung erfolgt ausschließlich innerhalb der EU. Ihre Chat-Nachrichten werden von einem Sprachmodell in Rechenzentren innerhalb der Europäischen Union verarbeitet. Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.",
-      "en": "AI processing takes place exclusively within the EU. Your chat messages are processed by a language model in data centres within the European Union. They are not used to train models and we do not store them permanently."
+      "de": "Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Ihre Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet: in EU-Mitgliedstaaten, je nach Anbieter auch in EFTA-Staaten wie Norwegen oder der Schweiz. Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.",
+      "en": "AI processing takes place in European data centres. Your chat messages are processed by a language model in our cloud provider's European data zone: in EU member states and, depending on the provider, in EFTA countries such as Norway or Switzerland. They are not used to train models and we do not store them permanently."
     },
     "hostingNonEu": {
       "de": "Diese Antwort kommt über eine Übergangslösung (Claude über die Anthropic API), die außerhalb der EU verarbeitet. Einzelheiten stehen in der [Datenschutzerklärung](/datenschutz).",
@@ -423,8 +423,8 @@
         "einwilligung",
         "consent"
       ],
-      "en": "Websites run on EU hosting and are built DSGVO/GDPR-conform: no advertising or profiling cookies, booking data is processed within the EU and deleted automatically after a set period, the domain is in your name. For our AI assistants: AI processing takes place exclusively within the EU. A legal assessment of your case is for your legal counsel; details: [Privacy policy](/datenschutz).",
-      "de": "Websites laufen auf EU-Hosting und werden DSGVO-konform gebaut: keine Werbe- oder Profiling-Cookies, Buchungsdaten werden innerhalb der EU verarbeitet und nach einer festgelegten Frist automatisch gelöscht, die Domain läuft auf Ihren Namen. Für unsere KI-Assistenten gilt: Die KI-Verarbeitung erfolgt ausschließlich innerhalb der EU. Die rechtliche Bewertung Ihres Falls übernimmt Ihre Rechtsberatung; Details: [Datenschutz](/datenschutz)."
+      "en": "Websites run on EU hosting and are built DSGVO/GDPR-conform: no advertising or profiling cookies, booking data is processed within the EU and deleted automatically after a set period, the domain is in your name. For our AI assistants: AI processing takes place in European data centres. A legal assessment of your case is for your legal counsel; details: [Privacy policy](/datenschutz).",
+      "de": "Websites laufen auf EU-Hosting und werden DSGVO-konform gebaut: keine Werbe- oder Profiling-Cookies, Buchungsdaten werden innerhalb der EU verarbeitet und nach einer festgelegten Frist automatisch gelöscht, die Domain läuft auf Ihren Namen. Für unsere KI-Assistenten gilt: Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Die rechtliche Bewertung Ihres Falls übernimmt Ihre Rechtsberatung; Details: [Datenschutz](/datenschutz)."
     },
     {
       "id": "how-we-work",
