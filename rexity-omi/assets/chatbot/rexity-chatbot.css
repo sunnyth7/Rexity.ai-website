@@ -368,11 +368,17 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 .rexity-chatbot__panel .rexity-chatbot__mailmenu-btn { background: #ffffff; }
 .rexity-chatbot__panel .rexity-chatbot__mdlink:hover { color: #3a2699; }
 
+/* entry form before the first message */
+.rexity-chatbot__gate { margin: 4px 0 4px; }
+.rexity-chatbot__gate-law { padding: 8px 10px; border-left: 3px solid var(--rc-accent); border-radius: 4px; background: #ffffff; color: var(--rc-ink); }
+.rexity-chatbot__gate .rexity-chatbot__handover-submit { justify-self: start; margin-top: 2px; }
+.rexity-chatbot__panel .rexity-chatbot__input:disabled { background: var(--rc-deep); cursor: not-allowed; }
+
 /* link cards: picture left, title, one or two lines, address (founder, 2 Oct 2026) */
 .rexity-chatbot__cards { display: grid; gap: 8px; margin-top: 10px; }
 .rexity-chatbot__card {
   display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-columns: 132px minmax(0, 1fr);
   min-height: 84px;
   overflow: hidden;
   border: 1px solid var(--rc-line-strong);
@@ -384,7 +390,8 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 }
 .rexity-chatbot__card:hover { border-color: var(--rc-accent); box-shadow: 0 6px 18px rgba(23, 21, 43, 0.12); }
 .rexity-chatbot__card-pic { display: block; background: #17152b; }
-.rexity-chatbot__card-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rexity-chatbot__card-pic { display: grid; align-items: center; }
+.rexity-chatbot__card-pic img { display: block; width: 100%; height: auto; max-height: 100%; object-fit: contain; }
 .rexity-chatbot__card-pic--mark { display: grid; place-items: center; }
 .rexity-chatbot__card-pic--mark img { width: 34px; height: 34px; object-fit: contain; }
 .rexity-chatbot__card-body { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; padding: 9px 12px; }
@@ -395,6 +402,8 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 
 /* ---------------------------------------------------------------- phones */
 @media (max-width: 767px) {
+  .rexity-chatbot__card { grid-template-columns: 96px minmax(0, 1fr); }
+  .rexity-chatbot__foot { flex-wrap: wrap; }
   .rexity-chatbot { right: 16px; bottom: 16px; }
   .rexity-chatbot__pill { justify-content: center; min-width: 0; width: 56px; height: 56px; padding: 0; }
   .rexity-chatbot__pill-text { display: none; }

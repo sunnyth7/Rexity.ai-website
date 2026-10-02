@@ -68,7 +68,7 @@
       ],
       rootLabel: "Rexity chat assistant",
       openLabel: "Open contact options",
-      closeLabel: "Close chat",
+      closeLabel: "Minimise chat",
       panelLabel: "Chat with the AI assistant of Rexity Labs",
       quickLabel: "Suggested questions",
       messageLabel: "Message to the AI assistant",
@@ -83,10 +83,20 @@
       placeholder: "Your question …",
       footnote: "Answers can contain mistakes; only our written quote is binding.",
       resetLabel: "Clear history",
+      // Entry form before the first message (founder, 2 Oct 2026); the notice follows docs/seo/AI_CLAIMS.md §5
+      gateTitle: "Before we start",
+      gateDisclaimer: "You are about to interact with our intelligent chatbot, powered by a modern AI engine.",
+      gateLaw: "Notice under the EU AI Act (Art. 50): you are chatting with an AI, not a person. Answers can contain mistakes; only our written quote is binding.",
+      gateEmail: "E-mail address",
+      gatePhone: "Phone number",
+      gateSubmit: "Start chat",
+      gatePrivacy: "We use your details to handle your enquiry and to contact you about it. Your e-mail address and phone number are not sent to the AI.",
+      gateError: "Please enter a valid e-mail address and phone number.",
+      gatePlaceholder: "Please enter your contact details first",
       thinking: "Rexity is writing …",
       contactTitle: "Contact us",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · Email" : "WhatsApp · Email",
-      contactChat: "AI chat",
+      contactChat: "Chat",
       contactWhatsApp: "WhatsApp",
       contactEmail: "Email",
       waText: "Hi Rexity Labs, I have a question",
@@ -115,7 +125,7 @@
       ],
       rootLabel: "Rexity Chat-Assistent",
       openLabel: "Kontaktmöglichkeiten öffnen",
-      closeLabel: "Chat schließen",
+      closeLabel: "Chat minimieren",
       panelLabel: "Chat mit dem KI-Assistenten von Rexity Labs",
       quickLabel: "Vorgeschlagene Fragen",
       messageLabel: "Nachricht an den KI-Assistenten",
@@ -129,10 +139,19 @@
       placeholder: "Ihre Frage …",
       footnote: "Antworten können Fehler enthalten; verbindlich ist nur unser schriftliches Angebot.",
       resetLabel: "Verlauf löschen",
+      gateTitle: "Bevor wir starten",
+      gateDisclaimer: "Sie chatten gleich mit unserem intelligenten Chatbot, betrieben mit moderner KI-Technologie.",
+      gateLaw: "Hinweis nach der EU-KI-Verordnung (Art. 50): Sie schreiben mit einer KI, nicht mit einem Menschen. Antworten können Fehler enthalten; verbindlich ist nur unser schriftliches Angebot.",
+      gateEmail: "E-Mail-Adresse",
+      gatePhone: "Telefonnummer",
+      gateSubmit: "Chat starten",
+      gatePrivacy: "Ihre Angaben nutzen wir, um Ihre Anfrage zu bearbeiten und Sie dazu zu kontaktieren. E-Mail-Adresse und Telefonnummer werden nicht an die KI gesendet.",
+      gateError: "Bitte geben Sie eine gültige E-Mail-Adresse und Telefonnummer ein.",
+      gatePlaceholder: "Bitte zuerst Kontaktdaten angeben",
       thinking: "Rexity schreibt …",
       contactTitle: "Kontakt",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · E-Mail" : "WhatsApp · E-Mail",
-      contactChat: "KI-Chat",
+      contactChat: "Chat",
       contactWhatsApp: "WhatsApp",
       contactEmail: "E-Mail",
       waText: "Hallo Rexity Labs, ich habe eine Frage",
@@ -238,6 +257,9 @@
     }
     if (name === "send") {
       return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
+    if (name === "down") {
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9.5l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     }
     if (name === "close") {
       return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/></svg>';
@@ -669,7 +691,7 @@
             '<div class="rexity-chatbot__top">',
               // loading="lazy": the logo is fetched only when the panel is shown (no request while closed)
               '<div class="rexity-chatbot__brand"><img src="/rexity-omi/assets/chatbot/rexity-labs-logo-white.webp" alt="Rexity Labs" width="153" height="27" loading="lazy"></div>',
-              '<button class="rexity-chatbot__close rexity-chatbot__panel-close" type="button">' + svgIcon("close") + '</button>',
+              '<button class="rexity-chatbot__close rexity-chatbot__panel-close" type="button">' + svgIcon("down") + '</button>',
             '</div>',
             '<div class="rexity-chatbot__intro">',
               '<h2 class="rexity-chatbot__intro-title"></h2>',
@@ -706,6 +728,7 @@
     var nudgeClose = root.querySelector(".rexity-chatbot__nudge-close");
     var resetBtn = root.querySelector(".rexity-chatbot__reset");
     var limitReached = false;
+    var gateOpen = false; // entry form shown: no message can be sent yet
 
     function hideMenu() {
       menu.setAttribute("hidden", "");
@@ -728,7 +751,7 @@
         quick.appendChild(chip);
       });
       // starter questions only until the visitor has written something
-      quick.hidden = !!messages.querySelector(".rexity-chatbot__message--user");
+      quick.hidden = gateOpen || !!messages.querySelector(".rexity-chatbot__message--user");
     }
 
     function renderChatLanguage(nextLang) {
@@ -746,7 +769,7 @@
       menuChatBtn.querySelector("span").textContent = activeCopy.contactChat;
       panel.setAttribute("aria-label", activeCopy.panelLabel);
       close.setAttribute("aria-label", activeCopy.closeLabel);
-      input.setAttribute("placeholder", limitReached ? activeCopy.limitPlaceholder : activeCopy.placeholder);
+      input.setAttribute("placeholder", gateOpen ? activeCopy.gatePlaceholder : limitReached ? activeCopy.limitPlaceholder : activeCopy.placeholder);
       input.setAttribute("aria-label", activeCopy.messageLabel);
       send.setAttribute("aria-label", activeCopy.sendLabel);
       nudgeText.querySelector("strong").textContent = activeCopy.nudgeTitle;
@@ -759,6 +782,7 @@
       resetBtn.textContent = activeCopy.resetLabel;
       renderChips();
       updateQuickCue();
+      if (gateOpen) showGate(); // re-render the entry form in the new language
     }
 
     // Suggestions scroll sideways on narrow screens: a fade on the right edge shows there is more (B-30).
@@ -796,7 +820,7 @@
     // ---- the chat (switch on, or ?chat=1) ---------------------------------------
     var restored = readLog();
     if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t, { ts: m.ts, cards: m.c }); });
-    else addMessage(messages, activeCopy.firstMessage, "bot");
+    else if (getLead()) addMessage(messages, activeCopy.firstMessage, "bot"); // before the entry form is sent, the form carries the notice
     renderChips();
     // "Verlauf löschen": removes the saved conversation from this browser and starts again
     resetBtn.addEventListener("click", function () {
@@ -806,10 +830,110 @@
       input.disabled = false;
       send.disabled = false;
       input.setAttribute("placeholder", activeCopy.placeholder);
+      if (!getLead()) { showGate(); return; }
       addMessage(messages, activeCopy.firstMessage, "bot");
       renderChips();
       input.focus();
     });
+
+    // ---- entry form (founder, 2 Oct 2026): e-mail address and phone number before the first
+    // message, with the AI notice. Posted to /api/lead (service "Chatbot"); the browser keeps only
+    // a "done" mark, never the contact details, and they are never sent to /api/chat.
+    function showGate() {
+      var old = messages.querySelector(".rexity-chatbot__gate");
+      if (old) old.remove();
+      gateOpen = true;
+      var c = activeCopy;
+      input.disabled = true;
+      send.disabled = true;
+      input.setAttribute("placeholder", c.gatePlaceholder);
+      if (quick) quick.hidden = true;
+      var f = document.createElement("form");
+      f.className = "rexity-chatbot__handover rexity-chatbot__gate";
+      f.noValidate = true;
+      f.setAttribute("aria-label", c.gateTitle);
+      function para(cls, text) { var el = document.createElement("p"); el.className = cls; el.textContent = text; return el; }
+      function field(type, label, auto, mode, max) {
+        var lab = document.createElement("label");
+        lab.className = "rexity-chatbot__handover-label";
+        var span = document.createElement("span");
+        span.textContent = label;
+        var el = document.createElement("input");
+        el.type = type;
+        el.className = "rexity-chatbot__field";
+        el.maxLength = max;
+        el.required = true;
+        el.setAttribute("autocomplete", auto);
+        el.setAttribute("inputmode", mode);
+        lab.appendChild(span);
+        lab.appendChild(el);
+        return { label: lab, input: el };
+      }
+      var emailF = field("email", c.gateEmail, "email", "email", 200);
+      var phoneF = field("tel", c.gatePhone, "tel", "tel", 40);
+      var trap = document.createElement("input");
+      trap.type = "text";
+      trap.name = "company_website";
+      trap.tabIndex = -1;
+      trap.autocomplete = "off";
+      trap.className = "rexity-chatbot__trap";
+      trap.setAttribute("aria-hidden", "true");
+      var err = para("rexity-chatbot__handover-error", "");
+      err.setAttribute("role", "alert");
+      err.hidden = true;
+      var submit = document.createElement("button");
+      submit.type = "submit";
+      submit.className = "rexity-chatbot__handover-submit";
+      submit.textContent = c.gateSubmit;
+      var priv = para("rexity-chatbot__handover-privacy", c.gatePrivacy + " ");
+      var pl = document.createElement("a");
+      pl.href = "/datenschutz";
+      pl.textContent = c.privacy;
+      priv.appendChild(pl);
+      [para("rexity-chatbot__handover-title", c.gateTitle), para("rexity-chatbot__handover-copy", c.gateDisclaimer), para("rexity-chatbot__handover-copy rexity-chatbot__gate-law", c.gateLaw),
+        emailF.label, phoneF.label, trap, err, submit, priv].forEach(function (n) { f.appendChild(n); });
+      messages.appendChild(f);
+      messages.scrollTop = Math.max(0, f.offsetTop - messages.offsetTop - 8); // show the form from its title
+      f.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var email = emailF.input.value.trim();
+        var phone = phoneF.input.value.trim();
+        var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        var digits = phone.replace(/\D/g, "");
+        var phoneOk = digits.length >= 7 && digits.length <= 15 && /^[+\d\s()\/-]+$/.test(phone);
+        if (!mailOk || !phoneOk) {
+          err.textContent = c.gateError;
+          err.hidden = false;
+          (mailOk ? phoneF.input : emailF.input).focus();
+          return;
+        }
+        err.hidden = true;
+        submit.disabled = true;
+        fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: "Chat-Besucher", email: email, phone: phone, service: "Chatbot", message: "Chat gestartet (Kontaktdaten vor dem Chat angegeben)", lang: lang, company_website: trap.value })
+        }).then(function (r) {
+          if (!r.ok) throw new Error("lead " + r.status);
+          saveLead("");
+          setHandoverState("sent");
+          gateOpen = false;
+          f.remove();
+          if (!messages.querySelector(".rexity-chatbot__message")) addMessage(messages, activeCopy.firstMessage, "bot");
+          input.disabled = limitReached;
+          send.disabled = limitReached;
+          input.setAttribute("placeholder", limitReached ? activeCopy.limitPlaceholder : activeCopy.placeholder);
+          renderChips();
+          input.focus();
+        }).catch(function () {
+          submit.disabled = false;
+          err.textContent = c.formFail;
+          err.hidden = false;
+          linkifyEmail(err);
+        });
+      });
+    }
+    if (!getLead()) showGate();
     if (quick) quick.addEventListener("scroll", updateQuickCue, { passive: true });
 
     function markIntroSeen() {
@@ -1033,7 +1157,7 @@
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
       var message = input.value.trim();
-      if (!message || limitReached) return;
+      if (!message || limitReached || gateOpen) return;
       input.value = "";
       send.disabled = true;
       // Capture the prior conversation BEFORE adding the new turn, so the
