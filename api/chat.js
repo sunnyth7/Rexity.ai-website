@@ -9,7 +9,7 @@
 //   - only what was asked: "übrigens"/"by the way" asides are dropped, at most one
 //     question back, at most two links (targets only from the digest's URL index);
 //   - German and English only (founder, 2 Oct 2026): the reply language is detected from the
-//     visitor's last message (a third language is answered in English), named in the per-request prompt and
+//     visitor's last message (German is the default: a third language is answered in German), named in the per-request prompt and
 //     returned as `lang`; deterministic copy exists in German and English, every other
 //     language gets the English copy;
 //   - process questions: three or four steps + one sentence with the booking link;
@@ -63,7 +63,7 @@ const ASSISTANT_NAME = (knowledge.brand && knowledge.brand.assistantName) || "Re
 
 // The assistant answers in German and English only (founder, 2 Oct 2026).
 function copyLang(lang) {
-  return lang === "de" ? "de" : "en";
+  return lang === "en" ? "en" : "de"; // German is the default
 }
 function approvedCopy(key, lang) {
   const c = COPY[key];
@@ -210,7 +210,7 @@ function normalize(value) {
     .trim();
 }
 
-// ---- Reply language (German and English only; other languages are detected, answered in English) ----
+// ---- Reply language (German and English only; other languages are detected, answered in German) ----
 // detectLanguage(text) -> ISO 639-1 code or null. Non-Latin scripts by their letters
 // (Arabic/Persian, Hebrew, Cyrillic: Russian/Ukrainian, Greek, Japanese, Korean, Chinese,
 // Hindi, Thai); Latin-script languages by stop words plus the letters only they use
@@ -284,12 +284,12 @@ function detectLanguage(text, prefer) {
 
 // Founder decision 2 Oct 2026: the assistant answers in German and English only. The
 // detector above still recognises other languages (reported as visitorLang), but the reply
-// language is always "de" or "en": a message in any third language is answered in English,
-// with one opening sentence that says so.
+// language is always "de" or "en". German is the default (founder, 2 Oct 2026): a message in
+// any third language is answered in German, with one opening sentence that says so.
 // 1) language of the current message if clear; 2) else the most recent clear user
 // turn; 3) else the page language sent by the widget; 4) else German.
 const REPLY_LANGS = ["de", "en"];
-const toReplyLang = (code) => (code ? (REPLY_LANGS.includes(code) ? code : "en") : null);
+const toReplyLang = (code) => (code ? (REPLY_LANGS.includes(code) ? code : "de") : null);
 function resolveReplyLang(message, history, clientLang) {
   let previous = null;
   for (let i = history.length - 1; i >= 0 && !previous; i--) {
@@ -891,7 +891,7 @@ function buildTurnPrompt(lang, name, provider, flags) {
     lines.push(`REPLY LANGUAGE: German, formal "Sie". If the visitor switches language, the next turn tells you.`);
   }
   if (f.foreign && LANG_NAMES[f.foreign]) {
-    lines.push(`THE VISITOR WROTE IN ${LANG_NAMES[f.foreign].toUpperCase()}. This assistant answers in German and English only: reply in English, never in ${LANG_NAMES[f.foreign]}, and begin with exactly this sentence: "I answer in English or German."`);
+    lines.push(`THE VISITOR WROTE IN ${LANG_NAMES[f.foreign].toUpperCase()}. This assistant answers in German and English only, and German is the default: reply in German, never in ${LANG_NAMES[f.foreign]}, and begin with exactly this sentence: "Ich antworte auf Deutsch oder Englisch."`);
   }
   if (provider === "anthropic") {
     lines.push(`TECHNICAL BASIS of this answer: Claude (Anthropic) via the Anthropic API, a temporary route that processes outside the EU. For hosting or AI questions do NOT use the EU sentences; say that this interim route processes outside the EU and point to /datenschutz.`);
@@ -899,7 +899,7 @@ function buildTurnPrompt(lang, name, provider, flags) {
     const tech = techBasis(provider, lang === "de" ? "de" : "en");
     if (tech) lines.push(`TECHNICAL BASIS of this answer (name only this route, only when asked about the technology, the model or where the AI runs): "${tech}"`);
   }
-  if (f.process) lines.push(`THIS MESSAGE asks about a process: three or four "- " steps, no internal detail, then one sentence that the details are settled in a short call with [Termin buchen](/#kontakt).`);
+  if (f.process) lines.push(`THIS MESSAGE asks about a process: if one page of the Seitenverzeichnis covers the topic, name and link it in the first sentence; then three or four "- " steps, no internal detail; then one sentence that the details are settled in a short call with [Termin buchen](/#kontakt).`);
   else if (f.list) lines.push(`THIS MESSAGE asks for steps, options or a list: a short "- " list is fine (at most 5 lines).`);
   if (f.handover) lines.push(`THIS MESSAGE is about the visitor's own case, timing, a call or an offer: answer briefly, offer contact in one sentence and end with [[handover]].`);
   if (f.hosting) lines.push(`THIS MESSAGE asks about hosting, data or the AI: use the claim-sheet sentences above, and the technical basis only as given here.`);
