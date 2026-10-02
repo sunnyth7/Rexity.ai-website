@@ -17,6 +17,10 @@
  *                  form[data-rx-form="book"] -> POST /api/book
  *                  payload, validation and DE/EN messages as production
  *                  (rexity-omi/omi/omi-lead.js, omi-booking.js).
+ *                  Sprint 31: the lead form carries a bot check (Cloudflare Turnstile): the widget
+ *                  is rendered into the form when the visitor first touches it, its token is sent
+ *                  as `turnstileToken` (api/lead.js verifies it when TURNSTILE_SECRET_KEY is set).
+ *                  Never on localhost / 127.0.0.1 (the widget's host name is rexity.ai).
  *  3. Booking modal: [data-rx-open="booking"] opens [data-rx-modal="booking"];
  *                  Esc / [data-rx-close] / backdrop close it; focus trap; focus restore.
  *  4. /styleguide only: [data-rx-palette-set] and [data-rx-fontset-set] switchers
@@ -195,12 +199,14 @@
         sending: "Wird gesendet…",
         ok: "Danke — wir haben Ihre Nachricht erhalten und melden uns in Kürze.",
         invalid: "Bitte geben Sie Ihren Namen und eine gültige E-Mail an.",
+        bot: "Die Sicherheitsprüfung (Schutz vor automatischen Anfragen) ist nicht durchgelaufen. Bitte senden Sie das Formular noch einmal ab oder schreiben Sie an info@rexity.ai.",
         err: "Etwas ist schiefgelaufen. Bitte schreiben Sie an info@rexity.ai."
       },
       en: {
         sending: "Sending…",
         ok: "Thanks — we’ve got your message and will be in touch shortly.",
         invalid: "Please enter your name and a valid email.",
+        bot: "The security check (protection against automated requests) did not complete. Please send the form once more or email info@rexity.ai.",
         err: "Something went wrong. Please email info@rexity.ai."
       }
     },
@@ -382,6 +388,86 @@
     };
   }
 
+  // ---- bot check for the lead form (Cloudflare Turnstile; public site key, the secret is in Vercel) ----
+  // Explicit rendering: the script from challenges.cloudflare.com is loaded when the visitor first touches the
+  // form, the widget sits above the button and shows itself only when Cloudflare wants an interaction. A token is
+  // single-use and lives five minutes: after a submit or on expiry the widget is reset.
+  var TS_KEY = "0x4AAAAAAFMB5KSMA-E1D8vB";
+  var TS_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  var TS_OFF = !TS_KEY || location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  function botSettle(b, token) {
+    if (b.waiters.length) {
+      var w = b.waiters;
+      b.waiters = [];
+      b.token = "";
+      if (token) b.stale = true;
+      for (var i = 0; i < w.length; i++) w[i](i === 0 ? token : "");
+    } else b.token = token || "";
+  }
+  function botReset(b) {
+    b.token = "";
+    b.stale = false;
+    try { if (b.id !== null && window.turnstile) window.turnstile.reset(b.id); } catch (e) {}
+  }
+  function botRender(b) {
+    if (b.id !== null || !window.turnstile) return;
+    try {
+      b.id = window.turnstile.render(b.box, {
+        sitekey: TS_KEY,
+        theme: doc.documentElement.hasAttribute("data-palette") ? "light" : "dark",
+        language: get(),
+        size: "flexible",
+        appearance: "interaction-only",
+        "refresh-expired": "manual",
+        callback: function (token) { b.stale = false; botSettle(b, token); },
+        "expired-callback": function () { botReset(b); },
+        "timeout-callback": function () { botReset(b); },
+        "error-callback": function () { botSettle(b, ""); return true; }
+      });
+    } catch (e) { b.id = null; botSettle(b, ""); }
+  }
+  /* the form's bot check (created on first use), or null where it is off */
+  function botFor(form) {
+    if (TS_OFF) return null;
+    if (form.__rxBot) return form.__rxBot;
+    var holder = doc.createElement("div");
+    holder.className = "rx-form__bot";
+    holder.style.gridColumn = "1 / -1";
+    var actions = form.querySelector(".rx-actions");
+    if (actions && actions.parentNode === form) form.insertBefore(holder, actions);
+    else form.appendChild(holder);
+    var b = (form.__rxBot = { box: holder, id: null, token: "", stale: false, waiters: [], loading: false });
+    if (window.turnstile) { botRender(b); return b; }
+    b.loading = true;
+    var tries = 0;
+    var poll = setInterval(function () {
+      if (window.turnstile) { clearInterval(poll); b.loading = false; botRender(b); }
+      else if (++tries > 100) { clearInterval(poll); b.loading = false; form.__rxBot = null; holder.remove(); botSettle(b, ""); }
+    }, 150);
+    if (!doc.querySelector('script[src^="https://challenges.cloudflare.com/turnstile/"]')) {
+      var sc = doc.createElement("script");
+      sc.src = TS_SRC;
+      sc.async = true;
+      sc.onerror = function () { clearInterval(poll); b.loading = false; form.__rxBot = null; sc.remove(); holder.remove(); botSettle(b, ""); };
+      doc.head.appendChild(sc);
+    }
+    return b;
+  }
+  /* cb(token): a token nobody has used yet; "" when none could be had (or the check is off here: cb(null)) */
+  function botToken(form, cb) {
+    var b = botFor(form);
+    if (!b) { cb(null); return; }
+    if (b.token) { var tk = b.token; b.token = ""; b.stale = true; cb(tk); return; }
+    var done = false;
+    var timer = setTimeout(function () { if (!done) { done = true; cb(""); } }, 45000);
+    b.waiters.push(function (token) { if (done) return; done = true; clearTimeout(timer); cb(token); });
+    if (b.id !== null && b.stale) botReset(b);
+  }
+  doc.addEventListener("focusin", function (e) {
+    var f = e.target && e.target.closest ? e.target.closest('form[data-rx-form="lead"]') : null;
+    if (f) botFor(f);
+  });
+
   function handleLead(form) {
     var ok = box(form, "success"), err = box(form, "error");
     hide(err);
@@ -405,23 +491,33 @@
     }
     markInvalid(form, [], err);
     busy(form, true, "lead");
-    post("/api/lead", payload)
-      .then(function (res) {
-        if (res.ok) {
-          form.reset();
-          form.style.display = "none";
-          show(ok, t("lead", "ok"));
-        } else {
-          // The API answers in English; show its text only in English, the production DE copy otherwise.
-          show(err, get() === "en" && res.data.error ? res.data.error : t("lead", "err"));
-        }
-      })
-      .catch(function () {
-        show(err, t("lead", "err"));
-      })
-      .then(function () {
+    botToken(form, function (token) {
+      if (token === "") { // the bot check is on here and gave no token
+        show(err, t("lead", "bot"));
         busy(form, false, "lead");
-      });
+        return;
+      }
+      if (token) payload.turnstileToken = token;
+      post("/api/lead", payload)
+        .then(function (res) {
+          if (res.ok) {
+            form.reset();
+            form.style.display = "none";
+            show(ok, t("lead", "ok"));
+          } else if (res.status === 403 && res.data.code === "bot_check") {
+            show(err, t("lead", "bot")); // the next submit gets a fresh token (the used one is reset on demand)
+          } else {
+            // The API answers in English; show its text only in English, the production DE copy otherwise.
+            show(err, get() === "en" && res.data.error ? res.data.error : t("lead", "err"));
+          }
+        })
+        .catch(function () {
+          show(err, t("lead", "err"));
+        })
+        .then(function () {
+          busy(form, false, "lead");
+        });
+    });
   }
 
   function handleBook(form) {

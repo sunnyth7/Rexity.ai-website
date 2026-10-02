@@ -1,0 +1,582 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Rexity Website-Check",
+    "version": "1.0.0",
+    "summary": "Checks one public website and returns scores for speed, findability, readiness for enquiries and trust.",
+    "description": "Free check of a publicly reachable website by Rexity Labs. One GET request runs the check (up to about a minute) or returns the result of the last 24 hours. The answer is the public tier: an overall score (0–100) with a band, the scores of four areas, one verdict line per area, the number of checks per state, how speed was measured and the labels of the pages read. It contains no single finding and no recommendations. The full report with every check is sent by e-mail to an address the visitor confirms on https://www.rexity.ai/website-check. No key is needed. Limits: 3 fresh checks per IP address and hour, 30 requests per IP address in 10 minutes (cached results included), and a daily cap for all callers; a reached limit answers 429 with Retry-After. The same check is available as an MCP tool at https://www.rexity.ai/mcp. The checker identifies itself as RexityWebsiteCheck/1.0 (+https://www.rexity.ai/website-check/bot).",
+    "contact": {
+      "name": "Rexity Labs UG (haftungsbeschränkt)",
+      "email": "info@rexity.ai",
+      "url": "https://www.rexity.ai/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.rexity.ai"
+    }
+  ],
+  "externalDocs": {
+    "description": "The tool for people, with the scoring rule",
+    "url": "https://www.rexity.ai/website-check"
+  },
+  "paths": {
+    "/api/check": {
+      "get": {
+        "operationId": "checkWebsite",
+        "summary": "Check a website (public tier)",
+        "description": "Runs the check for one address or returns the cached result. JSON by default; Markdown with format=md or the header Accept: text/markdown. Errors are always JSON.",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "description": "Address of the website, with or without https://. Public http/https websites on standard ports only; IP addresses and internal host names are refused.",
+            "schema": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "example": "www.example.de"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "required": false,
+            "description": "Language of the texts in the result",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "de",
+                "en"
+              ],
+              "default": "de"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "description": "json (default) or md (Markdown)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "json",
+                "md"
+              ],
+              "default": "json"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The result (public tier)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Result"
+                }
+              },
+              "text/markdown": {
+                "schema": {
+                  "type": "string",
+                  "description": "The same result as Markdown"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The parameter url is missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The address cannot be checked: not a valid public web address (bad_url, bad_scheme, bad_port, private_host), not found (dns), or its owner opted out (optout)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "A limit is reached: rate (per IP address) or cap (daily cap)",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until a new attempt makes sense",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The check failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Result": {
+        "type": "object",
+        "required": [
+          "ok",
+          "tier",
+          "lang",
+          "url",
+          "finalUrl",
+          "host",
+          "checkedAt",
+          "cached",
+          "overall",
+          "blocks",
+          "pages",
+          "links"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": true
+          },
+          "tier": {
+            "type": "string",
+            "const": "public",
+            "description": "This interface returns the public tier only"
+          },
+          "v": {
+            "type": "integer",
+            "description": "Version of the report format"
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "de",
+              "en"
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "The address as checked"
+          },
+          "finalUrl": {
+            "type": "string",
+            "description": "The address after redirects"
+          },
+          "host": {
+            "type": "string",
+            "description": "Host name of the checked site"
+          },
+          "checkedAt": {
+            "type": "string",
+            "description": "Time of the check (ISO 8601, UTC)",
+            "format": "date-time"
+          },
+          "cached": {
+            "type": "boolean",
+            "description": "true: a result of the last 24 hours (no new check was run)"
+          },
+          "truncated": {
+            "type": "boolean",
+            "description": "true: the page was larger than 1.5 MB and only its first part was evaluated"
+          },
+          "overall": {
+            "type": "object",
+            "required": [
+              "score",
+              "blocksUsed"
+            ],
+            "properties": {
+              "score": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 100,
+                "description": "Weighted mean of the areas that have a score; null when no area could be checked"
+              },
+              "band": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "good",
+                  "mid",
+                  "low",
+                  null
+                ]
+              },
+              "bandLabel": {
+                "type": "string",
+                "description": "The band in the requested language"
+              },
+              "blocksUsed": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "tempo",
+                    "find",
+                    "contact",
+                    "trust"
+                  ]
+                },
+                "description": "The areas that went into the overall score"
+              }
+            }
+          },
+          "blocks": {
+            "type": "object",
+            "required": [
+              "tempo",
+              "find",
+              "contact",
+              "trust"
+            ],
+            "properties": {
+              "tempo": {
+                "$ref": "#/components/schemas/TempoBlock"
+              },
+              "find": {
+                "$ref": "#/components/schemas/Block"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/Block"
+              },
+              "trust": {
+                "$ref": "#/components/schemas/Block"
+              }
+            }
+          },
+          "pages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Labels of the pages read in addition to the entered one (contact, booking, legal notice)"
+          },
+          "summary": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Short verdict: overall score, strongest and weakest area, how speed was measured. No single finding, no advice.",
+            "properties": {
+              "sentences": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source": {
+                "type": "string",
+                "enum": [
+                  "rules",
+                  "model"
+                ],
+                "description": "rules: fixed text; model: worded by an AI from the scores"
+              }
+            }
+          },
+          "offer": {
+            "type": "string",
+            "enum": [
+              "design",
+              "relaunch",
+              "care"
+            ],
+            "description": "Which service page matches the result"
+          },
+          "offerLabel": {
+            "type": "string",
+            "description": "Its label"
+          },
+          "offerUrl": {
+            "type": "string",
+            "description": "Its address"
+          },
+          "statusLabels": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The words for the states of counts in the requested language"
+          },
+          "fullReport": {
+            "type": "object",
+            "description": "Where the full report (every check with its measured value) can be had: by e-mail only, after the address was confirmed on the page",
+            "properties": {
+              "by": {
+                "type": "string",
+                "const": "email"
+              },
+              "note": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "links": {
+            "type": "object",
+            "description": "Related addresses",
+            "properties": {
+              "page": {
+                "type": "string"
+              },
+              "bot": {
+                "type": "string"
+              },
+              "openapi": {
+                "type": "string"
+              },
+              "mcp": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Block": {
+        "type": "object",
+        "required": [
+          "name",
+          "checked",
+          "score",
+          "weight",
+          "counts"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the area in the requested language"
+          },
+          "checked": {
+            "type": "boolean",
+            "description": "false: the area could not be checked; score is null and reason says why"
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Points of the area, 0 to 100"
+          },
+          "band": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "good",
+              "mid",
+              "low",
+              null
+            ],
+            "description": "good from 80 points, mid from 50, low below"
+          },
+          "bandLabel": {
+            "type": "string",
+            "description": "The band in the requested language"
+          },
+          "weight": {
+            "type": "integer",
+            "description": "Share of the area in the overall score, in percent"
+          },
+          "verdict": {
+            "type": "string",
+            "description": "One plain sentence on the area"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Why the area could not be checked (only when checked is false)"
+          },
+          "counts": {
+            "type": "object",
+            "description": "How many checks of the area ended in which state. The checks themselves are not part of this result.",
+            "required": [
+              "ok",
+              "partial",
+              "fail",
+              "info",
+              "unknown",
+              "na",
+              "total"
+            ],
+            "properties": {
+              "ok": {
+                "type": "integer",
+                "description": "met"
+              },
+              "partial": {
+                "type": "integer",
+                "description": "partly met"
+              },
+              "fail": {
+                "type": "integer",
+                "description": "open"
+              },
+              "info": {
+                "type": "integer",
+                "description": "notes (shown, never scored)"
+              },
+              "unknown": {
+                "type": "integer",
+                "description": "could not be checked"
+              },
+              "na": {
+                "type": "integer",
+                "description": "does not apply to this page"
+              },
+              "total": {
+                "type": "integer",
+                "description": "all checks of the area"
+              }
+            }
+          }
+        }
+      },
+      "TempoBlock": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Block"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "lighthouse",
+                  "own",
+                  null
+                ],
+                "description": "How speed was measured: Lighthouse through PageSpeed Insights, or the service's own measurement without a browser"
+              },
+              "methodLabel": {
+                "type": "string",
+                "description": "The method in the requested language"
+              },
+              "note": {
+                "type": "string",
+                "description": "What the method means"
+              },
+              "lighthouse": {
+                "type": "object",
+                "description": "Lighthouse's four category scores (only when Lighthouse ran)",
+                "properties": {
+                  "performance": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "accessibility": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "bestPractices": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "seo": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "metrics": {
+                "type": "object",
+                "description": "Lighthouse lab values as text in the requested language (only when Lighthouse ran)",
+                "properties": {
+                  "lcp": {
+                    "type": "string",
+                    "description": "Largest Contentful Paint, e.g. \"2,4 s\""
+                  },
+                  "cls": {
+                    "type": "string",
+                    "description": "Cumulative Layout Shift, e.g. \"0,03\""
+                  },
+                  "tbt": {
+                    "type": "string",
+                    "description": "Total Blocking Time, e.g. \"120 ms\""
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "ok",
+          "error",
+          "message"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "const": false
+          },
+          "error": {
+            "type": "string",
+            "description": "Error code",
+            "enum": [
+              "bad_url",
+              "bad_scheme",
+              "bad_port",
+              "private_host",
+              "optout",
+              "dns",
+              "rate",
+              "cap",
+              "server"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "A plain sentence in the requested language"
+          },
+          "links": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

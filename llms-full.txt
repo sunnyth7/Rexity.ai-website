@@ -25,7 +25,7 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 - [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
 - [Website-Relaunch und Umzug (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Website für Handwerker (Anfrageformular, Leistungsseiten, Terminbuchung)](https://www.rexity.ai/website-f%C3%BCr-handwerker): Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 € (Festpreise, netto zzgl. MwSt.).
-- [Kostenloser Website-Check (Tempo, Auffindbarkeit, Anfrage-Wege)](https://www.rexity.ai/website-check): Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in einer Minute geprüft – mit den drei wichtigsten Schritten.
+- [Kostenloser Website-Check (Tempo, Auffindbarkeit, Anfrage-Wege)](https://www.rexity.ai/website-check): Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in etwa einer Minute. Punkte sofort, alle Messwerte per E-Mail.
 - [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
@@ -83,6 +83,19 @@ Beispiel-Websites, die Rexity für einzelne Branchen gestaltet und gebaut hat; k
 - [Pizzeria-Website-Demo](https://www.rexity.ai/work/demo/pizzeria): Pizzeria-Website-Demo von Rexity: Hero-Video, Slice des Tages, Speisekarte mit Preisen, Ambiente und Öffnungszeiten. Mit KI-Chatbot erweiterbar.
 - [Immobilienmakler-Website-Demo](https://www.rexity.ai/work/demo/immobilienmakler): Immobilienmakler-Website-Demo von Rexity: Scroll-Animation, Objektangebote mit Filter, Merkliste, Kundenstimmen und Anfrageformular.
 - [Schuh-Onlineshop-Demo](https://www.rexity.ai/work/demo/schuh-onlineshop): Schuh-Onlineshop-Demo von Rexity: Kategorien, Bestseller-Raster, Markengeschichte, Bewertungen und Filialkarte. Mit Stripe-Checkout erweiterbar.
+
+## Website-Check für KI-Assistenten
+
+Der kostenlose Website-Check lässt sich auch direkt von Assistenten und Programmen aufrufen, ohne Schlüssel und ohne Anmeldung.
+
+- Wann nutzen: wenn jemand wissen möchte, wie gut die öffentlich erreichbare Website eines Betriebs für Besucher und Anfragen funktioniert (Tempo und Technik, Auffindbarkeit, Anfrage-Tauglichkeit, Vertrauen und Recht). Nur für öffentliche http/https-Websites; eine Prüfung dauert bis etwa eine Minute.
+- Abruf per GET: `https://www.rexity.ai/api/check?url=ADRESSE&lang=de` liefert JSON; mit `&format=md` oder dem Header `Accept: text/markdown` Markdown; `lang=en` für Englisch. Beschreibung der Schnittstelle: [OpenAPI](https://www.rexity.ai/.well-known/openapi.json).
+- Abruf per MCP: [https://www.rexity.ai/mcp](https://www.rexity.ai/mcp) (Streamable HTTP), ein Werkzeug `website_check` mit `url` und optional `lang`; es liefert dasselbe Ergebnis als Markdown.
+- Was das Ergebnis enthält: den Gesamtwert von 0 bis 100 mit Einordnung (gut, mittel, schwach), die Werte der vier Bereiche, je Bereich einen Satz und die Zahl der Prüfpunkte nach Status (erfüllt, teilweise, offen, Hinweis, nicht prüfbar), die Messmethode beim Tempo (mit den vier Lighthouse-Werten sowie LCP, CLS und TBT, wenn Lighthouse gemessen hat), die geprüfte Adresse, den Zeitpunkt und die Bezeichnungen der mitgelesenen Seiten.
+- Was es nicht enthält: einzelne Prüfpunkte, Messwerte einzelner Prüfpunkte und Handlungsempfehlungen.
+- Vollständiger Bericht: nur per E-Mail. Er geht an eine Adresse, die auf der Seite [Website-Check](https://www.rexity.ai/website-check) eingetragen und über den Link in einer Bestätigungs-E-Mail bestätigt wurde; über die Schnittstelle lässt er sich nicht abrufen.
+- Grenzen: 3 neue Prüfungen pro IP-Adresse und Stunde, 30 Anfragen pro IP-Adresse in 10 Minuten, dazu eine Tagesobergrenze für alle Aufrufer. Ergebnisse gelten 24 Stunden und zählen in dieser Zeit nicht als neue Prüfung. Ist eine Grenze erreicht, antwortet die Schnittstelle mit 429 und `Retry-After`.
+- Wer abruft: der Prüf-Dienst [RexityWebsiteCheck](https://www.rexity.ai/website-check/bot); dort steht, was er abruft und wie Betreiber ihre Website ausnehmen.
 
 ## Was wir nicht tun
 
@@ -474,15 +487,15 @@ Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
 
 Adresse: https://www.rexity.ai/website-check
 
-Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in einer Minute geprüft – mit den drei wichtigsten Schritten.
+Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in etwa einer Minute. Punkte sofort, alle Messwerte per E-Mail.
 
 Bringt Ihre Seite Anfragen? Kostenlos geprüft in etwa einer Minute: Tempo, Auffindbarkeit bei Google und Anfrage-Wege.
 
-Der kostenlose Website-Check für Betriebe: Adresse eingeben, in etwa einer Minute vier Werte von 0 bis 100 für Tempo & Technik, Auffindbarkeit, Anfrage-Tauglichkeit und Vertrauen & Recht erhalten – mit den Befunden im Klartext und dem Schritt, der am meisten bringt. Ohne Anmeldung.
+Der kostenlose Website-Check für Betriebe: Adresse eingeben, in etwa einer Minute vier Werte von 0 bis 100 für Tempo & Technik, Auffindbarkeit, Anfrage-Tauglichkeit und Vertrauen & Recht und ein Kurzfazit sehen, sofort und ohne Anmeldung. Alle Messwerte kommen als Bericht per E-Mail, nachdem Sie Ihre Adresse bestätigt haben.
 
 ### Was der Website-Check prüft
 
-Der Website-Check prüft kostenlos und in etwa einer Minute, ob Ihre Website Anfragen bringen kann: wie schnell sie auf dem Handy lädt, ob Suchmaschinen sie lesen können, wie leicht ein Besucher anruft, schreibt oder bucht, und ob Verschlüsselung und Pflichtseiten vorhanden sind. Sie erhalten vier Werte von 0 bis 100, die Befunde im Klartext und den Schritt, der am meisten bringt – ohne Anmeldung und ohne E-Mail-Adresse.
+Der Website-Check prüft kostenlos und in etwa einer Minute, ob Ihre Website Anfragen bringen kann: wie schnell sie auf dem Handy lädt, ob Suchmaschinen sie lesen können, wie leicht ein Besucher anruft, schreibt oder bucht, und ob Verschlüsselung und Pflichtseiten vorhanden sind. Vier Werte von 0 bis 100 und ein Kurzfazit sehen Sie sofort auf der Seite, ohne Anmeldung. Alle Messwerte – jeden einzelnen Prüfpunkt – senden wir Ihnen als Bericht per E-Mail, sobald Sie Ihre Adresse bestätigt haben.
 
 Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, Praxis, Studio, Salon, Werkstatt, Laden. Sie müssen nichts installieren und nichts von Technik verstehen. Geprüft wird die Adresse, die Sie eingeben – in der Regel Ihre Startseite, denn dort entscheidet sich meist, ob ein Besucher anfragt oder weiterklickt. Für die Kontaktwege liest der Check zusätzlich bis zu vier dort verlinkte Kontakt- und Buchungsseiten, weil Telefonnummer, Formular oder Buchung oft erst dort stehen.
 
@@ -491,13 +504,13 @@ Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, 
 Jeder Bereich beantwortet eine Frage, die sich ein Besucher nie laut stellt:
 
 - Tempo & Technik: Lädt die Seite zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT). Antwortet diese Messung nicht, messen wir selbst ohne Browser: Antwortzeit des Servers, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt immer das Verfahren.
-- Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Mit Gewerk und Ort sehen wir zusätzlich nach, ob Ihre Seite für diese Suche unter den ersten 20 Ergebnissen bei Google steht – sofern die Abfrage verfügbar ist.
-- Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang – auf der eingegebenen Seite und auf bis zu vier dort verlinkten Kontakt- und Buchungsseiten. Das Ergebnis sagt, wo etwas gefunden wurde. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
-- Vertrauen & Recht: Hinweise, keine Rechtsberatung: verschlüsselte Verbindung (HTTPS), Links zu Impressum und Datenschutzerklärung. Einen Link zu einer Erklärung zur Barrierefreiheit zeigen wir nur als Hinweis ohne Punkte, weil Kleinstunternehmen von der Pflicht in der Regel ausgenommen sind. Zusätzlich listen wir fremde Dienste auf, die schon beim Aufruf geladen werden, etwa Schriftarten oder Statistik-Skripte. Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.
+- Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Mit Gewerk und Ort sehen wir zusätzlich nach, ob Ihre Seite für diese Suche unter den ersten 20 Ergebnissen bei Google steht – sofern die Abfrage verfügbar ist. Die Position steht im Bericht per E-Mail.
+- Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang – auf der eingegebenen Seite und auf bis zu vier dort verlinkten Kontakt- und Buchungsseiten. Der Bericht per E-Mail sagt, wo etwas gefunden wurde. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
+- Vertrauen & Recht: Hinweise, keine Rechtsberatung: verschlüsselte Verbindung (HTTPS), Links zu Impressum und Datenschutzerklärung. Einen Link zu einer Erklärung zur Barrierefreiheit zählen wir nur als Hinweis ohne Punkte, weil Kleinstunternehmen von der Pflicht in der Regel ausgenommen sind. Zusätzlich listet der Bericht per E-Mail fremde Dienste auf, die schon beim Aufruf geladen werden, etwa Schriftarten oder Statistik-Skripte. Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.
 
 ### So lesen Sie die Punkte
 
-Die Punkte sagen, wie viele der geprüften Voraussetzungen erfüllt sind – nicht, wie schön Ihre Seite ist. Ab 80 Punkten ist ein Bereich in Ordnung, zwischen 50 und 79 lohnt ein Blick in die Befunde, unter 50 fehlt Grundlegendes.
+Die Punkte sagen, wie viele der geprüften Voraussetzungen erfüllt sind – nicht, wie schön Ihre Seite ist. Ab 80 Punkten nennen wir einen Bereich „gut“, von 50 bis 79 „mittel“, darunter „schwach“. Unter jedem Bereich steht, wie viele Prüfpunkte erfüllt, teilweise erfüllt oder offen sind; welche das sind und was gemessen wurde, steht im Bericht per E-Mail.
 
 Steht bei einem Bereich „nicht prüfbar“, ließ er sich in diesem Moment nicht prüfen – in der Regel, weil die Seite nicht geantwortet hat. Dann raten wir nicht, sondern lassen den Bereich aus dem Gesamtwert heraus. Antwortet nur die Lighthouse-Messung nicht, messen wir das Tempo selbst ohne Browser; im Ergebnis steht, welches Verfahren lief. Tempo-Werte schwanken außerdem von Lauf zu Lauf um einige Punkte; ein einzelner Wert ist eine Momentaufnahme.
 
@@ -528,13 +541,13 @@ Die 89 auf der Webdesign-Seite im ersten Lauf zeigen, was „Momentaufnahme“ h
 
 Den Website-Check haben wir am selben Tag auf unsere eigene Startseite angewendet: Gesamt 90, Auffindbarkeit 100, Vertrauen & Recht 100, Anfrage-Tauglichkeit 80 – ein WhatsApp-Link und ein Kartenlink fehlten dort. Die Lighthouse-Messung über die öffentliche Schnittstelle antwortete in diesem Lauf nicht; Tempo & Technik stammt deshalb aus unserer eigenen Messung ohne Browser: 87 von 100. Abzüge gab es für das HTML-Dokument der Startseite (323 KB; volle Punkte gibt es bis 100 KB) und dafür, dass nur 46 von 72 Bildern feste Maße tragen.
 
-### Nach dem Check: was jetzt sinnvoll ist
+### Unsere Leistungen rund um Ihre Website
 
-Je nach Ergebnis führt der nächste Schritt woanders hin:
+Drei Leistungen, die zu den vier Bereichen gehören:
 
-- Die Seite bringt zu wenige Anfragen: Fehlen Telefon-Link, Formular oder Buchung, hilft keine Politur an der Technik. Wir bauen Websites, deren erster Bildschirm sagt, was Sie anbieten und wie man Sie erreicht – ab 999 €, netto zzgl. MwSt. (https://www.rexity.ai/web/web-design)
-- Die Technik ist in die Jahre gekommen: Langsame Seite, kein HTTPS, kein Zugriff auf den Quelltext: Dann lohnt es sich, einen Relaunch gegen Einzelreparaturen zu rechnen. Domain, E-Mail und Weiterleitungen ziehen mit – ab 1.299 €, netto zzgl. MwSt. (https://www.rexity.ai/web/website-umzug)
-- Die Werte sind gut – so bleiben sie es: Sicherheitsupdates, regelmäßige Sicherungen und Monitoring von Erreichbarkeit und Fehlern gehören zum Jahrespaket – ab 999 € pro Jahr, netto zzgl. MwSt. (https://www.rexity.ai/website-wartung)
+- Webdesign: Websites, die Anfragen bringen: Wir bauen Websites, deren erster Bildschirm sagt, was Sie anbieten und wie man Sie erreicht – ab 999 €, netto zzgl. MwSt. (https://www.rexity.ai/web/web-design)
+- Website-Relaunch: neue Technik, gleiche Adresse: Eine bestehende Website auf neuer Technik; Domain, E-Mail und Weiterleitungen ziehen mit – ab 1.299 €, netto zzgl. MwSt. (https://www.rexity.ai/web/website-umzug)
+- Website-Wartung: damit die Werte so bleiben: Sicherheitsupdates, regelmäßige Sicherungen und Monitoring von Erreichbarkeit und Fehlern gehören zum Jahrespaket – ab 999 € pro Jahr, netto zzgl. MwSt. (https://www.rexity.ai/website-wartung)
 
 ### Kostenlos automatisch – oder ausführlich von einem Menschen
 
@@ -546,17 +559,17 @@ Der Website-Check auf dieser Seite ist kostenlos und läuft automatisch. Was ein
 ### Häufige Fragen
 
 - Frage: Ist der Website-Check wirklich kostenlos?
-  Antwort: Ja. Die Prüfung kostet nichts, und Sie brauchen weder ein Konto noch eine E-Mail-Adresse: Punkte, alle Befunde und die nächsten Schritte stehen direkt auf der Seite. Nur wenn Sie den Bericht zusätzlich per E-Mail möchten, geben Sie eine Adresse an. Kontakt nehmen wir nur auf, wenn Sie das gesonderte Häkchen setzen.
+  Antwort: Ja. Die Prüfung kostet nichts und braucht keine Anmeldung: Die Punkte der vier Bereiche und ein Kurzfazit sehen Sie sofort auf der Seite. Alle Messwerte – jeden einzelnen Prüfpunkt – senden wir Ihnen als Bericht per E-Mail. Dafür geben Sie Ihre Adresse an und bestätigen sie über den Link in einer ersten, kurzen E-Mail. Mit der Anforderung des Berichts willigen Sie ein, dass wir Sie per E-Mail zu diesem Ergebnis und zu passenden Leistungen kontaktieren; diese Einwilligung können Sie jederzeit widerrufen. Ein Schutz vor automatischen Anfragen (Cloudflare Turnstile) schützt das Formular.
 - Frage: Woher kommen die Tempo-Werte?
   Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Antwortet diese Messung nicht, messen wir selbst ohne Browser, was Ihr Server ausliefert: Antwortzeit, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt das Verfahren; die eigene Messung ersetzt keinen Lighthouse-Lauf in einem echten Browser. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
 - Frage: Sagt mir der Check, auf welchem Platz ich bei Google stehe?
-  Antwort: Nur als Stichprobe: Wenn Sie Gewerk und Ort angeben und die Abfrage verfügbar ist, sehen wir nach, ob Ihre Seite für genau diese Suche unter den ersten 20 Ergebnissen in Deutschland steht. Suchergebnisse unterscheiden sich je nach Standort und Gerät; der Platz ist deshalb ein Hinweis und fließt nicht in die Punkte ein.
+  Antwort: Nur als Stichprobe: Wenn Sie Gewerk und Ort angeben und die Abfrage verfügbar ist, sehen wir nach, ob Ihre Seite für genau diese Suche unter den ersten 20 Ergebnissen in Deutschland steht. Suchergebnisse unterscheiden sich je nach Standort und Gerät; der Platz ist deshalb ein Hinweis und fließt nicht in die Punkte ein. Er steht im Bericht per E-Mail, nicht auf der Seite.
 - Frage: Was passiert mit der Adresse, die ich eingebe?
-  Antwort: Wir rufen die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt, bis zu vier dort verlinkte Kontakt- und Buchungsseiten derselben Website und die Kopfdaten einiger Bilder und Dateien der Seite. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
+  Antwort: Bevor die Prüfung startet, prüft ein Schutz vor automatischen Anfragen (Cloudflare Turnstile) Ihren Browser. Dann rufen wir die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt, bis zu vier dort verlinkte Kontakt- und Buchungsseiten derselben Website und die Kopfdaten einiger Bilder und Dateien der Seite. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
 - Frage: Ist das Kurzfazit von einer KI geschrieben?
-  Antwort: Wenn ein Sprachmodell verfügbar ist, formuliert es das Kurzfazit aus den Messwerten Ihres Ergebnisses; das steht dann darunter. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Das Modell erhält nur die Befunde, nicht den Text Ihrer Seite und keine E-Mail-Adresse. Jede Zahl im Kurzfazit wird gegen das Ergebnis geprüft; passt etwas nicht, erscheint ein fest formulierter Text.
+  Antwort: Wenn ein Sprachmodell verfügbar ist, formuliert es das Kurzfazit aus den Punktwerten Ihres Ergebnisses; das steht dann darunter. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Das Modell erhält den Namen der geprüften Website, die Punktwerte und die Anzahl der Prüfpunkte je Status – keinen einzelnen Prüfpunkt, nicht den Text Ihrer Seite und keine E-Mail-Adresse. Jede Zahl im Kurzfazit wird gegen das Ergebnis geprüft; passt etwas nicht, erscheint ein fest formulierter Text.
 - Frage: Ersetzt der Check eine SEO-Analyse oder eine Rechtsprüfung?
-  Antwort: Nein. Er prüft eine Seite und bis zu vier verlinkte Kontakt- und Buchungsseiten auf 25 bis 30 bewertete Punkte, je nach Messverfahren für das Tempo, und liefert Hinweise. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
+  Antwort: Nein. Er prüft eine Seite und bis zu vier verlinkte Kontakt- und Buchungsseiten auf 25 bis 30 bewertete Punkte, je nach Messverfahren für das Tempo, und zeigt, wie viele davon erfüllt sind. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
 
 ## Online-Shop & Stripe-Checkout
 

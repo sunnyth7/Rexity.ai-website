@@ -1,0 +1,62 @@
+/* /werkzeuge (Sprint 33): the hub of the tools and apps we built. Included only by scripts/pages/45-tools.mjs
+   (content-hash ?v=), after assets/css/work.css, whose hero (rx-whero*), status chip (rx-prod__*), fact ticks
+   (rx-built__facts) and reveal the page reuses; panels, grid, chips, links and the CTA are the shared rx-* layer
+   (assets/css/rexity.css, docs/DESIGN_SYSTEM.md). Only the hub's own pieces are here. Dark site theme; the colours
+   come from the work family's variables (--rxw-*), so the light and contrast palettes follow. Micro labels >= 12 px. */
+
+.rx-thero .rx-whero__text { max-width: 52rem; }
+.rx-thero .rx-whero__tag { max-width: 44rem; }
+.rx-thero .rx-whero__lead { max-width: 44rem; }
+.rx-thero__jump { max-width: 100%; margin-top: 12px; }
+
+/* a card reached through the jump row or a ListItem anchor stays clear of the fixed header */
+.rx-tool, #werkzeuge, #apps { scroll-margin-top: 6rem; }
+
+#main .rx-tool { gap: 14px; }
+.rx-tool .rx-prod__name { margin: 0; color: var(--rxw-ink); font: 600 var(--rx-fs-card) / 1.25 var(--font-families--primary); letter-spacing: -0.01em; }
+.rx-tool .rx-prod__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.rx-tool .rx-prod__text { max-width: var(--rx-measure); color: var(--rxw-ink); font-size: 1rem; line-height: 1.55; }
+.rx-tool .rx-prod__text + .rx-prod__text { color: var(--rxw-muted); font-size: 0.9375rem; }
+
+.rx-tool__label { margin: 0 0 8px; color: var(--rxw-muted); font: 500 0.875rem / 1.3 var(--font-families--primary); letter-spacing: 0; }
+.rx-tool__areas .rx-chip { min-height: 32px; padding: 4px 12px; font-size: 0.8125rem; }
+
+/* "So nutzen Sie es": two numbered lines; the addresses wrap inside the card on a phone */
+.rx-tool__steps { display: grid; gap: 10px; margin: 0; padding: 0 0 0 1.25rem; color: var(--rxw-ink); font-size: 0.9375rem; line-height: 1.55; }
+.rx-tool__steps li { padding-left: 2px; }
+.rx-tool__steps li::marker { color: var(--rxw-muted); }
+.rx-tool__code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--rxw-ink) 9%, transparent);
+  color: var(--rxw-ink);
+  font: 0.875em / 1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* "Wofür" / "Stand" */
+.rx-tool__facts { display: grid; gap: 10px; margin: 0; padding-top: 14px; border-top: 1px solid var(--rxw-line); }
+.rx-tool__row { display: grid; gap: 2px; }
+.rx-tool__facts dt { color: var(--rxw-muted); font: 500 0.8125rem / 1.3 var(--font-families--primary); }
+.rx-tool__facts dd { margin: 0; color: var(--rxw-ink); font-size: 0.9375rem; line-height: 1.5; }
+
+.rx-tool__foot { display: flex; flex-wrap: wrap; gap: 0 24px; }
+
+/* the two app cards: the homepage's render of the same product on its accent stage; the box has the image's ratio */
+.rx-tool__visual {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 90% at 20% 0%, rgba(255, 255, 255, 0.24), transparent 60%),
+    linear-gradient(160deg, var(--rx-card-accent, #3a3a3a), color-mix(in srgb, var(--rx-card-accent, #3a3a3a) 62%, #000));
+}
+.rx-tool__visual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.rx-tools__more { margin-top: 20px; }
+
+/* tool cards with a screenshot of the tool: plain frame, picture from the top */
+.rx-tool__visual--shot { background: #f4f1fc; border: 1px solid var(--rxw-line); }
+.rx-tool__visual--shot img { object-position: top center; }

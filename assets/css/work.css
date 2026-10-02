@@ -416,3 +416,5 @@ html[data-palette="contrast"] #main { --rxw-line: rgba(16, 35, 63, 0.14); }
 .rx-built__shots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: 100%; margin: 4px 0 0; padding: 0; list-style: none; }
 .rx-built__shots img { display: block; width: 100%; height: auto; border-radius: 10px; }
 .rx-built__links .rx-wlive { font-size: 1rem; }
+/* Sprint 33: the link to /werkzeuge under the two cards */
+.rx-built__more { margin-top: 20px; }

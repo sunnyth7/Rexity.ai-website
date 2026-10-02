@@ -23,7 +23,7 @@ Rexity Labs UG (haftungsbeschränkt) ist ein kleines Software-Studio aus Hermann
 - [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
 - [Website-Relaunch und Umzug (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Website für Handwerker (Anfrageformular, Leistungsseiten, Terminbuchung)](https://www.rexity.ai/website-f%C3%BCr-handwerker): Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 € (Festpreise, netto zzgl. MwSt.).
-- [Kostenloser Website-Check (Tempo, Auffindbarkeit, Anfrage-Wege)](https://www.rexity.ai/website-check): Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in einer Minute geprüft – mit den drei wichtigsten Schritten.
+- [Kostenloser Website-Check (Tempo, Auffindbarkeit, Anfrage-Wege)](https://www.rexity.ai/website-check): Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in etwa einer Minute. Punkte sofort, alle Messwerte per E-Mail.
 - [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
@@ -88,6 +88,19 @@ Beispiel-Websites, die Rexity für einzelne Branchen gestaltet und gebaut hat; k
 - [Website mit Online-Kursbuchung für Fitnessstudios](https://www.rexity.ai/fitnessstudio-website): Website für Ihr Fitnessstudio mit Online-Kursbuchung: Mitglieder buchen und stornieren Kursplätze selbst, ohne Kundenkonto. Festpreis ab 1.999 €.
 - [Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten](https://www.rexity.ai/kfz-aufbereitung-website): Werkstatt-Website mit Online-Terminbuchung für Kfz-Aufbereiter: nur freie Zeiten, keine Doppelbuchung, Verwaltung am Handy. Ab 1.999 € Festpreis.
 - [Was kostet eine Website mit Kursbuchung?](https://www.rexity.ai/website-mit-kursbuchung-kosten): Was kostet eine Website mit Online-Kursbuchung? Ab 1.999 € Festpreis, Wartung optional ab 999 € im Jahr. Preisfaktoren und laufende Kosten erklärt.
+
+## Website-Check für KI-Assistenten
+
+Der kostenlose Website-Check lässt sich auch direkt von Assistenten und Programmen aufrufen, ohne Schlüssel und ohne Anmeldung.
+
+- Wann nutzen: wenn jemand wissen möchte, wie gut die öffentlich erreichbare Website eines Betriebs für Besucher und Anfragen funktioniert (Tempo und Technik, Auffindbarkeit, Anfrage-Tauglichkeit, Vertrauen und Recht). Nur für öffentliche http/https-Websites; eine Prüfung dauert bis etwa eine Minute.
+- Abruf per GET: `https://www.rexity.ai/api/check?url=ADRESSE&lang=de` liefert JSON; mit `&format=md` oder dem Header `Accept: text/markdown` Markdown; `lang=en` für Englisch. Beschreibung der Schnittstelle: [OpenAPI](https://www.rexity.ai/.well-known/openapi.json).
+- Abruf per MCP: [https://www.rexity.ai/mcp](https://www.rexity.ai/mcp) (Streamable HTTP), ein Werkzeug `website_check` mit `url` und optional `lang`; es liefert dasselbe Ergebnis als Markdown.
+- Was das Ergebnis enthält: den Gesamtwert von 0 bis 100 mit Einordnung (gut, mittel, schwach), die Werte der vier Bereiche, je Bereich einen Satz und die Zahl der Prüfpunkte nach Status (erfüllt, teilweise, offen, Hinweis, nicht prüfbar), die Messmethode beim Tempo (mit den vier Lighthouse-Werten sowie LCP, CLS und TBT, wenn Lighthouse gemessen hat), die geprüfte Adresse, den Zeitpunkt und die Bezeichnungen der mitgelesenen Seiten.
+- Was es nicht enthält: einzelne Prüfpunkte, Messwerte einzelner Prüfpunkte und Handlungsempfehlungen.
+- Vollständiger Bericht: nur per E-Mail. Er geht an eine Adresse, die auf der Seite [Website-Check](https://www.rexity.ai/website-check) eingetragen und über den Link in einer Bestätigungs-E-Mail bestätigt wurde; über die Schnittstelle lässt er sich nicht abrufen.
+- Grenzen: 3 neue Prüfungen pro IP-Adresse und Stunde, 30 Anfragen pro IP-Adresse in 10 Minuten, dazu eine Tagesobergrenze für alle Aufrufer. Ergebnisse gelten 24 Stunden und zählen in dieser Zeit nicht als neue Prüfung. Ist eine Grenze erreicht, antwortet die Schnittstelle mit 429 und `Retry-After`.
+- Wer abruft: der Prüf-Dienst [RexityWebsiteCheck](https://www.rexity.ai/website-check/bot); dort steht, was er abruft und wie Betreiber ihre Website ausnehmen.
 
 ## Was wir nicht tun
 

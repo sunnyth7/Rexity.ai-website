@@ -45,20 +45,9 @@ function globalCeilingExceeded() {
   return false;
 }
 
-const TURNSTILE_SECRET = String(process.env.TURNSTILE_SECRET_KEY || "").trim();
-async function verifyTurnstile(token, ip) {
-  if (!token) return false;
-  try {
-    const body = new URLSearchParams({ secret: TURNSTILE_SECRET, response: token });
-    if (ip && ip !== "unknown") body.set("remoteip", ip);
-    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: body, signal: AbortSignal.timeout(5000) });
-    const j = await r.json();
-    return Boolean(j && j.success);
-  } catch (_e) {
-    console.error("[lead] turnstile verification unavailable");
-    return false;
-  }
-}
+// Cloudflare Turnstile: api/_turnstile.js (shared with the Website-Check, api/check.js).
+const { verifyTurnstile, turnstileSecret } = require("./_turnstile");
+const TURNSTILE_SECRET = turnstileSecret();
 
 function refererPath(req) {
   try {
@@ -164,14 +153,18 @@ module.exports = async function handler(req, res) {
   const service = clip(data.service, 300).trim();
   const isChat = service === "Chatbot";
 
-  // Bot protection for the chat's entry form (founder, 2 Oct 2026): Cloudflare Turnstile. Active only when
-  // TURNSTILE_SECRET_KEY is set in Vercel and the widget carries the matching site key; without it the honeypot
-  // and the rate limits above remain the protection.
-  if (isChat && TURNSTILE_SECRET) {
+  // Bot protection (Cloudflare Turnstile, api/_turnstile.js). Active only when TURNSTILE_SECRET_KEY is set in Vercel.
+  // Sprint 31: then EVERY lead submission needs a valid token: the chat's entry form and its hand-over form (service
+  // "Chatbot", rexity-chatbot.js) and the contact form (form[data-rx-form="lead"], assets/js/rexity.js). The one
+  // exception is the chat transcript above: it is sent with navigator.sendBeacon when the page is left and cannot
+  // carry a token (it writes nothing to the database and mails only us). Without the secret the honeypot and the
+  // rate limits above remain the protection.
+  if (TURNSTILE_SECRET) {
     const ok = await verifyTurnstile(clip(data.turnstileToken, 4000), clientIp(req));
     if (!ok) {
+      console.log("[lead] bot check refused a " + (isChat ? "chat" : "contact-form") + " submission");
       res.statusCode = 403;
-      res.end(JSON.stringify({ ok: false, error: "Bot check failed. Please try again." }));
+      res.end(JSON.stringify({ ok: false, code: "bot_check", error: "Bot check failed. Please try again." }));
       return;
     }
   }
@@ -234,3 +227,4 @@ module.exports = async function handler(req, res) {
 };
 // Sprint 27: the Website-Check (api/check.js) stores its report requests through the same insert.
 module.exports.insertLead = insertLead;
+module.exports.verifyTurnstile = verifyTurnstile;

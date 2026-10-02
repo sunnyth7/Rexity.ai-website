@@ -213,14 +213,22 @@ async function sendMail(m) {
   const fromEmail = str(process.env.LEAD_NOTIFY_FROM) || "info@rexity.ai";
   const toEmail = str(process.env.LEAD_NOTIFY_TO) || "info@rexity.ai";
   try {
-    const r = await brevoSend(apiKey, {
+    const payload = {
       sender: { name: "Rexity Labs UG", email: fromEmail },
       to: [{ email: to }],
       replyTo: { email: toEmail },
       subject: str(m.subject).slice(0, 200),
       textContent: String(m.textContent || ""),
       htmlContent: String(m.htmlContent || "")
-    });
+    };
+    // Sprint 34: optional mail headers (the follow-up mail's List-Unsubscribe / List-Unsubscribe-Post). Plain
+    // one-line values only.
+    if (m.headers && typeof m.headers === "object") {
+      const headers = {};
+      for (const [k, v] of Object.entries(m.headers)) if (/^[A-Za-z][A-Za-z0-9-]{0,60}$/.test(k) && typeof v === "string" && v.length <= 2500 && !/[\r\n]/.test(v)) headers[k] = v;
+      if (Object.keys(headers).length) payload.headers = headers;
+    }
+    const r = await brevoSend(apiKey, payload);
     console.log("[notify] mail=report sent=" + r.ok + " status=" + r.status + (r.ok ? "" : " detail=" + r.detail));
     return r.ok ? { sent: true, status: r.status } : { sent: false, status: r.status, reason: "http_" + r.status };
   } catch (err) {

@@ -1,16 +1,27 @@
-/* website-check.js — Sprint 27 / 27b, /website-check only (loaded with defer by scripts/pages/30-services.mjs).
+/* website-check.js — /website-check only (loaded with defer by scripts/pages/30-services.mjs).
    Drives the tool rendered by scripts/pages/lib-services/check-tool.mjs: the address form in the hero, the report
-   card below it. Sends the address to /api/check, shows a calm step list while the check runs, then fills the
-   report: overall ring, Kurzfazit, "Was jetzt am meisten bringt", four area cards with every check open, and the
-   report-by-mail form. No data is stored in the browser.
+   card below it. Contract: docs/CHECK_API.md. No data is stored in the browser.
+
+   What the page shows (Sprint 31): the PUBLIC tier only. An overall ring with its band word and the Kurzfazit, four
+   area cards (small ring, verdict line, how many checks ended in which state), the speed card's method and, when
+   Lighthouse ran, its four category scores and LCP/CLS/TBT, and the pages read. The single checks and their
+   measured values go to the visitor's e-mail address after it was confirmed (report box). No advice anywhere.
+
+   Bot check (Cloudflare Turnstile): the widget is rendered explicitly into [data-wc-ts], the script from
+   challenges.cloudflare.com is loaded only when the visitor touches the form, and never on localhost / 127.0.0.1
+   (the widget's host name is rexity.ai; a local run sends no token and works when the server has no secret).
+   A token is single-use and sent as `turnstileToken`; a verified answer carries a `pass` (30 minutes) that the
+   later requests of the visit send instead (language switch, report request). A 403 `bot_check` gets one retry
+   with a fresh token, then a clear message.
 
    Layout: the report card is shown in the same task as the visitor's click and keeps one screen of height while
-   the check runs (website-check.css, .is-busy); the result then fills space below the fold.
+   the check runs (website-check-report.css, .is-busy); the result then fills space below the fold.
 
    Accessibility: one polite live region announces the step that is running and the finished result; errors are
    announced (role="alert") and focus goes to the field; when a result arrives, focus moves to the report heading.
-   Every check carries a mark and a word for its state (never colour alone). Reduced motion: no pulse, no ring
-   transition, no smooth scroll (website-check.css, and the check below).
+   Every state carries a word (never colour alone). Reduced motion: no pulse, no ring draw-in, no counting up, no
+   smooth scroll. The score card cannot be selected with the pointer and has no context menu; that changes nothing
+   for the keyboard, for focus, for screen readers or for the form fields (they are outside the card).
 
    The steps follow the clock, not the server (the function answers once, at the end): they say what is being
    done, in the order the parts usually finish. */
@@ -29,12 +40,15 @@
   var statusText = q("[data-wc-status-text]");
   var errorBox = form.querySelector("[data-wc-error]");
   var submit = form.querySelector("[data-wc-submit]");
+  var tsBox = form.querySelector("[data-wc-ts]");
   var mailSubmit = q("[data-wc-mail-submit]");
   var mailStatus = q("[data-wc-mail-status]");
+  var mailAsk = q("[data-wc-mail-ask]");
+  var mailDone = q("[data-wc-mail-done]");
   var title = q("[data-wc-title]");
   var urlInput = doc.getElementById("wc-url");
   var emailInput = doc.getElementById("wc-email");
-  if (!report || !mail || !urlInput || !emailInput) return;
+  if (!report || !mail || !urlInput || !emailInput || !mailAsk || !mailDone) return;
   // The report card's stylesheet: the card is hidden until a check starts, so the file is fetched after the page
   // has loaded (or as soon as the visitor touches the form), never in competition with the first paint.
   var cssHref = form.getAttribute("data-wc-css");
@@ -49,8 +63,6 @@
   }
   if (doc.readyState === "complete") setTimeout(addCss, 0);
   else window.addEventListener("load", function () { setTimeout(addCss, 0); });
-  form.addEventListener("focusin", addCss);
-  form.addEventListener("pointerdown", addCss);
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var S = {
@@ -58,7 +70,6 @@
       steps: ["Die Seite wird abgerufen.", "Die Kontaktwege werden geprüft, auch auf verlinkten Kontakt- und Buchungsseiten.", "Auffindbarkeit und Pflichtseiten werden geprüft.", "Das Tempo wird gemessen. Das dauert am längsten, bis zu etwa einer Minute.", "Das Ergebnis wird zusammengestellt."],
       running: "Die Prüfung läuft",
       resultFor: "Ihr Ergebnis",
-      checking: function (u) { return u; },
       done: function (host, score) { return "Prüfung abgeschlossen: " + host + (score === null ? " – kein Gesamtwert, weil kein Bereich geprüft werden konnte." : " erreicht insgesamt " + score + " von 100 Punkten."); },
       cached: "Ergebnis der letzten 24 Stunden",
       empty: "Bitte geben Sie die Adresse Ihrer Website ein.",
@@ -67,28 +78,25 @@
       notChecked: "nicht prüfbar",
       when: function (date) { return "geprüft am " + date; },
       wait: "Bitte einen Moment Geduld",
-      metrics: "Laborwerte von Lighthouse: ",
       band: { good: "gut", mid: "mittel", low: "schwach" },
       of100: function (n) { return n + " von 100"; },
-      overallOf: function (n) { return n === 4 ? "von 100 Punkten, aus allen vier Bereichen" : "von 100 Punkten, aus " + n + " von vier Bereichen"; },
+      overallOf: function (n) { return n === 4 ? "aus allen vier Bereichen" : "aus " + n + " von vier Bereichen"; },
       overallNone: "Kein Gesamtwert: Kein Bereich ließ sich prüfen.",
       status: { ok: "erfüllt", partial: "teilweise", fail: "offen", info: "Hinweis", unknown: "nicht prüfbar", na: "entfällt" },
-      pts: function (p, m) { return p + " von " + m; },
-      ptsNone: "ohne Punkte",
-      pages: function (list) { return "Mitgeprüfte Seiten: " + list.join(", "); },
-      rankIn: function (qy, p) { return "Platz " + p + " bei Google für „" + qy + "“ (Deutschland)"; },
-      rankOut: function (qy) { return "Für „" + qy + "“ nicht in den ersten 20 Ergebnissen bei Google (Deutschland)"; },
-      rankFail: function (qy) { return "Platz bei Google für „" + qy + "“: nicht prüfbar"; },
-      rankOff: "Die Platz-Abfrage bei Google ist derzeit nicht verfügbar.",
-      rankLabel: "Platz bei Google",
+      pages: function (list) { return "Mitgelesene Seiten: " + list.join(", ") + "."; },
       truncated: "Die Seite ist sehr groß; ausgewertet wurden die ersten 1,5 MB.",
-      noFix: "In den geprüften Punkten haben wir nichts gefunden, das Sie dringend ändern müssten.",
-      ai: "Kurzfazit von einer KI aus den Messwerten dieses Ergebnisses formuliert.",
-      mailReady: "Der Bericht ist bereit zum Versand.",
-      mailSending: "Der Bericht wird gesendet …",
-      mailSent: "Gesendet. Der Bericht ist unterwegs an Ihre Adresse.",
+      ai: "Kurzfazit von einer KI aus den Werten dieses Ergebnisses formuliert.",
+      lh: { performance: "Leistung", accessibility: "Barrierefreiheit", bestPractices: "Best Practices", seo: "SEO" },
+      mailSending: "Wird gesendet …",
       mailBad: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-      mailFail: "Der Bericht konnte gerade nicht versendet werden. Bitte schreiben Sie uns an info@rexity.ai.",
+      mailFail: "Die E-Mail konnte gerade nicht versendet werden. Bitte versuchen Sie es später erneut oder schreiben Sie uns an info@rexity.ai.",
+      confirmH: "Bestätigungs-Mail unterwegs",
+      confirmP: function (email, hours) { return "Wir haben eine E-Mail an " + email + " geschickt. Öffnen Sie den Link darin und bestätigen Sie dort den Versand; dann senden wir Ihnen den Bericht mit allen Messwerten. Der Link gilt " + hours + " Stunden. Nichts angekommen? Bitte sehen Sie auch im Spam-Ordner nach."; },
+      sentH: "Bericht unterwegs",
+      sentP: function (email) { return "Der Bericht mit allen Messwerten ist unterwegs an " + email + "."; },
+      botWait: "Kurze Sicherheitsprüfung …",
+      botAsk: "Bitte bestätigen Sie kurz im Feld unter der Adresse, dass Sie kein automatisches Programm sind.",
+      botFail: "Die Sicherheitsprüfung (Schutz vor automatischen Anfragen) ist nicht durchgelaufen. Bitte versuchen Sie es noch einmal. Hilft das nicht, laden Sie die Seite neu; ein Inhaltsblocker kann die Prüfung verhindern.",
       offer: {
         design: ["Webdesign: Websites, die Anfragen bringen", "/web/web-design"],
         relaunch: ["Website-Relaunch: neue Technik, gleiche Adresse", "/web/website-umzug"],
@@ -99,7 +107,6 @@
       steps: ["Fetching the page.", "Checking the ways to get in touch, also on linked contact and booking pages.", "Checking findability and mandatory pages.", "Measuring speed. This takes longest, up to about a minute.", "Putting the result together."],
       running: "The check is running",
       resultFor: "Your result",
-      checking: function (u) { return u; },
       done: function (host, score) { return "Check finished: " + host + (score === null ? " – no overall value because no area could be checked." : " reaches " + score + " out of 100 points overall."); },
       cached: "result from the last 24 hours",
       empty: "Please enter the address of your website.",
@@ -108,28 +115,25 @@
       notChecked: "could not be checked",
       when: function (date) { return "checked on " + date; },
       wait: "One moment, please",
-      metrics: "Lighthouse lab values: ",
       band: { good: "good", mid: "medium", low: "weak" },
       of100: function (n) { return n + " out of 100"; },
-      overallOf: function (n) { return n === 4 ? "out of 100 points, from all four areas" : "out of 100 points, from " + n + " of four areas"; },
+      overallOf: function (n) { return n === 4 ? "from all four areas" : "from " + n + " of four areas"; },
       overallNone: "No overall value: no area could be checked.",
       status: { ok: "met", partial: "partly", fail: "open", info: "note", unknown: "could not be checked", na: "does not apply" },
-      pts: function (p, m) { return p + " of " + m; },
-      ptsNone: "no points",
-      pages: function (list) { return "Pages read as well: " + list.join(", "); },
-      rankIn: function (qy, p) { return "Position " + p + " on Google for “" + qy + "” (Germany)"; },
-      rankOut: function (qy) { return "Not in the first 20 results on Google for “" + qy + "” (Germany)"; },
-      rankFail: function (qy) { return "Position on Google for “" + qy + "”: could not be checked"; },
-      rankOff: "The Google position lookup is not available at the moment.",
-      rankLabel: "Position on Google",
+      pages: function (list) { return "Pages read as well: " + list.join(", ") + "."; },
       truncated: "The page is very large; the first 1.5 MB were evaluated.",
-      noFix: "In the points we checked we found nothing that you urgently need to change.",
-      ai: "Short verdict worded by an AI from the measurements of this result.",
-      mailReady: "The report is ready to send.",
-      mailSending: "Sending the report …",
-      mailSent: "Sent. The report is on its way to your address.",
+      ai: "Short verdict worded by an AI from the values of this result.",
+      lh: { performance: "Performance", accessibility: "Accessibility", bestPractices: "Best practices", seo: "SEO" },
+      mailSending: "Sending …",
       mailBad: "Please enter a valid e-mail address.",
-      mailFail: "The report could not be sent just now. Please write to info@rexity.ai.",
+      mailFail: "The e-mail could not be sent just now. Please try again later or write to info@rexity.ai.",
+      confirmH: "Confirmation e-mail on its way",
+      confirmP: function (email, hours) { return "We have sent an e-mail to " + email + ". Open the link in it and confirm the dispatch there; then we send you the report with all measured values. The link is valid for " + hours + " hours. Nothing arrived? Please look in your spam folder as well."; },
+      sentH: "Report on its way",
+      sentP: function (email) { return "The report with all measured values is on its way to " + email + "."; },
+      botWait: "A short security check …",
+      botAsk: "Please confirm briefly in the box under the address that you are not an automated program.",
+      botFail: "The security check (protection against automated requests) did not complete. Please try once more. If that does not help, reload the page; a content blocker can prevent the check.",
       offer: {
         design: ["Web design: websites that bring enquiries", "/web/web-design"],
         relaunch: ["Website relaunch: new technology, same address", "/web/website-umzug"],
@@ -137,8 +141,8 @@
       }
     }
   };
-  var MARK = { ok: "✓", partial: "~", fail: "✕", info: "i", unknown: "?", na: "–" };
   var BLOCKS = ["tempo", "find", "contact", "trust"];
+  var ORDER = ["ok", "partial", "fail", "info", "unknown", "na"];
   var STEP_AT = [0, 1.2, 2.6, 4.2, 48]; // seconds at which each step becomes the active one
 
   function lang() {
@@ -156,13 +160,146 @@
     for (var i = 0; i < children.length; i++) node.appendChild(children[i]);
   }
   function show(node, on) { if (on) node.removeAttribute("hidden"); else node.setAttribute("hidden", ""); }
-  function num(n, lg) { return lg === "de" ? String(n).replace(".", ",") : String(n); }
 
-  var state = { busy: false, last: null, lastInput: null, timer: null, mailState: "idle", step: -1 };
+  var state = { busy: false, last: null, lastInput: null, timer: null, mailState: "idle", mailTo: "", mailHours: 48, step: -1, pass: null, passUntil: 0, noCheck: false };
+
+  // ---------------------------------------------------------------- bot check (Cloudflare Turnstile)
+  var host = location.hostname;
+  var LOCAL = host === "localhost" || host === "127.0.0.1";
+  var siteKey = form.getAttribute("data-wc-sitekey") || "";
+  var bot = { on: !!(siteKey && tsBox) && !LOCAL, id: null, token: null, stale: false, loading: false, waiters: [], asking: false };
+  var TS_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+  function botSettle(token) {
+    if (bot.waiters.length) {
+      var w = bot.waiters;
+      bot.waiters = [];
+      bot.token = null;
+      if (token) bot.stale = true; // handed out: the widget must be reset before the next token
+      for (var i = 0; i < w.length; i++) w[i](i === 0 ? token : null);
+    } else {
+      bot.token = token;
+    }
+  }
+  function botReset() {
+    bot.token = null;
+    bot.stale = false;
+    try { if (bot.id !== null && window.turnstile) window.turnstile.reset(bot.id); } catch (e) { /* nothing */ }
+  }
+  function botRender() {
+    if (!bot.on || bot.id !== null || !window.turnstile) return;
+    try {
+      bot.id = window.turnstile.render(tsBox, {
+        sitekey: siteKey,
+        theme: "light",
+        language: lang(),
+        size: "flexible",
+        appearance: "interaction-only", // the box shows itself only when Cloudflare wants an interaction
+        "refresh-expired": "manual",
+        callback: function (token) { bot.stale = false; botSettle(token); },
+        "expired-callback": function () { botReset(); }, // a token lives five minutes: get a fresh one
+        "timeout-callback": function () { botReset(); },
+        "error-callback": function () { bot.token = null; botSettle(null); return true; },
+        "before-interactive-callback": function () { bot.asking = true; tsBox.setAttribute("data-on", ""); if (bot.waiters.length) statusText.textContent = L().botAsk; },
+        "after-interactive-callback": function () { bot.asking = false; tsBox.removeAttribute("data-on"); }
+      });
+    } catch (e) { bot.id = null; botSettle(null); }
+  }
+  function botLoad() {
+    if (!bot.on || bot.id !== null || bot.loading) return;
+    if (window.turnstile) { botRender(); return; }
+    bot.loading = true;
+    var tries = 0;
+    var poll = setInterval(function () {
+      if (window.turnstile) { clearInterval(poll); bot.loading = false; botRender(); }
+      else if (++tries > 100) { clearInterval(poll); bot.loading = false; botSettle(null); }
+    }, 150);
+    if (doc.querySelector('script[src^="https://challenges.cloudflare.com/turnstile/"]')) return; // the chat form loads the same file
+    var s = doc.createElement("script");
+    s.src = TS_SRC;
+    s.async = true;
+    s.onerror = function () { clearInterval(poll); bot.loading = false; if (s.parentNode) s.parentNode.removeChild(s); botSettle(null); };
+    doc.head.appendChild(s);
+  }
+  /* -> Promise<string|null>: a token nobody has used yet, or null when none could be had in time */
+  function botToken() {
+    return new Promise(function (resolve) {
+      if (bot.token) { var tk = bot.token; bot.token = null; bot.stale = true; resolve(tk); return; }
+      var done = false;
+      var timer = setTimeout(function () { if (done) return; done = true; resolve(null); }, 60000);
+      bot.waiters.push(function (token) { if (done) return; done = true; clearTimeout(timer); resolve(token); });
+      if (bot.id === null) botLoad();
+      else if (bot.stale) botReset();
+    });
+  }
+  /* -> Promise<object|null>: the fields that prove the bot check ({} when none is needed), or null */
+  function proof(force) {
+    if (!bot.on) return Promise.resolve({});
+    if (!force && state.pass && state.passUntil > Date.now() + 5000) return Promise.resolve({ pass: state.pass });
+    if (!force && state.noCheck) return Promise.resolve({}); // the server answered a request without issuing a pass: its check is off
+    return botToken().then(function (token) { return token ? { turnstileToken: token } : null; });
+  }
+  if (bot.on) {
+    form.addEventListener("focusin", botLoad);
+    form.addEventListener("pointerdown", botLoad);
+  }
+  form.addEventListener("focusin", addCss);
+  form.addEventListener("pointerdown", addCss);
+
+  // ---------------------------------------------------------------- requests
+  function post(body, timeoutMs) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, timeoutMs) : null;
+    return fetch("/api/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: ctrl ? ctrl.signal : undefined })
+      .then(function (resp) { return resp.json().catch(function () { return null; }).then(function (data) { return { status: resp.status, data: data }; }); })
+      .then(function (r) { if (timer) clearTimeout(timer); return r; }, function (e) { if (timer) clearTimeout(timer); throw e; });
+  }
+  /* one request with the bot check's proof; a 403 bot_check is repeated once with a fresh token */
+  function send(body, timeoutMs, retried) {
+    return proof(!!retried).then(function (p) {
+      if (!p) return { status: 403, data: { ok: false, error: "bot_check", message: L().botFail } };
+      var b = {};
+      var k;
+      for (k in body) if (Object.prototype.hasOwnProperty.call(body, k)) b[k] = body[k];
+      for (k in p) if (Object.prototype.hasOwnProperty.call(p, k)) b[k] = p[k];
+      return post(b, timeoutMs).then(function (r) {
+        var d = r.data;
+        if (d && d.pass) {
+          state.pass = d.pass;
+          state.passUntil = d.passExpiresAt ? Date.parse(d.passExpiresAt) || 0 : Date.now() + 25 * 60000;
+          state.noCheck = false;
+        } else if (d && d.ok && p.turnstileToken) {
+          state.noCheck = true;
+        }
+        if (r.status === 403 && d && d.error === "bot_check") {
+          state.pass = null;
+          state.passUntil = 0;
+          state.noCheck = false;
+          if (bot.on && !retried) return send(body, timeoutMs, true);
+          d.message = L().botFail; // our own sentence: it says what to do next
+        }
+        return r;
+      });
+    });
+  }
 
   // ---------------------------------------------------------------- render
   function band(score) { return score >= 80 ? "good" : score >= 50 ? "mid" : "low"; }
-  function setRing(card, score) {
+  function count(node, to, animate) {
+    if (!animate || reduce || !window.requestAnimationFrame) { node.textContent = String(to); return; }
+    var t0 = null;
+    var dur = 900;
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      node.textContent = String(Math.round(to * eased));
+      if (p < 1) window.requestAnimationFrame(frame);
+    }
+    node.textContent = "0";
+    window.requestAnimationFrame(frame);
+  }
+  function setRing(card, score, animate) {
     var n = q("[data-wc-score]", card);
     var arc = q("[data-wc-arc]", card);
     if (score === null || score === undefined) {
@@ -171,85 +308,136 @@
       card.removeAttribute("data-band");
       return;
     }
-    n.textContent = String(score);
-    arc.setAttribute("stroke-dasharray", Math.max(0, Math.min(100, score)) + " 100");
     card.setAttribute("data-band", band(score));
+    var dash = Math.max(0, Math.min(100, score)) + " 100";
+    if (animate && !reduce) {
+      arc.setAttribute("stroke-dasharray", "0 100");
+      arc.getBoundingClientRect(); // the draw-in starts from an empty ring
+    }
+    arc.setAttribute("stroke-dasharray", dash);
+    count(n, score, animate);
   }
-  function itemNode(it) {
-    var t = L();
-    var li = el("li", "wc-item");
-    li.setAttribute("data-status", it.status);
-    var mark = el("span", "wc-item__mark", MARK[it.status] || "");
-    mark.setAttribute("aria-hidden", "true");
-    var label = el("p", "wc-item__label", it.label + " ");
-    label.appendChild(el("span", "wc-item__state", t.status[it.status] || ""));
-    li.appendChild(mark);
-    li.appendChild(label);
-    if (it.detail) li.appendChild(el("p", "wc-item__detail", it.detail));
-    if (it.max > 0 && it.status !== "unknown" && it.status !== "na") li.appendChild(el("p", "wc-item__pts", t.pts(num(it.points, lang()), it.max)));
-    else if (it.status === "info") li.appendChild(el("p", "wc-item__pts", t.ptsNone));
-    return li;
+  function pair(dl, label, value) {
+    var d = el("div", "wc-lh__item");
+    d.appendChild(el("dt", "", label));
+    d.appendChild(el("dd", "", value));
+    dl.appendChild(d);
   }
-  function render(data) {
+  // Sprint 34: the address of the score card for a result (same rule as cardPath() in api/_card.js).
+  function shareUrl(data, lg) {
+    var u;
+    try { u = new URL(data.url); } catch (e) { return null; }
+    var path = (u.pathname.replace(/\/+$/, "") || "/") + (u.search || "");
+    var qs = [];
+    if (path !== "/") qs.push("p=" + encodeURIComponent(path));
+    if (lg === "en") qs.push("lang=en");
+    return location.origin + "/website-check/ergebnis/" + encodeURIComponent(u.hostname.replace(/^www\./, "").toLowerCase()) + (qs.length ? "?" + qs.join("&") : "");
+  }
+  function wireShare(data, lg) {
+    var box = document.querySelector("[data-wc-share]");
+    if (!box) return;
+    var url = data && data.overall && data.overall.score !== null ? shareUrl(data, lg) : null;
+    box.hidden = !url;
+    if (!url) return;
+    var link = box.querySelector("[data-wc-share-link]");
+    var status = box.querySelector("[data-wc-share-status]");
+    var btn = box.querySelector("[data-wc-share-btn]");
+    link.href = url;
+    status.textContent = "";
+    btn.onclick = function () {
+      var en = lg === "en";
+      var say = function (x) { status.textContent = x; };
+      if (navigator.share) { navigator.share({ title: en ? "Website check: result" : "Website-Check: Ergebnis", url: url }).catch(function () {}); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(
+          function () { say(en ? "Link copied." : "Link kopiert."); },
+          function () { say(en ? "Copying did not work. Please use the link next to the button." : "Kopieren hat nicht geklappt. Bitte den Link neben dem Button verwenden."); });
+        return;
+      }
+      say(en ? "Please use the link next to the button." : "Bitte den Link neben dem Button verwenden.");
+    };
+  }
+
+  function render(data, animate) {
     var t = L();
     var lg = lang();
+    wireShare(data, lg);
     var date = "";
     try { date = new Intl.DateTimeFormat(lg === "en" ? "en-GB" : "de-DE", { dateStyle: "long", timeStyle: "short" }).format(new Date(data.checkedAt)); } catch (e) { date = data.checkedAt; }
     var site = q("[data-wc-site]");
     site.textContent = data.finalUrl || data.url;
     site.setAttribute("title", data.finalUrl || data.url);
-    q("[data-wc-when]").textContent = t.when(date);
+    q("[data-wc-when]").textContent = t.when(date) + (data.cached ? " · " + t.cached : "");
 
     var overall = q('[data-wc-block="overall"]');
-    setRing(overall, data.overall.score);
     var has = data.overall.score !== null && data.overall.score !== undefined;
-    q("[data-wc-band]", overall).textContent = has ? t.band[band(data.overall.score)] : t.notChecked;
-    q("[data-wc-of]", overall).textContent = (has ? t.overallOf(data.overall.blocksUsed.length) : t.overallNone) + (data.cached ? " · " + t.cached : "");
+    setRing(overall, has ? data.overall.score : null, animate);
+    q("[data-wc-band]", overall).textContent = has ? (data.overall.bandLabel || t.band[band(data.overall.score)]) : t.notChecked;
+    q("[data-wc-of]", overall).textContent = has ? t.overallOf(data.overall.blocksUsed.length) : t.overallNone;
     q("[data-wc-sr]", overall).textContent = has ? t.of100(data.overall.score) + ". " : "";
 
     for (var i = 0; i < BLOCKS.length; i++) {
       var id = BLOCKS[i];
       var b = data.blocks[id];
       var card = q('[data-wc-block="' + id + '"]');
-      setRing(card, b.score);
-      var scored = b.score !== null && b.score !== undefined;
-      q("[data-wc-sr]", card).textContent = scored ? t.of100(b.score) + ", " + t.band[band(b.score)] + ". " : t.notChecked + ". ";
+      var scored = b.checked && b.score !== null && b.score !== undefined;
+      setRing(card, scored ? b.score : null, animate);
+      q("[data-wc-bandword]", card).textContent = scored ? (b.bandLabel || t.band[band(b.score)]) : t.notChecked;
+      q("[data-wc-sr]", card).textContent = scored ? ", " + t.of100(b.score) + "." : ".";
       q("[data-wc-verdict]", card).textContent = b.checked ? (b.verdict || "") : (b.reason || t.notChecked);
-      var method = q("[data-wc-method]", card);
-      method.textContent = b.methodLabel || "";
-      show(method, !!b.methodLabel);
-      var nodes = [];
-      if (id === "find") {
-        if (b.ranking) {
-          var r = b.ranking;
-          nodes.push(itemNode({ status: "info", label: t.rankLabel, detail: !r.checked ? t.rankFail(r.query) : r.position ? t.rankIn(r.query, r.position) : t.rankOut(r.query), max: 0 }));
-        } else if (b.checked && state.lastInput && state.lastInput.trade && state.lastInput.town) {
-          nodes.push(itemNode({ status: "unknown", label: t.rankLabel, detail: t.rankOff, max: 0 }));
+      // how many checks ended in which state (the checks themselves are in the report e-mail)
+      var chips = [];
+      var counts = b.counts || {};
+      for (var k = 0; k < ORDER.length; k++) {
+        var st = ORDER[k];
+        if (!counts[st]) continue;
+        var li = el("li", "wc-chip");
+        li.setAttribute("data-status", st);
+        var dot = el("span", "wc-chip__dot");
+        dot.setAttribute("aria-hidden", "true");
+        li.appendChild(dot);
+        li.appendChild(el("b", "", String(counts[st])));
+        li.appendChild(doc.createTextNode(" " + ((data.statusLabels && data.statusLabels[st]) || t.status[st])));
+        chips.push(li);
+      }
+      var list = q("[data-wc-chips]", card);
+      fill(list, chips);
+      show(list, chips.length > 0);
+      if (id !== "tempo") continue;
+      // the speed card: the method, Lighthouse's four category scores and lab values (only when Lighthouse ran), the note
+      var speed = q("[data-wc-speed]", card);
+      q("[data-wc-method]", speed).textContent = b.methodLabel || "";
+      var lh = q("[data-wc-lh]", speed);
+      fill(lh, []);
+      if (b.method === "lighthouse" && b.lighthouse) {
+        var keys = ["performance", "accessibility", "bestPractices", "seo"];
+        for (var x = 0; x < keys.length; x++) {
+          var v = b.lighthouse[keys[x]];
+          pair(lh, t.lh[keys[x]], v === null || v === undefined ? "–" : String(v));
         }
       }
-      for (var k = 0; k < b.items.length; k++) nodes.push(itemNode(b.items[k]));
-      if (!nodes.length) nodes.push(el("li", "wc-item--none", b.reason || t.notChecked));
-      fill(q("[data-wc-items]", card), nodes);
-      // above the list: the method's note (for the own measurement: that it does not replace a Lighthouse run)
-      var note = q("[data-wc-note]", card);
+      show(lh, lh.childNodes.length > 0);
+      var mx = q("[data-wc-metrics]", speed);
+      fill(mx, []);
+      var mt = b.method === "lighthouse" ? b.metrics : null;
+      if (mt) {
+        if (mt.lcp) pair(mx, "LCP", mt.lcp);
+        if (mt.cls) pair(mx, "CLS", mt.cls);
+        if (mt.tbt) pair(mx, "TBT", mt.tbt);
+      }
+      show(mx, mx.childNodes.length > 0);
+      var note = q("[data-wc-note]", speed);
       note.textContent = b.note || "";
       show(note, !!b.note);
-      // under the list: Lighthouse lab values (only when Lighthouse ran), the pages read as well
-      var extras = [];
-      var mt = b.metrics || null;
-      if (mt && (mt.lcp || mt.cls || mt.tbt)) {
-        var parts = [];
-        if (mt.lcp) parts.push("LCP " + mt.lcp);
-        if (mt.cls) parts.push("CLS " + mt.cls);
-        if (mt.tbt) parts.push("TBT " + mt.tbt);
-        extras.push(t.metrics + parts.join(" · ") + ".");
-      }
-      if (b.pages && b.pages.length) extras.push(t.pages(b.pages) + ".");
-      if (id === "trust" && data.truncated) extras.push(t.truncated);
-      var extra = q("[data-wc-extra]", card);
-      extra.textContent = extras.join(" ");
-      show(extra, extras.length > 0);
+      show(speed, !!b.methodLabel);
     }
+
+    var extras = [];
+    if (data.pages && data.pages.length) extras.push(t.pages(data.pages));
+    if (data.truncated) extras.push(t.truncated);
+    var pages = q("[data-wc-pages]");
+    pages.textContent = extras.join(" ");
+    show(pages, extras.length > 0);
 
     var ps = [];
     var sentences = (data.summary && data.summary.sentences) || [];
@@ -260,12 +448,6 @@
     ai.textContent = byModel ? t.ai : "";
     show(ai, byModel);
 
-    var fixes = data.fixes && data.fixes.length ? data.fixes : (data.firstFix ? [data.firstFix] : []);
-    var lis = [];
-    for (var f = 0; f < fixes.length; f++) lis.push(el("li", "", fixes[f]));
-    if (!lis.length) lis.push(el("li", "wc-fixes__none", t.noFix));
-    fill(q("[data-wc-fixes]"), lis);
-
     var offer = q("[data-wc-offer]");
     var o = t.offer[data.offer] || t.offer.design;
     var od = S.de.offer[data.offer] || S.de.offer.design;
@@ -275,11 +457,20 @@
     if (span) { span.setAttribute("data-de", od[0]); span.setAttribute("data-en", oe[0]); span.textContent = o[0]; }
     setMail(state.mailState === "idle" ? "ready" : state.mailState);
   }
-  function setMail(name) {
+  /* report box: idle (no result yet) → ready → sending → confirm (confirmation mail sent) | sent | bad | fail */
+  function setMail(name, message) {
     var t = L();
     state.mailState = name;
-    mailStatus.setAttribute("data-state", name === "idle" || name === "ready" ? "idle" : name);
-    mailStatus.textContent = name === "idle" ? "" : name === "ready" ? t.mailReady : name === "sending" ? t.mailSending : name === "sent" ? t.mailSent : name === "bad" ? t.mailBad : t.mailFail;
+    var done = name === "confirm" || name === "sent";
+    mail.setAttribute("data-state", name);
+    show(mailAsk, !done);
+    show(mailDone, done);
+    if (done) {
+      q("[data-wc-mail-done-h]", mailDone).textContent = name === "confirm" ? t.confirmH : t.sentH;
+      q("[data-wc-mail-done-p]", mailDone).textContent = name === "confirm" ? t.confirmP(state.mailTo, state.mailHours) : t.sentP(state.mailTo);
+    }
+    mailStatus.setAttribute("data-state", name);
+    mailStatus.textContent = name === "sending" ? t.mailSending : name === "bad" ? t.mailBad : name === "fail" ? (message || t.mailFail) : "";
     mailSubmit.disabled = name === "idle" || name === "sending";
   }
   function showError(message, field) {
@@ -316,7 +507,7 @@
     show(report, true);
     report.classList.add("is-busy");
     setTitle("running");
-    q("[data-wc-site]").textContent = L().checking(input.url);
+    q("[data-wc-site]").textContent = input.url;
     q("[data-wc-when]").textContent = L().wait;
     state.step = -1;
   }
@@ -326,20 +517,20 @@
     show(areas, true);
     statusText.textContent = "";
   }
-  function post(body, timeoutMs) {
-    var ctrl = window.AbortController ? new AbortController() : null;
-    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, timeoutMs) : null;
-    return fetch("/api/check", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body), signal: ctrl ? ctrl.signal : undefined })
-      .then(function (resp) { return resp.json().catch(function () { return null; }).then(function (data) { return { status: resp.status, data: data }; }); })
-      .then(function (r) { if (timer) clearTimeout(timer); return r; }, function (e) { if (timer) clearTimeout(timer); throw e; });
+  function busy(on) {
+    state.busy = on;
+    if (on) submit.setAttribute("aria-disabled", "true"); else submit.removeAttribute("aria-disabled");
+    if (!on && state.timer) { clearInterval(state.timer); state.timer = null; }
   }
   function run(input, quiet) {
     if (state.busy) return;
     clearError();
-    state.busy = true;
+    busy(true);
     state.lastInput = input;
-    submit.setAttribute("aria-disabled", "true");
-    if (!quiet) {
+    var started = false;
+    function begin() {
+      if (quiet || started) return;
+      started = true;
       state.last = null;
       state.mailState = "idle";
       toRunning(input);
@@ -350,16 +541,32 @@
       var top = report.getBoundingClientRect().top;
       if (top < 0 || top > 120) report.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
     }
-    post({ url: input.url, trade: input.trade, town: input.town, lang: lang() }, 100000).then(function (r) {
-      finish();
+    // With a token or a pass at hand (the usual case: the widget was loaded when the field got the focus) the
+    // report card appears in the same task as the click. Otherwise the form says that the security check is
+    // running; the widget, if it asks for anything, sits right under the field.
+    var ready = !bot.on || bot.token || state.noCheck || (state.pass && state.passUntil > Date.now() + 5000);
+    if (ready) begin();
+    else if (!quiet) { form.setAttribute("data-wc-wait", ""); statusText.textContent = bot.asking ? L().botAsk : L().botWait; }
+    var body = { url: input.url, trade: input.trade, town: input.town, lang: lang() };
+    // the proof is fetched first (a pass, a token that is waiting, or a new one), then the check starts
+    proof(false).then(function (p) {
+      form.removeAttribute("data-wc-wait");
+      if (!p) return { status: 403, data: { ok: false, error: "bot_check", message: L().botFail } };
+      begin();
+      if (p.turnstileToken) { bot.token = p.turnstileToken; bot.stale = false; } // hand it back: send() takes it
+      return send(body, 100000);
+    }).then(function (r) {
+      busy(false);
       if (r.data && r.data.ok) {
         state.last = r.data;
-        render(r.data);
         if (!quiet) {
           show(runBox, false);
           show(outBox, true);
           report.classList.remove("is-busy");
           setTitle("resultFor");
+        }
+        render(r.data, !quiet);
+        if (!quiet) {
           try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); }
           var top = report.getBoundingClientRect().top;
           if (top < -40 || top > window.innerHeight * 0.5) report.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
@@ -374,17 +581,13 @@
       var fieldError = code === "bad_url" || code === "bad_scheme" || code === "bad_port" || code === "private_host" || code === "dns";
       showError((r.data && r.data.message) || L().network, fieldError ? urlInput : null);
     }, function (e) {
-      finish();
+      form.removeAttribute("data-wc-wait");
+      busy(false);
       if (quiet) return;
       state.last = null;
       toIdle();
       showError(e && e.name === "AbortError" ? L().timeout : L().network, null);
     });
-  }
-  function finish() {
-    state.busy = false;
-    submit.removeAttribute("aria-disabled");
-    if (state.timer) { clearInterval(state.timer); state.timer = null; }
   }
 
   form.addEventListener("submit", function (e) {
@@ -403,7 +606,14 @@
     try { urlInput.focus({ preventScroll: true }); urlInput.select(); } catch (e) { urlInput.focus(); }
   });
 
-  // ---------------------------------------------------------------- report by e-mail
+  // ---------------------------------------------------------------- the score card: light deterrents only
+  // No context menu on the card (pointer only; the keyboard's menu key on a focused control is untouched because the
+  // card holds no focusable control). Selection is switched off in the stylesheet (user-select). Nothing here stops
+  // a screen reader, the keyboard, or a determined visitor, and it is not meant to.
+  var scoreCard = q("[data-wc-scorecard]");
+  if (scoreCard) scoreCard.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+
+  // ---------------------------------------------------------------- report by e-mail (double opt-in)
   mail.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!state.last || state.mailState === "sending") return;
@@ -416,17 +626,39 @@
     }
     emailInput.removeAttribute("aria-invalid");
     setMail("sending");
-    post({ url: state.last.url, email: email, lang: lang(), company_website: mail.elements.company_website.value }, 100000).then(function (r) {
-      if (r.data && r.data.ok) { setMail("sent"); return; }
-      setMail("fail");
-      if (r.data && r.data.message) mailStatus.textContent = r.data.message;
+    send({ url: state.last.url, email: email, lang: lang(), company_website: mail.elements.company_website.value }, 60000).then(function (r) {
+      if (r.data && r.data.ok) {
+        state.mailTo = email;
+        state.mailHours = r.data.expiresInHours || 48;
+        setMail(r.data.status === "confirmation_sent" ? "confirm" : "sent");
+        try { mailDone.focus({ preventScroll: true }); } catch (e2) { mailDone.focus(); }
+        return;
+      }
+      setMail("fail", r.data && r.data.message);
       if (r.data && r.data.error === "email") { emailInput.setAttribute("aria-invalid", "true"); emailInput.focus(); }
     }, function () { setMail("fail"); });
   });
-  emailInput.addEventListener("input", function () { emailInput.removeAttribute("aria-invalid"); if (state.mailState === "bad" || state.mailState === "fail" || state.mailState === "sent") setMail(state.last ? "ready" : "idle"); });
+  emailInput.addEventListener("input", function () {
+    emailInput.removeAttribute("aria-invalid");
+    if (state.mailState === "bad" || state.mailState === "fail") setMail(state.last ? "ready" : "idle");
+  });
+  var mailReset = q("[data-wc-mail-reset]");
+  if (mailReset) mailReset.addEventListener("click", function () {
+    setMail(state.last ? "ready" : "idle");
+    try { emailInput.focus(); emailInput.select(); } catch (e) { /* nothing */ }
+  });
 
   // ---------------------------------------------------------------- language switch: same result in the other language
   window.addEventListener("rexity:languagechange", function () {
+    // the widget speaks the page's language: render it again (not while a request is waiting for its token)
+    if (bot.on && bot.id !== null && window.turnstile && !bot.waiters.length) {
+      try { window.turnstile.remove(bot.id); } catch (e) { /* nothing */ }
+      bot.id = null;
+      bot.token = null;
+      bot.stale = false;
+      tsBox.removeAttribute("data-on");
+      botRender();
+    }
     if (state.busy) {
       if (state.step >= 0) statusText.textContent = L().steps[state.step];
       q("[data-wc-when]").textContent = L().wait;
@@ -434,8 +666,7 @@
     }
     if (state.last && state.lastInput) {
       var keep = state.mailState;
-      render(state.last); // labels that live in this file switch at once …
-      state.mailState = keep;
+      render(state.last, false); // labels that live in this file switch at once …
       setMail(keep);
       run(state.lastInput, true); // … the report's own texts come from the function (24-hour cache, no new check)
     }

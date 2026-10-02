@@ -1,0 +1,4 @@
+{
+  "_comment": "Websites the Website-Check never requests (api/check.js). One host name per entry, lower case, without scheme, path or 'www.'. An entry covers the host and all its subdomains ('example.de' also covers 'www.example.de' and 'shop.example.de'). Site owners ask by e-mail to info@rexity.ai (see /website-check/bot); add the host here and deploy.",
+  "hosts": []
+}

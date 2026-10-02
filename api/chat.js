@@ -24,13 +24,13 @@
 // (CHAT_DAILY_USD_CEILING, default 2 USD) computed from the usage numbers; over a limit
 // the deterministic FAQ answers.
 //
-// Model providers (see "Provider selection" below):
-//   1. Amazon Bedrock, Claude Sonnet 5 via the EU inference profile (founder decision
-//      2026-09-27), when a Bedrock API key is set and the EU guard passes;
-//   2. Anthropic API (api.anthropic.com), Claude Haiku 4.5, when its key is set AND
-//      CHAT_ALLOW_NON_EU=1. NOT EU-resident; off by default since Sprint 24;
-//   3. Azure OpenAI in the EU data zone, as fallback when the providers above fail or
-//      time out (or as primary when neither is configured).
+// Model providers (see "Provider selection" below). Each feature names its own order (Sprint 30):
+//   - the chat: CHAT_PROVIDER, default Azure OpenAI in the EU data zone first (what answers in
+//     production today), then Amazon Bedrock (Claude via an EU inference profile) as fallback;
+//   - the Website-Check's Kurzfazit (completeText): CHECK_PROVIDER in api/check.js, default
+//     Bedrock first, Azure as fallback;
+//   - Anthropic API (api.anthropic.com), only with its key AND CHAT_ALLOW_NON_EU=1. NOT
+//     EU-resident; off by default since Sprint 24 and never used by completeText.
 //
 // Deterministic (never sent to the model): prompt-injection attempts and refund /
 // billing / legal questions (approved copy from data/rexity-knowledge.json). When no
@@ -97,22 +97,51 @@ const MODEL_TIMEOUT_MS = Math.min(25000, Math.max(100, parseInt(process.env.CHAT
 const AZURE_READY = Boolean(AZURE_ENDPOINT && AZURE_KEY && AZURE_DEPLOYMENT);
 
 // ---- Amazon Bedrock (Claude, EU inference profile) ----------------------------
-// Anthropic Messages API on the bedrock-runtime endpoint, authenticated with a
-// Bedrock API key (docs.aws.amazon.com/bedrock/latest/userguide/inference-messages-api.html,
-// "bedrock-runtime (curl, API key)"):
-//   POST https://bedrock-runtime.<region>.amazonaws.com/anthropic/v1/messages
-//   x-api-key: <Bedrock API key>, anthropic-version: 2023-06-01
-//   body: Anthropic Messages request with "model" = inference profile id
-// The key may be stored as BEDROCK_API_KEY or AWS_BEARER_TOKEN_BEDROCK (AWS's name).
-// If the endpoint rejects x-api-key (401/403), the request is retried once with
-// "Authorization: Bearer <key>" (the generic Bedrock API-key header, api-keys-use.html).
-const BEDROCK_KEY = process.env.BEDROCK_API_KEY || process.env.AWS_BEARER_TOKEN_BEDROCK || "";
+// Sprint 30: the standard runtime operation on the bedrock-runtime endpoint,
+//   POST https://bedrock-runtime.<region>.amazonaws.com/model/<inference profile id>/invoke
+//   body: Anthropic Messages request with "anthropic_version": "bedrock-2023-05-31" and no "model"
+// (BEDROCK_OPERATION=converse switches to /model/<id>/converse with the Converse shape).
+// Until Sprint 30 this file called /anthropic/v1/messages on bedrock-runtime, which is a path
+// of a different endpoint; production answered 400 "Operation not allowed" every time.
+//
+// Why InvokeModel and not Converse as the default: the body is Claude's own Messages format,
+// so the prompt-cache marker (cache_control), the thinking switch and the effort setting travel
+// as they are and the response parser is the one the Anthropic API path uses. Converse needs
+// them translated (cachePoint, additionalModelRequestFields). Both are the same IAM action
+// (bedrock:InvokeModel) and the same inference profile ids.
+//
+// Two ways to authenticate, in this order:
+//   a) a Bedrock API key (BEDROCK_API_KEY or AWS_BEARER_TOKEN_BEDROCK): "Authorization: Bearer <key>";
+//   b) AWS Signature Version 4 with an IAM access key (sigv4 below, node:crypto only), when the
+//      bearer key is refused (401, 403, or 400 "Operation not allowed") or no bearer key is set.
+// IAM key variables: BEDROCK_AWS_ACCESS_KEY_ID / BEDROCK_AWS_SECRET_ACCESS_KEY (+ optional
+// BEDROCK_AWS_SESSION_TOKEN), else AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY (+ AWS_SESSION_TOKEN).
+// On Vercel the plain AWS_* names can be present without anyone setting them ("These values do
+// not grant any AWS permissions and are not usable as AWS credentials", vercel.com/docs/
+// environment-variables/reserved-environment-variables, read 2 Oct 2026). So, when running on
+// Vercel, the plain names are used only for a long-term key (id starting "AKIA", session token
+// ignored); temporary credentials on Vercel must use the BEDROCK_AWS_* names.
+const BEDROCK_KEY = String(process.env.BEDROCK_API_KEY || process.env.AWS_BEARER_TOKEN_BEDROCK || "").trim();
 const BEDROCK_REGION = String(process.env.BEDROCK_REGION || "eu-central-1").trim().toLowerCase();
 const BEDROCK_MODEL = String(process.env.CHAT_MODEL || "eu.anthropic.claude-sonnet-5").trim();
-// Claude Sonnet 5 thinks adaptively by default. For a fast chat the default here is
-// "off" (thinking: disabled). "low" / "medium" / "high" switch adaptive thinking on
-// at that effort (with a larger token cap, because thinking counts against it);
-// "default" sends neither field and leaves the model's own default.
+const BEDROCK_OPERATION = String(process.env.BEDROCK_OPERATION || "").trim().toLowerCase() === "converse" ? "converse" : "invoke";
+const BEDROCK_ANTHROPIC_VERSION = "bedrock-2023-05-31";
+const BEDROCK_IAM = (() => {
+  const env = (k) => String(process.env[k] || "").trim();
+  if (env("BEDROCK_AWS_ACCESS_KEY_ID") && env("BEDROCK_AWS_SECRET_ACCESS_KEY")) {
+    return { accessKeyId: env("BEDROCK_AWS_ACCESS_KEY_ID"), secretAccessKey: env("BEDROCK_AWS_SECRET_ACCESS_KEY"), sessionToken: env("BEDROCK_AWS_SESSION_TOKEN"), source: "BEDROCK_AWS_*" };
+  }
+  const id = env("AWS_ACCESS_KEY_ID");
+  const secret = env("AWS_SECRET_ACCESS_KEY");
+  if (!id || !secret) return null;
+  const longTerm = /^AKIA/.test(id);
+  if (env("VERCEL") && !longTerm) return null; // the platform's own placeholders, not ours
+  return { accessKeyId: id, secretAccessKey: secret, sessionToken: longTerm ? "" : env("AWS_SESSION_TOKEN"), source: "AWS_*" };
+})();
+const BEDROCK_CONFIGURED = Boolean(BEDROCK_KEY || BEDROCK_IAM);
+// Thinking: "off" (default) asks for the least the model accepts (see bedrockThinking);
+// "low" / "medium" / "high" switch adaptive thinking on at that effort (with a larger token
+// cap, because thinking counts against it); "default" sends neither field.
 const BEDROCK_THINKING = String(process.env.BEDROCK_THINKING || "off").trim().toLowerCase();
 const ANTHROPIC_VERSION = "2023-06-01";
 
@@ -125,14 +154,45 @@ function bedrockEuCheck(region, model) {
   if (!/^eu\.[a-z0-9][a-z0-9.:_-]{2,120}$/i.test(model)) return `model "${model.slice(0, 80)}" is not an EU inference profile (must start with "eu.")`;
   return null;
 }
-const BEDROCK_EU_PROBLEM = BEDROCK_KEY ? bedrockEuCheck(BEDROCK_REGION, BEDROCK_MODEL) : null;
+const BEDROCK_EU_PROBLEM = BEDROCK_CONFIGURED ? bedrockEuCheck(BEDROCK_REGION, BEDROCK_MODEL) : null;
 if (BEDROCK_EU_PROBLEM) {
   console.error("[chat] EU guard: Bedrock refused, " + BEDROCK_EU_PROBLEM + "; Bedrock is not used, the next configured provider answers");
 }
-const BEDROCK_READY = Boolean(BEDROCK_KEY) && !BEDROCK_EU_PROBLEM;
+const BEDROCK_READY = BEDROCK_CONFIGURED && !BEDROCK_EU_PROBLEM;
 
-function bedrockUrl() {
-  return `https://bedrock-runtime.${BEDROCK_REGION}.amazonaws.com/anthropic/v1/messages`;
+const bedrockHost = () => `bedrock-runtime.${BEDROCK_REGION}.amazonaws.com`;
+// The id is one path segment: a ":" in it (…-v1:0) is sent percent-encoded.
+const bedrockPath = (model, operation) => `/model/${encodeURIComponent(model)}/${operation || BEDROCK_OPERATION}`;
+
+// ---- AWS Signature Version 4 (docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv4-create-signed-request.html)
+// -> the headers to add to the request (x-amz-date, authorization, x-amz-security-token).
+// Signs host, x-amz-date, the session token and every header passed in. The canonical URI is the
+// sent path with each segment URI-encoded once more (every service except S3 does this).
+const sha256Hex = (v) => crypto.createHash("sha256").update(v).digest("hex");
+const hmac = (key, v) => crypto.createHmac("sha256", key).update(v).digest();
+const rfc3986 = (v) => encodeURIComponent(v).replace(/[!'()*]/g, (c) => "%" + c.charCodeAt(0).toString(16).toUpperCase());
+function sigv4({ method, host, path: urlPath, query, headers, body, region, service, accessKeyId, secretAccessKey, sessionToken, now }) {
+  const d = now instanceof Date ? now : new Date(now || Date.now());
+  const amzDate = d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const day = amzDate.slice(0, 8);
+  const all = { host: host, "x-amz-date": amzDate };
+  for (const [k, v] of Object.entries(headers || {})) all[k.toLowerCase()] = String(v).trim().replace(/\s+/g, " ");
+  if (sessionToken) all["x-amz-security-token"] = sessionToken;
+  const names = Object.keys(all).sort();
+  const canonicalUri = String(urlPath || "/").split("/").map(rfc3986).join("/") || "/";
+  const canonicalQuery = String(query || "").split("&").filter(Boolean)
+    .map((kv) => { const i = kv.indexOf("="); return i < 0 ? [kv, ""] : [kv.slice(0, i), kv.slice(i + 1)]; })
+    .map(([k, v]) => [rfc3986(decodeURIComponent(k)), rfc3986(decodeURIComponent(v))])
+    .sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] < y[1] ? -1 : x[1] > y[1] ? 1 : 0))
+    .map(([k, v]) => k + "=" + v).join("&");
+  const canonicalRequest = [String(method).toUpperCase(), canonicalUri, canonicalQuery, names.map((n) => n + ":" + all[n] + "\n").join(""), names.join(";"), sha256Hex(body || "")].join("\n");
+  const scope = `${day}/${region}/${service}/aws4_request`;
+  const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256Hex(canonicalRequest)].join("\n");
+  const signingKey = hmac(hmac(hmac(hmac("AWS4" + secretAccessKey, day), region), service), "aws4_request");
+  const signature = crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex");
+  const out = { "x-amz-date": amzDate, authorization: `AWS4-HMAC-SHA256 Credential=${accessKeyId}/${scope}, SignedHeaders=${names.join(";")}, Signature=${signature}` };
+  if (sessionToken) out["x-amz-security-token"] = sessionToken;
+  return { headers: out, canonicalRequest, stringToSign, signature, signingKey: signingKey.toString("hex") };
 }
 
 // ---- Anthropic API (Claude Haiku 4.5; NOT EU-resident, founder's stopgap) --------
@@ -164,16 +224,21 @@ const ANTHROPIC_READY = Boolean(ANTHROPIC_KEY) && NON_EU_ALLOWED;
 const ANTHROPIC_WORKSPACE_ID = String(process.env.ANTHROPIC_WORKSPACE_ID || "").trim();
 
 // ---- Provider selection ---------------------------------------------------------
-// Default order: Bedrock (key set and EU guard passed) -> Anthropic API (key set and
-// CHAT_ALLOW_NON_EU=1) -> Azure -> the fixed fallback. CHAT_PROVIDER=anthropic|bedrock|azure
-// moves that provider to the front; the others stay as fallbacks in the default order.
+// Sprint 30: the provider is explicit per feature.
+//   Chat (this handler): CHAT_PROVIDER=azure|bedrock|anthropic names the first provider; the
+//     others stay as fallbacks in the default order. Default order: Azure -> Bedrock -> the
+//     Anthropic API (the last only with CHAT_ALLOW_NON_EU=1). Azure first is what answers in
+//     production today; a working Bedrock route therefore does not move the chat to another
+//     model by itself. Set CHAT_PROVIDER=bedrock to do that on purpose.
+//   Website-Check Kurzfazit (completeText, called by api/check.js): CHECK_PROVIDER there,
+//     default Bedrock -> Azure; never the Anthropic API.
 const CHAT_PROVIDER = String(process.env.CHAT_PROVIDER || "").trim().toLowerCase();
-const PROVIDER_ORDER = ["bedrock", "anthropic", "azure"];
+const PROVIDER_ORDER = ["azure", "bedrock", "anthropic"];
 if (CHAT_PROVIDER && !PROVIDER_ORDER.includes(CHAT_PROVIDER)) {
-  console.error(`[chat] CHAT_PROVIDER "${CHAT_PROVIDER.slice(0, 20)}" is unknown (anthropic|bedrock|azure); using the default order`);
+  console.error(`[chat] CHAT_PROVIDER "${CHAT_PROVIDER.slice(0, 20)}" is unknown (azure|bedrock|anthropic); using the default order`);
 }
-if (CHAT_PROVIDER === "bedrock" && !BEDROCK_KEY) {
-  console.error("[chat] CHAT_PROVIDER=bedrock but no Bedrock key (BEDROCK_API_KEY / AWS_BEARER_TOKEN_BEDROCK) is set");
+if (CHAT_PROVIDER === "bedrock" && !BEDROCK_CONFIGURED) {
+  console.error("[chat] CHAT_PROVIDER=bedrock but neither a Bedrock key (BEDROCK_API_KEY / AWS_BEARER_TOKEN_BEDROCK) nor IAM keys are set");
 }
 if (CHAT_PROVIDER === "anthropic" && !ANTHROPIC_READY) {
   console.error("[chat] CHAT_PROVIDER=anthropic but no Anthropic key (" + ANTHROPIC_KEY_VARS.join(" / ") + ") is set");
@@ -190,11 +255,14 @@ const ENGINE_NAME = { bedrock: "bedrock", anthropic: "anthropic", azure: "azure-
 // MODEL_TIMEOUT_MS, and all calls together at most MODEL_BUDGET_MS.
 const MODEL_BUDGET_MS = 45000;
 
-// Bedrock cool-down: a 401/403 (e.g. AccessDenied while AWS verifies the account) makes
-// this instance skip Bedrock for 10 minutes, so every message does not pay the extra
-// round trip. In memory, per warm instance; logged once per cool-down.
+// Bedrock cool-down: a refusal on every available way to authenticate (401/403, or 400
+// "Operation not allowed") makes this instance skip Bedrock for 10 minutes, so every message
+// does not pay the extra round trip. In memory, per warm instance; logged once per cool-down.
+// When the bearer key is refused and SigV4 answers, the instance goes straight to SigV4 for the
+// same 10 minutes (bedrockSigv4Until).
 const BEDROCK_COOLDOWN_MS = 10 * 60 * 1000;
 let bedrockSkipUntil = 0;
+let bedrockSigv4Until = 0;
 function bedrockCoolingDown() { return Date.now() < bedrockSkipUntil; }
 
 function azureUrl(deployment, route) {
@@ -615,16 +683,31 @@ const PRICE_DEFAULTS = {
   bedrock: [2.2, 0.22, 11], // Claude Sonnet 5, Bedrock EU profile
   anthropic: [1, 0.1, 5] // Claude Haiku 4.5, Anthropic API
 };
-function priceOf(provider) {
-  const env = String(process.env[`CHAT_PRICE_${provider.toUpperCase()}`] || "").split(",").map((x) => parseFloat(x));
-  const d = PRICE_DEFAULTS[provider] || PRICE_DEFAULTS.bedrock;
-  const [inp, cached, out] = env.length === 3 && env.every((x) => Number.isFinite(x) && x >= 0) ? env : d;
-  return { inp, cached, write: inp * 1.25, out };
+// Bedrock models other than the chat's default. Sprint 30: the price of Claude Opus 5.5 through
+// the Bedrock EU inference profile is NOT confirmed (the AWS price page did not list it when it
+// was fetched on 2 Oct 2026). Until CHECK_PRICE_BEDROCK / CHAT_PRICE_BEDROCK is set, the estimate
+// uses Anthropic's own list price (4 / 20 USD per million tokens, cache reads at one tenth) and
+// the usage line says price=list. Set the variable once the AWS price is on paper.
+const BEDROCK_MODEL_PRICES = [
+  [/claude-opus-5-5/i, [4, 0.4, 20]]
+];
+// -> { inp, cached, write, out, source: "env" | "list" }. prefix: "CHAT_PRICE" (chat) or "CHECK_PRICE"
+// (Website-Check Kurzfazit; falls back to the chat's variable, then to the table).
+function priceOf(provider, model, prefix) {
+  const parse = (name) => {
+    const v = String(process.env[name] || "").split(",").map((x) => parseFloat(x));
+    return v.length === 3 && v.every((x) => Number.isFinite(x) && x >= 0) ? v : null;
+  };
+  const P = provider.toUpperCase();
+  const fromEnv = (prefix && prefix !== "CHAT_PRICE" ? parse(`${prefix}_${P}`) : null) || (provider !== "bedrock" || !model || model === BEDROCK_MODEL ? parse(`CHAT_PRICE_${P}`) : null);
+  const byModel = provider === "bedrock" && model ? (BEDROCK_MODEL_PRICES.find(([re]) => re.test(model)) || [])[1] : null;
+  const [inp, cached, out] = fromEnv || byModel || PRICE_DEFAULTS[provider] || PRICE_DEFAULTS.bedrock;
+  return { inp, cached, write: inp * 1.25, out, source: fromEnv ? "env" : "list" };
 }
 // usage: { input_tokens (uncached), cache_read_input_tokens, cache_creation_input_tokens, output_tokens }
-function estimateUsd(provider, u) {
+function estimateUsd(provider, u, model, prefix) {
   if (!u) return 0;
-  const p = priceOf(provider);
+  const p = priceOf(provider, model, prefix);
   const n = (x) => (typeof x === "number" && x > 0 ? x : 0);
   return (n(u.input_tokens) * p.inp + n(u.cache_read_input_tokens) * p.cached + n(u.cache_creation_input_tokens) * p.write + n(u.output_tokens) * p.out) / 1e6;
 }
@@ -660,6 +743,9 @@ const SUPABASE_URL = String(process.env.SUPABASE_URL || "").replace(/\/+$/, "");
 const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const PERSIST_CONFIGURED = Boolean(SUPABASE_URL && SUPABASE_KEY) && String(process.env.CHAT_PERSISTENT_LIMIT || "").trim() !== "0";
 const PERSIST_TIMEOUT_MS = 1200;
+// Sprint 34: a day's row (model answers and their estimated USD; no visitor data) is kept 40 days instead of 3, so
+// that the weekly summary (api/digest.js) and the first review can read it. The ceiling logic only reads today's row.
+const DAY_ROW_TTL_S = 40 * 86400;
 const PERSIST_RETRY_MS = 10 * 60 * 1000;
 let persistOffUntil = 0;
 const IP_SALT = String(process.env.CHAT_IP_SALT || "") || crypto.createHash("sha256").update("rexity-chat|" + SUPABASE_KEY).digest("hex").slice(0, 32);
@@ -942,13 +1028,13 @@ async function postAzure(body, timeoutMs) {
 }
 
 // Token counts only: never the conversation, never a key.
-function logUsage(provider, model, fields, ms, usd) {
+function logUsage(provider, model, fields, ms, usd, priceSource) {
   const parts = Object.entries(fields).filter(([, v]) => typeof v === "number").map(([k, v]) => `${k}=${v}`);
-  console.log(["[chat] usage", `provider=${provider}`, `model=${model}`, ...parts, `ms=${ms}`, `usd=${(usd || 0).toFixed(6)}`].join(" "));
+  console.log(["[chat] usage", `provider=${provider}`, `model=${model}`, ...parts, `ms=${ms}`, `usd=${(usd || 0).toFixed(6)}`, `price=${priceSource || "list"}`].join(" "));
 }
 
 // -> { text, usage } (usage normalised: uncached input, cache reads, cache writes, output)
-async function callModel(messages, timeoutMs) {
+async function callModel(messages, timeoutMs, priceCtx) {
   if (typeof fetch !== "function") throw new Error("fetch unavailable");
   const t0 = Date.now();
   // No temperature: reasoning models only accept the default.
@@ -994,7 +1080,7 @@ async function callModel(messages, timeoutMs) {
     input_tokens: u.prompt_tokens,
     cache_read_input_tokens: u.prompt_tokens_details && u.prompt_tokens_details.cached_tokens,
     output_tokens: u.completion_tokens
-  }, Date.now() - t0, estimateUsd("azure", usage));
+  }, Date.now() - t0, estimateUsd("azure", usage, null, priceCtx && priceCtx.prefix), priceOf("azure", null, priceCtx && priceCtx.prefix).source);
   if (!answer || !String(answer).trim()) {
     throw Object.assign(new Error("empty model response" + (choice && choice.finish_reason ? " (finish_reason " + choice.finish_reason + ")" : "")), { usage });
   }
@@ -1031,94 +1117,152 @@ function buildMessagesBody(model, turnPrompt, history, message) {
   };
 }
 
-function buildBedrockBody(turnPrompt, history, message) {
-  const body = buildMessagesBody(BEDROCK_MODEL, turnPrompt, history, message);
-  if (BEDROCK_THINKING === "off") {
-    body.thinking = { type: "disabled" };
-  } else if (/^(low|medium|high)$/.test(BEDROCK_THINKING)) {
-    body.thinking = { type: "adaptive" };
-    body.output_config = { effort: BEDROCK_THINKING };
-    body.max_tokens = Math.max(MAX_COMPLETION_TOKENS, 2000); // thinking counts against max_tokens
-  }
-  return body;
+// What "thinking off" means per model (Anthropic's model notes, read 2 Oct 2026): Claude Opus 5.5,
+// Sonnet 5.5 and the Fable line reject { type: "disabled" } with a 400; there the lowest setting
+// is effort "low". Haiku 4.5 and older run without thinking when the field is omitted and reject
+// "effort". Every other current model accepts { type: "disabled" }.
+// -> the fields to merge into the Messages body (may raise max_tokens when thinking is on).
+function bedrockThinking(model, setting, maxTokens) {
+  const m = String(model).toLowerCase();
+  const noEffort = /haiku-4-5|sonnet-4-5|opus-4-1|claude-3/.test(m);
+  const alwaysThinks = /opus-5-5|sonnet-5-5|fable|mythos/.test(m);
+  if (setting === "default" || noEffort) return {};
+  if (/^(low|medium|high)$/.test(setting)) return { thinking: { type: "adaptive" }, output_config: { effort: setting }, max_tokens: Math.max(maxTokens, 2000) }; // thinking counts against max_tokens
+  if (alwaysThinks) return { output_config: { effort: "low" } };
+  return { thinking: { type: "disabled" } };
 }
 
-async function postBedrock(body, timeoutMs, authScheme) {
+function buildBedrockBody(turnPrompt, history, message) {
+  const body = buildMessagesBody(BEDROCK_MODEL, turnPrompt, history, message);
+  return Object.assign(body, bedrockThinking(BEDROCK_MODEL, BEDROCK_THINKING, MAX_COMPLETION_TOKENS));
+}
+
+// Messages body -> what goes on the wire for the configured operation.
+function bedrockPayload(body, operation) {
+  if ((operation || BEDROCK_OPERATION) !== "converse") {
+    const out = Object.assign({ anthropic_version: BEDROCK_ANTHROPIC_VERSION }, body);
+    delete out.model; // the inference profile id is in the URL
+    return out;
+  }
+  const system = [];
+  for (const b of Array.isArray(body.system) ? body.system : body.system ? [{ type: "text", text: String(body.system) }] : []) {
+    system.push({ text: b.text });
+    if (b.cache_control) system.push({ cachePoint: { type: "default" } });
+  }
+  const extra = {};
+  if (body.thinking) extra.thinking = body.thinking;
+  if (body.output_config) extra.output_config = body.output_config;
+  const out = {
+    messages: body.messages.map((m) => ({ role: m.role, content: [{ text: String(m.content) }] })),
+    inferenceConfig: { maxTokens: body.max_tokens }
+  };
+  if (system.length) out.system = system;
+  if (Object.keys(extra).length) out.additionalModelRequestFields = extra;
+  return out;
+}
+// Converse response -> the Messages shape readMessagesResponse() reads.
+function fromConverse(data) {
+  const blocks = (data && data.output && data.output.message && Array.isArray(data.output.message.content)) ? data.output.message.content : [];
+  const u = (data && data.usage) || {};
+  const stop = String((data && data.stopReason) || "");
+  return {
+    content: blocks.filter((b) => b && typeof b.text === "string").map((b) => ({ type: "text", text: b.text })),
+    stop_reason: /content_filtered|guardrail_intervened|refusal/.test(stop) ? "refusal" : stop,
+    usage: { input_tokens: u.inputTokens, cache_read_input_tokens: u.cacheReadInputTokens, cache_creation_input_tokens: u.cacheWriteInputTokens, output_tokens: u.outputTokens }
+  };
+}
+
+// One POST to bedrock-runtime. auth: "bearer" (Bedrock API key) or "sigv4" (IAM access key).
+async function postBedrock(model, payload, timeoutMs, auth) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs || MODEL_TIMEOUT_MS);
-  const headers = { "Content-Type": "application/json", "anthropic-version": ANTHROPIC_VERSION };
-  if (authScheme === "bearer") headers.Authorization = "Bearer " + BEDROCK_KEY;
-  else headers["x-api-key"] = BEDROCK_KEY;
+  const host = bedrockHost();
+  const urlPath = bedrockPath(model);
+  const raw = JSON.stringify(payload);
+  const headers = { "Content-Type": "application/json", Accept: "application/json" };
+  if (auth === "sigv4") {
+    Object.assign(headers, sigv4({
+      method: "POST", host, path: urlPath, body: raw, region: BEDROCK_REGION, service: "bedrock",
+      headers: { "content-type": headers["Content-Type"] },
+      accessKeyId: BEDROCK_IAM.accessKeyId, secretAccessKey: BEDROCK_IAM.secretAccessKey, sessionToken: BEDROCK_IAM.sessionToken
+    }).headers);
+  } else {
+    headers.Authorization = "Bearer " + BEDROCK_KEY;
+  }
   try {
-    return await fetch(bedrockUrl(), { method: "POST", headers: headers, body: JSON.stringify(body), signal: controller.signal });
+    return await fetch(`https://${host}${urlPath}`, { method: "POST", headers: headers, body: raw, signal: controller.signal });
   } finally {
     clearTimeout(timer);
   }
 }
 
-async function callBedrock(turnPrompt, history, message, timeoutMs) {
+const BEDROCK_REFUSED_400 = /operation not allowed|not authorized|access ?denied|don't have access|do not have access/i;
+// The ways to authenticate, in order: the bearer key when one is set, then SigV4 when IAM keys
+// are present. After a refused bearer key that SigV4 made good, SigV4 goes first for 10 minutes.
+function bedrockAuthModes() {
+  const modes = [];
+  if (BEDROCK_KEY && !(BEDROCK_IAM && Date.now() < bedrockSigv4Until)) modes.push("bearer");
+  if (BEDROCK_IAM) modes.push("sigv4");
+  return modes;
+}
+
+// body: an Anthropic Messages body (model, max_tokens, system, messages, thinking?, output_config?).
+// -> the parsed response in the Messages shape. Throws with .status; a refusal on every way to
+// authenticate starts the cool-down (err.logged = true: already logged, once).
+async function bedrockMessages(model, body, timeoutMs) {
   if (typeof fetch !== "function") throw new Error("fetch unavailable");
   const t0 = Date.now();
   const left = () => Math.max(100, timeoutMs - (Date.now() - t0));
-  let body = buildBedrockBody(turnPrompt, history, message);
-  let auth = "x-api-key";
-  let resp = await postBedrock(body, left(), auth);
-  if (resp.status === 401 || resp.status === 403) {
-    // Retried once with the generic Bedrock API-key header (logged below only if that
-    // fails too, together with the cool-down).
-    await resp.text().catch(() => "");
-    auth = "bearer";
-    resp = await postBedrock(body, left(), auth);
-    if (resp.status === 401 || resp.status === 403) {
-      const detail = await resp.text().catch(() => "");
-      bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
-      console.error("[chat] Bedrock HTTP " + resp.status + " (x-api-key and Bearer): skipping Bedrock on this instance for 10 minutes. " + detail.slice(0, 200));
-      const err = new Error("bedrock http " + resp.status + ", cooling down");
-      err.status = resp.status;
-      err.logged = true;
-      throw err;
+  const modes = bedrockAuthModes();
+  let current = body;
+  let strippedOnce = false;
+  for (let i = 0; i < modes.length; i++) {
+    const auth = modes[i];
+    let resp = await postBedrock(model, bedrockPayload(current), left(), auth);
+    let detail = "";
+    if (resp.status === 400) {
+      detail = await resp.text().catch(() => "");
+      if (!strippedOnce && (current.thinking || current.output_config) && /thinking|effort|output_config|additionalModelRequestFields/i.test(detail) && !BEDROCK_REFUSED_400.test(detail)) {
+        // A model that rejects the thinking/effort setting is retried once without it.
+        console.error("[chat] Bedrock 400 (retrying without thinking/effort): " + detail.slice(0, 300));
+        strippedOnce = true;
+        current = Object.assign({}, current);
+        delete current.thinking;
+        delete current.output_config;
+        resp = await postBedrock(model, bedrockPayload(current), left(), auth);
+        detail = resp.status === 400 ? await resp.text().catch(() => "") : "";
+      }
     }
-  }
-  if (resp.status === 400) {
-    const detail = await resp.text().catch(() => "");
-    if ((body.thinking || body.output_config) && /thinking|effort|output_config/i.test(detail)) {
-      // A model that rejects the thinking/effort setting is retried once without it.
-      console.error("[chat] Bedrock 400 (retrying without thinking/effort): " + detail.slice(0, 300));
-      body = Object.assign({}, body);
-      delete body.thinking;
-      delete body.output_config;
-      body.max_tokens = MAX_COMPLETION_TOKENS;
-      resp = await postBedrock(body, left(), auth);
-    } else if (/operation not allowed|not authorized|access/i.test(detail)) {
-      // Model access not granted yet (Anthropic use-case form / allowlisting pending): same
-      // 10-minute cool-down as a 401/403, so each message doesn't pay the round trip.
+    const refused = resp.status === 401 || resp.status === 403 || (resp.status === 400 && BEDROCK_REFUSED_400.test(detail));
+    if (refused) {
+      if (resp.status !== 400) detail = await resp.text().catch(() => "");
+      if (i + 1 < modes.length) continue; // the next way to authenticate (SigV4)
       bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
-      console.error("[chat] Bedrock HTTP 400 (model access not granted): skipping Bedrock on this instance for 10 minutes. " + detail.slice(0, 200));
-      const err = new Error("bedrock http 400, cooling down");
-      err.status = 400;
-      err.logged = true;
-      throw err;
-    } else {
-      console.error("[chat] Bedrock HTTP 400 " + detail.slice(0, 300));
-      const err = new Error("bedrock http 400");
-      err.status = 400;
-      throw err;
+      console.error("[chat] Bedrock HTTP " + resp.status + " (" + modes.join(", then ") + "; " + BEDROCK_OPERATION + "): skipping Bedrock on this instance for 10 minutes. " + detail.slice(0, 200));
+      throw Object.assign(new Error("bedrock http " + resp.status + ", cooling down"), { status: resp.status, logged: true });
     }
+    if (!resp.ok) {
+      // Log the status server-side only; the body can echo request content.
+      if (resp.status !== 400) detail = await resp.text().catch(() => "");
+      console.error("[chat] Bedrock HTTP " + resp.status + " " + detail.slice(0, 300));
+      throw Object.assign(new Error("bedrock http " + resp.status), { status: resp.status });
+    }
+    if (auth === "sigv4" && i > 0) bedrockSigv4Until = Date.now() + BEDROCK_COOLDOWN_MS; // the bearer key was refused just now
+    const data = await resp.json();
+    return BEDROCK_OPERATION === "converse" ? fromConverse(data) : data;
   }
-  if (!resp.ok) {
-    // Log the status server-side only; the body can echo request content.
-    const detail = await resp.text().catch(() => "");
-    console.error("[chat] Bedrock HTTP " + resp.status + " " + detail.slice(0, 300));
-    const err = new Error("bedrock http " + resp.status);
-    err.status = resp.status;
-    throw err;
-  }
-  return readMessagesResponse(await resp.json(), "bedrock", BEDROCK_MODEL, t0);
+  throw new Error("bedrock: no credentials");
+}
+
+async function callBedrock(turnPrompt, history, message, timeoutMs) {
+  const t0 = Date.now();
+  const data = await bedrockMessages(BEDROCK_MODEL, buildBedrockBody(turnPrompt, history, message), timeoutMs);
+  return readMessagesResponse(data, "bedrock", BEDROCK_MODEL, t0);
 }
 
 // Messages API response (Bedrock and Anthropic API): logs the token counts, returns the
 // joined text blocks (thinking blocks, if any, are ignored), throws on refusal / no text.
-function readMessagesResponse(data, provider, model, t0) {
+function readMessagesResponse(data, provider, model, t0, pricePrefix) {
   const text = (Array.isArray(data && data.content) ? data.content : [])
     .filter((b) => b && b.type === "text" && typeof b.text === "string")
     .map((b) => b.text)
@@ -1132,7 +1276,7 @@ function readMessagesResponse(data, provider, model, t0) {
     cache_creation_input_tokens: u.cache_creation_input_tokens,
     output_tokens: u.output_tokens
   };
-  logUsage(provider, model, usage, Date.now() - t0, estimateUsd(provider, usage));
+  logUsage(provider, model, usage, Date.now() - t0, estimateUsd(provider, usage, model, pricePrefix), priceOf(provider, model, pricePrefix).source);
   if (data && data.stop_reason === "refusal") throw Object.assign(new Error("model refused (stop_reason refusal)"), { usage });
   if (!text) throw Object.assign(new Error("empty model response" + (data && data.stop_reason ? " (stop_reason " + data.stop_reason + ")" : "")), { usage });
   return { text, usage };
@@ -1174,55 +1318,58 @@ async function callAnthropic(turnPrompt, history, message, timeoutMs) {
 }
 
 // ---- Plain completion for other functions (Sprint 27: api/check.js, the Website-Check's Kurzfazit) -----
-// Same EU-routed providers, keys, price list and daily cost ceiling as the chat, so the claim "Sprachmodell in
-// der europäischen Datenzone" holds for both; the non-EU Anthropic route is never used here, whatever
+// Same EU-routed providers, keys and the same daily cost ceiling as the chat (one shared USD total
+// per Europe/Berlin day, CHAT_DAILY_USD_CEILING), so the claim "Sprachmodell in der europäischen
+// Datenzone" holds for both; the non-EU Anthropic route is never used here, whatever
 // CHAT_ALLOW_NON_EU says. No site digest, no history: the caller passes one system and one user text.
-// -> { text, provider, usd }, or null when no EU provider is configured or today's cost ceiling is reached
-// (the caller then uses its own fixed text); throws when every provider fails.
-async function completeText({ system, user, timeoutMs, tag }) {
+// Sprint 30: the caller names its own provider order, Bedrock model, token cap and price variables:
+//   order      e.g. ["bedrock", "azure"] (default: the chat's order)
+//   model      Bedrock inference profile id (default: CHAT_MODEL); the EU guard applies to it
+//   maxTokens  output cap of the Bedrock call (default: the chat's cap). Azure keeps its own cap:
+//              its reasoning models spend part of it on hidden reasoning.
+//   pricePrefix "CHECK_PRICE" reads CHECK_PRICE_BEDROCK / CHECK_PRICE_AZURE before the chat's
+// -> { text, provider, model, usd, usage }, or null when no EU provider is configured or today's cost
+// ceiling is reached (the caller then uses its own fixed text); throws when every provider fails.
+async function completeText({ system, user, timeoutMs, tag, order, model, maxTokens, pricePrefix }) {
   if (typeof fetch !== "function") return null;
-  const active = PROVIDERS.filter((p) => p !== "anthropic" && !(p === "bedrock" && bedrockCoolingDown()));
+  const label = String(tag || "complete").replace(/[^a-z0-9-]/gi, "").slice(0, 20) || "complete";
+  const bedrockModel = String(model || BEDROCK_MODEL).trim();
+  const ready = { azure: AZURE_READY, bedrock: BEDROCK_CONFIGURED && !bedrockEuCheck(BEDROCK_REGION, bedrockModel) };
+  if (BEDROCK_CONFIGURED && !ready.bedrock && bedrockModel !== BEDROCK_MODEL) {
+    console.error("[" + label + "] EU guard: Bedrock refused, " + bedrockEuCheck(BEDROCK_REGION, bedrockModel));
+  }
+  const wanted = Array.isArray(order) && order.length ? order : PROVIDERS;
+  const active = wanted.filter((p, i) => (p === "azure" || p === "bedrock") && wanted.indexOf(p) === i && ready[p] && !(p === "bedrock" && bedrockCoolingDown()));
   if (!active.length) return null;
   let spent = spentToday();
   if (persistActive()) {
-    const row = await persistBump(`day:${berlinDay()}`, 0, 0, 3 * 86400);
+    const row = await persistBump(`day:${berlinDay()}`, 0, 0, DAY_ROW_TTL_S);
     if (row) spent = Math.max(spent, row.usd);
   }
   if (spent >= DAILY_USD_CEILING) return null;
-  const label = String(tag || "complete").replace(/[^a-z0-9-]/gi, "").slice(0, 20) || "complete";
   const ms = Math.min(MODEL_TIMEOUT_MS, Math.max(1000, timeoutMs || MODEL_TIMEOUT_MS));
+  const cap = Math.min(4000, Math.max(100, parseInt(maxTokens, 10) || MAX_COMPLETION_TOKENS));
   let lastError = null;
   for (const provider of active) {
+    const usedModel = provider === "bedrock" ? bedrockModel : AZURE_DEPLOYMENT;
     try {
       let result;
       if (provider === "bedrock") {
         const t0 = Date.now();
-        const body = { model: BEDROCK_MODEL, max_tokens: MAX_COMPLETION_TOKENS, system: [{ type: "text", text: String(system) }], messages: [{ role: "user", content: String(user) }] };
-        if (BEDROCK_THINKING === "off") body.thinking = { type: "disabled" };
-        let resp = await postBedrock(body, ms, "x-api-key");
-        if (resp.status === 401 || resp.status === 403) {
-          await resp.text().catch(() => "");
-          resp = await postBedrock(body, ms, "bearer");
-        }
-        if (!resp.ok) {
-          const detail = await resp.text().catch(() => "");
-          // Same 10-minute cool-down as the chat path: no key access (401/403) or model access not granted (400).
-          const noAccess = resp.status === 400 && /operation not allowed|not authorized|access/i.test(detail);
-          if (resp.status === 401 || resp.status === 403 || noAccess) bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
-          if (resp.status === 400) console.error("[chat] Bedrock HTTP 400 (text completion) " + detail.slice(0, 200));
-          throw Object.assign(new Error("bedrock http " + resp.status), { status: resp.status });
-        }
-        result = readMessagesResponse(await resp.json(), "bedrock", BEDROCK_MODEL, t0);
+        const body = Object.assign({ model: bedrockModel, max_tokens: cap, system: [{ type: "text", text: String(system) }], messages: [{ role: "user", content: String(user) }] },
+          bedrockThinking(bedrockModel, "off", cap));
+        result = readMessagesResponse(await bedrockMessages(bedrockModel, body, ms), "bedrock", bedrockModel, t0, pricePrefix);
       } else {
-        result = await callModel([{ role: "system", content: String(system) }, { role: "user", content: String(user) }], ms);
+        result = await callModel([{ role: "system", content: String(system) }, { role: "user", content: String(user) }], ms, { prefix: pricePrefix });
       }
-      const usd = estimateUsd(provider, result.usage);
+      const usd = estimateUsd(provider, result.usage, usedModel, pricePrefix);
       recordSpend(usd);
-      if (persistActive()) await persistBump(`day:${berlinDay()}`, 1, usd, 3 * 86400);
-      return { text: result.text, provider: ENGINE_NAME[provider], usd };
+      if (persistActive()) await persistBump(`day:${berlinDay()}`, 1, usd, DAY_ROW_TTL_S);
+      return { text: result.text, provider: ENGINE_NAME[provider], model: usedModel, usd, usage: result.usage };
     } catch (error) {
-      if (error && error.usage) recordSpend(estimateUsd(provider, error.usage)); // a failed answer still costs
+      if (error && error.usage) recordSpend(estimateUsd(provider, error.usage, usedModel, pricePrefix)); // a failed answer still costs
       lastError = error;
+      if (error && error.logged) continue; // already logged once (Bedrock cool-down)
       // Status and message only, never the key or the text.
       console.error("[" + label + "] " + provider + " failed" + (error && error.name === "AbortError" ? " (timeout)" : error && error.status ? " (status " + error.status + ")" : "") + ": " + (error && error.message));
     }
@@ -1390,14 +1537,14 @@ async function handler(req, res) {
   flags.foreign = foreign;
 
   // Primary path: the model with the full site digest, providers in PROVIDERS order
-  // (default: Bedrock, Azure; the Anthropic API only with CHAT_ALLOW_NON_EU=1).
+  // (default: Azure, then Bedrock; the Anthropic API only with CHAT_ALLOW_NON_EU=1).
   const active = PROVIDERS.filter((p) => !(p === "bedrock" && bedrockCoolingDown()));
   let limited = null;
   if (active.length && SITE_READY) {
     // Persistent counters (optional): this IP's window and today's spend, shared by all instances.
     let persisted = null;
     if (persistActive()) {
-      const [ipRow, dayRow] = await Promise.all([persistBump(ipKey(ip), 1, 0, 900), persistBump(`day:${berlinDay()}`, 0, 0, 3 * 86400)]);
+      const [ipRow, dayRow] = await Promise.all([persistBump(ipKey(ip), 1, 0, 900), persistBump(`day:${berlinDay()}`, 0, 0, DAY_ROW_TTL_S)]);
       persisted = { ip: ipRow, day: dayRow };
       if (ipRow && ipRow.count > IP_LIMIT) {
         res.setHeader("Retry-After", "120");
@@ -1429,9 +1576,9 @@ async function handler(req, res) {
             { role: "user", content: message }
           ], timeoutMs);
         usage = result.usage;
-        const usd = estimateUsd(provider, usage);
+        const usd = estimateUsd(provider, usage, provider === "bedrock" ? BEDROCK_MODEL : null);
         recordSpend(usd);
-        const persistSpend = persistActive() ? persistBump(`day:${berlinDay()}`, 1, usd, 3 * 86400) : null;
+        const persistSpend = persistActive() ? persistBump(`day:${berlinDay()}`, 1, usd, DAY_ROW_TTL_S) : null;
         const out = applyContract(result.text, { flags, lang, provider });
         if (!out.text) throw new Error("answer empty after sanitising");
         if (persistSpend) await persistSpend;
@@ -1478,5 +1625,8 @@ module.exports._test = {
   buildTurnPrompt, fallbackAnswer, URL_TITLES, STATIC_PROMPT, SITE_READY, MAX_COMPLETION_TOKENS, MAX_LINKS, WORD_LIMIT,
   PROVIDERS, BEDROCK_READY, BEDROCK_EU_PROBLEM, bedrockEuCheck, toAnthropicMessages, CLAIM_GUARD, LANG_NAMES,
   ANTHROPIC_READY, NON_EU_ALLOWED, ANTHROPIC_KEY_VAR, ANTHROPIC_MODEL, buildAnthropicBody, bedrockCoolingDown,
-  estimateUsd, DAILY_USD_CEILING, spentToday, PERSIST_CONFIGURED, persistActive, ipKey, MAX_VISITOR_MESSAGES
+  estimateUsd, priceOf, DAILY_USD_CEILING, spentToday, PERSIST_CONFIGURED, persistActive, ipKey, MAX_VISITOR_MESSAGES,
+  // Sprint 30: the Bedrock transport
+  sigv4, bedrockPath, bedrockHost, bedrockPayload, fromConverse, bedrockThinking, bedrockAuthModes, bedrockMessages,
+  BEDROCK_CONFIGURED, BEDROCK_OPERATION, BEDROCK_MODEL, BEDROCK_IAM_SOURCE: BEDROCK_IAM ? BEDROCK_IAM.source : null, PROVIDER_ORDER
 };

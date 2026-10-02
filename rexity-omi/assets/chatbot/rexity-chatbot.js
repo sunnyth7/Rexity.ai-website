@@ -78,9 +78,57 @@
       return l && typeof l.email === "string" && l.email ? { email: l.email, noMarketing: !!l.noMarketing } : null;
     } catch (e) { return null; }
   }
-  // Cloudflare Turnstile (bot protection of the entry form). Empty = off. Set the PUBLIC site key here and
-  // TURNSTILE_SECRET_KEY in Vercel; the script from challenges.cloudflare.com then loads only when the form shows.
-  var TURNSTILE_SITE_KEY = "";
+  // Cloudflare Turnstile (bot protection of the entry form and the hand-over form). Empty = off. The PUBLIC site key
+  // is here, TURNSTILE_SECRET_KEY is in Vercel. Sprint 31: the script from challenges.cloudflare.com loads only when
+  // the chat panel is open and shows one of the two forms (before, it loaded with every page for a new visitor).
+  var TURNSTILE_SITE_KEY = "0x4AAAAAAFMB5KSMA-E1D8vB"; // public site key (Cloudflare account info@rexity.ai, widget "rexity.ai Website-Check und Chat")
+  // Never on localhost / 127.0.0.1: the widget's host name is rexity.ai, so it cannot pass there. A local run sends
+  // no token and works when the server has no TURNSTILE_SECRET_KEY.
+  var BOT_OFF = !TURNSTILE_SITE_KEY || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  // One widget in `box` (explicit rendering). -> { token, reset(), remove() }. The script is loaded on first use,
+  // once per page (the Website-Check and the contact form load the same file). A token is single-use and lives five
+  // minutes: Turnstile renews an expired one by itself; after a submit that used it, call reset().
+  function botWidget(box, language) {
+    var w = { id: null, token: "", dead: false };
+    function render() {
+      if (w.dead || w.id !== null || !window.turnstile) return;
+      box.setAttribute("data-on", "1");
+      try {
+        w.id = window.turnstile.render(box, {
+          sitekey: TURNSTILE_SITE_KEY, language: language, theme: "light",
+          callback: function (tk) { w.token = tk; },
+          "expired-callback": function () { w.token = ""; },
+          "timeout-callback": function () { w.token = ""; },
+          "error-callback": function () { w.token = ""; return true; } // the widget shows its own error and retries
+        });
+      } catch (e) { w.id = null; }
+    }
+    w.reset = function () {
+      w.token = "";
+      try { if (w.id !== null && window.turnstile) window.turnstile.reset(w.id); } catch (e) {}
+    };
+    w.remove = function () {
+      w.dead = true;
+      w.token = "";
+      try { if (w.id !== null && window.turnstile) window.turnstile.remove(w.id); } catch (e) {}
+      w.id = null;
+    };
+    if (window.turnstile) render();
+    else {
+      var tries = 0;
+      var poll = window.setInterval(function () {
+        if (window.turnstile || w.dead || ++tries > 100) { window.clearInterval(poll); render(); }
+      }, 150);
+      if (!document.querySelector('script[src^="https://challenges.cloudflare.com/turnstile/"]')) {
+        var ts = document.createElement("script");
+        ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+        ts.async = true;
+        ts.onerror = function () { window.clearInterval(poll); ts.remove(); };
+        document.head.appendChild(ts);
+      }
+    }
+    return w;
+  }
   function handoverState() {
     try { return window.sessionStorage.getItem(HANDOVER_KEY) || ""; } catch (e) { return ""; }
   }
@@ -765,6 +813,8 @@
     var resetBtn = root.querySelector(".rexity-chatbot__reset");
     var limitReached = false;
     var gateOpen = false; // entry form shown: no message can be sent yet
+    var gateBot = null; // the entry form's Turnstile widget (botWidget), once the panel was opened
+    var gateBotMount = null;
 
     function hideMenu() {
       menu.setAttribute("hidden", "");
@@ -918,22 +968,11 @@
       optLab.appendChild(optTxt);
       var botBox = document.createElement("div");
       botBox.className = "rexity-chatbot__gate-bot";
-      var botToken = "";
-      if (TURNSTILE_SITE_KEY) {
-        var renderBot = function () {
-          if (!window.turnstile || botBox.getAttribute("data-on")) return;
-          botBox.setAttribute("data-on", "1");
-          window.turnstile.render(botBox, { sitekey: TURNSTILE_SITE_KEY, language: lang, theme: "light", callback: function (tk) { botToken = tk; }, "expired-callback": function () { botToken = ""; } });
-        };
-        if (window.turnstile) renderBot();
-        else {
-          var ts = document.createElement("script");
-          ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-          ts.async = true;
-          ts.onload = renderBot;
-          document.head.appendChild(ts);
-        }
-      }
+      // the bot check is mounted when the panel is open (openChat calls gateBotMount), not with the page
+      if (gateBot) gateBot.remove();
+      gateBot = null;
+      gateBotMount = function () { if (!BOT_OFF && !gateBot && botBox.isConnected) gateBot = botWidget(botBox, lang); };
+      if (root.classList.contains("is-open")) gateBotMount();
       var trap = document.createElement("input");
       trap.type = "text";
       trap.name = "company_website";
@@ -969,7 +1008,9 @@
           emailF.input.focus();
           return;
         }
-        if (TURNSTILE_SITE_KEY && !botToken) {
+        if (!BOT_OFF && !gateBot) gateBotMount();
+        var botToken = gateBot ? gateBot.token : "";
+        if (!BOT_OFF && !botToken) {
           err.textContent = c.gateBot;
           err.hidden = false;
           return;
@@ -985,6 +1026,9 @@
           saveLead("", email, noMarketing);
           setHandoverState("sent");
           gateOpen = false;
+          if (gateBot) gateBot.remove();
+          gateBot = null;
+          gateBotMount = null;
           f.remove();
           if (!messages.querySelector(".rexity-chatbot__message")) addMessage(messages, activeCopy.firstMessage, "bot");
           input.disabled = limitReached;
@@ -994,6 +1038,7 @@
           input.focus();
         }).catch(function () {
           submit.disabled = false;
+          if (gateBot) gateBot.reset(); // a token is single-use: the next attempt needs a new one
           err.textContent = c.formFail;
           err.hidden = false;
           linkifyEmail(err);
@@ -1044,6 +1089,7 @@
       hideNudge();
       lastFocus = document.activeElement;
       root.classList.add("is-open");
+      if (gateOpen && gateBotMount) gateBotMount();
       updateQuickCue();
       window.setTimeout(function () {
         updateQuickCue();
@@ -1186,11 +1232,16 @@
       pl.href = "/datenschutz";
       pl.textContent = c.privacy;
       priv.appendChild(pl);
-      [title, intro, nameF.label, contactF.label, noteF.label, trap, err, actions, priv].forEach(function (n) { f.appendChild(n); });
+      var hoBox = document.createElement("div");
+      hoBox.className = "rexity-chatbot__gate-bot";
+      [title, intro, nameF.label, contactF.label, noteF.label, hoBox, trap, err, actions, priv].forEach(function (n) { f.appendChild(n); });
       messages.appendChild(f);
       messages.scrollTop = messages.scrollHeight;
+      // same bot check as the entry form: with TURNSTILE_SECRET_KEY set, /api/lead refuses a lead without a token
+      var hoBot = BOT_OFF ? null : botWidget(hoBox, lang);
 
       cancel.addEventListener("click", function () {
+        if (hoBot) hoBot.remove();
         f.remove();
         input.focus();
       });
@@ -1207,6 +1258,11 @@
           (name.length < 2 ? nameF.input : contactF.input).focus();
           return;
         }
+        if (hoBot && !hoBot.token) {
+          err.textContent = c.gateBot;
+          err.hidden = false;
+          return;
+        }
         err.hidden = true;
         submit.disabled = true;
         var note = noteF.input.value.trim();
@@ -1219,6 +1275,7 @@
         };
         if (isMail) body.email = contact;
         else body.phone = contact;
+        if (hoBot) body.turnstileToken = hoBot.token;
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1230,10 +1287,12 @@
           var thanks = document.createElement("div");
           thanks.className = "rexity-chatbot__message rexity-chatbot__message--bot rexity-chatbot__handover-done";
           thanks.textContent = c.formThanks.replace("{name}", name);
+          if (hoBot) hoBot.remove();
           f.replaceWith(thanks);
           input.focus();
         }).catch(function () {
           submit.disabled = false;
+          if (hoBot) hoBot.reset();
           err.textContent = c.formFail;
           err.hidden = false;
           linkifyEmail(err);

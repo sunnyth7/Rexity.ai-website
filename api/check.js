@@ -1,38 +1,48 @@
-// /api/check — the Website-Check behind /website-check (Sprint 27, docs/seo/AI_OFFERS_PLAN.md §6.2).
+// /api/check — the Website-Check behind /website-check (Sprint 27, 27b; hardening, gate and assistant
+// access: Sprints 30/31, contract in docs/CHECK_API.md).
 //
-// POST { url, trade?, town?, lang? }            -> the report as JSON (about a minute: PageSpeed is the slow part)
-// POST { url, email, lang? }                   -> sends the full report to that address (Brevo, api/_notify.js),
-//                                                  stores a lead (api/lead.js path, service "Website-Check")
+// POST { url, lang?, trade?, town?, turnstileToken? | pass? }   browser: runs the check, answers with the PUBLIC tier
+// POST { url, email, lang?, turnstileToken? | pass? }           asks for the full report: one confirmation mail with a
+//                                                               signed link (double opt-in); nothing else is sent or stored
+// GET  ?confirm=<token>                                         the page behind that link: one button
+// POST confirm=<token> (form or JSON)                           sends the full report to the confirmed address, stores the
+//                                                               lead, notifies us
+// GET  ?url=<address>&lang=de|en[&format=json|md]               assistants: the PUBLIC tier as JSON or Markdown (own limits,
+//                                                               CORS open); also behind api/mcp.js (tool website_check)
+//
+// Two tiers (founder, Sprint 31). PUBLIC: overall score and band, block scores, one verdict line per block, the number
+// of checks per status, the method of the speed block (with Lighthouse's four scores and LCP/CLS/TBT when it ran), the
+// address, the time and the labels of the pages read. No single check, no measured detail. FULL: every check with
+// label, status, measured value and points; it exists only inside the report e-mail. Neither tier carries advice
+// ("what to do"): the advice texts are no longer part of any report, response or mail.
 //
 // What it does, block by block. A block that cannot be checked is reported as "nicht prüfbar" and gets no
 // score; nothing is ever guessed.
 //   1. Safety: public http/https hosts only. The host is resolved first and every address must be public
 //      (no private, loopback, link-local, CGNAT, metadata, multicast or documentation ranges, IPv4 and IPv6);
-//      the connection is pinned to the checked address; non-standard ports and credentials are refused; every
-//      redirect (max 3) is checked again; 1.5 MB response cap; 8 s per request; own User-Agent.
+//      the connection is pinned to the checked address; non-standard ports, credentials and IP literals in any
+//      notation are refused; every redirect (max 3) is checked and resolved again; 1.5 MB response cap; 8 s per
+//      request; own User-Agent with the address of its information page (/website-check/bot); hosts on the
+//      opt-out list (data/check-optout.json) are never requested, not directly and not after a redirect.
 //   2. Tempo & Technik: PageSpeed Insights API v5, mobile, Lighthouse lab values only (four category scores,
-//      LCP, CLS, TBT); one retry on 429/5xx. PAGESPEED_API_KEY is optional; without it the keyless quota
-//      applies. When PageSpeed does not answer (Sprint 27b), the block is scored from our own measurement
-//      without a browser ("Eigenmessung", WEIGHTS.tempoOwn): response time and size of the HTML, compression,
-//      render-blocking files in the head, images (lazy loading, dimensions, formats, largest of up to 6
-//      sampled), caching headers of up to 6 sampled files of the same site. The block says which method ran.
-//      "nicht prüfbar" remains only when the page itself cannot be fetched and PageSpeed fails as well.
+//      LCP, CLS, TBT); one retry on 429/5xx. PAGESPEED_API_KEY is optional. When PageSpeed does not answer, the
+//      block is scored from our own measurement without a browser ("Eigenmessung", WEIGHTS.tempoOwn).
 //   3. Auffindbarkeit: title, description, H1, canonical, noindex, lang, viewport, structured data, sitemap,
 //      robots.txt, llms.txt; optional ranking lookup (DATAFORSEO_AUTH_B64 + trade + town; one call per check).
-//   4. Anfrage-Tauglichkeit: tel:, mailto:, form or booking, WhatsApp, opening hours, map link, call to action.
-//      Sprint 27b: up to 4 internal pages linked from the entered page whose link text or address suggests
-//      contact or booking are read as well (same host, robots.txt respected, same safety rules, in parallel,
-//      one time budget); a check is met when it is found on the entered page or on one of them, and the
-//      detail says where. A visible phone number without a tel: link counts half.
+//   4. Anfrage-Tauglichkeit: tel:, mailto:, form or booking, WhatsApp, opening hours, map link, call to action;
+//      up to 4 internal contact/booking pages are read as well (same host, robots.txt respected).
 //   5. Vertrauen & Recht (Hinweise, keine Rechtsberatung): HTTPS, Impressum, Datenschutz, third-party hosts in
-//      the HTML (listed, not judged), accessibility statement (links also looked for on the pages of 4).
+//      the HTML (listed, not judged), accessibility statement.
 //   6. Scores: WEIGHTS below is the whole rule; the page prints it ("So bewerten wir").
-//   7. Kurzfazit: five sentences + three fixes. Written by the EU-routed model path of api/chat.js from the
-//      findings only (no page text, no e-mail address reaches the model); every number is validated against the
-//      report, otherwise (or without a model, or over the daily cost ceiling) a deterministic text is used.
-//   8. Limits: 5 fresh checks per 10 minutes per IP, 24 h cache per URL, CHECK_DAILY_CAP fresh checks per day
-//      (default 200); optional shared cache/counters in Supabase (docs/sql/check_cache.sql). All in memory per
-//      instance otherwise; everything degrades to a plain message.
+//   7. Kurzfazit: a few sentences naming the overall value, the strongest and the weakest block and the method.
+//      Written by the EU-routed model path of api/chat.js (CHECK_PROVIDER, CHECK_MODEL) from the scores and the
+//      counts only; no single finding, no page text and no e-mail address reaches the model. Every number is
+//      validated against the report and advice or single findings are rejected; otherwise (or without a model,
+//      or over the shared daily cost ceiling) a deterministic text is used.
+//   8. Limits: see docs/CHECK_API.md. Optional shared cache/counters in Supabase (docs/sql/check_cache.sql,
+//      docs/sql/check_usage_keys.sql). All in memory per instance otherwise; everything degrades to a plain message.
+//   9. Bot check: with TURNSTILE_SECRET_KEY set, every browser POST needs a Cloudflare Turnstile token (or the
+//      short-lived pass a verified check returns) before anything is fetched.
 //
 // Privacy: logs carry the host name, durations and status codes only — never an e-mail address or an IP.
 // No npm dependencies. Tests: scripts/check-tool/test-check.mjs (stubbed network, nothing leaves the machine).
@@ -43,7 +53,9 @@ const https = require("https");
 const zlib = require("zlib");
 const crypto = require("crypto");
 
-const UA = "RexityWebsiteCheck/1.0 (+https://www.rexity.ai/website-check)";
+const SITE_ORIGIN = "https://www.rexity.ai";
+const BOT_PAGE = SITE_ORIGIN + "/website-check/bot";
+const UA = "RexityWebsiteCheck/1.0 (+" + BOT_PAGE + ")";
 const ROBOTS_TOKEN = "rexitywebsitecheck";
 const MAX_BYTES = 1500000; // 1.5 MB, compressed and decompressed
 const SMALL_BYTES = 300000; // robots.txt, sitemap.xml, llms.txt
@@ -73,12 +85,38 @@ const HOST_LIMIT = 6; // fresh checks per host and hour
 const HOST_WINDOW_MS = 60 * 60 * 1000;
 const MAIL_IP_LIMIT = 3; // report mails per IP and window
 const MAIL_ADDRESS_LIMIT = 2; // report mails per address and day
-const MAX_BODY = 4000;
+const MAX_BODY = 6000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Assistant tier (GET /api/check, api/mcp.js): stricter than the browser's limits; cached results are free.
+const API_REQUEST_LIMIT = 30; // every assistant request (cached ones too) per IP and 10 minutes
+const API_FRESH_LIMIT = 3; // fresh checks per IP and hour
+const API_FRESH_WINDOW_MS = 60 * 60 * 1000;
+// Report by e-mail: the confirmation link and the pass a verified browser gets
+const CONFIRM_TTL_MS = 48 * 60 * 60 * 1000;
+const PASS_TTL_MS = 30 * 60 * 1000;
 
-const DAILY_CAP = (() => {
-  const v = parseInt(String(process.env.CHECK_DAILY_CAP || "").trim(), 10);
-  return Number.isFinite(v) && v >= 0 ? v : 200;
+const envInt = (name, fallback) => {
+  const v = parseInt(String(process.env[name] || "").trim(), 10);
+  return Number.isFinite(v) && v >= 0 ? v : fallback;
+};
+const DAILY_CAP = envInt("CHECK_DAILY_CAP", 200); // fresh checks per day, all callers
+const API_DAILY_CAP = envInt("CHECK_API_DAILY_CAP", 50); // of those: fresh checks per day through GET and MCP
+// The Kurzfazit's model route (Sprint 30): provider order and model are the check's own, not the chat's.
+const CHECK_PROVIDER = String(process.env.CHECK_PROVIDER || "").trim().toLowerCase();
+const CHECK_ORDER = CHECK_PROVIDER === "azure" ? ["azure", "bedrock"] : ["bedrock", "azure"];
+if (CHECK_PROVIDER && !["azure", "bedrock"].includes(CHECK_PROVIDER)) console.error(`[check] CHECK_PROVIDER "${CHECK_PROVIDER.slice(0, 20)}" is unknown (bedrock|azure); using bedrock, then azure`);
+const CHECK_MODEL = String(process.env.CHECK_MODEL || "eu.anthropic.claude-opus-5-5").trim();
+const CHECK_MAX_TOKENS = Math.min(2000, Math.max(200, envInt("CHECK_MAX_TOKENS", 400)));
+
+// Hosts that are never requested (data/check-optout.json; an entry covers the host and its subdomains).
+const OPTOUT = (() => {
+  try {
+    const list = require("../data/check-optout.json").hosts;
+    return (Array.isArray(list) ? list : []).map((h) => String(h || "").trim().toLowerCase().replace(/^[a-z]+:\/\//, "").replace(/[/?#].*$/, "").replace(/\.$/, "").replace(/^www\./, "")).filter((h) => /^[a-z0-9.-]+\.[a-z0-9-]+$/.test(h));
+  } catch (e) {
+    console.error("[check] data/check-optout.json missing or invalid:", e && e.message);
+    return [];
+  }
 })();
 
 // ---- Injectable network (tests replace these; nothing else in this file touches the network) -----------
@@ -90,8 +128,15 @@ const deps = {
   wait: (ms) => new Promise((r) => setTimeout(r, ms)), // back-off before the second PageSpeed attempt
   summarise: null, // tests may replace the model call; default: api/chat.js completeText (loaded lazily)
   notify: null, // default: api/_notify.js (loaded lazily)
-  insertLead: null // default: api/lead.js insertLead (loaded lazily)
+  insertLead: null, // default: api/lead.js insertLead (loaded lazily)
+  verifyTurnstile: null, // default: api/lead.js verifyTurnstile (loaded lazily)
+  optout: OPTOUT, // tests add hosts
+  randomBytes: (n) => crypto.randomBytes(n)
 };
+function isOptedOut(hostname) {
+  const h = String(hostname || "").toLowerCase().replace(/\.$/, "").replace(/^www\./, "");
+  return deps.optout.some((e) => h === e || h.endsWith("." + e));
+}
 
 // ---- The score rule (exported; the page prints it) ------------------------------------------------
 // Block score = points reached / points possible × 100 over the checks that could be carried out.
@@ -151,6 +196,7 @@ function assertSafeUrl(u) {
   if (!host.includes(".")) throw new CheckError("private_host");
   if (host === "localhost" || BLOCKED_SUFFIXES.some((s) => host.endsWith(s))) throw new CheckError("private_host");
   if (!/^[a-z0-9.-]+$/.test(host)) throw new CheckError("bad_url"); // URL() has already punycoded international names
+  if (isOptedOut(host)) throw new CheckError("optout"); // Sprint 30: the owner asked us not to check this site
 }
 
 function isIPv4Literal(s) { return /^\d{1,3}(\.\d{1,3}){3}$/.test(s); }
@@ -830,13 +876,15 @@ const T = (de, en) => ({ de, en });
 // status: ok | partial | fail | info | unknown | na. max 0 = shown, not scored.
 // share: 0..1, null = could not be checked ("unknown"), "na" = does not apply to this page (e.g. no images);
 // unknown and na leave the denominator.
-function mk(id, max, share, label, detail, fix) {
+// Sprint 31 (founder): no advice. The sixth argument of the calls below (the former "what to do" text of a check)
+// is ignored: it is not stored in a report, not returned by the function and not printed in the mail.
+function mk(id, max, share, label, detail) {
   const na = share === "na";
   const unknown = share === null;
   const out = na || unknown;
   const points = out ? 0 : Math.round(max * share * 10) / 10;
   const status = na ? "na" : unknown ? "unknown" : max === 0 ? "info" : share >= 1 ? "ok" : share > 0 ? "partial" : "fail";
-  return { id, max, points, status, label, detail, fix: !out && max > 0 && share < 1 ? fix || null : null };
+  return { id, max, points, status, label, detail };
 }
 const counts = (i) => i.max > 0 && i.status !== "unknown" && i.status !== "na";
 function blockScore(items) {
@@ -969,7 +1017,8 @@ function tempoBlock(psi, own) {
   if (psi.lcpMs !== null) metrics.lcp = { ms: Math.round(psi.lcpMs), de: `${fmtSec(psi.lcpMs, "de")} s`, en: `${fmtSec(psi.lcpMs, "en")} s` };
   if (psi.cls !== null) metrics.cls = { value: Math.round(psi.cls * 100) / 100, de: fmtCls(psi.cls, "de"), en: fmtCls(psi.cls, "en") };
   if (psi.tbtMs !== null) metrics.tbt = { ms: Math.round(psi.tbtMs), de: `${Math.round(psi.tbtMs)} ms`, en: `${Math.round(psi.tbtMs)} ms` };
-  return { id: "tempo", checked: true, score, items, metrics, method: "lighthouse", note: own ? METHOD_NOTE.lighthouse : METHOD_NOTE.lighthouseOnly, lighthouseVersion: psi.lighthouseVersion || "", own: own || null };
+  const lighthouse = { performance: psi.performance, accessibility: psi.accessibility, bestPractices: psi.bestPractices, seo: psi.seo };
+  return { id: "tempo", checked: true, score, items, metrics, lighthouse, method: "lighthouse", note: own ? METHOD_NOTE.lighthouse : METHOD_NOTE.lighthouseOnly, lighthouseVersion: psi.lighthouseVersion || "", own: own || null };
 }
 
 function findBlock(h, extra) {
@@ -1131,21 +1180,6 @@ function overallScore(blocks) {
   return { score: weight ? Math.round(sum / weight) : null, blocksUsed: used };
 }
 
-// Fix candidates in order of the points they would bring to the overall score.
-function rankFixes(blocks) {
-  const out = [];
-  for (const [id, w] of Object.entries(WEIGHTS.blocks)) {
-    const b = blocks[id];
-    if (!b || !b.checked) continue;
-    const possible = b.items.filter(counts).reduce((s, i) => s + i.max, 0) || 1;
-    for (const it of b.items) {
-      if (!it.fix) continue;
-      out.push({ id: `${id}.${it.id}`, block: id, gain: Math.round((((it.max - it.points) / possible) * w) * 10) / 10, text: it.fix });
-    }
-  }
-  return out.sort((a, b) => b.gain - a.gain);
-}
-
 function offerFor(blocks) {
   const s = (id) => (blocks[id] && typeof blocks[id].score === "number" ? blocks[id].score : null);
   const t = WEIGHTS.offerThreshold;
@@ -1154,6 +1188,7 @@ function offerFor(blocks) {
   return "care";
 }
 
+
 // ---- 7. Kurzfazit -----------------------------------------------------------------------------------
 const BLOCK_NAMES = {
   tempo: T("Tempo & Technik", "Speed & technology"),
@@ -1161,6 +1196,27 @@ const BLOCK_NAMES = {
   contact: T("Anfrage-Tauglichkeit", "Readiness for enquiries"),
   trust: T("Vertrauen & Recht", "Trust & legal")
 };
+const BAND_KEYS = ["good", "mid", "low"];
+const BAND_LABELS = { good: T("gut", "good"), mid: T("mittel", "medium"), low: T("schwach", "weak") };
+const bandKey = (score) => (typeof score === "number" ? BAND_KEYS[bandOf(score)] : null);
+// The words of the six states (the page and the mail use the same ones).
+const STATUS_LABELS = {
+  ok: T("erfüllt", "met"), partial: T("teilweise", "partly"), fail: T("offen", "open"),
+  info: T("Hinweis", "note"), unknown: T("nicht prüfbar", "could not be checked"), na: T("entfällt", "does not apply")
+};
+// -> how many checks of a block ended in which state (the public tier shows these numbers, never the checks)
+function countsOf(block) {
+  const c = { ok: 0, partial: 0, fail: 0, info: 0, unknown: 0, na: 0, total: 0 };
+  for (const it of (block && block.items) || []) {
+    if (c[it.status] === undefined) continue;
+    c[it.status]++;
+    c.total++;
+  }
+  return c;
+}
+
+// The fixed text: overall value, strongest block, weakest block, the method of the speed block. No single finding,
+// no advice (Sprint 31).
 function deterministicSummary(report, lang) {
   const L = lang === "en" ? "en" : "de";
   const de = L === "de";
@@ -1172,29 +1228,21 @@ function deterministicSummary(report, lang) {
     const best = scored.reduce((a, b) => (report.blocks[b].score > report.blocks[a].score ? b : a));
     const worst = scored.reduce((a, b) => (report.blocks[b].score < report.blocks[a].score ? b : a));
     s.push(de ? `Am stärksten ist der Bereich ${BLOCK_NAMES[best].de} mit ${report.blocks[best].score} Punkten.` : `The strongest area is ${BLOCK_NAMES[best].en} with ${report.blocks[best].score} points.`);
-    if (worst !== best) s.push(de ? `Am meisten zu holen ist im Bereich ${BLOCK_NAMES[worst].de} mit ${report.blocks[worst].score} Punkten.` : `There is most to gain in ${BLOCK_NAMES[worst].en} with ${report.blocks[worst].score} points.`);
-    else s.push(de ? "Geprüft werden konnte heute nur dieser eine Bereich." : "Only this one area could be checked today.");
+    if (worst !== best && report.blocks[worst].score !== report.blocks[best].score) s.push(de ? `Am schwächsten ist der Bereich ${BLOCK_NAMES[worst].de} mit ${report.blocks[worst].score} Punkten.` : `The weakest area is ${BLOCK_NAMES[worst].en} with ${report.blocks[worst].score} points.`);
+    else if (scored.length === 1) s.push(de ? "Geprüft werden konnte heute nur dieser eine Bereich." : "Only this one area could be checked today.");
+    else s.push(de ? "Die geprüften Bereiche liegen gleichauf." : "The areas checked are level with each other.");
   } else {
     s.push(de ? "Die Seite war für die Prüfung nicht erreichbar oder hat keine auswertbare Antwort geliefert." : "The page could not be reached for the check or returned nothing that could be evaluated.");
-    s.push(de ? "Versuchen Sie es später noch einmal oder prüfen Sie die eingegebene Adresse." : "Please try again later or check the address you entered.");
   }
   const t = report.blocks.tempo;
-  if (t && t.checked && t.metrics && t.metrics.lcp) s.push(de ? `Auf dem Handy erscheint der größte sichtbare Inhalt nach ${t.metrics.lcp.de.replace(" s", "")} Sekunden (Laborwert von Lighthouse).` : `On a phone the largest visible content appears after ${t.metrics.lcp.en.replace(" s", "")} seconds (Lighthouse lab value).`);
-  else if (t && t.checked && t.method === "own") {
-    const resp = t.items.find((i) => i.id === "response");
-    const ms = t.own && t.own.ttfbMs !== null && resp && resp.status !== "unknown" ? fmtMs(t.own.ttfbMs, L) : "";
-    s.push(de ? "Das Tempo haben wir ohne Browser selbst gemessen, weil die Lighthouse-Messung gerade nicht geantwortet hat" + (ms ? `; die erste Antwort Ihres Servers kam nach ${ms}.` : ".")
-      : "We measured speed ourselves without a browser because the Lighthouse measurement did not answer just now" + (ms ? `; your server's first response came after ${ms}.` : "."));
-  }
+  if (t && t.checked && t.method === "own") s.push(de ? "Das Tempo haben wir ohne Browser selbst gemessen, weil die Lighthouse-Messung gerade nicht geantwortet hat." : "We measured speed ourselves without a browser because the Lighthouse measurement did not answer just now.");
   else if (t && !t.checked) s.push(de ? "Das Tempo ließ sich heute nicht messen und fließt deshalb nicht in den Gesamtwert ein." : "Speed could not be measured today and is therefore not part of the overall value.");
   else s.push(de ? "Die Tempo-Werte stammen aus einer Labormessung mit Lighthouse auf einem simulierten Handy." : "The speed values come from a Lighthouse lab measurement on a simulated phone.");
-  const fixes = rankFixes(report.blocks).slice(0, 3);
-  if (fixes.length) s.push((de ? "Der wichtigste nächste Schritt: " : "The most important next step: ") + fixes[0].text[L]);
-  else s.push(de ? "In den geprüften Punkten haben wir nichts gefunden, das Sie dringend ändern müssten." : "In the points we checked we found nothing that you urgently need to change.");
-  return { lang: L, source: "rules", sentences: s.slice(0, 5), fixes: fixes.map((f) => f.id) };
+  return { lang: L, source: "rules", sentences: s };
 }
 
-// Every number a summary may state: the scores, metrics, counts and lengths of this report (plus 100).
+// Every number a summary may state: the overall value, the block scores, the numbers of checks per state and the
+// values of the public tier's speed block (plus 100). Nothing that only the full report contains.
 function allowedNumbers(report) {
   const set = new Set(["100"]);
   const add = (v) => {
@@ -1202,55 +1250,61 @@ function allowedNumbers(report) {
     for (const m of String(v).matchAll(/\d+(?:[.,]\d+)?/g)) set.add(m[0].replace(",", "."));
   };
   add(report.overall.score);
+  add(report.overall.blocksUsed.length);
+  add(Object.keys(WEIGHTS.blocks).length);
   for (const b of Object.values(report.blocks)) {
     if (!b) continue;
     add(b.score);
-    for (const it of b.items || []) { add(it.points); add(it.max); add(it.detail && it.detail.de); add(it.detail && it.detail.en); }
+    for (const v of Object.values(countsOf(b))) add(v);
+    if (b.lighthouse) for (const v of Object.values(b.lighthouse)) add(v);
     if (b.metrics) for (const m of Object.values(b.metrics)) { add(m.de); add(m.en); add(m.ms); add(m.value); }
-    if (b.ranking) { add(b.ranking.position); add(b.ranking.depth); }
-    if (b.thirdParty) add(b.thirdParty.length);
   }
   return set;
 }
 const SUMMARY_BANNED = /(garantier|guarantee|von\s+google\s+gepr|google[- ]zertifiziert|certified\s+by\s+google|rechtssicher|abmahn|dsgvo-konform|gdpr[- ]compliant|illegal|rechtswidrig|verstoß|verstoss|https?:\/\/|www\.)/i;
-function validateSummary(obj, report, candidates) {
-  if (!obj || !Array.isArray(obj.sentences) || obj.sentences.length !== 5) return "shape";
+// Sprint 31, founder: the Kurzfazit gives no advice …
+const SUMMARY_ADVICE = /(\bsollten?\b|\bsollte[nt]?\b|\bempfehl|\bempfiehlt|\bwir raten\b|\bratsam\b|\bam besten\b|\bbeginnen sie\b|\bstarten sie\b|\bergänzen sie\b|\bsetzen sie\b|\bfügen sie\b|\bverbessern sie\b|\boptimieren sie\b|\bprüfen sie\b|\bachten sie\b|\bnächste[rn]?\s+schritt|\bals nächstes\b|\blohnt sich\b|\bes fehlt, \w+ zu\b|\byou should\b|\bshould\b|\bwe recommend\b|\brecommend|\bwe advise\b|\badvis(e|able)\b|\bconsider\b|\bstart (with|by)\b|\bnext step|\bmake sure\b|\btry to\b|\bimprove your\b|\byou need to\b|\byou could\b)/i;
+// … and names no single check: these are the things only the full report lists.
+const SUMMARY_FINDING = /(telefon|\bphone\b|rufnummer|formular|\bform\b|terminbuchung|\bbooking\b|whats\s?app|e-?mail-adresse|mailto|öffnungszeit|sprechzeit|opening hours|office hours|\bkarte\b|\bmap\b|unternehmensprofil|business profile|handlungsaufforderung|call to action|impressum|legal notice|datenschutzerkl|privacy policy|barrierefreiheitserkl|accessibility statement|https|verschlüssel|encrypt|seitentitel|page title|\btitle\b|meta|beschreibung|description|überschrift|heading|\bh1\b|canonical|kanonisch|noindex|viewport|strukturierte daten|structured data|schema\.org|sitemap|robots|llms|komprimier|compress|gzip|brotli|\bbilder?\b|\bimages?\b|stylesheet|skript|script|cache|antwortzeit|response time|fremde (dienste|adressen)|third-party|google fonts|analytics|tag manager)/i;
+// -> null when the summary may be shown, else the reason it is rejected
+function validateSummary(obj, report) {
+  if (!obj || !Array.isArray(obj.sentences) || obj.sentences.length < 3 || obj.sentences.length > 5) return "shape";
   const allowed = allowedNumbers(report);
   const hostDigits = new Set((report.host.match(/\d+/g) || []));
   for (const raw of obj.sentences) {
     if (typeof raw !== "string") return "shape";
     const sent = raw.trim();
     if (sent.length < 15 || sent.length > 320) return "length";
-    if (SUMMARY_BANNED.test(sent.split(report.host).join(""))) return "banned";
-    for (const m of sent.split(report.host).join(" ").matchAll(/\d+(?:[.,]\d+)?/g)) {
+    const bare = sent.split(report.host).join(" ");
+    if (SUMMARY_BANNED.test(bare)) return "banned";
+    if (SUMMARY_ADVICE.test(bare)) return "advice";
+    if (SUMMARY_FINDING.test(bare)) return "finding";
+    for (const m of bare.matchAll(/\d+(?:[.,]\d+)?/g)) {
       const n = m[0].replace(",", ".");
       if (!allowed.has(n) && !hostDigits.has(m[0])) return "number:" + m[0];
     }
   }
-  if (!Array.isArray(obj.fixes)) return "fixes";
-  const ids = new Set(candidates.map((c) => c.id));
-  const picked = [...new Set(obj.fixes.filter((x) => typeof x === "string" && ids.has(x)))];
-  if (picked.length !== Math.min(3, candidates.length)) return "fixes";
   return null;
 }
-function modelInput(report, lang, candidates) {
+// What the model is given: the site's host, the scores, the method and the numbers of checks per state. No check,
+// no measured detail, no text of the checked site, no e-mail address.
+function modelInput(report, lang) {
   const L = lang === "en" ? "en" : "de";
   const blocks = {};
   for (const [id, b] of Object.entries(report.blocks)) {
-    blocks[id] = b.checked
-      ? { name: BLOCK_NAMES[id][L], score: b.score, method: b.method ? METHOD[b.method][L] : undefined, checks: b.items.filter((i) => i.id !== "thirdparty").map((i) => ({ check: i.label[L], result: i.status, detail: i.pageText || i.id === "schema" || i.id === "cta" || i.id === "lang" ? undefined : i.detail[L] })), metrics: b.metrics ? Object.fromEntries(Object.entries(b.metrics).map(([k, v]) => [k, v[L]])) : undefined, thirdPartyHosts: b.thirdParty ? b.thirdParty.length : undefined }
-      : { name: BLOCK_NAMES[id][L], notCheckable: true };
+    if (!b.checked) { blocks[id] = { name: BLOCK_NAMES[id][L], notCheckable: true }; continue; }
+    const c = countsOf(b);
+    blocks[id] = { name: BLOCK_NAMES[id][L], score: b.score, band: BAND_LABELS[bandKey(b.score)] ? BAND_LABELS[bandKey(b.score)][L] : undefined, method: b.method ? METHOD[b.method][L] : undefined, checks: { met: c.ok, partly: c.partial, open: c.fail, notes: c.info, notCheckable: c.unknown } };
   }
-  return { site: report.host, overall: report.overall.score, blocks, fixCandidates: candidates.slice(0, 8).map((c) => ({ id: c.id, text: c.text[L] })) };
+  return { site: report.host, overall: report.overall.score, blocks };
 }
 const SUMMARY_SYSTEM = {
-  de: "Du schreibst das Kurzfazit eines automatischen Website-Checks für die Inhaberin oder den Inhaber eines kleinen Betriebs. Schreibe genau fünf kurze, einfache Sätze auf Deutsch, in der Sie-Form, ohne Fachjargon. Nenne nur Zahlen, die im JSON stehen, und erfinde keine Befunde. Ein Bereich mit notCheckable wurde nicht geprüft: Sage das, rate nichts. Keine Rechtsberatung, keine Versprechen, keine Aussagen über Rechtsverstöße, keine Internetadressen, kein Eigenlob, keine Anrede und kein Gruß. Wähle aus fixCandidates die drei nützlichsten Schritte (nur deren id). Antworte ausschließlich mit JSON in dieser Form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\",\"…\"],\"fixes\":[\"id\",\"id\",\"id\"]}",
-  en: "You write the short verdict of an automatic website check for the owner of a small business. Write exactly five short, plain sentences in English, polite, no jargon. State only numbers that appear in the JSON and do not invent findings. An area marked notCheckable was not checked: say so, do not guess. No legal advice, no promises, no statements about legal violations, no web addresses, no self-praise, no greeting. Choose the three most useful steps from fixCandidates (their id only). Answer with JSON only, in this form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\",\"…\"],\"fixes\":[\"id\",\"id\",\"id\"]}"
+  de: "Du schreibst das Kurzfazit eines automatischen Website-Checks für die Inhaberin oder den Inhaber eines kleinen Betriebs. Schreibe genau vier kurze, einfache Sätze auf Deutsch, in der Sie-Form, ohne Fachjargon: erstens den Gesamtwert, zweitens den stärksten Bereich, drittens den schwächsten Bereich, viertens die Messmethode beim Tempo. Nenne nur Zahlen, die im JSON stehen. Nenne keinen einzelnen Prüfpunkt und keine Ursache, denn du kennst nur die Werte der Bereiche. Gib keinen Rat, keine Empfehlung und keinen nächsten Schritt. Ein Bereich mit notCheckable wurde nicht geprüft: Sage das, rate nichts. Keine Rechtsberatung, keine Versprechen, keine Aussagen über Rechtsverstöße, keine Internetadressen, kein Eigenlob, keine Anrede und kein Gruß. Antworte ausschließlich mit JSON in dieser Form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\"]}",
+  en: "You write the short verdict of an automatic website check for the owner of a small business. Write exactly four short, plain sentences in English, polite, no jargon: first the overall value, second the strongest area, third the weakest area, fourth how speed was measured. State only numbers that appear in the JSON. Name no single check and no cause, because you only know the values of the areas. Give no advice, no recommendation and no next step. An area marked notCheckable was not checked: say so, do not guess. No legal advice, no promises, no statements about legal violations, no web addresses, no self-praise, no greeting. Answer with JSON only, in this form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\"]}"
 };
 async function buildSummary(report, lang) {
   const L = lang === "en" ? "en" : "de";
   const fallback = deterministicSummary(report, L);
-  const candidates = rankFixes(report.blocks);
   if (report.overall.score === null) return fallback;
   let summarise = deps.summarise;
   if (!summarise) {
@@ -1258,17 +1312,20 @@ async function buildSummary(report, lang) {
   }
   if (typeof summarise !== "function") return fallback;
   try {
-    const out = await summarise({ system: SUMMARY_SYSTEM[L], user: JSON.stringify(modelInput(report, L, candidates)), timeoutMs: SUMMARY_TIMEOUT_MS, tag: "check" });
+    // One shared daily USD ceiling with the chat (CHAT_DAILY_USD_CEILING, api/chat.js): at or above it the call
+    // returns null and the fixed text is used.
+    const out = await summarise({ system: SUMMARY_SYSTEM[L], user: JSON.stringify(modelInput(report, L)), timeoutMs: SUMMARY_TIMEOUT_MS, tag: "check", order: CHECK_ORDER, model: CHECK_MODEL, maxTokens: CHECK_MAX_TOKENS, pricePrefix: "CHECK_PRICE" });
     if (!out || !out.text) return fallback; // no model configured, or the daily cost ceiling is reached
+    await bumpDaily("summaries", 1);
+    if (Number.isFinite(out.usd) && out.usd > 0) await countUsage("usdmicro", Math.round(out.usd * 1e6)); // Sprint 34
     const m = /\{[\s\S]*\}/.exec(out.text);
     const obj = m ? JSON.parse(m[0]) : null;
-    const problem = validateSummary(obj, report, candidates);
+    const problem = validateSummary(obj, report);
     if (problem) {
       console.error("[check] summary rejected (" + problem.split(":")[0] + "): deterministic text used");
       return fallback;
     }
-    const ids = new Set(candidates.map((c) => c.id));
-    return { lang: L, source: "model", sentences: obj.sentences.map((x) => x.trim()), fixes: [...new Set(obj.fixes.filter((x) => ids.has(x)))].slice(0, 3) };
+    return { lang: L, source: "model", sentences: obj.sentences.map((x) => x.trim()) };
   } catch (e) {
     console.error("[check] summary failed (" + ((e && e.name) || "error") + "): deterministic text used");
     return fallback;
@@ -1294,14 +1351,31 @@ function berlinDay(now) {
   try { return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(now)); }
   catch (_e) { return new Date(now).toISOString().slice(0, 10); }
 }
-const daily = { day: "", checks: 0, lookups: 0, mails: 0 };
+// Per Europe/Berlin day. checks: fresh checks (CHECK_DAILY_CAP); lookups: ranking lookups; mails: report requests
+// (one mail each: the confirmation mail, or the report itself without CHECK_MAIL_SECRET); apichecks: the fresh
+// checks among "checks" that came through GET or MCP (CHECK_API_DAILY_CAP); reports: full reports sent after a
+// confirmed address; summaries: model answers for the Kurzfazit (also those the guard then rejected); botfail: browser requests the bot check refused.
+const DAILY_KINDS = ["checks", "lookups", "mails", "apichecks", "reports", "summaries", "botfail",
+  // Sprint 34 (weekly numbers, docs/seo/CHECK_METRICS.md; counted by countUsage below, never a limit):
+  // cached: check requests answered from the 24-hour cache; cards: score cards shown; apiget: GET requests of
+  // assistants and programs; mcpcalls: calls of the MCP tool; ratehits: answers "429" of this function;
+  // usdmicro: estimated cost of the Kurzfazit's model answers in millionths of a US dollar.
+  "cached", "cards", "apiget", "mcpcalls", "ratehits", "usdmicro",
+  // followups: follow-up mails sent; optouts: opt-outs through the link in that mail (both counted by api/followup.js)
+  "followups", "optouts"];
+// How long a day's counter stays in the shared store: the weekly summary (api/digest.js) reads the last 7 days,
+// the first review 28 days. Numbers only, no visitor data.
+const DAY_COUNTER_TTL_S = 40 * 86400;
+const LEGACY_KINDS = new Set(["checks", "lookups", "mails"]); // the keys docs/sql/check_cache.sql already accepts
+const daily = { day: "" };
+for (const k of DAILY_KINDS) daily[k] = 0;
 function today() {
   const d = berlinDay(deps.now());
-  if (daily.day !== d) { daily.day = d; daily.checks = 0; daily.lookups = 0; daily.mails = 0; }
+  if (daily.day !== d) { daily.day = d; for (const k of DAILY_KINDS) daily[k] = 0; }
   return daily;
 }
 
-const REPORT_VERSION = 3; // 3: accessibility statement is a note without points; Lighthouse key live (older cached reports are not served)
+const REPORT_VERSION = 4; // 4: no advice texts in a report, Lighthouse scores kept on the speed block (older cached reports are not served)
 const cache = new Map(); // key -> { at, report }
 const cacheKey = (u) => (u.hostname.replace(/^www\./, "") + (u.pathname.replace(/\/+$/, "") || "/") + (u.search || "")).toLowerCase();
 function cacheGet(key) {
@@ -1331,7 +1405,9 @@ function persistOff(reason) {
   persistOffUntil = deps.now() + 10 * 60 * 1000;
   console.error("[check] shared store unavailable (" + reason + "): memory only on this instance for 10 minutes");
 }
-async function rpc(name, args) {
+// soft: a refusal (HTTP 4xx, e.g. a bucket key the installed function does not know yet: docs/sql/check_usage_keys.sql
+// not applied) is ignored and does not switch the shared store off.
+async function rpc(name, args, soft) {
   if (!persistActive()) return null;
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), 1500);
@@ -1342,7 +1418,11 @@ async function rpc(name, args) {
       body: JSON.stringify(args),
       signal: ctrl.signal
     });
-    if (!resp.ok) { await resp.text().catch(() => ""); persistOff("HTTP " + resp.status); return null; }
+    if (!resp.ok) {
+      await resp.text().catch(() => "");
+      if (!(soft && resp.status >= 400 && resp.status < 500)) persistOff("HTTP " + resp.status);
+      return null;
+    }
     return await resp.json();
   } catch (e) {
     persistOff(e && e.name === "AbortError" ? "timeout" : "network");
@@ -1365,11 +1445,19 @@ async function sharedSet(key, report) {
 async function bumpDaily(kind, n) {
   const d = today();
   d[kind] += n;
-  const data = await rpc("check_usage_bump", { p_key: `${kind}:${d.day}`, p_count: n, p_ttl_seconds: 3 * 86400 });
+  const shared = await sharedBump(`${kind}:${d.day}`, n, DAY_COUNTER_TTL_S, !LEGACY_KINDS.has(kind));
+  return shared === null ? d[kind] : Math.max(shared, d[kind]);
+}
+// -> the shared counter after adding n, or null (no shared store, or the key is not known there yet)
+async function sharedBump(key, n, ttlSeconds, soft) {
+  const data = await rpc("check_usage_bump", { p_key: key, p_count: n, p_ttl_seconds: ttlSeconds }, soft);
   const row = Array.isArray(data) ? data[0] : data;
   const shared = row && typeof row === "object" ? Number(row.count) : typeof row === "number" ? row : NaN;
-  return Number.isFinite(shared) ? Math.max(shared, d[kind]) : d[kind];
+  return Number.isFinite(shared) ? shared : null;
 }
+// The visitor's address as it appears in a shared key: a salted SHA-256 hash, never the address itself.
+const IP_SALT = crypto.createHash("sha256").update("rexity-check|" + SUPABASE_KEY).digest("hex").slice(0, 32);
+const ipHash = (ip) => crypto.createHash("sha256").update(IP_SALT + "|" + ip).digest("hex").slice(0, 32);
 
 // ---- The check ---------------------------------------------------------------------------------------
 async function fetchSide(origin, pathname, robots, accept) {
@@ -1438,6 +1526,9 @@ async function runCheck(input) {
     }
   }
   timing.fetch = deps.now() - tFetch;
+  // A redirect onto a site whose owner asked us not to check it ends the check: nothing more is requested, and the
+  // address is not handed to PageSpeed Insights either.
+  if (pageError === "optout") throw new CheckError("optout");
 
   const finalUrl = page ? page.finalUrl : entered;
   const host = finalUrl.hostname;
@@ -1543,51 +1634,150 @@ async function runCheck(input) {
   return report;
 }
 
-// What the page gets: one language, every check of every block, the first fix and up to three more.
+// ---- The two tiers (Sprint 31) ----------------------------------------------------------------------------
+const LINKS = { page: SITE_ORIGIN + "/website-check", bot: BOT_PAGE, openapi: SITE_ORIGIN + "/.well-known/openapi.json", mcp: SITE_ORIGIN + "/mcp" };
+const FULL_REPORT_NOTE = T(
+  "Den vollständigen Bericht mit jedem einzelnen Prüfpunkt gibt es nur per E-Mail: die Adresse auf der Seite eintragen und den Link in der Bestätigungs-E-Mail öffnen.",
+  "The full report with every single check is sent by e-mail only: enter the address on the page and open the link in the confirmation e-mail.");
+const OFFERS = {
+  design: { label: T("Webdesign: Websites, die Anfragen bringen", "Web design: websites that bring enquiries"), path: "/web/web-design" },
+  relaunch: { label: T("Website-Relaunch: neue Technik, gleiche Adresse", "Website relaunch: new technology, same address"), path: "/web/website-umzug" },
+  care: { label: T("Website-Wartung: damit die Werte so bleiben", "Website maintenance: so the values stay this way"), path: "/website-wartung" }
+};
+const verdictKey = (id, b) => (b.method === "own" ? "tempoOwn" : id);
+
+// PUBLIC tier: what the browser, GET /api/check and the MCP tool get. Scores, bands, one verdict line per block, the
+// numbers of checks per state, the speed block's method (with Lighthouse's four scores and LCP/CLS/TBT when it ran),
+// the labels of the pages read. No check, no measured detail, no advice.
 function publicView(report, lang, cached) {
   const L = lang === "en" ? "en" : "de";
   const sum = report.summaries[L];
-  const cand = rankFixes(report.blocks);
-  const byId = Object.fromEntries(cand.map((c) => [c.id, c]));
-  const fixIds = (sum && sum.fixes && sum.fixes.length ? sum.fixes : cand.slice(0, 3).map((c) => c.id)).filter((id) => byId[id]);
   const blocks = {};
   for (const [id, b] of Object.entries(report.blocks)) {
+    const v = verdictOf(verdictKey(id, b), b.score);
+    const band = bandKey(b.score);
     blocks[id] = {
-      name: BLOCK_NAMES[id][L], checked: b.checked, score: b.score, weight: WEIGHTS.blocks[id],
+      name: BLOCK_NAMES[id][L], checked: b.checked, score: b.score, band, bandLabel: band ? BAND_LABELS[band][L] : undefined, weight: WEIGHTS.blocks[id],
+      verdict: v ? v[L] : undefined,
       reason: b.reason ? b.reason[L] : undefined,
-      verdict: verdictOf(b.method === "own" ? "tempoOwn" : id, b.score) ? verdictOf(b.method === "own" ? "tempoOwn" : id, b.score)[L] : undefined,
-      method: b.method || undefined, methodLabel: b.method ? METHOD[b.method][L] : undefined, note: b.note ? b.note[L] : undefined,
-      pages: b.pages && b.pages.length ? b.pages : undefined,
-      items: (b.items || []).map((i) => ({ id: i.id, label: i.label[L], status: i.status, detail: i.detail[L], max: i.max, points: i.points })),
-      metrics: b.metrics ? Object.fromEntries(Object.entries(b.metrics).map(([k, v]) => [k, v[L]])) : undefined,
-      ranking: b.ranking ? { query: b.ranking.query, checked: b.ranking.checked, position: b.ranking.position === undefined ? null : b.ranking.position } : undefined
+      counts: countsOf(b)
     };
+    if (id === "tempo") {
+      blocks[id].method = b.method || null;
+      blocks[id].methodLabel = b.method ? METHOD[b.method][L] : undefined;
+      blocks[id].note = b.method === "own" ? METHOD_NOTE.own[L] : b.method === "lighthouse" ? METHOD_NOTE.lighthouseOnly[L] : undefined;
+      if (b.method === "lighthouse") {
+        blocks[id].lighthouse = b.lighthouse || undefined;
+        blocks[id].metrics = b.metrics ? Object.fromEntries(Object.entries(b.metrics).map(([k, m]) => [k, m[L]])) : undefined;
+      }
+    }
   }
+  const oBand = bandKey(report.overall.score);
+  const offer = OFFERS[report.offer] ? report.offer : "design";
   return {
-    ok: true, lang: L, url: report.url, finalUrl: report.finalUrl, host: report.host, checkedAt: report.checkedAt, cached: Boolean(cached),
-    truncated: report.truncated, overall: report.overall, blocks,
+    ok: true, tier: "public", v: REPORT_VERSION, lang: L, url: report.url, finalUrl: report.finalUrl, host: report.host, checkedAt: report.checkedAt, cached: Boolean(cached),
+    truncated: report.truncated,
+    overall: { score: report.overall.score, band: oBand, bandLabel: oBand ? BAND_LABELS[oBand][L] : undefined, blocksUsed: report.overall.blocksUsed },
+    blocks,
+    pages: ((report.blocks.contact && report.blocks.contact.pages) || []).slice(0, SUB_PAGES),
     summary: sum ? { sentences: sum.sentences, source: sum.source } : null,
-    firstFix: fixIds.length ? byId[fixIds[0]].text[L] : null,
-    moreFixes: Math.max(0, fixIds.length - 1),
-    // "Was jetzt am meisten bringt": the first fix (the summary's pick) and up to three more, by gain
-    fixes: [...fixIds, ...cand.map((c) => c.id).filter((id) => !fixIds.includes(id))].slice(0, 4).map((id) => byId[id].text[L]),
-    offer: report.offer
+    offer, offerLabel: OFFERS[offer].label[L], offerUrl: SITE_ORIGIN + OFFERS[offer].path,
+    statusLabels: Object.fromEntries(Object.entries(STATUS_LABELS).map(([k, v]) => [k, v[L]])),
+    fullReport: { by: "email", note: FULL_REPORT_NOTE[L], url: LINKS.page },
+    links: LINKS
   };
+}
+
+// FULL tier: every check with label, state, measured value and points. Used for the report e-mail only (and by the
+// tests); the handler never returns it.
+function fullView(report, lang) {
+  const L = lang === "en" ? "en" : "de";
+  const view = publicView(report, L, false);
+  view.tier = "full";
+  for (const [id, b] of Object.entries(report.blocks)) {
+    const out = view.blocks[id];
+    out.items = (b.items || []).map((i) => ({ id: i.id, label: i.label[L], status: i.status, statusLabel: STATUS_LABELS[i.status][L], detail: i.detail[L], max: i.max, points: i.points }));
+    out.method = b.method || undefined;
+    out.methodLabel = b.method ? METHOD[b.method][L] : undefined;
+    out.note = b.note ? b.note[L] : undefined;
+    out.pages = b.pages && b.pages.length ? b.pages : undefined;
+    out.lighthouse = b.lighthouse || undefined;
+    out.metrics = b.metrics ? Object.fromEntries(Object.entries(b.metrics).map(([k, m]) => [k, m[L]])) : undefined;
+    out.ranking = b.ranking ? { query: b.ranking.query, checked: b.ranking.checked, position: b.ranking.position === undefined ? null : b.ranking.position } : undefined;
+  }
+  return view;
+}
+
+// The public tier as Markdown (GET ?format=md, Accept: text/markdown, and the MCP tool).
+function publicMarkdown(view) {
+  const de = view.lang === "de";
+  const date = new Intl.DateTimeFormat(de ? "de-DE" : "en-GB", { timeZone: "Europe/Berlin", dateStyle: "long", timeStyle: "short" }).format(new Date(view.checkedAt));
+  const na = de ? "nicht prüfbar" : "could not be checked";
+  const out = [];
+  out.push(de ? `# Website-Check: ${view.host}` : `# Website check: ${view.host}`, "");
+  out.push(de ? `- Geprüfte Adresse: ${view.finalUrl}` : `- Address checked: ${view.finalUrl}`);
+  out.push(de ? `- Geprüft am: ${date} Uhr (Europe/Berlin)${view.cached ? ", Ergebnis der letzten 24 Stunden" : ""}` : `- Checked on: ${date} (Europe/Berlin)${view.cached ? ", result from the last 24 hours" : ""}`);
+  out.push(view.overall.score === null ? (de ? `- Gesamt: ${na}` : `- Overall: ${na}`) : (de ? `- Gesamt: ${view.overall.score} von 100 Punkten (${view.overall.bandLabel})` : `- Overall: ${view.overall.score} out of 100 points (${view.overall.bandLabel})`));
+  out.push("");
+  if (view.summary) out.push(de ? "## Kurzfazit" : "## Short verdict", "", view.summary.sentences.join(" "), "");
+  if (view.summary && view.summary.source === "model") out.push(de ? "_Das Kurzfazit wurde von einer KI aus den Werten dieses Ergebnisses formuliert._" : "_The short verdict was worded by an AI from the values of this result._", "");
+  out.push(de ? "## Bereiche" : "## Areas", "");
+  out.push(de ? "| Bereich | Punkte | Einordnung | Gewicht | erfüllt | teilweise | offen | Hinweise | nicht prüfbar | entfällt |" : "| Area | Points | Band | Weight | met | partly | open | notes | not checkable | does not apply |");
+  out.push("|---|---|---|---|---|---|---|---|---|---|");
+  for (const id of Object.keys(WEIGHTS.blocks)) {
+    const b = view.blocks[id];
+    const c = b.counts;
+    out.push(`| ${b.name} | ${b.score === null ? na : b.score} | ${b.bandLabel || "–"} | ${b.weight} % | ${c.ok} | ${c.partial} | ${c.fail} | ${c.info} | ${c.unknown} | ${c.na} |`);
+  }
+  out.push("");
+  for (const id of Object.keys(WEIGHTS.blocks)) {
+    const b = view.blocks[id];
+    out.push(`- **${b.name}:** ${b.checked ? b.verdict || "" : b.reason || na}`);
+  }
+  out.push("");
+  const t = view.blocks.tempo;
+  if (t.methodLabel) {
+    out.push(de ? "## Tempo: Methode" : "## Speed: method", "", `${t.methodLabel}. ${t.note || ""}`.trim(), "");
+    if (t.lighthouse) {
+      const lh = t.lighthouse;
+      const n = (x) => (x === null || x === undefined ? na : x);
+      out.push(de ? `- Lighthouse (mobil): Leistung ${n(lh.performance)}, Barrierefreiheit ${n(lh.accessibility)}, Best Practices ${n(lh.bestPractices)}, SEO ${n(lh.seo)}` : `- Lighthouse (mobile): performance ${n(lh.performance)}, accessibility ${n(lh.accessibility)}, best practices ${n(lh.bestPractices)}, SEO ${n(lh.seo)}`);
+      const m = t.metrics || {};
+      const parts = [m.lcp && `LCP ${m.lcp}`, m.cls && `CLS ${m.cls}`, m.tbt && `TBT ${m.tbt}`].filter(Boolean);
+      if (parts.length) out.push((de ? "- Laborwerte: " : "- Lab values: ") + parts.join(", "));
+      out.push("");
+    }
+  }
+  if (view.pages.length) out.push((de ? "Mitgelesene Seiten: " : "Pages read as well: ") + view.pages.join(", "), "");
+  out.push(de ? "## Vollständiger Bericht" : "## Full report", "", `${view.fullReport.note} ${view.fullReport.url}`, "");
+  out.push(de
+    ? "Der Check ist eine automatische Momentaufnahme der eingegebenen Seite. Er nennt hier keine einzelnen Prüfpunkte und gibt keine Handlungsempfehlungen. Die Angaben zu Vertrauen & Recht sind Hinweise und keine Rechtsberatung."
+    : "The check is an automatic snapshot of the page entered. It names no single checks here and gives no recommendations. The indications on trust & legal are not legal advice.");
+  return out.join("\n") + "\n";
 }
 
 // ---- 9. Report by e-mail --------------------------------------------------------------------------------
 const esc = (v) => String(v == null ? "" : v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 const MARK = { ok: "✓", partial: "~", fail: "✗", info: "i", unknown: "?", na: "–" };
+const SIGNATURE = ["Rexity Labs UG (haftungsbeschränkt)", "info@rexity.ai", "+49 174 2471435", "www.rexity.ai"];
+const CALL_URL = SITE_ORIGIN + "/#kontakt";
+// The sentence of the form in force (2 Oct 2026): requesting the report includes consent to be contacted.
+const CONSENT_NOTE = T(
+  "Mit der Anforderung des Berichts haben Sie eingewilligt, dass Rexity Labs Sie per E-Mail zu diesem Ergebnis und zu passenden Leistungen kontaktiert. Die Einwilligung können Sie jederzeit widerrufen: Eine kurze Nachricht an info@rexity.ai genügt.",
+  "By requesting the report you agreed that Rexity Labs may contact you by e-mail about this result and about matching services. You can withdraw this consent at any time: a short message to info@rexity.ai is enough.");
+
+const CONSENT_ASK = T(CONSENT_NOTE.de.replace("haben Sie eingewilligt", "willigen Sie ein"), CONSENT_NOTE.en.replace("you agreed", "you agree"));
+
+// The full report: every check with its state, measured value and points, the Lighthouse values, the pages read and
+// the rule. No advice (founder, Sprint 31). One call to action: the 15-minute call and the matching service page.
 function reportMail(report, lang) {
   const L = lang === "en" ? "en" : "de";
   const de = L === "de";
-  const view = publicView(report, L, false);
+  const view = fullView(report, L);
   const sum = report.summaries[L] || deterministicSummary(report, L);
-  const cand = Object.fromEntries(rankFixes(report.blocks).map((c) => [c.id, c]));
-  const fixes = sum.fixes.map((id) => cand[id]).filter(Boolean).map((c) => c.text[L]);
   const date = new Intl.DateTimeFormat(de ? "de-DE" : "en-GB", { timeZone: "Europe/Berlin", dateStyle: "long", timeStyle: "short" }).format(new Date(report.checkedAt));
   const head = de ? `Website-Check für ${report.host}` : `Website check for ${report.host}`;
-  const overall = view.overall.score === null ? (de ? "Gesamt: nicht prüfbar" : "Overall: could not be checked") : (de ? `Gesamt: ${view.overall.score} von 100 Punkten` : `Overall: ${view.overall.score} out of 100 points`);
+  const overall = view.overall.score === null ? (de ? "Gesamt: nicht prüfbar" : "Overall: could not be checked") : (de ? `Gesamt: ${view.overall.score} von 100 Punkten (${view.overall.bandLabel})` : `Overall: ${view.overall.score} out of 100 points (${view.overall.bandLabel})`);
   const text = [head, de ? `Geprüfte Adresse: ${report.finalUrl}` : `Address checked: ${report.finalUrl}`, de ? `Geprüft am ${date} Uhr` : `Checked on ${date}`, "", overall, ""];
   let html = `<div style="font-family:sans-serif;font-size:14px;line-height:1.5;color:#111"><h1 style="font-size:20px;margin:0 0 4px">${esc(head)}</h1>` +
     `<p style="margin:0 0 12px;color:#555">${esc(de ? "Geprüfte Adresse" : "Address checked")}: ${esc(report.finalUrl)}<br>${esc(de ? `Geprüft am ${date} Uhr` : `Checked on ${date}`)}</p>` +
@@ -1596,27 +1786,25 @@ function reportMail(report, lang) {
   html += `<h2 style="font-size:16px;margin:16px 0 4px">${de ? "Kurzfazit" : "Short verdict"}</h2><p>${sum.sentences.map(esc).join(" ")}</p>`;
   text.push(sum.sentences.join(" "), "");
   if (sum.source === "model") {
-    const n = de ? "Das Kurzfazit wurde von einer KI aus den Messwerten dieses Berichts formuliert." : "The short verdict was worded by an AI from the measurements in this report.";
+    const n = de ? "Das Kurzfazit wurde von einer KI aus den Werten dieses Berichts formuliert." : "The short verdict was worded by an AI from the values in this report.";
     text.push(n, "");
     html += `<p style="font-size:12px;color:#555">${esc(n)}</p>`;
   }
-  if (fixes.length) {
-    const h = de ? "Die drei nützlichsten Schritte" : "The three most useful steps";
-    text.push(h, ...fixes.map((f, i) => `${i + 1}. ${f}`), "");
-    html += `<h2 style="font-size:16px;margin:16px 0 4px">${esc(h)}</h2><ol>${fixes.map((f) => `<li>${esc(f)}</li>`).join("")}</ol>`;
-  }
+  const pts = (i) => (i.max > 0 && i.status !== "unknown" && i.status !== "na"
+    ? (de ? `${String(i.points).replace(".", ",")} von ${i.max} Punkten` : `${i.points} of ${i.max} points`)
+    : i.max > 0 ? (de ? "nicht gewertet" : "not scored") : (de ? "ohne Punkte" : "no points"));
   for (const id of Object.keys(WEIGHTS.blocks)) {
     const b = view.blocks[id];
     const title = b.name + (id === "trust" ? (de ? " (Hinweise, keine Rechtsberatung)" : " (indications, not legal advice)") : "") + ": " + (b.score === null ? (de ? "nicht prüfbar" : "could not be checked") : (de ? `${b.score} von 100` : `${b.score} out of 100`));
     text.push(title);
     html += `<h2 style="font-size:16px;margin:16px 0 4px">${esc(title)}</h2>`;
     if (!b.checked) { text.push("  " + (b.reason || ""), ""); html += `<p>${esc(b.reason || "")}</p>`; continue; }
-    if (b.methodLabel) { text.push("  " + b.methodLabel + (b.method === "own" ? ". " + b.note : "")); html += `<p style="color:#555">${esc(b.methodLabel + (b.method === "own" ? ". " + b.note : ""))}</p>`; }
+    if (b.methodLabel) { const line = b.methodLabel + ". " + (b.note || ""); text.push("  " + line.trim()); html += `<p style="color:#555">${esc(line.trim())}</p>`; }
     if (b.pages) { const line = (de ? "Mitgeprüfte Seiten: " : "Pages read as well: ") + b.pages.join(", "); text.push("  " + line); html += `<p style="color:#555">${esc(line)}</p>`; }
     html += '<table cellpadding="4" style="border-collapse:collapse;font-size:14px">';
     for (const i of b.items) {
-      text.push(`  [${MARK[i.status]}] ${i.label}: ${i.detail}`);
-      html += `<tr><td style="vertical-align:top">${MARK[i.status]}</td><td style="vertical-align:top">${esc(i.label)}</td><td style="vertical-align:top">${esc(i.detail)}</td></tr>`;
+      text.push(`  [${MARK[i.status]}] ${i.label} (${i.statusLabel}, ${pts(i)}): ${i.detail}`);
+      html += `<tr><td style="vertical-align:top">${MARK[i.status]}</td><td style="vertical-align:top">${esc(i.label)}<br><span style="font-size:12px;color:#555">${esc(i.statusLabel + ", " + pts(i))}</span></td><td style="vertical-align:top">${esc(i.detail)}</td></tr>`;
     }
     html += "</table>";
     if (b.metrics) {
@@ -1633,6 +1821,15 @@ function reportMail(report, lang) {
     }
     text.push("");
   }
+  // The one call to action
+  const offer = OFFERS[report.offer] || OFFERS.design;
+  const ctaHead = de ? "Über das Ergebnis sprechen" : "Talk about the result";
+  const ctaCall = de ? "15 Minuten über das Ergebnis sprechen:" : "Talk about the result for 15 minutes:";
+  const ctaPhone = de ? "oder telefonisch unter +49 174 2471435" : "or by phone on +49 174 2471435";
+  const ctaOffer = de ? "Die passende Leistung dazu:" : "The matching service:";
+  text.push(ctaHead, `${ctaCall} ${CALL_URL} ${ctaPhone}`, `${ctaOffer} ${offer.label[L]}: ${SITE_ORIGIN + offer.path}`, "");
+  html += `<h2 style="font-size:16px;margin:20px 0 4px">${esc(ctaHead)}</h2><p>${esc(ctaCall)} <a href="${esc(CALL_URL)}">${esc(CALL_URL)}</a> ${esc(ctaPhone)}<br>${esc(ctaOffer)} <a href="${esc(SITE_ORIGIN + offer.path)}">${esc(offer.label[L])}</a></p>`;
+
   const tm = report.blocks.tempo && report.blocks.tempo.method;
   const tempoLine = tm === "own"
     ? T("Tempo in diesem Bericht: eigene Messung ohne Browser; sie ersetzt keinen Lighthouse-Lauf in einem echten Browser.", "Speed in this report: our own measurement without a browser; it does not replace a Lighthouse run in a real browser.")
@@ -1640,15 +1837,123 @@ function reportMail(report, lang) {
     ? T("Tempo-Messung mit Google Lighthouse (PageSpeed Insights), Laborwerte auf einem simulierten Handy.", "Speed measured with Google Lighthouse (PageSpeed Insights), lab values on a simulated phone.")
     : T("Das Tempo ließ sich in diesem Lauf nicht messen.", "Speed could not be measured in this run.");
   const rule = de
-    ? `So bewerten wir: Jeder Bereich erhält 0 bis 100 Punkte aus den Prüfpunkten, die sich prüfen ließen. Gesamt = Tempo & Technik ${WEIGHTS.blocks.tempo} %, Auffindbarkeit ${WEIGHTS.blocks.find} %, Anfrage-Tauglichkeit ${WEIGHTS.blocks.contact} %, Vertrauen & Recht ${WEIGHTS.blocks.trust} %. Die vollständige Regel steht auf https://www.rexity.ai/website-check. ${tempoLine.de} Der Check ist eine automatische Momentaufnahme der eingegebenen Seite und ersetzt keine Rechtsberatung.`
-    : `How we score: each area gets 0 to 100 points from the checks that could be carried out. Overall = speed & technology ${WEIGHTS.blocks.tempo}%, findability ${WEIGHTS.blocks.find}%, readiness for enquiries ${WEIGHTS.blocks.contact}%, trust & legal ${WEIGHTS.blocks.trust}%. The full rule is on https://www.rexity.ai/website-check. ${tempoLine.en} The check is an automatic snapshot of the page you entered and does not replace legal advice.`;
-  const why = de
-    ? "Sie erhalten diese E-Mail, weil diese Adresse auf rexity.ai/website-check für den Bericht eingetragen wurde. Mit der Anforderung haben Sie eingewilligt, dass wir Sie per E-Mail zu diesem Ergebnis und zu passenden Leistungen kontaktieren. Widerruf jederzeit: eine kurze Nachricht an info@rexity.ai genügt."
-    : "You receive this e-mail because this address was entered for the report on rexity.ai/website-check. By requesting it you agreed that we may contact you by e-mail about this result and about matching services. To withdraw, a short message to info@rexity.ai is enough.";
-  const sig = ["Rexity Labs UG (haftungsbeschränkt)", "info@rexity.ai", "+49 174 2471435", "www.rexity.ai"];
-  text.push(rule, "", why, "", ...sig);
-  html += `<p style="font-size:12px;color:#555;margin-top:20px">${esc(rule)}</p><p style="font-size:12px;color:#555">${esc(why)}</p><p>${sig.map(esc).join("<br>")}</p></div>`;
+    ? `So bewerten wir: Jeder Prüfpunkt hat eine feste Punktzahl; sie steht oben hinter jedem Punkt. Ein Bereich erhält 0 bis 100 Punkte: erreichte Punkte geteilt durch mögliche Punkte der Prüfpunkte, die sich prüfen ließen. Hinweise zählen nicht mit. Ab ${WEIGHTS.bands.good} Punkten gilt ein Wert als gut, ab ${WEIGHTS.bands.mid} als mittel, darunter als schwach. Gesamt = Tempo & Technik ${WEIGHTS.blocks.tempo} %, Auffindbarkeit ${WEIGHTS.blocks.find} %, Anfrage-Tauglichkeit ${WEIGHTS.blocks.contact} %, Vertrauen & Recht ${WEIGHTS.blocks.trust} %. Die vollständige Regel steht auf https://www.rexity.ai/website-check. ${tempoLine.de} Der Check ist eine automatische Momentaufnahme der eingegebenen Seite und ersetzt keine Rechtsberatung.`
+    : `How we score: every check has a fixed number of points; it is shown above after each check. An area gets 0 to 100 points: points reached divided by points possible over the checks that could be carried out. Notes do not count. From ${WEIGHTS.bands.good} points a value counts as good, from ${WEIGHTS.bands.mid} as medium, below that as weak. Overall = speed & technology ${WEIGHTS.blocks.tempo}%, findability ${WEIGHTS.blocks.find}%, readiness for enquiries ${WEIGHTS.blocks.contact}%, trust & legal ${WEIGHTS.blocks.trust}%. The full rule is on https://www.rexity.ai/website-check. ${tempoLine.en} The check is an automatic snapshot of the page you entered and does not replace legal advice.`;
+  const why = (de
+    ? "Sie erhalten diese E-Mail, weil diese Adresse auf rexity.ai/website-check für den Bericht eingetragen und bestätigt wurde. "
+    : "You receive this e-mail because this address was entered and confirmed for the report on rexity.ai/website-check. ") + CONSENT_NOTE[L];
+  text.push(rule, "", why, "", ...SIGNATURE);
+  html += `<p style="font-size:12px;color:#555;margin-top:20px">${esc(rule)}</p><p style="font-size:12px;color:#555">${esc(why)}</p><p>${SIGNATURE.map(esc).join("<br>")}</p></div>`;
   return { subject: de ? `Ihr Website-Check: ${report.host}` : `Your website check: ${report.host}`, textContent: text.join("\n"), htmlContent: html };
+}
+
+// The short mail that asks for the confirmation (double opt-in). Nothing else is sent and nothing is stored until
+// the link in it is opened and the button on the page behind it is pressed.
+function confirmMail(host, link, lang) {
+  const de = lang !== "en";
+  const lines = de
+    ? [`für die Website ${host} wurde auf rexity.ai/website-check der vollständige Bericht an diese E-Mail-Adresse angefordert.`,
+      "Bitte bestätigen Sie Ihre Adresse. Danach senden wir Ihnen den Bericht:",
+      link,
+      "Der Link gilt 48 Stunden.",
+      CONSENT_ASK.de,
+      "Sie haben nichts angefordert? Dann ignorieren Sie diese E-Mail einfach. Ohne Bestätigung erhalten Sie keine weitere E-Mail von uns."]
+    : [`the full report for the website ${host} was requested for this e-mail address on rexity.ai/website-check.`,
+      "Please confirm your address. We will then send you the report:",
+      link,
+      "The link is valid for 48 hours.",
+      CONSENT_ASK.en,
+      "You did not request anything? Then simply ignore this e-mail. Without confirmation you will not receive any further e-mail from us."];
+  const hello = de ? "Guten Tag," : "Hello,";
+  const button = de ? "Adresse bestätigen und Bericht erhalten" : "Confirm address and get the report";
+  const html = `<div style="font-family:sans-serif;font-size:14px;line-height:1.5;color:#111"><p>${esc(hello)}</p><p>${esc(lines[0])}</p><p>${esc(lines[1])}</p>` +
+    `<p><a href="${esc(link)}" style="display:inline-block;padding:10px 16px;background:#17152b;color:#fff;text-decoration:none;border-radius:6px">${esc(button)}</a></p>` +
+    `<p style="font-size:12px;color:#555">${esc(lines[3])}</p><p style="font-size:12px;color:#555">${esc(lines[4])}</p><p style="font-size:12px;color:#555">${esc(lines[5])}</p><p>${SIGNATURE.map(esc).join("<br>")}</p></div>`;
+  return {
+    subject: de ? `Bitte bestätigen: Ihr Website-Check für ${host}` : `Please confirm: your website check for ${host}`,
+    textContent: [hello, "", lines[0], "", lines[1], lines[2], "", lines[3], "", lines[4], "", lines[5], "", ...SIGNATURE].join("\n"),
+    htmlContent: html
+  };
+}
+
+// ---- Signed values: the confirmation link and the pass of a verified browser ------------------------------------
+const b64u = (buf) => Buffer.from(buf).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+const unb64u = (s) => Buffer.from(String(s).replace(/-/g, "+").replace(/_/g, "/"), "base64");
+const hmacOf = (key, v) => crypto.createHmac("sha256", key).update(v).digest();
+const sameBytes = (a, b) => a.length === b.length && crypto.timingSafeEqual(a, b);
+let mailSecretWarned = false;
+// -> the two keys derived from CHECK_MAIL_SECRET, or null (variable missing or shorter than 16 characters)
+function mailKeys() {
+  const s = String(process.env.CHECK_MAIL_SECRET || "").trim();
+  if (s.length < 16) {
+    if (s && !mailSecretWarned) { mailSecretWarned = true; console.error("[check] CHECK_MAIL_SECRET is shorter than 16 characters and is ignored: report mails go out without confirmation"); }
+    return null;
+  }
+  return { enc: hmacOf(s, "rexity-check/confirm/enc/v1"), mac: hmacOf(s, "rexity-check/confirm/mac/v1") };
+}
+// The link carries everything needed to send the report later: address, checked URL, language, expiry. It is
+// encrypted (AES-256-GCM), so the e-mail address is not readable in a URL or a log, and signed (HMAC-SHA256 with
+// CHECK_MAIL_SECRET). Why no "pending" row in the database: an address that is never confirmed is then stored
+// nowhere, the link works on every instance without a shared store, and there is nothing to clean up. The price:
+// a single link cannot be withdrawn before its 48 hours are over (changing the secret withdraws all of them), and
+// "already used" is known in memory and, once docs/sql/check_usage_keys.sql is applied, in the shared counter.
+function signConfirm(payload, keys) {
+  const iv = deps.randomBytes(12);
+  const c = crypto.createCipheriv("aes-256-gcm", keys.enc, iv);
+  const ct = Buffer.concat([c.update(JSON.stringify(payload), "utf8"), c.final()]);
+  const body = "v1." + b64u(Buffer.concat([iv, c.getAuthTag(), ct]));
+  return body + "." + b64u(hmacOf(keys.mac, body));
+}
+// -> { email, url, lang, exp } or { error: "confirm_bad" | "confirm_expired" }
+function readConfirm(token, keys) {
+  const parts = String(token || "").split(".");
+  if (!keys || parts.length !== 3 || parts[0] !== "v1" || String(token).length > 4000) return { error: "confirm_bad" };
+  const body = parts[0] + "." + parts[1];
+  try {
+    if (!sameBytes(unb64u(parts[2]), hmacOf(keys.mac, body))) return { error: "confirm_bad" };
+    const raw = unb64u(parts[1]);
+    const d = crypto.createDecipheriv("aes-256-gcm", keys.enc, raw.subarray(0, 12));
+    d.setAuthTag(raw.subarray(12, 28));
+    const p = JSON.parse(Buffer.concat([d.update(raw.subarray(28)), d.final()]).toString("utf8"));
+    if (!p || typeof p.email !== "string" || typeof p.url !== "string" || !Number.isFinite(p.exp)) return { error: "confirm_bad" };
+    if (deps.now() > p.exp) return { error: "confirm_expired", lang: p.lang === "en" ? "en" : "de" };
+    return { email: p.email, url: p.url, lang: p.lang === "en" ? "en" : "de", exp: p.exp };
+  } catch (_e) {
+    return { error: "confirm_bad" };
+  }
+}
+const tokenId = (token) => crypto.createHash("sha256").update(String(token)).digest("hex").slice(0, 40);
+const usedTokens = new Map(); // token id -> expiry (confirmation links that already sent their report)
+
+// The pass: a browser that solved the bot check once gets a value that is accepted instead of a new token for
+// 30 minutes from the same IP address (the language switch and the report request need no second challenge).
+const turnstileSecret = () => String(process.env.TURNSTILE_SECRET_KEY || "").trim();
+const passKey = (secret) => hmacOf(secret, "rexity-check/pass/v1");
+function makePass(ip, secret) {
+  const exp = deps.now() + PASS_TTL_MS;
+  const body = exp.toString(36) + "." + crypto.createHash("sha256").update(ip).digest("hex").slice(0, 16);
+  return { pass: body + "." + b64u(hmacOf(passKey(secret), body)), expiresAt: new Date(exp).toISOString() };
+}
+function passValid(pass, ip, secret) {
+  const p = String(pass || "").split(".");
+  if (p.length !== 3 || String(pass).length > 200) return false;
+  const body = p[0] + "." + p[1];
+  try {
+    if (!sameBytes(unb64u(p[2]), hmacOf(passKey(secret), body))) return false;
+  } catch (_e) { return false; }
+  const exp = parseInt(p[0], 36);
+  return Number.isFinite(exp) && deps.now() <= exp && p[1] === crypto.createHash("sha256").update(ip).digest("hex").slice(0, 16);
+}
+// -> { ok, issued? } With TURNSTILE_SECRET_KEY set a browser POST needs a valid pass or a token Cloudflare accepts.
+async function botCheck(data, ip) {
+  const secret = turnstileSecret();
+  if (!secret) return { ok: true };
+  if (data.pass && passValid(data.pass, ip, secret)) return { ok: true };
+  const token = typeof data.turnstileToken === "string" ? data.turnstileToken.slice(0, 4000) : "";
+  const verify = deps.verifyTurnstile || require("./_turnstile").verifyTurnstile;
+  if (token && (await verify(token, ip))) return { ok: true, issued: makePass(ip, secret) };
+  await bumpDaily("botfail", 1);
+  return { ok: false };
 }
 
 // ---- Handler ------------------------------------------------------------------------------------------
@@ -1664,17 +1969,35 @@ const MSG = {
   bad_scheme: T("Bitte geben Sie eine Adresse ein, die mit http:// oder https:// beginnt.", "Please enter an address that starts with http:// or https://."),
   bad_port: T("Adressen mit Portangabe prüfen wir nicht. Bitte geben Sie die öffentliche Adresse Ihrer Website ein.", "We do not check addresses with a port. Please enter the public address of your website."),
   private_host: T("Diese Adresse prüfen wir nicht: Der Check ist nur für öffentlich erreichbare Websites gedacht.", "We do not check this address: the check is meant for publicly reachable websites only."),
+  optout: T("Diese Website prüfen wir nicht: Ihr Betreiber hat uns gebeten, sie vom Website-Check auszunehmen.", "We do not check this website: its owner asked us to leave it out of the website check."),
   dns: T("Diese Adresse haben wir nicht gefunden. Bitte prüfen Sie die Schreibweise.", "We could not find this address. Please check the spelling."),
   rate: T("Das waren viele Prüfungen in kurzer Zeit. Bitte versuchen Sie es in einigen Minuten erneut.", "That was a lot of checks in a short time. Please try again in a few minutes."),
   cap: T("Für heute ist die Zahl der kostenlosen Prüfungen erreicht. Bitte versuchen Sie es morgen wieder oder schreiben Sie uns an info@rexity.ai.", "Today's number of free checks has been reached. Please try again tomorrow or write to info@rexity.ai."),
   email: T("Bitte geben Sie eine gültige E-Mail-Adresse ein.", "Please enter a valid e-mail address."),
-  mail_failed: T("Der Bericht konnte gerade nicht versendet werden. Bitte schreiben Sie uns an info@rexity.ai.", "The report could not be sent just now. Please write to info@rexity.ai."),
+  mail_failed: T("Die E-Mail konnte gerade nicht versendet werden. Bitte schreiben Sie uns an info@rexity.ai.", "The e-mail could not be sent just now. Please write to info@rexity.ai."),
+  bot_check: T("Die Sicherheitsprüfung ist fehlgeschlagen. Bitte laden Sie die Seite neu und versuchen Sie es noch einmal.", "The security check failed. Please reload the page and try again."),
+  origin: T("Diese Anfrage kommt nicht von unserer Seite. Für Programme gibt es die Abfrage per GET, siehe https://www.rexity.ai/.well-known/openapi.json.", "This request does not come from our page. Programs can use the GET request, see https://www.rexity.ai/.well-known/openapi.json."),
+  confirm_bad: T("Dieser Bestätigungslink ist ungültig. Bitte fordern Sie den Bericht auf www.rexity.ai/website-check neu an.", "This confirmation link is not valid. Please request the report again on www.rexity.ai/website-check."),
+  confirm_expired: T("Dieser Bestätigungslink ist abgelaufen (er gilt 48 Stunden). Bitte fordern Sie den Bericht auf www.rexity.ai/website-check neu an.", "This confirmation link has expired (it is valid for 48 hours). Please request the report again on www.rexity.ai/website-check."),
+  method: T("Diese Methode wird nicht unterstützt.", "This method is not supported."),
+  json: T("Die Anfrage war kein gültiges JSON.", "The request was not valid JSON."),
+  too_large: T("Die Anfrage ist zu groß.", "The request is too large."),
   server: T("Die Prüfung ist fehlgeschlagen. Bitte versuchen Sie es später erneut.", "The check failed. Please try again later.")
 };
-const fail = (res, status, code, lang, headers) => send(res, status, { ok: false, error: code, message: (MSG[code] || MSG.server)[lang === "en" ? "en" : "de"] }, headers);
+const msgOf = (code, lang) => (MSG[code] || MSG.server)[lang === "en" ? "en" : "de"];
+const fail = (res, status, code, lang, headers) => send(res, status, { ok: false, error: code, message: msgOf(code, lang) }, headers);
+// HTTP status and Retry-After of a CheckError
+function errorShape(e, api) {
+  if (!(e instanceof CheckError)) return { status: 500, code: "server" };
+  if (e.code === "rate") return { status: 429, code: "rate", retry: api ? "3600" : "300" };
+  if (e.code === "cap") return { status: 429, code: "cap", retry: "3600" };
+  return { status: 422, code: e.code };
+}
 
-// Cache first (memory, then the shared store); a fresh check counts against the per-IP, per-host and daily limits.
-async function getReport(input, ip, lang) {
+// Cache first (memory, then the shared store): a cached result costs no limit. A fresh check counts against the
+// per-IP, per-host and daily limits; through GET and MCP (opts.api) the stricter assistant limits come first.
+async function getReport(input, ip, lang, opts) {
+  const api = Boolean(opts && opts.api);
   const key = cacheKey(input.parsed.url);
   let report = cacheGet(key);
   let cached = Boolean(report);
@@ -1683,13 +2006,20 @@ async function getReport(input, ip, lang) {
     if (report) { cached = true; cacheSet(key, report); }
   }
   if (!report) {
+    if (api) {
+      if (hit("apifresh:" + ip, API_FRESH_LIMIT, API_FRESH_WINDOW_MS)) throw new CheckError("rate");
+      const seen = await sharedBump(`apiip:${ipHash(ip)}:${Math.floor(deps.now() / API_FRESH_WINDOW_MS)}`, 1, 2 * 3600, true);
+      if (seen !== null && seen > API_FRESH_LIMIT) throw new CheckError("rate");
+      if (today().apichecks >= API_DAILY_CAP) throw new CheckError("cap");
+    }
     if (hit("ip:" + ip, IP_LIMIT, IP_WINDOW_MS)) throw new CheckError("rate");
     if (hit("host:" + input.parsed.url.hostname, HOST_LIMIT, HOST_WINDOW_MS)) throw new CheckError("rate");
     if (today().checks >= DAILY_CAP) throw new CheckError("cap");
+    if (api && (await bumpDaily("apichecks", 1)) > API_DAILY_CAP) throw new CheckError("cap");
     if ((await bumpDaily("checks", 1)) > DAILY_CAP) throw new CheckError("cap");
     report = await runCheck(input);
     cacheSet(key, report);
-  } else if (input.trade && input.town && report.blocks.find && report.blocks.find.checked && !report.blocks.find.ranking) {
+  } else if (!api && input.trade && input.town && report.blocks.find && report.blocks.find.checked && !report.blocks.find.ranking) {
     // a cached report without the ranking block: one lookup (never more than one per request)
     if (String(process.env.DATAFORSEO_AUTH_B64 || "").trim() && today().lookups < DAILY_CAP && !hit("rank:" + ip, IP_LIMIT, IP_WINDOW_MS)) {
       today().lookups++;
@@ -1705,73 +2035,359 @@ async function getReport(input, ip, lang) {
   return { report, cached };
 }
 
-async function handler(req, res) {
-  if (req.method !== "POST") return send(res, 405, { ok: false, error: "method" }, { Allow: "POST" });
+// GET /api/check?url=… and the MCP tool: the public tier for assistants and programs. No bot check; own limits.
+// -> { status, body, headers }
+async function assistantCheckCore({ url, lang, ip }) {
+  const L = String(lang || "").toLowerCase().startsWith("en") ? "en" : "de";
+  const err = (status, code, retry) => ({ status, lang: L, body: { ok: false, error: code, message: msgOf(code, L), links: LINKS }, headers: retry ? { "Retry-After": retry } : {} });
+  if (hit("apireq:" + ip, API_REQUEST_LIMIT, IP_WINDOW_MS)) return err(429, "rate", "600");
+  let parsed;
+  try { parsed = normaliseUrl(url); } catch (e) { return err(422, e instanceof CheckError ? e.code : "bad_url"); }
+  try {
+    const { report, cached } = await getReport({ parsed, trade: "", town: "" }, ip, L, { api: true });
+    return { status: 200, lang: L, body: publicView(report, L, cached), headers: {} };
+  } catch (e) {
+    const s = errorShape(e, true);
+    if (s.code === "server") console.error("[check] failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
+    return err(s.status, s.code, s.retry);
+  }
+}
+
+// The small page behind the confirmation link (and the answer after its button was pressed). No script, no
+// external file; the token never leaves in a referrer.
+function htmlPage(res, status, lang, title, bodyHtml) {
+  const de = lang !== "en";
+  res.statusCode = status;
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store");
+  res.setHeader("X-Robots-Tag", "noindex, nofollow");
+  res.setHeader("Referrer-Policy", "no-referrer");
+  res.end(`<!doctype html><html lang="${de ? "de" : "en"}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"><meta name="referrer" content="no-referrer"><title>${esc(title)}</title>` +
+    // Sprint 31: the light look of /website-check (violet tint, one white card, the accent button), with the system
+    // font because the page loads no file
+    `<style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.25rem;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;color:#17152b;background:radial-gradient(60% 50% at 50% 0%,rgba(124,58,237,.18),transparent 70%),#f4f1fc}main{width:100%;max-width:33rem;padding:2rem 1.5rem;border-radius:28px;background:#fff;box-shadow:0 1px 2px rgba(23,21,43,.05),0 30px 70px -28px rgba(75,50,170,.42)}.k{margin:0 0 .6rem;color:#5b3fd6;font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}h1{font-size:1.75rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem}p{margin:0 0 1rem}strong{overflow-wrap:anywhere}.b{display:inline-block;min-height:52px;font:inherit;font-weight:600;padding:.8rem 1.6rem;border:0;border-radius:14px;background:#5b3fd6;color:#fff;cursor:pointer;box-shadow:0 10px 24px -10px rgba(91,63,214,.75)}.b:hover{background:#4a31b8}form{margin:1.5rem 0}.b:focus-visible,a:focus-visible{outline:3px solid #5b3fd6;outline-offset:3px}.s{font-size:.8125rem;color:#55536b}.s:last-child{margin:1.5rem 0 0;padding-top:1rem;border-top:1px solid rgba(23,21,43,.1)}a{color:#4a31b8}@media(min-width:560px){main{padding:2.75rem 2.75rem 2.25rem}}@media(max-width:420px){.b{width:100%}}</style></head>` +
+    `<body><main data-wc-confirm><p class="k">${de ? "Website-Check" : "Website check"}</p><h1>${esc(title)}</h1>${bodyHtml}<p class="s"><a href="${SITE_ORIGIN}/website-check">${de ? "Zum Website-Check" : "To the website check"}</a> · Rexity Labs UG (haftungsbeschränkt) · <a href="${SITE_ORIGIN}/impressum">${de ? "Impressum" : "Legal notice"}</a> · <a href="${SITE_ORIGIN}/datenschutz">${de ? "Datenschutz" : "Privacy"}</a></p></main></body></html>`);
+}
+const CONFIRM_TEXT = {
+  title: T("Website-Check: Bericht bestätigen", "Website check: confirm the report"),
+  ask: T("Mit einem Klick senden wir den vollständigen Bericht für {host} an {email}.", "With one click we send the full report for {host} to {email}."),
+  button: T("Bericht jetzt senden", "Send the report now"),
+  sentTitle: T("Der Bericht ist unterwegs", "The report is on its way"),
+  sent: T("Wir haben den vollständigen Bericht für {host} an {email} gesendet. Bitte sehen Sie auch im Spam-Ordner nach, falls er in wenigen Minuten nicht da ist.", "We have sent the full report for {host} to {email}. Please also look in your spam folder if it has not arrived in a few minutes."),
+  already: T("Der Bericht für {host} wurde über diesen Link bereits an {email} gesendet. Für einen neuen Bericht fordern Sie ihn bitte auf der Seite erneut an.", "The report for {host} has already been sent to {email} through this link. For a new report please request it again on the page."),
+  failTitle: T("Das hat nicht geklappt", "That did not work")
+};
+const fillText = (t, host, email) => esc(t).replace("{host}", "<strong>" + esc(host) + "</strong>").replace("{email}", "<strong>" + esc(email) + "</strong>");
+const hostOf = (u) => { try { return new URL(u).hostname; } catch (_e) { return ""; } };
+
+// Pressing the button behind the confirmation link: the report goes out, and only now the lead is stored and we
+// are told. -> { status, code, lang, host, email }
+async function confirmReport(token, ip) {
+  const keys = mailKeys();
+  const p = readConfirm(token, keys);
+  if (p.error) return { status: p.error === "confirm_expired" ? 410 : 400, code: p.error, lang: p.lang || "de" };
+  const lang = p.lang;
+  const base = { lang, host: hostOf(p.url), email: p.email };
+  if (hit("confirmip:" + ip, 10, IP_WINDOW_MS)) return { ...base, status: 429, code: "rate", retry: "300" };
+  const id = tokenId(token);
+  for (const [k, exp] of usedTokens) if (deps.now() > exp) usedTokens.delete(k);
+  if (usedTokens.has(id)) return { ...base, status: 200, code: "already_sent" };
+  const before = await sharedBump("done:" + id, 0, 3 * 86400, true);
+  if (before !== null && before > 0) { usedTokens.set(id, p.exp); return { ...base, status: 200, code: "already_sent" }; }
+  let parsed;
+  try { parsed = normaliseUrl(p.url); } catch (e) { return { ...base, status: 422, code: e instanceof CheckError ? e.code : "bad_url" }; }
+  let report;
+  try {
+    ({ report } = await getReport({ parsed, trade: "", town: "" }, ip, lang));
+  } catch (e) {
+    const s = errorShape(e, false);
+    if (s.code === "server") console.error("[check] confirm failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
+    return { ...base, status: s.status, code: s.code, retry: s.retry };
+  }
+  usedTokens.set(id, p.exp); // claimed before the mail goes out: a double click sends one report
+  const sent = await deliverReport(report, p.email, lang);
+  if (!sent) { usedTokens.delete(id); return { ...base, status: 502, code: "mail_failed" }; }
+  await sharedBump("done:" + id, 1, 3 * 86400, true);
+  return { ...base, host: report.host, status: 200, code: "report_sent" };
+}
+
+// The full report to a confirmed address (or, without CHECK_MAIL_SECRET, to the address as entered), then the
+// lead and our own notification. -> true when the mail went out
+async function deliverReport(report, email, lang) {
+  const notify = deps.notify || require("./_notify");
+  const mail = reportMail(report, lang);
+  const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
+  if (!sent || !sent.sent) {
+    console.log("[check] report mail sent=false reason=" + ((sent && sent.reason) || "unknown"));
+    return false;
+  }
+  await bumpDaily("reports", 1);
+  await queueFollowup(report, email, lang); // Sprint 34: one follow-up two days later; does nothing unless CHECK_FOLLOWUP=1
+  // Lead (api/lead.js path). The form states it: requesting the report includes consent to be contacted.
+  const service = "Website-Check (Kontakt erlaubt)";
+  const overall = report.overall.score === null ? "nicht prüfbar" : report.overall.score + "/100";
+  const message = `Kontakt erlaubt: ja\nWebsite-Check für ${report.finalUrl}\nGesamt: ${overall}` +
+    Object.keys(WEIGHTS.blocks).map((id) => `\n${BLOCK_NAMES[id].de}: ${report.blocks[id].score === null ? "nicht prüfbar" : report.blocks[id].score + "/100"}`).join("");
+  try {
+    const insertLead = deps.insertLead || require("./lead").insertLead;
+    await insertLead({ id: "web_" + crypto.randomUUID(), name: report.host, email, phone: null, company: null, service, message, source: "WEBSITE", updatedAt: new Date(deps.now()).toISOString() });
+  } catch (e) {
+    console.error("[check] lead insert failed:", e && e.message ? String(e.message).slice(0, 120) : "error");
+  }
+  try {
+    await notify.notifyLead({ kind: "website-check", name: report.host, email, message, service, source: "/website-check", lang }, { confirmation: false });
+  } catch (_e) { /* never affects the response */ }
+  return true;
+}
+
+const queryOf = (req) => { try { return new URL(String(req.url || "/"), SITE_ORIGIN).searchParams; } catch (_e) { return new URLSearchParams(); } };
+const headerOf = (req, name) => { const v = req.headers && req.headers[name]; return typeof v === "string" ? v : Array.isArray(v) ? v.join(", ") : ""; };
+const OWN_HOSTS = new Set(["www.rexity.ai", "rexity.ai"]);
+// A browser POST from another site is refused (programs use GET; requests without an Origin header pass).
+function foreignOrigin(req) {
+  const origin = headerOf(req, "origin");
+  if (!origin) return false;
+  let host;
+  try { host = new URL(origin).host.toLowerCase(); } catch (_e) { return true; }
+  const own = (headerOf(req, "x-forwarded-host") || headerOf(req, "host")).toLowerCase();
+  return !(OWN_HOSTS.has(host) || (own && host === own));
+}
+const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, OPTIONS", "Access-Control-Allow-Headers": "Accept, Content-Type", "Access-Control-Max-Age": "86400" };
+
+async function coreHandler(req, res) {
   const ip = clientIp(req);
+  const query = queryOf(req);
+
+  if (req.method === "OPTIONS") { // preflight of a cross-origin GET
+    res.statusCode = 204;
+    for (const [k, v] of Object.entries(CORS)) res.setHeader(k, v);
+    return res.end();
+  }
+
+  if (req.method === "GET" || req.method === "HEAD") {
+    // 1. the page behind the confirmation link
+    if (query.has("confirm")) {
+      const p = readConfirm(query.get("confirm"), mailKeys());
+      const lang = p.lang || "de";
+      if (p.error) return htmlPage(res, p.error === "confirm_expired" ? 410 : 400, lang, CONFIRM_TEXT.failTitle[lang], `<p>${esc(msgOf(p.error, lang))}</p>`);
+      return htmlPage(res, 200, lang, CONFIRM_TEXT.title[lang],
+        `<p>${fillText(CONFIRM_TEXT.ask[lang], hostOf(p.url), p.email)}</p><form method="post" action="/api/check"><input type="hidden" name="confirm" value="${esc(query.get("confirm"))}"><button class="b" type="submit">${esc(CONFIRM_TEXT.button[lang])}</button></form><p class="s">${esc(CONSENT_ASK[lang])}</p>`);
+    }
+    // 1b. Sprint 34: the shareable score card (/website-check/ergebnis/<host>, vercel.json rewrite). Never starts a check.
+    if (query.has("card")) return cardPage(req, res, query, ip);
+    // 2. assistants and programs: the public tier
+    const lang = String(query.get("lang") || "").toLowerCase().startsWith("en") ? "en" : "de";
+    const head = { ...CORS, Vary: "Accept", "X-Robots-Tag": "noindex" };
+    if (!query.has("url")) {
+      return send(res, 400, { ok: false, error: "bad_url", message: msgOf("bad_url", lang), usage: "GET /api/check?url=<address>&lang=de|en[&format=json|md]", links: LINKS }, head);
+    }
+    const r = await assistantCheck({ url: query.get("url"), lang, ip, via: "get" });
+    const format = String(query.get("format") || "").toLowerCase();
+    const wantsMd = format === "md" || format === "markdown" || (format !== "json" && /text\/markdown/i.test(headerOf(req, "accept")));
+    if (r.status === 200 && wantsMd) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "text/markdown; charset=utf-8");
+      res.setHeader("Cache-Control", "no-store");
+      for (const [k, v] of Object.entries(head)) res.setHeader(k, v);
+      return res.end(publicMarkdown(r.body));
+    }
+    return send(res, r.status, r.body, { ...head, ...r.headers });
+  }
+
+  if (req.method !== "POST") return send(res, 405, { ok: false, error: "method", message: msgOf("method", "de") }, { Allow: "GET, POST, OPTIONS" });
+
   let body = "";
   for await (const chunk of req) {
     body += chunk;
-    if (body.length > MAX_BODY) return send(res, 413, { ok: false, error: "too_large" });
+    if (body.length > MAX_BODY) return send(res, 413, { ok: false, error: "too_large", message: msgOf("too_large", "de") });
   }
+  const isForm = /application\/x-www-form-urlencoded/i.test(headerOf(req, "content-type"));
   let data;
-  try { data = JSON.parse(body || "{}"); } catch (_e) { return send(res, 400, { ok: false, error: "json" }); }
-  if (!data || typeof data !== "object" || Array.isArray(data)) return send(res, 400, { ok: false, error: "json" });
+  if (isForm) data = Object.fromEntries(new URLSearchParams(body));
+  else {
+    try { data = JSON.parse(body || "{}"); } catch (_e) { return send(res, 400, { ok: false, error: "json", message: msgOf("json", "de") }); }
+  }
+  if (!data || typeof data !== "object" || Array.isArray(data)) return send(res, 400, { ok: false, error: "json", message: msgOf("json", "de") });
   const lang = String(data.lang || "").toLowerCase().startsWith("en") ? "en" : "de";
+
+  // The button behind the confirmation link (a plain form), or the same as JSON. No Origin check here: the page
+  // behind the link sends "Referrer-Policy: no-referrer", so the browser posts the form with "Origin: null"; the
+  // signed link itself is what authorises the request.
+  if (typeof data.confirm === "string" && data.confirm) {
+    const r = await confirmReport(data.confirm, ip);
+    const ok = r.code === "report_sent" || r.code === "already_sent";
+    if (!isForm) {
+      return ok ? send(res, 200, { ok: true, status: r.code, host: r.host, lang: r.lang })
+        : send(res, r.status, { ok: false, error: r.code, message: msgOf(r.code, r.lang) }, r.retry ? { "Retry-After": r.retry } : undefined);
+    }
+    const L = r.lang;
+    if (r.retry) res.setHeader("Retry-After", r.retry);
+    if (r.code === "report_sent") return htmlPage(res, 200, L, CONFIRM_TEXT.sentTitle[L], `<p>${fillText(CONFIRM_TEXT.sent[L], r.host, r.email)}</p>`);
+    if (r.code === "already_sent") return htmlPage(res, 200, L, CONFIRM_TEXT.sentTitle[L], `<p>${fillText(CONFIRM_TEXT.already[L], r.host, r.email)}</p>`);
+    return htmlPage(res, r.status, L, CONFIRM_TEXT.failTitle[L], `<p>${esc(msgOf(r.code, L))}</p>`);
+  }
+  if (isForm) return send(res, 400, { ok: false, error: "json", message: msgOf("json", lang) });
+  if (foreignOrigin(req)) return fail(res, 403, "origin", lang);
+
   const wantsMail = data.email !== undefined && data.email !== null && String(data.email).trim() !== "";
 
   // Honeypot (as in api/lead.js): pretend success, do nothing.
-  if (String(data.company_website || data._gotcha || "").trim()) return send(res, 200, wantsMail ? { ok: true, sent: true } : { ok: false, error: "server", message: MSG.server[lang] });
+  if (String(data.company_website || data._gotcha || "").trim()) return send(res, 200, wantsMail ? { ok: true, sent: true, status: "confirmation_sent" } : { ok: false, error: "server", message: MSG.server[lang] });
 
   if (hit("req:" + ip, REQUEST_LIMIT, IP_WINDOW_MS)) return fail(res, 429, "rate", lang, { "Retry-After": "300" });
 
   let parsed;
   try { parsed = normaliseUrl(data.url); } catch (e) { return fail(res, 422, e instanceof CheckError ? e.code : "bad_url", lang); }
   const input = { parsed, trade: cleanTerm(data.trade), town: cleanTerm(data.town) };
+  let email = "";
+  if (wantsMail) {
+    email = String(data.email).trim().slice(0, 200);
+    if (!EMAIL_RE.test(email)) return fail(res, 422, "email", lang);
+  }
 
   try {
+    // Bot check before anything is fetched, measured or sent to a model
+    const bot = await botCheck(data, ip);
+    if (!bot.ok) return fail(res, 403, "bot_check", lang);
+    const passFields = bot.issued ? { pass: bot.issued.pass, passExpiresAt: bot.issued.expiresAt } : {};
+
     if (wantsMail) {
-      const email = String(data.email).trim().slice(0, 200);
-      if (!EMAIL_RE.test(email)) return fail(res, 422, "email", lang);
       const addrKey = "mail:" + crypto.createHash("sha256").update(email.toLowerCase()).digest("hex").slice(0, 24);
       if (hit("mailip:" + ip, MAIL_IP_LIMIT, IP_WINDOW_MS) || hit(addrKey, MAIL_ADDRESS_LIMIT, 24 * 60 * 60 * 1000) || today().mails >= DAILY_CAP) return fail(res, 429, "rate", lang, { "Retry-After": "600" });
-      today().mails++;
+      if ((await bumpDaily("mails", 1)) > DAILY_CAP) return fail(res, 429, "rate", lang, { "Retry-After": "600" });
       const { report } = await getReport(input, ip, lang);
-      const notify = deps.notify || require("./_notify");
-      const consent = true; // since 2 Oct 2026 the form states it: requesting the report includes consent to be contacted (no separate tick)
-      const mail = reportMail(report, lang);
-      const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
-      if (!sent || !sent.sent) {
-        console.log("[check] report mail sent=false reason=" + ((sent && sent.reason) || "unknown"));
-        return fail(res, 502, "mail_failed", lang);
+      const keys = mailKeys();
+      if (keys) {
+        // Double opt-in: one short mail with a signed link. The report, the lead and our notification follow only
+        // after the address is confirmed.
+        const token = signConfirm({ email, url: report.url, lang, exp: deps.now() + CONFIRM_TTL_MS }, keys);
+        const mail = confirmMail(report.host, SITE_ORIGIN + "/api/check?confirm=" + token, lang);
+        const notify = deps.notify || require("./_notify");
+        const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
+        if (!sent || !sent.sent) {
+          console.log("[check] confirmation mail sent=false reason=" + ((sent && sent.reason) || "unknown"));
+          return fail(res, 502, "mail_failed", lang);
+        }
+        return send(res, 200, { ok: true, sent: true, status: "confirmation_sent", expiresInHours: Math.round(CONFIRM_TTL_MS / 3600000), ...passFields });
       }
-      // Lead (api/lead.js path): stored for every report request; marked for contact only with the separate tick.
-      const overall = report.overall.score === null ? "nicht prüfbar" : report.overall.score + "/100";
-      const message = `Kontakt erlaubt: ${consent ? "ja" : "nein"}\nWebsite-Check für ${report.finalUrl}\nGesamt: ${overall}` +
-        Object.keys(WEIGHTS.blocks).map((id) => `\n${BLOCK_NAMES[id].de}: ${report.blocks[id].score === null ? "nicht prüfbar" : report.blocks[id].score + "/100"}`).join("");
-      try {
-        const insertLead = deps.insertLead || require("./lead").insertLead;
-        await insertLead({
-          id: "web_" + crypto.randomUUID(), name: report.host, email, phone: null, company: null,
-          service: consent ? "Website-Check (Kontakt erlaubt)" : "Website-Check", message, source: "WEBSITE", updatedAt: new Date(deps.now()).toISOString()
-        });
-      } catch (e) {
-        console.error("[check] lead insert failed:", e && e.message ? String(e.message).slice(0, 120) : "error");
-      }
-      try {
-        await notify.notifyLead({ kind: "website-check", name: report.host, email, message, service: consent ? "Website-Check (Kontakt erlaubt)" : "Website-Check", source: "/website-check", lang }, { confirmation: false });
-      } catch (_e) { /* never affects the response */ }
-      return send(res, 200, { ok: true, sent: true });
+      console.log("[check] CHECK_MAIL_SECRET not set: report sent without confirmation of the address");
+      if (!(await deliverReport(report, email, lang))) return fail(res, 502, "mail_failed", lang);
+      return send(res, 200, { ok: true, sent: true, status: "report_sent", ...passFields });
     }
 
     const { report, cached } = await getReport(input, ip, lang);
-    return send(res, 200, publicView(report, lang, cached));
+    if (cached) await countUsage("cached", 1); // Sprint 34
+    return send(res, 200, { ...publicView(report, lang, cached), ...passFields });
   } catch (e) {
-    if (e instanceof CheckError) {
-      const status = e.code === "rate" || e.code === "cap" ? 429 : 422;
-      return fail(res, status, e.code, lang, status === 429 ? { "Retry-After": e.code === "cap" ? "3600" : "300" } : undefined);
-    }
-    console.error("[check] failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
-    return fail(res, 500, "server", lang);
+    const s = errorShape(e, false);
+    if (s.code === "server") console.error("[check] failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
+    return fail(res, s.status, s.code, lang, s.retry ? { "Retry-After": s.retry } : undefined);
+  }
+}
+
+// ---- Sprint 34: usage counters, the score card, the follow-up queue ------------------------------------------
+// Everything in this section is additive: it counts, or it reads what is already stored. None of it is a limit.
+
+// One more for a day's counter (memory and, when the shared store knows the key, there). Never throws and never
+// blocks a response on a store that refuses the key: docs/sql/check_usage_keys_s34.sql not applied yet means the
+// counter exists in memory only and the digest reports "kein Eintrag"; the store is then left alone for 10 minutes.
+const countOffUntil = new Map(); // kind -> time until which the shared store is not asked for it
+async function countUsage(kind, n) {
+  try {
+    const add = Number.isFinite(n) ? Math.max(0, Math.round(n)) : 1;
+    const d = today();
+    if (!(kind in d) || !add) return;
+    d[kind] += add;
+    if (!persistActive() || deps.now() < (countOffUntil.get(kind) || 0)) return;
+    const shared = await sharedBump(`${kind}:${d.day}`, add, DAY_COUNTER_TTL_S, true);
+    if (shared === null) countOffUntil.set(kind, deps.now() + 10 * 60 * 1000);
+  } catch (_e) { /* a counter never affects a response */ }
+}
+
+// GET /api/check?url=… and the MCP tool (via: "get" | "mcp"): the public tier, counted for the weekly numbers.
+async function assistantCheck({ url, lang, ip, via }) {
+  const mcp = via === "mcp";
+  await countUsage(mcp ? "mcpcalls" : "apiget", 1);
+  const r = await assistantCheckCore({ url, lang, ip });
+  if (r.status === 200 && r.body && r.body.cached) await countUsage("cached", 1);
+  if (r.status === 429 && mcp) await countUsage("ratehits", 1); // a GET's 429 is counted by handler() below
+  return r;
+}
+
+// The stored result for an address, or null. Reads the memory cache and the shared store; never fetches the
+// website, never calls a model, never writes. A result older than 24 hours is not returned even when an instance
+// still holds it.
+async function storedReport(url) {
+  const key = cacheKey(url);
+  const report = cacheGet(key) || (await sharedGet(key));
+  if (!report || !report.checkedAt) return null;
+  const age = deps.now() - Date.parse(report.checkedAt);
+  return Number.isFinite(age) && age >= 0 && age <= CACHE_TTL_MS ? report : null;
+}
+
+const CARD_REQUEST_LIMIT = 60; // score-card requests per IP and 10 minutes
+const PREVIEW_AGENT = /bot\b|bot\/|crawler|spider|facebookexternalhit|whatsapp|slack|telegram|discord|preview|embedly|skype|pinterest|vkshare|curl\/|wget\//i;
+// -> { status, card } for api/_card.js. host: the first path segment of /website-check/ergebnis/<host>; page: the
+// path of a checked sub-page (?p=/kontakt). The opt-out list wins over a stored result.
+async function cardData({ host, page, lang, ip }) {
+  const L = lang === "en" ? "en" : "de";
+  const h = String(host || "").trim().toLowerCase().replace(/^[a-z]+:\/\//, "").replace(/[/?#].*$/, "").replace(/\.$/, "");
+  if (hit("cardreq:" + ip, CARD_REQUEST_LIMIT, IP_WINDOW_MS)) return { status: 429, card: { state: "rate", host: "" } };
+  if (!h || h.length > 253 || !/^[a-z0-9.-]+$/.test(h)) return { status: 400, card: { state: "bad", host: "" } };
+  let p = String(page || "/");
+  if (!p.startsWith("/") || p.startsWith("//") || p.length > 300 || /[\s<>"'`\\]/.test(p)) p = "/";
+  let parsed;
+  try { parsed = normaliseUrl("https://" + h + p); } catch (e) {
+    return e instanceof CheckError && e.code === "optout" ? { status: 404, card: { state: "optout", host: "" } } : { status: 400, card: { state: "bad", host: "" } };
+  }
+  const shown = parsed.url.hostname.replace(/^www\./, "");
+  const report = await storedReport(parsed.url);
+  // a stored result whose final address (after a redirect) belongs to an opted-out site is not shown either
+  if (report && (isOptedOut(report.host) || isOptedOut(hostOf(report.finalUrl)))) return { status: 404, card: { state: "optout", host: "" } };
+  const path = (parsed.url.pathname.replace(/\/+$/, "") || "/") + (parsed.url.search || "");
+  if (!report) return { status: 404, card: { state: "none", host: shown, path } };
+  return { status: 200, card: { state: "result", host: shown, path, view: publicView(report, L, true), ttlMs: CACHE_TTL_MS } };
+}
+
+async function cardPage(req, res, query, ip) {
+  const lang = String(query.get("lang") || "").toLowerCase().startsWith("en") ? "en" : "de";
+  const r = await cardData({ host: query.get("card"), page: query.get("p"), lang, ip });
+  // A view is a person opening the card; the fetch of a link preview (a network's bot) is not counted.
+  if (r.status === 200 && req.method === "GET" && !PREVIEW_AGENT.test(headerOf(req, "user-agent"))) await countUsage("cards", 1);
+  res.statusCode = r.status;
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.setHeader("Cache-Control", "no-store"); // the opt-out list and the 24 hours must hold at every request
+  res.setHeader("X-Robots-Tag", "noindex");
+  if (r.status === 429) res.setHeader("Retry-After", "300");
+  const html = require("./_card").renderCard(r.card, lang);
+  return res.end(req.method === "HEAD" ? "" : html);
+}
+
+// The one follow-up mail (api/followup.js): queued only when CHECK_FOLLOWUP=1 and never affects the report.
+async function queueFollowup(report, email, lang) {
+  try {
+    const queue = deps.queueFollowup || require("./followup").queueFollowup;
+    await queue({ email, host: report.host, lang, now: deps.now() });
+  } catch (e) {
+    console.error("[check] follow-up not queued:", e && e.message ? String(e.message).slice(0, 120) : "error");
+  }
+}
+
+// The function Vercel calls. It wraps coreHandler for one purpose: an answer "429" (a limit of this function was
+// hit) is counted before the response is closed, so the count is not lost when the instance is frozen.
+async function handler(req, res) {
+  const end = res.end;
+  let pending = null;
+  res.end = function (...args) {
+    if (res.statusCode !== 429 || pending) return end.apply(res, args);
+    pending = countUsage("ratehits", 1).then(() => end.apply(res, args));
+    return res;
+  };
+  try {
+    await coreHandler(req, res);
+  } finally {
+    if (pending) await pending;
+    res.end = end;
   }
 }
 
@@ -1780,12 +2396,30 @@ module.exports.WEIGHTS = WEIGHTS;
 module.exports.BLOCK_NAMES = BLOCK_NAMES;
 module.exports.METHOD = METHOD;
 module.exports.METHOD_NOTE = METHOD_NOTE;
+module.exports.STATUS_LABELS = STATUS_LABELS;
+module.exports.BAND_LABELS = BAND_LABELS;
+module.exports.UA = UA;
+module.exports.LINKS = LINKS;
+module.exports.LIMITS = {
+  browser: { freshPerIp: IP_LIMIT, requestsPerIp: REQUEST_LIMIT, windowMinutes: IP_WINDOW_MS / 60000, freshPerHostPerHour: HOST_LIMIT, mailsPerIp: MAIL_IP_LIMIT, mailsPerAddressPerDay: MAIL_ADDRESS_LIMIT },
+  api: { freshPerIpPerHour: API_FRESH_LIMIT, requestsPerIp: API_REQUEST_LIMIT, windowMinutes: IP_WINDOW_MS / 60000, freshPerDay: API_DAILY_CAP },
+  cacheHours: CACHE_TTL_MS / 3600000, confirmHours: CONFIRM_TTL_MS / 3600000, passMinutes: PASS_TTL_MS / 60000
+};
+// api/mcp.js (the tool website_check) uses the same path as GET /api/check
+module.exports.assistantCheck = assistantCheck;
+module.exports.publicMarkdown = publicMarkdown;
+module.exports.clientIp = clientIp;
+// Sprint 34: api/mcp.js and api/followup.js count through the same counters
+module.exports.countUsage = countUsage;
+module.exports.CONSENT_NOTE = CONSENT_NOTE; // the follow-up mail repeats the consent sentence and the withdrawal note
 // For scripts/check-tool/test-check.mjs and the local dev server (not used by Vercel).
 module.exports._test = {
-  deps, CheckError, normaliseUrl, assertSafeUrl, isPublicIPv4, isPublicIPv6, isPublicAddress, parseIPv6, resolvePublic, safeFetch,
+  deps, CheckError, normaliseUrl, assertSafeUrl, isPublicIPv4, isPublicIPv6, isPublicAddress, parseIPv6, resolvePublic, safeFetch, isOptedOut,
   parseRobots, robotsAllows, analyseHtml, analysePerf, ownMeasure, ownItems, sampleAssets, readSubPages, mergePages, cacheCredit, verdictOf, modelInput, runPageSpeed, runRanking, tempoBlock, findBlock, contactBlock, trustBlock, blockScore, overallScore,
-  rankFixes, offerFor, deterministicSummary, validateSummary, allowedNumbers, buildSummary, runCheck, publicView, reportMail, cacheKey, baseDomain,
-  cache, buckets, daily, DAILY_CAP, MAX_BYTES, UA, IP_LIMIT, CACHE_TTL_MS,
+  offerFor, countsOf, deterministicSummary, validateSummary, allowedNumbers, buildSummary, runCheck, publicView, fullView, publicMarkdown, reportMail, confirmMail, cacheKey, cacheGet, baseDomain,
+  signConfirm, readConfirm, mailKeys, makePass, passValid, foreignOrigin,
+  countUsage, storedReport, cardData, DAILY_KINDS, DAY_COUNTER_TTL_S, countOffUntil,
+  cache, buckets, daily, usedTokens, DAILY_CAP, API_DAILY_CAP, MAX_BYTES, UA, IP_LIMIT, CACHE_TTL_MS, CONFIRM_TTL_MS, PASS_TTL_MS, REPORT_VERSION, API_FRESH_LIMIT, CHECK_ORDER, CHECK_MODEL, CHECK_MAX_TOKENS, SUMMARY_SYSTEM,
   defaultTransport,
-  reset() { cache.clear(); buckets.clear(); daily.day = ""; daily.checks = 0; daily.lookups = 0; daily.mails = 0; persistOffUntil = 0; }
+  reset() { cache.clear(); buckets.clear(); usedTokens.clear(); countOffUntil.clear(); daily.day = ""; for (const k of DAILY_KINDS) daily[k] = 0; persistOffUntil = 0; }
 };
