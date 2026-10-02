@@ -76,17 +76,16 @@
       pillTitle: "Ask Rexity",
       pillSubtitle: "Your virtual assistant",
       // AI notice: docs/seo/AI_CLAIMS.md §5
-      noticeTitle: "AI assistant by Rexity Labs",
-      noticeText: "You are chatting with an AI, not a person.",
+      noticeTitle: "AI assistant",
+      noticeText: "",
       privacy: "Privacy",
-      firstMessage: "AI assistant by Rexity Labs. You are chatting with an AI, not a person. Ask me about websites, apps, automation, prices or how a project works.",
+      firstMessage: "Hello! Ask me about websites, apps, automation, prices or how a project works.",
       placeholder: "Your question …",
       footnote: "Answers can contain mistakes; only our written quote is binding.",
       resetLabel: "Clear history",
       // Entry form before the first message (founder, 2 Oct 2026); the notice follows docs/seo/AI_CLAIMS.md §5
       gateTitle: "Before we start",
-      gateDisclaimer: "You are about to interact with our intelligent chatbot, powered by a modern AI engine.",
-      gateLaw: "Notice under the EU AI Act (Art. 50): you are chatting with an AI, not a person. Answers can contain mistakes; only our written quote is binding.",
+      gateDisclaimer: "You are about to interact with our intelligent chatbot, powered by a modern AI engine. So you are chatting with an AI, not a person (notice under Art. 50 of the EU AI Act).",
       gateEmail: "E-mail address",
       gatePhone: "Phone number",
       gateSubmit: "Start chat",
@@ -114,7 +113,7 @@
       formThanks: "Thank you, {name}. We will get back to you, usually within a day.",
       limitPlaceholder: "Conversation limit reached",
       nudgeTitle: "Questions about your project?",
-      nudgeText: "Our AI assistant answers right away.",
+      nudgeText: "Our assistant answers right away.",
       nudgeClose: "Dismiss"
     },
     de: {
@@ -132,16 +131,15 @@
       sendLabel: "Nachricht senden",
       pillTitle: "Rexity fragen",
       pillSubtitle: "Ihr virtueller Assistent",
-      noticeTitle: "KI-Assistent von Rexity Labs",
-      noticeText: "Sie schreiben mit einer KI, nicht mit einem Menschen.",
+      noticeTitle: "KI-Assistent",
+      noticeText: "",
       privacy: "Datenschutz",
-      firstMessage: "KI-Assistent von Rexity Labs. Sie schreiben mit einer KI, nicht mit einem Menschen. Fragen Sie mich zu Websites, Apps, Automatisierung, Preisen oder zum Ablauf.",
+      firstMessage: "Hallo! Fragen Sie mich zu Websites, Apps, Automatisierung, Preisen oder zum Ablauf.",
       placeholder: "Ihre Frage …",
       footnote: "Antworten können Fehler enthalten; verbindlich ist nur unser schriftliches Angebot.",
       resetLabel: "Verlauf löschen",
       gateTitle: "Bevor wir starten",
-      gateDisclaimer: "Sie chatten gleich mit unserem intelligenten Chatbot, betrieben mit moderner KI-Technologie.",
-      gateLaw: "Hinweis nach der EU-KI-Verordnung (Art. 50): Sie schreiben mit einer KI, nicht mit einem Menschen. Antworten können Fehler enthalten; verbindlich ist nur unser schriftliches Angebot.",
+      gateDisclaimer: "Sie chatten gleich mit unserem intelligenten Chatbot, betrieben mit moderner KI-Technologie. Sie schreiben also mit einer KI, nicht mit einem Menschen (Hinweis nach Art. 50 der EU-KI-Verordnung).",
       gateEmail: "E-Mail-Adresse",
       gatePhone: "Telefonnummer",
       gateSubmit: "Chat starten",
@@ -169,7 +167,7 @@
       formThanks: "Danke, {name}. Wir melden uns, in der Regel innerhalb eines Tages.",
       limitPlaceholder: "Gesprächsgrenze erreicht",
       nudgeTitle: "Fragen zu Ihrem Projekt?",
-      nudgeText: "Unser KI-Assistent antwortet sofort.",
+      nudgeText: "Unser Assistent antwortet sofort.",
       nudgeClose: "Hinweis schließen"
     }
   };
@@ -826,7 +824,7 @@
     // ---- the chat (switch on, or ?chat=1) ---------------------------------------
     var restored = readLog();
     if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t, { ts: m.ts, cards: m.c }); });
-    else if (getLead()) addMessage(messages, activeCopy.firstMessage, "bot"); // before the entry form is sent, the form carries the notice
+    else if (getLead()) addMessage(messages, activeCopy.firstMessage, "bot"); // the entry form carries the AI notice; the greeting does not repeat it
     renderChips();
     // "Verlauf löschen": removes the saved conversation from this browser and starts again
     resetBtn.addEventListener("click", function () {
@@ -896,7 +894,8 @@
       pl.href = "/datenschutz";
       pl.textContent = c.privacy;
       priv.appendChild(pl);
-      [para("rexity-chatbot__handover-title", c.gateTitle), para("rexity-chatbot__handover-copy", c.gateDisclaimer), para("rexity-chatbot__handover-copy rexity-chatbot__gate-law", c.gateLaw),
+      // one AI notice per place: this form carries it once (EU AI Act Art. 50, first interaction); the header only says "KI-Assistent"
+      [para("rexity-chatbot__handover-title", c.gateTitle), para("rexity-chatbot__handover-copy rexity-chatbot__gate-law", c.gateDisclaimer),
         emailF.label, phoneF.label, trap, err, submit, priv].forEach(function (n) { f.appendChild(n); });
       messages.appendChild(f);
       messages.scrollTop = Math.max(0, f.offsetTop - messages.offsetTop - 8); // show the form from its title

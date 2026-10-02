@@ -354,9 +354,9 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
   border-bottom: 0;
 }
 .rexity-chatbot__hero .rexity-chatbot__close:hover { background: rgba(255, 255, 255, 0.12); }
-.rexity-chatbot__intro { padding: 8px 22px 16px; }
-.rexity-chatbot__intro-title { font-size: 16px; }
-.rexity-chatbot__intro-copy { margin-top: 3px; font-size: 13px; }
+.rexity-chatbot__intro { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 6px 22px 14px; }
+.rexity-chatbot__intro-title { font-size: 15px; font-weight: 500; color: rgba(255, 255, 255, 0.86); letter-spacing: 0; }
+.rexity-chatbot__intro-copy { margin: 0; font-size: 13px; }
 .rexity-chatbot__panel ::placeholder { color: #77758a; }
 .rexity-chatbot__panel .rexity-chatbot__message--bot { background: #f1f0f7; color: var(--rc-ink); }
 .rexity-chatbot__panel .rexity-chatbot__message--user { background: #5b3fd6; color: #ffffff; }
