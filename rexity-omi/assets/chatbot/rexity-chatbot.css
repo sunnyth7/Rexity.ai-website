@@ -374,6 +374,10 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 .rexity-chatbot__gate .rexity-chatbot__handover-submit { justify-self: start; margin-top: 2px; }
 .rexity-chatbot__panel .rexity-chatbot__input:disabled { background: var(--rc-deep); cursor: not-allowed; }
 
+.rexity-chatbot__gate-check { display: flex; align-items: flex-start; gap: 10px; color: var(--rc-muted); font-size: 13px; line-height: 1.4; cursor: pointer; }
+.rexity-chatbot__gate-check input { flex: none; width: 18px; height: 18px; margin: 1px 0 0; accent-color: var(--rc-accent); }
+.rexity-chatbot__gate-bot:empty { display: none; }
+
 /* link cards: picture left, title, one or two lines, address (founder, 2 Oct 2026) */
 .rexity-chatbot__panel .rexity-chatbot__message--links { max-width: 100%; padding: 0; background: none; }
 .rexity-chatbot__message--links .rexity-chatbot__text { max-width: 88%; padding: 11px 14px; border-radius: 16px; border-top-left-radius: 6px; background: #f1f0f7; }

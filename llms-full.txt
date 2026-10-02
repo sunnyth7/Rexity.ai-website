@@ -1240,15 +1240,15 @@ Die drei Wege unterscheiden sich darin, wer die Arbeit macht und wer wofür vera
 
 ### Wo die KI-Verarbeitung stattfindet
 
-Für unseren eigenen Assistenten und für jeden Chatbot, den wir bauen, gilt: Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Die Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet (EU-Mitgliedstaaten, je nach Anbieter auch EFTA-Staaten wie Norwegen oder die Schweiz). Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.
+Für unseren eigenen Assistenten und für jeden Chatbot, den wir bauen, gilt: Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Die Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet (EU-Mitgliedstaaten, je nach Anbieter auch EFTA-Staaten wie Norwegen oder die Schweiz). Sie werden nicht zum Training von Modellen verwendet. Den Chat-Verlauf erhalten wir per E-Mail, um Ihre Anfrage zu bearbeiten.
 
 Technische Basis unseres Assistenten heute: GPT über Microsoft Azure OpenAI in der EU-Datenzone. „EU“ heißt dabei ein Rechenzentrum in einem Mitgliedstaat der Europäischen Union, nicht zwingend in Deutschland.
 
 ### Was mit den Daten Ihrer Besucher passiert
 
-So arbeitet unser Assistent auf rexity.ai: Vor der ersten Nachricht geben Besucher E-Mail-Adresse und Telefonnummer in ein Startformular ein, das auch den KI-Hinweis trägt. Die Angaben speichern wir als Kontaktanfrage in einer Datenbank in der EU; an das Sprachmodell gehen sie nie.
+So arbeitet unser Assistent auf rexity.ai: Vor der ersten Nachricht geben Besucher ihre E-Mail-Adresse in ein Startformular ein, das auch den KI-Hinweis trägt. Die Angaben speichern wir als Kontaktanfrage in einer Datenbank in der EU; an das Sprachmodell gehen sie nie.
 
-Den Inhalt der Unterhaltungen speichern wir nicht in einer Datenbank. Der Verlauf liegt bis zu 30 Tage im Browser des Besuchers und lässt sich mit „Verlauf löschen“ entfernen.
+Den Verlauf der Unterhaltung erhalten wir zusammen mit der E-Mail-Adresse per E-Mail, damit wir die Anfrage bearbeiten können; in einer Datenbank speichern wir den Inhalt nicht. Im Browser des Besuchers liegt der Verlauf bis zu 30 Tage und lässt sich mit „Verlauf löschen“ entfernen.
 
 Für Ihren Chatbot legen wir gemeinsam fest, welche Angaben abgefragt werden, und schließen mit Ihnen einen Vertrag zur Auftragsverarbeitung. Eine Rechtsberatung ersetzen wir nicht.
 

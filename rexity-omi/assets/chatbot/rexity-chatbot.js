@@ -67,9 +67,20 @@
       return l && typeof l.name === "string" ? { name: l.name } : null;
     } catch (e) { return null; }
   }
-  function saveLead(name) {
-    try { window.localStorage.setItem(LEAD_KEY, JSON.stringify({ name: name, ts: new Date().getTime() })); } catch (e) {}
+  function saveLead(name, email, noMarketing) {
+    try { window.localStorage.setItem(LEAD_KEY, JSON.stringify({ name: name, email: email || undefined, noMarketing: !!noMarketing, ts: new Date().getTime() })); } catch (e) {}
   }
+  // The e-mail address from the entry form (founder, 2 Oct 2026): kept in this browser so the chat history can
+  // be sent to Rexity Labs with it (/api/lead, kind "chat-transcript"). It is never sent to /api/chat.
+  function getContact() {
+    try {
+      var l = JSON.parse(window.localStorage.getItem(LEAD_KEY) || "null");
+      return l && typeof l.email === "string" && l.email ? { email: l.email, noMarketing: !!l.noMarketing } : null;
+    } catch (e) { return null; }
+  }
+  // Cloudflare Turnstile (bot protection of the entry form). Empty = off. Set the PUBLIC site key here and
+  // TURNSTILE_SECRET_KEY in Vercel; the script from challenges.cloudflare.com then loads only when the form shows.
+  var TURNSTILE_SITE_KEY = "";
   function handoverState() {
     try { return window.sessionStorage.getItem(HANDOVER_KEY) || ""; } catch (e) { return ""; }
   }
@@ -106,11 +117,12 @@
       gateTitle: "Before we start",
       gateDisclaimer: "You are about to interact with our intelligent chatbot, powered by a modern AI engine. So you are chatting with an AI, not a person (notice under Art. 50 of the EU AI Act).",
       gateEmail: "E-mail address",
-      gatePhone: "Phone number",
+      gateNoMarketing: "I do not want to be contacted for marketing purposes in future.",
       gateSubmit: "Start chat",
-      gatePrivacy: "We use your details to handle your enquiry and to contact you about it. Your e-mail address and phone number are not sent to the AI.",
-      gateError: "Please enter a valid e-mail address and phone number.",
-      gatePlaceholder: "Please enter your contact details first",
+      gatePrivacy: "We receive your e-mail address and the chat history to handle your enquiry. Your e-mail address is not sent to the AI.",
+      gateError: "Please enter a valid e-mail address.",
+      gateBot: "Please confirm the security check.",
+      gatePlaceholder: "Please enter your e-mail address first",
       thinking: "Rexity is writing …",
       contactTitle: "Contact us",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · Email" : "WhatsApp · Email",
@@ -160,11 +172,12 @@
       gateTitle: "Bevor wir starten",
       gateDisclaimer: "Sie chatten gleich mit unserem intelligenten Chatbot, betrieben mit moderner KI-Technologie. Sie schreiben also mit einer KI, nicht mit einem Menschen (Hinweis nach Art. 50 der EU-KI-Verordnung).",
       gateEmail: "E-Mail-Adresse",
-      gatePhone: "Telefonnummer",
+      gateNoMarketing: "Ich möchte künftig nicht zu Marketingzwecken kontaktiert werden.",
       gateSubmit: "Chat starten",
-      gatePrivacy: "Ihre Angaben nutzen wir, um Ihre Anfrage zu bearbeiten und Sie dazu zu kontaktieren. E-Mail-Adresse und Telefonnummer werden nicht an die KI gesendet.",
-      gateError: "Bitte geben Sie eine gültige E-Mail-Adresse und Telefonnummer ein.",
-      gatePlaceholder: "Bitte zuerst Kontaktdaten angeben",
+      gatePrivacy: "Wir erhalten Ihre E-Mail-Adresse und den Chat-Verlauf, um Ihre Anfrage zu bearbeiten. Die E-Mail-Adresse wird nicht an die KI gesendet.",
+      gateError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      gateBot: "Bitte bestätigen Sie die Sicherheitsprüfung.",
+      gatePlaceholder: "Bitte zuerst E-Mail-Adresse angeben",
       thinking: "Rexity schreibt …",
       contactTitle: "Kontakt",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · E-Mail" : "WhatsApp · E-Mail",
@@ -843,7 +856,7 @@
     // ---- the chat (switch on, or ?chat=1) ---------------------------------------
     var restored = readLog();
     if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t, { ts: m.ts, cards: m.c }); });
-    else if (getLead()) addMessage(messages, activeCopy.firstMessage, "bot"); // the entry form carries the AI notice; the greeting does not repeat it
+    else if (getContact()) addMessage(messages, activeCopy.firstMessage, "bot"); // the entry form carries the AI notice; the greeting does not repeat it
     renderChips();
     // "Verlauf löschen": removes the saved conversation from this browser and starts again
     resetBtn.addEventListener("click", function () {
@@ -853,7 +866,8 @@
       input.disabled = false;
       send.disabled = false;
       input.setAttribute("placeholder", activeCopy.placeholder);
-      if (!getLead()) { showGate(); return; }
+      try { window.localStorage.removeItem("rexity_chat_sent"); } catch (e) {}
+      if (!getContact()) { showGate(); return; }
       addMessage(messages, activeCopy.firstMessage, "bot");
       renderChips();
       input.focus();
@@ -893,7 +907,33 @@
         return { label: lab, input: el };
       }
       var emailF = field("email", c.gateEmail, "email", "email", 200);
-      var phoneF = field("tel", c.gatePhone, "tel", "tel", 40);
+      // opt-out of marketing contact, unchecked by default (founder, 2 Oct 2026)
+      var optLab = document.createElement("label");
+      optLab.className = "rexity-chatbot__gate-check";
+      var optBox = document.createElement("input");
+      optBox.type = "checkbox";
+      var optTxt = document.createElement("span");
+      optTxt.textContent = c.gateNoMarketing;
+      optLab.appendChild(optBox);
+      optLab.appendChild(optTxt);
+      var botBox = document.createElement("div");
+      botBox.className = "rexity-chatbot__gate-bot";
+      var botToken = "";
+      if (TURNSTILE_SITE_KEY) {
+        var renderBot = function () {
+          if (!window.turnstile || botBox.getAttribute("data-on")) return;
+          botBox.setAttribute("data-on", "1");
+          window.turnstile.render(botBox, { sitekey: TURNSTILE_SITE_KEY, language: lang, theme: "light", callback: function (tk) { botToken = tk; }, "expired-callback": function () { botToken = ""; } });
+        };
+        if (window.turnstile) renderBot();
+        else {
+          var ts = document.createElement("script");
+          ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+          ts.async = true;
+          ts.onload = renderBot;
+          document.head.appendChild(ts);
+        }
+      }
       var trap = document.createElement("input");
       trap.type = "text";
       trap.name = "company_website";
@@ -915,20 +955,23 @@
       priv.appendChild(pl);
       // one AI notice per place: this form carries it once (EU AI Act Art. 50, first interaction); the header only says "KI-Assistent"
       [para("rexity-chatbot__handover-title", c.gateTitle), para("rexity-chatbot__handover-copy rexity-chatbot__gate-law", c.gateDisclaimer),
-        emailF.label, phoneF.label, trap, err, submit, priv].forEach(function (n) { f.appendChild(n); });
+        emailF.label, optLab, botBox, trap, err, submit, priv].forEach(function (n) { f.appendChild(n); });
       messages.appendChild(f);
       messages.scrollTop = Math.max(0, f.offsetTop - messages.offsetTop - 8); // show the form from its title
       f.addEventListener("submit", function (event) {
         event.preventDefault();
         var email = emailF.input.value.trim();
-        var phone = phoneF.input.value.trim();
+        var noMarketing = optBox.checked;
         var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        var digits = phone.replace(/\D/g, "");
-        var phoneOk = digits.length >= 7 && digits.length <= 15 && /^[+\d\s()\/-]+$/.test(phone);
-        if (!mailOk || !phoneOk) {
+        if (!mailOk) {
           err.textContent = c.gateError;
           err.hidden = false;
-          (mailOk ? phoneF.input : emailF.input).focus();
+          emailF.input.focus();
+          return;
+        }
+        if (TURNSTILE_SITE_KEY && !botToken) {
+          err.textContent = c.gateBot;
+          err.hidden = false;
           return;
         }
         err.hidden = true;
@@ -936,10 +979,10 @@
         fetch("/api/lead", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name: "Chat-Besucher", email: email, phone: phone, service: "Chatbot", message: "Chat gestartet (Kontaktdaten vor dem Chat angegeben)", lang: lang, company_website: trap.value })
+          body: JSON.stringify({ name: "Chat-Besucher", email: email, service: "Chatbot", message: "Chat gestartet. Kein Marketing-Kontakt gewünscht: " + (noMarketing ? "ja" : "nein"), lang: lang, turnstileToken: botToken || undefined, company_website: trap.value })
         }).then(function (r) {
           if (!r.ok) throw new Error("lead " + r.status);
-          saveLead("");
+          saveLead("", email, noMarketing);
           setHandoverState("sent");
           gateOpen = false;
           f.remove();
@@ -957,7 +1000,33 @@
         });
       });
     }
-    if (!getLead()) showGate();
+    if (!getContact()) showGate();
+
+    // ---- chat history to Rexity Labs (founder, 2 Oct 2026): when the visitor leaves the page or hides the tab,
+    // the conversation so far goes to /api/lead (one internal e-mail, nothing to the visitor), but only if the
+    // visitor wrote something new since the last send.
+    var TRANSCRIPT_SENT_KEY = "rexity_chat_sent";
+    function sendTranscript() {
+      var contact = getContact();
+      if (!contact) return;
+      var turns = [];
+      messages.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
+        if (el.classList.contains("rexity-chatbot__message--loading") || el.classList.contains("rexity-chatbot__handover-done")) return;
+        turns.push({ role: el.classList.contains("rexity-chatbot__message--user") ? "user" : "assistant", content: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 1500) });
+      });
+      var users = turns.filter(function (m) { return m.role === "user"; }).length;
+      var sent = 0;
+      try { sent = Number(window.localStorage.getItem(TRANSCRIPT_SENT_KEY)) || 0; } catch (e) {}
+      if (users < sent) sent = 0; // history was cleared
+      if (!users || users <= sent) return;
+      var payload = JSON.stringify({ kind: "chat-transcript", email: contact.email, noMarketing: contact.noMarketing, transcript: turns.slice(-60), lang: lang });
+      var ok = false;
+      try { ok = navigator.sendBeacon && navigator.sendBeacon("/api/lead", new Blob([payload], { type: "application/json" })); } catch (e) {}
+      if (!ok) { try { fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: payload, keepalive: true }); } catch (e) {} }
+      try { window.localStorage.setItem(TRANSCRIPT_SENT_KEY, String(users)); } catch (e) {}
+    }
+    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") sendTranscript(); });
+    window.addEventListener("pagehide", sendTranscript);
     if (quick) quick.addEventListener("scroll", updateQuickCue, { passive: true });
 
     function markIntroSeen() {

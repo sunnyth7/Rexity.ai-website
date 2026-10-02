@@ -152,8 +152,8 @@
       "en": "AI assistant by Rexity Labs. You are chatting with an AI, not a person."
     },
     "hosting": {
-      "de": "Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Ihre Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet: in EU-Mitgliedstaaten, je nach Anbieter auch in EFTA-Staaten wie Norwegen oder der Schweiz. Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.",
-      "en": "AI processing takes place in European data centres. Your chat messages are processed by a language model in our cloud provider's European data zone: in EU member states and, depending on the provider, in EFTA countries such as Norway or Switzerland. They are not used to train models and we do not store them permanently."
+      "de": "Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Ihre Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet: in EU-Mitgliedstaaten, je nach Anbieter auch in EFTA-Staaten wie Norwegen oder der Schweiz. Sie werden nicht zum Training von Modellen verwendet. Den Chat-Verlauf erhalten wir per E-Mail, um Ihre Anfrage zu bearbeiten.",
+      "en": "AI processing takes place in European data centres. Your chat messages are processed by a language model in our cloud provider's European data zone: in EU member states and, depending on the provider, in EFTA countries such as Norway or Switzerland. They are not used to train models. We receive the chat history by e-mail to handle your enquiry."
     },
     "hostingNonEu": {
       "de": "Diese Antwort kommt über eine Übergangslösung (Claude über die Anthropic API), die außerhalb der EU verarbeitet. Einzelheiten stehen in der [Datenschutzerklärung](/datenschutz).",

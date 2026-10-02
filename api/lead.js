@@ -5,7 +5,7 @@
 // a no-build static site. The key lives in Vercel env, never client-side.
 
 const crypto = require("crypto");
-const { notifyLead } = require("./_notify");
+const { notifyLead, sendMail, escapeHtml } = require("./_notify");
 
 const SUPABASE_URL = process.env.SUPABASE_URL || "";
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
@@ -43,6 +43,21 @@ function globalCeilingExceeded() {
   if (globalHits.length >= GLOBAL_LEAD_CEILING) return true;
   globalHits.push(now);
   return false;
+}
+
+const TURNSTILE_SECRET = String(process.env.TURNSTILE_SECRET_KEY || "").trim();
+async function verifyTurnstile(token, ip) {
+  if (!token) return false;
+  try {
+    const body = new URLSearchParams({ secret: TURNSTILE_SECRET, response: token });
+    if (ip && ip !== "unknown") body.set("remoteip", ip);
+    const r = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: body, signal: AbortSignal.timeout(5000) });
+    const j = await r.json();
+    return Boolean(j && j.success);
+  } catch (_e) {
+    console.error("[lead] turnstile verification unavailable");
+    return false;
+  }
 }
 
 function refererPath(req) {
@@ -115,6 +130,30 @@ module.exports = async function handler(req, res) {
     return;
   }
 
+  // ---- Chat transcript (founder, 2 Oct 2026): the widget sends what the visitor chatted, with the e-mail
+  // address from the entry form. One internal mail to us; nothing goes to the visitor and nothing is stored
+  // in the database. Never log the content.
+  if (data.kind === "chat-transcript") {
+    const tEmail = clip(data.email, 200).trim();
+    const turns = (Array.isArray(data.transcript) ? data.transcript : []).slice(-60)
+      .map((m) => (m && typeof m.content === "string" ? { who: m.role === "user" ? "Besucher" : "Assistent", text: m.content.slice(0, 1500) } : null))
+      .filter(Boolean);
+    if (!EMAIL_RE.test(tEmail) || !turns.some((m) => m.who === "Besucher")) {
+      res.statusCode = 422;
+      res.end(JSON.stringify({ ok: false, error: "Nothing to send." }));
+      return;
+    }
+    const noMk = data.noMarketing === true;
+    const head = ["Chat-Verlauf von der Website", "E-Mail des Besuchers: " + tEmail, "Kein Marketing-Kontakt gewünscht: " + (noMk ? "ja" : "nein"), "Seite: " + (refererPath(req) || "-"), ""];
+    const text = head.concat(turns.map((m) => m.who + ": " + m.text)).join("\n");
+    const html = "<p>" + head.slice(0, 4).map(escapeHtml).join("<br>") + "</p>" + turns.map((m) => "<p><strong>" + m.who + ":</strong> " + escapeHtml(m.text).replace(/\n/g, "<br>") + "</p>").join("");
+    const to = String(process.env.LEAD_NOTIFY_TO || "info@rexity.ai").trim();
+    const r = await sendMail({ to: to, subject: "Chat-Verlauf: " + tEmail, textContent: text, htmlContent: html });
+    res.statusCode = r.sent || r.reason === "not_configured" ? 200 : 502;
+    res.end(JSON.stringify({ ok: r.sent === true }));
+    return;
+  }
+
   // Accept both the CF7 field names and plain ones.
   const name = clip(data.name || data["your-name"], 200).trim();
   const email = clip(data.email || data["your-email"], 200).trim();
@@ -123,6 +162,19 @@ module.exports = async function handler(req, res) {
   const phone = clip(data.phone, 60).trim();
   const company = clip(data.company, 200).trim();
   const service = clip(data.service, 300).trim();
+  const isChat = service === "Chatbot";
+
+  // Bot protection for the chat's entry form (founder, 2 Oct 2026): Cloudflare Turnstile. Active only when
+  // TURNSTILE_SECRET_KEY is set in Vercel and the widget carries the matching site key; without it the honeypot
+  // and the rate limits above remain the protection.
+  if (isChat && TURNSTILE_SECRET) {
+    const ok = await verifyTurnstile(clip(data.turnstileToken, 4000), clientIp(req));
+    if (!ok) {
+      res.statusCode = 403;
+      res.end(JSON.stringify({ ok: false, error: "Bot check failed. Please try again." }));
+      return;
+    }
+  }
 
   // Contact-form leads carry an email; chatbot-gate leads carry a phone.
   if (!name || (!email && !phone)) {
@@ -161,7 +213,7 @@ module.exports = async function handler(req, res) {
     // Email notification must never affect the client response.
     try {
       await notifyLead({
-        kind: phone && !email ? "chatbot" : "kontakt",
+        kind: isChat || (phone && !email) ? "chatbot" : "kontakt",
         name: name,
         email: email,
         phone: phone,
@@ -170,7 +222,7 @@ module.exports = async function handler(req, res) {
         service: service || subject,
         source: refererPath(req),
         lang: clip(data.lang, 10)
-      });
+      }, isChat ? { confirmation: false } : undefined); // chat: no mail to the visitor (founder, 2 Oct 2026)
     } catch (_e) { /* notifyLead never throws; belt and braces */ }
     res.statusCode = 200;
     res.end(JSON.stringify({ ok: true }));

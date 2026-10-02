@@ -100,9 +100,11 @@
     schriftliches Angebot. Sie erreichen uns jederzeit auch direkt per E-Mail, Telefon oder WhatsApp.
   </p>
   <ul>
-    <li><strong>Vor dem Start des Chats</strong> fragen wir Ihre E-Mail-Adresse und Telefonnummer ab. Wir
-      speichern sie wie eine Kontaktanfrage, um Ihr Anliegen zu bearbeiten und Sie dazu zu kontaktieren
-      (Art. 6 Abs. 1 lit. b DSGVO). Diese Angaben werden <strong>nicht</strong> an das Sprachmodell übermittelt.</li>
+    <li><strong>Vor dem Start des Chats</strong> fragen wir Ihre E-Mail-Adresse ab. Wir speichern sie wie eine
+      Kontaktanfrage, um Ihr Anliegen zu bearbeiten und Sie dazu zu kontaktieren (Art. 6 Abs. 1 lit. b DSGVO).
+      Sie wird <strong>nicht</strong> an das Sprachmodell übermittelt. Im Formular können Sie ankreuzen, dass Sie
+      künftig nicht zu Marketingzwecken kontaktiert werden möchten; Werbung per E-Mail senden wir ohnehin nur mit
+      Ihrer ausdrücklichen Einwilligung. Eine Bestätigungs-E-Mail an Sie wird nicht versendet.</li>
     <li><strong>Ihre Nachrichten</strong> und der Verlauf der laufenden Unterhaltung werden zur Beantwortung an
       ein Sprachmodell übermittelt: Microsoft Azure OpenAI (Microsoft Ireland Operations Ltd.), bereitgestellt
       in der EU-Datenzone. Die KI-Verarbeitung erfolgt in dieser Datenzone; sie umfasst die
@@ -111,10 +113,12 @@
       Modellen verwendet und nicht an OpenAI weitergegeben. Microsoft prüft Inhalte automatisiert auf
       Missbrauch; auffällige Inhalte können dafür befristet in der Azure-Region der Ressource (EU) gespeichert und von
       Microsoft-Beschäftigten im Europäischen Wirtschaftsraum geprüft werden.</li>
-    <li><strong>Keine Speicherung des Chat-Inhalts bei uns:</strong> Wir legen den Inhalt der Unterhaltung nicht
-      in einer Datenbank ab. Protokolliert werden nur technische Daten ohne Inhalt (Zeitpunkt, Dauer,
-      Verbrauch, Fehlercodes) sowie kurzzeitig die Zahl der Anfragen je IP-Adresse zum Schutz vor Missbrauch
-      (Art. 6 Abs. 1 lit. f DSGVO).</li>
+    <li><strong>Chat-Verlauf an uns:</strong> Den Verlauf Ihrer Unterhaltung erhalten wir zusammen mit Ihrer
+      E-Mail-Adresse per E-Mail (Versand über Brevo), sobald Sie die Seite verlassen, damit wir Ihre Anfrage
+      bearbeiten können (Art. 6 Abs. 1 lit. b DSGVO). In einer Datenbank legen wir den Chat-Inhalt nicht ab; die
+      E-Mail bewahren wir wie eine Kontaktanfrage auf. Protokolliert werden daneben technische Daten ohne Inhalt
+      (Zeitpunkt, Dauer, Verbrauch, Fehlercodes) sowie kurzzeitig die Zahl der Anfragen je IP-Adresse zum Schutz
+      vor Missbrauch (Art. 6 Abs. 1 lit. f DSGVO).</li>
     <li><strong>Verlauf in Ihrem Browser:</strong> Damit der Assistent den Zusammenhang behält, wird der Verlauf
       (höchstens 60 Nachrichten) im lokalen Speicher Ihres Browsers abgelegt und dort nach 30 Tagen
       verworfen. Mit „Verlauf löschen" im Chat-Fenster entfernen Sie ihn sofort.</li>
@@ -185,7 +189,7 @@
     <li>
       <strong>Supabase Pte. Ltd.</strong> (Sitz in Singapur; Datenbank in der EU, Region Irland) — Speicherung
       der Angaben aus Kontaktformular, Terminbuchung und dem Startformular des KI-Assistenten (Name, E-Mail,
-      Telefonnummer, Anliegen, Wunschtermin). Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO.
+      Telefonnummer, Anliegen, Wunschtermin; beim KI-Assistenten nur die E-Mail-Adresse). Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO.
       Auftragsverarbeitungsvertrag (Supabase-DPA) mit EU-Standardvertragsklauseln als Bestandteil der
       Nutzungsbedingungen.
     </li>
@@ -226,7 +230,10 @@
     <li><strong>Vapi / Retell / Twilio</strong> (Auswahl ausstehend) — Sprachprovider für die KI-Sprachassistenz
       „Rexona". Nicht aktiv. Standardmäßig ohne Aufzeichnung; Aufzeichnung nur nach ausdrücklicher Einwilligung.</li>
     <li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg) — Amazon Bedrock mit EU-Inferenzprofil als weiteres
-      Sprachmodell (Claude von Anthropic) für den KI-Assistenten; Verarbeitung ausschließlich in EU-Regionen. Nicht aktiv.</li>
+      Sprachmodell (Claude von Anthropic) für den KI-Assistenten; Verarbeitung in EU-Regionen. Nicht aktiv.</li>
+    <li><strong>Cloudflare, Inc.</strong> (USA) — Cloudflare Turnstile als Schutz des Chat-Startformulars vor automatisierten
+      Anfragen (Bot-Schutz). Nicht aktiv. Bei Einsatz wird beim Öffnen des Formulars ein Skript von Cloudflare geladen;
+      dabei werden IP-Adresse und technische Browser-Merkmale an Cloudflare übermittelt.</li>
     <li><strong>Sentry oder Datadog</strong> (optional) — Fehlerprotokollierung. Nicht aktiv.</li>
   </ul>
 
@@ -267,8 +274,8 @@
     <li>Im <code>localStorage</code> Ihres Browsers speichern wir Ihre Sprachpräferenz (DE/EN), damit der
       Sprachschalter beim erneuten Besuch funktioniert. Wenn Sie den KI-Assistenten nutzen, kommen der Verlauf
       Ihrer Unterhaltung (höchstens 60 Nachrichten, 30 Tage, jederzeit über „Verlauf löschen" entfernbar) und ein
-      Vermerk hinzu, dass Sie das Startformular ausgefüllt haben; Ihre Kontaktdaten selbst werden nicht im
-      Browser abgelegt. Dies ist zur Bereitstellung der von Ihnen gewünschten Funktion erforderlich im Sinne
+      Ihre im Startformular angegebene E-Mail-Adresse hinzu, damit der Verlauf Ihrer Anfrage zugeordnet werden
+      kann. Dies ist zur Bereitstellung der von Ihnen gewünschten Funktion erforderlich im Sinne
       des § 25 Abs. 2 TDDDG.</li>
     <li>Sollten wir künftig Tracking-Cookies oder ähnliche Technologien einsetzen, implementieren wir
       vorher einen Consent-Banner mit Opt-in nach § 25 Abs. 1 TTDSG.</li>
@@ -287,8 +294,8 @@
     <li>Audit-Ereignisse: 180 Tage.</li>
     <li>Terminbuchungen: 365 Tage nach Abschluss.</li>
     <li>Nicht konvertierte Leads: 18 Monate.</li>
-    <li>Kontaktdaten aus dem Startformular des KI-Assistenten: wie nicht konvertierte Leads.</li>
-    <li>Chat-Verlauf: nur in Ihrem Browser, 30 Tage; bei uns wird er nicht gespeichert.</li>
+    <li>E-Mail-Adresse aus dem Startformular des KI-Assistenten: wie nicht konvertierte Leads.</li>
+    <li>Chat-Verlauf: in Ihrem Browser 30 Tage; die E-Mail mit dem Verlauf bei uns wie nicht konvertierte Leads.</li>
     <li>Website-Check: Prüfergebnisse höchstens 24 Stunden im Zwischenspeicher; angeforderte Berichte (E-Mail-Adresse, geprüfte Adresse, Ergebnis in Kurzform) wie nicht konvertierte Leads.</li>
     <li>Opt-out-Liste: bis zum Widerruf der Abmeldung — gesetzlich notwendig.</li>
   </ul>
@@ -326,5 +333,5 @@ lenis.on('scroll', (e) => {
   </script>
 <!-- rx:scripts --><script defer src="/assets/js/rexity.js?v=c3ed747a4d"></script>
 <script>/* Vercel Web Analytics, as on production (Datenschutz §5). Loaded only on the real hosts, so local and LAN previews make no 404 request. */window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};if(/(^|\.)rexity\.ai$|\.vercel\.app$/.test(location.hostname)){var s=document.createElement("script");s.defer=true;s.src="/_vercel/insights/script.js";document.head.appendChild(s)}</script><!-- /rx:scripts -->
-<!-- rx:chatbot --><script defer src="/rexity-omi/assets/chatbot/rexity-chatbot.js?v=20261002g"></script><!-- /rx:chatbot -->
+<!-- rx:chatbot --><script defer src="/rexity-omi/assets/chatbot/rexity-chatbot.js?v=20261002h"></script><!-- /rx:chatbot -->
 </body></html>
