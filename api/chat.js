@@ -8,8 +8,8 @@
 //     trimmed at a sentence boundary unless the visitor asked for steps or a list);
 //   - only what was asked: "übrigens"/"by the way" asides are dropped, at most one
 //     question back, at most two links (targets only from the digest's URL index);
-//   - the visitor's language: the reply language is detected from the visitor's last
-//     message (any language; script + stop words), named in the per-request prompt and
+//   - German and English only (founder, 2 Oct 2026): the reply language is detected from the
+//     visitor's last message (a third language is answered in English), named in the per-request prompt and
 //     returned as `lang`; deterministic copy exists in German and English, every other
 //     language gets the English copy;
 //   - process questions: three or four steps + one sentence with the booking link;
@@ -61,7 +61,7 @@ const PHONE_DIGITS = "491742471435";
 const COPY = knowledge.copy || {};
 const ASSISTANT_NAME = (knowledge.brand && knowledge.brand.assistantName) || "Rexity";
 
-// Approved copy exists in German and English; every other reply language gets English.
+// The assistant answers in German and English only (founder, 2 Oct 2026).
 function copyLang(lang) {
   return lang === "de" ? "de" : "en";
 }
@@ -75,7 +75,7 @@ function approvedCopy(key, lang) {
 // Inference runs on our own Azure OpenAI resource in Germany West Central with a
 // DataZoneStandard deployment, so prompts and completions stay inside the EU data
 // zone. This is a compliance promise we advertise: do NOT add any non-EU model
-// provider (OpenAI, DeepSeek, Gemini, a US/global Bedrock profile, ...) here. The one
+// provider (OpenAI directly, Gemini, a US/global Bedrock profile, ...) here. The one
 // documented exception is the Anthropic API stopgap below (off unless CHAT_ALLOW_NON_EU=1).
 // The model is the deployment named in AZURE_OPENAI_DEPLOYMENT (set in Vercel); never
 // hard-code it.
@@ -210,7 +210,7 @@ function normalize(value) {
     .trim();
 }
 
-// ---- Reply language (Sprint 25: any language) ----------------------------------------
+// ---- Reply language (German and English only; other languages are detected, answered in English) ----
 // detectLanguage(text) -> ISO 639-1 code or null. Non-Latin scripts by their letters
 // (Arabic/Persian, Hebrew, Cyrillic: Russian/Ukrainian, Greek, Japanese, Korean, Chinese,
 // Hindi, Thai); Latin-script languages by stop words plus the letters only they use
@@ -282,18 +282,29 @@ function detectLanguage(text, prefer) {
   return null;
 }
 
+// Founder decision 2 Oct 2026: the assistant answers in German and English only. The
+// detector above still recognises other languages (reported as visitorLang), but the reply
+// language is always "de" or "en": a message in any third language is answered in English,
+// with one opening sentence that says so.
 // 1) language of the current message if clear; 2) else the most recent clear user
 // turn; 3) else the page language sent by the widget; 4) else German.
+const REPLY_LANGS = ["de", "en"];
+const toReplyLang = (code) => (code ? (REPLY_LANGS.includes(code) ? code : "en") : null);
 function resolveReplyLang(message, history, clientLang) {
   let previous = null;
   for (let i = history.length - 1; i >= 0 && !previous; i--) {
     if (history[i].role === "user") previous = detectLanguage(history[i].content, [clientLang]);
   }
   const current = detectLanguage(message, [previous, clientLang]);
-  if (current) return current;
-  if (previous) return previous;
-  if (clientLang && LANG_NAMES[clientLang]) return clientLang;
+  if (current) return toReplyLang(current);
+  if (previous) return toReplyLang(previous);
+  if (clientLang && REPLY_LANGS.includes(clientLang)) return clientLang;
   return "de";
+}
+// The visitor's own language when it is neither German nor English (else null).
+function foreignLang(message, clientLang) {
+  const code = detectLanguage(message, [clientLang]);
+  return code && !REPLY_LANGS.includes(code) ? code : null;
 }
 
 // ---- Output contract ----------------------------------------------------------
@@ -830,7 +841,7 @@ function buildStaticPrompt() {
     `6. Process questions ("Wie läuft … ab?", "How does … work?"): an outline of three or four steps as "- " lines, without internal detail (no tools, hours or internal checklists), then one sentence that the details are settled in a short call, with [Termin buchen](/#kontakt).`,
     `7. Hand-over: when the visitor asks about their own case, their timing, a call, an offer or a quote, answer in one or two sentences, then offer contact in one sentence: [Termin buchen](/#kontakt), WhatsApp (${PHONE_DISPLAY}) or ${CONTACT_EMAIL}. Then end your answer with the marker [[handover]] (the website shows a small contact form; the marker is removed before the visitor sees the answer).`,
     ``,
-    `LANGUAGE: Reply in the language of the visitor's last message, whatever it is (German, English, Turkish, Polish, Russian, Spanish, Arabic, …); the block after the SITE KNOWLEDGE names it. German always with the formal "Sie". Translate facts from the German SITE KNOWLEDGE faithfully; prices stay exact. Link targets are always the pages of the Seitenverzeichnis.`,
+    `LANGUAGE: This assistant answers in German and English only. Reply in German (always the formal "Sie") or English, as the block after the SITE KNOWLEDGE says; never in any other language, even if the visitor writes or asks in one. Translate facts from the German SITE KNOWLEDGE faithfully; prices stay exact. Link targets are always the pages of the Seitenverzeichnis.`,
     ``,
     `FACTS: Only state facts that are in the SITE KNOWLEDGE. If something is not covered (a specific integration, technology, client, date, number), say in one sentence that you have no confirmed information on it and offer the free 30-minute call ([Termin buchen](/#kontakt)) or ${CONTACT_EMAIL}. Never invent clients, figures, features, integrations, timelines, discounts or guarantees. No superlatives about Rexity ("best", "cheapest", "fastest", "guaranteed"). The client behind the URL /work/chara is called "Fahrzeugpflege Celle"; always use that name. The studio's products are RexFangs and RexDesk (both in testing); LevelKraft and CLEVR are apps "von uns entwickelt" (built and launched by Rexity) as listed under "Von uns entwickelt". Video marketing and content marketing as a separate service are no longer offered; dashboards are part of /web/saas.`,
     ``,
@@ -876,10 +887,11 @@ function buildTurnPrompt(lang, name, provider, flags) {
   const lines = [];
   if (lang === "en") {
     lines.push(`REPLY LANGUAGE: English (the visitor writes English). Translate facts from the German SITE KNOWLEDGE faithfully; keep page names and prices exact ("from €1,999 net plus VAT").`);
-  } else if (lang === "de" || !LANG_NAMES[lang]) {
-    lines.push(`REPLY LANGUAGE: German, formal "Sie". If the visitor switches language, the next turn tells you.`);
   } else {
-    lines.push(`REPLY LANGUAGE: ${LANG_NAMES[lang]} (${lang}): the visitor's last message is in ${LANG_NAMES[lang]}. Answer entirely in ${LANG_NAMES[lang]}; translate facts from the German SITE KNOWLEDGE faithfully, keep prices exact (euro amounts as published, net plus VAT) and keep the link targets.`);
+    lines.push(`REPLY LANGUAGE: German, formal "Sie". If the visitor switches language, the next turn tells you.`);
+  }
+  if (f.foreign && LANG_NAMES[f.foreign]) {
+    lines.push(`THE VISITOR WROTE IN ${LANG_NAMES[f.foreign].toUpperCase()}. This assistant answers in German and English only: reply in English, never in ${LANG_NAMES[f.foreign]}, and begin with exactly this sentence: "I answer in English or German."`);
   }
   if (provider === "anthropic") {
     lines.push(`TECHNICAL BASIS of this answer: Claude (Anthropic) via the Anthropic API, a temporary route that processes outside the EU. For hosting or AI questions do NOT use the EU sentences; say that this interim route processes outside the EU and point to /datenschutz.`);
@@ -1252,7 +1264,7 @@ async function handler(req, res) {
   try {
     const parsed = JSON.parse(body || "{}");
     message = String(parsed.message || "").slice(0, 1000);
-    clientLang = typeof parsed.lang === "string" && LANG_NAMES[parsed.lang.toLowerCase()] ? parsed.lang.toLowerCase() : null;
+    clientLang = typeof parsed.lang === "string" && REPLY_LANGS.includes(parsed.lang.toLowerCase()) ? parsed.lang.toLowerCase() : null;
     rawHistory = Array.isArray(parsed.history) ? parsed.history : [];
     history = sanitizeHistory(rawHistory);
     name = sanitizeName(parsed.lead);
@@ -1263,9 +1275,10 @@ async function handler(req, res) {
     return send(res, 400, { error: "Invalid request" });
   }
 
-  const lang = resolveReplyLang(message, history, clientLang);
+  const lang = resolveReplyLang(message, history, clientLang); // "de" | "en"
+  const foreign = foreignLang(message, clientLang);            // e.g. "es", else null
   const cl = copyLang(lang);
-  const base = { visitorLang: lang };
+  const base = { visitorLang: foreign || lang };
   const text = normalize(message);
   if (!text || text.length < 2) {
     return send(res, 200, { ...base, answer: cl === "de" ? "Schreiben Sie mir kurz, wobei ich Ihnen helfen kann." : "Tell me briefly what I can help you with.", lang: cl, engine: "policy" });
@@ -1284,6 +1297,7 @@ async function handler(req, res) {
     return send(res, 200, { ...base, answer: finalizeAnswer(copy).text, lang: cl, intent: intent, engine: "policy" });
   }
   const flags = contractFlags(message);
+  flags.foreign = foreign;
 
   // Primary path: the model with the full site digest, providers in PROVIDERS order
   // (default: Bedrock, Azure; the Anthropic API only with CHAT_ALLOW_NON_EU=1).
@@ -1367,7 +1381,7 @@ async function handler(req, res) {
 module.exports = handler;
 // For scripts/chat/test-chat.mjs and scripts/chat/eval.mjs (not used by Vercel).
 module.exports._test = {
-  toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang, detectLanguage,
+  toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang, foreignLang, REPLY_LANGS, detectLanguage,
   copyLang, contractFlags, applyContract, trimToWords, dropExtras, countWords, splitSentences, hostingAnswer, techBasis,
   buildTurnPrompt, fallbackAnswer, URL_TITLES, STATIC_PROMPT, SITE_READY, MAX_COMPLETION_TOKENS, MAX_LINKS, WORD_LIMIT,
   PROVIDERS, BEDROCK_READY, BEDROCK_EU_PROBLEM, bedrockEuCheck, toAnthropicMessages, CLAIM_GUARD, LANG_NAMES,

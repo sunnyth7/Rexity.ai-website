@@ -1993,7 +1993,7 @@
       },
       "stack": [
         "Retrieval (RAG)",
-        "DeepSeek",
+        "EU-hosted LLM",
         "Postgres",
         "pgvector"
       ],
