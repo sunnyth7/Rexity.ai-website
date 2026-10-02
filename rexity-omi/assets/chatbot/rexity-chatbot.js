@@ -82,6 +82,7 @@
       firstMessage: "AI assistant by Rexity Labs. You are chatting with an AI, not a person. Ask me about websites, apps, automation, prices or how a project works.",
       placeholder: "Your question …",
       footnote: "Answers can contain mistakes; only our written quote is binding.",
+      resetLabel: "Clear history",
       thinking: "Rexity is writing …",
       contactTitle: "Contact us",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · Email" : "WhatsApp · Email",
@@ -127,6 +128,7 @@
       firstMessage: "KI-Assistent von Rexity Labs. Sie schreiben mit einer KI, nicht mit einem Menschen. Fragen Sie mich zu Websites, Apps, Automatisierung, Preisen oder zum Ablauf.",
       placeholder: "Ihre Frage …",
       footnote: "Antworten können Fehler enthalten; verbindlich ist nur unser schriftliches Angebot.",
+      resetLabel: "Verlauf löschen",
       thinking: "Rexity schreibt …",
       contactTitle: "Kontakt",
       contactSubtitle: CHAT_ON ? "Chat · WhatsApp · E-Mail" : "WhatsApp · E-Mail",
@@ -456,13 +458,23 @@
     linkifyEmail(el);
   }
 
-  // ---- The conversation survives a click on a chat link (same browser tab) ------
+  // ---- The conversation is kept in the visitor's browser (founder, 2 Oct 2026) -------
+  // localStorage, so the assistant still knows the context on the next page and on the next
+  // visit. Entries older than 30 days are dropped; "Verlauf löschen" removes everything.
+  // Messages of the last 3 hours are the current conversation (sent as `history`, counted
+  // for the 20-message cap); older ones are sent as `memory` (context only).
   var LOG_KEY = "rexity_chat_log";
   var REOPEN_KEY = "rexity_chat_reopen";
+  var LOG_TTL = 30 * 24 * 3600 * 1000;
+  var CURRENT_WINDOW = 3 * 3600 * 1000;
   function readLog() {
     try {
-      var log = JSON.parse(window.sessionStorage.getItem(LOG_KEY) || "[]");
-      return Array.isArray(log) ? log.filter(function (m) { return m && (m.t === "bot" || m.t === "user") && typeof m.x === "string"; }) : [];
+      var raw = window.localStorage.getItem(LOG_KEY) || window.sessionStorage.getItem(LOG_KEY); // sessionStorage: versions before 2 Oct 2026
+      var log = JSON.parse(raw || "[]");
+      var now = new Date().getTime();
+      return Array.isArray(log) ? log.filter(function (m) {
+        return m && (m.t === "bot" || m.t === "user") && typeof m.x === "string" && (!m.ts || now - m.ts < LOG_TTL);
+      }) : [];
     } catch (e) { return []; }
   }
   function writeLog(container) {
@@ -470,10 +482,82 @@
       var log = [];
       container.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
         if (el.classList.contains("rexity-chatbot__message--loading")) return;
-        log.push({ t: el.classList.contains("rexity-chatbot__message--user") ? "user" : "bot", x: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 2000) });
+        var entry = {
+          t: el.classList.contains("rexity-chatbot__message--user") ? "user" : "bot",
+          x: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 2000),
+          ts: Number(el.getAttribute("data-ts")) || new Date().getTime()
+        };
+        var cards = el.getAttribute("data-cards");
+        if (cards) { try { entry.c = JSON.parse(cards); } catch (e) {} }
+        log.push(entry);
       });
-      window.sessionStorage.setItem(LOG_KEY, JSON.stringify(log.slice(-60)));
+      window.localStorage.setItem(LOG_KEY, JSON.stringify(log.slice(-60)));
     } catch (e) {}
+  }
+  function clearLog() {
+    try { window.localStorage.removeItem(LOG_KEY); } catch (e) {}
+    try { window.sessionStorage.removeItem(LOG_KEY); window.sessionStorage.removeItem(HANDOVER_KEY); } catch (e) {}
+  }
+
+  // ---- Link cards: a small preview (picture, title, one line, address) for every site
+  // page linked in an answer. Data comes from /api/chat (`cards`); everything is set as text.
+  function cleanCards(cards) {
+    if (!Array.isArray(cards)) return [];
+    return cards.slice(0, 2).map(function (c) {
+      if (!c || typeof c.url !== "string" || typeof c.title !== "string") return null;
+      var target = linkTarget(c.url);
+      if (!target || target.kind !== "site") return null;
+      return {
+        url: target.href,
+        title: c.title.slice(0, 120),
+        description: typeof c.description === "string" ? c.description.slice(0, 220) : "",
+        image: typeof c.image === "string" && /^\/assets\/[\w.\/%-]+\.(?:jpe?g|png|webp)$/i.test(c.image) ? c.image : null
+      };
+    }).filter(Boolean);
+  }
+  function renderCards(el, cards) {
+    var list = cleanCards(cards);
+    if (!list.length) { el.removeAttribute("data-cards"); return; }
+    el.setAttribute("data-cards", JSON.stringify(list));
+    var wrap = document.createElement("div");
+    wrap.className = "rexity-chatbot__cards";
+    list.forEach(function (c) {
+      var a = document.createElement("a");
+      a.className = "rexity-chatbot__card";
+      a.href = c.url;
+      a.setAttribute("data-rexity-chat-nav", "");
+      var pic = document.createElement("span");
+      pic.className = "rexity-chatbot__card-pic";
+      var img = document.createElement("img");
+      img.alt = "";
+      img.loading = "lazy";
+      img.decoding = "async";
+      img.width = 120;
+      img.height = 63;
+      img.src = c.image || "/assets/brand/final/rexity-mark-white.svg";
+      if (!c.image) pic.className += " rexity-chatbot__card-pic--mark";
+      pic.appendChild(img);
+      var body = document.createElement("span");
+      body.className = "rexity-chatbot__card-body";
+      var title = document.createElement("strong");
+      title.className = "rexity-chatbot__card-title";
+      title.textContent = c.title;
+      var desc = document.createElement("span");
+      desc.className = "rexity-chatbot__card-desc";
+      desc.textContent = c.description;
+      var host = document.createElement("span");
+      host.className = "rexity-chatbot__card-host";
+      var shown = c.url;
+      try { shown = decodeURIComponent(c.url); } catch (e) {}
+      host.textContent = "rexity.ai" + (shown === "/" ? "" : shown);
+      body.appendChild(title);
+      if (c.description) body.appendChild(desc);
+      body.appendChild(host);
+      a.appendChild(pic);
+      a.appendChild(body);
+      wrap.appendChild(a);
+    });
+    el.appendChild(wrap);
   }
 
   // A "thinking" bubble: three bouncing dots (animated), shown while the
@@ -497,11 +581,13 @@
   }
 
   // Replace a thinking bubble with the final answer + clickable links.
-  function setBotAnswer(el, text) {
+  function setBotAnswer(el, text, cards) {
     el.classList.remove("rexity-chatbot__message--loading");
     el.removeAttribute("role");
     el.setAttribute("data-raw", String(text || ""));
+    el.setAttribute("data-ts", String(new Date().getTime()));
     renderBotText(el, text);
+    renderCards(el, cards);
     if (el.parentNode) {
       el.parentNode.scrollTop = el.parentNode.scrollHeight;
       writeLog(el.parentNode);
@@ -514,11 +600,12 @@
     closeMailMenus();
   }, true);
 
-  function addMessage(container, text, type) {
+  function addMessage(container, text, type, meta) {
     var item = document.createElement("div");
     item.className = "rexity-chatbot__message rexity-chatbot__message--" + type;
     item.setAttribute("data-raw", String(text || ""));
-    if (type.indexOf("bot") > -1) renderBotText(item, text);
+    item.setAttribute("data-ts", String((meta && meta.ts) || new Date().getTime()));
+    if (type.indexOf("bot") > -1) { renderBotText(item, text); renderCards(item, meta && meta.cards); }
     else item.textContent = text;
     container.appendChild(item);
     container.scrollTop = container.scrollHeight;
@@ -529,13 +616,17 @@
   // Every turn goes to /api/chat (the server counts the visitor messages for the
   // 20-message cap); the last 16 in full, earlier ones shortened. Never a phone number
   // or e-mail address of the visitor: only the name after the hand-over form.
-  async function askApi(message, lang, history) {
+  async function askApi(message, lang, history, memory) {
     var full = history.length - 16;
     var sent = history.map(function (m, i) { return i < full ? { role: m.role, content: m.content.slice(0, 80) } : m; });
     var response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: message, lang: lang, history: sent, lead: getLead() || undefined })
+      body: JSON.stringify({
+        message: message, lang: lang, history: sent,
+        memory: memory && memory.length ? memory.slice(-8).map(function (m) { return { role: m.role, content: m.content.slice(0, 400) }; }) : undefined,
+        lead: getLead() || undefined
+      })
     });
     if (!response.ok) throw new Error("Chat request failed");
     var data = await response.json();
@@ -577,7 +668,7 @@
           '<div class="rexity-chatbot__hero">',
             '<div class="rexity-chatbot__top">',
               // loading="lazy": the logo is fetched only when the panel is shown (no request while closed)
-              '<div class="rexity-chatbot__brand"><img src="/assets/brand/web/rexity-logo-horizontal-white.svg" alt="Rexity Labs" width="112" height="29" loading="lazy"></div>',
+              '<div class="rexity-chatbot__brand"><img src="/rexity-omi/assets/chatbot/rexity-labs-logo-white.webp" alt="Rexity Labs" width="153" height="27" loading="lazy"></div>',
               '<button class="rexity-chatbot__close rexity-chatbot__panel-close" type="button">' + svgIcon("close") + '</button>',
             '</div>',
             '<div class="rexity-chatbot__intro">',
@@ -591,7 +682,7 @@
             '<input class="rexity-chatbot__input" type="text" maxlength="1000" autocomplete="off" enterkeyhint="send">',
             '<button class="rexity-chatbot__send" type="submit">' + svgIcon("send") + '</button>',
           '</form>',
-          '<div class="rexity-chatbot__footnote"></div>',
+          '<div class="rexity-chatbot__foot"><span class="rexity-chatbot__footnote"></span> <button class="rexity-chatbot__reset" type="button"></button></div>',
         '</div>'
       );
     }
@@ -613,6 +704,7 @@
     var nudge = root.querySelector(".rexity-chatbot__nudge");
     var nudgeText = root.querySelector(".rexity-chatbot__nudge-text");
     var nudgeClose = root.querySelector(".rexity-chatbot__nudge-close");
+    var resetBtn = root.querySelector(".rexity-chatbot__reset");
     var limitReached = false;
 
     function hideMenu() {
@@ -664,6 +756,7 @@
       root.querySelector(".rexity-chatbot__notice").textContent = activeCopy.noticeText;
       root.querySelector(".rexity-chatbot__privacy").textContent = activeCopy.privacy;
       root.querySelector(".rexity-chatbot__footnote").textContent = activeCopy.footnote;
+      resetBtn.textContent = activeCopy.resetLabel;
       renderChips();
       updateQuickCue();
     }
@@ -702,9 +795,21 @@
 
     // ---- the chat (switch on, or ?chat=1) ---------------------------------------
     var restored = readLog();
-    if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t); });
+    if (restored.length) restored.forEach(function (m) { addMessage(messages, m.x, m.t, { ts: m.ts, cards: m.c }); });
     else addMessage(messages, activeCopy.firstMessage, "bot");
     renderChips();
+    // "Verlauf löschen": removes the saved conversation from this browser and starts again
+    resetBtn.addEventListener("click", function () {
+      clearLog();
+      messages.textContent = "";
+      limitReached = false;
+      input.disabled = false;
+      send.disabled = false;
+      input.setAttribute("placeholder", activeCopy.placeholder);
+      addMessage(messages, activeCopy.firstMessage, "bot");
+      renderChips();
+      input.focus();
+    });
     if (quick) quick.addEventListener("scroll", updateQuickCue, { passive: true });
 
     function markIntroSeen() {
@@ -934,9 +1039,13 @@
       // Capture the prior conversation BEFORE adding the new turn, so the
       // model gets context (AI notice + alternating user/bot bubbles).
       var history = [];
+      var memory = [];
+      var nowTs = new Date().getTime();
       messages.querySelectorAll(".rexity-chatbot__message").forEach(function (el) {
         if (el.classList.contains("rexity-chatbot__message--loading") || el.classList.contains("rexity-chatbot__handover-done")) return;
-        history.push({
+        // older than 3 hours = an earlier conversation: context only, not counted for the 20-message cap
+        var older = nowTs - (Number(el.getAttribute("data-ts")) || nowTs) > CURRENT_WINDOW;
+        (older ? memory : history).push({
           role: el.classList.contains("rexity-chatbot__message--user") ? "user" : "assistant",
           // the raw answer, links included, so the model sees what it linked before
           content: (el.getAttribute("data-raw") || el.textContent || "").slice(0, 1500)
@@ -950,12 +1059,12 @@
       var minWait = new Promise(function (resolve) { window.setTimeout(resolve, 600); });
       var data;
       try {
-        data = await askApi(message, curLang, history);
+        data = await askApi(message, curLang, history, memory);
       } catch (_error) {
         data = { answer: localReply(message) };
       }
       await minWait;
-      setBotAnswer(loading, data.answer);
+      setBotAnswer(loading, data.answer, data.cards);
       send.disabled = false;
       if (data.intent === "conversation_limit") {
         limitReached = true;

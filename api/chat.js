@@ -1220,7 +1220,33 @@ function applyContract(raw, ctx) {
 const MAX_VISITOR_MESSAGES = 20;
 const MAX_BODY = 48000;
 
+// Link cards (founder, 2 Oct 2026): every site page linked in an answer comes with a small
+// preview (title, one-line description, picture) from the generated URL index. Anchors use
+// their page's card; contact targets and external links have none. At most two.
+const URL_CARDS = new Map();
+for (const u of site.urls || []) if (u && u.card && typeof u.path === "string") URL_CARDS.set(u.path, u.card);
+function cardsFor(answer, lang) {
+  const out = [];
+  const seen = new Set();
+  const re = /\[[^\]\n]{1,160}\]\(([^()\s]{1,300})\)/g;
+  let m;
+  while ((m = re.exec(String(answer || ""))) && out.length < 2) {
+    const target = m[1];
+    const page = target.split("#")[0] || "/";
+    if (target === "/#kontakt" || seen.has(page)) continue;
+    const card = URL_CARDS.get(page);
+    if (!card) continue;
+    seen.add(page);
+    const c = card[lang === "en" ? "en" : "de"] || card.de;
+    out.push({ url: target, title: c.t, description: c.d, image: card.img || null });
+  }
+  return out;
+}
 function send(res, status, payload) {
+  if (status === 200 && payload && typeof payload.answer === "string") {
+    const cards = cardsFor(payload.answer, payload.lang);
+    if (cards.length) payload.cards = cards;
+  }
   res.statusCode = status;
   res.end(JSON.stringify(payload));
 }
@@ -1266,7 +1292,10 @@ async function handler(req, res) {
     message = String(parsed.message || "").slice(0, 1000);
     clientLang = typeof parsed.lang === "string" && REPLY_LANGS.includes(parsed.lang.toLowerCase()) ? parsed.lang.toLowerCase() : null;
     rawHistory = Array.isArray(parsed.history) ? parsed.history : [];
-    history = sanitizeHistory(rawHistory);
+    // "memory": earlier conversations the widget kept in the visitor's browser (founder, 2 Oct 2026).
+    // They give the model context but do not count towards the 20-message cap of the current conversation.
+    const memory = Array.isArray(parsed.memory) ? parsed.memory.slice(-8).map((m) => (m && typeof m.content === "string" ? { role: m.role, content: m.content.slice(0, 400) } : null)).filter(Boolean) : [];
+    history = sanitizeHistory(memory.concat(rawHistory));
     name = sanitizeName(parsed.lead);
     // Token counts (not secret) on request, for the live eval: body debug:"usage" or header x-rexity-debug: usage.
     const hdr = req.headers && (req.headers["x-rexity-debug"] || req.headers["X-Rexity-Debug"]);
@@ -1381,7 +1410,7 @@ async function handler(req, res) {
 module.exports = handler;
 // For scripts/chat/test-chat.mjs and scripts/chat/eval.mjs (not used by Vercel).
 module.exports._test = {
-  toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang, foreignLang, REPLY_LANGS, detectLanguage,
+  toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang, foreignLang, REPLY_LANGS, detectLanguage, cardsFor,
   copyLang, contractFlags, applyContract, trimToWords, dropExtras, countWords, splitSentences, hostingAnswer, techBasis,
   buildTurnPrompt, fallbackAnswer, URL_TITLES, STATIC_PROMPT, SITE_READY, MAX_COMPLETION_TOKENS, MAX_LINKS, WORD_LIMIT,
   PROVIDERS, BEDROCK_READY, BEDROCK_EU_PROBLEM, bedrockEuCheck, toAnthropicMessages, CLAIM_GUARD, LANG_NAMES,

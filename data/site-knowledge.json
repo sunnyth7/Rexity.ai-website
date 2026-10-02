@@ -11,151 +11,553 @@
   "urls": [
     {
       "path": "/",
-      "title": "Startseite"
+      "title": "Startseite",
+      "card": {
+        "de": {
+          "t": "Websites & Automatisierung in Niedersachsen",
+          "d": "Rexity Labs aus Hermannsburg bei Celle baut Websites mit Online-Buchung, Apps und Automatisierung für KMU in Niedersachsen. Websites ab 999 € Festpreis."
+        },
+        "en": {
+          "t": "Websites & Automation in Lower Saxony",
+          "d": "Rexity Labs from Hermannsburg near Celle builds websites with online booking, apps and automation for SMEs in Lower Saxony. Fixed-price websites from €999."
+        },
+        "img": "/assets/img/og/home.jpg"
+      }
     },
     {
       "path": "/web",
-      "title": "Web & Apps"
+      "title": "Web & Apps",
+      "card": {
+        "de": {
+          "t": "Websites & Apps entwickeln lassen für KMU",
+          "d": "Websites, Web-Apps, SaaS, Mobile Apps und Dashboards aus einer Hand – gestaltet und programmiert in Niedersachsen. Websites ab 999 €, Apps ab 4.900 €."
+        },
+        "en": {
+          "t": "Website & App Development for Small Businesses",
+          "d": "Websites, web apps, SaaS, mobile apps and dashboards from one team – designed and coded in Lower Saxony. Websites from €999, apps from €4,900."
+        },
+        "img": "/assets/img/og/web.jpg"
+      }
     },
     {
       "path": "/web/web-design",
-      "title": "Webdesign Celle: Websites mit Online-Buchung"
+      "title": "Webdesign Celle: Websites mit Online-Buchung",
+      "card": {
+        "de": {
+          "t": "Webdesign Celle: Websites mit Buchung ab 999 €",
+          "d": "Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €."
+        },
+        "en": {
+          "t": "Web Design Celle: Websites with Booking from €999",
+          "d": "Websites that bring enquiries and bookings – custom-coded, with appointment or class booking. From Hermannsburg near Celle, fixed price from €999."
+        },
+        "img": "/assets/img/og/web-web-design.jpg"
+      }
     },
     {
       "path": "/web/saas",
-      "title": "Web-Apps, SaaS & Dashboards"
+      "title": "Web-Apps, SaaS & Dashboards",
+      "card": {
+        "de": {
+          "t": "Web-Apps, SaaS & Dashboards ab 1.599 €",
+          "d": "Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU."
+        },
+        "en": {
+          "t": "Web Apps, SaaS & Dashboards from €1,599",
+          "d": "Custom web apps, SaaS platforms and KPI dashboards for businesses: concept, development and operation. Fixed prices from €1,599, hosted in the EU."
+        },
+        "img": "/assets/img/og/web-saas.jpg"
+      }
     },
     {
       "path": "/web/mobile-apps",
-      "title": "Mobile Apps"
+      "title": "Mobile Apps",
+      "card": {
+        "de": {
+          "t": "App-Entwicklung für iOS & Android ab 4.900 €",
+          "d": "App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €."
+        },
+        "en": {
+          "t": "App Development for iOS & Android from €4,900",
+          "d": "App development for iPhone and Android from one codebase, including publishing on the App Store and Google Play. Fixed price from €4,900."
+        },
+        "img": "/assets/img/og/web-mobile-apps.jpg"
+      }
     },
     {
       "path": "/automation",
-      "title": "Automatisierung"
+      "title": "Automatisierung",
+      "card": {
+        "de": {
+          "t": "Automatisierung für KMU in Niedersachsen",
+          "d": "Automatisierung für KMU in Niedersachsen: KI-Chatbot ab 799 €, WhatsApp-Automatisierung ab 1.299 €, RPA und Dokumenten-Chatbot ab 2.999 €. Festpreise."
+        },
+        "en": {
+          "t": "Business Automation for SMEs in Lower Saxony",
+          "d": "Automation for SMEs in Lower Saxony: AI chatbot from €799, WhatsApp automation from €1,299, RPA and document chatbot from €2,999. Fixed prices."
+        },
+        "img": "/assets/img/og/automation.jpg"
+      }
     },
     {
       "path": "/automation/rpa",
-      "title": "RPA & Prozessautomatisierung"
+      "title": "RPA & Prozessautomatisierung",
+      "card": {
+        "de": {
+          "t": "Prozessautomatisierung Niedersachsen: RPA für KMU",
+          "d": "Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis."
+        },
+        "en": {
+          "t": "Process Automation (RPA) for SMEs in Lower Saxony",
+          "d": "Process automation (RPA) for SMEs: recurring tasks such as data entry, invoices and reports run automatically. From €2,999, fixed price."
+        },
+        "img": "/assets/img/og/automation-rpa.jpg"
+      }
     },
     {
       "path": "/automation/whatsapp",
-      "title": "WhatsApp-Automatisierung & Erinnerungen"
+      "title": "WhatsApp-Automatisierung & Erinnerungen",
+      "card": {
+        "de": {
+          "t": "WhatsApp-Automatisierung & Termin-Erinnerungen",
+          "d": "Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €."
+        },
+        "en": {
+          "t": "WhatsApp Automation & Appointment Reminders",
+          "d": "Automatic replies, appointment reminders and bookings via the WhatsApp API – with opt-in and GDPR. Reminders for €299, WhatsApp flows from €1,299."
+        },
+        "img": "/assets/img/og/automation-whatsapp.jpg"
+      }
     },
     {
       "path": "/automation/voice",
-      "title": "Voice-Agenten"
+      "title": "Voice-Agenten",
+      "card": {
+        "de": {
+          "t": "KI-Telefonassistent & Voice-Agenten für KMU",
+          "d": "KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage."
+        },
+        "en": {
+          "t": "AI Phone Assistant & Voice Agents for SMEs",
+          "d": "AI phone assistant for SMEs: answers calls, handles common questions and books appointments or callbacks. RexFangs is in testing, price on request."
+        },
+        "img": "/assets/img/og/automation-voice.jpg"
+      }
     },
     {
       "path": "/automation/chatbots",
-      "title": "Website-Chatbots"
+      "title": "Website-Chatbots",
+      "card": {
+        "de": {
+          "t": "KI-Chatbot für Unternehmen & Websites ab 799 €",
+          "d": "KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €."
+        },
+        "en": {
+          "t": "AI Chatbot for Businesses & Websites from €799",
+          "d": "AI chatbot for your website: answers from your approved content, captures enquiries and hands over to your team. AI chatbot from €799, FAQ chatbot €499."
+        },
+        "img": "/assets/img/og/automation-chatbots.jpg"
+      }
     },
     {
       "path": "/marketing",
-      "title": "Sichtbarkeit: SEO & Google Unternehmensprofil"
+      "title": "Sichtbarkeit: SEO & Google Unternehmensprofil",
+      "card": {
+        "de": {
+          "t": "Sichtbarkeit für Betriebe: SEO & Google-Profil",
+          "d": "Sichtbarkeit für Betriebe: SEO und Google Unternehmensprofil, damit Kunden Sie bei Google finden. Mit echter SEO-Fallstudie, ohne Ranking-Versprechen."
+        },
+        "en": {
+          "t": "Visibility for Businesses: SEO & Google Profile",
+          "d": "Visibility for small businesses: SEO and a Google Business Profile so customers find you on Google. With a real SEO case study and no ranking promises."
+        },
+        "img": "/assets/img/og/marketing.jpg"
+      }
     },
     {
       "path": "/marketing/seo",
-      "title": "SEO & Google Unternehmensprofil"
+      "title": "SEO & Google Unternehmensprofil",
+      "card": {
+        "de": {
+          "t": "SEO & Google Unternehmensprofil für Betriebe",
+          "d": "SEO für kleine Betriebe: Seiten, die für echte Suchanfragen ranken, Google Unternehmensprofil, Bewertungen und Inhalte. Ehrliche Ziele, keine Garantien."
+        },
+        "en": {
+          "t": "SEO & Google Business Profile for Businesses",
+          "d": "SEO for small businesses: pages that rank for real searches, a Google Business Profile, reviews and content. Honest goals, no guarantees."
+        },
+        "img": "/assets/img/og/marketing-seo.jpg"
+      }
     },
     {
       "path": "/niedersachsen",
-      "title": "IT-Dienstleister in Niedersachsen"
+      "title": "IT-Dienstleister in Niedersachsen",
+      "card": {
+        "de": {
+          "t": "IT-Dienstleister in Niedersachsen: Websites & Apps",
+          "d": "Rexity Labs aus Hermannsburg bei Celle baut Websites mit Online-Buchung, Apps und Automatisierung für Betriebe in Niedersachsen — von Celle bis Hannover."
+        },
+        "en": {
+          "t": "IT Services in Lower Saxony: Websites & Apps",
+          "d": "Rexity Labs from Hermannsburg near Celle builds websites with online booking, apps and automation for businesses in Lower Saxony — from Celle to Hanover."
+        },
+        "img": "/assets/img/og/niedersachsen.jpg"
+      }
     },
     {
       "path": "/preise",
-      "title": "Preise"
+      "title": "Preise",
+      "card": {
+        "de": {
+          "t": "Website erstellen lassen: Kosten & Preise ab 999 €",
+          "d": "Preise für Website, App und Automatisierung: Website ab 999 €, mit Buchung ab 1.999 €, App ab 4.900 €, KI-Chatbot ab 799 €. Festpreise, netto zzgl. MwSt."
+        },
+        "en": {
+          "t": "Website & App Prices: Fixed Prices from €999",
+          "d": "Prices for websites, apps and automation: website from €999, with booking from €1,999, app from €4,900, AI chatbot from €799. Fixed prices, net plus VAT."
+        },
+        "img": "/assets/img/og/preise.jpg"
+      }
     },
     {
       "path": "/fitnessstudio-website",
-      "title": "Website mit Online-Kursbuchung für Fitnessstudios"
+      "title": "Website mit Online-Kursbuchung für Fitnessstudios",
+      "card": {
+        "de": {
+          "t": "Fitnessstudio-Website mit Online-Kursbuchung",
+          "d": "Website für Ihr Fitnessstudio mit Online-Kursbuchung: Mitglieder buchen und stornieren Kursplätze selbst, ohne Kundenkonto. Festpreis ab 1.999 €."
+        },
+        "en": {
+          "t": "Gym Website with Online Class Booking",
+          "d": "Gym website with online class booking: members book and cancel class spots themselves, no customer account needed. Fixed price from 1,999 €."
+        },
+        "img": "/assets/img/og/fitnessstudio-website.jpg"
+      }
     },
     {
       "path": "/kfz-aufbereitung-website",
-      "title": "Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten"
+      "title": "Online-Terminbuchung für Kfz-Aufbereiter & Werkstätten",
+      "card": {
+        "de": {
+          "t": "Website mit Online-Terminbuchung für Werkstätten",
+          "d": "Werkstatt-Website mit Online-Terminbuchung für Kfz-Aufbereiter: nur freie Zeiten, keine Doppelbuchung, Verwaltung am Handy. Ab 1.999 € Festpreis."
+        },
+        "en": {
+          "t": "Website with Online Booking for Workshops",
+          "d": "Workshop website with online appointment booking for car detailers: free slots only, no double bookings, admin on your phone. From €1,999 fixed price."
+        },
+        "img": "/assets/img/og/kfz-aufbereitung-website.jpg"
+      }
     },
     {
       "path": "/website-mit-kursbuchung-kosten",
-      "title": "Was kostet eine Website mit Kursbuchung?"
+      "title": "Was kostet eine Website mit Kursbuchung?",
+      "card": {
+        "de": {
+          "t": "Website mit Kursbuchung: Kosten & Preise 2026",
+          "d": "Was kostet eine Website mit Online-Kursbuchung? Ab 1.999 € Festpreis, Wartung optional ab 999 € im Jahr. Preisfaktoren und laufende Kosten erklärt."
+        },
+        "en": {
+          "t": "Website with Class Booking: Cost & Prices 2026",
+          "d": "What does a website with online class booking cost? From €1,999 fixed price, optional maintenance from €999 a year. Price factors and running costs."
+        },
+        "img": "/assets/img/og/website-mit-kursbuchung-kosten.jpg"
+      }
     },
     {
       "path": "/impressum",
-      "title": "Impressum"
+      "title": "Impressum",
+      "card": {
+        "de": {
+          "t": "Impressum — Rexity",
+          "d": "Impressum von Rexity Labs UG (haftungsbeschränkt)"
+        },
+        "en": {
+          "t": "Impressum — Rexity",
+          "d": "Impressum von Rexity Labs UG (haftungsbeschränkt)"
+        }
+      }
     },
     {
       "path": "/datenschutz",
-      "title": "Datenschutzerklärung"
+      "title": "Datenschutzerklärung",
+      "card": {
+        "de": {
+          "t": "Datenschutzerklärung — Rexity",
+          "d": "Datenschutzerklärung von Rexity Labs UG (haftungsbeschränkt)"
+        },
+        "en": {
+          "t": "Datenschutzerklärung — Rexity",
+          "d": "Datenschutzerklärung von Rexity Labs UG (haftungsbeschränkt)"
+        }
+      }
     },
     {
       "path": "/work",
-      "title": "Arbeiten"
+      "title": "Arbeiten",
+      "card": {
+        "de": {
+          "t": "Referenzen & Fallstudien: Websites und Apps",
+          "d": "Referenzen von Rexity Labs: Website mit Kursbuchung für ein Fitnessstudio in Hermannsburg, Terminbuchung für Fahrzeugpflege in Celle, Lern-App LevelKraft."
+        },
+        "en": {
+          "t": "Case Studies & References: Websites and Apps",
+          "d": "Rexity Labs case studies: class booking for a gym in Hermannsburg, appointment booking for a car-care business in Celle and the LevelKraft app."
+        },
+        "img": "/assets/img/og/work.jpg"
+      }
     },
     {
       "path": "/work/body-and-care",
-      "title": "Body & Care Hermannsburg"
+      "title": "Body & Care Hermannsburg",
+      "card": {
+        "de": {
+          "t": "Fitnessstudio-Website mit Kursbuchung: Body & Care",
+          "d": "Fallstudie Body & Care Hermannsburg: neue Website mit Online-Kursbuchung, Selbst-Stornierung ohne Kundenkonto und Kursverwaltung. Live seit 14.09.2026."
+        },
+        "en": {
+          "t": "Gym Website with Class Booking: Body & Care",
+          "d": "Case study Body & Care Hermannsburg: new website with online class booking, self-cancellation without an account and class admin. Live since 14 Sep 2026."
+        },
+        "img": "/assets/img/og/work-body-and-care.jpg"
+      }
     },
     {
       "path": "/work/chara",
-      "title": "Fahrzeugpflege Celle"
+      "title": "Fahrzeugpflege Celle",
+      "card": {
+        "de": {
+          "t": "Fahrzeugpflege Celle: Website mit Terminbuchung",
+          "d": "Fallstudie Fahrzeugpflege Celle: Website mit Online-Terminbuchung in vier Schritten, nur freie Zeiten, keine Doppelbuchung und Verwaltung für den Inhaber."
+        },
+        "en": {
+          "t": "Fahrzeugpflege Celle: Website with Online Booking",
+          "d": "Case study Fahrzeugpflege Celle: a website with online booking in four steps, free slots only, no double bookings and an admin area for the owner."
+        },
+        "img": "/assets/img/og/work-chara.jpg"
+      }
     },
     {
       "path": "/work/levelkraft",
-      "title": "LevelKraft"
+      "title": "LevelKraft",
+      "card": {
+        "de": {
+          "t": "LevelKraft: Lern-App für iOS, Android & Web",
+          "d": "Fallstudie LevelKraft: Lern-App für TELC und Goethe, von Rexity entwickelt – iPhone, Android, Web, Stripe-Checkout und SEO."
+        },
+        "en": {
+          "t": "LevelKraft: Learning App for iOS, Android & Web",
+          "d": "Case study LevelKraft: exam-prep app for TELC and Goethe, built by Rexity – iPhone, Android, web, Stripe checkout and SEO."
+        },
+        "img": "/assets/img/og/work-levelkraft.jpg"
+      }
     },
     {
       "path": "/artikel",
-      "title": "Artikel"
+      "title": "Artikel",
+      "card": {
+        "de": {
+          "t": "Ratgeber: Website, Online-Buchung & Automatisierung",
+          "d": "Fallstudien und Ratgeber für Betriebe in Niedersachsen: Website, Online-Terminbuchung, Erreichbarkeit und Automatisierung, kurz erklärt."
+        },
+        "en": {
+          "t": "Guides: Websites, Online Booking & Automation",
+          "d": "Case studies and guides for businesses in Lower Saxony: websites, online booking, reachability and automation, briefly explained."
+        },
+        "img": "/assets/img/og/artikel.jpg"
+      }
     },
     {
       "path": "/web/online-shop",
-      "title": "Online-Shop & Stripe-Checkout"
+      "title": "Online-Shop & Stripe-Checkout",
+      "card": {
+        "de": {
+          "t": "Online-Shop & Stripe-Checkout erstellen lassen",
+          "d": "Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €."
+        },
+        "en": {
+          "t": "Online Shop & Stripe Checkout Development",
+          "d": "Online shop or website with Stripe checkout: cards, SEPA, Apple Pay and Google Pay. Built in the Celle district, fixed price from €5,999, net plus VAT."
+        },
+        "img": "/assets/img/og/web-online-shop.jpg"
+      }
     },
     {
       "path": "/website-wartung",
-      "title": "Website-Wartung & Betreuung"
+      "title": "Website-Wartung & Betreuung",
+      "card": {
+        "de": {
+          "t": "Website-Wartung & Betreuung ab 999 €/Jahr",
+          "d": "Wartung und Betreuung Ihrer Website: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen – als Jahrespaket oder monatlich. Was drin ist."
+        },
+        "en": {
+          "t": "Website Maintenance & Support from €999/year",
+          "d": "Maintenance and support for your website: security updates, backups, monitoring and small changes – as an annual package or monthly. What is included."
+        },
+        "img": "/assets/img/og/website-wartung.jpg"
+      }
     },
     {
       "path": "/web/website-umzug",
-      "title": "Website-Relaunch & Umzug"
+      "title": "Website-Relaunch & Umzug",
+      "card": {
+        "de": {
+          "t": "Website-Relaunch & Umzug ohne Ranking-Verlust",
+          "d": "Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit."
+        },
+        "en": {
+          "t": "Website Relaunch & Migration, No Ranking Loss",
+          "d": "Website relaunch and migration: domain, e-mail and redirects without losing rankings, with a 10-point checklist. Fixed price from €1,299, remote."
+        },
+        "img": "/assets/img/og/web-website-umzug.jpg"
+      }
     },
     {
       "path": "/website-f%C3%BCr-handwerker",
-      "title": "Website für Handwerker"
+      "title": "Website für Handwerker",
+      "card": {
+        "de": {
+          "t": "Website für Handwerker: Anfragen & Termine ab 999 €",
+          "d": "Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit."
+        },
+        "en": {
+          "t": "Website for Tradespeople: Enquiries & Booking",
+          "d": "Websites for tradespeople: enquiry form, service pages and booking. Fixed price from €999, with booking from €1,999. Celle district and nationwide."
+        },
+        "img": "/assets/img/og/website-fuer-handwerker.jpg"
+      }
     },
     {
       "path": "/automation/terminerinnerung",
-      "title": "Terminerinnerung per SMS & WhatsApp"
+      "title": "Terminerinnerung per SMS & WhatsApp",
+      "card": {
+        "de": {
+          "t": "Terminerinnerung per SMS & WhatsApp für Betriebe",
+          "d": "Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit."
+        },
+        "en": {
+          "t": "SMS & WhatsApp Appointment Reminders for Businesses",
+          "d": "Appointment reminders by e-mail or SMS at a fixed price of €299, by WhatsApp with opt-in via the official Business Platform. From Lower Saxony, nationwide."
+        },
+        "img": "/assets/img/og/automation-terminerinnerung.jpg"
+      }
     },
     {
       "path": "/artikel/beste-webdesign-agentur-finden",
-      "title": "Die beste Webdesign-Agentur? So prüfen Sie Anbieter"
+      "title": "Die beste Webdesign-Agentur? So prüfen Sie Anbieter",
+      "card": {
+        "de": {
+          "t": "Die beste Webdesign-Agentur? So prüfen Sie Anbieter",
+          "d": "Beste Agentur-Rankings sind oft Werbung. 12 Prüfpunkte, Warnsignale und Fragen fürs Erstgespräch – mit Bewertungsbogen zum Ausfüllen."
+        },
+        "en": {
+          "t": "Choosing a web design agency: how to assess providers",
+          "d": "Agency rankings are often advertising. Use 12 checks, warning signs and first-call questions, including a printable scorecard."
+        },
+        "img": "/assets/img/articles/beste-webdesign-agentur-finden/7947665-1600.webp"
+      }
     },
     {
       "path": "/artikel/guenstige-website-erstellen-lassen",
-      "title": "Günstige Website erstellen lassen: Was unter 2.000 € geht"
+      "title": "Günstige Website erstellen lassen: Was unter 2.000 € geht",
+      "card": {
+        "de": {
+          "t": "Günstige Website erstellen lassen: Was unter 2.000 € geht",
+          "d": "Was bekommen Sie für 300, 1.000 oder 2.000 €? Wo Sparen sinnvoll ist, wo es teuer wird – und wie Sie Angebote fair vergleichen."
+        },
+        "en": {
+          "t": "Affordable website: what a budget under €2,000 can buy",
+          "d": "What can €300, €1,000 or €2,000 buy? Learn where savings make sense, where they become costly and how to compare quotes fairly."
+        },
+        "img": "/assets/img/articles/guenstige-website-erstellen-lassen/5942707-1600.webp"
+      }
     },
     {
       "path": "/artikel/verpasste-anrufe-kosten",
-      "title": "Verpasste Anrufe: Was sie Ihren Betrieb wirklich kosten"
+      "title": "Verpasste Anrufe: Was sie Ihren Betrieb wirklich kosten",
+      "card": {
+        "de": {
+          "t": "Verpasste Anrufe: Was sie Ihren Betrieb wirklich kosten",
+          "d": "Wie viel Umsatz geht über unbeantwortete Anrufe verloren? Messen Sie es in 7 Tagen und rechnen Sie es mit Ihren eigenen Zahlen aus."
+        },
+        "en": {
+          "t": "Missed calls: what they really cost your business",
+          "d": "How much business do unanswered calls cost you? Measure it over 7 days and work out the impact with your own numbers and our calculator."
+        },
+        "img": "/assets/img/articles/verpasste-anrufe-kosten/30234360-1600.webp"
+      }
     },
     {
       "path": "/artikel/website-erstellen-lassen-kosten",
-      "title": "Website erstellen lassen: Kosten, Preise & Festpreis 2026"
+      "title": "Website erstellen lassen: Kosten, Preise & Festpreis 2026",
+      "card": {
+        "de": {
+          "t": "Website erstellen lassen: Kosten, Preise & Festpreis 2026",
+          "d": "Was kostet eine Website 2026? Preise Posten für Posten, Festpreis oder Stundensatz, 3-Jahres-Vergleich und ein Rechner für Ihre eigene Situation."
+        },
+        "en": {
+          "t": "Having a website built: costs, prices & fixed price 2026",
+          "d": "What does a website cost in 2026? Prices item by item, fixed price or hourly rate, a 3-year comparison and a calculator for your own situation."
+        },
+        "img": "/assets/img/articles/website-erstellen-lassen-kosten/20232209-1600.webp"
+      }
     },
     {
       "path": "/artikel/website-mit-online-terminbuchung",
-      "title": "Website mit Online-Terminbuchung: Tools, Kosten, DSGVO"
+      "title": "Website mit Online-Terminbuchung: Tools, Kosten, DSGVO",
+      "card": {
+        "de": {
+          "t": "Website mit Online-Terminbuchung: Tools, Kosten, DSGVO",
+          "d": "Buchungs-Abo oder eigenes System? Kosten über 3 Jahre, Erinnerungen per E-Mail und WhatsApp, DSGVO und BFSG – verständlich erklärt."
+        },
+        "en": {
+          "t": "Website with online booking: tools, costs and GDPR",
+          "d": "Booking subscription or custom system? Three-year costs, email and WhatsApp reminders, GDPR and accessibility explained clearly."
+        },
+        "img": "/assets/img/articles/website-mit-online-terminbuchung/3361483-1600.webp"
+      }
     },
     {
       "path": "/agb",
-      "title": "Allgemeine Geschäftsbedingungen"
+      "title": "Allgemeine Geschäftsbedingungen",
+      "card": {
+        "de": {
+          "t": "AGB — Rexity Labs UG",
+          "d": "Allgemeine Geschäftsbedingungen der Rexity Labs UG (haftungsbeschränkt)"
+        },
+        "en": {
+          "t": "AGB — Rexity Labs UG",
+          "d": "Allgemeine Geschäftsbedingungen der Rexity Labs UG (haftungsbeschränkt)"
+        }
+      }
     },
     {
       "path": "/aeb",
-      "title": "Allgemeine Einkaufsbedingungen"
+      "title": "Allgemeine Einkaufsbedingungen",
+      "card": {
+        "de": {
+          "t": "AEB — Rexity Labs UG",
+          "d": "Allgemeine Einkaufsbedingungen der Rexity Labs UG (haftungsbeschränkt)"
+        },
+        "en": {
+          "t": "AEB — Rexity Labs UG",
+          "d": "Allgemeine Einkaufsbedingungen der Rexity Labs UG (haftungsbeschränkt)"
+        }
+      }
     },
     {
       "path": "/barrierefreiheit",
-      "title": "Erklärung zur Barrierefreiheit"
+      "title": "Erklärung zur Barrierefreiheit",
+      "card": {
+        "de": {
+          "t": "Erklärung zur Barrierefreiheit — Rexity Labs UG",
+          "d": "Erklärung zur Barrierefreiheit gemäß BFSG für rexity.ai"
+        },
+        "en": {
+          "t": "Erklärung zur Barrierefreiheit — Rexity Labs UG",
+          "d": "Erklärung zur Barrierefreiheit gemäß BFSG für rexity.ai"
+        }
+      }
     },
     {
       "path": "/#kontakt",

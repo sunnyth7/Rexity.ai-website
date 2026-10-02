@@ -146,7 +146,7 @@ html.rx-modal-open .rexity-chatbot { opacity: 0; visibility: hidden; pointer-eve
   border-bottom: 1px solid var(--rc-line);
 }
 .rexity-chatbot__top { display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 0 22px; }
-.rexity-chatbot__brand img { display: block; height: 26px; width: auto; }
+.rexity-chatbot__brand img { display: block; height: 27px; width: auto; }
 .rexity-chatbot__close {
   display: grid;
   width: 44px;
@@ -323,7 +323,75 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
 }
 .rexity-chatbot__send svg { width: 20px; height: 20px; }
 .rexity-chatbot__send:disabled { cursor: progress; opacity: 0.6; }
-.rexity-chatbot__footnote { flex: none; padding: 0 22px 14px; color: var(--rc-quiet); font-size: 12px; line-height: 1.45; }
+.rexity-chatbot__foot { flex: none; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 22px 14px; }
+.rexity-chatbot__footnote { color: var(--rc-quiet); font-size: 12px; line-height: 1.45; }
+.rexity-chatbot__reset { flex: none; padding: 4px 0; border: 0; background: none; color: var(--rc-quiet); font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.45; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; cursor: pointer; }
+.rexity-chatbot__reset:hover { color: var(--rc-ink); }
+
+
+/* ---------------------------------------------------------------- light panel (founder, 2 Oct 2026)
+   The open chat is white with a dark brand header that carries the white "Rexity Labs" logo.
+   The launcher, the contact menu and the greeting bubble keep the dark site look. */
+.rexity-chatbot__panel {
+  --rc-panel: #ffffff;
+  --rc-deep: #f6f5fb;
+  --rc-ink: #17152b;
+  --rc-muted: #55536b;
+  --rc-quiet: #6b6980;
+  --rc-line: rgba(23, 21, 43, 0.1);
+  --rc-line-strong: rgba(23, 21, 43, 0.2);
+  --rc-field: #ffffff;
+  --rc-accent: #5b3fd6;
+  border-color: rgba(23, 21, 43, 0.12);
+  box-shadow: 0 32px 100px rgba(10, 8, 30, 0.45);
+}
+.rexity-chatbot__hero {
+  --rc-ink: #ffffff;
+  --rc-muted: rgba(255, 255, 255, 0.78);
+  --rc-line: rgba(255, 255, 255, 0.22);
+  --rc-accent: #cdbdff;
+  background: radial-gradient(120% 160% at 100% 0%, rgba(177, 151, 252, 0.38), transparent 62%), #17152b;
+  border-bottom: 0;
+}
+.rexity-chatbot__hero .rexity-chatbot__close:hover { background: rgba(255, 255, 255, 0.12); }
+.rexity-chatbot__intro { padding: 8px 22px 16px; }
+.rexity-chatbot__intro-title { font-size: 16px; }
+.rexity-chatbot__intro-copy { margin-top: 3px; font-size: 13px; }
+.rexity-chatbot__panel ::placeholder { color: #77758a; }
+.rexity-chatbot__panel .rexity-chatbot__message--bot { background: #f1f0f7; color: var(--rc-ink); }
+.rexity-chatbot__panel .rexity-chatbot__message--user { background: #5b3fd6; color: #ffffff; }
+.rexity-chatbot__panel .rexity-chatbot__chip { background: #ffffff; }
+.rexity-chatbot__panel .rexity-chatbot__chip:hover { border-color: var(--rc-accent); background: #f6f5fb; }
+.rexity-chatbot__panel .rexity-chatbot__send,
+.rexity-chatbot__panel .rexity-chatbot__handover-submit { background: #17152b; color: #ffffff; }
+.rexity-chatbot__panel .rexity-chatbot__handover-error { color: #b3261e; }
+.rexity-chatbot__panel .rexity-chatbot__mailmenu-btn { background: #ffffff; }
+.rexity-chatbot__panel .rexity-chatbot__mdlink:hover { color: #3a2699; }
+
+/* link cards: picture left, title, one or two lines, address (founder, 2 Oct 2026) */
+.rexity-chatbot__cards { display: grid; gap: 8px; margin-top: 10px; }
+.rexity-chatbot__card {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  min-height: 84px;
+  overflow: hidden;
+  border: 1px solid var(--rc-line-strong);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--rc-ink);
+  text-decoration: none;
+  transition: border-color 0.3s var(--rc-ease), box-shadow 0.3s var(--rc-ease);
+}
+.rexity-chatbot__card:hover { border-color: var(--rc-accent); box-shadow: 0 6px 18px rgba(23, 21, 43, 0.12); }
+.rexity-chatbot__card-pic { display: block; background: #17152b; }
+.rexity-chatbot__card-pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.rexity-chatbot__card-pic--mark { display: grid; place-items: center; }
+.rexity-chatbot__card-pic--mark img { width: 34px; height: 34px; object-fit: contain; }
+.rexity-chatbot__card-body { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; padding: 9px 12px; }
+.rexity-chatbot__card-title { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: 14px; font-weight: 600; line-height: 1.25; }
+.rexity-chatbot__card-desc { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--rc-muted); font-size: 12px; line-height: 1.35; }
+.rexity-chatbot__card-host { overflow: hidden; color: var(--rc-accent); font-size: 12px; font-weight: 500; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
+.rexity-chatbot__message--bot:has(.rexity-chatbot__cards) { max-width: 100%; }
 
 /* ---------------------------------------------------------------- phones */
 @media (max-width: 767px) {
@@ -335,7 +403,7 @@ textarea.rexity-chatbot__field { min-height: 64px; resize: vertical; }
   .rexity-chatbot.is-open { left: 8px; right: 8px; bottom: 8px; }
   .rexity-chatbot__panel { width: 100%; max-height: calc(100vh - 16px); max-height: calc(100dvh - 16px); border-radius: 20px; }
   .rexity-chatbot__top { padding-left: 18px; }
-  .rexity-chatbot__intro, .rexity-chatbot__messages, .rexity-chatbot__footnote { padding-left: 18px; padding-right: 18px; }
+  .rexity-chatbot__intro, .rexity-chatbot__messages, .rexity-chatbot__foot { padding-left: 18px; padding-right: 18px; }
   .rexity-chatbot__quick { padding-left: 18px; padding-right: 18px; }
   .rexity-chatbot__chip { font-size: 14px; }
   /* links in answers: a 44 px tall tap area without changing the line layout */
