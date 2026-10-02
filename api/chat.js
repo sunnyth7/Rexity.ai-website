@@ -129,7 +129,15 @@ const ANTHROPIC_KEY_VAR = ANTHROPIC_KEY_VARS.find((k) => String(process.env[k] |
 const ANTHROPIC_KEY = ANTHROPIC_KEY_VAR ? String(process.env[ANTHROPIC_KEY_VAR]).trim() : "";
 const ANTHROPIC_MODEL = String(process.env.ANTHROPIC_MODEL || "claude-haiku-4-5").trim();
 const ANTHROPIC_URL = "https://api.anthropic.com/v1/messages";
-const ANTHROPIC_READY = Boolean(ANTHROPIC_KEY);
+// EU-only rule (founder "go" on docs/seo/AI_OFFERS_PLAN.md, 2 Oct 2026): api.anthropic.com
+// processes in the USA, so this provider is OFF unless CHAT_ALLOW_NON_EU=1 is set on
+// purpose. With the key present but the switch off, the provider is skipped and logged
+// once; Bedrock (EU profile) and Azure (EU data zone) answer.
+const NON_EU_ALLOWED = String(process.env.CHAT_ALLOW_NON_EU || "").trim() === "1";
+if (ANTHROPIC_KEY && !NON_EU_ALLOWED) {
+  console.error("[chat] EU-only: the Anthropic API key is set but CHAT_ALLOW_NON_EU is not 1; api.anthropic.com is not used");
+}
+const ANTHROPIC_READY = Boolean(ANTHROPIC_KEY) && NON_EU_ALLOWED;
 // An organisation-level key (not scoped to a workspace) must name the workspace in the
 // anthropic-workspace-id header; set ANTHROPIC_WORKSPACE_ID (the ID, not a secret) or use a
 // workspace-scoped key.
@@ -863,5 +871,5 @@ module.exports._test = {
   toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang,
   buildTurnPrompt, fallbackAnswer, URL_TITLES, STATIC_PROMPT, SITE_READY, MAX_COMPLETION_TOKENS,
   PROVIDERS, BEDROCK_READY, BEDROCK_EU_PROBLEM, bedrockEuCheck, toAnthropicMessages,
-  ANTHROPIC_READY, ANTHROPIC_KEY_VAR, ANTHROPIC_MODEL, buildAnthropicBody, bedrockCoolingDown
+  ANTHROPIC_READY, NON_EU_ALLOWED, ANTHROPIC_KEY_VAR, ANTHROPIC_MODEL, buildAnthropicBody, bedrockCoolingDown
 };
