@@ -1370,11 +1370,16 @@ function deterministicSummary(report, lang) {
   } else {
     s.push(de ? "Die Seite war für die Prüfung nicht erreichbar oder hat keine auswertbare Antwort geliefert." : "The page could not be reached for the check or returned nothing that could be evaluated.");
   }
-  const t = report.blocks.tempo;
-  if (t && t.checked && t.method === "own") s.push(de ? "Das Tempo haben wir ohne Browser selbst gemessen, weil die Lighthouse-Messung gerade nicht geantwortet hat." : "We measured speed ourselves without a browser because the Lighthouse measurement did not answer just now.");
-  else if (t && !t.checked) s.push(de ? "Das Tempo ließ sich heute nicht messen und fließt deshalb nicht in den Gesamtwert ein." : "Speed could not be measured today and is therefore not part of the overall value.");
-  else s.push(de ? "Die Tempo-Werte stammen aus einer Labormessung mit Lighthouse auf einem simulierten Handy." : "The speed values come from a Lighthouse lab measurement on a simulated phone.");
+  s.push(speedSentence(report, de));
   return { lang: L, source: "rules", sentences: s };
+}
+// The speed-method sentence (also appended to a model-written Kurzfazit, 3 Oct 2026: the model paraphrased it
+// with words the guard must reject, e.g. "Bilder").
+function speedSentence(report, de) {
+  const t = report.blocks.tempo;
+  if (t && t.checked && t.method === "own") return (de ? "Das Tempo haben wir ohne Browser selbst gemessen, weil die Lighthouse-Messung gerade nicht geantwortet hat." : "We measured speed ourselves without a browser because the Lighthouse measurement did not answer just now.");
+  if (t && !t.checked) return de ? "Das Tempo ließ sich heute nicht messen und fließt deshalb nicht in den Gesamtwert ein." : "Speed could not be measured today and is therefore not part of the overall value.";
+  return de ? "Die Tempo-Werte stammen aus einer Labormessung mit Lighthouse auf einem simulierten Handy." : "The speed values come from a Lighthouse lab measurement on a simulated phone.";
 }
 
 // Every number a summary may state: the overall value, the block scores, the numbers of checks per state, the
@@ -1406,7 +1411,7 @@ const SUMMARY_BANNED = /(garantier|guarantee|von\s+google\s+gepr|google[- ]zerti
 // Sprint 36 (founder): never a verdict on the site's security. "Sicherheit der Website" (the area's name) passes.
 const SUMMARY_VERDICT = /(gehackt|angreifbar|sicherheitslücke|sicherheitsluecke|\bunsicher|\bsicher(e[rsnm]?)?\b|\bhacked\b|vulnerab|\binsecure\b|\bunsafe\b|\b(is|are|not)\s+secure\b|\bsafe\b)/i;
 // Sprint 31, founder: the Kurzfazit gives no advice …
-const SUMMARY_ADVICE = /(\bsollten?\b|\bsollte[nt]?\b|\bempfehl|\bempfiehlt|\bwir raten\b|\bratsam\b|\bam besten\b|\bbeginnen sie\b|\bstarten sie\b|\bergänzen sie\b|\bsetzen sie\b|\bfügen sie\b|\bverbessern sie\b|\boptimieren sie\b|\bprüfen sie\b|\bachten sie\b|\bnächste[rn]?\s+schritt|\bals nächstes\b|\blohnt sich\b|\bes fehlt, \w+ zu\b|\byou should\b|\bshould\b|\bwe recommend\b|\brecommend|\bwe advise\b|\badvis(e|able)\b|\bconsider\b|\bstart (with|by)\b|\bnext step|\bmake sure\b|\btry to\b|\bimprove your\b|\byou need to\b|\byou could\b)/i;
+const SUMMARY_ADVICE = /(\bsollten?\b|\bsollte[nt]?\b|\bempfehl|\bempfiehlt|\bwir raten\b|\bratsam\b|\bbeginnen sie\b|\bstarten sie\b|\bergänzen sie\b|\bsetzen sie\b|\bfügen sie\b|\bverbessern sie\b|\boptimieren sie\b|\bprüfen sie\b|\bachten sie\b|\bnächste[rn]?\s+schritt|\bals nächstes\b|\blohnt sich\b|\bes fehlt, \w+ zu\b|\byou should\b|\bshould\b|\bwe recommend\b|\brecommend|\bwe advise\b|\badvis(e|able)\b|\bconsider\b|\bstart (with|by)\b|\bnext step|\bmake sure\b|\btry to\b|\bimprove your\b|\byou need to\b|\byou could\b)/i;
 // … and names a single check only by a label that was handed to it (Sprint 36): whatever is left of a sentence once
 // the names of the areas and the handed-over labels are taken out must not speak of a check.
 const SUMMARY_FINDING = /(telefon|\bphone\b|rufnummer|formular|\bform\b|terminbuchung|\bbooking\b|whats\s?app|e-?mail-adresse|mailto|öffnungszeit|sprechzeit|opening hours|office hours|\bkarte\b|\bmap\b|unternehmensprofil|business profile|handlungsaufforderung|call to action|impressum|legal notice|datenschutzerkl|privacy policy|barrierefreiheitserkl|accessibility statement|https|verschlüssel|encrypt|seitentitel|page title|\btitle\b|meta|beschreibung|description|überschrift|heading|\bh1\b|canonical|kanonisch|noindex|viewport|strukturierte daten|structured data|schema\.org|sitemap|robots|llms|komprimier|compress|gzip|brotli|\bbilder?\b|\bimages?\b|stylesheet|skript|script|cache|antwortzeit|response time|fremde (dienste|adressen)|third-party|google fonts|analytics|tag manager)/i;
@@ -1446,17 +1451,15 @@ function modelInput(report, lang) {
     const c = countsOf(b);
     blocks[id] = { name: BLOCK_NAMES[id][L], score: b.score, band: BAND_LABELS[bandKey(b.score)] ? BAND_LABELS[bandKey(b.score)][L] : undefined, method: b.method ? METHOD[b.method][L] : undefined, checks: { met: c.ok, partly: c.partial, open: c.fail, notes: c.info, notCheckable: c.unknown } };
   }
-  const cut = (t) => (t.length > 200 ? t.slice(0, 199) + "…" : t);
   const open = openChecks(report).slice(0, SUMMARY_OPEN_MAX).map((o) => {
     const row = { area: BLOCK_NAMES[o.block][L], label: o.item.label[L], state: STATUS_LABELS[o.item.status][L] };
-    if (!o.item.pageText) row.measured = cut(o.item.detail[L]);
     return row;
   });
   return { site: report.host, overall: report.overall.score, blocks, open };
 }
 const SUMMARY_SYSTEM = {
-  de: "Du schreibst das Kurzfazit eines automatischen Website-Checks für die Inhaberin oder den Inhaber eines kleinen Betriebs. Schreibe kurze, einfache Sätze auf Deutsch, in der Sie-Form, ohne Fachjargon: erstens den Gesamtwert, zweitens den stärksten Bereich, drittens den schwächsten Bereich, viertens – nur wenn die Liste open nicht leer ist – den ersten Eintrag aus open: Nenne seine Bezeichnung (label) wörtlich und in Anführungszeichen, dazu seinen Bereich, als schlichte Feststellung, was offen ist; zuletzt die Messmethode beim Tempo. Das sind vier oder fünf Sätze. Nenne nur Zahlen, die im JSON stehen. Nenne keinen Prüfpunkt, der nicht in open steht, und keine Ursache. Gib keinen Rat, keine Empfehlung und keinen nächsten Schritt; schreibe nicht, was zu tun wäre. Bewerte die Website nicht als sicher oder unsicher und verwende keine Wörter wie angreifbar, gehackt oder Sicherheitslücke. Ein Bereich mit notCheckable wurde nicht geprüft: Sage das, rate nichts. Keine Rechtsberatung, keine Versprechen, keine Aussagen über Rechtsverstöße, keine Internetadressen, kein Eigenlob, keine Anrede und kein Gruß. Antworte ausschließlich mit JSON in dieser Form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\"]}",
-  en: "You write the short verdict of an automatic website check for the owner of a small business. Write short, plain sentences in English, polite, no jargon: first the overall value, second the strongest area, third the weakest area, fourth – only if the list open is not empty – the first entry of open: quote its label word for word in quotation marks, with its area, as a plain statement of what is open; last, how speed was measured. That makes four or five sentences. State only numbers that appear in the JSON. Name no check that is not in open, and no cause. Give no advice, no recommendation and no next step; do not write what should be done. Do not call the website secure or insecure and do not use words such as vulnerable, hacked or security hole. An area marked notCheckable was not checked: say so, do not guess. No legal advice, no promises, no statements about legal violations, no web addresses, no self-praise, no greeting. Answer with JSON only, in this form: {\"sentences\":[\"…\",\"…\",\"…\",\"…\"]}"
+  de: "Du schreibst das Kurzfazit eines automatischen Website-Checks für die Inhaberin oder den Inhaber eines kleinen Betriebs. Schreibe kurze, einfache Sätze auf Deutsch, in der Sie-Form, ohne Fachjargon: erstens den Gesamtwert, zweitens den stärksten Bereich, drittens den schwächsten Bereich, viertens – nur wenn die Liste open nicht leer ist – den ersten Eintrag aus open: Nenne seine Bezeichnung (label) wörtlich und in Anführungszeichen, dazu seinen Bereich, als schlichte Feststellung, dass er offen ist – ohne Messwert, ohne Erklärung, ohne Ursache. Das sind drei oder vier Sätze. Schreibe nichts zur Messmethode beim Tempo; diesen Satz ergänzen wir selbst. Nenne nur Zahlen, die im JSON stehen. Nenne keinen Prüfpunkt, der nicht in open steht, und keine Ursache. Gib keinen Rat, keine Empfehlung und keinen nächsten Schritt; schreibe nicht, was zu tun wäre. Bewerte die Website nicht als sicher oder unsicher und verwende keine Wörter wie angreifbar, gehackt oder Sicherheitslücke. Ein Bereich mit notCheckable wurde nicht geprüft: Sage das, rate nichts. Keine Rechtsberatung, keine Versprechen, keine Aussagen über Rechtsverstöße, keine Internetadressen, kein Eigenlob, keine Anrede und kein Gruß. Antworte ausschließlich mit JSON in dieser Form: {\"sentences\":[\"…\",\"…\",\"…\"]}",
+  en: "You write the short verdict of an automatic website check for the owner of a small business. Write short, plain sentences in English, polite, no jargon: first the overall value, second the strongest area, third the weakest area, fourth – only if the list open is not empty – the first entry of open: quote its label word for word in quotation marks, with its area, as a plain statement that it is open – no measured value, no explanation, no cause. That makes three or four sentences. Write nothing about how speed was measured; we add that sentence ourselves. State only numbers that appear in the JSON. Name no check that is not in open, and no cause. Give no advice, no recommendation and no next step; do not write what should be done. Do not call the website secure or insecure and do not use words such as vulnerable, hacked or security hole. An area marked notCheckable was not checked: say so, do not guess. No legal advice, no promises, no statements about legal violations, no web addresses, no self-praise, no greeting. Answer with JSON only, in this form: {\"sentences\":[\"…\",\"…\",\"…\"]}"
 };
 async function buildSummary(report, lang) {
   const L = lang === "en" ? "en" : "de";
@@ -1479,9 +1482,10 @@ async function buildSummary(report, lang) {
     const problem = validateSummary(obj, report);
     if (problem) {
       console.error("[check] summary rejected (" + problem.split(":")[0] + "): deterministic text used");
+      if (process.env.CHECK_DEBUG_SUMMARY === "1") console.error("[check] rejected text (" + problem + "): " + String(out.text).slice(0, 1200)); // local debugging only; never set in Vercel
       return fallback;
     }
-    return { lang: L, source: "model", sentences: obj.sentences.map((x) => x.trim()) };
+    return { lang: L, source: "model", sentences: obj.sentences.map((x) => x.trim()).concat(speedSentence(report, L === "de")) };
   } catch (e) {
     console.error("[check] summary failed (" + ((e && e.name) || "error") + "): deterministic text used");
     return fallback;
