@@ -1,14 +1,14 @@
 {
-  "version": "3.2.0",
+  "version": "3.3.0",
   "meta": {
-    "lastReviewed": "2026-09-27",
+    "lastReviewed": "2026-10-02",
     "approvedBy": "Sunny Thakur",
     "sources": [
       "docs/REXONA_CHATBOT_DATABANK_PRD.md",
       "lib/services.ts",
       "https://www.rexity.ai/"
     ],
-    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to info@rexity.ai. The published phone number is +49 174 2471435. v3.1: deterministic FAQ layer added — crisp layman answers, matched before the LLM. v3.1.1 (2026-09-25): prices updated to the founder's new list on /preise; maintenance is an optional annual package from 999 € (no longer included); RexFangs positioning; Body & Care result (studio-reported, with disclaimer). v3.1.2 (2026-09-25): LevelKraft SEO case study and the app's MRR (ca. $80 in June → ca. $290 in September 2026, rounded) with the forecast framed as three scenarios (ca. $610–2.400 MRR in July 2027), never a promise. v3.2.0 (2026-09-27, Sprint 15-C): the LLM now answers from data/site-knowledge.json (generated from the built pages); this file keeps copy, rules and the offline fallback. Timeline aligned with the site (4–8 weeks; blueprint and demo within one week), team/stack/differentiators aligned with the site, Body & Care customer figures removed (hidden on the work pages)."
+    "notes": "Assistant name is Rexity (Rexona rename parked for trademark review). All routing goes to info@rexity.ai. The published phone number is +49 174 2471435. v3.1: deterministic FAQ layer added — crisp layman answers, matched before the LLM. v3.1.1 (2026-09-25): prices updated to the founder's new list on /preise; maintenance is an optional annual package from 999 € (no longer included); RexFangs positioning; Body & Care result (studio-reported, with disclaimer). v3.1.2 (2026-09-25): LevelKraft SEO case study and the app's MRR (ca. $80 in June → ca. $290 in September 2026, rounded) with the forecast framed as three scenarios (ca. $610–2.400 MRR in July 2027), never a promise. v3.2.0 (2026-09-27, Sprint 15-C): the LLM now answers from data/site-knowledge.json (generated from the built pages); this file keeps copy, rules and the offline fallback. Timeline aligned with the site (4–8 weeks; blueprint and demo within one week), team/stack/differentiators aligned with the site, Body & Care customer figures removed (hidden on the work pages). v3.3.0 (2026-10-02, Sprint 25): copy aligned with the behaviour contract (answer first, short, one link, no habitual question back) and with docs/seo/AI_CLAIMS.md (hosting sentences, technical basis per route, AI notice); new copy for hosting, identity, process, hand-over, the 20-message limit; retired offers removed (AI video marketing, content marketing as its own service, dashboards as their own page: dashboards are part of /web/saas); new offers added (Website-Umzug & Relaunch, Website für Handwerker, Terminerinnerung, Online-Shop, Website-Wartung & Betreuung); the voice assistant RexFangs is in testing, not an offer. Reply languages: any (the model mirrors the visitor); this approved copy is German and English, every other language gets the English copy."
   },
   "brand": {
     "name": "Rexity Labs",
@@ -27,7 +27,7 @@
       "en",
       "de"
     ],
-    "pricingPolicy": "Quote only the published prices from https://www.rexity.ai/preise (as of 2026-09-25; all fixed prices, net plus statutory VAT): Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Website mit Online-Checkout ab 5.999 €; Website-Migration / Relaunch ab 1.299 €; Mobile Optimierung einer bestehenden Website 699 €; Mobile App ab 4.900 €; Dashboards ab 1.599 €; KI-Chatbot ab 799 €; FAQ-Chatbot 499 €; E-Mail- & SMS-Automatisierung 299 €; WhatsApp-Automatisierung ab 1.299 €; KI-Lösungen (RPA & Dokumenten-Chatbot auf eigenem Server) ab 2.999 €; Digitale Rezeption — RexFangs, digitaler KI-Sprach- und Empfangsassistent: in der Testphase, Preis auf Anfrage; Website-Check 249 €; Jährliche Wartung ab 999 € pro Jahr (optional, not included in any project price); Stundensatz 89 €. Rexity offers fair, market-rate fixed prices and a quality promise: websites are built safe, secure and GDPR-compliant, and the production version only goes live after thorough testing and the client's approval. Always add that it is a fixed price after a quote and negotiable once scope and timeframe are known, and ask what the project is for. Never invent other numbers, discounts or totals.",
+    "pricingPolicy": "Quote only the published prices from https://www.rexity.ai/preise (as of 2026-09-25; all fixed prices, net plus statutory VAT): Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Website mit Online-Checkout ab 5.999 €; Website-Migration / Relaunch ab 1.299 €; Mobile Optimierung einer bestehenden Website 699 €; Mobile App ab 4.900 €; Dashboards ab 1.599 €; KI-Chatbot ab 799 €; FAQ-Chatbot 499 €; E-Mail- & SMS-Automatisierung 299 €; WhatsApp-Automatisierung ab 1.299 €; KI-Lösungen (RPA & Dokumenten-Chatbot auf eigenem Server) ab 2.999 €; Digitale Rezeption — RexFangs, digitaler KI-Sprach- und Empfangsassistent: in der Testphase, Preis auf Anfrage; Website-Check 249 €; Jährliche Wartung ab 999 € pro Jahr (optional, not included in any project price); Stundensatz 89 €. Rexity offers fair, market-rate fixed prices and a quality promise: websites are built safe, secure and GDPR-compliant, and the production version only goes live after thorough testing and the client's approval. Say once that it is a fixed price after a short call (net plus VAT); ask back only when the visitor wants the price of their own project. Never invent other numbers, discounts or totals.",
     "timelinePolicy": "Only the durations published on the site: the free 30-minute call, then blueprint, documentation and demo within one week, then implementation typically four to eight weeks for a website with booking (marketing sites 2–4 weeks, as on /web/web-design; the case studies took about five and six weeks). Never binding, never a fixed date.",
     "promoteProducts": false,
     "neverSay": [
@@ -65,7 +65,8 @@
       "proposal",
       "book a call",
       "termin vereinbaren"
-    ]
+    ],
+    "replyLanguages": "Any language: the model replies in the language of the visitor's last message (api/chat.js detectLanguage). This deterministic copy exists in German and English; every other language gets the English copy."
   },
   "copy": {
     "greeting": {
@@ -85,20 +86,20 @@
       "en": "Sorry, I cannot provide a binding answer on that. Please email info@rexity.ai."
     },
     "unknownFallback": {
-      "de": "Dazu kann ich Ihnen gerade keine genaue Auskunft geben. Schreiben Sie uns gern an info@rexity.ai oder buchen Sie ein kostenloses 30-Minuten-Gespräch: [Termin buchen](/#kontakt).",
-      "en": "I can't give you a precise answer on that right now. Please write to info@rexity.ai or book a free 30-minute call: [Book a call](/#kontakt)."
+      "de": "Dazu habe ich keine bestätigte Information. Schreiben Sie uns an info@rexity.ai oder buchen Sie ein kostenloses 30-Minuten-Gespräch: [Termin buchen](/#kontakt).",
+      "en": "I have no confirmed information on that. Please write to info@rexity.ai or book a free 30-minute call: [book a call](/#kontakt)."
     },
     "businessRouting": {
-      "de": "Gern! Am einfachsten buchen Sie ein kostenloses 30-Minuten-Gespräch: [Termin buchen](/#kontakt). Sie können uns auch an info@rexity.ai schreiben oder anrufen: +49 174 2471435.",
-      "en": "Happy to! The easiest way is a free 30-minute call: [Book a call](/#kontakt). You can also write to info@rexity.ai or call +49 174 2471435."
+      "de": "Gern. Am einfachsten buchen Sie ein kostenloses 30-Minuten-Gespräch: [Termin buchen](/#kontakt). Oder schreiben Sie an info@rexity.ai bzw. per WhatsApp an +49 174 2471435.",
+      "en": "Gladly. The easiest way is a free 30-minute call: [book a call](/#kontakt). Or write to info@rexity.ai or on WhatsApp to +49 174 2471435."
     },
     "humanRequest": {
-      "de": "Gern. Sie erreichen das Rexity-Team direkt per E-Mail an info@rexity.ai, telefonisch oder per WhatsApp unter +49 174 2471435, oder Sie buchen ein kostenloses Gespräch: [Termin buchen](/#kontakt).",
-      "en": "Of course. You can reach the Rexity team directly by email at info@rexity.ai, by phone or WhatsApp on +49 174 2471435, or book a free call: [Book a call](/#kontakt)."
+      "de": "Gern. Sie erreichen das Team direkt per E-Mail an info@rexity.ai, telefonisch oder per WhatsApp unter +49 174 2471435, oder Sie buchen ein Gespräch: [Termin buchen](/#kontakt).",
+      "en": "Of course. You can reach the team directly at info@rexity.ai, by phone or WhatsApp on +49 174 2471435, or book a call: [book a call](/#kontakt)."
     },
     "timeline": {
-      "de": "Nach dem kostenlosen 30-Minuten-Gespräch kommen Bauplan, Dokumentation und Demo innerhalb einer Woche; die Umsetzung dauert typisch vier bis acht Wochen für eine Website mit Buchung. Die genaue Dauer hängt vom Umfang ab und steht im Angebot. Details: https://www.rexity.ai/#kontakt",
-      "en": "After the free 30-minute call, the blueprint, documentation and a demo follow within one week; implementation typically takes four to eight weeks for a website with booking. The exact duration depends on scope and is set out in the quote. Details: https://www.rexity.ai/#kontakt"
+      "de": "Eine Website mit Buchung dauert typisch vier bis acht Wochen; Bauplan, Dokumentation und Demo bekommen Sie innerhalb einer Woche nach dem kostenlosen Gespräch. Die genaue Dauer steht im Angebot: [Termin buchen](/#kontakt).",
+      "en": "A website with booking typically takes four to eight weeks; you get the blueprint, documentation and a demo within one week of the free call. The exact duration is in the quote: [book a call](/#kontakt)."
     },
     "injection": {
       "de": "Ich kann nur mit freigegebenen Rexity-Informationen helfen. Gerne erkläre ich Ihnen unsere Services, oder Sie schreiben an info@rexity.ai.",
@@ -106,37 +107,83 @@
     },
     "pricing": {
       "general": {
-        "de": "Gern, unsere Preise sind öffentlich: individuell programmierte Website ab 999 €, Website mit Backend und Buchungsverwaltung ab 1.999 €, Website mit Online-Checkout ab 5.999 €, Mobile App ab 4.900 €, Dashboards ab 1.599 €, KI-Chatbot ab 799 € (FAQ-Chatbot 499 €), WhatsApp-Automatisierung ab 1.299 €; die digitale Rezeption RexFangs (KI-Sprach- und Empfangsassistent, in der Testphase) auf Anfrage — jeweils Festpreis nach Angebot und verhandelbar, sobald Umfang und Zeitrahmen feststehen. Alle Details: https://www.rexity.ai/preise. Worum geht es bei Ihnen — Studio, Werkstatt, Praxis, Shop oder etwas anderes? Dann sage ich Ihnen, was ungefähr passt. Als unverbindlicher Einstieg eignet sich der Website-Check für 249 €. Wartung gibt es optional als Jahrespaket ab 999 €. Preise netto zzgl. MwSt.",
-        "en": "Happy to help, our prices are public: custom-coded website from €999, website with backend and booking management from €1,999, website with online checkout from €5,999, mobile app from €4,900, dashboards from €1,599, AI chatbot from €799 (FAQ chatbot €499), WhatsApp automation from €1,299; the digital reception RexFangs (AI voice and reception assistant, in testing) on request — each a fixed price after a quote, negotiable once scope and timeframe are clear. All details: https://www.rexity.ai/preise. What is it for — a studio, workshop, practice, shop or something else? Then I can tell you roughly what fits. A low-risk first step is the website check for €249. Maintenance is optional, as an annual package from €999. Prices net plus VAT."
+        "de": "Unsere Einstiegspreise stehen öffentlich auf der Preisseite, zum Beispiel Website ab 999 €, Website mit Online-Buchung ab 1.999 €, Mobile App ab 4.900 € – Festpreise netto zzgl. MwSt., der genaue Preis folgt nach einem kurzen Gespräch. Alle Preise: [Preise](/preise).",
+        "en": "Our starting prices are public, for example a website from €999, a website with online booking from €1,999, a mobile app from €4,900 – fixed prices net plus VAT, the exact price follows a short call. All prices: [Prices](/preise)."
       },
       "booking": {
-        "de": "Eine individuell programmierte Website (Node.js oder Next.js, kein Baukasten) beginnt bei 999 €. Mit Backend und Buchungsverwaltung, bei der Ihre Kunden ihre Termine selbst buchen, beginnt sie bei 1.999 € — Festpreis nach Angebot, netto zzgl. MwSt.; Wartung optional als Jahrespaket ab 999 €. Den Umzug einer bestehenden Website (Relaunch) gibt es ab 1.299 €, die mobile Optimierung einer bestehenden Website für 699 €. Der genaue Preis hängt vom Umfang ab und ist verhandelbar, sobald wir wissen, was Sie brauchen und bis wann. Worum geht es bei Ihnen — Kurse, Termine oder Reservierungen? Details: https://www.rexity.ai/preise — oder schreiben Sie direkt an info@rexity.ai.",
-        "en": "A custom-coded website (Node.js or Next.js, no website builder) starts at €999. With a backend and booking management, where your customers book their appointments themselves, it starts at €1,999 — fixed price after a quote, net plus VAT; maintenance is optional, as an annual package from €999. Moving an existing website to a new one (relaunch) starts at €1,299; mobile optimisation of an existing website is €699. The exact price depends on scope and is negotiable once we know what you need and by when. What is it for — classes, appointments or reservations? Details: https://www.rexity.ai/preise — or write directly to info@rexity.ai."
+        "de": "Eine individuell programmierte Website gibt es ab 999 €, mit Online-Buchung und Verwaltungsbereich ab 1.999 € – Festpreise netto zzgl. MwSt.; den genauen Preis nennen wir nach einem kurzen Gespräch. Details: [Preise](/preise).",
+        "en": "A custom-coded website starts from €999, with online booking and an admin area from €1,999 – fixed prices net plus VAT; the exact price follows a short call. Details: [Prices](/preise)."
       },
       "checkout": {
-        "de": "Eine Website mit Online-Checkout — Shop, Hotel- oder Kursplattform mit Bezahlung per Karte, PayPal oder Klarna — beginnt bei 5.999 €, Festpreis nach Angebot, netto zzgl. MwSt. Marktüblich sind etwa 8.000 bis 20.000 €. Der Preis ist verhandelbar, sobald Umfang und Zeitrahmen feststehen. Was möchten Sie online verkaufen oder buchen lassen? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
-        "en": "A website with online checkout — shop, hotel or course platform with payment by card, PayPal or Klarna — starts at €5,999, fixed price after a quote, net plus VAT. Typical market: €8,000 to €20,000. Negotiable once scope and timeframe are clear. What do you want to sell or take bookings for online? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+        "de": "Eine Website mit Online-Checkout (Shop, Buchung mit Bezahlung, Mitgliedschaften) gibt es ab 5.999 € netto zzgl. MwSt.; den genauen Festpreis nennen wir nach einem kurzen Gespräch. Details: [Online-Shop & Stripe-Checkout](/web/online-shop).",
+        "en": "A website with online checkout (shop, booking with payment, memberships) starts from €5,999 net plus VAT; the exact fixed price follows a short call. Details: [Online shop & Stripe checkout](/web/online-shop)."
+      },
+      "migration": {
+        "de": "Ein Website-Umzug oder Relaunch kostet bei uns ab 1.299 € netto zzgl. MwSt.; den Festpreis nennen wir nach der Bestandsaufnahme. Details: [Website-Relaunch & Umzug](/web/website-umzug).",
+        "en": "A website move or relaunch starts from €1,299 net plus VAT; the fixed price follows the inventory of your current site. Details: [Website relaunch & move](/web/website-umzug)."
       },
       "app": {
-        "de": "Eine App für iPhone und Android beginnt bei 4.900 € — eine gemeinsame Codebasis für beide Plattformen, Veröffentlichung in den Stores inklusive, Festpreis nach Angebot. Marktüblich sind für eine einfache App etwa 5.000 bis 15.000 €. Verhandelbar, sobald Umfang und Zeitrahmen klar sind. Was soll die App können? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
-        "en": "An app for iPhone and Android starts at €4,900 — one codebase for both platforms, store publication included, fixed price after a quote. A simple app typically costs €5,000 to €15,000 in Germany. Negotiable once scope and timeframe are clear. What should the app do? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+        "de": "Eine App für iPhone und Android gibt es ab 4.900 € netto zzgl. MwSt., aus einer gemeinsamen Codebasis, Veröffentlichung in den Stores inklusive. Details: [Mobile Apps](/web/mobile-apps).",
+        "en": "An app for iPhone and Android starts from €4,900 net plus VAT, from one codebase, store publication included. Details: [Mobile apps](/web/mobile-apps)."
       },
       "automation": {
-        "de": "Unsere Preise für Automatisierung und KI: FAQ-Chatbot 499 €, KI-Chatbot mit Ihren eigenen Inhalten ab 799 €, E-Mail- und SMS-Automatisierung bei Buchung, Stornierung oder Benachrichtigung 299 €, WhatsApp-Automatisierung ab 1.299 €, KI-Lösungen mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € — jeweils Festpreis nach Angebot, netto zzgl. MwSt. Unsere digitale Rezeption RexFangs, ein digitaler KI-Sprach- und Empfangsassistent, nimmt Anrufe an, ruft zurück und übernimmt Kommunikations-Workflows wie Terminbuchung, Erinnerung, Rückruf, Beschwerde und Recall; sie ist noch in der Testphase, Preis auf Anfrage. Verhandelbar, sobald wir den Ablauf kennen, der automatisiert werden soll. Welcher Vorgang kostet Sie heute am meisten Zeit? Details: https://www.rexity.ai/preise — oder direkt an info@rexity.ai.",
-        "en": "Our prices for automation and AI: FAQ chatbot €499, AI chatbot with your own content from €799, email and SMS automation on booking, cancellation or notification €299, WhatsApp automation from €1,299, AI solutions with RPA and a document chatbot on your own server from €2,999 — each a fixed price after a quote, net plus VAT. Our digital reception RexFangs, an AI-powered digital voice and reception assistant, answers and makes calls and handles communication workflows such as booking, reminders, callbacks, complaints and recalls; it is still in testing, price on request. Negotiable once we know the process to automate. Which task costs you the most time today? Details: https://www.rexity.ai/preise — or write to info@rexity.ai."
+        "de": "Unsere Preise für Automatisierung und KI: FAQ-Chatbot 499 €, KI-Chatbot ab 799 €, E-Mail- und SMS-Erinnerungen 299 €, WhatsApp-Automatisierung ab 1.299 €, KI-Lösungen auf Ihrem eigenen Server ab 2.999 € – Festpreise netto zzgl. MwSt. Details: [Preise: Automatisierung & KI](/preise#automatisierung-ki).",
+        "en": "Our prices for automation and AI: FAQ chatbot €499, AI chatbot from €799, email and SMS reminders €299, WhatsApp automation from €1,299, AI solutions on your own server from €2,999 – fixed prices net plus VAT. Details: [Prices: automation & AI](/preise#automatisierung-ki)."
       },
       "check": {
-        "de": "Der Website-Check kostet 249 €: eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Ein guter erster Schritt, wenn Sie noch nicht sicher sind, was Sie brauchen. Buchen können Sie ihn per E-Mail an info@rexity.ai — oder ich beantworte vorher gern Ihre Fragen.",
-        "en": "The website check costs €249: one hour reviewing your existing website and your booking or enquiry path, followed by written findings with concrete recommendations. A good first step if you are not yet sure what you need. Book it by email to info@rexity.ai — or ask me anything first."
+        "de": "Der Website-Check kostet 249 € netto zzgl. MwSt.: eine Stunde Prüfung Ihrer Website und Ihres Anfrageweges, danach ein schriftlicher Befund mit Empfehlungen. Buchen: [Termin buchen](/#kontakt).",
+        "en": "The website check costs €249 net plus VAT: one hour reviewing your website and enquiry path, then written findings with recommendations. Book it: [book a call](/#kontakt)."
       },
       "maintenance": {
-        "de": "Wartung ist optional und kostet als Jahrespaket ab 999 € pro Jahr, netto zzgl. MwSt.: Sicherheitsupdates, Sicherungen, kleine Änderungen. Sie ist in keinem Projektpreis enthalten; Sie können die Seite auch selbst betreuen. Details: https://www.rexity.ai/preise.",
-        "en": "Maintenance is optional and costs from €999 a year as an annual package, net plus VAT: security updates, backups, small changes. It is not included in any project price; you can also look after the site yourself. Details: https://www.rexity.ai/preise."
+        "de": "Die Wartung kostet ab 999 € pro Jahr netto zzgl. MwSt. (Sicherheitsupdates, Sicherungen, kleine Änderungen) und ist optional. Details: [Website-Wartung & Betreuung](/website-wartung).",
+        "en": "Maintenance costs from €999 a year net plus VAT (security updates, backups, small changes) and is optional. Details: [Website maintenance & support](/website-wartung)."
       },
       "hourly": {
-        "de": "Für Erweiterungen, Beratung oder Aufgaben außerhalb eines Festpreises berechnen wir 89 € pro Stunde, marktüblich sind 100 bis 180 €. Die meisten Projekte laufen aber zum Festpreis — der ist verhandelbar, sobald Umfang und Zeitrahmen feststehen. Details: https://www.rexity.ai/preise.",
-        "en": "For extensions, consulting or work outside a fixed price we charge €89 per hour; the market rate is €100 to €180. Most projects run on a fixed price though — negotiable once scope and timeframe are clear. Details: https://www.rexity.ai/preise."
+        "de": "Für Aufgaben außerhalb eines Festpreises berechnen wir 89 € pro Stunde netto zzgl. MwSt.; die meisten Projekte laufen zum Festpreis. Details: [Preise](/preise#beratung-extras).",
+        "en": "For work outside a fixed price we charge €89 per hour net plus VAT; most projects run on a fixed price. Details: [Prices](/preise#beratung-extras)."
       }
+    },
+    "identity": {
+      "de": "Ich bin Rexity, der KI-Assistent von Rexity Labs, kein Mensch. Das Team erreichen Sie direkt: [Termin buchen](/#kontakt) oder info@rexity.ai.",
+      "en": "I am Rexity, the AI assistant of Rexity Labs, not a person. You can reach the team directly: [book a call](/#kontakt) or info@rexity.ai."
+    },
+    "aiNotice": {
+      "de": "KI-Assistent von Rexity Labs. Sie schreiben mit einer KI, nicht mit einem Menschen.",
+      "en": "AI assistant by Rexity Labs. You are chatting with an AI, not a person."
+    },
+    "hosting": {
+      "de": "Die KI-Verarbeitung erfolgt ausschließlich innerhalb der EU. Ihre Chat-Nachrichten werden von einem Sprachmodell in Rechenzentren innerhalb der Europäischen Union verarbeitet. Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.",
+      "en": "AI processing takes place exclusively within the EU. Your chat messages are processed by a language model in data centres within the European Union. They are not used to train models and we do not store them permanently."
+    },
+    "hostingNonEu": {
+      "de": "Diese Antwort kommt über eine Übergangslösung (Claude über die Anthropic API), die außerhalb der EU verarbeitet. Einzelheiten stehen in der [Datenschutzerklärung](/datenschutz).",
+      "en": "This answer comes through an interim route (Claude via the Anthropic API) that processes outside the EU. Details are in the [privacy policy](/datenschutz)."
+    },
+    "techBasis": {
+      "bedrock": {
+        "de": "Technische Basis: Claude (Anthropic) über Amazon Bedrock mit EU-Inferenzprofil.",
+        "en": "Technical basis: Claude (Anthropic) via Amazon Bedrock with the EU inference profile."
+      },
+      "azure": {
+        "de": "Technische Basis: GPT über Microsoft Azure OpenAI in der EU-Datenzone.",
+        "en": "Technical basis: GPT via Microsoft Azure OpenAI in the EU data zone."
+      }
+    },
+    "handoverContact": {
+      "de": "Das klären wir am besten persönlich: [Termin buchen](/#kontakt), per WhatsApp unter +49 174 2471435 oder an info@rexity.ai.",
+      "en": "This is best settled in person: [book a call](/#kontakt), WhatsApp on +49 174 2471435 or info@rexity.ai."
+    },
+    "processClose": {
+      "de": "Die Einzelheiten klären wir in einem kurzen Gespräch: [Termin buchen](/#kontakt).",
+      "en": "We settle the details in a short call: [book a call](/#kontakt)."
+    },
+    "process": {
+      "de": "So läuft ein Projekt ab:\n- Kostenloses Gespräch (30 Minuten): was Sie brauchen, bis wann, in welchem Umfang.\n- Innerhalb einer Woche: Bauplan, Demo und Festpreis-Angebot.\n- Umsetzung mit Zwischenständen, typisch vier bis acht Wochen für eine Website mit Buchung.\n- Go-live erst nach Test und Ihrer Freigabe.\nDie Einzelheiten klären wir in einem kurzen Gespräch: [Termin buchen](/#kontakt).",
+      "en": "This is how a project runs:\n- Free call (30 minutes): what you need, by when, in what scope.\n- Within one week: blueprint, demo and fixed-price quote.\n- Implementation with interim reviews, typically four to eight weeks for a website with booking.\n- Go-live only after testing and your approval.\nWe settle the details in a short call: [book a call](/#kontakt)."
+    },
+    "conversationLimit": {
+      "de": "Dieses Gespräch hat die Grenze von 20 Nachrichten erreicht. Für alles Weitere sprechen Sie bitte direkt mit uns: [Termin buchen](/#kontakt), per WhatsApp unter +49 174 2471435 oder an info@rexity.ai.",
+      "en": "This conversation has reached its limit of 20 messages. For anything else, please talk to us directly: [book a call](/#kontakt), WhatsApp on +49 174 2471435 or info@rexity.ai."
     }
   },
   "entries": [
@@ -222,8 +269,8 @@
         "telefon",
         "anruf"
       ],
-      "en": "Rexity builds AI agents that guide users, answer approved questions, prepare workflows, and hand complex cases to humans. This covers website chatbots, WhatsApp assistants, voice and RPA assistants, retrieval-based answering from approved databanks, human handoff, structured output validation, prompt-injection protection, and safe audit summaries. Typical deliverables: assistant persona and disclosure, a knowledge databank, an intent list, guardrails, a RAG adapter, a channel adapter plan, handoff rules, and testing scenarios. Agents always disclose that they are AI, collect consent before processing data, and every conversation step can be audit-logged.",
-      "de": "Rexity entwickelt KI-Agenten, die Nutzer führen, freigegebene Fragen beantworten, Prozesse vorbereiten und komplexe Anliegen an Menschen übergeben. Dazu gehören Website-Chatbots, WhatsApp-Assistenten, Voice- und RPA-Assistenten, retrieval-basierte Antworten aus freigegebenen Datenbanken, Human Handoff, strukturierte Ausgabevalidierung, Schutz vor Prompt-Injection und sichere Audit-Zusammenfassungen. Typische Leistungen: Assistenten-Persona und Offenlegung, Wissensdatenbank, Intent-Liste, Guardrails, RAG-Adapter, Kanal-Adapter-Plan, Übergaberegeln und Testszenarien. Die Agenten geben sich stets als KI zu erkennen, holen vor der Datenverarbeitung die Einwilligung ein, und jeder Gesprächsschritt kann revisionssicher protokolliert werden.",
+      "en": "Rexity builds AI agents that guide users, answer approved questions, prepare workflows, and hand complex cases to humans. This covers website chatbots, WhatsApp assistants and RPA assistants (the phone assistant RexFangs is in testing), retrieval-based answering from approved databanks, human handoff, structured output validation, prompt-injection protection, and safe audit summaries. Typical deliverables: assistant persona and disclosure, a knowledge databank, an intent list, guardrails, a RAG adapter, a channel adapter plan, handoff rules, and testing scenarios. Agents always disclose that they are AI, collect consent before processing data, and every conversation step can be audit-logged.",
+      "de": "Rexity entwickelt KI-Agenten, die Nutzer führen, freigegebene Fragen beantworten, Prozesse vorbereiten und komplexe Anliegen an Menschen übergeben. Dazu gehören Website-Chatbots, WhatsApp-Assistenten und RPA-Assistenten (der Telefonassistent RexFangs ist in der Testphase), retrieval-basierte Antworten aus freigegebenen Datenbanken, Human Handoff, strukturierte Ausgabevalidierung, Schutz vor Prompt-Injection und sichere Audit-Zusammenfassungen. Typische Leistungen: Assistenten-Persona und Offenlegung, Wissensdatenbank, Intent-Liste, Guardrails, RAG-Adapter, Kanal-Adapter-Plan, Übergaberegeln und Testszenarien. Die Agenten geben sich stets als KI zu erkennen, holen vor der Datenverarbeitung die Einwilligung ein, und jeder Gesprächsschritt kann revisionssicher protokolliert werden.",
       "url": "/automation"
     },
     {
@@ -257,7 +304,7 @@
     {
       "id": "svc-dashboards",
       "code": "SVC.05",
-      "title": "Dashboards",
+      "title": "Dashboards (part of Web-Apps, SaaS & Dashboards)",
       "keywords": [
         "dashboard",
         "dashboards",
@@ -273,8 +320,8 @@
         "monitoring",
         "berichte"
       ],
-      "en": "Rexity designs dashboards that present key metrics, processes, and outcomes clearly so teams can make better decisions. This covers KPI dashboards, marketing dashboards, operations dashboards, automation monitoring dashboards, lead and conversion reporting, data source mapping, decision-support views, and admin or operations views for automations. Typical deliverables: KPI definition, a data source map, a dashboard wireframe, a dashboard implementation plan, access and role recommendations, and monitoring and reporting notes.",
-      "de": "Rexity konzipiert Dashboards, die wichtige Kennzahlen, Prozesse und Ergebnisse übersichtlich darstellen und Teams bei Entscheidungen unterstützen. Dazu gehören KPI-Dashboards, Marketing-Dashboards, Operations-Dashboards, Monitoring-Dashboards für Automatisierungen, Lead- und Conversion-Reporting, Datenquellen-Mapping, Entscheidungs-Views sowie Admin- und Ops-Ansichten für Automatisierungen. Typische Leistungen: KPI-Definition, Datenquellen-Map, Dashboard-Wireframe, Implementierungsplan, Zugriffs- und Rollenempfehlung sowie Monitoring- und Reporting-Hinweise.",
+      "en": "Dashboards are part of our web apps and SaaS work: KPI, operations and reporting dashboards that show key figures and processes at a glance, from your existing tools. From €1,599 net plus VAT. Details: [Web apps, SaaS & dashboards](/web/saas).",
+      "de": "Dashboards gehören zu unseren Web-Apps und SaaS-Projekten: KPI-, Operations- und Reporting-Dashboards, die wichtige Kennzahlen und Prozesse übersichtlich zeigen, aus Ihren bestehenden Tools. Ab 1.599 € netto zzgl. MwSt. Details: [Web-Apps, SaaS & Dashboards](/web/saas).",
       "url": "/web/saas"
     },
     {
@@ -293,8 +340,8 @@
         "overview",
         "wer seid ihr"
       ],
-      "en": "Rexity supports companies with Web & App Design and Development, Digital Marketing, AI Agents, Digital Automations, and Dashboards. Everything Rexity ships is production-grade, DSGVO-compliant and EU-hosted, built by a small, technically strong team in Hermannsburg (Lower Saxony). For a concrete project discussion, write to info@rexity.ai.",
-      "de": "Rexity unterstützt Unternehmen bei Web- & App-Design und Entwicklung, Digital Marketing, AI Agents, digitalen Automatisierungen und Dashboards. Alles, was Rexity ausliefert, ist produktionsreif, DSGVO-konform und EU-gehostet — gebaut von einem kleinen, technisch starken Team in Hermannsburg (Niedersachsen). Für ein konkretes Projektgespräch schreiben Sie an info@rexity.ai."
+      "en": "Rexity Labs plans, builds and looks after websites with online booking, apps and automation for businesses – in person, from Hermannsburg (Lower Saxony). Services: websites and online shops, website moves and relaunches, mobile apps and web apps, automation and AI (chatbots, WhatsApp, reminders), SEO and the Google Business Profile, maintenance and support. Overview: [Prices](/preise).",
+      "de": "Rexity Labs plant, baut und betreut Websites mit Online-Buchung, Apps und Automatisierung für Betriebe – persönlich aus Hermannsburg (Niedersachsen). Leistungen: Websites und Online-Shops, Website-Umzug und Relaunch, Mobile Apps und Web-Apps, Automatisierung und KI (Chatbots, WhatsApp, Erinnerungen), SEO und Google Unternehmensprofil, Wartung und Betreuung. Überblick: [Preise](/preise)."
     },
     {
       "id": "industries",
@@ -376,8 +423,8 @@
         "einwilligung",
         "consent"
       ],
-      "en": "Compliance is built in, not bolted on. Rexity software is DSGVO/GDPR-compliant, EU-hosted, audit-logged, and opt-out by design: AI assistants disclose themselves, consent is collected before data processing, personal data is minimised and access-controlled, and automated actions leave an audit trail. For a formal legal assessment of a specific case, clients should consult their legal counsel — Rexity describes its engineering approach, not legal advice.",
-      "de": "Compliance ist eingebaut, nicht nachträglich aufgesetzt. Rexity-Software ist DSGVO-konform, EU-gehostet, audit-protokolliert und mit Opt-out ab Werk: KI-Assistenten geben sich zu erkennen, Einwilligungen werden vor der Datenverarbeitung eingeholt, personenbezogene Daten werden minimiert und zugriffsgeschützt, und automatisierte Aktionen hinterlassen eine Prüfspur. Für eine formale rechtliche Bewertung eines konkreten Falls wenden Sie sich bitte an Ihre Rechtsberatung — Rexity beschreibt den Engineering-Ansatz, keine Rechtsberatung."
+      "en": "Websites run on EU hosting and are built DSGVO/GDPR-conform: no advertising or profiling cookies, booking data is processed within the EU and deleted automatically after a set period, the domain is in your name. For our AI assistants: AI processing takes place exclusively within the EU. A legal assessment of your case is for your legal counsel; details: [Privacy policy](/datenschutz).",
+      "de": "Websites laufen auf EU-Hosting und werden DSGVO-konform gebaut: keine Werbe- oder Profiling-Cookies, Buchungsdaten werden innerhalb der EU verarbeitet und nach einer festgelegten Frist automatisch gelöscht, die Domain läuft auf Ihren Namen. Für unsere KI-Assistenten gilt: Die KI-Verarbeitung erfolgt ausschließlich innerhalb der EU. Die rechtliche Bewertung Ihres Falls übernimmt Ihre Rechtsberatung; Details: [Datenschutz](/datenschutz)."
     },
     {
       "id": "how-we-work",
@@ -444,8 +491,8 @@
         "fahrzeugpflege celle",
         "mrr"
       ],
-      "en": "Rexity has shipped real projects you can look at on rexity.ai/work: a new website with online class booking for Body & Care, a gym in Hermannsburg (live since September 2026); a website with online appointment booking for a car detailing business in Celle; and LevelKraft, our own exam-prep app, live on the App Store, Google Play and the web. The SEO case study on rexity.ai/work/levelkraft (as of September 2026) shows 2,736 page views in August after 624 in July and approx. 24× more website visits per day. The app's monthly recurring revenue (MRR) also rose, according to internal revenue data, from approx. $80 in June to approx. $290 in September (values rounded), since the SEO work began in July. For July 2027 the page shows three forecast scenarios from approx. $610 (cautious) and approx. $1,060 (base) to approx. $2,400 MRR (optimistic); this is a forecast based on assumptions about growth, churn and advertising, not a promise and not a guarantee. Results depend on the market, the starting point and the execution. Each project page shows the duration, what was built and the outcome. For a tailored example for your industry, email info@rexity.ai.",
-      "de": "Rexity hat echte Projekte umgesetzt, die Sie auf rexity.ai/work ansehen können: eine neue Website mit Online-Kursbuchung für Body & Care, ein Fitnessstudio in Hermannsburg (live seit September 2026); eine Website mit Online-Terminbuchung für einen Fahrzeugpflege-Betrieb in Celle; und LevelKraft, unsere eigene App zur Prüfungsvorbereitung, live im App Store, bei Google Play und im Web. Die SEO-Fallstudie auf rexity.ai/work/levelkraft (Stand September 2026) zeigt 2.736 Seitenaufrufe im August nach 624 im Juli und ca. 24× mehr Website-Besuche pro Tag. Auch der monatlich wiederkehrende Umsatz (MRR) der App stieg laut internen Umsatzdaten von ca. $80 im Juni auf ca. $290 im September (Werte gerundet), seit die SEO-Arbeit im Juli begann. Für Juli 2027 zeigt die Seite drei Prognose-Szenarien von ca. $610 (vorsichtig) über ca. $1.060 (Basis) bis ca. $2.400 MRR (optimistisch); das ist eine Prognose auf Basis von Annahmen zu Wachstum, Abwanderung und Werbung, keine Zusage und keine Garantie. Ergebnisse hängen von Markt, Ausgangslage und Umsetzung ab. Jede Projektseite zeigt Dauer, Umfang und Ergebnis. Für ein passendes Beispiel für Ihre Branche schreiben Sie an info@rexity.ai.",
+      "en": "Rexity has shipped real projects you can look at on rexity.ai/work: a new website with online class booking for Body & Care, a gym in Hermannsburg (live since September 2026); a website with online appointment booking for a car detailing business in Celle; and LevelKraft, an exam-prep app we developed and launched, live on the App Store, Google Play and the web. The SEO case study on rexity.ai/work/levelkraft (as of September 2026) shows 2,736 page views in August after 624 in July and approx. 24× more website visits per day. The app's monthly recurring revenue (MRR) also rose, according to internal revenue data, from approx. $80 in June to approx. $290 in September (values rounded), since the SEO work began in July. For July 2027 the page shows three forecast scenarios from approx. $610 (cautious) and approx. $1,060 (base) to approx. $2,400 MRR (optimistic); this is a forecast based on assumptions about growth, churn and advertising, not a promise and not a guarantee. Results depend on the market, the starting point and the execution. Each project page shows the duration, what was built and the outcome. For a tailored example for your industry, email info@rexity.ai.",
+      "de": "Rexity hat echte Projekte umgesetzt, die Sie auf rexity.ai/work ansehen können: eine neue Website mit Online-Kursbuchung für Body & Care, ein Fitnessstudio in Hermannsburg (live seit September 2026); eine Website mit Online-Terminbuchung für einen Fahrzeugpflege-Betrieb in Celle; und LevelKraft, eine App zur Prüfungsvorbereitung, die wir entwickelt und gestartet haben, live im App Store, bei Google Play und im Web. Die SEO-Fallstudie auf rexity.ai/work/levelkraft (Stand September 2026) zeigt 2.736 Seitenaufrufe im August nach 624 im Juli und ca. 24× mehr Website-Besuche pro Tag. Auch der monatlich wiederkehrende Umsatz (MRR) der App stieg laut internen Umsatzdaten von ca. $80 im Juni auf ca. $290 im September (Werte gerundet), seit die SEO-Arbeit im Juli begann. Für Juli 2027 zeigt die Seite drei Prognose-Szenarien von ca. $610 (vorsichtig) über ca. $1.060 (Basis) bis ca. $2.400 MRR (optimistisch); das ist eine Prognose auf Basis von Annahmen zu Wachstum, Abwanderung und Werbung, keine Zusage und keine Garantie. Ergebnisse hängen von Markt, Ausgangslage und Umsetzung ab. Jede Projektseite zeigt Dauer, Umfang und Ergebnis. Für ein passendes Beispiel für Ihre Branche schreiben Sie an info@rexity.ai.",
       "url": "/work"
     },
     {
@@ -601,7 +648,7 @@
     {
       "id": "svc-voice",
       "code": "02.3",
-      "title": "Voice Agents",
+      "title": "Voice Agents (RexFangs, in testing)",
       "url": "/automation/voice",
       "keywords": [
         "voice agent",
@@ -613,8 +660,8 @@
         "sprachassistent",
         "anrufe"
       ],
-      "en": "Rexity builds voice agents (a cloud receptionist) that answer inbound calls 24/7, turn speech into intent, then answer FAQs, route to the right team, book appointments or take a message — with every call summarised in your CRM. Complex calls are handed to a human with context.",
-      "de": "Rexity baut Voice-Agenten (einen Cloud-Empfang), die eingehende Anrufe rund um die Uhr annehmen, Sprache in Absicht umwandeln und dann FAQs beantworten, ans richtige Team weiterleiten, Termine buchen oder eine Nachricht aufnehmen — jeder Anruf im CRM zusammengefasst. Komplexe Anrufe werden mit Kontext an einen Menschen übergeben."
+      "en": "Our phone assistant RexFangs is in testing, not an offer yet: it answers calls, books appointments, calls back and hands over to people. As soon as it is ready, the offer will be on the page. Details: [Voice agents](/automation/voice).",
+      "de": "Unser Telefonassistent RexFangs ist in der Testphase, noch kein Angebot: Er nimmt Anrufe an, bucht Termine, ruft zurück und übergibt an Menschen. Sobald er reif ist, steht das Angebot auf der Seite. Details: [Voice-Agenten](/automation/voice)."
     },
     {
       "id": "svc-chatbots",
@@ -630,8 +677,8 @@
         "kundenservice",
         "chat"
       ],
-      "en": "Rexity builds website chatbots that answer only from your approved content (retrieval/RAG), capture leads, and escalate hard questions to a human with context — every conversation logged to your CRM. Multilingual, transparent about being an assistant, and honest about its limits.",
-      "de": "Rexity baut Website-Chatbots, die ausschließlich aus Ihren freigegebenen Inhalten antworten (Retrieval/RAG), Leads erfassen und schwierige Fragen mit Kontext an einen Menschen eskalieren — jedes Gespräch im CRM protokolliert. Mehrsprachig, transparent als Assistent und ehrlich über Grenzen."
+      "en": "We build website chatbots that answer from your approved content, guide visitors and hand complex cases to a person: the FAQ chatbot for €499, the AI chatbot from €799 (net plus VAT). They say clearly that they are an AI. Details: [Website chatbots](/automation/chatbots).",
+      "de": "Wir bauen Website-Chatbots, die aus Ihren freigegebenen Inhalten antworten, Besucher führen und komplexe Fälle an einen Menschen übergeben: den FAQ-Chatbot für 499 €, den KI-Chatbot ab 799 € (netto zzgl. MwSt.). Sie geben sich klar als KI zu erkennen. Details: [Website-Chatbots](/automation/chatbots)."
     },
     {
       "id": "svc-seo",
@@ -653,7 +700,7 @@
     {
       "id": "svc-content",
       "code": "03.2",
-      "title": "Content (part of SEO & Google Business Profile)",
+      "title": "Content (part of SEO & Google Unternehmensprofil, not a separate service)",
       "url": "/marketing/seo",
       "keywords": [
         "content",
@@ -664,13 +711,13 @@
         "content marketing",
         "inhalte"
       ],
-      "en": "Rexity plans and produces consistent, on-brand content and social posts: a strategy and calendar so output is steady, creation in your voice, publishing across the right channels, then measuring what resonates and repurposing the winners.",
-      "de": "Rexity plant und produziert konsistenten, markentreuen Content und Social-Posts: Strategie und Kalender für stetigen Output, Erstellung in Ihrer Tonalität, Veröffentlichung über die richtigen Kanäle, dann messen, was ankommt, und Gewinner wiederverwerten."
+      "en": "Content is part of our SEO work, not a separate service: service pages, articles and landing texts that answer real searches, and posts for the Google Business Profile. Content marketing as its own service and AI video marketing are no longer offered. Details: [SEO & Google Business Profile](/marketing/seo).",
+      "de": "Inhalte gehören bei uns zur SEO-Arbeit, nicht zu einer eigenen Leistung: Leistungsseiten, Artikel und Landing-Texte, die echte Suchanfragen beantworten, und Beiträge fürs Google Unternehmensprofil. Content-Marketing als eigene Leistung und KI-Videomarketing bieten wir nicht mehr an. Details: [SEO & Google Unternehmensprofil](/marketing/seo)."
     },
     {
       "id": "svc-testing-support",
       "code": "05",
-      "title": "Wartung & Betreuung",
+      "title": "Website-Wartung & Betreuung",
       "url": "/website-wartung",
       "keywords": [
         "testing",
@@ -712,9 +759,95 @@
         "ab 1.999",
         "wartung"
       ],
-      "en": "Happy to help, our prices are public: custom-coded website from €999, website with backend and booking management from €1,999, website with online checkout from €5,999, mobile app from €4,900, dashboards from €1,599, AI chatbot from €799 (FAQ chatbot €499), WhatsApp automation from €1,299; the digital reception RexFangs (AI voice and reception assistant, in testing) on request — each a fixed price after a quote, negotiable once scope and timeframe are clear. All details: https://www.rexity.ai/preise. What is it for — a studio, workshop, practice, shop or something else? Then I can tell you roughly what fits. A low-risk first step is the website check for €249. Maintenance is optional, as an annual package from €999. Prices net plus VAT.",
-      "de": "Gern, unsere Preise sind öffentlich: individuell programmierte Website ab 999 €, Website mit Backend und Buchungsverwaltung ab 1.999 €, Website mit Online-Checkout ab 5.999 €, Mobile App ab 4.900 €, Dashboards ab 1.599 €, KI-Chatbot ab 799 € (FAQ-Chatbot 499 €), WhatsApp-Automatisierung ab 1.299 €; die digitale Rezeption RexFangs (KI-Sprach- und Empfangsassistent, in der Testphase) auf Anfrage — jeweils Festpreis nach Angebot und verhandelbar, sobald Umfang und Zeitrahmen feststehen. Alle Details: https://www.rexity.ai/preise. Worum geht es bei Ihnen — Studio, Werkstatt, Praxis, Shop oder etwas anderes? Dann sage ich Ihnen, was ungefähr passt. Als unverbindlicher Einstieg eignet sich der Website-Check für 249 €. Wartung gibt es optional als Jahrespaket ab 999 €. Preise netto zzgl. MwSt.",
+      "en": "Our starting prices are public, for example a website from €999, a website with online booking from €1,999, a mobile app from €4,900 – fixed prices net plus VAT, the exact price follows a short call. All prices: [Prices](/preise).",
+      "de": "Unsere Einstiegspreise stehen öffentlich auf der Preisseite, zum Beispiel Website ab 999 €, Website mit Online-Buchung ab 1.999 €, Mobile App ab 4.900 € – Festpreise netto zzgl. MwSt., der genaue Preis folgt nach einem kurzen Gespräch. Alle Preise: [Preise](/preise).",
       "url": "/preise"
+    },
+    {
+      "id": "svc-website-umzug",
+      "code": "01.6",
+      "title": "Website-Umzug & Relaunch",
+      "url": "/web/website-umzug",
+      "keywords": [
+        "umzug",
+        "website-umzug",
+        "relaunch",
+        "migration",
+        "domain-umzug",
+        "domain umziehen",
+        "e-mail-umzug",
+        "hosterwechsel",
+        "providerwechsel",
+        "neue website",
+        "modernisieren",
+        "move",
+        "redirects",
+        "weiterleitungen"
+      ],
+      "en": "We move your website, domain and e-mail mailboxes or turn the old site into a new one: with redirects, DNS switch and SEO protection, so nothing goes offline and rankings are kept. From €1,299 net plus VAT, fixed price after the inventory. Details: [Website relaunch & move](/web/website-umzug).",
+      "de": "Wir ziehen Ihre Website, Ihre Domain und Ihre E-Mail-Postfächer um oder überführen den alten Auftritt in eine neue Website: mit Weiterleitungen, DNS-Umstellung und SEO-Schutz, ohne Ausfall. Ab 1.299 € netto zzgl. MwSt., Festpreis nach der Bestandsaufnahme. Details: [Website-Relaunch & Umzug](/web/website-umzug)."
+    },
+    {
+      "id": "svc-handwerker",
+      "code": "01.7",
+      "title": "Website für Handwerker",
+      "url": "/website-f%C3%BCr-handwerker",
+      "keywords": [
+        "handwerker",
+        "handwerk",
+        "handwerksbetrieb",
+        "tischler",
+        "elektriker",
+        "maler",
+        "dachdecker",
+        "sanitär",
+        "heizung",
+        "baustelle",
+        "besichtigung",
+        "craftsman",
+        "tradesman"
+      ],
+      "en": "Websites for trade businesses: one page per service, an enquiry form that delivers the details for your quote, and optionally booking for site visits or callbacks. From €999, with enquiry and booking flow and admin area from €1,999 (net plus VAT). Details: [Website for tradespeople](/website-f%C3%BCr-handwerker).",
+      "de": "Websites für Handwerksbetriebe: eine Seite pro Leistung, ein Anfrageformular, das die Angaben für Ihr Angebot gleich mitliefert, und auf Wunsch eine Terminbuchung für Besichtigung oder Rückruf. Ab 999 €, mit Anfrage- und Terminstrecke und Verwaltungsbereich ab 1.999 € (netto zzgl. MwSt.). Details: [Website für Handwerker](/website-f%C3%BCr-handwerker)."
+    },
+    {
+      "id": "svc-terminerinnerung",
+      "code": "02.5",
+      "title": "Terminerinnerung per E-Mail, SMS & WhatsApp",
+      "url": "/automation/terminerinnerung",
+      "keywords": [
+        "erinnerung",
+        "terminerinnerung",
+        "reminder",
+        "sms",
+        "bestätigung",
+        "no-show",
+        "vergessene termine",
+        "appointment reminder"
+      ],
+      "en": "We set up automatic confirmations and reminders before every appointment: by e-mail, SMS or WhatsApp. E-mail and SMS for a fixed €299 net plus VAT; WhatsApp needs the WhatsApp automation (from €1,299). Details: [Appointment reminders](/automation/terminerinnerung).",
+      "de": "Wir richten automatische Bestätigungen und Erinnerungen vor jedem Termin ein: per E-Mail, SMS oder WhatsApp. E-Mail und SMS zum Festpreis von 299 € netto zzgl. MwSt.; für WhatsApp kommt die WhatsApp-Automatisierung dazu (ab 1.299 €). Details: [Terminerinnerung](/automation/terminerinnerung)."
+    },
+    {
+      "id": "svc-online-shop",
+      "code": "01.8",
+      "title": "Online-Shop & Stripe-Checkout",
+      "url": "/web/online-shop",
+      "keywords": [
+        "onlineshop",
+        "online-shop",
+        "shop",
+        "checkout",
+        "stripe",
+        "bezahlung",
+        "gutscheine",
+        "mitgliedschaft",
+        "verkaufen",
+        "e-commerce",
+        "payment"
+      ],
+      "en": "Online shops and websites with online checkout: products, vouchers, courses or appointments, paid via Stripe. From €5,999 net plus VAT; Stripe's fees per payment are not included. Details: [Online shop & Stripe checkout](/web/online-shop).",
+      "de": "Online-Shops und Websites mit Online-Checkout: Produkte, Gutscheine, Kurse oder Termine, bezahlt über Stripe. Ab 5.999 € netto zzgl. MwSt.; die Gebühren von Stripe pro Zahlung sind nicht enthalten. Details: [Online-Shop & Stripe-Checkout](/web/online-shop)."
     }
   ],
   "faqs": [
@@ -731,8 +864,8 @@
         "bist du ein bot",
         "bist du eine ki"
       ],
-      "en": "I am Rexity, the virtual assistant of Rexity Labs. I can explain our services and point you to the right one. For everything deeper, the team is at info@rexity.ai.",
-      "de": "Ich bin Rexity, der virtuelle Assistent von Rexity Labs. Ich erkläre Ihnen unsere Services und zeige Ihnen den passenden. Für alles Weitere erreichen Sie das Team unter info@rexity.ai."
+      "en": "I am Rexity, the AI assistant of Rexity Labs, not a person. You can reach the team directly: [book a call](/#kontakt) or info@rexity.ai.",
+      "de": "Ich bin Rexity, der KI-Assistent von Rexity Labs, kein Mensch. Das Team erreichen Sie direkt: [Termin buchen](/#kontakt) oder info@rexity.ai."
     },
     {
       "id": "faq-what-is-rexity",
@@ -746,8 +879,8 @@
         "tell me about rexity",
         "erzähl mir von rexity"
       ],
-      "en": "Rexity is a German software team that builds digital tools for businesses: websites, mobile apps, AI assistants, automations, and dashboards. You tell us what your business needs — we build it and keep it running. Everything follows EU data-protection rules.",
-      "de": "Rexity ist ein deutsches Software-Team, das digitale Werkzeuge für Unternehmen baut: Websites, Apps, KI-Assistenten, Automatisierungen und Dashboards. Sie sagen uns, was Ihr Geschäft braucht — wir bauen es und halten es am Laufen. Alles nach EU-Datenschutzregeln."
+      "en": "Rexity Labs is a small software studio in Hermannsburg (Lower Saxony) that plans, builds and looks after websites with online booking, apps and automation for businesses – in person, remote across Germany. More: [Start page](/).",
+      "de": "Rexity Labs ist ein kleines Software-Studio in Hermannsburg (Niedersachsen), das Websites mit Online-Buchung, Apps und Automatisierung für Betriebe plant, baut und betreut – persönlich, remote in ganz Deutschland. Mehr: [Startseite](/)."
     },
     {
       "id": "faq-what-do-you-do",
@@ -768,8 +901,8 @@
         "alle services",
         "alle leistungen"
       ],
-      "en": "We do five things: we build websites and apps, we help people find you online (digital marketing), we build AI helpers that answer your customers (AI agents), we automate repetitive work (digital automations), and we build dashboards that show your numbers at a glance. Ask me about any of them — or email info@rexity.ai.",
-      "de": "Wir machen fünf Dinge: Wir bauen Websites und Apps, wir sorgen dafür, dass Kunden Sie online finden (Digital Marketing), wir bauen KI-Helfer, die Ihren Kunden antworten (AI Agents), wir automatisieren wiederkehrende Arbeit (digitale Automatisierungen), und wir bauen Dashboards, die Ihre Zahlen auf einen Blick zeigen. Fragen Sie mich zu jedem davon — oder schreiben Sie an info@rexity.ai."
+      "en": "We plan, build and look after websites with online booking, online shops, apps and automation – and help you be found on Google. That includes website moves and relaunches, AI chatbots, WhatsApp and reminders, and maintenance. Overview with prices: [Prices](/preise).",
+      "de": "Wir planen, bauen und betreuen Websites mit Online-Buchung, Online-Shops, Apps und Automatisierung – und sorgen dafür, dass Sie bei Google gefunden werden. Dazu gehören Website-Umzug und Relaunch, KI-Chatbots, WhatsApp und Erinnerungen sowie die Wartung. Überblick mit Preisen: [Preise](/preise)."
     },
     {
       "id": "faq-web-design",
@@ -814,8 +947,8 @@
         "what is online marketing",
         "was ist online marketing"
       ],
-      "en": "Digital marketing means getting your business found online. Rexity helps with three things: showing up on Google (SEO), content that attracts customers, and AI-made marketing videos. More customers find you — without you chasing them. Interested? Email info@rexity.ai.",
-      "de": "Digital Marketing heißt: Ihr Unternehmen wird online gefunden. Rexity hilft bei drei Dingen: bei Google sichtbar werden (SEO), Inhalte, die Kunden anziehen, und KI-erstellte Marketing-Videos. Mehr Kunden finden Sie — ohne dass Sie ihnen hinterherlaufen. Interesse? Schreiben Sie an info@rexity.ai."
+      "en": "Being found online: we do SEO for your website and set up and maintain your Google Business Profile, with honest reporting instead of ranking promises. Video marketing is no longer offered. Details: [SEO & Google Business Profile](/marketing/seo).",
+      "de": "Online gefunden werden: Wir machen SEO für Ihre Website und richten Ihr Google Unternehmensprofil ein und pflegen es, mit ehrlichem Reporting statt Ranking-Versprechen. Videomarketing bieten wir nicht mehr an. Details: [SEO & Google Unternehmensprofil](/marketing/seo)."
     },
     {
       "id": "faq-ai-agents",
@@ -831,8 +964,8 @@
         "what is a voice agent",
         "was ist ein sprachassistent"
       ],
-      "en": "An AI agent is a digital helper that talks to your customers for you — on your website, on WhatsApp, or on the phone. It answers questions and books appointments day and night, and hands tricky cases to a human. Rexity builds these for your business, fully compliant with EU data rules. Curious? Email info@rexity.ai.",
-      "de": "Ein KI-Agent ist ein digitaler Helfer, der für Sie mit Ihren Kunden spricht — auf Ihrer Website, über WhatsApp oder am Telefon. Er beantwortet Fragen und bucht Termine, Tag und Nacht, und übergibt knifflige Fälle an einen Menschen. Rexity baut solche Helfer für Ihr Unternehmen, vollständig DSGVO-konform. Neugierig? Schreiben Sie an info@rexity.ai."
+      "en": "An AI agent is a digital helper that talks to your customers for you — on your website or on WhatsApp. It answers questions and books appointments day and night, and hands tricky cases to a human. Rexity builds these for your business, fully compliant with EU data rules. Curious? Email info@rexity.ai.",
+      "de": "Ein KI-Agent ist ein digitaler Helfer, der für Sie mit Ihren Kunden spricht — auf Ihrer Website oder über WhatsApp. Er beantwortet Fragen und bucht Termine, Tag und Nacht, und übergibt knifflige Fälle an einen Menschen. Rexity baut solche Helfer für Ihr Unternehmen, vollständig DSGVO-konform. Neugierig? Schreiben Sie an info@rexity.ai."
     },
     {
       "id": "faq-automations",
@@ -860,8 +993,8 @@
         "what is a kpi dashboard",
         "was ist reporting"
       ],
-      "en": "A dashboard is one screen that shows how your business is doing — sales, customers, marketing — in simple charts. Instead of digging through spreadsheets, you see your numbers at a glance. Rexity builds dashboards tailored to what matters in your business. Interested? Email info@rexity.ai.",
-      "de": "Ein Dashboard ist ein Bildschirm, der zeigt, wie Ihr Geschäft läuft — Umsatz, Kunden, Marketing — in einfachen Diagrammen. Statt in Tabellen zu wühlen, sehen Sie Ihre Zahlen auf einen Blick. Rexity baut Dashboards, zugeschnitten auf das, was in Ihrem Geschäft zählt. Interesse? Schreiben Sie an info@rexity.ai."
+      "en": "A dashboard is one screen that shows how your business is doing, from your existing tools. We build them as part of web apps and SaaS, from €1,599 net plus VAT. Details: [Web apps, SaaS & dashboards](/web/saas).",
+      "de": "Ein Dashboard ist ein Bildschirm, der zeigt, wie Ihr Betrieb läuft, aus Ihren bestehenden Tools. Wir bauen Dashboards als Teil von Web-Apps und SaaS, ab 1.599 € netto zzgl. MwSt. Details: [Web-Apps, SaaS & Dashboards](/web/saas)."
     },
     {
       "id": "faq-how-help",
@@ -943,8 +1076,8 @@
         "telefonassistent",
         "sprachassistent"
       ],
-      "en": "Yes — we build voice agents (a cloud receptionist) that answer calls 24/7, handle FAQs, route, book appointments or take a message, and summarise every call in your CRM. More: https://www.rexity.ai/automation/voice",
-      "de": "Ja — wir bauen Voice-Agenten (einen Cloud-Empfang), die Anrufe rund um die Uhr annehmen, FAQs beantworten, weiterleiten, Termine buchen oder eine Nachricht aufnehmen und jeden Anruf im CRM zusammenfassen. Mehr: https://www.rexity.ai/automation/voice"
+      "en": "Our phone assistant RexFangs is in testing and not on offer yet; as soon as it is ready, the offer will be on the page: [Voice agents](/automation/voice).",
+      "de": "Unser Telefonassistent RexFangs ist in der Testphase und noch kein Angebot; sobald er reif ist, steht das Angebot auf der Seite: [Voice-Agenten](/automation/voice)."
     }
   ]
 }
