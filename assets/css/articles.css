@@ -194,6 +194,10 @@
 .rx-page-artikel .ax-figure { margin: 0; }
 .rx-page-artikel .ar-col > .ax-figure { margin-bottom: 40px; }
 .rx-page-artikel .ax-figure .rx-media__frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+/* AI note under generated images (founder, 2 Oct 2026): very small, readable for anyone who looks for it */
+.ax-ai-note { display: block; margin-top: 4px; font-size: 0.625rem; line-height: 1.4; letter-spacing: 0.01em; color: var(--rx-muted); }
+.rx-media__caption--note { padding-top: 6px; padding-bottom: 6px; border-top: 0; }
+.rx-media__caption--note .ax-ai-note { margin-top: 0; }
 .rx-page-artikel .ax-figure .rx-media__caption a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .rx-page-artikel .ax-figure--missing .rx-media__frame { display: grid; place-items: center; padding: 24px; border: 1px dashed #ffd84d; }
 .rx-page-artikel .ax-figure__missing { margin: 0; color: #ffd84d; font-size: 0.875rem; text-align: center; overflow-wrap: anywhere; }
@@ -343,7 +347,7 @@
   background: linear-gradient(180deg, rgba(17, 17, 17, 0.55) 0%, rgba(17, 17, 17, 0.35) 38%, rgba(17, 17, 17, 0.6) 70%, rgba(17, 17, 17, 0.92) 100%);
 }
 .rx-page-artikel .section.hero.ax-hero--cover .section-header-content-normal.for-hero { top: 56%; }
-.rx-page-artikel .ax-hero__credit { position: absolute; right: 16px; bottom: 12px; z-index: 3; margin: 0; color: rgba(255, 253, 253, 0.72); font-size: 0.75rem; line-height: 1.3; }
+.rx-page-artikel .ax-hero__credit { position: absolute; right: 16px; bottom: 12px; z-index: 3; margin: 0; color: rgba(255, 253, 253, 0.72); font-size: 0.625rem; line-height: 1.3; }
 .rx-page-artikel .ax-hero__credit a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 @media (max-width: 767px) {
   .rx-page-artikel .section.hero.ax-hero { height: min(66svh, 580px); min-height: 400px; }
