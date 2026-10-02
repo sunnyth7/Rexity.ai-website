@@ -2846,13 +2846,13 @@
       "batch": "sprint-3"
     },
     {
-      "file": "services/shots/chatbots-startfenster.webp",
+      "file": "services/shots/chatbots-antwort.webp",
       "source": "own",
       "prompt_or_url": "own screenshot: the chat panel of rexity.ai's own assistant (rexity-omi/assets/chatbot/rexity-chatbot.js, CHATBOT_VERSION 20261002f) on /automation/chatbots, local static build of branch sprint/26-chatbot-offer served on 127.0.0.1:4712, chat forced on with ?chat=1, opened through the page's demo button; headless Chrome, 390x844 at 2x, 2 Oct 2026",
       "author": "Rexity Labs",
-      "alt_de": "Chat-Fenster des KI-Assistenten von Rexity Labs: Startformular mit KI-Hinweis, E-Mail-Adresse und Telefonnummer",
-      "alt_en": "Chat window of the Rexity Labs AI assistant: start form with AI notice, e-mail address and phone number",
-      "notes": "Sprint 26: demo block of /automation/chatbots. Shows the entry form (empty state) only: header 'Rexity Labs / KI-Assistent', the Art. 50 notice, the two contact fields, 'Chat starten', the privacy line and the footnote. No model answer is shown and no request was sent (/api/chat and /api/lead were not called; nothing stubbed). Crop of the panel (748x1528 px), WebP q84 (Pillow). Re-shoot when the widget's look or texts change.",
+      "alt_de": "Chat-Fenster des KI-Assistenten von Rexity Labs: Antwort auf die Frage nach dem Preis eines KI-Chatbots mit Link-Karte zur Seite",
+      "alt_en": "Chat window of the Rexity Labs AI assistant: answer to the question about the price of an AI chatbot, with a link card to the page",
+      "notes": "Replaced on 2 Oct 2026 on the founder's instruction by his own screenshot of a real answer of the live assistant (cropped, rounded corners, placed on a dark background). Earlier note: Sprint 26: demo block of /automation/chatbots. Shows the entry form (empty state) only: header 'Rexity Labs / KI-Assistent', the Art. 50 notice, the two contact fields, 'Chat starten', the privacy line and the footnote. No model answer is shown and no request was sent (/api/chat and /api/lead were not called; nothing stubbed). Crop of the panel (748x1528 px), WebP q84 (Pillow). Re-shoot when the widget's look or texts change.",
       "batch": "sprint-26"
     },
     {
