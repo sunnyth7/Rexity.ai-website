@@ -25,6 +25,7 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 - [Webentwicklung und Webdesign](https://www.rexity.ai/web/web-design): Websites, die Anfragen und Buchungen bringen – individuell programmiert, mit Termin- oder Kursbuchung. Aus Hermannsburg bei Celle, Festpreis ab 999 €. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 €; Mobile Optimierung einer bestehenden Website 699 € (Festpreise, netto zzgl. MwSt.).
 - [Website-Relaunch und Umzug (Domain, E-Mail, Weiterleitungen)](https://www.rexity.ai/web/website-umzug): Website-Relaunch und Umzug: Domain, E-Mail und Weiterleitungen ohne Ranking-Verlust, mit 10-Punkte-Checkliste. Festpreis ab 1.299 €, remote bundesweit. Preise: Website-Migration / Relaunch ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Website für Handwerker (Anfrageformular, Leistungsseiten, Terminbuchung)](https://www.rexity.ai/website-f%C3%BCr-handwerker): Website für Handwerker: Anfrageformular, Leistungsseiten und Terminbuchung. Festpreis ab 999 €, mit Buchung ab 1.999 €. Landkreis Celle und bundesweit. Preise: Website (individuell programmiert) ab 999 €; Website mit Backend & Buchungsverwaltung ab 1.999 € (Festpreise, netto zzgl. MwSt.).
+- [Kostenloser Website-Check (Tempo, Auffindbarkeit, Anfrage-Wege)](https://www.rexity.ai/website-check): Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in einer Minute geprüft – mit den drei wichtigsten Schritten.
 - [UX/UI- und App-Design](https://www.rexity.ai/web/web-design): Wireframes, Klick-Prototyp, Designsystem und mobile-first-Gestaltung für Websites und Apps, im selben Team, das danach programmiert.
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
@@ -32,7 +33,7 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 - [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren Inhalten, Verarbeitung in der EU, ab 799 € Festpreis. Jetzt live testen – direkt auf dieser Seite. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
 - [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Terminerinnerung per SMS, E-Mail und WhatsApp](https://www.rexity.ai/automation/terminerinnerung): Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit. Preise: E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
-- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € (Festpreise, netto zzgl. MwSt.).
+- [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): KI-Assistent fürs Büro: Anfragen erfassen, Daten finden, Angebote vorbereiten. In Europa gehostet oder auf Ihrem eigenen Server, ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
 - [SEO (Suchmaschinenoptimierung) und Google Unternehmensprofil](https://www.rexity.ai/marketing/seo): SEO für kleine Betriebe: Seiten, die für echte Suchanfragen ranken, Google Unternehmensprofil, Bewertungen und Inhalte. Ehrliche Ziele, keine Garantien. Preise: Website-Check 249 € (Festpreise, netto zzgl. MwSt.). Kein Pauschalpaket, Festpreis nach einem kurzen Gespräch.
 - [Website-Wartung und Betreuung](https://www.rexity.ai/website-wartung): Wartung und Betreuung Ihrer Website: Sicherheitsupdates, Sicherungen, Monitoring und kleine Änderungen – als Jahrespaket oder monatlich. Was drin ist. Preise: Jährliche Wartung ab 999 € pro Jahr (Festpreise, netto zzgl. MwSt.).
@@ -230,6 +231,7 @@ Beide bisher veröffentlichten Kundenprojekte liegen im Landkreis Celle: das Fit
 
 Die Seiten zu den Fragen, die in Gesprächen am häufigsten kommen:
 
+- Kostenloser Website-Check: Bringt Ihre heutige Seite Anfragen? In etwa einer Minute geprüft: Tempo auf dem Handy, Auffindbarkeit bei Google und Anfrage-Wege – mit dem Schritt, der am meisten bringt. (https://www.rexity.ai/website-check)
 - Website-Relaunch und Umzug ohne Ranking-Verlust: Domain, E-Mail und Inhalte umziehen – mit Weiterleitungs-Tabelle, DNS-Plan und Nachlauf in der Search Console, ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
 - Website-Wartung und Betreuung: Sicherheitsupdates, Sicherungen und kleine Änderungen als Jahrespaket ab 999 € pro Jahr. (https://www.rexity.ai/website-wartung)
 - Website für Handwerker: Anfrageformular mit allen Angaben fürs Angebot, Leistungsseiten je Gewerk und auf Wunsch Terminbuchung – für Handwerksbetriebe. (https://www.rexity.ai/website-f%C3%BCr-handwerker)
@@ -285,6 +287,7 @@ Vier typische Anlässe – der Ablauf ist bei allen derselbe, der Umfang untersc
 - Neue Domain: Der Betrieb heißt anders oder die alte Adresse passt nicht mehr. Jede alte Seite bekommt eine dauerhafte Weiterleitung auf ihre neue Adresse, Google wird über den Adresswechsel informiert.
 - Relaunch mit neuem Design: Die Website wird neu gebaut. Wir übernehmen die Inhalte, die ranken, ordnen sie der neuen Struktur zu und sichern jede alte Adresse ab, bevor die neue Seite live geht.
 - E-Mail-Umzug: Postfächer wechseln den Anbieter – etwa vom alten Hoster zu einem eigenen Mail-Dienst. Alte Mails, Ordner und Kontakte kommen mit; die Umstellung passiert so, dass keine Mail verloren geht.
+- Erst prüfen: der kostenlose Website-Check: Sie sind nicht sicher, ob ein Relaunch nötig ist? Der Website-Check zeigt in etwa einer Minute, wo Ihre Seite bei Tempo, Auffindbarkeit und Anfrage-Wegen steht. (https://www.rexity.ai/website-check)
 
 ### Was bei einem Umzug schiefgehen kann – und was wir dagegen tun
 
@@ -441,7 +444,7 @@ Was sich je Gewerk unterscheidet, ist die Anfrage: Ein Elektro- oder SHK-Betrieb
 
 Bei einer Kfz-Werkstatt steht dagegen oft die feste Terminbuchung im Vordergrund: Der Kunde wählt Leistung, Tag und Uhrzeit, und der Termin ist sofort verbindlich. Ein Dachdecker oder Tischler braucht eher die Besichtigung vor Ort und ein gut vorbereitetes Angebot. Beides lässt sich auf einer Website verbinden.
 
-### Weiterlesen: Webdesign, Terminbuchung, Relaunch und Chatbot
+### Weiterlesen: Webdesign, Terminbuchung, Relaunch, Chatbot und Büro-Assistent
 
 Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
 
@@ -449,6 +452,8 @@ Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
 - Website mit Terminbuchung für Werkstätten: Eine Seite pro Leistung, nur freie Zeiten, keine Doppelbuchung – für Kfz-Aufbereiter und Werkstätten. (https://www.rexity.ai/kfz-aufbereitung-website)
 - Website-Relaunch ohne Ranking-Verlust: Die alte Seite durch eine neue ersetzen, mit Weiterleitungen, Domain und E-Mail – ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
 - KI-Chatbot für die Website eines Handwerksbetriebs: Ein Assistent beantwortet Fragen zu Leistungen, Einsatzgebiet und Ablauf aus Ihren Inhalten und nimmt Anfragen auf, während Sie auf der Baustelle sind. FAQ-Chatbot 499 €, KI-Chatbot ab 799 €. (https://www.rexity.ai/automation/chatbots)
+- KI-Assistent fürs Büro im Handwerksbetrieb: Aus der Anfrage werden Vorgang, Terminvorschlag und Angebotsentwurf – vorbereitet vom Assistenten, freigegeben von Ihnen. (https://www.rexity.ai/automation/rpa)
+- Website-Check für Ihren Betrieb: Sie haben schon eine Website? Der kostenlose Website-Check zeigt in etwa einer Minute, ob sie Anfragen bringen kann: Telefon-Link, Formular, Tempo auf dem Handy, Auffindbarkeit. (https://www.rexity.ai/website-check)
 
 ### Häufige Fragen
 
@@ -464,6 +469,94 @@ Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
   Antwort: Eine Website ohne Buchung dauert in der Regel zwei bis vier Wochen. Mit Online-Terminbuchung rechnen Sie mit etwas mehr: Die Website der Fahrzeugpflege Celle entstand in rund fünf Wochen. Bauplan, Demo und Festpreis-Angebot bekommen Sie innerhalb einer Woche nach dem Gespräch.
 - Frage: Kommen Sie zu mir in den Betrieb?
   Antwort: Ja. Die meiste Arbeit passiert remote von Hermannsburg aus. Für Erstgespräch, Fotos oder Abnahme kommen wir im Raum Celle, Hannover und Braunschweig ohne Aufpreis vorbei; weiter entfernte Termine stimmen wir vorher ab.
+
+## Website-Check
+
+Adresse: https://www.rexity.ai/website-check
+
+Kostenloser Website-Check für Betriebe: Tempo, Auffindbarkeit bei Google und Anfrage-Wege in einer Minute geprüft – mit den drei wichtigsten Schritten.
+
+Bringt Ihre Seite Anfragen? Kostenlos geprüft in etwa einer Minute: Tempo, Auffindbarkeit bei Google und Anfrage-Wege.
+
+Der kostenlose Website-Check für Betriebe: Adresse eingeben, in etwa einer Minute vier Werte von 0 bis 100 für Tempo & Technik, Auffindbarkeit, Anfrage-Tauglichkeit und Vertrauen & Recht erhalten – mit den Befunden im Klartext und dem Schritt, der am meisten bringt. Ohne Anmeldung.
+
+### Was der Website-Check prüft
+
+Der Website-Check prüft kostenlos und in etwa einer Minute, ob Ihre Website Anfragen bringen kann: wie schnell sie auf dem Handy lädt, ob Suchmaschinen sie lesen können, wie leicht ein Besucher anruft, schreibt oder bucht, und ob Verschlüsselung und Pflichtseiten vorhanden sind. Sie erhalten vier Werte von 0 bis 100, die Befunde im Klartext und den Schritt, der am meisten bringt – ohne Anmeldung und ohne E-Mail-Adresse.
+
+Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, Praxis, Studio, Salon, Werkstatt, Laden. Sie müssen nichts installieren und nichts von Technik verstehen. Geprüft wird genau die Adresse, die Sie eingeben – in der Regel Ihre Startseite, denn dort entscheidet sich meist, ob ein Besucher anfragt oder weiterklickt.
+
+### Vier Bereiche – und warum sie für Anfragen zählen
+
+Jeder Bereich beantwortet eine Frage, die sich ein Besucher nie laut stellt:
+
+- Tempo & Technik: Lädt die Seite auf dem Handy zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT).
+- Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Mit Gewerk und Ort sehen wir zusätzlich nach, ob Ihre Seite für diese Suche unter den ersten 20 Ergebnissen bei Google steht – sofern die Abfrage verfügbar ist.
+- Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
+- Vertrauen & Recht: Hinweise, keine Rechtsberatung: verschlüsselte Verbindung (HTTPS), Links zu Impressum und Datenschutzerklärung, ein Link zu einer Erklärung zur Barrierefreiheit. Zusätzlich listen wir fremde Dienste auf, die schon beim Aufruf geladen werden, etwa Schriftarten oder Statistik-Skripte. Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.
+
+### So lesen Sie die Punkte
+
+Die Punkte sagen, wie viele der geprüften Voraussetzungen erfüllt sind – nicht, wie schön Ihre Seite ist. Ab 80 Punkten ist ein Bereich in Ordnung, zwischen 50 und 79 lohnt ein Blick in die Befunde, unter 50 fehlt Grundlegendes.
+
+Steht bei einem Bereich „nicht prüfbar“, ließ er sich in diesem Moment nicht messen – etwa weil die Seite nicht geantwortet hat oder die Tempo-Messung ausgelastet war. Dann raten wir nicht, sondern lassen den Bereich aus dem Gesamtwert heraus. Tempo-Werte schwanken außerdem von Lauf zu Lauf um einige Punkte; ein einzelner Wert ist eine Momentaufnahme.
+
+### Was der Check nicht sagen kann
+
+Ein automatischer Check sieht nur, was im Quelltext einer Seite steht. Das bleibt offen:
+
+- Ob wirklich Anfragen kommen: Geprüft werden die Voraussetzungen, nicht Ihre Besucherzahlen oder Ihr Umsatz.
+- Wie Ihre ganze Website abschneidet: Geprüft wird die eine eingegebene Adresse, nicht jede Unterseite.
+- Ob Texte und Bilder überzeugen: Ob Ihr Angebot verständlich ist und die Fotos passen, beurteilt nur ein Mensch.
+- Ob Formular und Buchung funktionieren: Der Check sieht, dass ein Formular da ist – er schickt nichts ab.
+- Was nach einer Einwilligung geladen wird: Wir sehen den Quelltext beim ersten Aufruf, nicht das, was ein Einwilligungs-Banner später nachlädt.
+- Wie echte Besucher das Tempo erleben: Die Werte sind Laborwerte auf einem simulierten Handy.
+- Ob Ihre Seite rechtlich in Ordnung ist: Die Hinweise ersetzen keine Rechtsberatung.
+
+### Unsere eigenen Werte: Lighthouse mobil, lokale Messung
+
+Wir messen unsere eigenen Seiten mit demselben Werkzeug. Gemessen am 2. Oktober 2026 auf rexity.ai mit Lighthouse 12 (mobil, lokale Messung, zwei Läufe je Seite):
+
+- Seite: Startseite; Leistung (Lauf 1 / 2): 98 / 99; Barrierefreiheit: 100; Best Practices: 100; SEO: 100; LCP (Lauf 1 / 2): 1,6 s / 2,0 s
+- Seite: /preise; Leistung (Lauf 1 / 2): 100 / 100; Barrierefreiheit: 100; Best Practices: 100; SEO: 100; LCP (Lauf 1 / 2): 1,2 s / 1,2 s
+- Seite: /web/web-design; Leistung (Lauf 1 / 2): 89 / 100; Barrierefreiheit: 100; Best Practices: 100; SEO: 100; LCP (Lauf 1 / 2): 3,8 s / 1,7 s
+- Seite: /website-für-handwerker; Leistung (Lauf 1 / 2): 100 / 100; Barrierefreiheit: 100; Best Practices: 100; SEO: 100; LCP (Lauf 1 / 2): 1,5 s / 1,5 s
+
+Lighthouse mobil, lokale Messung, 02.10.2026. Zwei Läufe je Seite; Barrierefreiheit, Best Practices und SEO waren in beiden Läufen gleich.
+
+Die 89 auf der Webdesign-Seite im ersten Lauf zeigen, was „Momentaufnahme“ heißt: Im zweiten Lauf erreichte dieselbe Seite 100. Unser Ziel für jede Seite, die wir bauen: 95+ in allen vier Lighthouse-Werten. Das ist ein Ziel, keine Zusage für jedes Projekt und jeden Lauf – Videos, Karten oder eingebundene Buchungssysteme kosten Tempo, und darüber sprechen wir vorher.
+
+Den Website-Check haben wir am selben Tag auf unsere eigene Startseite angewendet: Auffindbarkeit 100, Vertrauen & Recht 100, Anfrage-Tauglichkeit 80 – ein WhatsApp-Link und ein Kartenlink fehlten dort. Die Tempo-Messung über die öffentliche Schnittstelle war in diesem Lauf nicht verfügbar; der Bereich stand deshalb als „nicht prüfbar“ im Ergebnis.
+
+### Nach dem Check: was jetzt sinnvoll ist
+
+Je nach Ergebnis führt der nächste Schritt woanders hin:
+
+- Die Seite bringt zu wenige Anfragen: Fehlen Telefon-Link, Formular oder Buchung, hilft keine Politur an der Technik. Wir bauen Websites, deren erster Bildschirm sagt, was Sie anbieten und wie man Sie erreicht – ab 999 €, netto zzgl. MwSt. (https://www.rexity.ai/web/web-design)
+- Die Technik ist in die Jahre gekommen: Langsame Seite, kein HTTPS, kein Zugriff auf den Quelltext: Dann lohnt es sich, einen Relaunch gegen Einzelreparaturen zu rechnen. Domain, E-Mail und Weiterleitungen ziehen mit – ab 1.299 €, netto zzgl. MwSt. (https://www.rexity.ai/web/website-umzug)
+- Die Werte sind gut – so bleiben sie es: Sicherheitsupdates, regelmäßige Sicherungen und Monitoring von Erreichbarkeit und Fehlern gehören zum Jahrespaket – ab 999 € pro Jahr, netto zzgl. MwSt. (https://www.rexity.ai/website-wartung)
+
+### Kostenlos automatisch – oder ausführlich von einem Menschen
+
+Der Website-Check auf dieser Seite ist kostenlos und läuft automatisch. Was eine Maschine nicht sieht, prüft auf Wunsch ein Mensch:
+
+- Website-Check mit schriftlichem Befund: Eine Stunde Prüfung Ihrer bestehenden Website und Ihres Buchungs- oder Anfrageweges, danach ein schriftlicher Befund mit konkreten Empfehlungen. Festpreis 249 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Ist der Website-Check wirklich kostenlos?
+  Antwort: Ja. Die Prüfung kostet nichts, und Sie brauchen weder ein Konto noch eine E-Mail-Adresse: Punkte, Befunde und der erste Schritt stehen direkt auf der Seite. Nur für den vollständigen Bericht per E-Mail geben Sie eine Adresse an. Kontakt nehmen wir nur auf, wenn Sie das gesonderte Häkchen setzen.
+- Frage: Woher kommen die Tempo-Werte?
+  Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
+- Frage: Sagt mir der Check, auf welchem Platz ich bei Google stehe?
+  Antwort: Nur als Stichprobe: Wenn Sie Gewerk und Ort angeben und die Abfrage verfügbar ist, sehen wir nach, ob Ihre Seite für genau diese Suche unter den ersten 20 Ergebnissen in Deutschland steht. Suchergebnisse unterscheiden sich je nach Standort und Gerät; der Platz ist deshalb ein Hinweis und fließt nicht in die Punkte ein.
+- Frage: Was passiert mit der Adresse, die ich eingebe?
+  Antwort: Wir rufen die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
+- Frage: Ist das Kurzfazit von einer KI geschrieben?
+  Antwort: Wenn ein Sprachmodell verfügbar ist, formuliert es das Kurzfazit aus den Messwerten Ihres Ergebnisses; das steht dann darunter. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Das Modell erhält nur die Befunde, nicht den Text Ihrer Seite und keine E-Mail-Adresse. Jede Zahl im Kurzfazit wird gegen das Ergebnis geprüft; passt etwas nicht, erscheint ein fest formulierter Text.
+- Frage: Ersetzt der Check eine SEO-Analyse oder eine Rechtsprüfung?
+  Antwort: Nein. Er prüft eine Seite auf 25 bewertete Punkte und liefert Hinweise. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
 
 ## Online-Shop & Stripe-Checkout
 
@@ -706,15 +799,15 @@ Zwei Apps, die wir gebaut und gestartet haben, jeweils für iPhone und Android.
 
 Adresse: https://www.rexity.ai/automation
 
-Automatisierung für KMU in Niedersachsen: KI-Chatbot ab 799 €, WhatsApp-Automatisierung ab 1.299 €, RPA und Dokumenten-Chatbot ab 2.999 €. Festpreise.
+KI-Automatisierung für Betriebe in Niedersachsen: KI-Chatbot ab 799 €, WhatsApp-Automatisierung ab 1.299 €, KI-Assistent fürs Büro ab 2.999 €.
 
 Keine Menschen mehr für Roboter-Arbeit bezahlen.
 
 Automatisieren Sie Anrufe, Nachrichten und Workflows, die Ihrem Team den Tag fressen — von Prozessautomatisierung bis WhatsApp-, Voice- und Website-Assistenten.
 
-### Automatisierung für kleine und mittlere Betriebe
+### KI-Automatisierung für kleine und mittlere Betriebe
 
-Automatisierung heißt bei uns: Software erledigt die wiederkehrende Arbeit, die heute jemand von Hand macht – Termine bestätigen, immer gleiche Fragen beantworten, Daten von einem Programm ins nächste übertragen. Ihr Team gewinnt Zeit für die Arbeit, die wirklich Menschen braucht.
+KI-Automatisierung heißt bei uns: Software übernimmt den Weg einer Kundenanfrage, den heute jemand von Hand geht – Anfragen annehmen, wiederkehrende Fragen beantworten, an Termine erinnern und im Büro Vorgang und Angebotsentwurf vorbereiten. Ihr Team gewinnt Zeit für die Arbeit, die wirklich Menschen braucht.
 
 Wir arbeiten vor allem für Dienstleistungsbetriebe, deren Tag nicht am Schreibtisch stattfindet: im Studio, in der Werkstatt, in der Praxis, im Salon oder im Handwerk. Dort klingelt das Telefon oft genau dann, wenn niemand Zeit hat, und Anfragen kommen über mehrere Kanäle gleichzeitig herein.
 
@@ -722,12 +815,12 @@ Wir fangen klein an: mit dem Ablauf, bei dem die Zeitersparnis am größten und 
 
 ### Typische Aufgaben, die wir automatisieren
 
-Diese Abläufe gibt es in fast jedem Betrieb – und meist laufen sie noch von Hand.
+Von der Anfrage bis zum Angebot: Diese Abläufe gibt es in fast jedem Betrieb – und meist laufen sie noch von Hand.
 
-- Bestätigungen und Erinnerungen: Nach jeder Buchung geht automatisch eine E-Mail oder SMS hinaus, vor dem Termin eine Erinnerung. Weniger vergessene Termine, keine Nachrichten von Hand.
-- Immer gleiche Fragen: Öffnungszeiten, Preise, freie Termine: Ein Chat-Assistent auf Ihrer Website beantwortet sie aus Ihren eigenen Inhalten und gibt alles andere an Sie weiter. (https://www.rexity.ai/automation/chatbots)
 - Anfragen per WhatsApp: Viele Kunden schreiben lieber, als anzurufen. Ein WhatsApp-Assistent antwortet über die offizielle Schnittstelle, bucht Termine und übergibt schwierige Fälle an Ihr Team.
-- Daten abtippen und übertragen: Rechnungen, Lieferscheine, Formulare, Listen: Regelbasierte Schritte übernimmt ein Programm, das Daten zuverlässig zwischen Ihren Systemen bewegt.
+- Immer gleiche Fragen: Öffnungszeiten, Preise, freie Termine: Ein Chat-Assistent auf Ihrer Website beantwortet sie aus Ihren eigenen Inhalten und gibt alles andere an Sie weiter. (https://www.rexity.ai/automation/chatbots)
+- Bestätigungen und Erinnerungen: Nach jeder Buchung geht automatisch eine E-Mail oder SMS hinaus, vor dem Termin eine Erinnerung. Weniger vergessene Termine, keine Nachrichten von Hand. (https://www.rexity.ai/automation/terminerinnerung)
+- Büroarbeit nach der Anfrage: Vorgang anlegen, Daten zusammensuchen, Termin vorschlagen, Angebot entwerfen: Der KI-Assistent fürs Büro bereitet vor, ein Mensch gibt frei. Regelbasierte Schritte wie das Übertragen von Daten zwischen Programmen laufen automatisch mit. (https://www.rexity.ai/automation/rpa)
 - Anrufe, die niemand annimmt: Unser Telefonassistent RexFangs nimmt Anrufe an und ruft zurück. Er ist noch in der Testphase; wir sagen Ihnen ehrlich, wann er für Ihren Betrieb bereit ist.
 
 ### Was wir konkret bauen
@@ -784,80 +877,92 @@ Fallstudie: https://www.rexity.ai/work/chara
 - Frage: Was kostet eine Automatisierung?
   Antwort: Die E-Mail- und SMS-Automatisierung kostet 299 €, ein FAQ-Chatbot 499 €. Einen KI-Chatbot gibt es ab 799 €, die WhatsApp-Automatisierung ab 1.299 €. Alle Preise sind Festpreise, netto zzgl. MwSt.; die vollständige Übersicht steht auf unserer Preisseite.
 
-## RPA & Prozessautomatisierung
+## KI-Assistent fürs Büro
 
 Adresse: https://www.rexity.ai/automation/rpa
 
-Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis.
+KI-Assistent fürs Büro: Anfragen erfassen, Daten finden, Angebote vorbereiten. In Europa gehostet oder auf Ihrem eigenen Server, ab 2.999 € Festpreis.
 
-Auditierbar, wiederholbar, ohne Handarbeit.
+Anfrage rein – Vorgang, Termin und Angebotsentwurf fertig.
 
-Wir kartieren die wiederkehrende Handarbeit Ihres Teams und verwandeln sie in zuverlässige automatisierte Workflows — über CRM, Postfach und interne Tools hinweg.
+Der KI-Assistent fürs Büro nimmt Anfragen aus E-Mail, Formular oder Chat entgegen, sucht die passenden Daten in Ihren Unterlagen und bereitet Vorgang, Terminvorschlag und Angebotsentwurf vor. An Ihre Kunden geht nichts, bevor ein Mensch es freigegeben hat. Rexity Labs aus Hermannsburg (Landkreis Celle) baut ihn zum Festpreis ab 2.999 €, netto zzgl. MwSt. – in einer europäischen Datenzone oder auf einem Server in Ihrem Betrieb.
 
-### Was Prozessautomatisierung (RPA) ist
+### Was der KI-Assistent im Büro übernimmt
 
-Rexity Labs UG aus Hermannsburg (Landkreis Celle) automatisiert wiederkehrende Büroarbeit für kleine und mittlere Betriebe in Niedersachsen: Dateneingabe, Rechnungen, Berichte und den Abgleich zwischen Programmen. Prozessautomatisierung mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt.
+In vielen Betrieben ist das Büro das, was nach Feierabend übrig bleibt: Anfragen beantworten, Daten zusammensuchen, Angebote schreiben. Diese Schritte bereitet der Assistent vor.
 
-RPA steht für Robotic Process Automation: Ein Software-Roboter übernimmt regelbasierte Arbeitsschritte, die heute jemand am Bildschirm von Hand erledigt – Daten aus einer E-Mail in eine Liste übertragen, Rechnungen erfassen, Berichte zusammenstellen. Die Arbeit bleibt dieselbe, nur erledigt sie jetzt ein Programm, zuverlässig und zu festen Zeiten.
+Er liest die eingehende Anfrage, erkennt, worum es geht, und sucht in Ihren freigegebenen Unterlagen, was dazugehört: Kundendaten, frühere Aufträge, Preislisten. Daraus entstehen ein angelegter Vorgang, ein Terminvorschlag und ein Angebotsentwurf in Ihrer Vorlage.
 
-Das lohnt sich für kleine und mittlere Betriebe, in denen jede Woche Stunden mit Abtippen und Kopieren vergehen: im Handwerk mit Angeboten und Lieferscheinen, in der Praxis mit Formularen, im Büro eines Studios oder einer Werkstatt mit Listen und Rechnungen.
+Der Assistent entscheidet nichts allein: Jede Antwort, jeder Termin und jedes Angebot wartet auf die Freigabe durch einen Menschen. Regelbasierte Schritte wie das Übertragen von Daten zwischen Programmen (Prozessautomatisierung, kurz RPA) laufen im Hintergrund mit.
 
-Wichtig ist uns: Der Roboter übernimmt die Normalfälle, Menschen behalten die Ausnahmen. Jeder Lauf wird protokolliert, sodass Sie jederzeit nachvollziehen können, was automatisch passiert ist.
+### Beispiel-Szenario: Heizungs- und Sanitärbetrieb
 
-### Typische Abläufe für RPA
+Ein Beispiel, kein Kundenprojekt: ein Heizungs- und Sanitärbetrieb, dessen Monteure tagsüber beim Kunden sind. Das Telefon im Büro ist oft besetzt, Anfragen kommen zusätzlich per E-Mail und über die Website, und Angebote entstehen abends.
 
-- Rechnungen und Belege: Eingehende Rechnungen werden erfasst, geprüft und dorthin übertragen, wo Sie sie brauchen – statt jede Zeile von Hand abzutippen.
-- Dateneingabe zwischen Programmen: Kundendaten aus Formularen, E-Mails oder Buchungen landen automatisch in Kundenliste und Kalender.
-- Berichte und Auswertungen: Zahlen, die jede Woche aus mehreren Quellen zusammengesucht werden, stellt der Roboter zu festen Zeiten zusammen.
-- Fragen an Ihre Dokumente: Ein Chatbot über Ihre eigenen Dokumente beantwortet Fragen zu Verträgen, Anleitungen oder internen Regeln – installiert auf einem lokalen Server bei Ihnen.
+- Anfrage: Heute: Die E-Mail wartet, bis jemand im Büro Zeit hat.; Mit dem KI-Assistenten: Der Assistent erfasst die Anfrage, legt den Vorgang an und markiert, welche Angaben noch fehlen.
+- Termin: Heute: Der Vor-Ort-Termin wird per Rückruf vereinbart, manchmal erst nach mehreren Versuchen.; Mit dem KI-Assistenten: Er schlägt freie Zeiten aus dem Kalender vor. Das Büro bestätigt den Vorschlag.
+- Angebot: Heute: Das Angebot wird abends aus alten Angeboten und der Preisliste zusammengestellt.; Mit dem KI-Assistenten: Er entwirft das Angebot aus Vorlage und Preisliste. Der Meister prüft Mengen und Preise, ändert und gibt frei.
+- Versand: Heute: Das Angebot geht hinaus, wenn es fertig ist.; Mit dem KI-Assistenten: Es geht erst nach der Freigabe an den Kunden.
 
-### Was wir konkret bauen
+### Beispiel-Szenario: Service-Center mit Auftragsliste
 
-- Eine schriftliche Aufnahme Ihres heutigen Ablaufs, Schritt für Schritt
-- Software-Roboter, die Daten zwischen Postfach, Kundenverwaltung und internen Programmen bewegen
-- Regeln für Ausnahmen, die an einen Menschen gehen
-- Geplante Läufe mit Überwachung und einer Benachrichtigung, wenn etwas hakt
-- Ein vollständiges Protokoll jedes Laufs
-- Auf Wunsch KI-Lösungen auf einem lokalen Server in Ihrem Betrieb
+Ein zweites Beispiel, ebenfalls kein Kundenprojekt: ein Service-Center, das Fahrzeuge zur Wartung annimmt. Eine Frage kommt immer wieder: „Ist mein Fahrzeug fertig?“ Die Antwort steht in der Auftragsliste, aber jemand muss nachsehen und sich melden.
 
-### So läuft ein RPA-Projekt ab
+- Frage: Heute: Der Kunde ruft an oder schreibt. Die Annahme unterbricht ihre Arbeit und sucht den Auftrag.; Mit dem KI-Assistenten: Der Assistent findet den Auftrag in der Liste und liest den Status: in Arbeit, wartet auf ein Teil, fertig.
+- Antwort: Heute: Die Auskunft kommt per Rückruf, wenn Zeit ist.; Mit dem KI-Assistenten: Er entwirft die Antwort mit Status und Abholzeit. Die Annahme prüft sie und sendet sie ab.
+- Unklare Fälle: Heute: Wie es weitergeht, hängt davon ab, wer gerade erreichbar ist.; Mit dem KI-Assistenten: Steht der Status nicht eindeutig in der Liste, entwirft der Assistent keine Antwort, sondern gibt die Frage an die Werkstattleitung.
 
-1. Gespräch: 30 Minuten, kostenlos: Welche Arbeit wiederholt sich jede Woche, und wie viel Zeit kostet sie?
-2. Prozess kartieren: Wir dokumentieren den Ablauf von A bis Z und wählen die häufigen, regelbasierten Schritte aus, die sich lohnen.
-3. Bauplan und Festpreis: Innerhalb einer Woche: Bauplan, Demo und ein Festpreis-Angebot ohne versteckte Kosten.
-4. Bauen und prüfen: Wir bauen den Roboter und testen Normalfälle und Ausnahmen; Sonderfälle übernehmen Menschen.
-5. Betrieb: Geplante Läufe mit Überwachung und vollständigem Protokoll. Dann messen wir die Zeitersparnis und bauen aus, was funktioniert.
+### Fachkräfte fehlen – Routine muss nicht am Menschen hängen
 
-### Was Prozessautomatisierung kostet
+In Handwerksberufen konnten 2025 rechnerisch knapp 100.000 offene Stellen nicht besetzt werden, fast jede zweite. Allein in der Sanitär-, Heizungs- und Klimatechnik fehlten rund 10.900 Fachkräfte. Das zeigt eine Auswertung des Kompetenzzentrums Fachkräftesicherung (KOFA) am Institut der deutschen Wirtschaft.
+
+Zugleich setzen laut einer Bitkom-Befragung von 504 Handwerksbetrieben erst 4 Prozent künstliche Intelligenz ein; 72 Prozent sagen, sie hätten zu viel zu tun, um sich mit der Digitalisierung zu beschäftigen. Ein Assistent ersetzt keine Fachkraft. Er nimmt ihr die Schritte ab, für die es keinen Meisterbrief braucht.
+
+Quellen, Stand: Oktober 2026 KOFA Kompakt 7/2026: Fachkräftesicherung im Handwerk (Institut der deutschen Wirtschaft, Juni 2026, PDF) (https://www.kofa.de/media/Publikationen/KOFA_Kompakt/KOFA_Kompakt_07.2026_Handwerk.pdf); Bitkom: Handwerk – Azubis machen Betriebe fit für die Digitalisierung (Presseinformation, 28. August 2025) (https://www.bitkom.org/Presse/Presseinformation/Handwerk-Azubis-Betriebe-Digitalisierung)
+
+### Lokale KI für Unternehmen oder europäische Cloud: wo der Assistent läuft
+
+Sie wählen, wo die KI arbeitet. Im Standard läuft der Assistent in unserer Cloud-Umgebung. Anfragen und Unterlagen werden dabei von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet: in EU-Mitgliedstaaten, je nach Anbieter auch in EFTA-Staaten wie Norwegen oder der Schweiz. Sie werden nicht zum Training von Modellen verwendet.
+
+Technische Basis: GPT über Microsoft Azure OpenAI in der EU-Datenzone. Wir schließen mit Ihnen einen Vertrag zur Auftragsverarbeitung.
+
+Auf Wunsch läuft die Lösung auf einem Server in Ihrem Betrieb. Dann bleiben die Daten in Ihrem Haus. Dort arbeitet ein offenes Sprachmodell. Welche Aufgaben es gut löst und wo die Cloud-Variante im Vorteil ist, klären wir im Gespräch.
+
+### Was der KI-Assistent fürs Büro kostet
 
 Festpreise, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
 
-- KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server: Dokumentenverwaltung mit KI: ein Chatbot über Ihre Dokumente und automatisierte Abläufe, installiert auf einem lokalen Server bei Ihnen. Festpreis ab 2.999 €, netto zzgl. MwSt.
-- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- KI-Assistent fürs Büro: Anfragen erfassen, Daten finden, Vorgang, Termin und Angebotsentwurf vorbereiten – in der europäischen Datenzone oder mit Dokumenten-Chatbot auf einem Server in Ihrem Betrieb. Festpreis ab 2.999 €, netto zzgl. MwSt.
 - Alle Preise: https://www.rexity.ai/preise
 
-### Fahrzeugpflege Celle: feste Regeln statt Handarbeit
+### Was der Assistent nicht tut
 
-Aus der Praxis.
+- Er sendet nichts selbstständig: keine E-Mail, kein Angebot, keine Terminzusage ohne Freigabe.
+- Er trifft keine rechtlichen oder steuerlichen Entscheidungen und ersetzt keine Beratung.
+- Er legt keine Preise fest: Er rechnet mit Ihrer Preisliste, und Sie prüfen das Ergebnis.
+- Er soll nicht raten: Fehlende Angaben markiert er als offen.
 
-Bei diesem Fahrzeugpflege-Betrieb in Celle liefen Termine über Telefon und Nachrichten. Heute ist der Ablauf fest geregelt: Kunden buchen in vier Schritten, nur freie Zeiten werden angezeigt, Doppelbuchungen sind technisch ausgeschlossen, und Buchungsdaten werden 30 Tage nach dem Termin vollständig gelöscht.
+### So läuft das Projekt ab
 
-Kein klassisches RPA-Projekt, aber dasselbe Prinzip: Regeln statt Handarbeit. Eine RPA-Fallstudie zeigen wir, sobald ein solches Kundenprojekt live ist.
-
-Fallstudie: https://www.rexity.ai/work/chara
+1. Gespräch: 30 Minuten, kostenlos: Welche Anfragen kommen herein, und was passiert heute damit?
+2. Ablauf aufnehmen: Wir schreiben den Weg von der Anfrage bis zum Angebot auf und legen fest, an welchen Stellen ein Mensch freigibt.
+3. Bauplan und Festpreis: Sie bekommen Bauplan, Demo und ein Festpreis-Angebot ohne versteckte Kosten.
+4. Bauen, testen, begleiten: Wir testen mit echten Beispielen aus Ihrem Alltag. Live geht der Assistent erst nach Ihrer Freigabe; danach verbessern wir ihn anhand der Fälle, die tatsächlich kommen.
 
 ### Häufige Fragen
 
 - Frage: Wie entscheiden Sie, was zuerst automatisiert wird?
   Antwort: Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist.
-- Frage: Welche Abläufe eignen sich für RPA?
-  Antwort: Abläufe, die häufig vorkommen, klaren Regeln folgen und am Bildschirm stattfinden: Rechnungsverarbeitung, Dateneingabe, Berichte und der Abgleich zwischen Programmen. Weniger geeignet ist alles, was jedes Mal eine neue Entscheidung braucht.
-- Frage: Was passiert bei Fehlern oder Sonderfällen?
-  Antwort: Der Roboter übernimmt nur die Normalfälle. Sonderfälle gehen an einen Menschen, und wenn ein Lauf hakt, bekommen Sie eine Benachrichtigung.
-- Frage: Müssen wir dafür unsere Programme wechseln?
-  Antwort: In der Regel nicht. Wir automatisieren zwischen den Programmen, die Sie heute nutzen, etwa Postfach, Kundenverwaltung und internen Werkzeugen.
-- Frage: Was kostet RPA bei Ihnen?
-  Antwort: KI-Lösungen mit RPA und Dokumenten-Chatbot auf Ihrem eigenen Server gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
+- Frage: Was macht ein KI-Assistent im Büro?
+  Antwort: Er nimmt Anfragen auf, sucht die passenden Daten in Ihren Unterlagen und bereitet Vorgang, Terminvorschlag und Angebotsentwurf vor. Ein Mensch prüft und gibt frei. Wir richten ihn auf Ihre Abläufe, Vorlagen und Programme ein.
+- Frage: Verschickt der Assistent selbstständig E-Mails oder Angebote?
+  Antwort: Nein. Er schreibt Entwürfe. Antworten, Terminzusagen und Angebote gehen erst hinaus, wenn jemand in Ihrem Betrieb sie freigegeben hat. Jeder Schritt wird protokolliert.
+- Frage: Kann KI Angebote für einen Handwerksbetrieb erstellen?
+  Antwort: Einen Entwurf, ja: aus Ihrer Vorlage, Ihrer Preisliste und den Angaben aus der Anfrage. Aufmaß, Mengen und Preise prüft weiterhin eine Fachkraft, denn der Assistent kennt die Baustelle nicht. Er spart das Zusammensuchen und Abtippen, nicht die fachliche Entscheidung.
+- Frage: Wo werden unsere Daten verarbeitet?
+  Antwort: In der Cloud-Variante erfolgt die KI-Verarbeitung in europäischen Rechenzentren, in der europäischen Datenzone unseres Cloud-Anbieters. Auf Wunsch läuft die Lösung auf einem Server in Ihrem Betrieb. Dann bleiben die Daten in Ihrem Haus.
+- Frage: Was kostet der KI-Assistent fürs Büro?
+  Antwort: Den KI-Assistenten fürs Büro gibt es ab 2.999 € als Festpreis, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Gespräch, wenn der Umfang klar ist.
 
 ## WhatsApp-Automatisierung & Erinnerungen
 
@@ -1115,22 +1220,11 @@ Festpreise für den Bau, netto zzgl. MwSt. Welche Stufe zu Ihnen passt, klären 
 - KI-Chatbot: Ein KI-gestützter Chat-Assistent, der mit Ihren eigenen Inhalten antwortet. Festpreis ab 799 €, netto zzgl. MwSt.
 - Alle Preise: https://www.rexity.ai/preise
 
-### 12 Monate KI-Nutzung inklusive
-
-Für Chatbot-Projekte, die Sie bis zum 31.12.2026 bei Rexity Labs beauftragen. Die Laufzeit beginnt mit dem Go-live.
-
-- Was enthalten ist: Die laufenden Kosten des Sprachmodells für den Assistenten, den wir für Sie bauen: beim KI-Chatbot 12 Monate ab Go-live, bis zu 1.000 Unterhaltungen pro Monat; beim FAQ-Chatbot 6 Monate ab Go-live, bis zu 500 Unterhaltungen pro Monat. Eine Unterhaltung ist eine zusammenhängende Chat-Sitzung eines Besuchers mit höchstens 20 Nachrichten.
-- Was nicht enthalten ist: Der Festpreis für den Bau des Assistenten (siehe oben), Änderungen nach der Abnahme und die jährliche Betreuung.
-- Über der Obergrenze: Der Assistent antwortet bis zum Monatsende aus den festen Antworten (FAQ) weiter, oder wir rechnen die zusätzliche Nutzung zum Selbstkostenpreis ab. Sie legen das bei der Einrichtung fest.
-- Nach der Laufzeit: Die Modellkosten rechnen wir zum Selbstkostenpreis ab; die Höhe nennen wir vorab in Ihrem Angebot. Voraussetzung ist die Betreuung im Rahmen der Jährlichen Wartung, ab 999 € pro Jahr.
-- Was das Angebot nicht ist: Kein eigener API-Zugang, kein Guthaben, nicht übertragbar, keine Barauszahlung. Der Assistent läuft in unserer Cloud-Umgebung; die KI-Verarbeitung erfolgt in europäischen Rechenzentren.
-- Für wen: Unternehmen, Selbstständige und Vereine; kein Angebot an Verbraucher. Alle Preise netto zzgl. gesetzlicher MwSt.
-
 ### Was ein Chatbot im Betrieb kostet
 
 - FAQ-Chatbot: Was es ist: Bau zum Festpreis: beantwortet automatisch die häufigsten Fragen; Kosten: 499 € einmalig
 - KI-Chatbot: Was es ist: Bau zum Festpreis: versteht frei formulierte Fragen, nimmt Anfragen auf; Kosten: ab 799 € einmalig
-- Sprachmodell: Was es ist: Laufende Kosten pro Unterhaltung; Kosten: etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen, je nach Modell (Schätzung, siehe unten); bei Beauftragung bis 31.12.2026 inklusive, Bedingungen oben
+- Sprachmodell: Was es ist: Laufende Kosten pro Unterhaltung; Kosten: etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen, je nach Modell (Schätzung, siehe unten)
 - Betreuung: Was es ist: Jährliche Wartung: Sicherheitsupdates, Sicherungen, kleine Änderungen; Kosten: ab 999 € pro Jahr, optional
 
 Alle Preise netto zzgl. MwSt. Modellkosten: Schätzung auf Basis der Listenpreise, Stand 10/2026. Annahme: 1.000 Unterhaltungen mit je 6 Nachrichten, pro Nachricht rund 2.500 Token Eingabe und 250 Token Antwort, ohne Zwischenspeicherung. Spanne: Modelle verschiedener Anbieter mit Verarbeitung in der EU.
@@ -1163,7 +1257,7 @@ Für Ihren Chatbot legen wir gemeinsam fest, welche Angaben abgefragt werden, un
 - Frage: Erfindet es Dinge?
   Antwort: Es antwortet aus Ihren freigegebenen Inhalten und verweist bei Unsicherheit weiter.
 - Frage: Was kostet ein Chatbot für eine Website?
-  Antwort: Der Bau kostet als Festpreis 499 € (FAQ-Chatbot) oder ab 799 € (KI-Chatbot), netto zzgl. MwSt. Dazu kommt das Sprachmodell: nach unserer Schätzung auf Basis der Listenpreise (Stand 10/2026) etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen. Bei Beauftragung bis 31.12.2026 ist es 12 bzw. 6 Monate inklusive, mit den Bedingungen oben.
+  Antwort: Der Bau kostet als Festpreis 499 € (FAQ-Chatbot) oder ab 799 € (KI-Chatbot), netto zzgl. MwSt. Dazu kommt das Sprachmodell: nach unserer Schätzung auf Basis der Listenpreise (Stand 10/2026) etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen.
 - Frage: Was ist der Unterschied zwischen FAQ-Chatbot und KI-Chatbot?
   Antwort: Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden und kostet 499 €. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mit Ihren eigenen Inhalten und kostet ab 799 €. Beides sind Festpreise, netto zzgl. MwSt.
 - Frage: Ist ein KI-Chatbot DSGVO-konform?
@@ -1310,6 +1404,10 @@ Fallstudie: https://www.rexity.ai/work/levelkraft
 - Regelmäßiges Reporting zu Rankings, Besuchen und dem Unternehmensprofil
 - Sie sprechen direkt mit der Person, die an Ihrer Website arbeitet
 
+### Erst messen, dann optimieren
+
+- Website-Check kostenlos: Auffindbarkeit in einer Minute prüfen: Seitentitel, Beschreibung, Hauptüberschrift, „noindex“, strukturierte Daten, Sitemap und robots.txt – der Website-Check zeigt, ob Suchmaschinen Ihre Seite lesen können, und misst dazu das Tempo auf dem Handy. (https://www.rexity.ai/website-check)
+
 ### Was SEO bei uns kostet
 
 Für SEO und die Pflege des Unternehmensprofils gibt es keine Pauschalpakete: Nach einem kurzen Gespräch bekommen Sie einen Festpreis. Zum Einstieg eignet sich der Website-Check; für Aufgaben außerhalb eines Festpreises gilt unser Stundensatz.
@@ -1396,6 +1494,7 @@ Wartung bedeutet bei uns deshalb weniger Update-Routine und mehr Kontrolle: Lauf
 - Websites mit Online-Buchung: Wenn Kunden online buchen, kostet ein Ausfall Termine. Nach Updates prüfen wir die Buchung jedes Mal. (https://www.rexity.ai/web/web-design)
 - Online-Shops und Bezahlung: Checkout und Bestellmails müssen laufen; wir testen sie nach Änderungen. (https://www.rexity.ai/web/online-shop)
 - Betriebe ohne eigene IT: Niemand im Team muss sich um Technik kümmern: Sie schreiben uns, was sich ändern soll.
+- Website-Check: wo steht Ihre Seite heute?: Vor der Wartung steht der Befund. Der kostenlose Website-Check misst Tempo und Technik und prüft Auffindbarkeit, Anfrage-Wege und Pflichtseiten. (https://www.rexity.ai/website-check)
 
 ### Body & Care: ein ruhiger Start
 

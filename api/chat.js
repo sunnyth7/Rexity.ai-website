@@ -1173,6 +1173,60 @@ async function callAnthropic(turnPrompt, history, message, timeoutMs) {
   return readMessagesResponse(data, "anthropic", ANTHROPIC_MODEL, t0);
 }
 
+// ---- Plain completion for other functions (Sprint 27: api/check.js, the Website-Check's Kurzfazit) -----
+// Same EU-routed providers, keys, price list and daily cost ceiling as the chat, so the claim "Sprachmodell in
+// der europäischen Datenzone" holds for both; the non-EU Anthropic route is never used here, whatever
+// CHAT_ALLOW_NON_EU says. No site digest, no history: the caller passes one system and one user text.
+// -> { text, provider, usd }, or null when no EU provider is configured or today's cost ceiling is reached
+// (the caller then uses its own fixed text); throws when every provider fails.
+async function completeText({ system, user, timeoutMs, tag }) {
+  if (typeof fetch !== "function") return null;
+  const active = PROVIDERS.filter((p) => p !== "anthropic" && !(p === "bedrock" && bedrockCoolingDown()));
+  if (!active.length) return null;
+  let spent = spentToday();
+  if (persistActive()) {
+    const row = await persistBump(`day:${berlinDay()}`, 0, 0, 3 * 86400);
+    if (row) spent = Math.max(spent, row.usd);
+  }
+  if (spent >= DAILY_USD_CEILING) return null;
+  const label = String(tag || "complete").replace(/[^a-z0-9-]/gi, "").slice(0, 20) || "complete";
+  const ms = Math.min(MODEL_TIMEOUT_MS, Math.max(1000, timeoutMs || MODEL_TIMEOUT_MS));
+  let lastError = null;
+  for (const provider of active) {
+    try {
+      let result;
+      if (provider === "bedrock") {
+        const t0 = Date.now();
+        const body = { model: BEDROCK_MODEL, max_tokens: MAX_COMPLETION_TOKENS, system: [{ type: "text", text: String(system) }], messages: [{ role: "user", content: String(user) }] };
+        if (BEDROCK_THINKING === "off") body.thinking = { type: "disabled" };
+        let resp = await postBedrock(body, ms, "x-api-key");
+        if (resp.status === 401 || resp.status === 403) {
+          await resp.text().catch(() => "");
+          resp = await postBedrock(body, ms, "bearer");
+        }
+        if (!resp.ok) {
+          await resp.text().catch(() => "");
+          if (resp.status === 401 || resp.status === 403) bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
+          throw Object.assign(new Error("bedrock http " + resp.status), { status: resp.status });
+        }
+        result = readMessagesResponse(await resp.json(), "bedrock", BEDROCK_MODEL, t0);
+      } else {
+        result = await callModel([{ role: "system", content: String(system) }, { role: "user", content: String(user) }], ms);
+      }
+      const usd = estimateUsd(provider, result.usage);
+      recordSpend(usd);
+      if (persistActive()) await persistBump(`day:${berlinDay()}`, 1, usd, 3 * 86400);
+      return { text: result.text, provider: ENGINE_NAME[provider], usd };
+    } catch (error) {
+      if (error && error.usage) recordSpend(estimateUsd(provider, error.usage)); // a failed answer still costs
+      lastError = error;
+      // Status and message only, never the key or the text.
+      console.error("[" + label + "] " + provider + " failed" + (error && error.name === "AbortError" ? " (timeout)" : error && error.status ? " (status " + error.status + ")" : "") + ": " + (error && error.message));
+    }
+  }
+  throw lastError || new Error("no provider answered");
+}
+
 // ---- The contract applied to one model answer ---------------------------------------------
 // raw model text -> { text, links, removed, handover, trimmed, words, guard }
 function applyContract(raw, ctx) {
@@ -1412,6 +1466,8 @@ async function handler(req, res) {
 }
 
 module.exports = handler;
+// Sprint 27: the Website-Check (api/check.js) writes its Kurzfazit through the same EU providers and cost ceiling.
+module.exports.completeText = completeText;
 // For scripts/chat/test-chat.mjs and scripts/chat/eval.mjs (not used by Vercel).
 module.exports._test = {
   toPlainText, sanitizeAnswer, finalizeAnswer, sanitizeName, classifyIntent, resolveReplyLang, foreignLang, REPLY_LANGS, detectLanguage, cardsFor,

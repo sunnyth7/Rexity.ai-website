@@ -124,6 +124,43 @@
       vollständig KI-generiert sein; das ist dort angegeben.</li>
   </ul>
 
+  <div class="spacer-small"></div><h2 class="heading-style-h3">4b. Website-Check</h2>
+  <p>
+    Mit dem Website-Check prüfen wir eine von Ihnen eingegebene Internetadresse automatisch. Die Prüfung ist
+    kostenlos und ohne Anmeldung nutzbar; eine E-Mail-Adresse ist dafür nicht nötig.
+  </p>
+  <ul>
+    <li><strong>Abruf der Seite:</strong> Unser Server ruft die eingegebene Adresse sowie die Dateien
+      <code>robots.txt</code>, <code>sitemap.xml</code> und <code>llms.txt</code> derselben Website ab und wertet
+      den Quelltext aus (zum Beispiel Seitentitel, Kontaktwege, Links zu Impressum und Datenschutzerklärung,
+      eingebundene fremde Dienste). Der Abruf gibt sich als „RexityWebsiteCheck“ zu erkennen.</li>
+    <li><strong>Tempo-Messung:</strong> Die Ladezeit lassen wir über die PageSpeed-Insights-Schnittstelle von
+      Google (Google LLC, USA) messen. Übermittelt wird dafür nur die eingegebene Adresse; Ihre IP-Adresse
+      und andere Angaben zu Ihnen erhält Google dabei von uns nicht.</li>
+    <li><strong>Platz in der Suche (nur wenn diese Abfrage aktiv ist und Sie Gewerk und Ort angeben):</strong> Wir
+      fragen beim Suchdaten-Anbieter DataForSEO OÜ (Estland) die Google-Ergebnisse für den Suchbegriff aus
+      Gewerk und Ort ab. Übermittelt wird nur dieser Suchbegriff; ob die geprüfte Website darin vorkommt, werten
+      wir selbst aus.</li>
+    <li><strong>Kurzfazit:</strong> Ist ein Sprachmodell verfügbar, formuliert es aus den Prüfergebnissen ein
+      Kurzfazit; darauf weisen wir beim Ergebnis hin. Die KI-Verarbeitung erfolgt in der europäischen Datenzone
+      unseres Cloud-Anbieters (siehe §4a). Das Modell erhält die Befunde und den Namen der geprüften Website,
+      nicht den Text der Seite und keine E-Mail-Adresse. Andernfalls erscheint ein fest formulierter Text.</li>
+    <li><strong>Zwischenspeicher und Schutz vor Missbrauch:</strong> Das Prüfergebnis halten wir höchstens
+      24 Stunden vor, damit dieselbe Adresse nicht mehrfach gemessen wird; es enthält weder Ihre IP-Adresse noch
+      eine E-Mail-Adresse. Zur Begrenzung der Anfragen verarbeiten wir Ihre IP-Adresse für einige Minuten im
+      Arbeitsspeicher des Servers; gespeichert wird sie nicht (Art. 6 Abs. 1 lit. f DSGVO).</li>
+    <li><strong>Bericht per E-Mail (freiwillig):</strong> Fordern Sie den vollständigen Bericht an, verarbeiten wir
+      Ihre E-Mail-Adresse, um ihn Ihnen zu senden (Versand über Brevo, siehe §5.1; Art. 6 Abs. 1 lit. b DSGVO).
+      E-Mail-Adresse, geprüfte Adresse und das Ergebnis in Kurzform speichern wir dabei wie eine Kontaktanfrage
+      (siehe §7).</li>
+    <li><strong>Kontaktaufnahme nur mit Einwilligung:</strong> Zu Ihrem Ergebnis melden wir uns nur, wenn Sie
+      das gesonderte Häkchen „Rexity Labs darf mich zu diesem Ergebnis kontaktieren“ setzen (Art. 6 Abs. 1
+      lit. a DSGVO). Die Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen, zum Beispiel
+      per E-Mail an info@rexity.ai.</li>
+    <li>Der Website-Check ist eine automatische Momentaufnahme und keine Rechtsberatung. Bitte geben Sie nur
+      Adressen öffentlich erreichbarer Websites ein.</li>
+  </ul>
+
   <div class="spacer-small"></div><h2 class="heading-style-h3">5. Auftragsverarbeiter und Drittanbieter</h2>
   <p>
     Mit den nachstehenden Auftragsverarbeitern haben wir, soweit erforderlich, Verträge zur
@@ -134,7 +171,7 @@
   <ul>
     <li>
       <strong>Vercel Inc.</strong> (Sitz in den USA) — Hosting der Website und der Server-Funktionen
-      (Kontaktformular, Terminbuchung, KI-Assistent). Die Seiten werden über das weltweite
+      (Kontaktformular, Terminbuchung, KI-Assistent, Website-Check). Die Seiten werden über das weltweite
       Auslieferungsnetz von Vercel bereitgestellt; die Server-Funktionen werden in Frankfurt am Main
       ausgeführt. Verarbeitet werden Anfrage-Metadaten (IP-Adresse, Browser, aufgerufene Adresse);
       Vercel kann dabei Daten auch in den USA verarbeiten. Rechtsgrundlage Art. 6 Abs. 1 lit. f DSGVO.
@@ -163,6 +200,15 @@
       Sprachmodell des KI-Assistenten, bereitgestellt in der EU-Datenzone (EU-Mitgliedstaaten, ggf. EFTA-Staaten;
       siehe §4a). Auftragsverarbeitung nach dem Datenschutznachtrag zu den
       Microsoft-Produktbedingungen (DPA).
+    </li>
+    <li>
+      <strong>Google LLC</strong> (USA) — PageSpeed-Insights-Schnittstelle für die Tempo-Messung im
+      Website-Check. Übermittelt wird nur die Adresse der zu prüfenden Website, keine Angaben zu Besuchern
+      (siehe §4b).
+    </li>
+    <li>
+      <strong>DataForSEO OÜ</strong> (Tallinn, Estland) — Abfrage von Suchergebnissen im Website-Check, nur wenn
+      diese Abfrage aktiv ist. Übermittelt wird nur der Suchbegriff aus Gewerk und Ort (siehe §4b).
     </li>
     <li>
       <strong>Schriftarten, Stylesheets und Skripte</strong> — werden ausschließlich von unserer eigenen
@@ -243,6 +289,7 @@
     <li>Nicht konvertierte Leads: 18 Monate.</li>
     <li>Kontaktdaten aus dem Startformular des KI-Assistenten: wie nicht konvertierte Leads.</li>
     <li>Chat-Verlauf: nur in Ihrem Browser, 30 Tage; bei uns wird er nicht gespeichert.</li>
+    <li>Website-Check: Prüfergebnisse höchstens 24 Stunden im Zwischenspeicher; angeforderte Berichte (E-Mail-Adresse, geprüfte Adresse, Ergebnis in Kurzform) wie nicht konvertierte Leads.</li>
     <li>Opt-out-Liste: bis zum Widerruf der Abmeldung — gesetzlich notwendig.</li>
   </ul>
 

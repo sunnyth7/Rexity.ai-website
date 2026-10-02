@@ -180,3 +180,5 @@ module.exports = async function handler(req, res) {
     res.end(JSON.stringify({ ok: false, error: "Could not save your message. Please email info@rexity.ai." }));
   }
 };
+// Sprint 27: the Website-Check (api/check.js) stores its report requests through the same insert.
+module.exports.insertLead = insertLead;

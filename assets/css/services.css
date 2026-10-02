@@ -636,6 +636,17 @@ a.sv-card:hover .sv-card__go { text-decoration: underline; text-underline-offset
 .rexity-chat-ready .sv-demo__off { display: none; }
 .sv-demo__shot { max-width: 420px; justify-self: center; }
 .sv-demo__caption { padding: 10px 2px 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
+/* Sprint 28 (/automation/rpa): generated illustration with caption and the small AI note (same rule as
+   articles.css .ax-ai-note, which is not loaded on service pages); source links under a text section. */
+.sv-figure { align-self: start; }
+.sv-figure__caption { display: block; padding: 10px 2px 0; color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
+.sv-figure__text { display: block; }
+.sv-main .ax-ai-note { display: block; margin-top: 4px; font-size: 0.625rem; line-height: 1.4; letter-spacing: 0.01em; color: var(--rx-muted); }
+.sv-scene { margin-bottom: 24px; }
+.sv-sources { max-width: var(--rx-measure); margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--rx-line); color: var(--rx-muted); font-size: 0.875rem; line-height: 1.5; }
+.sv-sources__label { margin: 0 0 6px; }
+.sv-sources__list { display: grid; gap: 4px; margin: 0; padding-left: 18px; }
+.sv-sources__list .rx-link { display: inline; min-height: 0; overflow-wrap: anywhere; }
 .sv-table-wrap { width: 100%; }
 .sv-table { width: 100%; border-collapse: collapse; color: var(--rx-ink); font-size: 1rem; line-height: 1.5; }
 .sv-table caption { padding-bottom: 10px; color: var(--rx-muted); font-size: 0.875rem; text-align: left; caption-side: top; }

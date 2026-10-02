@@ -154,7 +154,9 @@ function confirmationMail(f, sender, replyTo) {
   };
 }
 
-async function notifyLead(input) {
+// opts.confirmation === false: only the internal mail (Sprint 27: the Website-Check sends its own report mail to
+// the visitor through sendMail(); the standard "we reply within one working day" confirmation would be wrong there).
+async function notifyLead(input, opts) {
   const apiKey = str(process.env.BREVO_API_KEY);
   if (!apiKey) return { sent: false, reason: "not_configured" };
   // Key shape only (never the value), to tell an API key from an SMTP/MCP key.
@@ -185,7 +187,7 @@ async function notifyLead(input) {
     result.internal = r1.status;
     console.log("[notify] kind=" + f.kind + " mail=internal sent=" + r1.ok + " status=" + r1.status + (r1.ok ? "" : " key=" + keyShape + " detail=" + r1.detail));
 
-    if (f.email && EMAIL_RE.test(f.email)) {
+    if (f.email && EMAIL_RE.test(f.email) && !(opts && opts.confirmation === false)) {
       const r2 = await brevoSend(apiKey, confirmationMail(f, { name: "Rexity Labs UG", email: fromEmail }, { email: toEmail }));
       result.confirmation = r2.status;
       console.log("[notify] kind=" + f.kind + " mail=confirmation sent=" + r2.ok + " status=" + r2.status + (r2.ok ? "" : " detail=" + r2.detail));
@@ -201,4 +203,31 @@ async function notifyLead(input) {
   }
 }
 
-module.exports = { notifyLead, escapeHtml };
+// Sprint 27: one transactional mail to a visitor who asked for it (the Website-Check report), same Brevo account,
+// sender and reply-to as the confirmation mail. -> { sent, status?, reason? }. Logs metadata only.
+async function sendMail(m) {
+  const apiKey = str(process.env.BREVO_API_KEY);
+  if (!apiKey) return { sent: false, reason: "not_configured" };
+  const to = str(m && m.to);
+  if (!EMAIL_RE.test(to)) return { sent: false, reason: "bad_address" };
+  const fromEmail = str(process.env.LEAD_NOTIFY_FROM) || "info@rexity.ai";
+  const toEmail = str(process.env.LEAD_NOTIFY_TO) || "info@rexity.ai";
+  try {
+    const r = await brevoSend(apiKey, {
+      sender: { name: "Rexity Labs UG", email: fromEmail },
+      to: [{ email: to }],
+      replyTo: { email: toEmail },
+      subject: str(m.subject).slice(0, 200),
+      textContent: String(m.textContent || ""),
+      htmlContent: String(m.htmlContent || "")
+    });
+    console.log("[notify] mail=report sent=" + r.ok + " status=" + r.status + (r.ok ? "" : " detail=" + r.detail));
+    return r.ok ? { sent: true, status: r.status } : { sent: false, status: r.status, reason: "http_" + r.status };
+  } catch (err) {
+    const reason = err && err.name === "AbortError" ? "timeout" : "fetch_error";
+    console.log("[notify] mail=report sent=false reason=" + reason);
+    return { sent: false, reason: reason };
+  }
+}
+
+module.exports = { notifyLead, escapeHtml, sendMail };
