@@ -163,8 +163,9 @@
       Gewerk und Ort ab. Übermittelt wird nur dieser Suchbegriff; ob die geprüfte Website darin vorkommt, werten
       wir selbst aus. Das Ergebnis steht im Bericht per E-Mail.</li>
     <li><strong>Kurzfazit:</strong> Ist ein Sprachmodell verfügbar, formuliert es aus den Punktwerten ein
-      Kurzfazit; darauf weisen wir beim Ergebnis hin. Die KI-Verarbeitung erfolgt in der europäischen Datenzone
-      unseres Cloud-Anbieters (siehe §4a). Das Modell erhält den Namen der geprüften Website, die Punktwerte und
+      Kurzfazit; darauf weisen wir beim Ergebnis hin. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren: über
+      Amazon Bedrock mit EU-Inferenzprofil, ersatzweise in der europäischen Datenzone von Microsoft Azure (siehe
+      §5.1 und §5.2). Das Modell erhält den Namen der geprüften Website, die Punktwerte und
       die Anzahl der Prüfpunkte je Status, keinen einzelnen Befund, nicht den Text der Seite und keine
       E-Mail-Adresse. Andernfalls erscheint ein fest formulierter Text.</li>
     <li><strong>Zwischenspeicher und Begrenzung der Anfragen:</strong> Das Prüfergebnis halten wir höchstens
@@ -286,9 +287,9 @@
       Vorlagen). Nicht aktiv. Aktivierung erst nach abgeschlossener WhatsApp-Business-Verifikation.</li>
     <li><strong>Vapi / Retell / Twilio</strong> (Auswahl ausstehend) — Sprachprovider für die KI-Sprachassistenz
       „Rexona". Nicht aktiv. Standardmäßig ohne Aufzeichnung; Aufzeichnung nur nach ausdrücklicher Einwilligung.</li>
-    <li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg) — Amazon Bedrock mit EU-Inferenzprofil als weiteres
-      Sprachmodell (Claude von Anthropic), zuerst für das Kurzfazit des Website-Checks, später auch für den
-      KI-Assistenten; Verarbeitung in EU-Regionen. Vorbereitet, nicht aktiv.</li>
+    <li><strong>Amazon Web Services EMEA SARL</strong> (Luxemburg) — Amazon Bedrock mit EU-Inferenzprofil als
+      Sprachmodell (Claude von Anthropic) für das Kurzfazit des Website-Checks; Verarbeitung in EU-Regionen.
+      Seit 02.10.2026 aktiv. Für den KI-Assistenten vorbereitet, dort nicht aktiv.</li>
     <li><strong>Sentry oder Datadog</strong> (optional) — Fehlerprotokollierung. Nicht aktiv.</li>
   </ul>
 
