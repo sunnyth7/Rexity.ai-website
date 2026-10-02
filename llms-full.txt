@@ -484,33 +484,33 @@ Der kostenlose Website-Check für Betriebe: Adresse eingeben, in etwa einer Minu
 
 Der Website-Check prüft kostenlos und in etwa einer Minute, ob Ihre Website Anfragen bringen kann: wie schnell sie auf dem Handy lädt, ob Suchmaschinen sie lesen können, wie leicht ein Besucher anruft, schreibt oder bucht, und ob Verschlüsselung und Pflichtseiten vorhanden sind. Sie erhalten vier Werte von 0 bis 100, die Befunde im Klartext und den Schritt, der am meisten bringt – ohne Anmeldung und ohne E-Mail-Adresse.
 
-Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, Praxis, Studio, Salon, Werkstatt, Laden. Sie müssen nichts installieren und nichts von Technik verstehen. Geprüft wird genau die Adresse, die Sie eingeben – in der Regel Ihre Startseite, denn dort entscheidet sich meist, ob ein Besucher anfragt oder weiterklickt.
+Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, Praxis, Studio, Salon, Werkstatt, Laden. Sie müssen nichts installieren und nichts von Technik verstehen. Geprüft wird die Adresse, die Sie eingeben – in der Regel Ihre Startseite, denn dort entscheidet sich meist, ob ein Besucher anfragt oder weiterklickt. Für die Kontaktwege liest der Check zusätzlich bis zu vier dort verlinkte Kontakt- und Buchungsseiten, weil Telefonnummer, Formular oder Buchung oft erst dort stehen.
 
 ### Vier Bereiche – und warum sie für Anfragen zählen
 
 Jeder Bereich beantwortet eine Frage, die sich ein Besucher nie laut stellt:
 
-- Tempo & Technik: Lädt die Seite auf dem Handy zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT).
+- Tempo & Technik: Lädt die Seite zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT). Antwortet diese Messung nicht, messen wir selbst ohne Browser: Antwortzeit des Servers, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt immer das Verfahren.
 - Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Mit Gewerk und Ort sehen wir zusätzlich nach, ob Ihre Seite für diese Suche unter den ersten 20 Ergebnissen bei Google steht – sofern die Abfrage verfügbar ist.
-- Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
+- Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang – auf der eingegebenen Seite und auf bis zu vier dort verlinkten Kontakt- und Buchungsseiten. Das Ergebnis sagt, wo etwas gefunden wurde. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
 - Vertrauen & Recht: Hinweise, keine Rechtsberatung: verschlüsselte Verbindung (HTTPS), Links zu Impressum und Datenschutzerklärung, ein Link zu einer Erklärung zur Barrierefreiheit. Zusätzlich listen wir fremde Dienste auf, die schon beim Aufruf geladen werden, etwa Schriftarten oder Statistik-Skripte. Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.
 
 ### So lesen Sie die Punkte
 
 Die Punkte sagen, wie viele der geprüften Voraussetzungen erfüllt sind – nicht, wie schön Ihre Seite ist. Ab 80 Punkten ist ein Bereich in Ordnung, zwischen 50 und 79 lohnt ein Blick in die Befunde, unter 50 fehlt Grundlegendes.
 
-Steht bei einem Bereich „nicht prüfbar“, ließ er sich in diesem Moment nicht messen – etwa weil die Seite nicht geantwortet hat oder die Tempo-Messung ausgelastet war. Dann raten wir nicht, sondern lassen den Bereich aus dem Gesamtwert heraus. Tempo-Werte schwanken außerdem von Lauf zu Lauf um einige Punkte; ein einzelner Wert ist eine Momentaufnahme.
+Steht bei einem Bereich „nicht prüfbar“, ließ er sich in diesem Moment nicht prüfen – in der Regel, weil die Seite nicht geantwortet hat. Dann raten wir nicht, sondern lassen den Bereich aus dem Gesamtwert heraus. Antwortet nur die Lighthouse-Messung nicht, messen wir das Tempo selbst ohne Browser; im Ergebnis steht, welches Verfahren lief. Tempo-Werte schwanken außerdem von Lauf zu Lauf um einige Punkte; ein einzelner Wert ist eine Momentaufnahme.
 
 ### Was der Check nicht sagen kann
 
 Ein automatischer Check sieht nur, was im Quelltext einer Seite steht. Das bleibt offen:
 
 - Ob wirklich Anfragen kommen: Geprüft werden die Voraussetzungen, nicht Ihre Besucherzahlen oder Ihr Umsatz.
-- Wie Ihre ganze Website abschneidet: Geprüft wird die eine eingegebene Adresse, nicht jede Unterseite.
+- Wie Ihre ganze Website abschneidet: Geprüft werden die eingegebene Adresse und bis zu vier verlinkte Kontakt- und Buchungsseiten, nicht jede Unterseite.
 - Ob Texte und Bilder überzeugen: Ob Ihr Angebot verständlich ist und die Fotos passen, beurteilt nur ein Mensch.
 - Ob Formular und Buchung funktionieren: Der Check sieht, dass ein Formular da ist – er schickt nichts ab.
 - Was nach einer Einwilligung geladen wird: Wir sehen den Quelltext beim ersten Aufruf, nicht das, was ein Einwilligungs-Banner später nachlädt.
-- Wie echte Besucher das Tempo erleben: Die Werte sind Laborwerte auf einem simulierten Handy.
+- Wie echte Besucher das Tempo erleben: Die Werte sind Laborwerte auf einem simulierten Handy oder, wenn diese Messung nicht antwortet, unsere eigene Messung ohne Browser.
 - Ob Ihre Seite rechtlich in Ordnung ist: Die Hinweise ersetzen keine Rechtsberatung.
 
 ### Unsere eigenen Werte: Lighthouse mobil, lokale Messung
@@ -526,7 +526,7 @@ Lighthouse mobil, lokale Messung, 02.10.2026. Zwei Läufe je Seite; Barrierefrei
 
 Die 89 auf der Webdesign-Seite im ersten Lauf zeigen, was „Momentaufnahme“ heißt: Im zweiten Lauf erreichte dieselbe Seite 100. Unser Ziel für jede Seite, die wir bauen: 95+ in allen vier Lighthouse-Werten. Das ist ein Ziel, keine Zusage für jedes Projekt und jeden Lauf – Videos, Karten oder eingebundene Buchungssysteme kosten Tempo, und darüber sprechen wir vorher.
 
-Den Website-Check haben wir am selben Tag auf unsere eigene Startseite angewendet: Auffindbarkeit 100, Vertrauen & Recht 100, Anfrage-Tauglichkeit 80 – ein WhatsApp-Link und ein Kartenlink fehlten dort. Die Tempo-Messung über die öffentliche Schnittstelle war in diesem Lauf nicht verfügbar; der Bereich stand deshalb als „nicht prüfbar“ im Ergebnis.
+Den Website-Check haben wir am selben Tag auf unsere eigene Startseite angewendet: Gesamt 90, Auffindbarkeit 100, Vertrauen & Recht 100, Anfrage-Tauglichkeit 80 – ein WhatsApp-Link und ein Kartenlink fehlten dort. Die Lighthouse-Messung über die öffentliche Schnittstelle antwortete in diesem Lauf nicht; Tempo & Technik stammt deshalb aus unserer eigenen Messung ohne Browser: 87 von 100. Abzüge gab es für das HTML-Dokument der Startseite (323 KB; volle Punkte gibt es bis 100 KB) und dafür, dass nur 46 von 72 Bildern feste Maße tragen.
 
 ### Nach dem Check: was jetzt sinnvoll ist
 
@@ -546,17 +546,17 @@ Der Website-Check auf dieser Seite ist kostenlos und läuft automatisch. Was ein
 ### Häufige Fragen
 
 - Frage: Ist der Website-Check wirklich kostenlos?
-  Antwort: Ja. Die Prüfung kostet nichts, und Sie brauchen weder ein Konto noch eine E-Mail-Adresse: Punkte, Befunde und der erste Schritt stehen direkt auf der Seite. Nur für den vollständigen Bericht per E-Mail geben Sie eine Adresse an. Kontakt nehmen wir nur auf, wenn Sie das gesonderte Häkchen setzen.
+  Antwort: Ja. Die Prüfung kostet nichts, und Sie brauchen weder ein Konto noch eine E-Mail-Adresse: Punkte, alle Befunde und die nächsten Schritte stehen direkt auf der Seite. Nur wenn Sie den Bericht zusätzlich per E-Mail möchten, geben Sie eine Adresse an. Kontakt nehmen wir nur auf, wenn Sie das gesonderte Häkchen setzen.
 - Frage: Woher kommen die Tempo-Werte?
-  Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
+  Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Antwortet diese Messung nicht, messen wir selbst ohne Browser, was Ihr Server ausliefert: Antwortzeit, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt das Verfahren; die eigene Messung ersetzt keinen Lighthouse-Lauf in einem echten Browser. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
 - Frage: Sagt mir der Check, auf welchem Platz ich bei Google stehe?
   Antwort: Nur als Stichprobe: Wenn Sie Gewerk und Ort angeben und die Abfrage verfügbar ist, sehen wir nach, ob Ihre Seite für genau diese Suche unter den ersten 20 Ergebnissen in Deutschland steht. Suchergebnisse unterscheiden sich je nach Standort und Gerät; der Platz ist deshalb ein Hinweis und fließt nicht in die Punkte ein.
 - Frage: Was passiert mit der Adresse, die ich eingebe?
-  Antwort: Wir rufen die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
+  Antwort: Wir rufen die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt, bis zu vier dort verlinkte Kontakt- und Buchungsseiten derselben Website und die Kopfdaten einiger Bilder und Dateien der Seite. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
 - Frage: Ist das Kurzfazit von einer KI geschrieben?
   Antwort: Wenn ein Sprachmodell verfügbar ist, formuliert es das Kurzfazit aus den Messwerten Ihres Ergebnisses; das steht dann darunter. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Das Modell erhält nur die Befunde, nicht den Text Ihrer Seite und keine E-Mail-Adresse. Jede Zahl im Kurzfazit wird gegen das Ergebnis geprüft; passt etwas nicht, erscheint ein fest formulierter Text.
 - Frage: Ersetzt der Check eine SEO-Analyse oder eine Rechtsprüfung?
-  Antwort: Nein. Er prüft eine Seite auf 25 bewertete Punkte und liefert Hinweise. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
+  Antwort: Nein. Er prüft eine Seite und bis zu vier verlinkte Kontakt- und Buchungsseiten auf 25 bis 30 bewertete Punkte, je nach Messverfahren für das Tempo, und liefert Hinweise. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
 
 ## Online-Shop & Stripe-Checkout
 

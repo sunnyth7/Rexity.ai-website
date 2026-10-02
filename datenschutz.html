@@ -137,10 +137,15 @@
     <li><strong>Abruf der Seite:</strong> Unser Server ruft die eingegebene Adresse sowie die Dateien
       <code>robots.txt</code>, <code>sitemap.xml</code> und <code>llms.txt</code> derselben Website ab und wertet
       den Quelltext aus (zum Beispiel Seitentitel, Kontaktwege, Links zu Impressum und Datenschutzerklärung,
-      eingebundene fremde Dienste). Der Abruf gibt sich als „RexityWebsiteCheck“ zu erkennen.</li>
+      eingebundene fremde Dienste). Für die Kontaktwege liest er zusätzlich bis zu vier dort verlinkte Seiten
+      derselben Website, deren Linktext oder Adresse nach Kontakt oder Buchung klingt, und fragt die Kopfdaten
+      einiger Bilder und Dateien der Seite ab (Größe, Angaben zum Zwischenspeichern). Der Abruf gibt sich als
+      „RexityWebsiteCheck“ zu erkennen und beachtet die <code>robots.txt</code> der Website.</li>
     <li><strong>Tempo-Messung:</strong> Die Ladezeit lassen wir über die PageSpeed-Insights-Schnittstelle von
       Google (Google LLC, USA) messen. Übermittelt wird dafür nur die eingegebene Adresse; Ihre IP-Adresse
-      und andere Angaben zu Ihnen erhält Google dabei von uns nicht.</li>
+      und andere Angaben zu Ihnen erhält Google dabei von uns nicht. Antwortet die Schnittstelle nicht, messen
+      wir selbst ohne Browser (Antwortzeit des Servers, Größe der Seite, Bilder, blockierende Dateien); die
+      Adresse geht auch dann vorher an die Schnittstelle.</li>
     <li><strong>Platz in der Suche (nur wenn diese Abfrage aktiv ist und Sie Gewerk und Ort angeben):</strong> Wir
       fragen beim Suchdaten-Anbieter DataForSEO OÜ (Estland) die Google-Ergebnisse für den Suchbegriff aus
       Gewerk und Ort ab. Übermittelt wird nur dieser Suchbegriff; ob die geprüfte Website darin vorkommt, werten
