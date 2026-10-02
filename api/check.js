@@ -1,7 +1,7 @@
 // /api/check — the Website-Check behind /website-check (Sprint 27, docs/seo/AI_OFFERS_PLAN.md §6.2).
 //
 // POST { url, trade?, town?, lang? }            -> the report as JSON (about a minute: PageSpeed is the slow part)
-// POST { url, email, consent?, lang? }          -> sends the full report to that address (Brevo, api/_notify.js),
+// POST { url, email, lang? }                   -> sends the full report to that address (Brevo, api/_notify.js),
 //                                                  stores a lead (api/lead.js path, service "Website-Check")
 //
 // What it does, block by block. A block that cannot be checked is reported as "nicht prüfbar" and gets no
@@ -1643,8 +1643,8 @@ function reportMail(report, lang) {
     ? `So bewerten wir: Jeder Bereich erhält 0 bis 100 Punkte aus den Prüfpunkten, die sich prüfen ließen. Gesamt = Tempo & Technik ${WEIGHTS.blocks.tempo} %, Auffindbarkeit ${WEIGHTS.blocks.find} %, Anfrage-Tauglichkeit ${WEIGHTS.blocks.contact} %, Vertrauen & Recht ${WEIGHTS.blocks.trust} %. Die vollständige Regel steht auf https://www.rexity.ai/website-check. ${tempoLine.de} Der Check ist eine automatische Momentaufnahme der eingegebenen Seite und ersetzt keine Rechtsberatung.`
     : `How we score: each area gets 0 to 100 points from the checks that could be carried out. Overall = speed & technology ${WEIGHTS.blocks.tempo}%, findability ${WEIGHTS.blocks.find}%, readiness for enquiries ${WEIGHTS.blocks.contact}%, trust & legal ${WEIGHTS.blocks.trust}%. The full rule is on https://www.rexity.ai/website-check. ${tempoLine.en} The check is an automatic snapshot of the page you entered and does not replace legal advice.`;
   const why = de
-    ? "Sie erhalten diese E-Mail, weil diese Adresse auf rexity.ai/website-check für den Bericht eingetragen wurde. Wir nutzen sie nur für diesen Versand – außer Sie haben dort zugestimmt, dass wir Sie zu dem Ergebnis kontaktieren dürfen."
-    : "You receive this e-mail because this address was entered for the report on rexity.ai/website-check. We use it only to send this report – unless you agreed there that we may contact you about the result.";
+    ? "Sie erhalten diese E-Mail, weil diese Adresse auf rexity.ai/website-check für den Bericht eingetragen wurde. Mit der Anforderung haben Sie eingewilligt, dass wir Sie per E-Mail zu diesem Ergebnis und zu passenden Leistungen kontaktieren. Widerruf jederzeit: eine kurze Nachricht an info@rexity.ai genügt."
+    : "You receive this e-mail because this address was entered for the report on rexity.ai/website-check. By requesting it you agreed that we may contact you by e-mail about this result and about matching services. To withdraw, a short message to info@rexity.ai is enough.";
   const sig = ["Rexity Labs UG (haftungsbeschränkt)", "info@rexity.ai", "+49 174 2471435", "www.rexity.ai"];
   text.push(rule, "", why, "", ...sig);
   html += `<p style="font-size:12px;color:#555;margin-top:20px">${esc(rule)}</p><p style="font-size:12px;color:#555">${esc(why)}</p><p>${sig.map(esc).join("<br>")}</p></div>`;
@@ -1737,7 +1737,7 @@ async function handler(req, res) {
       today().mails++;
       const { report } = await getReport(input, ip, lang);
       const notify = deps.notify || require("./_notify");
-      const consent = data.consent === true || data.consent === "true" || data.consent === "on" || data.consent === 1;
+      const consent = true; // since 2 Oct 2026 the form states it: requesting the report includes consent to be contacted (no separate tick)
       const mail = reportMail(report, lang);
       const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
       if (!sent || !sent.sent) {

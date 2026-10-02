@@ -416,7 +416,7 @@
     }
     emailInput.removeAttribute("aria-invalid");
     setMail("sending");
-    post({ url: state.last.url, email: email, consent: !!mail.elements.consent.checked, lang: lang(), company_website: mail.elements.company_website.value }, 100000).then(function (r) {
+    post({ url: state.last.url, email: email, lang: lang(), company_website: mail.elements.company_website.value }, 100000).then(function (r) {
       if (r.data && r.data.ok) { setMail("sent"); return; }
       setMail("fail");
       if (r.data && r.data.message) mailStatus.textContent = r.data.message;
