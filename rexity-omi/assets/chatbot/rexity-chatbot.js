@@ -21,7 +21,8 @@
   // stays exactly as before (WhatsApp + E-Mail); the "Chatbot" entry, the greeting bubble
   // and the chat panel are off. GO-LIVE = set CHAT_ENABLED to true on the next line and
   // bump CHATBOT_VERSION in scripts/lib/shell.mjs, then npm run build (docs/CHATBOT.md).
-  var CHAT_ENABLED = false;
+  // Founder, 2 Oct 2026: "go, switch the chat on" (eval 78/80 on production, docs/logs/sprint-25.md).
+  var CHAT_ENABLED = true;
   // Tester override (Sprint 25): opening any page with ?chat=1 enables the chat in this
   // browser (localStorage) while the switch is off; ?chat=0 clears it.
   function chatOverride() {
@@ -35,6 +36,24 @@
     }
   }
   var CHAT_ON = CHAT_ENABLED || chatOverride();
+
+  // ---- "Open the chat" hook (Sprint 26, /automation/chatbots live demo) ----------
+  // Any element with data-rexity-open-chat opens the chat panel on click — but only when
+  // the chat is available (CHAT_ENABLED, or the ?chat=1 tester override) and the panel has
+  // been built. Otherwise the click is left alone, so the element keeps its own behaviour:
+  // the demo button is a link to /#kontakt with data-rx-open="booking" (booking modal;
+  // without JavaScript the contact section). The listener sits on window in the capture
+  // phase, so it runs before the booking handler of rexity.js (document, capture) and stops
+  // it when the chat opens. When the chat is available, <html> gets .rexity-chat-ready, so a
+  // page can hide text that only applies while the chat is off (services.css .sv-demo__off).
+  var openChatHook = null;
+  window.addEventListener("click", function (event) {
+    var el = event.target && event.target.closest && event.target.closest("[data-rexity-open-chat]");
+    if (!el || !openChatHook) return;
+    event.preventDefault();
+    event.stopPropagation();
+    openChatHook();
+  }, true);
 
   var CONTACT = {
     email: "info@rexity.ai",
@@ -970,6 +989,8 @@
     }
 
     menuChatBtn.addEventListener("click", openChat);
+    openChatHook = openChat; // data-rexity-open-chat (see the hook at the top)
+    document.documentElement.classList.add("rexity-chat-ready");
     nudgeText.addEventListener("click", openChat);
     nudgeClose.addEventListener("click", function () {
       markIntroSeen();

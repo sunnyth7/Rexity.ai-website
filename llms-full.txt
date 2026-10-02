@@ -29,7 +29,7 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 - [Online-Shop mit Stripe-Checkout](https://www.rexity.ai/web/online-shop): Online-Shop oder Website mit Stripe-Checkout erstellen lassen: Kartenzahlung, SEPA, Apple Pay, Google Pay. Aus dem Landkreis Celle, Festpreis ab 5.999 €. Preise: Website mit Online-Checkout ab 5.999 € (Festpreise, netto zzgl. MwSt.).
 - [App-Entwicklung für iOS (App Store) und Android (Google Play)](https://www.rexity.ai/web/mobile-apps): App-Entwicklung für iPhone und Android aus einer Codebasis, inklusive Veröffentlichung im App Store und bei Google Play. Festpreis ab 4.900 €. Preise: Mobile App (iPhone & Android) ab 4.900 € (Festpreise, netto zzgl. MwSt.).
 - [Web-Apps, SaaS-Plattformen und Dashboards](https://www.rexity.ai/web/saas): Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
-- [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
+- [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren Inhalten, Verarbeitung in der EU, ab 799 € Festpreis. Jetzt live testen – direkt auf dieser Seite. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
 - [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
 - [Terminerinnerung per SMS, E-Mail und WhatsApp](https://www.rexity.ai/automation/terminerinnerung): Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit. Preise: E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
 - [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): Prozessautomatisierung (RPA) für KMU: wiederkehrende Abläufe wie Dateneingabe, Rechnungen und Reports laufen automatisch. Ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € (Festpreise, netto zzgl. MwSt.).
@@ -441,13 +441,14 @@ Was sich je Gewerk unterscheidet, ist die Anfrage: Ein Elektro- oder SHK-Betrieb
 
 Bei einer Kfz-Werkstatt steht dagegen oft die feste Terminbuchung im Vordergrund: Der Kunde wählt Leistung, Tag und Uhrzeit, und der Termin ist sofort verbindlich. Ein Dachdecker oder Tischler braucht eher die Besichtigung vor Ort und ein gut vorbereitetes Angebot. Beides lässt sich auf einer Website verbinden.
 
-### Weiterlesen: Webdesign, Terminbuchung und Relaunch
+### Weiterlesen: Webdesign, Terminbuchung, Relaunch und Chatbot
 
 Die Seiten zu den Fragen, die bei Handwerksbetrieben am häufigsten dazukommen:
 
 - Webdesign Celle: Websites mit Online-Buchung: Wie wir Websites gestalten und programmieren – mit Anfrage-, Termin- oder Kursbuchung, aus Hermannsburg im Landkreis Celle. (https://www.rexity.ai/web/web-design)
 - Website mit Terminbuchung für Werkstätten: Eine Seite pro Leistung, nur freie Zeiten, keine Doppelbuchung – für Kfz-Aufbereiter und Werkstätten. (https://www.rexity.ai/kfz-aufbereitung-website)
 - Website-Relaunch ohne Ranking-Verlust: Die alte Seite durch eine neue ersetzen, mit Weiterleitungen, Domain und E-Mail – ab 1.299 €. (https://www.rexity.ai/web/website-umzug)
+- KI-Chatbot für die Website eines Handwerksbetriebs: Ein Assistent beantwortet Fragen zu Leistungen, Einsatzgebiet und Ablauf aus Ihren Inhalten und nimmt Anfragen auf, während Sie auf der Baustelle sind. FAQ-Chatbot 499 €, KI-Chatbot ab 799 €. (https://www.rexity.ai/automation/chatbots)
 
 ### Häufige Fragen
 
@@ -724,7 +725,7 @@ Wir fangen klein an: mit dem Ablauf, bei dem die Zeitersparnis am größten und 
 Diese Abläufe gibt es in fast jedem Betrieb – und meist laufen sie noch von Hand.
 
 - Bestätigungen und Erinnerungen: Nach jeder Buchung geht automatisch eine E-Mail oder SMS hinaus, vor dem Termin eine Erinnerung. Weniger vergessene Termine, keine Nachrichten von Hand.
-- Immer gleiche Fragen: Öffnungszeiten, Preise, freie Termine: Ein Chat-Assistent auf Ihrer Website beantwortet sie aus Ihren eigenen Inhalten und gibt alles andere an Sie weiter.
+- Immer gleiche Fragen: Öffnungszeiten, Preise, freie Termine: Ein Chat-Assistent auf Ihrer Website beantwortet sie aus Ihren eigenen Inhalten und gibt alles andere an Sie weiter. (https://www.rexity.ai/automation/chatbots)
 - Anfragen per WhatsApp: Viele Kunden schreiben lieber, als anzurufen. Ein WhatsApp-Assistent antwortet über die offizielle Schnittstelle, bucht Termine und übergibt schwierige Fälle an Ihr Team.
 - Daten abtippen und übertragen: Rechnungen, Lieferscheine, Formulare, Listen: Regelbasierte Schritte übernimmt ein Programm, das Daten zuverlässig zwischen Ihren Systemen bewegt.
 - Anrufe, die niemand annimmt: Unser Telefonassistent RexFangs nimmt Anrufe an und ruft zurück. Er ist noch in der Testphase; wir sagen Ihnen ehrlich, wann er für Ihren Betrieb bereit ist.
@@ -881,7 +882,7 @@ Geeignet ist das für Betriebe, deren Kunden bereits über WhatsApp schreiben: S
 ### Typische Situationen
 
 - Nachrichten bleiben liegen: Während der Arbeit kann niemand antworten. Der Assistent antwortet sofort und sammelt, was Ihr Team später braucht.
-- Jeden Tag die gleichen Fragen: Öffnungszeiten, Preise, Anfahrt: Häufige Fragen beantwortet der Assistent aus Ihren freigegebenen Inhalten.
+- Jeden Tag die gleichen Fragen: Öffnungszeiten, Preise, Anfahrt: Häufige Fragen beantwortet der Assistent aus Ihren freigegebenen Inhalten. Dieselben Antworten gibt ein KI-Chatbot auf Ihrer Website. (https://www.rexity.ai/automation/chatbots)
 - Termine per Chat: Wer einen Termin möchte, bekommt echte freie Zeitfenster angeboten, statt Nachrichten hin und her.
 - Wichtige Anfragen gehen unter: Der Assistent erkennt, was jemand will, und gibt Anfragen, die nur ein Mensch klären kann, mit dem ganzen Verlauf an Ihr Team weiter.
 
@@ -1075,81 +1076,104 @@ RexFangs ist noch in der Testphase; den Preis nennen wir auf Anfrage.
 - Frage: Kann es an einen Menschen übergeben?
   Antwort: Ja — komplexe oder sensible Anrufe gehen direkt an Ihr Team.
 
-## Website-Chatbots
+## KI-Chatbot für Ihre Website
 
 Adresse: https://www.rexity.ai/automation/chatbots
 
-KI-Chatbot für Ihre Website: antwortet aus Ihren freigegebenen Inhalten, erfasst Anfragen und übergibt an Ihr Team. KI-Chatbot ab 799 €, FAQ-Chatbot 499 €.
+KI-Chatbot für Ihre Website: antwortet aus Ihren Inhalten, Verarbeitung in der EU, ab 799 € Festpreis. Jetzt live testen – direkt auf dieser Seite.
 
-Der Assistent auf genau dieser Seite.
+Antwortet aus Ihren Inhalten und nimmt Anfragen auf. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren.
 
-Ein Website-Assistent, der freigegebene Fragen aus Ihrer eigenen Wissensbasis beantwortet, Besucher führt und komplexe Fälle an einen Menschen übergibt — genau wie der hier.
+Ein KI-Chatbot ist ein Chat-Fenster auf Ihrer Website, das Besucherfragen sofort beantwortet – aus Inhalten, die Sie freigegeben haben. Was er nicht sicher weiß, gibt er an Ihr Team weiter. Rexity Labs aus Hermannsburg (Landkreis Celle) baut ihn zum Festpreis: FAQ-Chatbot 499 €, KI-Chatbot ab 799 €, netto zzgl. MwSt.
 
 ### Was ein KI-Chatbot für Ihre Website leistet
 
-Rexity Labs UG aus Hermannsburg (Landkreis Celle) baut KI-Chatbots für die Websites kleiner und mittlerer Betriebe in Niedersachsen. Der Chatbot antwortet aus Ihren freigegebenen Inhalten und gibt weiter, was er nicht sicher weiß. Ein FAQ-Chatbot kostet 499 €, ein KI-Chatbot gibt es ab 799 €, jeweils als Festpreis netto zzgl. MwSt.
+Der Chatbot beantwortet die Fragen, die Ihr Team jeden Tag mehrfach hört: Öffnungszeiten, Preise, Abläufe, freie Termine. Er antwortet in normaler Sprache und gibt sich klar als KI zu erkennen.
 
-Ein KI-Chatbot ist ein Chat-Fenster auf Ihrer Website, in dem Besucher in normaler Sprache fragen und sofort eine Antwort bekommen. Er antwortet aus Inhalten, die Sie freigegeben haben: Leistungen, Preise, Öffnungszeiten, Abläufe. Was er nicht sicher weiß, gibt er an Sie weiter, statt zu raten.
+Sinnvoll ist das für Betriebe, die immer wieder dieselben Fragen bekommen: das Studio nach Kurszeiten, die Werkstatt nach Preisen, die Praxis nach Unterlagen. Jede Frage, die der Chatbot beantwortet, ist ein Anruf weniger während der Arbeit.
 
-Sinnvoll ist das für Betriebe, die immer wieder dieselben Fragen bekommen: das Studio nach Kurszeiten, die Werkstatt nach Preisen und freien Terminen, die Praxis nach Unterlagen, der Salon nach Leistungen. Jede Frage, die der Chatbot beantwortet, ist ein Anruf weniger während der Arbeit.
+Es gibt ihn in zwei Stufen. Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mit Ihren eigenen Inhalten und nimmt Anfragen für Sie auf.
 
-Es gibt ihn in zwei Stufen. Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mehrsprachig mit Ihren eigenen Inhalten und nimmt Anfragen für Sie auf.
+### Live ausprobieren: unser eigener KI-Assistent
 
-### Typische Probleme, die ein Chatbot löst
+Auf rexity.ai arbeitet ein Assistent, den wir selbst gebaut haben, nach demselben Prinzip wie Ihr Chatbot: Er beantwortet Fragen zu unseren Leistungen, Preisen und Abläufen aus den Inhalten dieser Website, nennt die passende Seite und bietet einen Termin an, wenn Sie über Ihr Vorhaben sprechen möchten.
 
-- Das Telefon klingelt während der Arbeit: Fragen zu Öffnungszeiten, Preisen und Terminen beantwortet der Chatbot, während Sie mit Kunden beschäftigt sind.
-- Anfragen am Abend und am Wochenende: Viele Besucher schauen abends auf Ihre Website. Der Chatbot antwortet sofort und nimmt Anfragen auf, die Sie am nächsten Morgen bearbeiten.
-- Informationen sind schwer zu finden: Statt sich durch Unterseiten zu klicken, fragen Besucher direkt und werden zur passenden Seite geführt.
-- Kunden schreiben in anderen Sprachen: Der KI-Chatbot antwortet mehrsprachig, auf Grundlage derselben freigegebenen Inhalte.
-
-### Was wir für Sie bauen
-
-- Eine Wissensbasis aus Ihren eigenen, freigegebenen Inhalten
-- Einen Assistenten, der sich klar als KI zu erkennen gibt
-- Regeln, welche Fragen er beantworten darf und welche an Sie gehen
-- Die Übergabe an Ihr Team mit dem ganzen Gesprächsverlauf
-- Schutz vor Versuchen, den Assistenten zu manipulieren
-- Ein Protokoll der Gespräche und der aufgenommenen Anfragen
-- Ein Chat-Fenster, das zu Ihrer Marke passt, am Handy wie am Rechner
+Für Besucher ist der Assistent noch nicht freigeschaltet; wir prüfen seine Antworten gerade intern. Bis dahin führt der Button zur Terminbuchung – im Gespräch zeigen wir Ihnen den Assistenten live.
 
 ### So läuft ein Chatbot-Projekt ab
 
-1. Gespräch: 30 Minuten, kostenlos: Welche Fragen kommen immer wieder, welche Inhalte gibt es schon, und was soll der Chatbot auf keinen Fall beantworten?
+1. Gespräch: 30 Minuten, kostenlos: Welche Fragen kommen immer wieder, und was soll der Chatbot auf keinen Fall beantworten?
 2. Inhalte sammeln: Aus Website, Preislisten und Ihren Antworten stellen wir die Wissensbasis zusammen. Sie geben jede Quelle frei.
-3. Bauen und testen: Wir richten Assistent, Regeln und Übergabe ein und testen mit echten Fragen – auch mit solchen, auf die er nicht antworten soll.
-4. Freigabe und Start: Der Chatbot geht erst live, wenn Sie mit seinen Antworten zufrieden sind.
-5. Verfeinern: In den ersten Wochen verbessern wir die Antworten anhand echter Gespräche.
+3. Bauen und testen: Wir richten Assistent, KI-Hinweis, Regeln und Übergabe ein und testen mit echten Fragen – auch mit solchen, auf die er nicht antworten soll.
+4. Freigabe und Start: Der Chatbot geht erst live, wenn Sie mit seinen Antworten zufrieden sind. Danach verbessern wir die Antworten anhand der Fragen, die tatsächlich kommen.
 
 ### Was ein Chatbot kostet
 
-Festpreise, netto zzgl. MwSt. Welche Stufe zu Ihnen passt, klären wir im kostenlosen Gespräch.
+Festpreise für den Bau, netto zzgl. MwSt. Welche Stufe zu Ihnen passt, klären wir im kostenlosen Gespräch.
 
 - FAQ-Chatbot: Beantwortet automatisch die häufigsten Fragen Ihrer Kunden. Festpreis 499 €, netto zzgl. MwSt.
 - KI-Chatbot: Ein KI-gestützter Chat-Assistent, der mit Ihren eigenen Inhalten antwortet. Festpreis ab 799 €, netto zzgl. MwSt.
 - Alle Preise: https://www.rexity.ai/preise
 
-### LevelKraft: Feedback im Gespräch
+### 12 Monate KI-Nutzung inklusive
 
-Aus unserer Arbeit.
+Für Chatbot-Projekte, die Sie bis zum 31.12.2026 bei Rexity Labs beauftragen. Die Laufzeit beginnt mit dem Go-live.
 
-In LevelKraft, einer Lern-App für die TELC- und Goethe-Prüfungen, die wir entwickelt haben, simuliert ein Sprach-Tutor die mündliche Prüfung im Gespräch, und Lernende bekommen sofortiges Feedback zu Sprechen und Schreiben.
+- Was enthalten ist: Die laufenden Kosten des Sprachmodells für den Assistenten, den wir für Sie bauen: beim KI-Chatbot 12 Monate ab Go-live, bis zu 1.000 Unterhaltungen pro Monat; beim FAQ-Chatbot 6 Monate ab Go-live, bis zu 500 Unterhaltungen pro Monat. Eine Unterhaltung ist eine zusammenhängende Chat-Sitzung eines Besuchers mit höchstens 20 Nachrichten.
+- Was nicht enthalten ist: Der Festpreis für den Bau des Assistenten (siehe oben), Änderungen nach der Abnahme und die jährliche Betreuung.
+- Über der Obergrenze: Der Assistent antwortet bis zum Monatsende aus den festen Antworten (FAQ) weiter, oder wir rechnen die zusätzliche Nutzung zum Selbstkostenpreis ab. Sie legen das bei der Einrichtung fest.
+- Nach der Laufzeit: Die Modellkosten rechnen wir zum Selbstkostenpreis ab; die Höhe nennen wir vorab in Ihrem Angebot. Voraussetzung ist die Betreuung im Rahmen der Jährlichen Wartung, ab 999 € pro Jahr.
+- Was das Angebot nicht ist: Kein eigener API-Zugang, kein Guthaben, nicht übertragbar, keine Barauszahlung. Der Assistent läuft in unserer Cloud-Umgebung; die KI-Verarbeitung erfolgt in europäischen Rechenzentren.
+- Für wen: Unternehmen, Selbstständige und Vereine; kein Angebot an Verbraucher. Alle Preise netto zzgl. gesetzlicher MwSt.
 
-Einen Website-Chatbot für einen Kunden zeigen wir hier, sobald einer live ist.
+### Was ein Chatbot im Betrieb kostet
 
-Fallstudie: https://www.rexity.ai/work/levelkraft
+- FAQ-Chatbot: Was es ist: Bau zum Festpreis: beantwortet automatisch die häufigsten Fragen; Kosten: 499 € einmalig
+- KI-Chatbot: Was es ist: Bau zum Festpreis: versteht frei formulierte Fragen, nimmt Anfragen auf; Kosten: ab 799 € einmalig
+- Sprachmodell: Was es ist: Laufende Kosten pro Unterhaltung; Kosten: etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen, je nach Modell (Schätzung, siehe unten); bei Beauftragung bis 31.12.2026 inklusive, Bedingungen oben
+- Betreuung: Was es ist: Jährliche Wartung: Sicherheitsupdates, Sicherungen, kleine Änderungen; Kosten: ab 999 € pro Jahr, optional
+
+Alle Preise netto zzgl. MwSt. Modellkosten: Schätzung auf Basis der Listenpreise, Stand 10/2026. Annahme: 1.000 Unterhaltungen mit je 6 Nachrichten, pro Nachricht rund 2.500 Token Eingabe und 250 Token Antwort, ohne Zwischenspeicherung. Spanne: Modelle verschiedener Anbieter mit Verarbeitung in der EU.
+
+### Selbst bauen, Baukasten oder bauen lassen?
+
+Die drei Wege unterscheiden sich darin, wer die Arbeit macht und wer wofür verantwortlich ist.
+
+- Ihr Aufwand: Selbst bauen: Hoch: Programmierung, Schnittstellen, Tests, Betrieb; Baukasten: Mittel: Inhalte einpflegen, Regeln einstellen, laufend pflegen; Bauen lassen: Gering: Inhalte freigeben, Antworten prüfen
+- Laufende Kosten: Selbst bauen: Modell- und Serverkosten direkt beim Anbieter; Baukasten: Meist eine monatliche Gebühr, oft nach Nutzung gestaffelt; Bauen lassen: Festpreis für den Bau, danach Modellkosten und optional Betreuung
+- Ort der Verarbeitung: Selbst bauen: Sie wählen Anbieter und Region selbst; Baukasten: Hängt vom Anbieter ab: Serverstandort und Vertrag zur Auftragsverarbeitung prüfen; Bauen lassen: Bei uns in europäischen Rechenzentren (EU-Datenzone), mit Vertrag zur Auftragsverarbeitung
+- KI-Hinweis (Art. 50): Selbst bauen: Sie bauen ihn selbst ein und sind als Anbieter verantwortlich; Baukasten: Prüfen, ob und wie die Plattform ihn zeigt; Bauen lassen: Vor der ersten Nachricht eingebaut
+
+### Wo die KI-Verarbeitung stattfindet
+
+Für unseren eigenen Assistenten und für jeden Chatbot, den wir bauen, gilt: Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Die Chat-Nachrichten werden von einem Sprachmodell in der europäischen Datenzone unseres Cloud-Anbieters verarbeitet (EU-Mitgliedstaaten, je nach Anbieter auch EFTA-Staaten wie Norwegen oder die Schweiz). Sie werden nicht zum Training von Modellen verwendet und von uns nicht dauerhaft gespeichert.
+
+Technische Basis unseres Assistenten heute: GPT über Microsoft Azure OpenAI in der EU-Datenzone. „EU“ heißt dabei ein Rechenzentrum in einem Mitgliedstaat der Europäischen Union, nicht zwingend in Deutschland.
+
+### Was mit den Daten Ihrer Besucher passiert
+
+So arbeitet unser Assistent auf rexity.ai: Vor der ersten Nachricht geben Besucher E-Mail-Adresse und Telefonnummer in ein Startformular ein, das auch den KI-Hinweis trägt. Die Angaben speichern wir als Kontaktanfrage in einer Datenbank in der EU; an das Sprachmodell gehen sie nie.
+
+Den Inhalt der Unterhaltungen speichern wir nicht in einer Datenbank. Der Verlauf liegt bis zu 30 Tage im Browser des Besuchers und lässt sich mit „Verlauf löschen“ entfernen.
+
+Für Ihren Chatbot legen wir gemeinsam fest, welche Angaben abgefragt werden, und schließen mit Ihnen einen Vertrag zur Auftragsverarbeitung. Eine Rechtsberatung ersetzen wir nicht.
 
 ### Häufige Fragen
 
 - Frage: Erfindet es Dinge?
   Antwort: Es antwortet aus Ihren freigegebenen Inhalten und verweist bei Unsicherheit weiter.
+- Frage: Was kostet ein Chatbot für eine Website?
+  Antwort: Der Bau kostet als Festpreis 499 € (FAQ-Chatbot) oder ab 799 € (KI-Chatbot), netto zzgl. MwSt. Dazu kommt das Sprachmodell: nach unserer Schätzung auf Basis der Listenpreise (Stand 10/2026) etwa 5 bis 50 US-Dollar pro 1.000 Unterhaltungen. Bei Beauftragung bis 31.12.2026 ist es 12 bzw. 6 Monate inklusive, mit den Bedingungen oben.
 - Frage: Was ist der Unterschied zwischen FAQ-Chatbot und KI-Chatbot?
   Antwort: Der FAQ-Chatbot beantwortet automatisch die häufigsten Fragen Ihrer Kunden und kostet 499 €. Der KI-Chatbot versteht auch frei formulierte Fragen, antwortet mit Ihren eigenen Inhalten und kostet ab 799 €. Beides sind Festpreise, netto zzgl. MwSt.
+- Frage: Ist ein KI-Chatbot DSGVO-konform?
+  Antwort: Er kann es sein, wenn Rechtsgrundlage, Datenschutzerklärung und Vertrag zur Auftragsverarbeitung stimmen und nur so viele Daten fließen wie nötig. Bei uns erfolgt die KI-Verarbeitung in europäischen Rechenzentren, und wir schließen mit Ihnen einen Vertrag zur Auftragsverarbeitung. Dies ist keine Rechtsberatung.
 - Frage: Merken Besucher, dass sie mit einer KI schreiben?
-  Antwort: Ja. Der Assistent gibt sich klar als KI zu erkennen, und bei schwierigen Fragen übernimmt ein Mensch aus Ihrem Team.
-- Frage: Wo werden die Gesprächsdaten verarbeitet?
-  Antwort: Wir bauen DSGVO-konform und hosten in der EU; personenbezogene Daten werden so sparsam wie möglich erfasst und sind zugriffsgeschützt. Die rechtliche Bewertung Ihres konkreten Falls übernimmt Ihre Rechtsberatung.
-- Frage: Funktioniert der Chatbot auch auf WhatsApp?
-  Antwort: Ja, derselbe Ansatz funktioniert auf WhatsApp – über die offizielle WhatsApp Business API und nur mit Einwilligung Ihrer Kunden.
+  Antwort: Ja. Vor der ersten Nachricht steht ein Hinweis, dass Besucher mit einer KI schreiben, wie es Art. 50 der EU-KI-Verordnung seit dem 2. August 2026 verlangt. Im Kopf des Chat-Fensters steht dauerhaft „KI-Assistent“, und auf Nachfrage sagt der Assistent, dass er eine KI ist.
+- Frage: Wie wird ein KI-Chatbot in die Website integriert?
+  Antwort: In der Regel mit einem kleinen Skript, das wir in Ihre Website einbauen; das Chat-Fenster erscheint dann auf jeder Seite. Ob Ihr Website-System das zulässt, prüfen wir im kostenlosen Gespräch.
+- Frage: Kann ich einen Chatbot für meine Website selbst erstellen?
+  Antwort: Ja, mit einem Baukasten oder direkt über die Schnittstelle eines Modellanbieters. Dann richten Sie Inhalte, Regeln, KI-Hinweis, Datenschutz und Betrieb selbst ein und sind dafür verantwortlich. Den Vergleich finden Sie oben.
 
 ## Sichtbarkeit: SEO & Google Unternehmensprofil
 
