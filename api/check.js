@@ -125,7 +125,9 @@ const LOOKUP_DAILY_CAP = envInt("CHECK_LOOKUP_DAILY_CAP", 200); // ranking looku
 const CHECK_PROVIDER = String(process.env.CHECK_PROVIDER || "").trim().toLowerCase();
 const CHECK_ORDER = CHECK_PROVIDER === "azure" ? ["azure", "bedrock"] : ["bedrock", "azure"];
 if (CHECK_PROVIDER && !["azure", "bedrock"].includes(CHECK_PROVIDER)) console.error(`[check] CHECK_PROVIDER "${CHECK_PROVIDER.slice(0, 20)}" is unknown (bedrock|azure); using bedrock, then azure`);
-const CHECK_MODEL = String(process.env.CHECK_MODEL || "eu.anthropic.claude-opus-5-5").trim();
+// Claude Opus 5 (not 5.5): 5.5 cannot switch thinking off and used the whole 400-token allowance on it, so the
+// Kurzfazit came back cut off and was discarded (log of 3 Oct 2026). Opus 5 answers without thinking.
+const CHECK_MODEL = String(process.env.CHECK_MODEL || "eu.anthropic.claude-opus-5").trim();
 const CHECK_MAX_TOKENS = Math.min(2000, Math.max(200, envInt("CHECK_MAX_TOKENS", 400)));
 
 // Hosts that are never requested (data/check-optout.json; an entry covers the host and its subdomains).
