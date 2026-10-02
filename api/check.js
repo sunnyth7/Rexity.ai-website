@@ -116,7 +116,7 @@ const WEIGHTS = {
   bands: { good: 80, mid: 50 }, // the words on the page: from 80 good, from 50 medium, below weak
   find: { title: 15, description: 15, h1: 10, canonical: 10, indexable: 15, lang: 5, viewport: 10, schema: 10, sitemap: 7, robots: 3 },
   contact: { phone: 25, form: 25, email: 10, whatsapp: 10, hours: 10, map: 10, cta: 10 },
-  trust: { https: 40, impressum: 25, datenschutz: 25, a11y: 10 },
+  trust: { https: 40, impressum: 30, datenschutz: 30, a11y: 0 }, // a11y: note only (micro-enterprises are usually exempt)
   // One matching link under the result: contact below 60 -> /web/web-design; else tempo or find below 60 ->
   // /web/website-umzug; else /website-wartung.
   offerThreshold: 60
@@ -1093,8 +1093,9 @@ function trustBlock(h, finalUrl) {
       T("Das Impressum von der Startseite aus verlinken (Hinweis, keine Rechtsberatung).", "Link the legal notice (Impressum) from the home page (an indication, not legal advice).")), h, "impressum"),
     quoting(mk("datenschutz", W.datenschutz, h.datenschutz ? 1 : 0, T("Link zur Datenschutzerklärung", "Link to the privacy policy"), h.datenschutz ? foundAt(h, "datenschutz") : no,
       T("Die Datenschutzerklärung von der Startseite aus verlinken (Hinweis, keine Rechtsberatung).", "Link the privacy policy from the home page (an indication, not legal advice).")), h, "datenschutz"),
-    quoting(mk("a11y", W.a11y, h.a11y ? 1 : 0, T("Link zu einer Erklärung zur Barrierefreiheit", "Link to an accessibility statement"), h.a11y ? foundAt(h, "a11y") : no,
-      T("Prüfen, ob für Ihre Website eine Erklärung zur Barrierefreiheit nötig ist, und sie dann verlinken (Hinweis, keine Rechtsberatung).", "Check whether your website needs an accessibility statement and, if so, link it (an indication, not legal advice).")), h, "a11y"),
+    quoting(mk("a11y", 0, 1, T("Link zu einer Erklärung zur Barrierefreiheit", "Link to an accessibility statement"),
+      h.a11y ? foundAt(h, "a11y") : T(no.de + ". Kleinstunternehmen, die nur Dienstleistungen anbieten, sind von der Pflicht in der Regel ausgenommen; ob das für Sie gilt, bewerten wir nicht.",
+        no.en + ". Micro-enterprises that only provide services are usually exempt from the duty; we do not judge whether that applies to you."), null), h, "a11y"),
     mk("thirdparty", 0, 1, T("Fremde Dienste, die schon beim Aufruf geladen werden", "Third-party services loaded as soon as the page opens"),
       n ? T(`${n} fremde Adresse${n === 1 ? "" : "n"} im Quelltext: ` + h.thirdParty.slice(0, 12).map((t) => t.host + (t.label ? ` (${t.label})` : "")).join(", ") + (n > 12 ? " …" : "") + ". Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.",
         `${n} third-party address${n === 1 ? "" : "es"} in the source: ` + h.thirdParty.slice(0, 12).map((t) => t.host + (t.label ? ` (${t.label})` : "")).join(", ") + (n > 12 ? " …" : "") + ". We do not judge whether consent is required for them.")
@@ -1300,7 +1301,7 @@ function today() {
   return daily;
 }
 
-const REPORT_VERSION = 2; // Sprint 27b: own measurement, pages read with the entered one (older cached reports are not served)
+const REPORT_VERSION = 3; // 3: accessibility statement is a note without points; Lighthouse key live (older cached reports are not served)
 const cache = new Map(); // key -> { at, report }
 const cacheKey = (u) => (u.hostname.replace(/^www\./, "") + (u.pathname.replace(/\/+$/, "") || "/") + (u.search || "")).toLowerCase();
 function cacheGet(key) {

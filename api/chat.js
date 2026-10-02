@@ -1205,8 +1205,11 @@ async function completeText({ system, user, timeoutMs, tag }) {
           resp = await postBedrock(body, ms, "bearer");
         }
         if (!resp.ok) {
-          await resp.text().catch(() => "");
-          if (resp.status === 401 || resp.status === 403) bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
+          const detail = await resp.text().catch(() => "");
+          // Same 10-minute cool-down as the chat path: no key access (401/403) or model access not granted (400).
+          const noAccess = resp.status === 400 && /operation not allowed|not authorized|access/i.test(detail);
+          if (resp.status === 401 || resp.status === 403 || noAccess) bedrockSkipUntil = Date.now() + BEDROCK_COOLDOWN_MS;
+          if (resp.status === 400) console.error("[chat] Bedrock HTTP 400 (text completion) " + detail.slice(0, 200));
           throw Object.assign(new Error("bedrock http " + resp.status), { status: resp.status });
         }
         result = readMessagesResponse(await resp.json(), "bedrock", BEDROCK_MODEL, t0);
