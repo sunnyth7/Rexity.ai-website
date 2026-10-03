@@ -66,6 +66,8 @@
     <li>Terminbuchungen (Datum, Uhrzeit, optionale Notizen).</li>
     <li>Nachrichten an den KI-Assistenten (Chat) — werden zur Beantwortung verarbeitet; den Verlauf erhalten wir per E-Mail, in einer Datenbank legen wir ihn nicht ab (siehe §4a).</li>
     <li>Website-Check: die eingegebene Internetadresse und, wenn Sie den Bericht anfordern, Ihre E-Mail-Adresse (siehe §4b).</li>
+    <li>Automatisierungs-Check: Ihre Angaben zu Branche, Teamgröße und Aufgaben und, wenn Sie den Bericht oder einen Rückruf anfordern, Ihre E-Mail-Adresse beziehungsweise Name und Telefonnummer (siehe §4c).</li>
+    <li>Demo „Vom Posteingang zum Auftrag": ein von Ihnen eingefügter Text (wird nicht gespeichert) und, wenn Sie sich die E-Mails der Demo zusenden lassen, Ihre bestätigte E-Mail-Adresse mit den Terminen der Demo für sieben Tage (siehe §4a).</li>
     <li>Bei Sprachgesprächen: Anrufprotokoll. <strong>Audioaufzeichnungen nur bei ausdrücklicher Einwilligung.</strong></li>
     <li>Technische Daten beim Webseitenbesuch (IP-Adresse, User-Agent, Zeitstempel) — gemäß Art. 6 Abs. 1 lit. f DSGVO zur Sicherheit der Plattform.</li>
   </ul>
@@ -74,7 +76,7 @@
   <ul>
     <li><strong>Vertragsanbahnung und -erfüllung</strong> (Art. 6 Abs. 1 lit. b DSGVO): Beantwortung von Anfragen, Terminbuchung.</li>
     <li><strong>Berechtigtes Interesse</strong> (Art. 6 Abs. 1 lit. f DSGVO): Sicherheit, Missbrauchserkennung, Qualitätsverbesserung — abgewogen gegen Ihre Interessen.</li>
-    <li><strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO): Marketing-Kommunikation, Anrufaufzeichnungen.</li>
+    <li><strong>Einwilligung</strong> (Art. 6 Abs. 1 lit. a DSGVO): Marketing-Kommunikation, Kontaktaufnahme nach Anforderung eines Berichts (Website-Check, Automatisierungs-Check), E-Mails der Demo an Ihre bestätigte Adresse, Anrufaufzeichnungen.</li>
     <li><strong>Rechtliche Verpflichtungen</strong> (Art. 6 Abs. 1 lit. c DSGVO): Aufbewahrungsfristen.</li>
   </ul>
 
@@ -323,8 +325,7 @@
       Zusatz gebildeter Prüfwert (Hash) für höchstens zwei Stunden in einem Zähler gespeichert (Art. 6 Abs. 1
       lit. f DSGVO). Ein Bericht per E-Mail lässt sich auf diesem Weg nicht anfordern; Google-Position und
       Backlinks gibt es dort nicht.</li>
-    <li><strong>Bericht per E-Mail (freiwillig, mit Einwilligung in die Kontaktaufnahme):</strong> Der Bericht
-      enthält dasselbe wie das Ergebnis auf der Seite. Fordern Sie ihn an, senden wir zuerst eine kurze E-Mail mit einem Bestätigungslink an die angegebene
+    <li><strong>Bericht per E-Mail (freiwillig, mit Einwilligung in die Kontaktaufnahme):</strong> Der Bericht enthält dasselbe wie das Ergebnis auf der Seite und zusätzlich Google-Position und Backlinks, wenn diese Abfrage aktiv ist (siehe oben). Fordern Sie ihn an, senden wir zuerst eine kurze E-Mail mit einem Bestätigungslink an die angegebene
       Adresse (Versand über Brevo, siehe §5.1; Art. 6 Abs. 1 lit. b DSGVO). Der Link gilt 48 Stunden. Erst wenn
       Sie ihn öffnen und dort den Versand bestätigen, senden wir den Bericht, und erst dann speichern wir
       E-Mail-Adresse, geprüfte Adresse und das Ergebnis in Kurzform wie eine Kontaktanfrage (siehe §7). Eine
@@ -423,8 +424,7 @@
   <ul>
     <li>
       <strong>Vercel Inc.</strong> (Sitz in den USA) — Auftragsverarbeiter. Hosting der Website und der
-      Server-Funktionen (Kontaktformular, Terminbuchung, KI-Assistent, Website-Check samt Schnittstelle für
-      Programme) sowie Schutz vor Überlastung und Angriffen (Firewall). Die Seiten werden über das weltweite
+      Server-Funktionen (Kontaktformular, Terminbuchung, KI-Assistent, Website-Check samt Schnittstelle für Programme, Automatisierungs-Check, Demo „Vom Posteingang zum Auftrag" samt täglichem Erinnerungslauf) sowie Schutz vor Überlastung und Angriffen (Firewall). Die Seiten werden über das weltweite
       Auslieferungsnetz von Vercel bereitgestellt; die Server-Funktionen werden in Frankfurt am Main
       ausgeführt. Verarbeitet werden Anfrage-Metadaten (IP-Adresse, Browser, aufgerufene Adresse) und die
       Inhalte der Anfragen im Durchlauf; Vercel kann dabei Daten auch in den USA verarbeiten. Rechtsgrundlage
@@ -444,8 +444,11 @@
       Auftragsverarbeiter. Speicherung der Angaben aus Kontaktformular, Terminbuchung, dem Startformular des
       KI-Assistenten und bestätigten Berichtsanforderungen des Website-Checks (Name, E-Mail, Telefonnummer,
       Anliegen, Wunschtermin; beim KI-Assistenten nur die E-Mail-Adresse, falls angegeben; beim Website-Check E-Mail-Adresse,
-      geprüfte Adresse und Ergebnis in Kurzform). Dazu technische Zähler ohne Inhalte: Tageszahlen sowie die in
-      §4a und §4b genannten Prüfwerte (Hash) von IP-Adressen, der Zwischenspeicher der Prüfergebnisse und, verschlüsselt und für höchstens 48 Stunden, noch nicht bestätigte Berichtsanforderungen des Automatisierungs-Checks (siehe §4c).
+      geprüfte Adresse und Ergebnis in Kurzform). Außerdem bestätigte Berichtsanforderungen und Rückruf-Bitten des
+      Automatisierungs-Checks mit Ihren Angaben und der Auswertung (siehe §4c) sowie, für höchstens sieben Tage, die
+      bestätigte E-Mail-Adresse, die Sprache und die Termine der Demo „Vom Posteingang zum Auftrag" (siehe §4a;
+      Rechtsgrundlage dort Art. 6 Abs. 1 lit. a DSGVO). Dazu technische Zähler ohne Inhalte: Tageszahlen sowie die in
+      §4a, §4b und §4c genannten Prüfwerte (Hash) von IP-Adressen, der Zwischenspeicher der Prüfergebnisse und, verschlüsselt und für höchstens 48 Stunden, noch nicht bestätigte Berichtsanforderungen des Automatisierungs-Checks (siehe §4c).
       Rechtsgrundlage Art. 6 Abs. 1 lit. b DSGVO, für die Zähler Art. 6 Abs. 1 lit. f DSGVO.
       Auftragsverarbeitungsvertrag (Supabase-DPA) mit EU-Standardvertragsklauseln als Bestandteil der
       Nutzungsbedingungen.
@@ -453,22 +456,24 @@
     <li>
       <strong>Brevo (Sendinblue SAS)</strong> (Paris, Frankreich) — Auftragsverarbeiter. Versand der
       E-Mail-Benachrichtigung über Ihre Anfrage an uns und der Eingangsbestätigung an Sie, der E-Mail mit dem
-      Chat-Verlauf an uns sowie, beim Website-Check, der Bestätigungs-E-Mail und des Berichts. Verarbeitet werden
+      Chat-Verlauf an uns sowie, beim Website-Check und beim Automatisierungs-Check, der Bestätigungs-E-Mail und des Berichts und, in der Demo „Vom Posteingang zum Auftrag", der Bestätigungs-E-Mail und der E-Mails der Demo an Ihre bestätigte Adresse. Verarbeitet werden
       Name, E-Mail-Adresse und der Inhalt Ihrer Anfrage, des Chat-Verlaufs beziehungsweise des Berichts.
       Auftragsverarbeitungsvertrag als Anhang der Brevo-Nutzungsbedingungen.
     </li>
     <li>
       <strong>Microsoft Ireland Operations Ltd.</strong> (Dublin, Irland) — Auftragsverarbeiter. Microsoft Azure
-      OpenAI als Sprachmodell des KI-Assistenten und ersatzweise für das Kurzfazit des Website-Checks,
-      bereitgestellt in der EU-Datenzone (EU-Mitgliedstaaten, ggf. EFTA-Staaten; siehe §4a). Verarbeitet werden
-      Chat-Nachrichten und Verlauf beziehungsweise Name der geprüften Website und Punktwerte.
+      OpenAI als Sprachmodell des KI-Assistenten und ersatzweise für das Kurzfazit des Website-Checks und für eigene Texte in der
+      Demo „Vom Posteingang zum Auftrag", bereitgestellt in der EU-Datenzone (EU-Mitgliedstaaten, ggf. EFTA-Staaten;
+      siehe §4a). Verarbeitet werden Chat-Nachrichten und Verlauf, Name der geprüften Website und Punktwerte
+      beziehungsweise der in der Demo eingefügte Text.
       Auftragsverarbeitung nach dem Datenschutznachtrag zu den Microsoft-Produktbedingungen (DPA).
     </li>
     <li>
       <strong>Amazon Web Services EMEA SARL</strong> (Luxemburg) — Auftragsverarbeiter. Amazon Bedrock mit
       EU-Inferenzprofil als Sprachmodell (Claude von Anthropic) für das Kurzfazit des Website-Checks, seit
-      02.10.2026, und ersatzweise für den KI-Assistenten, wenn Microsoft Azure nicht antwortet. Verarbeitet
-      werden Name der geprüften Website und Punktwerte beziehungsweise Chat-Nachrichten und Verlauf, in
+      02.10.2026, für eigene Texte in der Demo „Vom Posteingang zum Auftrag", seit 03.10.2026, und ersatzweise für
+      den KI-Assistenten, wenn Microsoft Azure nicht antwortet. Verarbeitet werden Name der geprüften Website und
+      Punktwerte, der in der Demo eingefügte Text beziehungsweise Chat-Nachrichten und Verlauf, in
       AWS-Regionen der Europäischen Union (siehe §4a). Auftragsverarbeitung nach dem
       AWS-Datenverarbeitungszusatz (DPA), der Bestandteil der AWS-Nutzungsbedingungen ist und
       EU-Standardvertragsklauseln für Übermittlungen in Drittländer enthält.
@@ -490,8 +495,7 @@
     </li>
     <li>
       <strong>Cloudflare, Inc.</strong> (San Francisco, USA) — Auftragsverarbeiter. Cloudflare Turnstile als
-      Schutz vor automatischen Anfragen (Bot-Schutz) an drei Formularen: Startformular des KI-Assistenten,
-      Website-Check und Kontaktformular. Das Skript von Cloudflare (<code>challenges.cloudflare.com</code>) wird
+      Schutz vor automatischen Anfragen (Bot-Schutz) an fünf Stellen: Startformular des KI-Assistenten, Website-Check, Kontaktformular, Automatisierungs-Check und Demo „Vom Posteingang zum Auftrag" (eigener Text und Feld für Ihre E-Mail-Adresse). Das Skript von Cloudflare (<code>challenges.cloudflare.com</code>) wird
       erst geladen, wenn Sie eines dieser Formulare öffnen oder verwenden, nicht beim bloßen Aufruf einer Seite.
       Nach Angaben von Cloudflare werden dabei die IP-Adresse, technische Merkmale der Verbindung und des Browsers
       (TLS-Fingerabdruck, User-Agent) sowie die Kennung und Adresse unserer Website verarbeitet, um Menschen von
@@ -618,8 +622,7 @@
 
   <div class="spacer-small"></div><h2 class="heading-style-h3">6. Pseudonymisierung und Audit-Logs</h2>
   <p>
-    Für die Formulare, den KI-Assistenten und den Website-Check dieser Website führen wir keine Audit-Logs;
-    was dort gespeichert wird, steht in §2, §4a, §4b und §5.1. Die folgende Regel gilt für die WhatsApp- und
+    Für die Formulare, den KI-Assistenten, den Website-Check, den Automatisierungs-Check und die Demo dieser Website führen wir keine Audit-Logs; was dort gespeichert wird, steht in §2, §4a, §4b, §4c und §5.1. Die folgende Regel gilt für die WhatsApp- und
     Sprach-Kanäle (§4), die noch nicht aktiv sind.
     Audit-Logs werden mit pseudonymisierten Zusammenfassungen geschrieben. E-Mails, Telefonnummern,
     IBAN-Nummern und freie Texteingaben werden vor der Speicherung entfernt bzw. ersetzt. Klartext-
