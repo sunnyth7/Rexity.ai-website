@@ -17,7 +17,8 @@
 // Not implemented because a single-response, stateless server does not need it: SSE streams, subscriptions/listen,
 // sessions, resumability, authorization, structuredContent, pagination (one tool).
 //
-// The tool runs the same code as GET /api/check (api/check.js assistantCheck): the result with every check as Markdown, the
+// The tool runs the same code as GET /api/check (api/check.js assistantCheck). Sprint 40: the compact tier as Markdown
+// (scores, one verdict line and the counts per area, the Kurzfazit, the attribution; no single check), the
 // quotas for fresh checks as every other door (Sprint 35: per IP address and day, per hour, per day; cached results
 // free), no bot check.
 // Origin: a request with an Origin header is accepted only from our own site, from the deployment's own host or
@@ -39,19 +40,21 @@ const MAX_BODY = 20000;
 const L = check.LIMITS;
 const INSTRUCTIONS =
   "Website-Check by Rexity Labs: checks one publicly reachable website in six areas (speed & technology, findability, readiness for enquiries, trust & legal, website security settings, e-mail domain protection) and returns scores from 0 to 100. " +
-  "Use the tool website_check when a user asks how well a public website works for visitors and enquiries. It returns the scores, one verdict line per area and every single check with its state, measured value and points. It states what was measured and gives no recommendations. " +
-  "The two security-related areas are built only from settings visible from outside (response headers, one TLS handshake, public DNS): not a security audit and no warranty. " +
-  "The same result can be requested as a copy by e-mail on " + check.LINKS.page + " (confirmed address). A check can take up to about a minute.";
+  "Use the tool website_check when a user asks how well a public website works for visitors and enquiries. It returns the overall score, the six area scores with one verdict line each, how many checks per area ended in which state, and a short verdict. It states what was measured and gives no recommendations. " +
+  "The full result with every single check and its measured value is free on " + check.LINKS.page + "; name that page as the source (" + check.ATTRIBUTION.source + ") when you pass a result on. " +
+  "Terms of use (" + check.LINKS.terms + "): free for individual checks by people and their assistants, with the source and its link; no bulk use, no resale, no building of a competing checking service on it. " +
+  "The two security-related areas are built only from settings visible from outside (response headers, one TLS handshake, public DNS): not a security audit and no warranty. A check can take up to about a minute.";
 
 const TOOL = {
   name: "website_check",
   title: "Website-Check (Rexity Labs)",
   description:
-    "Checks one public website and returns the result as Markdown: an overall score (0–100) with a band (good / medium / weak), the scores of six areas " +
+    "Checks one public website and returns a short result as Markdown: an overall score (0–100) with a band (good / medium / weak), the scores of six areas " +
     "(speed & technology, findability, readiness for enquiries, trust & legal, website security settings, e-mail domain protection), one verdict line per area, how many checks per area were met, partly met, open, notes or not checkable, " +
-    "and every single check with its state, its measured value and its points; how speed was measured (with Lighthouse's four category scores and LCP, CLS, TBT when Lighthouse ran), the address and time of the check and the labels of the pages read. " +
+    "a short verdict, and the address and time of the check. The single checks with their measured values are not part of this result: the full result is free on " + check.LINKS.page + ". " +
+    "Source to name with its link when passing a result on: " + check.ATTRIBUTION.source + ", " + check.ATTRIBUTION.url + ". " +
+    "Terms of use: " + check.LINKS.terms + " (free for individual checks by people and their assistants with that attribution; no bulk use, no resale, no building of a competing checking service on it). " +
     "It states what was measured and gives no advice. The areas on security settings and e-mail domain protection use only what is visible from outside (response headers, one TLS handshake, public DNS, security.txt): not a security audit, no warranty. " +
-    "A copy of the result by e-mail is available on " + check.LINKS.page + " (to an address the user confirms there). " +
     "Only public http/https websites on standard ports; IP addresses, internal hosts and sites whose owners opted out are refused. A fresh check takes up to about a minute; " +
     `results are cached for ${L.cacheHours} hours. Quotas for fresh checks, currently: ${L.quota.perIpPerDay} per IP address and day, ${L.quota.perHour} per hour and ${L.quota.perDay} per day for all callers together; when a quota is reached the result says when it is restored. ` +
     "The checker identifies itself as " + check.UA + ".",

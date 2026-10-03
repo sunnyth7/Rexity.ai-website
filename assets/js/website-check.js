@@ -26,6 +26,13 @@
    smooth scroll. The lists of checks are native disclosures (details/summary): keyboard and screen readers get them
    for free, and a list a visitor closed stays closed when the language is switched.
 
+   Sprint 40: Google position and backlinks cost money per lookup and exist only in the report by e-mail (confirmed
+   address). When the function says they are switched on (`visibilityTeaser`), the findability card shows one quiet
+   line, the e-mail field's label names them and the report box says what the report adds; the report request sends
+   trade and town with it. A report mail carries a signed link to this page (`#bericht=<token>`, or `?bericht=`):
+   opened with it, the page loads the result together with the section "Sichtbarkeit bei Google (nur im Bericht)".
+   The token is read once and removed from the address bar.
+
    The steps follow the clock, not the server (the function answers once, at the end): they say what is being
    done, in the order the parts usually finish. */
 (function () {
@@ -99,6 +106,8 @@
       confirmP: function (email, hours) { return "Wir haben eine E-Mail an " + email + " geschickt. Öffnen Sie den Link darin und bestätigen Sie dort den Versand; dann senden wir Ihnen den Bericht als Kopie dieses Ergebnisses. Der Link gilt " + hours + " Stunden. Nichts angekommen? Bitte sehen Sie auch im Spam-Ordner nach."; },
       sentH: "Bericht unterwegs",
       sentP: function (email) { return "Der Bericht, eine Kopie dieses Ergebnisses, ist unterwegs an " + email + "."; },
+      viewLoading: "Ihr Ergebnis aus dem Bericht wird geladen.",
+      viewFail: "Das Ergebnis aus dem Bericht ließ sich nicht laden. Bitte öffnen Sie den Link aus der E-Mail erneut.",
       botWait: "Kurze Sicherheitsprüfung …",
       botAsk: "Bitte bestätigen Sie kurz im Feld unter der Adresse, dass Sie kein automatisches Programm sind.",
       botFail: "Die Sicherheitsprüfung (Schutz vor automatischen Anfragen) ist nicht durchgelaufen. Bitte versuchen Sie es noch einmal. Hilft das nicht, laden Sie die Seite neu; ein Inhaltsblocker kann die Prüfung verhindern.",
@@ -138,6 +147,8 @@
       confirmP: function (email, hours) { return "We have sent an e-mail to " + email + ". Open the link in it and confirm the dispatch there; then we send you the report as a copy of this result. The link is valid for " + hours + " hours. Nothing arrived? Please look in your spam folder as well."; },
       sentH: "Report on its way",
       sentP: function (email) { return "The report, a copy of this result, is on its way to " + email + "."; },
+      viewLoading: "Loading your result from the report.",
+      viewFail: "The result from the report could not be loaded. Please open the link from the e-mail again.",
       botWait: "A short security check …",
       botAsk: "Please confirm briefly in the box under the address that you are not an automated program.",
       botFail: "The security check (protection against automated requests) did not complete. Please try once more. If that does not help, reload the page; a content blocker can prevent the check.",
@@ -421,6 +432,7 @@
         var it = items[n];
         var row = el("li", "wc-item");
         row.setAttribute("data-status", it.status);
+        if (it.flag) row.setAttribute("data-flag", it.flag); // Sprint 40: a note that needs a second look (domain expiry under 30 days)
         var mark = el("span", "wc-item__mark");
         var sym = el("span", "wc-item__sym", MARK[it.status] || "");
         sym.setAttribute("aria-hidden", "true");
@@ -446,8 +458,8 @@
       show(box, rows.length > 0);
       var blockNote = q("[data-wc-blocknote]", card);
       if (blockNote) { if (b.note) blockNote.textContent = b.note; show(blockNote, !!b.checked); }
-      var rank = q("[data-wc-ranking]", card);
-      if (rank) { rank.textContent = (b.ranking && b.ranking.text) || ""; show(rank, !!(b.ranking && b.ranking.text)); }
+      var teaser = q("[data-wc-teaser]", card);
+      if (teaser) { teaser.textContent = data.visibilityTeaser || ""; show(teaser, !!data.visibilityTeaser && !data.visibility); }
       show(q("[data-wc-main]", card), rows.length > 0 || (id === "tempo" && !!b.methodLabel));
       if (id !== "tempo") continue;
       // the speed card: the method, Lighthouse's four category scores and lab values (only when Lighthouse ran), the note
@@ -478,6 +490,8 @@
       show(speed, !!b.methodLabel);
     }
 
+    renderPaid(data, lg);
+
     var extras = [];
     if (data.pages && data.pages.length) extras.push(t.pages(data.pages));
     if (data.truncated) extras.push(t.truncated);
@@ -502,6 +516,37 @@
     var span = offer.firstElementChild;
     if (span) { span.setAttribute("data-de", od[0]); span.setAttribute("data-en", oe[0]); span.textContent = o[0]; }
     setMail(state.mailState === "idle" ? "ready" : state.mailState);
+  }
+  /* Sprint 40. The report box when the paid lookups are on (label of the one e-mail field, one more sentence), and
+     the unscored section of a result opened through the signed link of a report mail. */
+  function renderPaid(data, lg) {
+    var on = !!data.visibilityTeaser;
+    var label = q("[data-wc-mail-label]");
+    if (label) {
+      var span = label.firstElementChild || label;
+      var de = label.getAttribute(on ? "data-wc-label-paid-de" : "data-wc-label-de");
+      var en = label.getAttribute(on ? "data-wc-label-paid-en" : "data-wc-label-en");
+      if (de && en) { span.setAttribute("data-de", de); span.setAttribute("data-en", en); span.textContent = lg === "en" ? en : de; }
+    }
+    var hint = q("[data-wc-paid-hint]");
+    if (hint) show(hint, on);
+    var vis = q("[data-wc-vis]");
+    if (!vis) return;
+    var v = data.visibility;
+    var rows = [];
+    if (v && v.rows) {
+      for (var i = 0; i < v.rows.length; i++) {
+        var d = el("div", "wc-vis__row");
+        d.appendChild(el("dt", "", v.rows[i].label));
+        d.appendChild(el("dd", "", v.rows[i].detail));
+        rows.push(d);
+      }
+      q("[data-wc-vis-title]", vis).textContent = v.title || "";
+      q("[data-wc-vis-note]", vis).textContent = v.note || "";
+    }
+    fill(q("[data-wc-vis-rows]", vis), rows);
+    show(vis, rows.length > 0);
+    show(mail, !data.fromReport); // the visitor already has the report
   }
   /* report box: idle (no result yet) → ready → sending → confirm (confirmation mail sent) | sent | bad | fail */
   function setMail(name, message) {
@@ -573,6 +618,7 @@
     clearError();
     busy(true);
     state.lastInput = input;
+    state.view = null;
     var started = false;
     function begin() {
       if (quiet || started) return;
@@ -665,7 +711,8 @@
     }
     emailInput.removeAttribute("aria-invalid");
     setMail("sending");
-    send({ url: state.last.url, email: email, lang: lang(), company_website: mail.elements.company_website.value }, 60000).then(function (r) {
+    // trade and town travel with the request: with both, the report carries the Google position for that search
+    send({ url: state.last.url, email: email, trade: (form.elements.trade.value || "").trim(), town: (form.elements.town.value || "").trim(), lang: lang(), company_website: mail.elements.company_website.value }, 60000).then(function (r) {
       if (r.data && r.data.ok) {
         state.mailTo = email;
         state.mailHours = r.data.expiresInHours || 48;
@@ -687,6 +734,63 @@
     try { emailInput.focus(); emailInput.select(); } catch (e) { /* nothing */ }
   });
 
+  // ---------------------------------------------------------------- the signed link of a report mail (Sprint 40)
+  /* The token sits in the fragment (it reaches neither our server's log nor a referrer); "?bericht=" is accepted
+     too. It is taken out of the address bar at once. No bot check: the signed token is what authorises the request. */
+  function viewToken() {
+    var m = /(?:^|[#&])bericht=([A-Za-z0-9._-]{20,6000})/.exec(location.hash || "");
+    var fromQuery = false;
+    if (!m) { m = /(?:^|[?&])bericht=([A-Za-z0-9._-]{20,6000})/.exec(location.search || ""); fromQuery = !!m; }
+    if (!m) return null;
+    try {
+      if (window.history && history.replaceState) history.replaceState(null, "", location.pathname + (fromQuery ? "" : location.search));
+    } catch (e) { /* nothing */ }
+    return m[1];
+  }
+  function openView(token, quiet) {
+    if (state.busy) return;
+    busy(true);
+    addCss();
+    if (!quiet) {
+      state.last = null;
+      toRunning({ url: "" });
+      q("[data-wc-site]").textContent = "";
+      statusText.textContent = L().viewLoading;
+      var steps = runBox.querySelectorAll("[data-wc-step]");
+      for (var s = 0; s < steps.length; s++) steps[s].setAttribute("data-state", s === steps.length - 1 ? "active" : "done");
+    }
+    post({ report: token, lang: lang() }, 100000).then(function (r) {
+      busy(false);
+      if (r.data && r.data.ok) {
+        state.last = r.data;
+        state.view = token;
+        state.lastInput = null;
+        if (!quiet) {
+          show(runBox, false);
+          show(outBox, true);
+          report.classList.remove("is-busy");
+          setTitle("resultFor");
+        }
+        render(r.data, !quiet);
+        if (!quiet) { try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); } }
+        statusText.textContent = L().done(r.data.host, r.data.overall.score);
+        return;
+      }
+      if (quiet) return;
+      toIdle();
+      showError((r.data && r.data.message) || L().viewFail, null);
+    }, function () {
+      busy(false);
+      if (quiet) return;
+      toIdle();
+      showError(L().viewFail, null);
+    });
+  }
+  var startToken = viewToken();
+  if (startToken) openView(startToken, false);
+  // the link opened in a tab that already shows this page changes the fragment only
+  window.addEventListener("hashchange", function () { var tk = viewToken(); if (tk) openView(tk, false); });
+
   // ---------------------------------------------------------------- language switch: same result in the other language
   window.addEventListener("rexity:languagechange", function () {
     // the widget speaks the page's language: render it again (not while a request is waiting for its token)
@@ -700,6 +804,11 @@
     if (state.busy) {
       if (state.step >= 0) statusText.textContent = L().steps[state.step];
       q("[data-wc-when]").textContent = L().wait;
+      return;
+    }
+    if (state.last && state.view) {
+      render(state.last, false);
+      openView(state.view, true); // the same result and section in the other language
       return;
     }
     if (state.last && state.lastInput) {

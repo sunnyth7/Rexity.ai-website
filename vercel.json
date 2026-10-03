@@ -181,11 +181,22 @@
     {
       "path": "/api/followup",
       "schedule": "30 7 * * *"
+    },
+    {
+      "path": "/api/rpa-reminders",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/rpa-reminders",
+      "schedule": "0 8 * * *"
     }
   ],
   "functions": {
     "api/chat.js": { "maxDuration": 60 },
     "api/check.js": { "maxDuration": 90 },
-    "api/mcp.js": { "maxDuration": 90 }
+    "api/mcp.js": { "maxDuration": 90 },
+    "api/rpa-demo.js": { "maxDuration": 30 },
+    "api/automation-check.js": { "maxDuration": 45 },
+    "api/rpa-reminders.js": { "maxDuration": 60 }
   }
 }

@@ -10,8 +10,8 @@
 // GET  ?url=<address>&lang=de|en[&format=json|md]               assistants: the PUBLIC tier as JSON or Markdown (own limits,
 //                                                               CORS open); also behind api/mcp.js (tool website_check)
 //
-// One result for every door (founder, Sprint 36: "show everything in Ergebnis"). The answer of the browser POST, of
-// GET and of the MCP tool carries: overall score and band, the six block scores with one verdict line each, the
+// Sprint 36 (founder: "show everything in Ergebnis"), since Sprint 40 for the page and the report mail only (GET and
+// the MCP tool: the compact tier, see 10). The answer of the browser POST carries: overall score and band, the six block scores with one verdict line each, the
 // number of checks per status AND every check with label, status, measured value and points, the method of the speed
 // block (with Lighthouse's four scores and LCP/CLS/TBT when it ran), the address, the time and the labels of the pages
 // read. The report e-mail (confirmed address) is the same content as a copy to keep. Nothing carries advice ("what
@@ -29,7 +29,7 @@
 //      LCP, CLS, TBT); one retry on 429/5xx. PAGESPEED_API_KEY is optional. When PageSpeed does not answer, the
 //      block is scored from our own measurement without a browser ("Eigenmessung", WEIGHTS.tempoOwn).
 //   3. Auffindbarkeit: title, description, H1, canonical, noindex, lang, viewport, structured data, sitemap,
-//      robots.txt, llms.txt; optional ranking lookup (DATAFORSEO_AUTH_B64 + trade + town; one call per check).
+//      robots.txt, llms.txt. (The ranking lookup left the check in Sprint 40: see 10.)
 //   4. Anfrage-Tauglichkeit: tel:, mailto:, form or booking, WhatsApp, opening hours, map link, call to action;
 //      up to 4 internal contact/booking pages are read as well (same host, robots.txt respected).
 //   5. Vertrauen & Recht (Hinweise, keine Rechtsberatung): HTTPS, Impressum, Datenschutz, third-party hosts in
@@ -51,6 +51,13 @@
 //      log of the checked addresses per day without anything about the visitor (docs/sql/check_runs.sql).
 //   9. Bot check: with TURNSTILE_SECRET_KEY set, every browser POST needs a Cloudflare Turnstile token (or the
 //      short-lived pass a verified check returns) before anything is fetched.
+//  10. Sprint 40 (api/_sources.js): three free sources in every check (field data of the Chrome UX Report inside
+//      "Tempo & Technik", domain expiry through RDAP as a note in "Sicherheit der Website", green hosting according
+//      to the Green Web Foundation as a note in "Tempo & Technik"). Two paid lookups (DataForSEO: Google position
+//      for "<Gewerk> <Ort>", backlink summary) run ONLY when a report is confirmed through the signed link, inside
+//      caps per address, per day and in US dollars; their result is in the report mail and behind a signed view link
+//      (POST { report: <token> }), never in a cached report or an anonymous answer. GET and the MCP tool return a
+//      compact tier (scores, verdict lines, counts, Kurzfazit, attribution), no single check.
 //
 // Privacy: logs carry the host name, durations and status codes only — never an e-mail address or an IP.
 // No npm dependencies. Tests: scripts/check-tool/test-check.mjs (stubbed network, nothing leaves the machine).
@@ -61,6 +68,7 @@ const https = require("https");
 const zlib = require("zlib");
 const crypto = require("crypto");
 const sec = require("./_security"); // Sprint 36: the two read-only areas "security" and "mail"
+const src = require("./_sources"); // Sprint 40: field data, domain expiry, green hosting; the paid lookups of the report
 
 const SITE_ORIGIN = "https://www.rexity.ai";
 const BOT_PAGE = SITE_ORIGIN + "/website-check/bot";
@@ -115,12 +123,22 @@ const envInt = (name, fallback) => {
 //   ip    fresh checks per IP address and Europe/Berlin day   CHECK_IP_DAILY    default 5
 //   hour  fresh checks per clock hour, all visitors           CHECK_HOURLY_CAP  default 200
 //   day   fresh checks per Europe/Berlin day, all visitors    CHECK_DAILY_CAP   default 1000 (200 until Sprint 35)
+// Founder's own connections (3 Oct 2026): addresses in CHECK_IP_ALLOW (comma separated; an entry ending in "." or ":"
+// is a prefix, e.g. an IPv6 home prefix) get CHECK_IP_ALLOW_DAILY fresh checks per day (default 300) instead of the
+// normal per-IP quota, and are not held by the 10-minute burst limit. The hourly and daily totals still apply.
+const IP_ALLOW = String(process.env.CHECK_IP_ALLOW || "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
+const IP_ALLOW_DAILY = envInt("CHECK_IP_ALLOW_DAILY", 300) || 300;
+function ipAllowed(ip) {
+  const a = String(ip || "").trim().toLowerCase();
+  if (!a) return false;
+  return IP_ALLOW.some((e) => (/[.:]$/.test(e) ? a.startsWith(e) : a === e));
+}
 const QUOTA_ENV = { ip: envInt("CHECK_IP_DAILY", 5) || 5, hour: envInt("CHECK_HOURLY_CAP", 200) || 200, day: envInt("CHECK_DAILY_CAP", 1000) || 1000 };
 const API_DAILY_CAP = envInt("CHECK_API_DAILY_CAP", 50); // of the day's fresh checks: at most this many through GET and MCP
 // Until Sprint 35 these two shared the number of CHECK_DAILY_CAP (200). They keep 200: report requests cost mail
-// quota, ranking lookups cost money, and neither should grow because the check quota did.
+// quota, the paid lookups cost money, and neither should grow because the check quota did.
 const MAIL_DAILY_CAP = envInt("CHECK_MAIL_DAILY_CAP", 200); // report requests (one mail each) per day
-const LOOKUP_DAILY_CAP = envInt("CHECK_LOOKUP_DAILY_CAP", 200); // ranking lookups per day
+const LOOKUP_DAILY_CAP = envInt("CHECK_LOOKUP_DAILY_CAP", 200); // paid lookups (DataForSEO calls) per day, all reports together
 // The Kurzfazit's model route (Sprint 30): provider order and model are the check's own, not the chat's.
 const CHECK_PROVIDER = String(process.env.CHECK_PROVIDER || "").trim().toLowerCase();
 const CHECK_ORDER = CHECK_PROVIDER === "azure" ? ["azure", "bedrock"] : ["bedrock", "azure"];
@@ -157,6 +175,9 @@ const deps = {
   tls: null, // (host, timeoutMs) -> the facts of one TLS handshake; default: sec.handshake with the pinned public address
   dns: null, // { resolveMx, resolveTxt, resolveCaa }; default: node:dns/promises through the system's resolvers
   securityRun: undefined, // tests may replace the whole collection; undefined: sec.collect
+  // Sprint 40 (api/_sources.js): undefined = the three free lookups run through deps.fetch; null = off (no rows are
+  // added); a function replaces the collection
+  sourcesRun: undefined,
   randomBytes: (n) => crypto.randomBytes(n)
 };
 function isOptedOut(hostname) {
@@ -888,36 +909,9 @@ function ownMeasure(page, h, perf, assets) {
   };
 }
 
-// ---- 3b. Optional ranking lookup (DataForSEO, one call per check) -------------------------------------
+// ---- 3b. (Sprint 40) The ranking lookup is no longer part of a check: it costs money per call and runs only for a
+// confirmed e-mail address, see "Sprint 40" below and api/_sources.js.
 const cleanTerm = (s) => String(s || "").normalize("NFC").replace(/[^\p{L}\p{N} .&-]/gu, " ").replace(/\s+/g, " ").trim().slice(0, 40);
-async function runRanking(host, trade, town) {
-  const auth = String(process.env.DATAFORSEO_AUTH_B64 || "").trim();
-  if (!auth || !trade || !town) return null; // block omitted
-  const keyword = `${trade} ${town}`;
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), SERP_TIMEOUT_MS);
-  try {
-    const resp = await deps.fetch("https://api.dataforseo.com/v3/serp/google/organic/live/regular", {
-      method: "POST",
-      headers: { Authorization: "Basic " + auth, "Content-Type": "application/json" },
-      body: JSON.stringify([{ keyword, location_code: 2276, language_code: "de", depth: 20 }]),
-      signal: ctrl.signal
-    });
-    if (!resp.ok) { await resp.text().catch(() => ""); return { query: keyword, checked: false, reason: "http_" + resp.status }; }
-    const data = await resp.json();
-    const task = data && Array.isArray(data.tasks) ? data.tasks[0] : null;
-    const result = task && Array.isArray(task.result) ? task.result[0] : null;
-    if (!result || !Array.isArray(result.items)) return { query: keyword, checked: false, reason: "no_result" };
-    const own = baseDomain(host);
-    const hit = result.items.find((i) => i && i.type === "organic" && typeof i.domain === "string" && baseDomain(i.domain) === own);
-    const pos = hit ? Number(hit.rank_group || hit.rank_absolute) : null;
-    return { query: keyword, checked: true, position: Number.isFinite(pos) && pos >= 1 && pos <= 20 ? pos : null, depth: 20 };
-  } catch (e) {
-    return { query: keyword, checked: false, reason: e && e.name === "AbortError" ? "timeout" : "network" };
-  } finally {
-    clearTimeout(timer);
-  }
-}
 
 // ---- 6. Blocks, items, scores ----------------------------------------------------------------------
 const T = (de, en) => ({ de, en });
@@ -1113,9 +1107,7 @@ function findBlock(h, extra) {
   const ll = extra.llms;
   items.push(mk("llms", 0, ll.state === "unknown" || ll.state === "robots" ? null : 1, T("llms.txt (Hinweisdatei für KI-Dienste)", "llms.txt (hint file for AI services)"),
     ll.state === "ok" ? T("vorhanden", "present") : ll.state === "missing" ? T("nicht vorhanden (kein Muss; zählt nicht in die Punkte)", "not present (not required; not part of the score)") : T("nicht geprüft", "not checked"), null));
-  const out = { id: "find", checked: true, score: blockScore(items), items };
-  if (extra.ranking) out.ranking = extra.ranking;
-  return out;
+  return { id: "find", checked: true, score: blockScore(items), items };
 }
 
 // Sprint 27b: h may be the merged view of the entered page and the internal pages read with it (mergePages):
@@ -1379,6 +1371,8 @@ function speedSentence(report, de) {
   const t = report.blocks.tempo;
   if (t && t.checked && t.method === "own") return (de ? "Das Tempo haben wir ohne Browser selbst gemessen, weil die Lighthouse-Messung gerade nicht geantwortet hat." : "We measured speed ourselves without a browser because the Lighthouse measurement did not answer just now.");
   if (t && !t.checked) return de ? "Das Tempo ließ sich heute nicht messen und fließt deshalb nicht in den Gesamtwert ein." : "Speed could not be measured today and is therefore not part of the overall value.";
+  // Sprint 40: with a record in the Chrome UX Report the area also carries field data
+  if (t && t.field) return de ? "Die Tempo-Werte stammen aus einer Labormessung mit Lighthouse auf einem simulierten Handy und aus Felddaten des Chrome UX Report." : "The speed values come from a Lighthouse lab measurement on a simulated phone and from field data of the Chrome UX Report.";
   return de ? "Die Tempo-Werte stammen aus einer Labormessung mit Lighthouse auf einem simulierten Handy." : "The speed values come from a Lighthouse lab measurement on a simulated phone.";
 }
 
@@ -1511,7 +1505,7 @@ function berlinDay(now) {
   try { return new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Berlin", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(now)); }
   catch (_e) { return new Date(now).toISOString().slice(0, 10); }
 }
-// Per Europe/Berlin day. checks: fresh checks (CHECK_DAILY_CAP); lookups: ranking lookups; mails: report requests
+// Per Europe/Berlin day. checks: fresh checks (CHECK_DAILY_CAP); lookups: DataForSEO calls of confirmed reports (Sprint 40); mails: report requests
 // (one mail each: the confirmation mail, or the report itself without CHECK_MAIL_SECRET); apichecks: the fresh
 // checks among "checks" that came through GET or MCP (CHECK_API_DAILY_CAP); reports: full reports sent after a
 // confirmed address; summaries: model answers for the Kurzfazit (also those the guard then rejected); botfail: browser requests the bot check refused.
@@ -1524,7 +1518,11 @@ const DAILY_KINDS = ["checks", "lookups", "mails", "apichecks", "reports", "summ
   // followups: follow-up mails sent; optouts: opt-outs through the link in that mail (both counted by api/followup.js)
   "followups", "optouts",
   // Sprint 35: answers "429" because a quota was reached, by kind (per IP address, per hour, per day)
-  "quotaip", "quotahour", "quotaday"];
+  "quotaip", "quotahour", "quotaday",
+  // Sprint 40: paidruns: confirmed reports for which the paid lookups ran; dfsmicro: what DataForSEO's answers
+  // reported as cost, in millionths of a US dollar; dfscap: the same at list price, reserved before the calls (the
+  // counter of the daily USD cap). "lookups" (above) now counts the single DataForSEO calls.
+  "paidruns", "dfsmicro", "dfscap"];
 // How long a day's counter stays in the shared store: 183 days (founder, 2 Oct 2026: six months for everything
 // that is a record; 40 days until Sprint 35). Numbers only, no visitor data. Short-lived rows (per-IP quota,
 // hourly counter, cache, one-time link markers) are not records and keep their short lives.
@@ -1539,7 +1537,7 @@ function today() {
   return daily;
 }
 
-const REPORT_VERSION = 5; // 5: six areas (security, mail), every check in every answer; 4: no advice texts, Lighthouse scores on the speed block (older cached reports are not served)
+const REPORT_VERSION = 6; // 6: field data, domain expiry and green hosting in the areas; the ranking lookup left the check (Sprint 40). 5: six areas (security, mail), every check in every answer; 4: no advice texts, Lighthouse scores on the speed block (older cached reports are not served)
 const cache = new Map(); // key -> { at, report }
 const cacheKey = (u) => (u.hostname.replace(/^www\./, "") + (u.pathname.replace(/\/+$/, "") || "/") + (u.search || "")).toLowerCase();
 function cacheGet(key) {
@@ -1852,7 +1850,7 @@ async function runCheck(input) {
   }
 
   // PageSpeed (slow) in parallel with the small files, the pages read with the entered one, the sampled files and
-  // the optional ranking lookup
+  // the three free sources of Sprint 40
   const tPsi = deps.now();
   const psiP = runPageSpeed(entered.href).then((r) => { timing.psi = deps.now() - tPsi; return r; });
   // robots.txt once, for everything that is fetched beyond the entered address (also security.txt, Sprint 36)
@@ -1907,20 +1905,16 @@ async function runCheck(input) {
     timing.assets = assets.length;
     return { robots: { state: rb.state }, sitemap: { state: sm.state }, llms: { state: ll.state }, h: mergePages(h0, subs), own: ownMeasure(page, h0, perf, assets) };
   })();
-  const rankP = (async () => {
-    if (!htmlOk || !input.trade || !input.town) return null;
-    if (!String(process.env.DATAFORSEO_AUTH_B64 || "").trim()) return null;
-    if (today().lookups >= LOOKUP_DAILY_CAP) return null;
-    today().lookups++;
-    return runRanking(host, input.trade, input.town);
-  })();
-  const [psi, side, ranking, secFacts] = await Promise.all([psiP, sideP, rankP, secP]);
+  // Sprint 40: the three free sources (api/_sources.js), each with its own short timeout. Nothing here costs money:
+  // the paid lookups are not part of a check (see runPaid below).
+  const srcP = runSources({ host, finalUrl, htmlOk });
+  const [psi, side, secFacts, srcFacts] = await Promise.all([psiP, sideP, secP, srcP]);
 
   const blocks = { tempo: tempoBlock(psi, side ? side.own : null) };
   let why = null;
   if (htmlOk) {
     const h = side.h;
-    blocks.find = findBlock(h, { robots: side.robots, sitemap: side.sitemap, llms: side.llms, ranking });
+    blocks.find = findBlock(h, { robots: side.robots, sitemap: side.sitemap, llms: side.llms });
     blocks.contact = contactBlock(h);
     blocks.trust = trustBlock(h, finalUrl.href);
   } else {
@@ -1939,6 +1933,7 @@ async function runCheck(input) {
   }
   blocks.security = securityBlock(secFacts, why, deps.now());
   blocks.mail = mailBlock(secFacts);
+  applySources(blocks, srcFacts, host, deps.now()); // Sprint 40: field data and green hosting -> tempo, domain expiry -> security
   const report = {
     v: REPORT_VERSION,
     url: entered.href,
@@ -1952,12 +1947,13 @@ async function runCheck(input) {
   };
   report.offer = offerFor(blocks);
   report.durationMs = deps.now() - t0;
-  console.log(`[check] host=${host} ms=${report.durationMs} fetch=${timing.fetch || 0} psi=${timing.psi || 0} psi_ok=${Boolean(psi && psi.ok)}${psi && !psi.ok ? " psi_reason=" + psi.reason : ""} tempo=${blocks.tempo.method || "none"} side=${timing.side || 0} sec=${timing.sec || 0}${secFacts && secFacts.ms ? " sec_parts=" + Object.entries(secFacts.ms).map(([k, v]) => k + ":" + v).join(",") : ""} subpages=${timing.subs || 0} files=${timing.assets || 0} html=${htmlOk} ranking=${ranking ? (ranking.checked ? "ok" : "failed") : "off"} overall=${report.overall.score}`);
+  console.log(`[check] host=${host} ms=${report.durationMs} fetch=${timing.fetch || 0} psi=${timing.psi || 0} psi_ok=${Boolean(psi && psi.ok)}${psi && !psi.ok ? " psi_reason=" + psi.reason : ""} tempo=${blocks.tempo.method || "none"} side=${timing.side || 0} sec=${timing.sec || 0}${secFacts && secFacts.ms ? " sec_parts=" + Object.entries(secFacts.ms).map(([k, v]) => k + ":" + v).join(",") : ""} subpages=${timing.subs || 0} files=${timing.assets || 0} html=${htmlOk} sources=${srcFacts ? `crux:${srcFacts.crux.state},rdap:${srcFacts.expiry.state},green:${srcFacts.green.state}` : "off"} overall=${report.overall.score}`);
   return report;
 }
 
 // ---- The result every door returns (Sprint 36) -----------------------------------------------------------------
-const LINKS = { page: SITE_ORIGIN + "/website-check", bot: BOT_PAGE, openapi: SITE_ORIGIN + "/.well-known/openapi.json", mcp: SITE_ORIGIN + "/mcp" };
+const TERMS_PAGE = SITE_ORIGIN + "/website-check/nutzung"; // Sprint 40: what the open interface may be used for
+const LINKS = { page: SITE_ORIGIN + "/website-check", bot: BOT_PAGE, openapi: SITE_ORIGIN + "/.well-known/openapi.json", mcp: SITE_ORIGIN + "/mcp", terms: TERMS_PAGE };
 const MAIL_COPY_NOTE = T(
   "Dieses Ergebnis enthält jeden Prüfpunkt mit seinem Messwert. Auf der Seite lässt es sich zusätzlich als Bericht per E-Mail anfordern: als Kopie zum Aufbewahren oder Weitergeben, an eine Adresse, die über den Link in einer Bestätigungs-E-Mail bestätigt wurde.",
   "This result contains every check with its measured value. On the page it can also be requested as a report by e-mail: a copy to keep or pass on, sent to an address that was confirmed through the link in a confirmation e-mail.");
@@ -1976,9 +1972,10 @@ const pointsLabel = (i, L) => (i.max > 0 && i.status !== "unknown" && i.status !
 // What the browser, GET /api/check and the MCP tool get: scores, bands, one verdict line per block, the numbers of
 // checks per state AND every check (label, state, measured value, points), the speed block's method (with
 // Lighthouse's four scores and LCP/CLS/TBT when it ran), the labels of the pages read. No advice.
-// opts.ranking: the position of the ranking lookup is part of the answer (only for the browser request that asked
-// with trade and town, and in the report e-mail; GET and MCP never carry the search term a visitor typed).
-function publicView(report, lang, cached, opts) {
+// Sprint 40: this is the view of the PAGE (browser POST), of the report e-mail and of the score card's data. GET and
+// the MCP tool get assistantView() below. No view built here ever carries paid data: that lives only in the signed
+// view link of a confirmed report (viewReport).
+function publicView(report, lang, cached) {
   const L = lang === "en" ? "en" : "de";
   const sum = report.summaries[L];
   const blocks = {};
@@ -1993,7 +1990,7 @@ function publicView(report, lang, cached, opts) {
       reason: b.reason ? b.reason[L] : undefined,
       notApplicable: b.na ? true : undefined,
       counts: countsOf(b),
-      items: (b.items || []).map((i) => ({ id: i.id, label: i.label[L], status: i.status, statusLabel: STATUS_LABELS[i.status][L], detail: i.detail[L], points: i.points, max: i.max, pointsLabel: pointsLabel(i, L) }))
+      items: (b.items || []).map((i) => ({ id: i.id, label: i.label[L], status: i.status, statusLabel: STATUS_LABELS[i.status][L], detail: i.detail[L], points: i.points, max: i.max, pointsLabel: pointsLabel(i, L), flag: i.flag || undefined }))
     };
     if (id === "tempo") {
       blocks[id].method = b.method || null;
@@ -2005,7 +2002,6 @@ function publicView(report, lang, cached, opts) {
       }
     } else if (b.note) blocks[id].note = b.note[L]; // security, mail: the disclaimer
     if (id === "contact" && b.pages && b.pages.length) blocks[id].pages = b.pages.slice(0, SUB_PAGES);
-    if (id === "find" && opts && opts.ranking && b.ranking) blocks[id].ranking = { query: b.ranking.query, checked: b.ranking.checked, position: b.ranking.position === undefined ? null : b.ranking.position, text: rankingLine(b.ranking, L === "de") };
   }
   const oBand = bandKey(report.overall.score);
   const offer = OFFERS[report.offer] ? report.offer : "design";
@@ -2023,22 +2019,18 @@ function publicView(report, lang, cached, opts) {
   };
 }
 
-// The same result with the ranking position: what the report e-mail prints (and what the tests read).
+// The result as the report e-mail prints it (and as the tests read it): the page's view.
 function fullView(report, lang) {
-  return publicView(report, lang === "en" ? "en" : "de", false, { ranking: true });
+  return publicView(report, lang === "en" ? "en" : "de", false);
 }
 
-const rankingLine = (r, de) => (!r.checked ? (de ? `Platz bei Google für „${r.query}“: nicht prüfbar` : `Position on Google for “${r.query}”: could not be checked`)
-  : r.position ? (de ? `Platz bei Google für „${r.query}“ (Deutschland): ${r.position}` : `Position on Google for “${r.query}” (Germany): ${r.position}`)
-  : (de ? `Platz bei Google für „${r.query}“ (Deutschland): nicht in den ersten 20 Ergebnissen` : `Position on Google for “${r.query}” (Germany): not in the first 20 results`));
-
-// The result as Markdown (GET ?format=md, Accept: text/markdown, and the MCP tool).
+// The result as Markdown (GET ?format=md, Accept: text/markdown, and the MCP tool). Sprint 40: the compact tier of
+// assistantView(): the scores, one line and the counts per area, the Kurzfazit, and where the full result is.
 function publicMarkdown(view) {
   const de = view.lang === "de";
   const date = new Intl.DateTimeFormat(de ? "de-DE" : "en-GB", { timeZone: "Europe/Berlin", dateStyle: "long", timeStyle: "short" }).format(new Date(view.checkedAt));
   const na = de ? "nicht prüfbar" : "could not be checked";
   const ids = BLOCK_IDS.filter((id) => view.blocks[id]);
-  const cell = (x) => String(x).replace(/\|/g, "/").replace(/\s+/g, " ").trim();
   const out = [];
   out.push(de ? `# Website-Check: ${view.host}` : `# Website check: ${view.host}`, "");
   out.push(de ? `- Geprüfte Adresse: ${view.finalUrl}` : `- Address checked: ${view.finalUrl}`);
@@ -2056,35 +2048,231 @@ function publicMarkdown(view) {
     out.push(`| ${b.name} | ${b.score === null ? (b.notApplicable ? view.statusLabels.na : na) : b.score} | ${b.bandLabel || "–"} | ${b.weight} % | ${c.ok} | ${c.partial} | ${c.fail} | ${c.info} | ${c.unknown} | ${c.na} |`);
   }
   out.push("");
-  // every area with its checks: state, label, measured value, points
   for (const id of ids) {
     const b = view.blocks[id];
-    out.push(`## ${b.name}${b.score === null ? "" : (de ? `: ${b.score} von 100 (${b.bandLabel})` : `: ${b.score} out of 100 (${b.bandLabel})`)}`, "");
-    out.push(b.checked ? b.verdict || "" : b.reason || na, "");
-    if (!b.checked) continue;
-    if (id === "tempo" && b.methodLabel) {
-      out.push(`${b.methodLabel}. ${b.note || ""}`.trim(), "");
-      if (b.lighthouse) {
-        const lh = b.lighthouse;
-        const n = (x) => (x === null || x === undefined ? na : x);
-        out.push(de ? `- Lighthouse (mobil): Leistung ${n(lh.performance)}, Barrierefreiheit ${n(lh.accessibility)}, Best Practices ${n(lh.bestPractices)}, SEO ${n(lh.seo)}` : `- Lighthouse (mobile): performance ${n(lh.performance)}, accessibility ${n(lh.accessibility)}, best practices ${n(lh.bestPractices)}, SEO ${n(lh.seo)}`);
-        const m = b.metrics || {};
-        const parts = [m.lcp && `LCP ${m.lcp}`, m.cls && `CLS ${m.cls}`, m.tbt && `TBT ${m.tbt}`].filter(Boolean);
-        if (parts.length) out.push((de ? "- Laborwerte: " : "- Lab values: ") + parts.join(", "));
-        out.push("");
-      }
-    }
-    out.push(de ? "| Status | Prüfpunkt | Gemessen | Punkte |" : "| State | Check | Measured | Points |", "|---|---|---|---|");
-    for (const i of b.items) out.push(`| ${i.statusLabel} | ${cell(i.label)} | ${cell(i.detail)} | ${i.pointsLabel} |`);
-    out.push("");
-    if (id === "contact" && b.pages) out.push((de ? "Mitgelesene Seiten: " : "Pages read as well: ") + b.pages.join(", "), "");
-    if (id !== "tempo" && b.note) out.push(`_${b.note}_`, "");
+    out.push(`- **${b.name}:** ${b.checked ? b.verdict || "" : b.reason || na}`);
   }
-  out.push(de ? "## Kopie per E-Mail" : "## Copy by e-mail", "", `${view.mailCopy.note} ${view.mailCopy.url}`, "");
+  out.push("");
+  out.push(de ? "## Vollständiges Ergebnis" : "## Full result", "", `${view.full.note} ${view.full.url}`, "");
+  out.push(de
+    ? `Quelle: ${view.attribution.source}, ${view.attribution.url}. Bitte bei der Wiedergabe mit diesem Link nennen. Nutzungsbedingungen: ${view.attribution.terms}`
+    : `Source: ${view.attribution.source}, ${view.attribution.url}. Please name it with this link when passing the result on. Terms of use: ${view.attribution.terms}`, "");
   out.push(de
     ? "Der Check ist eine automatische Momentaufnahme der eingegebenen Seite. Er nennt, was gemessen wurde, und gibt keine Handlungsempfehlungen. Die Angaben zu Vertrauen & Recht sind Hinweise und keine Rechtsberatung. " + sec.DISCLAIMER.de
     : "The check is an automatic snapshot of the page entered. It states what was measured and gives no recommendations. The indications on trust & legal are not legal advice. " + sec.DISCLAIMER.en);
   return out.join("\n") + "\n";
+}
+
+// ---- Sprint 40: further sources, the paid lookups of a confirmed report, the compact tier for assistants ---------
+// Everything in this section is new; the functions above call into it at four places (runCheck, confirmReport, the
+// handler's "report" branch, assistantCheckCore). Contract: docs/CHECK_API.md §18–§20; design and threat list:
+// docs/logs/sprint-40-sources.md.
+
+// A. The three free sources (api/_sources.js) ---------------------------------------------------------------
+// What the module may use to reach the network: plain fetch through deps.fetch (tests replace it). The module's own
+// gate refuses every address outside its list before the request is made.
+const sourcesIo = { fetch: (url, opt) => deps.fetch(url, opt) };
+// -> the facts of src.collect, or null (no rows are added). Never throws. Runs only for a page that was read.
+async function runSources({ host, finalUrl, htmlOk }) {
+  if (!htmlOk || deps.sourcesRun === null) return null;
+  const shared = sec.sharedSuffix(host);
+  const ctx = { url: finalUrl.origin + finalUrl.pathname, host, domain: shared ? "" : baseDomain(host), shared, key: String(process.env.PAGESPEED_API_KEY || "").trim(), now: deps.now() };
+  try {
+    const facts = deps.sourcesRun ? await deps.sourcesRun(ctx, sourcesIo) : await src.collect(ctx, sourcesIo);
+    return facts && facts.crux && facts.expiry && facts.green ? { ...facts, domain: ctx.domain, shared } : null;
+  } catch (e) {
+    console.error("[check] sources failed:", e && e.message ? String(e.message).slice(0, 160) : "error");
+    return null;
+  }
+}
+// Adds the rows to the areas that exist. Field data: scored rows inside "Tempo & Technik" (their points join the
+// area's denominator only when there is a record, so a site without field data keeps its lab score). Green hosting:
+// a note in "Tempo & Technik". Domain expiry: a note in "Sicherheit der Website".
+function applySources(blocks, facts, host, now) {
+  if (!facts) return;
+  const t = blocks.tempo;
+  if (t && t.checked) {
+    const rows = src.fieldItems(facts.crux, mk);
+    // after the scored rows of the method (Lighthouse's four, or the own measurement's), before the notes
+    const at = t.method === "lighthouse" ? Object.keys(WEIGHTS.tempo).length : t.items.length;
+    t.items.splice(at, 0, ...rows);
+    t.items.push(src.greenItem(facts.green, host, mk));
+    t.score = blockScore(t.items);
+    if (facts.crux.state === "ok") t.field = { scope: facts.crux.scope };
+  }
+  const s = blocks.security;
+  if (s && s.checked) {
+    s.items.push(facts.shared
+      ? mk("domainExpiry", 0, "na", T("Ablauf der Domain-Registrierung", "Expiry of the domain registration"), T(`entfällt: ${host} liegt unter der Sammel-Adresse eines Anbieters (${facts.shared}).`, `does not apply: ${host} sits under a provider's shared address (${facts.shared}).`))
+      : src.expiryItem(facts.expiry, facts.domain, mk, now));
+  }
+}
+
+// B. The paid lookups (DataForSEO): only for a confirmed e-mail address ------------------------------------
+// They cost money per call, so nothing here is reachable from an anonymous request. The one caller is
+// confirmReport(): the visitor entered an address in the form, got the confirmation mail, opened its signed link and
+// pressed the button; the token that link carries (AES-256-GCM, HMAC-SHA256, CHECK_MAIL_SECRET) names the address,
+// the checked site and the search. The result goes into the report mail and into a second signed value, the view
+// link; it is never written into the report object, so it cannot reach the cache, GET, MCP or the score card.
+const envNum = (name, fallback) => { const v = parseFloat(String(process.env[name] || "").trim().replace(",", ".")); return Number.isFinite(v) && v >= 0 ? v : fallback; };
+const DFS_DAILY_USD = envNum("CHECK_DFS_DAILY_USD", 2); // daily cap for DataForSEO in US dollars, all reports together
+const PAID_PER_ADDRESS_DAY = 2; // paid runs per confirmed address and Europe/Berlin day
+const PAID_PER_ADDRESS_WEEK = 5; // … and per calendar week (Monday to Sunday, Europe/Berlin)
+const VIEW_TTL_DAYS = 7;
+const VIEW_TTL_MS = VIEW_TTL_DAYS * 24 * 60 * 60 * 1000;
+const dfsAuth = () => String(process.env.DATAFORSEO_AUTH_B64 || "").trim();
+// switched on only with the key AND the confirmation step: without CHECK_MAIL_SECRET an address is never confirmed
+const paidOn = () => Boolean(dfsAuth() && mailKeys());
+// "2026-W40": the ISO week of a Europe/Berlin day
+function isoWeek(day) {
+  const d = new Date(day + "T12:00:00Z");
+  const wd = (d.getUTCDay() + 6) % 7; // Monday = 0
+  d.setUTCDate(d.getUTCDate() - wd + 3); // the Thursday of that week names its year
+  const first = new Date(Date.UTC(d.getUTCFullYear(), 0, 4));
+  const week = 1 + Math.round(((d - first) / 86400000 - 3 + ((first.getUTCDay() + 6) % 7)) / 7);
+  return `${d.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
+}
+// A counter that must hold across instances because it limits money. -> the count after adding n, or null when it
+// cannot be trusted: a shared store is configured but did not take the key (docs/sql/check_paid.sql not applied, an
+// error, no answer). null means "do not spend" (fail closed, as the Claude ceiling of Sprint 35). Only where no
+// shared store is configured at all (local runs, tests) the count lives in memory.
+const paidMem = new Map();
+async function capBump(key, n, ttlSeconds) {
+  if (paidMem.size > 20000) paidMem.clear();
+  const mem = (paidMem.get(key) || 0) + n;
+  paidMem.set(key, mem);
+  if (!PERSIST_CONFIGURED) return mem;
+  const shared = await sharedBump(key, n, ttlSeconds, true);
+  return shared === null ? null : Math.max(shared, mem);
+}
+const paidByToken = new Map(); // token id -> { exp, extra }: a second press after a failed mail does not pay twice
+// The address as it appears in a counter key: an HMAC with the mail secret, never the address itself.
+const addressKey = (email, keys) => crypto.createHmac("sha256", keys.mac).update("paid|" + String(email).trim().toLowerCase()).digest("hex").slice(0, 32);
+// -> null (switched off: the report says nothing), { available: false, reason } (a cap is reached or cannot be
+//    counted) or { available: true, position | null, backlinks }
+async function runPaid(report, { email, trade, town }) {
+  const auth = dfsAuth();
+  const keys = mailKeys();
+  if (!auth || !keys || !report || report.overall.score === null) return null;
+  const off = (reason) => { console.log(`[check] paid host=${report.host} skipped=${reason}`); return { available: false, reason }; };
+  const day = today().day;
+  const a = addressKey(email, keys);
+  // 1. this address: 2 runs a day, 5 a week
+  const perDay = await capBump(`paddr:${a}:${day}`, 1, 2 * 86400);
+  if (perDay === null) return off("store");
+  if (perDay > PAID_PER_ADDRESS_DAY) return off("address_day");
+  const perWeek = await capBump(`paddrw:${a}:${isoWeek(day)}`, 1, 8 * 86400);
+  if (perWeek === null) return off("store");
+  if (perWeek > PAID_PER_ADDRESS_WEEK) return off("address_week");
+  // 2. all reports together: the number of calls, then the money at list price (reserved before the calls)
+  const keyword = trade && town ? `${trade} ${town}` : "";
+  const calls = keyword ? 2 : 1;
+  const lookups = await capBump(`lookups:${day}`, calls, DAY_COUNTER_TTL_S);
+  if (lookups === null) return off("store");
+  today().lookups = Math.max(today().lookups, lookups);
+  if (lookups > LOOKUP_DAILY_CAP) return off("lookups_day");
+  const reserve = Math.round(src.expectedUsd(keyword) * 1e6);
+  const spent = await capBump(`dfscap:${day}`, reserve, DAY_COUNTER_TTL_S);
+  if (spent === null) return off("store");
+  if (spent > Math.round(DFS_DAILY_USD * 1e6)) return off("usd_day");
+  // 3. the calls. Sent: the search term and the domain. Never the e-mail address.
+  const shared = sec.sharedSuffix(report.host);
+  const bare = (h) => String(h || "").toLowerCase().replace(/^www\./, "");
+  const domain = shared ? bare(report.host) : baseDomain(report.host);
+  let r;
+  try {
+    r = await src.paid(sourcesIo, { auth, domain, keyword, baseDomain: shared ? bare : baseDomain });
+  } catch (e) {
+    console.error("[check] paid lookups failed:", e && e.message ? String(e.message).slice(0, 160) : "error");
+    return off("error");
+  }
+  const micro = Math.round(r.usd * 1e6);
+  await countUsage("paidruns", 1);
+  if (micro > 0) await countUsage("dfsmicro", micro);
+  if (micro > reserve) await capBump(`dfscap:${day}`, micro - reserve, DAY_COUNTER_TTL_S); // the answers reported more than the list price
+  console.log(`[check] paid host=${report.host} calls=${r.calls} usd=${r.usd.toFixed(4)} position=${r.position ? (r.position.checked ? "ok" : "failed:" + r.position.reason) : "none"} backlinks=${r.backlinks.checked ? "ok" : "failed:" + r.backlinks.reason}`);
+  const strip = (o, names) => (o ? Object.fromEntries(names.map((k) => [k, o[k]])) : null);
+  return { available: true, position: strip(r.position, ["query", "checked", "position", "top", "depth"]), backlinks: strip(r.backlinks, ["checked", "referringDomains", "backlinks", "spamScore"]) };
+}
+// The signed view link: a second value with keys of its own (a confirmation link is not a view link and the other
+// way round). It carries the checked address and the paid figures of that one run, encrypted, and expires.
+function viewKeys() {
+  const s = String(process.env.CHECK_MAIL_SECRET || "").trim();
+  return s.length < 16 ? null : { enc: hmacOf(s, "rexity-check/view/enc/v1"), mac: hmacOf(s, "rexity-check/view/mac/v1") };
+}
+// -> { url, exp, paid } or { error: "view_bad" | "view_expired" }
+function readView(token, keys) {
+  const parts = String(token || "").split(".");
+  if (!keys || parts.length !== 3 || parts[0] !== "v1" || String(token).length > 6000) return { error: "view_bad" };
+  const body = parts[0] + "." + parts[1];
+  try {
+    if (!sameBytes(unb64u(parts[2]), hmacOf(keys.mac, body))) return { error: "view_bad" };
+    const raw = unb64u(parts[1]);
+    const d = crypto.createDecipheriv("aes-256-gcm", keys.enc, raw.subarray(0, 12));
+    d.setAuthTag(raw.subarray(12, 28));
+    const p = JSON.parse(Buffer.concat([d.update(raw.subarray(28)), d.final()]).toString("utf8"));
+    if (!p || p.k !== "view" || typeof p.url !== "string" || !Number.isFinite(p.exp) || !p.paid || typeof p.paid !== "object") return { error: "view_bad" };
+    if (deps.now() > p.exp) return { error: "view_expired" };
+    return { url: p.url, exp: p.exp, paid: p.paid };
+  } catch (_e) {
+    return { error: "view_bad" };
+  }
+}
+// What the report mail gets in addition: the section and the link. null when the paid lookups are switched off.
+async function reportExtra(report, p, id, lang) {
+  for (const [k, v] of paidByToken) if (deps.now() > v.exp) paidByToken.delete(k);
+  let paid = paidByToken.has(id) ? paidByToken.get(id).paid : undefined;
+  if (paid === undefined) {
+    paid = await runPaid(report, p);
+    paidByToken.set(id, { exp: p.exp, paid });
+  }
+  if (!paid) return null;
+  const keys = viewKeys();
+  const viewLink = paid.available && keys ? LINKS.page + "#bericht=" + signConfirm({ k: "view", url: report.url, exp: deps.now() + VIEW_TTL_MS, paid }, keys) : "";
+  return { visibility: src.visibilityView(paid, lang), viewLink };
+}
+// POST { report: <token> } from the page: the result as the page shows it, plus the section with the paid figures.
+// The token is what authorises the request (no bot check); the result itself comes from the cache or, when the 24
+// hours are over, from a fresh check inside the usual quotas. -> { status, body } | { status, code, retry }
+async function viewReport(token, ip, lang) {
+  if (hit("view:" + ip, 20, IP_WINDOW_MS)) return { status: 429, code: "rate", retry: "300" };
+  const p = readView(token, viewKeys());
+  if (p.error) return { status: p.error === "view_expired" ? 410 : 400, code: p.error };
+  let parsed;
+  try { parsed = normaliseUrl(p.url); } catch (e) { return { status: 422, code: e instanceof CheckError ? e.code : "bad_url" }; }
+  try {
+    const { report, cached } = await getReport({ parsed, trade: "", town: "" }, ip, lang, { quiet: true });
+    return { status: 200, body: { ...publicView(report, lang, cached), visibility: src.visibilityView(p.paid, lang), fromReport: true, viewExpiresAt: new Date(p.exp).toISOString() } };
+  } catch (e) {
+    const s = errorShape(e, false);
+    if (s.code === "server") console.error("[check] view failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
+    return { status: s.status, code: s.code, retry: s.retry };
+  }
+}
+
+// C. The compact tier of GET /api/check and the MCP tool ---------------------------------------------------
+// Founder, 3 Oct 2026: the open interface must not be a free back end for someone else's checking tool. Assistants
+// get what answers a person's question about one site: the overall score and band, the six area scores with one
+// verdict line and the counts per state, the Kurzfazit, the checked address and time, and where the result comes
+// from. No single check, no measured value, no Lighthouse or field value, nothing paid.
+const ATTRIBUTION = { source: "Rexity Labs Website-Check", url: LINKS.page, terms: TERMS_PAGE };
+const FULL_NOTE = T(
+  "Dies ist die Kurzfassung für Assistenten. Das vollständige Ergebnis mit jedem einzelnen Prüfpunkt und seinem Messwert zeigt die Seite des Website-Checks kostenlos:",
+  "This is the short version for assistants. The full result with every single check and its measured value is shown free of charge on the website check's page:");
+function assistantView(report, lang, cached) {
+  const L = lang === "en" ? "en" : "de";
+  const v = publicView(report, L, cached);
+  const blocks = {};
+  for (const [id, b] of Object.entries(v.blocks)) {
+    blocks[id] = { name: b.name, checked: b.checked, score: b.score, band: b.band, bandLabel: b.bandLabel, weight: b.weight, verdict: b.verdict, reason: b.reason, notApplicable: b.notApplicable, counts: b.counts };
+  }
+  return {
+    ok: true, tier: "compact", v: v.v, lang: L, url: v.url, finalUrl: v.finalUrl, host: v.host, checkedAt: v.checkedAt, cached: v.cached,
+    overall: v.overall, blocks, summary: v.summary, statusLabels: v.statusLabels,
+    attribution: ATTRIBUTION,
+    full: { note: FULL_NOTE[L], url: LINKS.page },
+    links: LINKS
+  };
 }
 
 // ---- 9. Report by e-mail --------------------------------------------------------------------------------
@@ -2102,7 +2290,9 @@ const CONSENT_ASK = T(CONSENT_NOTE.de.replace("haben Sie eingewilligt", "willige
 // The report by e-mail: the same content as the result on the page, as a copy to keep or pass on (Sprint 36): every
 // check with its state, measured value and points, the Lighthouse values, the pages read and the rule. No advice
 // (founder, Sprint 31). One call to action: the 15-minute call and the matching service page.
-function reportMail(report, lang) {
+// Sprint 40: extra = { visibility, viewLink } adds the unscored section "Sichtbarkeit bei Google (nur im Bericht)" with
+// the paid lookups of this confirmed report and the signed link that shows the same on the page.
+function reportMail(report, lang, extra) {
   const L = lang === "en" ? "en" : "de";
   const de = L === "de";
   const view = fullView(report, L);
@@ -2145,10 +2335,22 @@ function reportMail(report, lang) {
       const m = [b.metrics.lcp && `LCP ${b.metrics.lcp}`, b.metrics.cls && `CLS ${b.metrics.cls}`, b.metrics.tbt && `TBT ${b.metrics.tbt}`].filter(Boolean).join(" · ");
       if (m) { const line = (de ? "Laborwerte (Lighthouse mobil): " : "Lab values (Lighthouse mobile): ") + m; text.push("  " + line); html += `<p style="color:#555">${esc(line)}</p>`; }
     }
-    if (b.ranking) {
-      const line = rankingLine(b.ranking, de);
-      text.push("  " + line);
-      html += `<p>${esc(line)}</p>`;
+    text.push("");
+  }
+  if (extra && extra.visibility) {
+    const v = extra.visibility;
+    text.push(v.title);
+    html += `<h2 style="font-size:16px;margin:16px 0 4px">${esc(v.title)}</h2><table cellpadding="4" style="border-collapse:collapse;font-size:14px">`;
+    for (const r of v.rows) {
+      text.push(`  ${r.label}: ${r.detail}`);
+      html += `<tr><td style="vertical-align:top">${esc(r.label)}</td><td style="vertical-align:top">${esc(r.detail)}</td></tr>`;
+    }
+    text.push("  " + v.note);
+    html += `</table><p style="font-size:12px;color:#555">${esc(v.note)}</p>`;
+    if (extra.viewLink) {
+      const line = de ? `Das Ergebnis mit diesen Angaben auf der Seite ansehen (der Link gilt ${VIEW_TTL_DAYS} Tage):` : `See the result with these figures on the page (the link is valid for ${VIEW_TTL_DAYS} days):`;
+      text.push("  " + line + " " + extra.viewLink);
+      html += `<p>${esc(line)} <a href="${esc(extra.viewLink)}">${esc(de ? "Ergebnis öffnen" : "Open the result")}</a></p>`;
     }
     text.push("");
   }
@@ -2213,14 +2415,17 @@ const unb64u = (s) => Buffer.from(String(s).replace(/-/g, "+").replace(/_/g, "/"
 const hmacOf = (key, v) => crypto.createHmac("sha256", key).update(v).digest();
 const sameBytes = (a, b) => a.length === b.length && crypto.timingSafeEqual(a, b);
 let mailSecretWarned = false;
-// -> the two keys derived from CHECK_MAIL_SECRET, or null (variable missing or shorter than 16 characters)
-function mailKeys() {
+// -> the two keys derived from CHECK_MAIL_SECRET, or null (variable missing or shorter than 16 characters).
+// Sprint 39: `scope` gives another tool (api/automation-check.js) keys of its own from the same secret, so a link of
+// one tool is never valid at the other; without it: the Website-Check's keys, as before.
+function mailKeys(scope) {
   const s = String(process.env.CHECK_MAIL_SECRET || "").trim();
   if (s.length < 16) {
     if (s && !mailSecretWarned) { mailSecretWarned = true; console.error("[check] CHECK_MAIL_SECRET is shorter than 16 characters and is ignored: report mails go out without confirmation"); }
     return null;
   }
-  return { enc: hmacOf(s, "rexity-check/confirm/enc/v1"), mac: hmacOf(s, "rexity-check/confirm/mac/v1") };
+  const label = typeof scope === "string" && /^[a-z0-9/-]{3,60}$/.test(scope) ? scope : "rexity-check/confirm";
+  return { enc: hmacOf(s, label + "/enc/v1"), mac: hmacOf(s, label + "/mac/v1") };
 }
 // The link carries everything needed to send the report later: address, checked URL, language, expiry. It is
 // encrypted (AES-256-GCM), so the e-mail address is not readable in a URL or a log, and signed (HMAC-SHA256 with
@@ -2248,7 +2453,9 @@ function readConfirm(token, keys) {
     const p = JSON.parse(Buffer.concat([d.update(raw.subarray(28)), d.final()]).toString("utf8"));
     if (!p || typeof p.email !== "string" || typeof p.url !== "string" || !Number.isFinite(p.exp)) return { error: "confirm_bad" };
     if (deps.now() > p.exp) return { error: "confirm_expired", lang: p.lang === "en" ? "en" : "de" };
-    return { email: p.email, url: p.url, lang: p.lang === "en" ? "en" : "de", exp: p.exp };
+    const out = { email: p.email, url: p.url, lang: p.lang === "en" ? "en" : "de", exp: p.exp, trade: cleanTerm(p.trade), town: cleanTerm(p.town) }; // Sprint 40: the search of the paid lookup
+    if (p.data && typeof p.data === "object") out.data = p.data; // Sprint 39: the Automatisierungs-Check's entries travel in its own link
+    return out;
   } catch (_e) {
     return { error: "confirm_bad" };
   }
@@ -2314,6 +2521,8 @@ const MSG = {
   origin: T("Diese Anfrage kommt nicht von unserer Seite. Für Programme gibt es die Abfrage per GET, siehe https://www.rexity.ai/.well-known/openapi.json.", "This request does not come from our page. Programs can use the GET request, see https://www.rexity.ai/.well-known/openapi.json."),
   confirm_bad: T("Dieser Bestätigungslink ist ungültig. Bitte fordern Sie den Bericht auf www.rexity.ai/website-check neu an.", "This confirmation link is not valid. Please request the report again on www.rexity.ai/website-check."),
   confirm_expired: T("Dieser Bestätigungslink ist abgelaufen (er gilt 48 Stunden). Bitte fordern Sie den Bericht auf www.rexity.ai/website-check neu an.", "This confirmation link has expired (it is valid for 48 hours). Please request the report again on www.rexity.ai/website-check."),
+  view_bad: T("Dieser Link zum Ergebnis ist ungültig. Bitte öffnen Sie ihn noch einmal aus der E-Mail mit Ihrem Bericht.", "This link to the result is not valid. Please open it again from the e-mail with your report."),
+  view_expired: T("Dieser Link zum Ergebnis ist abgelaufen. Die Angaben stehen weiterhin in der E-Mail mit Ihrem Bericht; für ein neues Ergebnis prüfen Sie die Adresse bitte erneut.", "This link to the result has expired. The figures are still in the e-mail with your report; for a new result please check the address again."),
   method: T("Diese Methode wird nicht unterstützt.", "This method is not supported."),
   json: T("Die Anfrage war kein gültiges JSON.", "The request was not valid JSON."),
   too_large: T("Die Anfrage ist zu groß.", "The request is too large."),
@@ -2348,6 +2557,8 @@ async function getReport(input, ip, lang, opts) {
     // 1. the quotas, from this instance's own count first: a visitor past the quota gets the quota's sentence, and
     //    nothing is counted for a request that is refused
     const q = await quotaNow();
+    const own = ipAllowed(ip);
+    if (own) q.ip = Math.max(q.ip, IP_ALLOW_DAILY);
     const refuse = async (kind) => { await countUsage("quota" + kind, 1); throw new CheckError("quota_" + kind); };
     const m = quotaMemNow();
     if ((m.ips.get(ipHash(ip)) || 0) >= q.ip) await refuse("ip");
@@ -2357,7 +2568,7 @@ async function getReport(input, ip, lang, opts) {
     //    A fresh check takes most of a minute, so someone running the 5 checks of a day one after the other stays
     //    inside both.
     if (hit("host:" + input.parsed.url.hostname, HOST_LIMIT, HOST_WINDOW_MS)) throw new CheckError("rate");
-    if (hit("ip:" + ip, IP_LIMIT, IP_WINDOW_MS)) throw new CheckError("rate");
+    if (!own && hit("ip:" + ip, IP_LIMIT, IP_WINDOW_MS)) throw new CheckError("rate");
     // An attempt that produces no result is logged as one, with its status (never for an opted-out site).
     const attempt = async (e) => { const status = runStatusOf(e); if (status) await logRun({ url: input.parsed.url, door, score: null, status }); };
     // 3. the host must exist and be public before a quota is used: a typing mistake costs none of the day's five
@@ -2373,13 +2584,6 @@ async function getReport(input, ip, lang, opts) {
     }
     cacheSet(key, report);
     await logRun({ url: report.url, door, score: report.overall.score, status: report.blocks.find && report.blocks.find.checked ? "ok" : "nicht erreichbar" });
-  } else if (!api && input.trade && input.town && report.blocks.find && report.blocks.find.checked && !report.blocks.find.ranking) {
-    // a cached report without the ranking block: one lookup (never more than one per request)
-    if (String(process.env.DATAFORSEO_AUTH_B64 || "").trim() && today().lookups < LOOKUP_DAILY_CAP && !hit("rank:" + ip, IP_LIMIT, IP_WINDOW_MS)) {
-      today().lookups++;
-      const r = await runRanking(report.host, input.trade, input.town);
-      if (r) report.blocks.find.ranking = r;
-    }
   }
   if (!report.summaries[lang]) {
     report.summaries[lang] = await buildSummary(report, lang);
@@ -2400,7 +2604,7 @@ async function assistantCheckCore({ url, lang, ip, door }) {
   try { parsed = normaliseUrl(url); } catch (e) { return err(422, e instanceof CheckError ? e.code : "bad_url"); }
   try {
     const { report, cached } = await getReport({ parsed, trade: "", town: "" }, ip, L, { api: true, door });
-    return { status: 200, lang: L, body: publicView(report, L, cached), headers: {} };
+    return { status: 200, lang: L, body: assistantView(report, L, cached), headers: {} }; // Sprint 40: the compact tier
   } catch (e) {
     const s = errorShape(e, true);
     if (s.code === "server") console.error("[check] failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
@@ -2410,8 +2614,12 @@ async function assistantCheckCore({ url, lang, ip, door }) {
 
 // The small page behind the confirmation link (and the answer after its button was pressed). No script, no
 // external file; the token never leaves in a referrer.
-function htmlPage(res, status, lang, title, bodyHtml) {
+function htmlPage(res, status, lang, title, bodyHtml, tool) {
   const de = lang !== "en";
+  // Sprint 39: another tool (api/automation-check.js) shows the same page with its own name and way back
+  const kicker = tool && tool.kicker ? tool.kicker : de ? "Website-Check" : "Website check";
+  const backHref = tool && tool.href ? tool.href : SITE_ORIGIN + "/website-check";
+  const backLabel = tool && tool.back ? tool.back : de ? "Zum Website-Check" : "To the website check";
   res.statusCode = status;
   res.setHeader("Content-Type", "text/html; charset=utf-8");
   res.setHeader("Cache-Control", "no-store");
@@ -2421,7 +2629,7 @@ function htmlPage(res, status, lang, title, bodyHtml) {
     // Sprint 31: the light look of /website-check (violet tint, one white card, the accent button), with the system
     // font because the page loads no file
     `<style>*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.25rem;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;color:#17152b;background:radial-gradient(60% 50% at 50% 0%,rgba(124,58,237,.18),transparent 70%),#f4f1fc}main{width:100%;max-width:33rem;padding:2rem 1.5rem;border-radius:28px;background:#fff;box-shadow:0 1px 2px rgba(23,21,43,.05),0 30px 70px -28px rgba(75,50,170,.42)}.k{margin:0 0 .6rem;color:#5b3fd6;font-size:.8125rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}h1{font-size:1.75rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 1rem}p{margin:0 0 1rem}strong{overflow-wrap:anywhere}.b{display:inline-block;min-height:52px;font:inherit;font-weight:600;padding:.8rem 1.6rem;border:0;border-radius:14px;background:#5b3fd6;color:#fff;cursor:pointer;box-shadow:0 10px 24px -10px rgba(91,63,214,.75)}.b:hover{background:#4a31b8}form{margin:1.5rem 0}.b:focus-visible,a:focus-visible{outline:3px solid #5b3fd6;outline-offset:3px}.s{font-size:.8125rem;color:#55536b}.s:last-child{margin:1.5rem 0 0;padding-top:1rem;border-top:1px solid rgba(23,21,43,.1)}a{color:#4a31b8}@media(min-width:560px){main{padding:2.75rem 2.75rem 2.25rem}}@media(max-width:420px){.b{width:100%}}</style></head>` +
-    `<body><main data-wc-confirm><p class="k">${de ? "Website-Check" : "Website check"}</p><h1>${esc(title)}</h1>${bodyHtml}<p class="s"><a href="${SITE_ORIGIN}/website-check">${de ? "Zum Website-Check" : "To the website check"}</a> · Rexity Labs UG (haftungsbeschränkt) · <a href="${SITE_ORIGIN}/impressum">${de ? "Impressum" : "Legal notice"}</a> · <a href="${SITE_ORIGIN}/datenschutz">${de ? "Datenschutz" : "Privacy"}</a></p></main></body></html>`);
+    `<body><main data-wc-confirm><p class="k">${esc(kicker)}</p><h1>${esc(title)}</h1>${bodyHtml}<p class="s"><a href="${esc(backHref)}">${esc(backLabel)}</a> · Rexity Labs UG (haftungsbeschränkt) · <a href="${SITE_ORIGIN}/impressum">${de ? "Impressum" : "Legal notice"}</a> · <a href="${SITE_ORIGIN}/datenschutz">${de ? "Datenschutz" : "Privacy"}</a></p></main></body></html>`);
 }
 const CONFIRM_TEXT = {
   title: T("Website-Check: Bericht bestätigen", "Website check: confirm the report"),
@@ -2460,7 +2668,9 @@ async function confirmReport(token, ip) {
     return { ...base, status: s.status, code: s.code, retry: s.retry };
   }
   usedTokens.set(id, p.exp); // claimed before the mail goes out: a double click sends one report
-  const sent = await deliverReport(report, p.email, lang);
+  // Sprint 40: the paid lookups run here and only here: this address was confirmed through the signed link
+  const extra = await reportExtra(report, p, id, lang);
+  const sent = await deliverReport(report, p.email, lang, extra);
   if (!sent) { usedTokens.delete(id); return { ...base, status: 502, code: "mail_failed" }; }
   await sharedBump("done:" + id, 1, 3 * 86400, true);
   return { ...base, host: report.host, status: 200, code: "report_sent" };
@@ -2468,9 +2678,9 @@ async function confirmReport(token, ip) {
 
 // The full report to a confirmed address (or, without CHECK_MAIL_SECRET, to the address as entered), then the
 // lead and our own notification. -> true when the mail went out
-async function deliverReport(report, email, lang) {
+async function deliverReport(report, email, lang, extra) {
   const notify = deps.notify || require("./_notify");
-  const mail = reportMail(report, lang);
+  const mail = reportMail(report, lang, extra);
   const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
   if (!sent || !sent.sent) {
     console.log("[check] report mail sent=false reason=" + ((sent && sent.reason) || "unknown"));
@@ -2595,6 +2805,12 @@ async function coreHandler(req, res) {
   if (isForm) return send(res, 400, { ok: false, error: "json", message: msgOf("json", lang) });
   if (foreignOrigin(req)) return fail(res, 403, "origin", lang);
 
+  // Sprint 40: the page opened through the signed link of a report mail (the result with the paid figures)
+  if (typeof data.report === "string" && data.report) {
+    const r = await viewReport(data.report, ip, lang);
+    return r.status === 200 ? send(res, 200, r.body) : fail(res, r.status, r.code, lang, r.retry ? { "Retry-After": r.retry } : undefined);
+  }
+
   const wantsMail = data.email !== undefined && data.email !== null && String(data.email).trim() !== "";
 
   // Honeypot (as in api/lead.js): pretend success, do nothing.
@@ -2626,7 +2842,7 @@ async function coreHandler(req, res) {
       if (keys) {
         // Double opt-in: one short mail with a signed link. The report, the lead and our notification follow only
         // after the address is confirmed.
-        const token = signConfirm({ email, url: report.url, lang, exp: deps.now() + CONFIRM_TTL_MS }, keys);
+        const token = signConfirm({ email, url: report.url, lang, exp: deps.now() + CONFIRM_TTL_MS, trade: input.trade, town: input.town }, keys);
         const mail = confirmMail(report.host, SITE_ORIGIN + "/api/check?confirm=" + token, lang);
         const notify = deps.notify || require("./_notify");
         const sent = await notify.sendMail({ to: email, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
@@ -2643,10 +2859,8 @@ async function coreHandler(req, res) {
 
     const { report, cached } = await getReport(input, ip, lang);
     if (cached) await countUsage("cached", 1); // Sprint 34
-    // the ranking position is shown to the request that asked with exactly this search (never to GET or MCP)
-    const rk = report.blocks.find && report.blocks.find.ranking;
-    const ownSearch = Boolean(rk && input.trade && input.town && rk.query === `${input.trade} ${input.town}`);
-    return send(res, 200, { ...publicView(report, lang, cached, { ranking: ownSearch }), ...passFields });
+    // Sprint 40: no paid data here, ever. When the paid lookups are switched on, one quiet line says where they are.
+    return send(res, 200, { ...publicView(report, lang, cached), ...(paidOn() ? { visibilityTeaser: src.VISIBILITY.teaser[lang] } : {}), ...passFields });
   } catch (e) {
     const s = errorShape(e, false);
     if (s.code === "server") console.error("[check] failed:", e && e.message ? String(e.message).slice(0, 200) : "error");
@@ -2755,10 +2969,20 @@ async function runLogView(query) {
     from = berlinDayPlus(todayStr, -(n - 1));
   }
   const rows = await readRows("check_runs", `select=day,url,host,runs,cached,door,score,status,first_at,last_at&day=gte.${from}&day=lte.${to}&order=day.desc,runs.desc,url.asc&limit=20000`);
+  // Sprint 40: the paid lookups of each day (numbers only: runs, DataForSEO calls, cost as the answers reported it).
+  // Read for ranges of up to 35 days; null = not read or no row.
+  const dayList = [];
+  for (let d = to; d >= from && dayList.length <= RETENTION_DAYS; d = berlinDayPlus(d, -1)) dayList.push(d);
+  const paidRows = dayList.length <= 35 ? await readRows("check_usage", "select=bucket,count&bucket=in.(" + dayList.flatMap((d) => [`"paidruns:${d}"`, `"lookups:${d}"`, `"dfsmicro:${d}"`]).join(",") + ")") : null;
+  const paidOf = (d) => {
+    const n = (k) => { const r = (paidRows || []).find((x) => x && x.bucket === `${k}:${d}`); return r && Number.isFinite(Number(r.count)) ? Number(r.count) : null; };
+    const micro = n("dfsmicro");
+    return paidRows ? { reports: n("paidruns"), lookups: n("lookups"), usd: micro === null ? null : micro / 1e6 } : null;
+  };
   const days = [];
   for (let d = to; d >= from && days.length <= RETENTION_DAYS; d = berlinDayPlus(d, -1)) {
     const list = (rows || []).filter((r) => r && r.day === d).map((r) => ({ url: String(r.url || ""), host: String(r.host || ""), runs: Number(r.runs) || 0, cached: Number(r.cached) || 0, door: String(r.door || ""), score: r.score === null || r.score === undefined ? null : Number(r.score), status: String(r.status || ""), firstAt: r.first_at || null, lastAt: r.last_at || null }));
-    days.push({ day: d, total: list.reduce((a, r) => a + r.runs, 0), addresses: list.filter((r) => r.runs > 0).length, cachedViews: list.reduce((a, r) => a + r.cached, 0), rows: list });
+    days.push({ day: d, total: list.reduce((a, r) => a + r.runs, 0), addresses: list.filter((r) => r.runs > 0).length, cachedViews: list.reduce((a, r) => a + r.cached, 0), paid: paidOf(d), rows: list });
   }
   return { status: 200, body: { ok: true, readable: rows !== null, note: rows === null ? (PERSIST_CONFIGURED ? "The log could not be read: docs/sql/check_runs.sql not applied, or the shared store did not answer." : "No shared store is configured (SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY): nothing is logged.") : undefined, from, to, days } };
 }
@@ -2910,8 +3134,12 @@ module.exports.LIMITS = {
   quota: { perIpPerDay: QUOTA_ENV.ip, perHour: QUOTA_ENV.hour, perDay: QUOTA_ENV.day },
   browser: { freshPerIp: IP_LIMIT, requestsPerIp: REQUEST_LIMIT, windowMinutes: IP_WINDOW_MS / 60000, freshPerHostPerHour: HOST_LIMIT, mailsPerIp: MAIL_IP_LIMIT, mailsPerAddressPerDay: MAIL_ADDRESS_LIMIT },
   api: { requestsPerIp: API_REQUEST_LIMIT, windowMinutes: IP_WINDOW_MS / 60000, freshPerDay: API_DAILY_CAP },
-  cacheHours: CACHE_TTL_MS / 3600000, confirmHours: CONFIRM_TTL_MS / 3600000, passMinutes: PASS_TTL_MS / 60000
+  cacheHours: CACHE_TTL_MS / 3600000, confirmHours: CONFIRM_TTL_MS / 3600000, passMinutes: PASS_TTL_MS / 60000,
+  // Sprint 40: the paid lookups of a confirmed report
+  paid: { perAddressPerDay: PAID_PER_ADDRESS_DAY, perAddressPerWeek: PAID_PER_ADDRESS_WEEK, lookupsPerDay: LOOKUP_DAILY_CAP, usdPerDay: DFS_DAILY_USD, viewDays: VIEW_TTL_DAYS }
 };
+module.exports.SOURCES = src; // Sprint 40: for the page's rule (weights, thresholds, wording)
+module.exports.ATTRIBUTION = ATTRIBUTION;
 // api/mcp.js (the tool website_check) uses the same path as GET /api/check
 module.exports.assistantCheck = assistantCheck;
 module.exports.publicMarkdown = publicMarkdown;
@@ -2919,16 +3147,32 @@ module.exports.clientIp = clientIp;
 // Sprint 34: api/mcp.js and api/followup.js count through the same counters
 module.exports.countUsage = countUsage;
 module.exports.CONSENT_NOTE = CONSENT_NOTE; // the follow-up mail repeats the consent sentence and the withdrawal note
+// Sprint 39: the pieces api/rpa-demo.js and api/automation-check.js share with the Website-Check instead of copying
+// them: bot check and pass, origin check, burst limiter, the shared counter with the salted IP hash, the signed
+// confirmation link, the confirmation page, the mail limits and the consent sentence.
+module.exports.shared = {
+  deps, SITE_ORIGIN, EMAIL_RE, SIGNATURE, CALL_URL, CONSENT_ASK, CONSENT_NOTE, MSG, T,
+  IP_WINDOW_MS, MAIL_IP_LIMIT, MAIL_ADDRESS_LIMIT, MAIL_DAILY_CAP, CONFIRM_TTL_MS,
+  esc, hit, clientIp, headerOf, queryOf, foreignOrigin, send, htmlPage, botCheck,
+  today, bumpDaily, sharedBump, ipHash, tokenId, usedTokens, persistActive,
+  mailKeys, signConfirm, readConfirm, secondsToBerlinMidnight,
+  // Sprint 42 (the RPA demo's sandbox: api/_rpa.js, api/rpa-demo.js, api/rpa-reminders.js): the store's functions by
+  // name, the fail-closed counter of Sprint 40 for the demo's mail caps, and the calendar helpers
+  rpc, capBump, isoWeek, berlinDayPlus, berlinClock, persistConfigured: () => PERSIST_CONFIGURED
+};
 // For scripts/check-tool/test-check.mjs and the local dev server (not used by Vercel).
 module.exports._test = {
   deps, CheckError, normaliseUrl, assertSafeUrl, isPublicIPv4, isPublicIPv6, isPublicAddress, parseIPv6, resolvePublic, safeFetch, isOptedOut,
-  parseRobots, robotsAllows, analyseHtml, analysePerf, ownMeasure, ownItems, sampleAssets, readSubPages, mergePages, cacheCredit, verdictOf, modelInput, runPageSpeed, runRanking, tempoBlock, findBlock, contactBlock, trustBlock, blockScore, overallScore,
+  parseRobots, robotsAllows, analyseHtml, analysePerf, ownMeasure, ownItems, sampleAssets, readSubPages, mergePages, cacheCredit, verdictOf, modelInput, runPageSpeed, tempoBlock, findBlock, contactBlock, trustBlock, blockScore, overallScore,
   offerFor, countsOf, openChecks, securityBlock, mailBlock, runSecurity, securityIo, plainGet, sec, pointsLabel, deterministicSummary, validateSummary, allowedNumbers, buildSummary, runCheck, publicView, fullView, publicMarkdown, reportMail, confirmMail, cacheKey, cacheGet, baseDomain,
   signConfirm, readConfirm, mailKeys, makePass, passValid, foreignOrigin,
   countUsage, storedReport, cardData, DAILY_KINDS, DAY_COUNTER_TTL_S, countOffUntil,
+  ipAllowed, IP_ALLOW_DAILY,
   cache, buckets, daily, usedTokens, DAILY_CAP: QUOTA_ENV.day, API_DAILY_CAP, MAX_BYTES, UA, IP_LIMIT, CACHE_TTL_MS, CONFIRM_TTL_MS, PASS_TTL_MS, REPORT_VERSION, CHECK_ORDER, CHECK_MODEL, CHECK_MAX_TOKENS, SUMMARY_SYSTEM,
   defaultTransport,
+  // Sprint 40
+  src, runSources, applySources, sourcesIo, runPaid, reportExtra, viewReport, readView, viewKeys, assistantView, paidOn, isoWeek, capBump, paidMem, paidByToken, addressKey, DFS_DAILY_USD, VIEW_TTL_MS,
   // Sprint 35
   QUOTA_ENV, QUOTA_RANGE, MAIL_DAILY_CAP, LOOKUP_DAILY_CAP, RETENTION_DAYS, quotaNow, quotaTake, quotaMem, quotaState, logRun, berlinClock, berlinDayStartMs, berlinDayPlus, secondsToBerlinMidnight, secondsToNextHour, msgOf,
-  reset() { cache.clear(); buckets.clear(); usedTokens.clear(); countOffUntil.clear(); daily.day = ""; for (const k of DAILY_KINDS) daily[k] = 0; persistOffUntil = 0; quotaMem.day = ""; quotaMem.ips.clear(); quotaMem.hour = -1; quotaMem.hourCount = 0; quotaState.at = -Infinity; quotaState.override = null; quotaState.readable = false; quotaTakeOffUntil = 0; runLogOffUntil = 0; }
+  reset() { cache.clear(); buckets.clear(); usedTokens.clear(); countOffUntil.clear(); daily.day = ""; for (const k of DAILY_KINDS) daily[k] = 0; persistOffUntil = 0; quotaMem.day = ""; quotaMem.ips.clear(); quotaMem.hour = -1; quotaMem.hourCount = 0; quotaState.at = -Infinity; quotaState.override = null; quotaState.readable = false; quotaTakeOffUntil = 0; runLogOffUntil = 0; paidMem.clear(); paidByToken.clear(); src._test.resetCache(); }
 };

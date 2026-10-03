@@ -43,7 +43,12 @@ const deps = {
   notify: null // default: api/_notify.js (tests replace it)
 };
 
-const CHECK_KINDS = ["checks", "apichecks", "mails", "reports", "summaries", "botfail", "cached", "cards", "apiget", "mcpcalls", "ratehits", "usdmicro", "followups", "optouts", "quotaip", "quotahour", "quotaday"];
+const CHECK_KINDS = ["checks", "apichecks", "mails", "reports", "summaries", "botfail", "cached", "cards", "apiget", "mcpcalls", "ratehits", "usdmicro", "followups", "optouts", "quotaip", "quotahour", "quotaday",
+  // Sprint 40: confirmed reports with paid lookups, the DataForSEO calls made for them and what their answers reported as cost
+  "paidruns", "lookups", "dfsmicro",
+  // Sprint 42 (RPA demo's sandbox agent; docs/sql/rpa_agent.sql): agent runs with an own text, confirmed addresses,
+  // demo mails delivered, runs of the 9:00 reminder job and the reminders it (or the page) delivered, opt-outs
+  "rparuns", "rpaconf", "rpasent", "rparemrun", "rparem", "rpastop"];
 const RETENTION_DAYS = 183; // six months (founder, 2 Oct 2026)
 const RUN_LIST_MAX = 50; // lines of "Geprüfte Adressen gestern" in the mail
 // The Claude ceiling as api/chat.js computes it (same variables, same defaults and ranges)
@@ -233,6 +238,9 @@ function weeklyMail(w) {
     lines.push(`  davon Kontingent je Tag erreicht: ${n(c.quotaday)}`);
     lines.push(`  Aufrufe des Sprachmodells für das Kurzfazit: ${n(c.summaries)}`);
     lines.push(`  Geschätzte Kosten des Kurzfazits: ${c.usdmicro ? usdOf(c.usdmicro.sum) + `, Einträge an ${c.usdmicro.days} von ${total} Tagen` : "kein Eintrag"}`);
+    lines.push(`  Berichte mit Google-Position und Backlinks (bezahlte Abfragen): ${n(c.paidruns)}`);
+    lines.push(`  davon Abfragen bei DataForSEO: ${n(c.lookups)}`);
+    lines.push(`  Kosten laut den Antworten von DataForSEO: ${c.dfsmicro ? deNum(c.dfsmicro.sum / 1e6, 4) + " USD" + `, Einträge an ${c.dfsmicro.days} von ${total} Tagen` : "kein Eintrag"}`);
     lines.push(`  Nachfass-E-Mails versendet: ${n(c.followups)}`);
     lines.push(`  Abmeldungen über den Link der Nachfass-E-Mail: ${n(c.optouts)}`);
     lines.push("", "Anteile (nur berechnet, wenn beide Zahlen einen Eintrag haben und der Nenner nicht 0 ist)");
@@ -262,6 +270,69 @@ function weeklyMail(w) {
   const text = lines.join("\n");
   return { subject: `Website-Check: ${total === 7 ? "Wochenzahlen" : total + " Tage"} ${from} bis ${to}`, textContent: text, htmlContent: mailBody(text) };
 }
+// ---- Sprint 41 (own block): the Automatisierungs-Check and its language model ---------------------------------------------
+// Counters of api/automation-check.js (check_usage) and the Gemini ceiling of api/_gemini.js (chat_usage buckets
+// gemini:<day>, geministop:<day>; docs/sql/auto_check.sql). Also removes expired waiting entries of report requests.
+const AUTO_KINDS = ["autoruns", "automodel", "autofallback", "autoquota", "automails", "autoreports", "autocallbacks", "autobookings"];
+// -> { counts: { kind: number|null } | null (not readable), gemini: { usd, calls, refused } | null, geminiReadable, purged: number|null }
+async function collectAuto(day) {
+  const [rows, chatRows] = await Promise.all([
+    readRows("check_usage", "select=bucket,count&bucket=in.(" + AUTO_KINDS.map((k) => `"${k}:${day}"`).join(",") + ")"),
+    readRows("chat_usage", "select=bucket,count,usd&bucket=in.(" + [`"gemini:${day}"`, `"geministop:${day}"`].join(",") + ")")
+  ]);
+  let counts = null;
+  if (rows !== null) {
+    counts = {};
+    for (const k of AUTO_KINDS) {
+      const row = rows.find((r) => r && r.bucket === `${k}:${day}`);
+      counts[k] = row && Number.isFinite(Number(row.count)) ? Number(row.count) : null;
+    }
+  }
+  const g = (chatRows || []).find((r) => r && r.bucket === "gemini:" + day);
+  const stop = (chatRows || []).find((r) => r && r.bucket === "geministop:" + day);
+  const gemini = g || stop ? { usd: g ? Number(g.usd) || 0 : 0, calls: g ? Number(g.count) || 0 : 0, refused: stop ? Number(stop.count) || 0 : 0 } : null;
+  // expired waiting entries (ciphertext only) are removed once a day; null: function not installed or no answer
+  let purged = null;
+  const base = String(process.env.SUPABASE_URL || "").replace(/\/+$/, "");
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  if (base && key) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 3000);
+    try {
+      const resp = await deps.fetch(`${base}/rest/v1/rpc/auto_pending_purge`, { method: "POST", headers: { apikey: key, Authorization: "Bearer " + key, "Content-Type": "application/json" }, body: "{}", signal: ctrl.signal });
+      const text = await resp.text().catch(() => "");
+      if (resp.ok && /^\s*\d+\s*$/.test(text)) purged = parseInt(text, 10);
+    } catch (_e) { /* the rows expire by themselves and are never returned after 48 hours */ } finally { clearTimeout(timer); }
+  }
+  return { counts, gemini, geminiReadable: chatRows !== null, purged };
+}
+function autoLines(a) {
+  if (!a) return [];
+  const n = (v) => (v === null || v === undefined ? "kein Eintrag" : String(v));
+  const ceiling = numEnv("GEMINI_DAILY_USD_CEILING", 3, 0, 1000);
+  const lines = ["", "Automatisierungs-Check"];
+  if (!a.counts) lines.push("  Die Zähler waren nicht lesbar (Supabase nicht eingerichtet, Tabelle check_usage fehlt oder keine Antwort).");
+  else {
+    lines.push(`  Auswertungen: ${n(a.counts.autoruns)}`);
+    lines.push(`  davon vom Sprachmodell formuliert: ${n(a.counts.automodel)}, nach festen Regeln: ${n(a.counts.autofallback)}`);
+    lines.push(`  Kontingent erreicht (Antwort 429): ${n(a.counts.autoquota)}`);
+    lines.push(`  Berichts-Anforderungen: ${n(a.counts.automails)}`);
+    lines.push(`  Bestätigte Berichte (Anfrage gespeichert): ${n(a.counts.autoreports)}`);
+    lines.push(`  Rückruf-Bitten: ${n(a.counts.autocallbacks)}`);
+    lines.push(`  Terminfenster aus dem Ergebnis geöffnet: ${n(a.counts.autobookings)}`);
+  }
+  lines.push("  Sprachmodell des Automatisierungs-Checks (eigene Tagesobergrenze)");
+  lines.push(`  Tagesobergrenze: ${String(ceiling).replace(".", ",")} USD (GEMINI_DAILY_USD_CEILING)`);
+  if (!a.geminiReadable) lines.push("  Die Zähler waren nicht lesbar.");
+  else if (!a.gemini) lines.push("  Geschätzte Kosten: kein Eintrag (kein Aufruf; oder docs/sql/auto_check.sql ist nicht eingespielt, dann wird das Modell nicht aufgerufen)");
+  else {
+    lines.push(`  Geschätzte Kosten: ${deNum(a.gemini.usd, 4)} USD für ${a.gemini.calls} ${a.gemini.calls === 1 ? "Aufruf" : "Aufrufe"}; Schätzung aus Token-Zahlen und dem hinterlegten Preis, keine Rechnung`);
+    lines.push(a.gemini.refused > 0 ? `  Obergrenze erreicht: ja (${a.gemini.refused} ${a.gemini.refused === 1 ? "Auswertung lief" : "Auswertungen liefen"} nach festen Regeln)` : "  Obergrenze erreicht: nein");
+  }
+  if (a.purged !== null && a.purged > 0) lines.push(`  Abgelaufene, nicht bestätigte Berichts-Anforderungen entfernt: ${a.purged}`);
+  return lines;
+}
+// ---- end of the Sprint 41 block ----------------------------------------------------------------------------------------------
 function digestMail(d) {
   const [y, m, dd] = d.day.split("-");
   const date = `${dd}.${m}.${y}`;
@@ -284,8 +355,16 @@ function digestMail(d) {
     lines.push(`  Von der Bot-Prüfung abgewiesen: ${n(d.check.botfail)}`);
     lines.push(`  Treffer der Limits (Antwort 429 der Funktion): ${n(d.check.ratehits)}`);
     lines.push(`  davon Kontingent erreicht: je IP-Adresse ${n(d.check.quotaip)}, je Stunde ${n(d.check.quotahour)}, je Tag ${n(d.check.quotaday)}`);
+    lines.push(`  Berichte mit Google-Position und Backlinks (bezahlte Abfragen, nur bestätigte Adressen): ${n(d.check.paidruns)}`);
+    lines.push(`  davon Abfragen bei DataForSEO: ${n(d.check.lookups)}`);
+    lines.push(`  Kosten laut den Antworten von DataForSEO: ${d.check.dfsmicro === null || d.check.dfsmicro === undefined ? "kein Eintrag" : deNum(d.check.dfsmicro / 1e6, 4) + " USD"}`);
     lines.push(`  Nachfass-E-Mails versendet: ${n(d.check.followups)}`);
     lines.push(`  Abmeldungen über den Link der Nachfass-E-Mail: ${n(d.check.optouts)}`);
+    // Sprint 42: the RPA demo's sandbox agent. One line for the reminder job's runs of that day; numbers only.
+    lines.push("", "RPA-Demo (Sandbox auf /automation/rpa)");
+    lines.push(`  Agentenläufe mit eigenem Text: ${n(d.check.rparuns)}`);
+    lines.push(`  Bestätigte Adressen: ${n(d.check.rpaconf)} · Demo-E-Mails an bestätigte Adressen: ${n(d.check.rpasent)} · Abmeldungen: ${n(d.check.rpastop)}`);
+    lines.push(`  Erinnerungslauf 9:00 Uhr: Läufe ${n(d.check.rparemrun)}, Erinnerungen versendet ${n(d.check.rparem)}`);
   }
   lines.push("", "Sprachmodell (Assistent und Kurzfazit zusammen)");
   if (!d.chatReadable) lines.push("  Die Zähler waren nicht lesbar (Supabase nicht eingerichtet, Tabelle chat_usage fehlt oder keine Antwort).");
@@ -310,6 +389,7 @@ function digestMail(d) {
       ? `  Obergrenze erreicht: ja (${d.claude.refused} ${d.claude.refused === 1 ? "Aufruf ging" : "Aufrufe gingen"} an den nächsten Anbieter oder bekamen den festen Text)`
       : "  Obergrenze erreicht: nein");
   }
+  for (const l of autoLines(d.auto)) lines.push(l); // Sprint 41
   // Sprint 35: the addresses checked yesterday (websites, not visitors)
   lines.push("", "Geprüfte Adressen gestern");
   if (!d.runs) lines.push("  Das Protokoll war nicht lesbar (docs/sql/check_runs.sql nicht eingespielt, Supabase nicht eingerichtet oder keine Antwort).");
@@ -371,6 +451,7 @@ async function handler(req, res) {
     day = berlinDay(deps.now() - 24 * 60 * 60 * 1000);
     data = await collect(day);
     data.retention = await retentionPurge(deps.now()); // Sprint 35: a dry run unless RETENTION_PURGE=1
+    data.auto = await collectAuto(day); // Sprint 41
     const mail = digestMail(data);
     sent = await notify.sendMail({ to, subject: mail.subject, textContent: mail.textContent, htmlContent: mail.htmlContent });
     console.log("[digest] day=" + day + " sent=" + Boolean(sent && sent.sent) + (sent && !sent.sent ? " reason=" + (sent.reason || "unknown") : ""));
@@ -394,4 +475,4 @@ async function handler(req, res) {
 }
 
 module.exports = handler;
-module.exports._test = { deps, collect, digestMail, berlinDay, CHECK_KINDS, collectRange, weeklyMail, lastDays, isBerlinMonday, shareLine, retentionPurge, claudeBudget, RETENTION_DAYS, RUN_LIST_MAX };
+module.exports._test = { deps, collect, digestMail, collectAuto, autoLines, AUTO_KINDS, berlinDay, CHECK_KINDS, collectRange, weeklyMail, lastDays, isBerlinMonday, shareLine, retentionPurge, claudeBudget, RETENTION_DAYS, RUN_LIST_MAX };

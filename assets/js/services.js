@@ -93,6 +93,21 @@
     for (var f = 0; f < flows.length; f++) initFlow(flows[f]);
     var vids = doc.querySelectorAll("video[data-sv-video]");
     for (var v = 0; v < vids.length; v++) initVideo(vids[v]);
+    initEdgeLight();
+  }
+
+  // Edge light (Sprint 43): the hovered panel's border light follows the pointer. One listener on the main element;
+  // only two custom properties are written, so there is no layout work.
+  function initEdgeLight() {
+    var main = doc.querySelector(".sv-main");
+    if (!main || !window.matchMedia || !window.matchMedia("(hover: hover)").matches) return;
+    main.addEventListener("pointermove", function (e) {
+      var p = e.target && e.target.closest ? e.target.closest(".rx-panel") : null;
+      if (!p) return;
+      var r = p.getBoundingClientRect();
+      p.style.setProperty("--ex", (e.clientX - r.left) + "px");
+      p.style.setProperty("--ey", (e.clientY - r.top) + "px");
+    }, { passive: true });
   }
   if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", init);
   else init();

@@ -150,6 +150,7 @@ html:root .sv-main.wc-page .wc-hero .section-header-button-box { visibility: vis
 .wc-rule .rx-faq__a { max-width: none; }
 .wc-rule .rx-faq__a > p { max-width: var(--rx-measure); }
 .wc-rule .rx-faq__a > p + p { margin-top: 0.7em; }
+.wc-rule__p a { color: var(--wc-accent-deep, #4a31b8); text-decoration: underline; text-underline-offset: 2px; }
 .wc-rule__grid { display: grid; gap: 20px 28px; grid-template-columns: minmax(0, 1fr); margin-top: 1.2em; }
 .wc-rule__h { color: var(--wc-ink); font: 600 1rem/1.3 var(--font-families--primary); }
 .wc-rule__list { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; padding: 0; list-style: none; }

@@ -32,6 +32,7 @@ Diese Fassung enthält die Texte der Leistungsseiten von https://www.rexity.ai/ 
 - [Web-Apps, SaaS-Plattformen und Dashboards](https://www.rexity.ai/web/saas): Individuelle Web-Apps, SaaS-Plattformen und KPI-Dashboards für Betriebe: Konzept, Entwicklung, Betrieb. Festpreise ab 1.599 €, gehostet in der EU. Preise: Dashboards ab 1.599 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Chatbots für Websites](https://www.rexity.ai/automation/chatbots): KI-Chatbot für Ihre Website: antwortet aus Ihren Inhalten, Verarbeitung in der EU, ab 799 € Festpreis. Jetzt live testen – direkt auf dieser Seite. Preise: KI-Chatbot ab 799 €; FAQ-Chatbot 499 € (Festpreise, netto zzgl. MwSt.).
 - [WhatsApp-Automatisierung](https://www.rexity.ai/automation/whatsapp): Automatische Antworten, Termin-Erinnerungen und Buchungen per WhatsApp API – mit Opt-in und DSGVO. Erinnerungen für 299 €, WhatsApp-Flows ab 1.299 €. Preise: WhatsApp-Automatisierung ab 1.299 € (Festpreise, netto zzgl. MwSt.).
+- [Kostenloser Automatisierungs-Check (was sich an wiederkehrenden Aufgaben automatisieren lässt, mit Schätzung pro Jahr)](https://www.rexity.ai/automatisierungs-check): Kostenloser Automatisierungs-Check: Aufgaben kurz beschreiben und sehen, was sich automatisieren lässt, mit einer Schätzung der Entlastung pro Jahr.
 - [Terminerinnerung per SMS, E-Mail und WhatsApp](https://www.rexity.ai/automation/terminerinnerung): Terminerinnerung per E-Mail oder SMS zum Festpreis von 299 €, per WhatsApp mit Opt-in über die offizielle Business Platform. Aus Niedersachsen, bundesweit. Preise: E-Mail- & SMS-Automatisierung 299 € (Festpreise, netto zzgl. MwSt.).
 - [Prozessautomatisierung (RPA) und Dokumenten-Chatbot](https://www.rexity.ai/automation/rpa): KI-Assistent fürs Büro: Anfragen erfassen, Daten finden, Angebote vorbereiten. In Europa gehostet oder auf Ihrem eigenen Server, ab 2.999 € Festpreis. Preise: KI-Lösungen: RPA & Dokumenten-Chatbot auf Ihrem eigenen Server ab 2.999 € (Festpreise, netto zzgl. MwSt.).
 - [KI-Telefonassistent RexFangs (in der Testphase)](https://www.rexity.ai/automation/voice): KI-Telefonassistent für KMU: nimmt Anrufe an, beantwortet häufige Fragen und bucht Termine oder Rückrufe. RexFangs ist in der Testphase, Preis auf Anfrage.
@@ -90,11 +91,14 @@ Der kostenlose Website-Check lässt sich auch direkt von Assistenten und Program
 
 - Wann nutzen: wenn jemand wissen möchte, wie gut die öffentlich erreichbare Website eines Betriebs für Besucher und Anfragen funktioniert (Tempo und Technik, Auffindbarkeit, Anfrage-Tauglichkeit, Vertrauen und Recht) und welche Schutzeinstellungen sie nach außen zeigt (Sicherheit der Website, Schutz der E-Mail-Domain). Nur für öffentliche http/https-Websites; eine Prüfung dauert bis etwa eine Minute.
 - Abruf per GET: `https://www.rexity.ai/api/check?url=ADRESSE&lang=de` liefert JSON; mit `&format=md` oder dem Header `Accept: text/markdown` Markdown; `lang=en` für Englisch. Beschreibung der Schnittstelle: [OpenAPI](https://www.rexity.ai/.well-known/openapi.json).
-- Abruf per MCP: [https://www.rexity.ai/mcp](https://www.rexity.ai/mcp) (Streamable HTTP), ein Werkzeug `website_check` mit `url` und optional `lang`; es liefert dasselbe Ergebnis als Markdown.
-- Was das Ergebnis enthält: den Gesamtwert von 0 bis 100 mit Einordnung (gut, mittel, schwach), die Werte der sechs Bereiche, je Bereich einen Satz, die Zahl der Prüfpunkte nach Status (erfüllt, teilweise, offen, Hinweis, nicht prüfbar) und jeden einzelnen Prüfpunkt mit Bezeichnung, Status, Messwert und Punkten, die Messmethode beim Tempo (mit den vier Lighthouse-Werten sowie LCP, CLS und TBT, wenn Lighthouse gemessen hat), die geprüfte Adresse, den Zeitpunkt und die Bezeichnungen der mitgelesenen Seiten.
-- Was es nicht enthält: Handlungsempfehlungen. Das Ergebnis nennt, was gemessen wurde und was das bedeutet, nicht, was zu tun ist.
+- Abruf per MCP: [https://www.rexity.ai/mcp](https://www.rexity.ai/mcp) (Streamable HTTP), ein Werkzeug `website_check` mit `url` und optional `lang`; es liefert dasselbe als Markdown.
+- Was die Schnittstelle liefert: eine Kurzfassung. Den Gesamtwert von 0 bis 100 mit Einordnung (gut, mittel, schwach), die Werte der sechs Bereiche, je Bereich einen Satz und die Zahl der Prüfpunkte nach Status (erfüllt, teilweise, offen, Hinweis, nicht prüfbar), das Kurzfazit, die geprüfte Adresse und den Zeitpunkt.
+- Was sie nicht liefert: die einzelnen Prüfpunkte mit ihren Messwerten. Das vollständige Ergebnis zeigt die Seite [Website-Check](https://www.rexity.ai/website-check) kostenlos; bitte dorthin verweisen. Handlungsempfehlungen gibt es nirgends: Das Ergebnis nennt, was gemessen wurde und was das bedeutet, nicht, was zu tun ist.
+- Quelle nennen: Wer ein Ergebnis wiedergibt, nennt „Rexity Labs Website-Check“ mit Link auf https://www.rexity.ai/website-check. Die Antwort enthält dafür den Block `attribution`.
+- Nutzungsbedingungen: [https://www.rexity.ai/website-check/nutzung](https://www.rexity.ai/website-check/nutzung). Frei für einzelne Prüfungen durch Menschen und ihre Assistenten mit Quellenangabe und Link; keine Massenabrufe, kein Weiterverkauf, kein Aufbau eines konkurrierenden Prüfdienstes auf dieser Schnittstelle. Andere Nutzung: info@rexity.ai.
+- Was geprüft wird: neben der Seite selbst auch Felddaten aus dem Chrome UX Report (echte Chrome-Nutzer, 28 Tage, sofern vorhanden), das Ablaufdatum der Domain laut Registrierungsstelle (sofern veröffentlicht) und ob der Hosting-Anbieter laut Green Web Foundation mit Strom aus erneuerbaren Quellen verzeichnet ist. In der Kurzfassung stecken diese Punkte nur in den Bereichswerten.
 - Sicherheit der Website und Schutz der E-Mail-Domain: Von außen sichtbare Einstellungen, geprüft ohne Eingriff in die Website; kein Sicherheitsaudit und keine Gewähr. Gelesen werden nur die Antwort der Seite (Kopfzeilen, Cookies, Quelltext), die http-Adresse derselben Website, ein TLS-Handshake auf Port 443, die Datei security.txt und öffentliche DNS-Einträge (MX, SPF, DMARC, CAA). DKIM und DNSSEC werden nicht geprüft.
-- Bericht per E-Mail: eine Kopie desselben Ergebnisses zum Aufbewahren oder Weitergeben. Sie geht an eine Adresse, die auf der Seite [Website-Check](https://www.rexity.ai/website-check) eingetragen und über den Link in einer Bestätigungs-E-Mail bestätigt wurde; über die Schnittstelle lässt sie sich nicht anfordern.
+- Bericht per E-Mail: das vollständige Ergebnis als Kopie zum Aufbewahren oder Weitergeben. Er geht an eine Adresse, die auf der Seite [Website-Check](https://www.rexity.ai/website-check) eingetragen und über den Link in einer Bestätigungs-E-Mail bestätigt wurde; über die Schnittstelle lässt er sich nicht anfordern. Google-Position und Backlinks gibt es, sofern diese Abfrage aktiv ist, nur in diesem Bericht.
 - Grenzen: derzeit 5 neue Prüfungen pro IP-Adresse und Tag, dazu 200 pro Stunde und 1.000 pro Tag für alle Aufrufer zusammen; außerdem 30 Anfragen pro IP-Adresse in 10 Minuten. Ergebnisse gelten 24 Stunden und zählen in dieser Zeit nicht als neue Prüfung. Ist ein Kontingent erreicht, antwortet die Schnittstelle mit 429 und `Retry-After`.
 - Wer abruft: der Prüf-Dienst [RexityWebsiteCheck](https://www.rexity.ai/website-check/bot); dort steht, was er abruft und wie Betreiber ihre Website ausnehmen.
 
@@ -504,11 +508,11 @@ Gedacht ist der Check für Inhaberinnen und Inhaber kleiner Betriebe: Handwerk, 
 
 Jeder Bereich beantwortet eine Frage, die sich ein Besucher nie laut stellt:
 
-- Tempo & Technik: Lädt die Seite zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT). Antwortet diese Messung nicht, messen wir selbst ohne Browser: Antwortzeit des Servers, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt immer das Verfahren.
-- Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Mit Gewerk und Ort sehen wir zusätzlich nach, ob Ihre Seite für diese Suche unter den ersten 20 Ergebnissen bei Google steht – sofern die Abfrage verfügbar ist. Die Position steht dann im Ergebnis.
+- Tempo & Technik: Lädt die Seite zügig? Gemessen wird mit Google Lighthouse (PageSpeed Insights) auf einem simulierten Handy mit gedrosselter Verbindung: Leistung, Barrierefreiheit, Best Practices und technische SEO-Grundlagen, dazu die Ladezeit des größten sichtbaren Inhalts (LCP), Layout-Sprünge (CLS) und Blockierzeit (TBT). Antwortet diese Messung nicht, messen wir selbst ohne Browser: Antwortzeit des Servers, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt immer das Verfahren. Liegen für Ihre Seite Felddaten aus dem Chrome UX Report vor, zeigt das Ergebnis zusätzlich, wie echte Chrome-Nutzer auf Handys sie in den letzten 28 Tagen erlebt haben (LCP, INP und CLS, 75. Perzentil). Für viele kleine Websites gibt es wegen zu weniger Besuche keine solchen Daten; das zählt dann weder für noch gegen Sie. Als Hinweis ohne Punkte steht dabei, ob der Hosting-Anbieter laut Green Web Foundation mit Nachweis für Strom aus erneuerbaren Quellen verzeichnet ist.
+- Auffindbarkeit: Können Suchmaschinen die Seite lesen und einordnen? Geprüft werden Seitentitel, Beschreibung, Hauptüberschrift, kanonische Adresse, ein versehentliches „noindex“, Sprachangabe, Darstellung auf dem Handy, strukturierte Daten zu Ihrem Betrieb, Sitemap und robots.txt. Ihre Google-Position für eine Suche aus Gewerk und Ort und die Zahl der Backlinks Ihrer Domain gehören nicht zu diesem Bereich: Sie stehen, sofern die Abfrage verfügbar ist, nur im Bericht per E-Mail und zählen nicht in die Punkte.
 - Anfrage-Tauglichkeit: Wie schnell kommt ein Besucher zu Ihnen durch? Gesucht werden eine Telefonnummer zum Antippen, eine anklickbare E-Mail-Adresse, ein Kontaktformular oder eine Terminbuchung, ein WhatsApp-Link, Öffnungszeiten, eine Karte oder der Link zum Google-Unternehmensprofil und eine klare Schaltfläche am Seitenanfang – auf der eingegebenen Seite und auf bis zu vier dort verlinkten Kontakt- und Buchungsseiten. Das Ergebnis sagt, wo etwas gefunden wurde. Dieser Bereich hat zusammen mit dem Tempo das größte Gewicht.
 - Vertrauen & Recht: Hinweise, keine Rechtsberatung: verschlüsselte Verbindung (HTTPS), Links zu Impressum und Datenschutzerklärung. Einen Link zu einer Erklärung zur Barrierefreiheit zählen wir nur als Hinweis ohne Punkte, weil Kleinstunternehmen von der Pflicht in der Regel ausgenommen sind. Zusätzlich listet das Ergebnis fremde Dienste auf, die schon beim Aufruf geladen werden, etwa Schriftarten oder Statistik-Skripte. Ob dafür eine Einwilligung nötig ist, bewerten wir nicht.
-- Sicherheit der Website: Welche Schutzeinstellungen zeigt die Seite nach außen? Wir lesen, was jeder Browser beim Aufruf ohnehin erhält: ob die http-Adresse auf https weiterleitet, ob das Zertifikat gültig ist und wie lange noch, welche Schutz-Kopfzeilen die Seite sendet (zum Beispiel Strict-Transport-Security und Content-Security-Policy), wie die Cookies des ersten Aufrufs gekennzeichnet sind und ob die Seite Inhalte über http nachlädt. Als Hinweise ohne Punkte nennt das Ergebnis öffentlich genannte Software mit Versionsnummer, Skripte von fremden Adressen ohne Prüfsumme und die Datei security.txt. Von außen sichtbare Einstellungen, geprüft ohne Eingriff in die Website; kein Sicherheitsaudit und keine Gewähr.
+- Sicherheit der Website: Welche Schutzeinstellungen zeigt die Seite nach außen? Wir lesen, was jeder Browser beim Aufruf ohnehin erhält: ob die http-Adresse auf https weiterleitet, ob das Zertifikat gültig ist und wie lange noch, welche Schutz-Kopfzeilen die Seite sendet (zum Beispiel Strict-Transport-Security und Content-Security-Policy), wie die Cookies des ersten Aufrufs gekennzeichnet sind und ob die Seite Inhalte über http nachlädt. Als Hinweise ohne Punkte nennt das Ergebnis öffentlich genannte Software mit Versionsnummer, Skripte von fremden Adressen ohne Prüfsumme, die Datei security.txt und, sofern die Registrierungsstelle es veröffentlicht, bis wann die Domain registriert ist (bei .de-Domains gibt es dieses Datum nicht öffentlich). Von außen sichtbare Einstellungen, geprüft ohne Eingriff in die Website; kein Sicherheitsaudit und keine Gewähr.
 - Schutz Ihrer E-Mail-Domain: Kann jemand E-Mails in Ihrem Namen verschicken? Im öffentlichen DNS Ihrer Domain sehen wir nach, ob genau ein SPF-Eintrag gesetzt ist und wie er endet, und ob ein DMARC-Eintrag gesetzt ist und welche Vorgabe er macht. Fehlt der DMARC-Eintrag, können Dritte E-Mails versenden, die so aussehen, als kämen sie von Ihnen. MX- und CAA-Einträge nennt das Ergebnis als Hinweise ohne Punkte. DKIM prüfen wir nicht: Der Eintrag liegt unter einem frei gewählten Namen, den wir nicht raten. Auch hier gilt: von außen sichtbare Einstellungen, kein Sicherheitsaudit und keine Gewähr.
 
 ### So lesen Sie die Punkte
@@ -526,7 +530,7 @@ Ein automatischer Check sieht nur, was eine Website nach außen zeigt. Das bleib
 - Ob Texte und Bilder überzeugen: Ob Ihr Angebot verständlich ist und die Fotos passen, beurteilt nur ein Mensch.
 - Ob Formular und Buchung funktionieren: Der Check sieht, dass ein Formular da ist – er schickt nichts ab.
 - Was nach einer Einwilligung geladen wird: Wir sehen den Quelltext beim ersten Aufruf, nicht das, was ein Einwilligungs-Banner später nachlädt.
-- Wie echte Besucher das Tempo erleben: Die Werte sind Laborwerte auf einem simulierten Handy oder, wenn diese Messung nicht antwortet, unsere eigene Messung ohne Browser.
+- Wie jeder einzelne Besucher das Tempo erlebt: Die Lighthouse-Werte sind Laborwerte auf einem simulierten Handy. Felddaten echter Chrome-Nutzer zeigt das Ergebnis nur, wenn der Chrome UX Report für Ihre Website genug Besuche erfasst hat; bei vielen kleinen Websites ist das nicht der Fall.
 - Wie es hinter der Seite aussieht: Wir lesen Einstellungen, die von außen sichtbar sind. Server, Zugänge, Erweiterungen und Sicherungen sieht der Check nicht; er ist kein Sicherheitsaudit.
 - Ob Ihre Seite rechtlich in Ordnung ist: Die Hinweise ersetzen keine Rechtsberatung.
 
@@ -565,15 +569,17 @@ Der Website-Check auf dieser Seite ist kostenlos und läuft automatisch. Was ein
 - Frage: Ist der Website-Check wirklich kostenlos?
   Antwort: Ja. Die Prüfung kostet nichts und braucht keine Anmeldung: Die Punkte der sechs Bereiche, ein Kurzfazit und jeden einzelnen Prüfpunkt mit seinem Messwert sehen Sie sofort auf der Seite. Auf Wunsch senden wir Ihnen dasselbe Ergebnis als Bericht per E-Mail, als Kopie zum Aufbewahren oder Weitergeben. Dafür geben Sie Ihre Adresse an und bestätigen sie über den Link in einer ersten, kurzen E-Mail. Mit der Anforderung des Berichts willigen Sie ein, dass wir Sie per E-Mail zu diesem Ergebnis und zu passenden Leistungen kontaktieren; diese Einwilligung können Sie jederzeit widerrufen. Ein Schutz vor automatischen Anfragen (Cloudflare Turnstile) schützt das Formular.
 - Frage: Woher kommen die Tempo-Werte?
-  Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Antwortet diese Messung nicht, messen wir selbst ohne Browser, was Ihr Server ausliefert: Antwortzeit, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Das Ergebnis nennt das Verfahren; die eigene Messung ersetzt keinen Lighthouse-Lauf in einem echten Browser. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
+  Antwort: Aus einer Tempo-Messung mit Google Lighthouse (PageSpeed Insights). Das sind Laborwerte: Ihre Seite wird auf einem simulierten Handy mit gedrosselter Verbindung geladen. Sie zeigen, wo Ihre Seite steht, aber nicht, was jeder einzelne Besucher erlebt. Antwortet diese Messung nicht, messen wir selbst ohne Browser, was Ihr Server ausliefert: Antwortzeit, Größe und Komprimierung des HTML, blockierende Dateien, Bilder und Cache-Angaben. Zusätzlich fragen wir den Chrome UX Report ab: Hat er für Ihre Seite oder Ihre Website genug Besuche erfasst, zeigt das Ergebnis Felddaten echter Chrome-Nutzer auf Handys aus den letzten 28 Tagen (75. Perzentil von LCP, INP und CLS), eingeordnet nach den von Google veröffentlichten Schwellen. Fehlen sie, bleibt es bei den Laborwerten. Das Ergebnis nennt das Verfahren; die eigene Messung ersetzt keinen Lighthouse-Lauf in einem echten Browser. Rexity Labs ist ein unabhängiger Anbieter; der Check ist kein Angebot von Google.
 - Frage: Sagt mir der Check, auf welchem Platz ich bei Google stehe?
-  Antwort: Nur als Stichprobe: Wenn Sie Gewerk und Ort angeben und die Abfrage verfügbar ist, sehen wir nach, ob Ihre Seite für genau diese Suche unter den ersten 20 Ergebnissen in Deutschland steht. Suchergebnisse unterscheiden sich je nach Standort und Gerät; der Platz ist deshalb ein Hinweis und fließt nicht in die Punkte ein. Er steht im Ergebnis unter „Auffindbarkeit“ und im Bericht per E-Mail.
+  Antwort: Nicht auf der Seite, sondern im Bericht per E-Mail, und nur, wenn diese Abfrage verfügbar ist. Wenn Sie Gewerk und Ort angeben und den Bericht anfordern, sehen wir nach der Bestätigung Ihrer E-Mail-Adresse nach, an welcher Stelle der ersten 50 organischen Ergebnisse bei Google Deutschland Ihre Seite für genau diese Suche steht, und nennen die ersten drei Domains. Dazu kommt die Zahl der Backlinks und verweisenden Domains aus dem Index eines Datenanbieters. Die Position ist eine Momentaufnahme aus einer Ergebnis-Datenbank: Suchergebnisse unterscheiden sich je nach Standort, Gerät und Verlauf. Die Backlink-Zahlen sind eine Schätzung. Beides fließt nicht in die Punkte ein. Weil jede dieser Abfragen Geld kostet, läuft sie erst für eine bestätigte Adresse.
 - Frage: Was passiert mit der Adresse, die ich eingebe?
-  Antwort: Bevor die Prüfung startet, prüft ein Schutz vor automatischen Anfragen (Cloudflare Turnstile) Ihren Browser. Dann rufen wir die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt, bis zu vier dort verlinkte Kontakt- und Buchungsseiten derselben Website und die Kopfdaten einiger Bilder und Dateien der Seite. Für die Bereiche „Sicherheit der Website“ und „Schutz Ihrer E-Mail-Domain“ rufen wir außerdem einmal die http-Adresse derselben Website und die Datei security.txt ab, bauen einmal eine verschlüsselte Verbindung auf, um das Zertifikat zu lesen, und fragen die öffentlichen DNS-Einträge der Domain ab (MX, SPF, DMARC, CAA). Wir senden nichts ab und melden uns nirgends an. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle von Google. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
+  Antwort: Bevor die Prüfung startet, prüft ein Schutz vor automatischen Anfragen (Cloudflare Turnstile) Ihren Browser. Dann rufen wir die Seite ab wie ein Besucher, dazu robots.txt, Sitemap und llms.txt, bis zu vier dort verlinkte Kontakt- und Buchungsseiten derselben Website und die Kopfdaten einiger Bilder und Dateien der Seite. Für die Bereiche „Sicherheit der Website“ und „Schutz Ihrer E-Mail-Domain“ rufen wir außerdem einmal die http-Adresse derselben Website und die Datei security.txt ab, bauen einmal eine verschlüsselte Verbindung auf, um das Zertifikat zu lesen, und fragen die öffentlichen DNS-Einträge der Domain ab (MX, SPF, DMARC, CAA). Wir senden nichts ab und melden uns nirgends an. Für die Tempo-Messung geht die Adresse an die PageSpeed-Insights-Schnittstelle und an die Schnittstelle des Chrome UX Report von Google. Der Name der Domain geht an die öffentliche Registrierungsauskunft (RDAP) der zuständigen Registrierungsstelle, der Name der Website an das Verzeichnis der Green Web Foundation. Nichts davon enthält Angaben zu Ihnen. Das Ergebnis speichern wir höchstens 24 Stunden zwischen, ohne IP-Adresse und ohne E-Mail-Adresse. Einzelheiten stehen in der Datenschutzerklärung.
 - Frage: Ist das Kurzfazit von einer KI geschrieben?
   Antwort: Wenn ein Sprachmodell verfügbar ist, formuliert es das Kurzfazit aus den Werten Ihres Ergebnisses; das steht dann darunter. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Das Modell erhält den Namen der geprüften Website, die Punktwerte, die Anzahl der Prüfpunkte je Status und höchstens sechs offene Prüfpunkte mit Bezeichnung und Messwert – nicht den Text Ihrer Seite und keine E-Mail-Adresse. Jede Zahl im Kurzfazit wird gegen das Ergebnis geprüft, und ein Prüfpunkt darf nur mit einer Bezeichnung genannt werden, die das Modell erhalten hat; passt etwas nicht, erscheint ein fest formulierter Text.
 - Frage: Ersetzt der Check eine SEO-Analyse, eine Rechtsprüfung oder ein Sicherheitsaudit?
-  Antwort: Nein. Er prüft eine Seite und bis zu vier verlinkte Kontakt- und Buchungsseiten auf 40 oder 45 bewertete Prüfpunkte, je nach Messverfahren für das Tempo, und zeigt zu jedem, was gemessen wurde. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Ein Sicherheitsaudit ist der Check ebenfalls nicht: Die Bereiche „Sicherheit der Website“ und „Schutz Ihrer E-Mail-Domain“ lesen nur Einstellungen, die von außen sichtbar sind. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
+  Antwort: Nein. Er prüft eine Seite und bis zu vier verlinkte Kontakt- und Buchungsseiten auf 40 bis 48 bewertete Prüfpunkte, je nach Messverfahren für das Tempo und je nachdem, ob Felddaten vorliegen, und zeigt zu jedem, was gemessen wurde. Eine SEO-Analyse betrachtet zusätzlich Inhalte, Wettbewerb und alle Unterseiten; rechtliche Fragen beantwortet Ihre Rechtsberatung. Ein Sicherheitsaudit ist der Check ebenfalls nicht: Die Bereiche „Sicherheit der Website“ und „Schutz Ihrer E-Mail-Domain“ lesen nur Einstellungen, die von außen sichtbar sind. Für die Prüfung durch einen Menschen gibt es den Website-Check mit schriftlichem Befund für 249 €, netto zzgl. MwSt.
+- Frage: Dürfen KI-Assistenten und Programme den Website-Check nutzen?
+  Antwort: Ja, für einzelne Prüfungen. Assistenten und Programme erhalten eine Kurzfassung: den Gesamtwert, die sechs Bereichswerte mit je einem Satz, die Zahl der Prüfpunkte je Status und das Kurzfazit. Die einzelnen Prüfpunkte mit ihren Messwerten gibt es nur hier auf der Seite. Die Nutzung ist frei für Menschen und ihre Assistenten, wenn die Quelle „Rexity Labs Website-Check“ mit Link genannt wird. Nicht erlaubt sind Massenabrufe, der Weiterverkauf und der Aufbau eines eigenen Prüfdienstes auf dieser Schnittstelle. Die Bedingungen stehen unter www.rexity.ai/website-check/nutzung.
 
 ## Online-Shop & Stripe-Checkout
 
@@ -912,6 +918,28 @@ Er liest die eingehende Anfrage, erkennt, worum es geht, und sucht in Ihren frei
 
 Der Assistent entscheidet nichts allein: Jede Antwort, jeder Termin und jedes Angebot wartet auf die Freigabe durch einen Menschen. Regelbasierte Schritte wie das Übertragen von Daten zwischen Programmen (Prozessautomatisierung, kurz RPA) laufen im Hintergrund mit.
 
+### Was ist RPA?
+
+RPA steht für Robotic Process Automation, auf Deutsch: robotergestützte Prozessautomatisierung. Gemeint ist Software, die wiederkehrende Büroschritte so erledigt, wie ein Mensch sie klicken und tippen würde: eine eingehende E-Mail oder ein Formular lesen, die Angaben an die richtige Stelle übertragen, die Aufgabe oder den Termin anlegen, die Standardantwort schreiben. Menschen kümmern sich dann nur noch um die Ausnahmen.
+
+Klassische RPA braucht feste Formulare, in denen jedes Feld immer an derselben Stelle steht. Mit einem Sprachmodell davor kann die Software auch freien Text lesen, etwa eine formlos geschriebene E-Mail, und daraus dieselben Angaben gewinnen. Das zeigt die Demo weiter unten.
+
+Was RPA nicht ist: kein Roboter, der durch das Büro läuft, kein Ersatz für die Entscheidungen Ihrer Mitarbeitenden und kein Zaubermittel für unklare Abläufe. Einen Ablauf, den heute niemand Schritt für Schritt beschreiben kann, kann auch keine Software ausführen. Er wird zuerst geklärt und dann automatisiert.
+
+### Drei Beispiele aus Handwerk und Praxis
+
+Beispiele, keine Kundenprojekte: So sieht RPA im Büroalltag aus.
+
+- Störungsmeldung im Heizungsbetrieb: Beispiel, kein Kundenprojekt: Eine E-Mail meldet eine ausgefallene Heizung. Die Software liest Name, Adresse und Telefonnummer heraus, legt den Vorgang mit dem Vermerk „dringend“ an und bereitet die Antwort vor. Wer wann fährt, entscheidet weiterhin die Disposition.
+- Angebotsanfrage beim Malerbetrieb: Beispiel, kein Kundenprojekt: Über das Website-Formular kommt eine Anfrage für zwei Zimmer. Die Software überträgt die Angaben in die Auftragsliste, bemerkt, dass die Adresse fehlt, und entwirft die Rückfrage. Das Angebot rechnet weiterhin eine Fachkraft.
+- Terminänderung in der Praxis: Beispiel, kein Kundenprojekt: Jemand bittet per E-Mail um einen anderen Termin. Die Software erkennt den Wunsch, sucht im Kalender nach freien Zeiten und schreibt den Antwortentwurf. Freigegeben wird er am Empfang.
+
+### Vom Posteingang zum Auftrag
+
+Probieren Sie den Agenten selbst aus: in einer Sandbox mit einem erfundenen Betrieb, drei Monteuren und einem Kalender. Wählen Sie eine Beispiel-E-Mail oder fügen Sie einen eigenen Text ein.
+
+Simulation: Es wird nichts versendet und kein Kalender berührt.
+
 ### Beispiel-Szenario: Heizungs- und Sanitärbetrieb
 
 Ein Beispiel, kein Kundenprojekt: ein Heizungs- und Sanitärbetrieb, dessen Monteure tagsüber beim Kunden sind. Das Telefon im Büro ist oft besetzt, Anfragen kommen zusätzlich per E-Mail und über die Website, und Angebote entstehen abends.
@@ -970,6 +998,8 @@ Festpreise, netto zzgl. MwSt. Den genauen Preis nennen wir nach einem kurzen Ges
 
 - Frage: Wie entscheiden Sie, was zuerst automatisiert wird?
   Antwort: Wir starten dort, wo die Zeitersparnis am größten und das Risiko am geringsten ist.
+- Frage: Was ist RPA?
+  Antwort: RPA (Robotic Process Automation) ist Software, die wiederkehrende Büroschritte so ausführt, wie ein Mensch sie klicken und tippen würde: Anfrage lesen, Angaben übertragen, Aufgabe oder Termin anlegen, Standardantwort schreiben. Mit einem Sprachmodell davor liest sie auch freien Text statt nur feste Formulare. Die Ausnahmen und die Entscheidungen bleiben bei Menschen.
 - Frage: Was macht ein KI-Assistent im Büro?
   Antwort: Er nimmt Anfragen auf, sucht die passenden Daten in Ihren Unterlagen und bereitet Vorgang, Terminvorschlag und Angebotsentwurf vor. Ein Mensch prüft und gibt frei. Wir richten ihn auf Ihre Abläufe, Vorlagen und Programme ein.
 - Frage: Verschickt der Assistent selbstständig E-Mails oder Angebote?
@@ -1285,6 +1315,78 @@ Für Ihren Chatbot legen wir gemeinsam fest, welche Angaben abgefragt werden, un
   Antwort: In der Regel mit einem kleinen Skript, das wir in Ihre Website einbauen; das Chat-Fenster erscheint dann auf jeder Seite. Ob Ihr Website-System das zulässt, prüfen wir im kostenlosen Gespräch.
 - Frage: Kann ich einen Chatbot für meine Website selbst erstellen?
   Antwort: Ja, mit einem Baukasten oder direkt über die Schnittstelle eines Modellanbieters. Dann richten Sie Inhalte, Regeln, KI-Hinweis, Datenschutz und Betrieb selbst ein und sind dafür verantwortlich. Den Vergleich finden Sie oben.
+
+## Automatisierungs-Check
+
+Adresse: https://www.rexity.ai/automatisierungs-check
+
+Kostenloser Automatisierungs-Check: Aufgaben kurz beschreiben und sehen, was sich automatisieren lässt, mit einer Schätzung der Entlastung pro Jahr.
+
+Welche Ihrer wiederkehrenden Aufgaben können wir für Sie automatisieren, und was bringt das im Jahr? Kostenlos, in etwa zwei Minuten.
+
+Der kostenlose Automatisierungs-Check für Betriebe: Sie nennen eine bis sechs wiederkehrende Aufgaben, beschreiben kurz, wie sie heute ablaufen, und erhalten eine Auswertung: was wir vollständig oder teilweise für Sie automatisieren können, welche Schritte das wären und eine Schätzung der Entlastung pro Jahr. Die Texte formuliert eine KI aus Ihren Angaben; die Zahlen rechnen wir nach einer veröffentlichten Regel aus Ihren eigenen Werten. Die Schätzung ist keine Zusage. Ohne Anmeldung; auf Wunsch kommt der Plan als Bericht per E-Mail, nachdem Sie Ihre Adresse bestätigt haben.
+
+### Was der Automatisierungs-Check zeigt
+
+Der Automatisierungs-Check zeigt für jede Ihrer wiederkehrenden Aufgaben, ob wir sie vollständig, teilweise oder derzeit kaum für Sie automatisieren können, welche Schritte eine Automatisierung übernehmen würde und was bei Ihrem Team bleibt. Er dauert etwa zwei Minuten, kostet nichts und braucht keine Anmeldung.
+
+Gedacht ist er für Inhaberinnen und Inhaber kleiner Betriebe, die wissen möchten, wo sich ein Anfang lohnt: Handwerk, Praxis, Büro, Studio, Werkstatt. Sie nennen, was im Alltag immer wieder anfällt, zum Beispiel Angebote schreiben, Termine bestätigen, Rechnungen ablegen oder Anfragen beantworten, und beschreiben in ein, zwei Sätzen, wie das heute abläuft.
+
+Dazu nennt er eine Schätzung pro Jahr: die Zeit, die eine Automatisierung übernehmen kann, und, wenn Sie Ihren Stundensatz angeben, deren Gegenwert in Euro, jeweils als Spanne. Die Auswertung formuliert ein Sprachmodell (KI) aus Ihren Angaben; die Zahlen berechnen wir selbst nach einer festen, veröffentlichten Regel aus Ihren eigenen Werten. Die ganze Regel steht oben unter „So rechnen wir“. Die Schätzung ist keine Zusage.
+
+### So läuft der Check ab
+
+1. Ihr Betrieb: Branche und Teamgröße, damit die Auswertung zu Ihrem Betrieb passt.
+2. Was kostet Sie Zeit?: Eine bis sechs Aufgaben in einem Feld, mit Komma getrennt. Für Ihre Branche schlagen wir typische Aufgaben vor.
+3. Pro Aufgabe, kompakt: Wie oft, wie viele Minuten, wie viele Personen, wo die Informationen ankommen, und in ein, zwei Sätzen, wie es heute abläuft.
+4. Auswertung: Je Aufgabe: was wir für Sie tun können, was bei Ihrem Team bleibt und eine Schätzung pro Jahr. Danach entscheiden Sie, ob Sie mit uns darüber sprechen möchten.
+
+### Drei Fragen, die über die Eignung entscheiden
+
+- Immer die gleichen Schritte?: Software folgt einem festen Ablauf. Je gleichförmiger die Schritte sind, desto vollständiger lässt sich eine Aufgabe übergeben. Wechselt der Ablauf von Fall zu Fall, wird er zuerst vereinheitlicht.
+- Kommen die Informationen digital an?: Eine E-Mail, ein Formular oder ein PDF kann Software lesen. Einen Anruf, einen Zettel oder ein Gespräch am Tresen muss erst jemand erfassen; die Automatisierung beginnt dann einen Schritt später.
+- Braucht es eine Ermessensentscheidung?: Wo jedes Mal abgewogen wird, bleibt die Entscheidung beim Menschen. Automatisieren lässt sich dann die Vorbereitung: Angaben zusammentragen, einen Entwurf schreiben, zur Freigabe vorlegen.
+
+### Was der Check nicht sagen kann
+
+- Er verspricht keine Ersparnis: Die Schätzung beruht auf Ihren Angaben und auf Annahmen, die unter „So rechnen wir“ stehen. Den tatsächlichen Anteil ermitteln wir im ersten Gespräch.
+- Er nennt keinen Preis: Die Schätzung zeigt die Entlastung, nicht die Kosten einer Umsetzung. Den Preis nennen wir nach einem kurzen Gespräch.
+- Er kennt Ihre Programme nicht: Ob sich Ihr Postfach, Ihr Kalender oder Ihre Branchensoftware anbinden lassen, klärt erst ein Gespräch.
+- Er prüft Ihre Angaben nicht: Das Ergebnis ist so genau wie Ihre Schätzung.
+- Er ersetzt keine Aufnahme des Ablaufs: Vor jedem Projekt schreiben wir den Weg Schritt für Schritt auf.
+
+### Vom Ergebnis zur Umsetzung
+
+Was wir aus gut automatisierbaren Aufgaben bauen.
+
+- KI-Assistent fürs Büro: Für Anfragen, die per E-Mail oder Formular hereinkommen: Vorgang, Terminvorschlag und Antwortentwurf, zur Freigabe vorbereitet. Die Demo auf der Seite zeigt den Weg an einem Beispiel. (https://www.rexity.ai/automation/rpa#demo)
+- Terminerinnerung per SMS & WhatsApp: Für Termine, die bestätigt und erinnert werden: automatische Nachrichten vor jedem Termin. (https://www.rexity.ai/automation/terminerinnerung)
+- KI-Chatbot für Ihre Website: Für Fragen, die sich wiederholen: Antworten aus Ihren eigenen Inhalten, rund um die Uhr. (https://www.rexity.ai/automation/chatbots)
+- Website-Check: Unser zweites kostenloses Werkzeug: prüft, ob Ihre Website Anfragen bringen kann. (https://www.rexity.ai/website-check)
+
+### Kostenlos auswerten – und was eine Umsetzung kostet
+
+Der Automatisierungs-Check ist kostenlos. Umsetzungen bieten wir zu Festpreisen an, netto zzgl. MwSt.; den genauen Preis nennen wir nach einem kurzen Gespräch.
+
+- KI-Assistent fürs Büro: Anfragen erfassen, Daten finden, Vorgang, Termin und Angebotsentwurf vorbereiten – in der europäischen Datenzone oder mit Dokumenten-Chatbot auf einem Server in Ihrem Betrieb. Festpreis ab 2.999 €, netto zzgl. MwSt.
+- E-Mail- & SMS-Automatisierung: Automatische E-Mails oder SMS bei Buchung, Stornierung oder Benachrichtigung. Festpreis 299 €, netto zzgl. MwSt.
+- KI-Chatbot: Ein KI-gestützter Chat-Assistent, der mit Ihren eigenen Inhalten antwortet. Festpreis ab 799 €, netto zzgl. MwSt.
+- Alle Preise: https://www.rexity.ai/preise
+
+### Häufige Fragen
+
+- Frage: Ist der Automatisierungs-Check wirklich kostenlos?
+  Antwort: Ja. Die Auswertung kostet nichts und braucht keine Anmeldung. Das Ergebnis steht meist nach weniger als einer halben Minute auf der Seite. Auf Wunsch senden wir Ihnen den Plan zusätzlich als Bericht per E-Mail; dafür geben Sie Ihre Adresse an und bestätigen sie über den Link in einer ersten, kurzen E-Mail. Je Anschluss sind drei Auswertungen pro Tag möglich.
+- Frage: Wie verlässlich ist die Schätzung?
+  Antwort: Sie ist eine Schätzung auf Basis Ihrer Angaben, keine Zusage. Die Stunden pro Jahr rechnen wir aus Ihren eigenen Zahlen. Den Anteil, den eine Automatisierung übernimmt, setzen wir als Spanne an: 70 bis 90 Prozent bei vollständig, 30 bis 50 Prozent bei teilweise automatisierbaren Aufgaben. Formel und Annahmen stehen unter „So rechnen wir“. Wie hoch der Anteil bei Ihrem Ablauf tatsächlich ist, ermitteln wir im ersten Gespräch; die Kosten einer Umsetzung sind in der Schätzung nicht abgezogen.
+- Frage: Was passiert mit meinen Angaben?
+  Antwort: Für die Auswertung übermitteln wir Ihre Angaben an unseren Server und an ein Sprachmodell. Die KI-Verarbeitung erfolgt in europäischen Rechenzentren. Bitte nennen Sie in den Beschreibungen keine Namen von Kunden oder Beschäftigten. Für die Auswertung selbst speichern wir Ihre Angaben nicht; in Ihrem Browser bleiben sie, bis Sie den Tab schließen. Fordern Sie den Bericht per E-Mail an, liegen die Angaben bis zu Ihrer Bestätigung höchstens 48 Stunden verschlüsselt bereit; als Anfrage speichern wir sie erst, nachdem Sie Ihre Adresse bestätigt haben, oder wenn Sie um einen Rückruf bitten. Einzelheiten stehen in der Datenschutzerklärung.
+- Frage: Wie wird die Automatisierbarkeit bewertet?
+  Antwort: Ein Sprachmodell (KI) liest Ihre Angaben und Ihre Beschreibung und stuft jede Aufgabe ein: vollständig, teilweise oder derzeit kaum automatisierbar. Sagen Sie selbst, dass eine Aufgabe jedes Mal anders abläuft, stufen wir sie höchstens als teilweise automatisierbar ein. Steht kein Sprachmodell zur Verfügung, gilt eine feste Punkteregel aus Ihren Antworten. Beides steht unter „So rechnen wir“.
+- Frage: Arbeitet der Automatisierungs-Check mit KI?
+  Antwort: Ja, für die Einstufung und die Texte: Ein Sprachmodell formuliert aus Ihren Angaben, was eine Automatisierung übernehmen würde, was bei Ihrem Team bleibt und welche Fragen wir im Gespräch stellen würden. Darauf weisen wir vor der Auswertung und am Ergebnis hin. Stunden, Anteile und Beträge rechnet das Modell nicht: Sie entstehen nach der veröffentlichten Regel aus Ihren eigenen Zahlen.
+- Frage: Was passiert nach dem Check?
+  Antwort: Nichts, solange Sie nichts weiter tun. Wenn Sie möchten, buchen Sie ein 15-Minuten-Gespräch, bitten um einen Rückruf oder lassen sich den Plan per E-Mail senden. Im Gespräch gehen wir Ihre Aufgaben durch, klären den tatsächlichen Anteil an Ihrem Ablauf und sagen, was eine Umsetzung kostet.
 
 ## Sichtbarkeit: SEO & Google Unternehmensprofil
 

@@ -675,3 +675,36 @@ a.sv-card:hover .sv-card__go { text-decoration: underline; text-underline-offset
   .sv-table__lbl { display: block; color: var(--rx-muted); font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.02em; }
   .sv-table__val { overflow-wrap: break-word; }
 }
+
+/* ------------------------------------------------------------------ Sprint 43: big tiles (/automation) + edge light
+   Big tile: image on top (16:10, full card width), text below. */
+.sv-main .sv-tile--big { flex-direction: column; align-items: stretch; gap: 0; padding: 0; overflow: hidden; }
+.sv-tile--big .sv-tile__media { width: 100%; height: auto; aspect-ratio: 16 / 10; border: 0; border-radius: 0; }
+.sv-tile--big .sv-tile__img { transition: transform 0.5s ease; }
+.sv-tile--big:hover .sv-tile__img { transform: scale(1.04); }
+.sv-tile--big .sv-tile__body { padding: 20px 22px 22px; gap: 8px; }
+.sv-main .sv-tile--big .sv-tile__title { font-size: 1.375rem; }
+@media (max-width: 991px) {
+  .sv-main .sv-tiles--big.rx-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sv-main .sv-tiles--big.rx-grid--3 > :last-child:nth-child(odd) { grid-column: auto; }
+}
+@media (max-width: 639px) {
+  .sv-main .sv-tiles--big.rx-grid--3 { grid-template-columns: minmax(0, 1fr); }
+  .sv-tile--big .sv-tile__media { width: 100%; height: auto; }
+}
+/* Edge light: a soft light runs along the border of a hovered panel and follows the pointer (--ex / --ey are set by
+   assets/js/services.js; without JavaScript the light sits at the top centre). Focus shows it too. */
+.sv-main .rx-panel { position: relative; }
+.sv-main .rx-panel::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none;
+  background: radial-gradient(260px circle at var(--ex, 50%) var(--ey, 0%), rgba(214, 200, 255, 0.95), rgba(140, 108, 255, 0.55) 35%, rgba(91, 63, 214, 0) 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity: 0; transition: opacity 0.25s ease;
+}
+.sv-main .rx-panel:hover::after, .sv-main a.rx-panel:focus-visible::after { opacity: 1; }
+.sv-main .rx-panel:hover { box-shadow: 0 18px 50px -24px rgba(140, 108, 255, 0.55); }
+@media (prefers-reduced-motion: reduce) {
+  .sv-tile--big .sv-tile__img, .sv-main .rx-panel::after { transition: none; }
+  .sv-tile--big:hover .sv-tile__img { transform: none; }
+}

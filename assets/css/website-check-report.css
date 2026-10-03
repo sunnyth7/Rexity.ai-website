@@ -116,6 +116,22 @@
 .wc-block__verdict { color: var(--wc-muted); font-size: 0.9375rem; line-height: 1.5; overflow-wrap: anywhere; }
 .wc-block__note, .wc-block__extra { color: var(--wc-quiet); font-size: 0.8125rem; line-height: 1.5; overflow-wrap: anywhere; }
 .wc-block__extra { color: var(--wc-ink); font-size: 0.9375rem; }
+/* Sprint 40: the quiet line of the findability card, a flagged note (domain expiry under 30 days), and the unscored
+   section of a result opened through the link of a report mail */
+.wc-block__teaser { margin-top: 10px; }
+.wc-item[data-flag] .wc-item__mark { background: #fbf1dc; color: #6f4800; }
+.wc-item[data-flag] .wc-item__sym { background: var(--wc-mid); }
+.wc-item[data-flag="expired"] .wc-item__mark { background: #fde9e6; color: #96190f; }
+.wc-item[data-flag="expired"] .wc-item__sym { background: var(--wc-low); }
+.wc-vis { margin-top: 20px; padding: 20px; border: 1px solid var(--wc-line); border-radius: 20px; background: #ffffff; }
+.wc-vis__h { color: var(--wc-ink); font: 600 1.125rem/1.3 var(--font-families--primary); }
+.wc-vis__rows { margin: 10px 0 0; }
+.wc-vis__row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--wc-line); }
+.wc-vis__row dt { color: var(--wc-ink); font: 600 0.9375rem/1.4 var(--font-families--primary); overflow-wrap: anywhere; }
+.wc-vis__row dd { margin: 0; color: var(--wc-muted); font-size: 0.9375rem; line-height: 1.5; overflow-wrap: anywhere; }
+.wc-vis__note { margin-top: 12px; color: var(--wc-quiet); font-size: 0.8125rem; line-height: 1.5; }
+@media (min-width: 768px) { .wc-vis { padding: 24px 28px; } .wc-vis__row { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 4px 20px; } }
+.wc-mail__paid { margin-top: 8px; }
 .wc-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 0; list-style: none; }
 .wc-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; background: var(--wc-soft); color: var(--wc-muted); font: 500 0.8125rem/1.5 var(--font-families--primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .wc-chip b { color: var(--wc-ink); font-weight: 700; }
